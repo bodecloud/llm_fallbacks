@@ -80,10 +80,10 @@ tencent/hy3-preview:free
 github_copilot/gpt-4o-2024-08-06
 meta_llama/llama-3.3-70b-instruct
 meta_llama/llama-3.3-8b-instruct
+nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
 google/gemma-4-26b-a4b-it:free
 google/gemma-4-31b-it:free
 inclusionai/ling-2.6-1t:free
-inclusionai/ling-2.6-flash:free
 google/gemma-3-27b-it:free
 baidu/qianfan-ocr-fast:free
 openai/gpt-oss-120b:free
@@ -112,6 +112,8 @@ gradient_ai/openai-gpt-4o
 gradient_ai/openai-gpt-4o-mini
 nvidia/nemotron-3-nano-30b-a3b:free
 openai/gpt-oss-20b:free
+poolside/laguna-m.1:free
+poolside/laguna-xs.2:free
 snowflake/llama3.1-405b
 snowflake/llama3.1-70b
 snowflake/llama3.1-8b

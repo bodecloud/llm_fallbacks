@@ -5,6 +5,66 @@
         "api_env_key_name": "OPENROUTER_API_KEY",
         "api_key_required": false,
         "model_specs": {
+            "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
+                "input_cost_per_token": 0.0,
+                "output_cost_per_token": 0.0,
+                "max_input_tokens": 256000,
+                "max_output_tokens": 65536,
+                "metadata": {
+                    "notes": "NVIDIA Nemotron\u2122 3 Nano Omni is a 30B-A3B open multimodal model designed to function as a perception and context sub-agent in enterprise agent systems. It accepts text, image, video, and..."
+                },
+                "litellm_provider": "openrouter",
+                "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
+                    "input_cost_per_token": 0.0,
+                    "output_cost_per_token": 0.0,
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 65536,
+                    "metadata": {
+                        "notes": "NVIDIA Nemotron\u2122 3 Nano Omni is a 30B-A3B open multimodal model designed to function as a perception and context sub-agent in enterprise agent systems. It accepts text, image, video, and..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "poolside/laguna-xs.2:free": {
+                "input_cost_per_token": 0.0,
+                "output_cost_per_token": 0.0,
+                "max_input_tokens": 131072,
+                "max_output_tokens": 8192,
+                "metadata": {
+                    "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
+                },
+                "litellm_provider": "openrouter",
+                "poolside/laguna-xs.2:free": {
+                    "input_cost_per_token": 0.0,
+                    "output_cost_per_token": 0.0,
+                    "max_input_tokens": 131072,
+                    "max_output_tokens": 8192,
+                    "metadata": {
+                        "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "poolside/laguna-m.1:free": {
+                "input_cost_per_token": 0.0,
+                "output_cost_per_token": 0.0,
+                "max_input_tokens": 131072,
+                "max_output_tokens": 8192,
+                "metadata": {
+                    "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 128K..."
+                },
+                "litellm_provider": "openrouter",
+                "poolside/laguna-m.1:free": {
+                    "input_cost_per_token": 0.0,
+                    "output_cost_per_token": 0.0,
+                    "max_input_tokens": 131072,
+                    "max_output_tokens": 8192,
+                    "metadata": {
+                        "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 128K..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "~anthropic/claude-haiku-latest": {
                 "input_cost_per_token": 1e-06,
                 "output_cost_per_token": 5e-06,
@@ -222,8 +282,8 @@
                 }
             },
             "qwen/qwen3.6-max-preview": {
-                "input_cost_per_token": 1.3e-06,
-                "output_cost_per_token": 7.8e-06,
+                "input_cost_per_token": 1.04e-06,
+                "output_cost_per_token": 6.24e-06,
                 "max_input_tokens": 262144,
                 "max_output_tokens": 65536,
                 "metadata": {
@@ -231,8 +291,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen3.6-max-preview": {
-                    "input_cost_per_token": 1.3e-06,
-                    "output_cost_per_token": 7.8e-06,
+                    "input_cost_per_token": 1.04e-06,
+                    "output_cost_per_token": 6.24e-06,
                     "max_input_tokens": 262144,
                     "max_output_tokens": 65536,
                     "metadata": {
@@ -242,18 +302,18 @@
                 }
             },
             "qwen/qwen3.6-27b": {
-                "input_cost_per_token": 5e-07,
-                "output_cost_per_token": 2e-06,
-                "max_input_tokens": 262144,
+                "input_cost_per_token": 3.25e-07,
+                "output_cost_per_token": 3.25e-06,
+                "max_input_tokens": 256000,
                 "max_output_tokens": 65536,
                 "metadata": {
                     "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen3.6-27b": {
-                    "input_cost_per_token": 5e-07,
-                    "output_cost_per_token": 2e-06,
-                    "max_input_tokens": 262144,
+                    "input_cost_per_token": 3.25e-07,
+                    "output_cost_per_token": 3.25e-06,
+                    "max_input_tokens": 256000,
                     "max_output_tokens": 65536,
                     "metadata": {
                         "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
@@ -441,18 +501,18 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "inclusionai/ling-2.6-flash:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
+            "inclusionai/ling-2.6-flash": {
+                "input_cost_per_token": 8e-08,
+                "output_cost_per_token": 2.4e-07,
                 "max_input_tokens": 262144,
                 "max_output_tokens": 32768,
                 "metadata": {
                     "notes": "Ling-2.6-flash is an instant (instruct) model from inclusionAI with 104B total parameters and 7.4B active parameters, designed for real-world agents that require fast responses, strong execution, and high token efficiency...."
                 },
                 "litellm_provider": "openrouter",
-                "inclusionai/ling-2.6-flash:free": {
-                    "input_cost_per_token": 0.0,
-                    "output_cost_per_token": 0.0,
+                "inclusionai/ling-2.6-flash": {
+                    "input_cost_per_token": 8e-08,
+                    "output_cost_per_token": 2.4e-07,
                     "max_input_tokens": 262144,
                     "max_output_tokens": 32768,
                     "metadata": {
@@ -6387,26 +6447,6 @@
                     }
                 }
             },
-            "qwen/qwq-32b": {
-                "input_cost_per_token": 1.5e-07,
-                "output_cost_per_token": 5.8e-07,
-                "max_input_tokens": 131072,
-                "max_output_tokens": 131072,
-                "metadata": {
-                    "notes": "QwQ is the reasoning model of the Qwen series. Compared with conventional instruction-tuned models, QwQ, which is capable of thinking and reasoning, can achieve significantly enhanced performance in downstream tasks,..."
-                },
-                "litellm_provider": "openrouter",
-                "qwen/qwq-32b": {
-                    "input_cost_per_token": 1.5e-07,
-                    "output_cost_per_token": 5.8e-07,
-                    "max_input_tokens": 131072,
-                    "max_output_tokens": 131072,
-                    "metadata": {
-                        "notes": "QwQ is the reasoning model of the Qwen series. Compared with conventional instruction-tuned models, QwQ, which is capable of thinking and reasoning, can achieve significantly enhanced performance in downstream tasks,..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "google/gemini-2.0-flash-lite-001": {
                 "input_cost_per_token": 7.5e-08,
                 "output_cost_per_token": 3e-07,
@@ -7487,6 +7527,48 @@
                     "litellm_provider": "openrouter"
                 }
             },
+            "meta-llama/llama-3.2-11b-vision-instruct": {
+                "input_cost_per_token": 2.45e-07,
+                "output_cost_per_token": 2.45e-07,
+                "max_input_tokens": 131072,
+                "max_output_tokens": 16384,
+                "mode": "chat",
+                "supports_vision": true,
+                "metadata": {
+                    "notes": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and..."
+                },
+                "litellm_provider": "openrouter",
+                "meta-llama/llama-3.2-11b-vision-instruct": {
+                    "input_cost_per_token": 2.45e-07,
+                    "output_cost_per_token": 2.45e-07,
+                    "max_input_tokens": 131072,
+                    "max_output_tokens": 16384,
+                    "mode": "chat",
+                    "supports_vision": true,
+                    "metadata": {
+                        "notes": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "meta-llama/llama-3.2-1b-instruct": {
+                "input_cost_per_token": 2.7e-08,
+                "output_cost_per_token": 2e-07,
+                "max_input_tokens": 60000,
+                "metadata": {
+                    "notes": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate..."
+                },
+                "litellm_provider": "openrouter",
+                "meta-llama/llama-3.2-1b-instruct": {
+                    "input_cost_per_token": 2.7e-08,
+                    "output_cost_per_token": 2e-07,
+                    "max_input_tokens": 60000,
+                    "metadata": {
+                        "notes": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "meta-llama/llama-3.2-3b-instruct:free": {
                 "input_cost_per_token": 0.0,
                 "output_cost_per_token": 0.0,
@@ -7523,48 +7605,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "meta-llama/llama-3.2-1b-instruct": {
-                "input_cost_per_token": 2.7e-08,
-                "output_cost_per_token": 2e-07,
-                "max_input_tokens": 60000,
-                "metadata": {
-                    "notes": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate..."
-                },
-                "litellm_provider": "openrouter",
-                "meta-llama/llama-3.2-1b-instruct": {
-                    "input_cost_per_token": 2.7e-08,
-                    "output_cost_per_token": 2e-07,
-                    "max_input_tokens": 60000,
-                    "metadata": {
-                        "notes": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "meta-llama/llama-3.2-11b-vision-instruct": {
-                "input_cost_per_token": 2.45e-07,
-                "output_cost_per_token": 2.45e-07,
-                "max_input_tokens": 131072,
-                "max_output_tokens": 16384,
-                "mode": "chat",
-                "supports_vision": true,
-                "metadata": {
-                    "notes": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and..."
-                },
-                "litellm_provider": "openrouter",
-                "meta-llama/llama-3.2-11b-vision-instruct": {
-                    "input_cost_per_token": 2.45e-07,
-                    "output_cost_per_token": 2.45e-07,
-                    "max_input_tokens": 131072,
-                    "max_output_tokens": 16384,
-                    "mode": "chat",
-                    "supports_vision": true,
-                    "metadata": {
-                        "notes": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "qwen/qwen-2.5-72b-instruct": {
                 "input_cost_per_token": 3.6e-07,
                 "output_cost_per_token": 4e-07,
@@ -7585,26 +7625,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "cohere/command-r-plus-08-2024": {
-                "input_cost_per_token": 2.5e-06,
-                "output_cost_per_token": 1e-05,
-                "max_input_tokens": 128000,
-                "max_output_tokens": 4000,
-                "metadata": {
-                    "notes": "command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus) with roughly 50% higher throughput and 25% lower latencies as compared to the previous Command R+ version, while keeping the hardware footprint..."
-                },
-                "litellm_provider": "openrouter",
-                "cohere/command-r-plus-08-2024": {
-                    "input_cost_per_token": 2.5e-06,
-                    "output_cost_per_token": 1e-05,
-                    "max_input_tokens": 128000,
-                    "max_output_tokens": 4000,
-                    "metadata": {
-                        "notes": "command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus) with roughly 50% higher throughput and 25% lower latencies as compared to the previous Command R+ version, while keeping the hardware footprint..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "cohere/command-r-08-2024": {
                 "input_cost_per_token": 1.5e-07,
                 "output_cost_per_token": 6e-07,
@@ -7621,6 +7641,26 @@
                     "max_output_tokens": 4000,
                     "metadata": {
                         "notes": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "cohere/command-r-plus-08-2024": {
+                "input_cost_per_token": 2.5e-06,
+                "output_cost_per_token": 1e-05,
+                "max_input_tokens": 128000,
+                "max_output_tokens": 4000,
+                "metadata": {
+                    "notes": "command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus) with roughly 50% higher throughput and 25% lower latencies as compared to the previous Command R+ version, while keeping the hardware footprint..."
+                },
+                "litellm_provider": "openrouter",
+                "cohere/command-r-plus-08-2024": {
+                    "input_cost_per_token": 2.5e-06,
+                    "output_cost_per_token": 1e-05,
+                    "max_input_tokens": 128000,
+                    "max_output_tokens": 4000,
+                    "metadata": {
+                        "notes": "command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus) with roughly 50% higher throughput and 25% lower latencies as compared to the previous Command R+ version, while keeping the hardware footprint..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -7743,26 +7783,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "meta-llama/llama-3.1-8b-instruct": {
-                "input_cost_per_token": 2e-08,
-                "output_cost_per_token": 5e-08,
-                "max_input_tokens": 16384,
-                "max_output_tokens": 16384,
-                "metadata": {
-                    "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
-                },
-                "litellm_provider": "openrouter",
-                "meta-llama/llama-3.1-8b-instruct": {
-                    "input_cost_per_token": 2e-08,
-                    "output_cost_per_token": 5e-08,
-                    "max_input_tokens": 16384,
-                    "max_output_tokens": 16384,
-                    "metadata": {
-                        "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "meta-llama/llama-3.1-70b-instruct": {
                 "input_cost_per_token": 4e-07,
                 "output_cost_per_token": 4e-07,
@@ -7783,20 +7803,38 @@
                     "litellm_provider": "openrouter"
                 }
             },
+            "meta-llama/llama-3.1-8b-instruct": {
+                "input_cost_per_token": 2e-08,
+                "output_cost_per_token": 5e-08,
+                "max_input_tokens": 16384,
+                "max_output_tokens": 16384,
+                "metadata": {
+                    "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
+                },
+                "litellm_provider": "openrouter",
+                "meta-llama/llama-3.1-8b-instruct": {
+                    "input_cost_per_token": 2e-08,
+                    "output_cost_per_token": 5e-08,
+                    "max_input_tokens": 16384,
+                    "max_output_tokens": 16384,
+                    "metadata": {
+                        "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "mistralai/mistral-nemo": {
                 "input_cost_per_token": 2e-08,
-                "output_cost_per_token": 4e-08,
+                "output_cost_per_token": 3e-08,
                 "max_input_tokens": 131072,
-                "max_output_tokens": 16384,
                 "metadata": {
                     "notes": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,..."
                 },
                 "litellm_provider": "openrouter",
                 "mistralai/mistral-nemo": {
                     "input_cost_per_token": 2e-08,
-                    "output_cost_per_token": 4e-08,
+                    "output_cost_per_token": 3e-08,
                     "max_input_tokens": 131072,
-                    "max_output_tokens": 16384,
                     "metadata": {
                         "notes": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,..."
                     },
@@ -7955,26 +7993,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "meta-llama/llama-3-8b-instruct": {
-                "input_cost_per_token": 3e-08,
-                "output_cost_per_token": 4e-08,
-                "max_input_tokens": 8192,
-                "max_output_tokens": 16384,
-                "metadata": {
-                    "notes": "Meta's latest class of model (Llama 3) launched with a variety of sizes & flavors. This 8B instruct-tuned version was optimized for high quality dialogue usecases. It has demonstrated strong..."
-                },
-                "litellm_provider": "openrouter",
-                "meta-llama/llama-3-8b-instruct": {
-                    "input_cost_per_token": 3e-08,
-                    "output_cost_per_token": 4e-08,
-                    "max_input_tokens": 8192,
-                    "max_output_tokens": 16384,
-                    "metadata": {
-                        "notes": "Meta's latest class of model (Llama 3) launched with a variety of sizes & flavors. This 8B instruct-tuned version was optimized for high quality dialogue usecases. It has demonstrated strong..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "meta-llama/llama-3-70b-instruct": {
                 "input_cost_per_token": 5.1e-07,
                 "litellm_provider": "openrouter",
@@ -7994,6 +8012,26 @@
                     "max_output_tokens": 8000,
                     "metadata": {
                         "notes": "Meta's latest class of model (Llama 3) launched with a variety of sizes & flavors. This 70B instruct-tuned version was optimized for high quality dialogue usecases. It has demonstrated strong..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "meta-llama/llama-3-8b-instruct": {
+                "input_cost_per_token": 3e-08,
+                "output_cost_per_token": 4e-08,
+                "max_input_tokens": 8192,
+                "max_output_tokens": 16384,
+                "metadata": {
+                    "notes": "Meta's latest class of model (Llama 3) launched with a variety of sizes & flavors. This 8B instruct-tuned version was optimized for high quality dialogue usecases. It has demonstrated strong..."
+                },
+                "litellm_provider": "openrouter",
+                "meta-llama/llama-3-8b-instruct": {
+                    "input_cost_per_token": 3e-08,
+                    "output_cost_per_token": 4e-08,
+                    "max_input_tokens": 8192,
+                    "max_output_tokens": 16384,
+                    "metadata": {
+                        "notes": "Meta's latest class of model (Llama 3) launched with a variety of sizes & flavors. This 8B instruct-tuned version was optimized for high quality dialogue usecases. It has demonstrated strong..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -8116,6 +8154,26 @@
                     "litellm_provider": "openrouter"
                 }
             },
+            "openai/gpt-3.5-turbo-0613": {
+                "input_cost_per_token": 1e-06,
+                "output_cost_per_token": 2e-06,
+                "max_input_tokens": 4095,
+                "max_output_tokens": 4096,
+                "metadata": {
+                    "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+                },
+                "litellm_provider": "openrouter",
+                "openai/gpt-3.5-turbo-0613": {
+                    "input_cost_per_token": 1e-06,
+                    "output_cost_per_token": 2e-06,
+                    "max_input_tokens": 4095,
+                    "max_output_tokens": 4096,
+                    "metadata": {
+                        "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "openai/gpt-4-turbo-preview": {
                 "input_cost_per_token": 1e-05,
                 "output_cost_per_token": 3e-05,
@@ -8135,26 +8193,6 @@
                         "notes": "The preview GPT-4 model with improved instruction following, JSON mode, reproducible outputs, parallel function calling, and more. Training data: up to Dec 2023. **Note:** heavily rate limited by OpenAI while..."
                     },
                     "supports_function_calling": true,
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "openai/gpt-3.5-turbo-0613": {
-                "input_cost_per_token": 1e-06,
-                "output_cost_per_token": 2e-06,
-                "max_input_tokens": 4095,
-                "max_output_tokens": 4096,
-                "metadata": {
-                    "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
-                },
-                "litellm_provider": "openrouter",
-                "openai/gpt-3.5-turbo-0613": {
-                    "input_cost_per_token": 1e-06,
-                    "output_cost_per_token": 2e-06,
-                    "max_input_tokens": 4095,
-                    "max_output_tokens": 4096,
-                    "metadata": {
-                        "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
-                    },
                     "litellm_provider": "openrouter"
                 }
             },
@@ -8236,6 +8274,24 @@
                     "litellm_provider": "openrouter"
                 }
             },
+            "mistralai/mistral-7b-instruct-v0.1": {
+                "input_cost_per_token": 1.1e-07,
+                "output_cost_per_token": 1.9e-07,
+                "max_input_tokens": 2824,
+                "metadata": {
+                    "notes": "A 7.3B parameter model that outperforms Llama 2 13B on all benchmarks, with optimizations for speed and context length."
+                },
+                "litellm_provider": "openrouter",
+                "mistralai/mistral-7b-instruct-v0.1": {
+                    "input_cost_per_token": 1.1e-07,
+                    "output_cost_per_token": 1.9e-07,
+                    "max_input_tokens": 2824,
+                    "metadata": {
+                        "notes": "A 7.3B parameter model that outperforms Llama 2 13B on all benchmarks, with optimizations for speed and context length."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "openai/gpt-3.5-turbo-instruct": {
                 "input_cost_per_token": 1.5e-06,
                 "output_cost_per_token": 2e-06,
@@ -8252,24 +8308,6 @@
                     "max_output_tokens": 4096,
                     "metadata": {
                         "notes": "This model is a variant of GPT-3.5 Turbo tuned for instructional prompts and omitting chat-related optimizations. Training data: up to Sep 2021."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "mistralai/mistral-7b-instruct-v0.1": {
-                "input_cost_per_token": 1.1e-07,
-                "output_cost_per_token": 1.9e-07,
-                "max_input_tokens": 2824,
-                "metadata": {
-                    "notes": "A 7.3B parameter model that outperforms Llama 2 13B on all benchmarks, with optimizations for speed and context length."
-                },
-                "litellm_provider": "openrouter",
-                "mistralai/mistral-7b-instruct-v0.1": {
-                    "input_cost_per_token": 1.1e-07,
-                    "output_cost_per_token": 1.9e-07,
-                    "max_input_tokens": 2824,
-                    "metadata": {
-                        "notes": "A 7.3B parameter model that outperforms Llama 2 13B on all benchmarks, with optimizations for speed and context length."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -8386,29 +8424,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "openai/gpt-4": {
-                "input_cost_per_token": 3e-05,
-                "litellm_provider": "openrouter",
-                "max_tokens": 4096,
-                "mode": "chat",
-                "output_cost_per_token": 6e-05,
-                "supports_tool_choice": true,
-                "max_input_tokens": 8191,
-                "max_output_tokens": 4096,
-                "metadata": {
-                    "notes": "OpenAI's flagship model, GPT-4 is a large-scale multimodal language model capable of solving difficult problems with greater accuracy than previous models due to its broader general knowledge and advanced reasoning..."
-                },
-                "openai/gpt-4": {
-                    "input_cost_per_token": 3e-05,
-                    "output_cost_per_token": 6e-05,
-                    "max_input_tokens": 8191,
-                    "max_output_tokens": 4096,
-                    "metadata": {
-                        "notes": "OpenAI's flagship model, GPT-4 is a large-scale multimodal language model capable of solving difficult problems with greater accuracy than previous models due to its broader general knowledge and advanced reasoning..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "openai/gpt-3.5-turbo": {
                 "input_cost_per_token": 5e-07,
                 "litellm_provider": "openrouter",
@@ -8431,9 +8446,62 @@
                     },
                     "litellm_provider": "openrouter"
                 }
+            },
+            "openai/gpt-4": {
+                "input_cost_per_token": 3e-05,
+                "litellm_provider": "openrouter",
+                "max_tokens": 4096,
+                "mode": "chat",
+                "output_cost_per_token": 6e-05,
+                "supports_tool_choice": true,
+                "max_input_tokens": 8191,
+                "max_output_tokens": 4096,
+                "metadata": {
+                    "notes": "OpenAI's flagship model, GPT-4 is a large-scale multimodal language model capable of solving difficult problems with greater accuracy than previous models due to its broader general knowledge and advanced reasoning..."
+                },
+                "openai/gpt-4": {
+                    "input_cost_per_token": 3e-05,
+                    "output_cost_per_token": 6e-05,
+                    "max_input_tokens": 8191,
+                    "max_output_tokens": 4096,
+                    "metadata": {
+                        "notes": "OpenAI's flagship model, GPT-4 is a large-scale multimodal language model capable of solving difficult problems with greater accuracy than previous models due to its broader general knowledge and advanced reasoning..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
             }
         },
         "free_models": {
+            "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
+                "input_cost_per_token": 0.0,
+                "output_cost_per_token": 0.0,
+                "max_input_tokens": 256000,
+                "max_output_tokens": 65536,
+                "metadata": {
+                    "notes": "NVIDIA Nemotron\u2122 3 Nano Omni is a 30B-A3B open multimodal model designed to function as a perception and context sub-agent in enterprise agent systems. It accepts text, image, video, and..."
+                },
+                "litellm_provider": "openrouter"
+            },
+            "poolside/laguna-xs.2:free": {
+                "input_cost_per_token": 0.0,
+                "output_cost_per_token": 0.0,
+                "max_input_tokens": 131072,
+                "max_output_tokens": 8192,
+                "metadata": {
+                    "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
+                },
+                "litellm_provider": "openrouter"
+            },
+            "poolside/laguna-m.1:free": {
+                "input_cost_per_token": 0.0,
+                "output_cost_per_token": 0.0,
+                "max_input_tokens": 131072,
+                "max_output_tokens": 8192,
+                "metadata": {
+                    "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 128K..."
+                },
+                "litellm_provider": "openrouter"
+            },
             "inclusionai/ling-2.6-1t:free": {
                 "input_cost_per_token": 0.0,
                 "output_cost_per_token": 0.0,
@@ -8451,16 +8519,6 @@
                 "max_output_tokens": 262144,
                 "metadata": {
                     "notes": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to..."
-                },
-                "litellm_provider": "openrouter"
-            },
-            "inclusionai/ling-2.6-flash:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 262144,
-                "max_output_tokens": 32768,
-                "metadata": {
-                    "notes": "Ling-2.6-flash is an instant (instruct) model from inclusionAI with 104B total parameters and 7.4B active parameters, designed for real-world agents that require fast responses, strong execution, and high token efficiency...."
                 },
                 "litellm_provider": "openrouter"
             },

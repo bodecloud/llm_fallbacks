@@ -244,6 +244,26 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 256000,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "NVIDIA Nemotron\u2122 3 Nano Omni is a 30B-A3B open multimodal model designed to function as a perception and context sub-agent in enterprise agent systems. It accepts text, image, video, and..."
+        },
+        "litellm_provider": "openrouter",
+        "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 256000,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "NVIDIA Nemotron\u2122 3 Nano Omni is a 30B-A3B open multimodal model designed to function as a perception and context sub-agent in enterprise agent systems. It accepts text, image, video, and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "google/gemma-4-26b-a4b-it:free": {
         "input_cost_per_token": 0.0,
         "output_cost_per_token": 0.0,
@@ -300,26 +320,6 @@
             "max_output_tokens": 32768,
             "metadata": {
                 "notes": "Ling-2.6-1T is an instant (instruct) model from inclusionAI and the company\u2019s trillion-parameter flagship, designed for real-world agents that require fast execution and high efficiency at scale. It uses a \u201cfast..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "inclusionai/ling-2.6-flash:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 32768,
-        "metadata": {
-            "notes": "Ling-2.6-flash is an instant (instruct) model from inclusionAI with 104B total parameters and 7.4B active parameters, designed for real-world agents that require fast responses, strong execution, and high token efficiency...."
-        },
-        "litellm_provider": "openrouter",
-        "inclusionai/ling-2.6-flash:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 32768,
-            "metadata": {
-                "notes": "Ling-2.6-flash is an instant (instruct) model from inclusionAI with 104B total parameters and 7.4B active parameters, designed for real-world agents that require fast responses, strong execution, and high token efficiency...."
             },
             "litellm_provider": "openrouter"
         }
@@ -642,6 +642,46 @@
             "max_output_tokens": 8192,
             "metadata": {
                 "notes": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "poolside/laguna-m.1:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 8192,
+        "metadata": {
+            "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 128K..."
+        },
+        "litellm_provider": "openrouter",
+        "poolside/laguna-m.1:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 8192,
+            "metadata": {
+                "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 128K..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "poolside/laguna-xs.2:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 8192,
+        "metadata": {
+            "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
+        },
+        "litellm_provider": "openrouter",
+        "poolside/laguna-xs.2:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 8192,
+            "metadata": {
+                "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
             },
             "litellm_provider": "openrouter"
         }
@@ -2105,6 +2145,24 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
+    "mistralai/mistral-nemo": {
+        "input_cost_per_token": 2e-08,
+        "output_cost_per_token": 3e-08,
+        "max_input_tokens": 131072,
+        "metadata": {
+            "notes": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,..."
+        },
+        "litellm_provider": "openrouter",
+        "mistralai/mistral-nemo": {
+            "input_cost_per_token": 2e-08,
+            "output_cost_per_token": 3e-08,
+            "max_input_tokens": 131072,
+            "metadata": {
+                "notes": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "voyage/rerank-2.5": {
         "input_cost_per_token": 5e-08,
         "litellm_provider": "voyage",
@@ -2195,26 +2253,6 @@
         "mode": "chat",
         "supports_tool_choice": true,
         "supports_function_calling": true
-    },
-    "mistralai/mistral-nemo": {
-        "input_cost_per_token": 2e-08,
-        "output_cost_per_token": 4e-08,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 16384,
-        "metadata": {
-            "notes": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,..."
-        },
-        "litellm_provider": "openrouter",
-        "mistralai/mistral-nemo": {
-            "input_cost_per_token": 2e-08,
-            "output_cost_per_token": 4e-08,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "lambda_ai/hermes3-8b": {
         "input_cost_per_token": 2.5e-08,
@@ -5794,6 +5832,26 @@
         "max_tokens": 16384,
         "supports_vision": true,
         "supports_system_messages": true
+    },
+    "inclusionai/ling-2.6-flash": {
+        "input_cost_per_token": 8e-08,
+        "output_cost_per_token": 2.4e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "Ling-2.6-flash is an instant (instruct) model from inclusionAI with 104B total parameters and 7.4B active parameters, designed for real-world agents that require fast responses, strong execution, and high token efficiency...."
+        },
+        "litellm_provider": "openrouter",
+        "inclusionai/ling-2.6-flash": {
+            "input_cost_per_token": 8e-08,
+            "output_cost_per_token": 2.4e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "Ling-2.6-flash is an instant (instruct) model from inclusionAI with 104B total parameters and 7.4B active parameters, designed for real-world agents that require fast responses, strong execution, and high token efficiency...."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "vercel_ai_gateway/meta/llama-3.2-11b": {
         "input_cost_per_token": 1.6e-07,
@@ -10066,26 +10124,6 @@
         "supports_response_schema": true,
         "supports_system_messages": true,
         "supports_tool_choice": true
-    },
-    "qwen/qwq-32b": {
-        "input_cost_per_token": 1.5e-07,
-        "output_cost_per_token": 5.8e-07,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 131072,
-        "metadata": {
-            "notes": "QwQ is the reasoning model of the Qwen series. Compared with conventional instruction-tuned models, QwQ, which is capable of thinking and reasoning, can achieve significantly enhanced performance in downstream tasks,..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwq-32b": {
-            "input_cost_per_token": 1.5e-07,
-            "output_cost_per_token": 5.8e-07,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 131072,
-            "metadata": {
-                "notes": "QwQ is the reasoning model of the Qwen series. Compared with conventional instruction-tuned models, QwQ, which is capable of thinking and reasoning, can achieve significantly enhanced performance in downstream tasks,..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "azure_ai/llama-3.2-11b-vision-instruct": {
         "input_cost_per_token": 3.7e-07,
@@ -19739,26 +19777,6 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
-    "qwen/qwen3.6-27b": {
-        "input_cost_per_token": 5e-07,
-        "output_cost_per_token": 2e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3.6-27b": {
-            "input_cost_per_token": 5e-07,
-            "output_cost_per_token": 2e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "deepcogito/cogito-v2.1-671b": {
         "input_cost_per_token": 1.25e-06,
         "output_cost_per_token": 1.25e-06,
@@ -21970,6 +21988,26 @@
             "max_output_tokens": 4096,
             "metadata": {
                 "notes": "This model is a variant of GPT-3.5 Turbo tuned for instructional prompts and omitting chat-related optimizations. Training data: up to Sep 2021."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "qwen/qwen3.6-27b": {
+        "input_cost_per_token": 3.25e-07,
+        "output_cost_per_token": 3.25e-06,
+        "max_input_tokens": 256000,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3.6-27b": {
+            "input_cost_per_token": 3.25e-07,
+            "output_cost_per_token": 3.25e-06,
+            "max_input_tokens": 256000,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
             },
             "litellm_provider": "openrouter"
         }
@@ -25878,6 +25916,26 @@
             "/v1/audio/transcriptions"
         ]
     },
+    "qwen/qwen3.6-max-preview": {
+        "input_cost_per_token": 1.04e-06,
+        "output_cost_per_token": 6.24e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Qwen3.6-Max-Preview is a proprietary frontier model from Alibaba Cloud built on a sparse mixture-of-experts architecture with approximately 1 trillion total parameters. It is optimized for agentic coding, tool use, and..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3.6-max-preview": {
+            "input_cost_per_token": 1.04e-06,
+            "output_cost_per_token": 6.24e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Qwen3.6-Max-Preview is a proprietary frontier model from Alibaba Cloud built on a sparse mixture-of-experts architecture with approximately 1 trillion total parameters. It is optimized for agentic coding, tool use, and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "anthropic/claude-haiku-4.5": {
         "cache_creation_input_token_cost": 1.25e-06,
         "cache_read_input_token_cost": 1e-07,
@@ -26941,26 +26999,6 @@
         "output_cost_per_token": 6e-06,
         "supports_system_messages": true,
         "supports_tool_choice": true
-    },
-    "qwen/qwen3.6-max-preview": {
-        "input_cost_per_token": 1.3e-06,
-        "output_cost_per_token": 7.8e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "Qwen3.6-Max-Preview is a proprietary frontier model from Alibaba Cloud built on a sparse mixture-of-experts architecture with approximately 1 trillion total parameters. It is optimized for agentic coding, tool use, and..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3.6-max-preview": {
-            "input_cost_per_token": 1.3e-06,
-            "output_cost_per_token": 7.8e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "Qwen3.6-Max-Preview is a proprietary frontier model from Alibaba Cloud built on a sparse mixture-of-experts architecture with approximately 1 trillion total parameters. It is optimized for agentic coding, tool use, and..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "databricks/databricks-meta-llama-3-1-8b-instruct": {
         "input_cost_per_token": 1.5000999999999998e-07,
@@ -40308,6 +40346,80 @@
         "supports_vision": true,
         "supports_web_search": true
     },
+    "azure/gpt-5.5-pro": {
+        "cache_read_input_token_cost": 3e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 6e-06,
+        "input_cost_per_token": 3e-05,
+        "input_cost_per_token_above_272k_tokens": 6e-05,
+        "litellm_provider": "azure",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "responses",
+        "output_cost_per_token": 0.00018,
+        "output_cost_per_token_above_272k_tokens": 0.00027,
+        "supported_endpoints": [
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": false,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_none_reasoning_effort": false,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_low_reasoning_effort": false
+    },
+    "azure/gpt-5.5-pro-2026-04-23": {
+        "cache_read_input_token_cost": 3e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 6e-06,
+        "input_cost_per_token": 3e-05,
+        "input_cost_per_token_above_272k_tokens": 6e-05,
+        "litellm_provider": "azure",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "responses",
+        "output_cost_per_token": 0.00018,
+        "output_cost_per_token_above_272k_tokens": 0.00027,
+        "supported_endpoints": [
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": false,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true
+    },
     "gemini-embedding-2": {
         "input_cost_per_audio_per_second": 0.00016,
         "input_cost_per_image": 0.00012,
@@ -40616,6 +40728,92 @@
         "supports_xhigh_reasoning_effort": true,
         "supports_minimal_reasoning_effort": true
     },
+    "gpt-5.5-pro": {
+        "cache_read_input_token_cost": 3e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 6e-06,
+        "input_cost_per_token": 3e-05,
+        "input_cost_per_token_above_272k_tokens": 6e-05,
+        "input_cost_per_token_flex": 1.5e-05,
+        "input_cost_per_token_batches": 1.5e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "responses",
+        "output_cost_per_token": 0.00018,
+        "output_cost_per_token_above_272k_tokens": 0.00027,
+        "output_cost_per_token_flex": 9e-05,
+        "output_cost_per_token_batches": 9e-05,
+        "supported_endpoints": [
+            "/v1/responses",
+            "/v1/batch"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": false,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_service_tier": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_none_reasoning_effort": false,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": true
+    },
+    "gpt-5.5-pro-2026-04-23": {
+        "cache_read_input_token_cost": 3e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 6e-06,
+        "input_cost_per_token": 3e-05,
+        "input_cost_per_token_above_272k_tokens": 6e-05,
+        "input_cost_per_token_flex": 1.5e-05,
+        "input_cost_per_token_batches": 1.5e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "responses",
+        "output_cost_per_token": 0.00018,
+        "output_cost_per_token_above_272k_tokens": 0.00027,
+        "output_cost_per_token_flex": 9e-05,
+        "output_cost_per_token_batches": 9e-05,
+        "supported_endpoints": [
+            "/v1/responses",
+            "/v1/batch"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": false,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_service_tier": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_none_reasoning_effort": false,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": true
+    },
     "azure/gpt-4o-realtime-preview-2024-10-01": {
         "cache_creation_input_audio_token_cost": 2e-05,
         "cache_read_input_token_cost": 2.5e-06,
@@ -40755,80 +40953,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "azure/gpt-5.5-pro": {
-        "cache_read_input_token_cost": 6e-06,
-        "cache_read_input_token_cost_above_272k_tokens": 1.2e-05,
-        "input_cost_per_token": 6e-05,
-        "input_cost_per_token_above_272k_tokens": 0.00012,
-        "litellm_provider": "azure",
-        "max_input_tokens": 1050000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "responses",
-        "output_cost_per_token": 0.00036,
-        "output_cost_per_token_above_272k_tokens": 0.00054,
-        "supported_endpoints": [
-            "/v1/batch",
-            "/v1/responses"
-        ],
-        "supported_modalities": [
-            "text",
-            "image"
-        ],
-        "supported_output_modalities": [
-            "text"
-        ],
-        "supports_function_calling": true,
-        "supports_native_streaming": true,
-        "supports_parallel_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": false,
-        "supports_system_messages": true,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "supports_web_search": true,
-        "supports_none_reasoning_effort": false,
-        "supports_xhigh_reasoning_effort": true,
-        "supports_minimal_reasoning_effort": false,
-        "supports_low_reasoning_effort": false
-    },
-    "azure/gpt-5.5-pro-2026-04-23": {
-        "cache_read_input_token_cost": 6e-06,
-        "cache_read_input_token_cost_above_272k_tokens": 1.2e-05,
-        "input_cost_per_token": 6e-05,
-        "input_cost_per_token_above_272k_tokens": 0.00012,
-        "litellm_provider": "azure",
-        "max_input_tokens": 1050000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "responses",
-        "output_cost_per_token": 0.00036,
-        "output_cost_per_token_above_272k_tokens": 0.00054,
-        "supported_endpoints": [
-            "/v1/batch",
-            "/v1/responses"
-        ],
-        "supported_modalities": [
-            "text",
-            "image"
-        ],
-        "supported_output_modalities": [
-            "text"
-        ],
-        "supports_function_calling": true,
-        "supports_native_streaming": true,
-        "supports_parallel_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": false,
-        "supports_system_messages": true,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "supports_web_search": true
-    },
     "databricks/databricks-claude-opus-4-5": {
         "input_cost_per_token": 5.00003e-06,
         "input_dbu_cost_per_token": 7.1429e-05,
@@ -40847,92 +40971,6 @@
         "supports_function_calling": true,
         "supports_reasoning": true,
         "supports_tool_choice": true
-    },
-    "gpt-5.5-pro": {
-        "cache_read_input_token_cost": 6e-06,
-        "cache_read_input_token_cost_above_272k_tokens": 1.2e-05,
-        "input_cost_per_token": 6e-05,
-        "input_cost_per_token_above_272k_tokens": 0.00012,
-        "input_cost_per_token_flex": 3e-05,
-        "input_cost_per_token_batches": 3e-05,
-        "litellm_provider": "openai",
-        "max_input_tokens": 1050000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "responses",
-        "output_cost_per_token": 0.00036,
-        "output_cost_per_token_above_272k_tokens": 0.00054,
-        "output_cost_per_token_flex": 0.00018,
-        "output_cost_per_token_batches": 0.00018,
-        "supported_endpoints": [
-            "/v1/responses",
-            "/v1/batch"
-        ],
-        "supported_modalities": [
-            "text",
-            "image"
-        ],
-        "supported_output_modalities": [
-            "text"
-        ],
-        "supports_function_calling": true,
-        "supports_native_streaming": true,
-        "supports_parallel_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": false,
-        "supports_system_messages": true,
-        "supports_tool_choice": true,
-        "supports_service_tier": true,
-        "supports_vision": true,
-        "supports_web_search": true,
-        "supports_none_reasoning_effort": false,
-        "supports_xhigh_reasoning_effort": true,
-        "supports_minimal_reasoning_effort": true
-    },
-    "gpt-5.5-pro-2026-04-23": {
-        "cache_read_input_token_cost": 6e-06,
-        "cache_read_input_token_cost_above_272k_tokens": 1.2e-05,
-        "input_cost_per_token": 6e-05,
-        "input_cost_per_token_above_272k_tokens": 0.00012,
-        "input_cost_per_token_flex": 3e-05,
-        "input_cost_per_token_batches": 3e-05,
-        "litellm_provider": "openai",
-        "max_input_tokens": 1050000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "responses",
-        "output_cost_per_token": 0.00036,
-        "output_cost_per_token_above_272k_tokens": 0.00054,
-        "output_cost_per_token_flex": 0.00018,
-        "output_cost_per_token_batches": 0.00018,
-        "supported_endpoints": [
-            "/v1/responses",
-            "/v1/batch"
-        ],
-        "supported_modalities": [
-            "text",
-            "image"
-        ],
-        "supported_output_modalities": [
-            "text"
-        ],
-        "supports_function_calling": true,
-        "supports_native_streaming": true,
-        "supports_parallel_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": false,
-        "supports_system_messages": true,
-        "supports_tool_choice": true,
-        "supports_service_tier": true,
-        "supports_vision": true,
-        "supports_web_search": true,
-        "supports_none_reasoning_effort": false,
-        "supports_xhigh_reasoning_effort": true,
-        "supports_minimal_reasoning_effort": true
     },
     "elevenlabs/eleven_multilingual_v2": {
         "input_cost_per_character": 0.00018,
