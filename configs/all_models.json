@@ -7398,24 +7398,6 @@
         "supports_tool_choice": true,
         "supports_response_schema": true
     },
-    "mistralai/mistral-small-creative": {
-        "input_cost_per_token": 1e-07,
-        "output_cost_per_token": 3e-07,
-        "max_input_tokens": 32768,
-        "metadata": {
-            "notes": "Mistral Small Creative is an experimental small model designed for creative writing, narrative generation, roleplay and character-driven dialogue, general-purpose instruction following, and conversational agents."
-        },
-        "litellm_provider": "openrouter",
-        "mistralai/mistral-small-creative": {
-            "input_cost_per_token": 1e-07,
-            "output_cost_per_token": 3e-07,
-            "max_input_tokens": 32768,
-            "metadata": {
-                "notes": "Mistral Small Creative is an experimental small model designed for creative writing, narrative generation, roleplay and character-driven dialogue, general-purpose instruction following, and conversational agents."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "mistralai/voxtral-small-24b-2507": {
         "input_cost_per_token": 1e-07,
         "output_cost_per_token": 3e-07,
