@@ -6226,26 +6226,6 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
-    "qwen/qwen3-30b-a3b": {
-        "input_cost_per_token": 8e-08,
-        "output_cost_per_token": 2.8e-07,
-        "max_input_tokens": 40960,
-        "max_output_tokens": 16384,
-        "metadata": {
-            "notes": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3-30b-a3b": {
-            "input_cost_per_token": 8e-08,
-            "output_cost_per_token": 2.8e-07,
-            "max_input_tokens": 40960,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "deepinfra/qwen/qwen3-30b-a3b": {
         "max_tokens": 40960,
         "max_input_tokens": 40960,
@@ -9131,6 +9111,26 @@
         "max_tokens": 20000,
         "supports_system_messages": true,
         "supports_reasoning": true
+    },
+    "qwen/qwen3-30b-a3b": {
+        "input_cost_per_token": 9e-08,
+        "output_cost_per_token": 4.5e-07,
+        "max_input_tokens": 40960,
+        "max_output_tokens": 20000,
+        "metadata": {
+            "notes": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3-30b-a3b": {
+            "input_cost_per_token": 9e-08,
+            "output_cost_per_token": 4.5e-07,
+            "max_input_tokens": 40960,
+            "max_output_tokens": 20000,
+            "metadata": {
+                "notes": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "qwen/qwen-vl-plus": {
         "input_cost_per_token": 1.365e-07,
@@ -12254,26 +12254,6 @@
         "supports_function_calling": true,
         "source": "https://nebius.com/prices-ai-studio"
     },
-    "deepseek/deepseek-v3.1-terminus": {
-        "input_cost_per_token": 2.1e-07,
-        "output_cost_per_token": 7.9e-07,
-        "max_input_tokens": 163840,
-        "max_output_tokens": 32768,
-        "metadata": {
-            "notes": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's..."
-        },
-        "litellm_provider": "openrouter",
-        "deepseek/deepseek-v3.1-terminus": {
-            "input_cost_per_token": 2.1e-07,
-            "output_cost_per_token": 7.9e-07,
-            "max_input_tokens": 163840,
-            "max_output_tokens": 32768,
-            "metadata": {
-                "notes": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "inception/mercury-2": {
         "input_cost_per_token": 2.5e-07,
         "output_cost_per_token": 7.5e-07,
@@ -13316,6 +13296,26 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "deepseek/deepseek-v3.1-terminus": {
+        "input_cost_per_token": 2.7e-07,
+        "output_cost_per_token": 9.5e-07,
+        "max_input_tokens": 163840,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's..."
+        },
+        "litellm_provider": "openrouter",
+        "deepseek/deepseek-v3.1-terminus": {
+            "input_cost_per_token": 2.7e-07,
+            "output_cost_per_token": 9.5e-07,
+            "max_input_tokens": 163840,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "novita/qwen/qwen3-omni-30b-a3b-instruct": {
         "litellm_provider": "novita",
         "mode": "chat",
@@ -13703,7 +13703,7 @@
         "max_audio_length_hours": 8.4,
         "max_audio_per_prompt": 1,
         "max_images_per_prompt": 3000,
-        "max_input_tokens": 1000000,
+        "max_input_tokens": 1048576,
         "max_output_tokens": 8192,
         "max_pdf_size_mb": 30,
         "max_tokens": 8192,
@@ -13725,7 +13725,7 @@
             "input_cost_per_token": 1e-07,
             "output_cost_per_token": 4e-07,
             "input_cost_per_image": 1e-07,
-            "max_input_tokens": 1000000,
+            "max_input_tokens": 1048576,
             "max_output_tokens": 8192,
             "metadata": {
                 "notes": "Gemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It..."

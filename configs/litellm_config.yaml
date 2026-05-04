@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-33734dd6e87e4e1eac69de598651cd96
+  master_key: sk-b1edf701f3494cc88af7a099f6b29992
   alerting:
   - slack
   - email
@@ -4156,8 +4156,8 @@ model_list:
     model: openai/deepseek/deepseek-v3.1-terminus
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 2.1e-07
-    output_cost_per_token: 7.9e-07
+    input_cost_per_token: 2.7e-07
+    output_cost_per_token: 9.5e-07
     max_input_tokens: 163840
     max_output_tokens: 32768
     metadata: &id169
@@ -4167,8 +4167,8 @@ model_list:
         the model's...
     litellm_provider: openrouter
     deepseek/deepseek-v3.1-terminus:
-      input_cost_per_token: 2.1e-07
-      output_cost_per_token: 7.9e-07
+      input_cost_per_token: 2.7e-07
+      output_cost_per_token: 9.5e-07
       max_input_tokens: 163840
       max_output_tokens: 32768
       metadata: *id169
@@ -6036,20 +6036,20 @@ model_list:
     model: openai/qwen/qwen3-30b-a3b
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 8.0e-08
-    output_cost_per_token: 2.8e-07
+    input_cost_per_token: 9.0e-08
+    output_cost_per_token: 4.5e-07
     max_input_tokens: 40960
-    max_output_tokens: 16384
+    max_output_tokens: 20000
     metadata: &id247
       notes: Qwen3, the latest generation in the Qwen large language model series,
         features both dense and mixture-of-experts (MoE) architectures to excel in
         reasoning, multilingual support, and advanced agent tasks. Its unique...
     litellm_provider: openrouter
     qwen/qwen3-30b-a3b:
-      input_cost_per_token: 8.0e-08
-      output_cost_per_token: 2.8e-07
+      input_cost_per_token: 9.0e-08
+      output_cost_per_token: 4.5e-07
       max_input_tokens: 40960
-      max_output_tokens: 16384
+      max_output_tokens: 20000
       metadata: *id247
       litellm_provider: openrouter
 - model_name: qwen/qwen3-8b
@@ -6986,7 +6986,7 @@ model_list:
     max_audio_length_hours: 8.4
     max_audio_per_prompt: 1
     max_images_per_prompt: 3000
-    max_input_tokens: 1000000
+    max_input_tokens: 1048576
     max_output_tokens: 8192
     max_pdf_size_mb: 30
     max_tokens: 8192
@@ -7010,7 +7010,7 @@ model_list:
       input_cost_per_token: 1.0e-07
       output_cost_per_token: 4.0e-07
       input_cost_per_image: 1.0e-07
-      max_input_tokens: 1000000
+      max_input_tokens: 1048576
       max_output_tokens: 8192
       metadata: *id289
       litellm_provider: openrouter
