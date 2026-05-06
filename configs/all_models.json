@@ -109,6 +109,7 @@
         "supports_vision": true,
         "supports_prompt_caching": false,
         "supports_reasoning": true,
+        "supports_minimal_reasoning_effort": true,
         "supports_tool_choice": true
     },
     "google/lyria-3-clip-preview": {
@@ -622,30 +623,6 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
-    "google/gemma-3-27b-it:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 8192,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemma-3-27b-it:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 8192,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "openai/gpt-oss-20b:free": {
         "input_cost_per_token": 0.0,
         "output_cost_per_token": 0.0,
@@ -1010,54 +987,6 @@
         "output_cost_per_token": 0.0,
         "source": "https://docs.mistral.ai/capabilities/code_generation/"
     },
-    "google/gemma-3-12b-it:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 32768,
-        "max_output_tokens": 8192,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemma-3-12b-it:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 32768,
-            "max_output_tokens": 8192,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "google/gemma-3-4b-it:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 32768,
-        "max_output_tokens": 8192,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemma-3-4b-it:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 32768,
-            "max_output_tokens": 8192,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "publicai/aisingapore/qwen-sea-lion-v4-32b-it": {
         "input_cost_per_token": 0.0,
         "litellm_provider": "publicai",
@@ -1356,46 +1285,6 @@
         "max_tokens": 4096,
         "mode": "chat",
         "output_cost_per_token": 0.0
-    },
-    "google/gemma-3n-e2b-it:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 8192,
-        "max_output_tokens": 2048,
-        "metadata": {
-            "notes": "Gemma 3n E2B IT is a multimodal, instruction-tuned model developed by Google DeepMind, designed to operate efficiently at an effective parameter size of 2B while leveraging a 6B architecture. Based..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemma-3n-e2b-it:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 8192,
-            "max_output_tokens": 2048,
-            "metadata": {
-                "notes": "Gemma 3n E2B IT is a multimodal, instruction-tuned model developed by Google DeepMind, designed to operate efficiently at an effective parameter size of 2B while leveraging a 6B architecture. Based..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "google/gemma-3n-e4b-it:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 8192,
-        "max_output_tokens": 2048,
-        "metadata": {
-            "notes": "Gemma 3n E4B-it is optimized for efficient execution on mobile and low-resource devices, such as phones, laptops, and tablets. It supports multimodal inputs\u2014including text, visual data, and audio\u2014enabling diverse tasks..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemma-3n-e4b-it:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 8192,
-            "max_output_tokens": 2048,
-            "metadata": {
-                "notes": "Gemma 3n E4B-it is optimized for efficient execution on mobile and low-resource devices, such as phones, laptops, and tablets. It supports multimodal inputs\u2014including text, visual data, and audio\u2014enabling diverse tasks..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "doubao-embedding": {
         "input_cost_per_token": 0.0,
@@ -3981,6 +3870,20 @@
         "output_cost_per_token": 1e-07,
         "litellm_provider": "fireworks_ai",
         "mode": "chat"
+    },
+    "crusoe/google/gemma-3-12b-it": {
+        "input_cost_per_token": 1e-07,
+        "litellm_provider": "crusoe",
+        "max_input_tokens": 131072,
+        "max_output_tokens": 131072,
+        "max_tokens": 131072,
+        "mode": "chat",
+        "output_cost_per_token": 1e-07,
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
     },
     "deepinfra/nvidia/nvidia-nemotron-nano-9b-v2": {
         "max_tokens": 131072,
@@ -6683,6 +6586,19 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "crusoe/meta-llama/llama-3.3-70b-instruct": {
+        "input_cost_per_token": 2e-07,
+        "litellm_provider": "crusoe",
+        "max_input_tokens": 131072,
+        "max_output_tokens": 131072,
+        "max_tokens": 131072,
+        "mode": "chat",
+        "output_cost_per_token": 2e-07,
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true
+    },
     "fireworks_ai/accounts/fireworks/models/cogito-v1-preview-llama-8b": {
         "max_tokens": 131072,
         "max_input_tokens": 131072,
@@ -8032,6 +7948,26 @@
         "supports_parallel_function_calling": true,
         "supports_system_messages": true,
         "supports_tool_choice": true
+    },
+    "microsoft/phi-4-mini-instruct": {
+        "input_cost_per_token": 8e-08,
+        "output_cost_per_token": 3.5e-07,
+        "max_input_tokens": 128000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "Phi-4-mini-instruct is a lightweight open model built upon synthetic data and filtered publicly available websites - with a focus on high-quality, reasoning dense data. The model belongs to the Phi-4..."
+        },
+        "litellm_provider": "openrouter",
+        "microsoft/phi-4-mini-instruct": {
+            "input_cost_per_token": 8e-08,
+            "output_cost_per_token": 3.5e-07,
+            "max_input_tokens": 128000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "Phi-4-mini-instruct is a lightweight open model built upon synthetic data and filtered publicly available websites - with a focus on high-quality, reasoning dense data. The model belongs to the Phi-4..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "deepseek/deepseek-coder": {
         "input_cost_per_token": 1.4e-07,
@@ -10158,6 +10094,39 @@
         "supports_function_calling": true,
         "supports_tool_choice": true,
         "supports_vision": true
+    },
+    "vertex_ai/xai/grok-4.1-fast-non-reasoning": {
+        "cache_read_input_token_cost": 5e-08,
+        "input_cost_per_token": 2e-07,
+        "litellm_provider": "vertex_ai",
+        "max_input_tokens": 2000000,
+        "max_output_tokens": 2000000,
+        "max_tokens": 2000000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-07,
+        "source": "https://docs.x.ai/docs/models (Vertex AI Model Garden)",
+        "supports_function_calling": true,
+        "supports_response_schema": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true
+    },
+    "vertex_ai/xai/grok-4.1-fast-reasoning": {
+        "cache_read_input_token_cost": 5e-08,
+        "input_cost_per_token": 2e-07,
+        "litellm_provider": "vertex_ai",
+        "max_input_tokens": 2000000,
+        "max_output_tokens": 2000000,
+        "max_tokens": 2000000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-07,
+        "source": "https://docs.x.ai/docs/models (Vertex AI Model Garden)",
+        "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true
     },
     "deepinfra/meta-llama/llama-4-maverick-17b-128e-instruct-fp8": {
         "max_tokens": 1048576,
@@ -13730,7 +13699,7 @@
         "max_audio_length_hours": 8.4,
         "max_audio_per_prompt": 1,
         "max_images_per_prompt": 3000,
-        "max_input_tokens": 1000000,
+        "max_input_tokens": 1048576,
         "max_output_tokens": 8192,
         "max_pdf_size_mb": 30,
         "max_tokens": 8192,
@@ -13752,7 +13721,7 @@
             "input_cost_per_token": 1e-07,
             "output_cost_per_token": 4e-07,
             "input_cost_per_image": 1e-07,
-            "max_input_tokens": 1000000,
+            "max_input_tokens": 1048576,
             "max_output_tokens": 8192,
             "metadata": {
                 "notes": "Gemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It..."
@@ -15103,6 +15072,19 @@
         "max_tokens": 32768,
         "mode": "chat",
         "output_cost_per_token": 7.9e-07
+    },
+    "crusoe/openai/gpt-oss-120b": {
+        "input_cost_per_token": 8e-07,
+        "litellm_provider": "crusoe",
+        "max_input_tokens": 131072,
+        "max_output_tokens": 131072,
+        "max_tokens": 131072,
+        "mode": "chat",
+        "output_cost_per_token": 8e-07,
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true
     },
     "lambda_ai/deepseek-r1-671b": {
         "input_cost_per_token": 8e-07,
@@ -19953,6 +19935,31 @@
         "supports_tool_choice": true,
         "supports_vision": true
     },
+    "z-ai/glm-5": {
+        "input_cost_per_token": 6e-07,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 202752,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1.92e-06,
+        "source": "https://openrouter.ai/z-ai/glm-5",
+        "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
+        },
+        "z-ai/glm-5": {
+            "input_cost_per_token": 6e-07,
+            "output_cost_per_token": 1.92e-06,
+            "max_input_tokens": 202752,
+            "metadata": {
+                "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "google/gemini-3.1-flash-lite-preview": {
         "cache_read_input_token_cost": 2.5e-08,
         "cache_read_input_token_cost_per_audio_token": 5e-08,
@@ -20124,32 +20131,6 @@
         "supports_system_messages": true,
         "supports_tool_choice": true,
         "source": "https://aws.amazon.com/bedrock/pricing/"
-    },
-    "z-ai/glm-5": {
-        "input_cost_per_token": 6e-07,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 202752,
-        "max_output_tokens": 16384,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 2.08e-06,
-        "source": "https://openrouter.ai/z-ai/glm-5",
-        "supports_function_calling": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
-        },
-        "z-ai/glm-5": {
-            "input_cost_per_token": 6e-07,
-            "output_cost_per_token": 2.08e-06,
-            "max_input_tokens": 202752,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "replicate/deepseek-ai/deepseek-v3.1": {
         "input_cost_per_token": 6.72e-07,
@@ -20836,6 +20817,19 @@
         "cache_read_input_token_cost": 1.1e-07,
         "input_cost_per_token_cache_hit": 1.1e-07,
         "supports_reasoning": true
+    },
+    "crusoe/deepseek-ai/deepseek-v3-0324": {
+        "input_cost_per_token": 1.5e-06,
+        "litellm_provider": "crusoe",
+        "max_input_tokens": 163840,
+        "max_output_tokens": 163840,
+        "max_tokens": 163840,
+        "mode": "chat",
+        "output_cost_per_token": 1.5e-06,
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true
     },
     "openai/gpt-audio-mini": {
         "input_cost_per_token": 6e-07,
@@ -24276,6 +24270,19 @@
         "supports_reasoning": true,
         "supports_system_messages": true
     },
+    "crusoe/moonshotai/kimi-k2-thinking": {
+        "input_cost_per_token": 2.5e-06,
+        "litellm_provider": "crusoe",
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "max_tokens": 262144,
+        "mode": "chat",
+        "output_cost_per_token": 2.5e-06,
+        "supports_function_calling": false,
+        "supports_reasoning": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": false
+    },
     "replicate/google/gemini-2.5-flash": {
         "input_cost_per_token": 2.5e-06,
         "output_cost_per_token": 2.5e-06,
@@ -24893,6 +24900,19 @@
         "supports_function_calling": true,
         "supports_tool_choice": true,
         "supports_response_schema": true
+    },
+    "crusoe/qwen/qwen3-235b-a22b-instruct-2507": {
+        "input_cost_per_token": 3e-06,
+        "litellm_provider": "crusoe",
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "max_tokens": 262144,
+        "mode": "chat",
+        "output_cost_per_token": 3e-06,
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true
     },
     "vertex_ai/mistral-nemo@2407": {
         "input_cost_per_token": 3e-06,
@@ -26888,6 +26908,39 @@
         "tool_use_system_prompt_tokens": 346,
         "supports_native_structured_output": true
     },
+    "vertex_ai/xai/grok-4.20-non-reasoning": {
+        "cache_read_input_token_cost": 2e-07,
+        "input_cost_per_token": 2e-06,
+        "litellm_provider": "vertex_ai",
+        "max_input_tokens": 2000000,
+        "max_output_tokens": 2000000,
+        "max_tokens": 2000000,
+        "mode": "chat",
+        "output_cost_per_token": 6e-06,
+        "source": "https://docs.x.ai/docs/models (Vertex AI Model Garden)",
+        "supports_function_calling": true,
+        "supports_response_schema": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true
+    },
+    "vertex_ai/xai/grok-4.20-reasoning": {
+        "cache_read_input_token_cost": 2e-07,
+        "input_cost_per_token": 2e-06,
+        "litellm_provider": "vertex_ai",
+        "max_input_tokens": 2000000,
+        "max_output_tokens": 2000000,
+        "max_tokens": 2000000,
+        "mode": "chat",
+        "output_cost_per_token": 6e-06,
+        "source": "https://docs.x.ai/docs/models (Vertex AI Model Garden)",
+        "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true
+    },
     "xai/grok-4.20-0309-reasoning": {
         "cache_read_input_token_cost": 2e-07,
         "input_cost_per_token": 2e-06,
@@ -27318,6 +27371,19 @@
         "mode": "chat",
         "output_cost_per_token": 8e-06,
         "supports_tool_choice": true
+    },
+    "crusoe/deepseek-ai/deepseek-r1-0528": {
+        "input_cost_per_token": 3e-06,
+        "litellm_provider": "crusoe",
+        "max_input_tokens": 163840,
+        "max_output_tokens": 163840,
+        "max_tokens": 163840,
+        "mode": "chat",
+        "output_cost_per_token": 7e-06,
+        "supports_function_calling": false,
+        "supports_reasoning": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": false
     },
     "gradient_ai/openai-o3": {
         "input_cost_per_token": 2e-06,
@@ -33365,6 +33431,7 @@
         "supports_function_calling": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
+        "supports_max_reasoning_effort": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "tool_use_system_prompt_tokens": 159,
@@ -33438,6 +33505,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_max_reasoning_effort": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "tool_use_system_prompt_tokens": 346,
@@ -33492,6 +33560,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_max_reasoning_effort": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "tool_use_system_prompt_tokens": 346,
@@ -33575,6 +33644,7 @@
             "search_context_size_low": 0.01,
             "search_context_size_medium": 0.01
         },
+        "supports_adaptive_thinking": true,
         "supports_assistant_prefill": true,
         "supports_computer_use": true,
         "supports_function_calling": true,
@@ -33582,6 +33652,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_max_reasoning_effort": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "tool_use_system_prompt_tokens": 346,
@@ -33670,6 +33741,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_max_reasoning_effort": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "tool_use_system_prompt_tokens": 346,
@@ -33771,6 +33843,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_max_reasoning_effort": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "tool_use_system_prompt_tokens": 346,
@@ -33798,6 +33871,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_max_reasoning_effort": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "tool_use_system_prompt_tokens": 346,
@@ -34774,6 +34848,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_max_reasoning_effort": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "tool_use_system_prompt_tokens": 346,
@@ -34802,6 +34877,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_max_reasoning_effort": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "tool_use_system_prompt_tokens": 346,
@@ -34831,6 +34907,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_max_reasoning_effort": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "tool_use_system_prompt_tokens": 346,
@@ -35303,7 +35380,8 @@
         "mode": "chat",
         "output_cost_per_token": 2.5e-05,
         "supports_function_calling": true,
-        "supports_vision": true
+        "supports_vision": true,
+        "supports_minimal_reasoning_effort": true
     },
     "oci/xai.grok-3-fast": {
         "input_cost_per_token": 5e-06,
@@ -36139,6 +36217,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "openai/gpt-chat-latest": {
+        "input_cost_per_token": 5e-06,
+        "output_cost_per_token": 3e-05,
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT Chat Latest points to OpenAI's stable API alias `chat-latest` that always resolves to the latest Instant chat model used in ChatGPT. As OpenAI rolls out new Instant model updates..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-chat-latest": {
+            "input_cost_per_token": 5e-06,
+            "output_cost_per_token": 3e-05,
+            "max_input_tokens": 400000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT Chat Latest points to OpenAI's stable API alias `chat-latest` that always resolves to the latest Instant chat model used in ChatGPT. As OpenAI rolls out new Instant model updates..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "azure/gpt-5.5": {
         "cache_read_input_token_cost": 5e-07,
         "cache_read_input_token_cost_above_272k_tokens": 1e-06,
@@ -36342,6 +36440,7 @@
         "supports_function_calling": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
+        "supports_max_reasoning_effort": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "tool_use_system_prompt_tokens": 346,
@@ -36379,6 +36478,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_max_reasoning_effort": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_xhigh_reasoning_effort": true,
@@ -36415,6 +36515,7 @@
             "search_context_size_low": 0.01,
             "search_context_size_medium": 0.01
         },
+        "supports_adaptive_thinking": true,
         "supports_assistant_prefill": false,
         "supports_computer_use": true,
         "supports_function_calling": true,
@@ -36448,6 +36549,7 @@
             "search_context_size_low": 0.01,
             "search_context_size_medium": 0.01
         },
+        "supports_adaptive_thinking": true,
         "supports_assistant_prefill": false,
         "supports_computer_use": true,
         "supports_function_calling": true,
@@ -36481,6 +36583,7 @@
             "search_context_size_low": 0.01,
             "search_context_size_medium": 0.01
         },
+        "supports_adaptive_thinking": true,
         "supports_assistant_prefill": false,
         "supports_computer_use": true,
         "supports_function_calling": true,
@@ -36515,6 +36618,7 @@
             "search_context_size_low": 0.01,
             "search_context_size_medium": 0.01
         },
+        "supports_adaptive_thinking": true,
         "supports_assistant_prefill": false,
         "supports_computer_use": true,
         "supports_function_calling": true,
@@ -36789,6 +36893,7 @@
         "supports_pdf_input": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
+        "supports_minimal_reasoning_effort": true,
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
@@ -36812,6 +36917,7 @@
         "supports_pdf_input": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
+        "supports_minimal_reasoning_effort": true,
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true
@@ -36838,6 +36944,7 @@
         "supports_pdf_input": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
+        "supports_minimal_reasoning_effort": true,
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
@@ -36865,6 +36972,7 @@
         "supports_pdf_input": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
+        "supports_minimal_reasoning_effort": true,
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
@@ -36888,6 +36996,7 @@
         "supports_assistant_prefill": true,
         "supports_computer_use": true,
         "supports_function_calling": true,
+        "supports_minimal_reasoning_effort": true,
         "supports_pdf_input": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
@@ -36916,6 +37025,7 @@
         "supports_assistant_prefill": true,
         "supports_computer_use": true,
         "supports_function_calling": true,
+        "supports_minimal_reasoning_effort": true,
         "supports_pdf_input": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
@@ -36937,6 +37047,7 @@
         "output_cost_per_token": 2.5e-05,
         "supports_assistant_prefill": true,
         "supports_computer_use": true,
+        "supports_minimal_reasoning_effort": true,
         "supports_function_calling": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
@@ -36982,6 +37093,7 @@
         "supports_assistant_prefill": true,
         "supports_computer_use": true,
         "supports_function_calling": true,
+        "supports_minimal_reasoning_effort": true,
         "supports_pdf_input": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
@@ -37008,6 +37120,7 @@
         "supports_assistant_prefill": true,
         "supports_computer_use": true,
         "supports_function_calling": true,
+        "supports_minimal_reasoning_effort": true,
         "supports_pdf_input": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
@@ -37030,6 +37143,7 @@
         "supports_assistant_prefill": true,
         "supports_computer_use": true,
         "supports_function_calling": true,
+        "supports_minimal_reasoning_effort": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_tool_choice": true,
@@ -37495,6 +37609,7 @@
         "supports_assistant_prefill": true,
         "supports_computer_use": true,
         "supports_function_calling": true,
+        "supports_minimal_reasoning_effort": true,
         "supports_pdf_input": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
@@ -37709,7 +37824,7 @@
         "supports_web_search": true,
         "supports_none_reasoning_effort": true,
         "supports_xhigh_reasoning_effort": true,
-        "supports_minimal_reasoning_effort": true
+        "supports_minimal_reasoning_effort": false
     },
     "gpt-5.5-2026-04-23": {
         "cache_read_input_token_cost": 5e-07,
@@ -37757,7 +37872,7 @@
         "supports_web_search": true,
         "supports_none_reasoning_effort": true,
         "supports_xhigh_reasoning_effort": true,
-        "supports_minimal_reasoning_effort": true
+        "supports_minimal_reasoning_effort": false
     },
     "xai/grok-4-0709": {
         "input_cost_per_token": 3e-06,
@@ -40920,7 +41035,8 @@
         "supports_web_search": true,
         "supports_none_reasoning_effort": false,
         "supports_xhigh_reasoning_effort": true,
-        "supports_minimal_reasoning_effort": true
+        "supports_minimal_reasoning_effort": false,
+        "supports_low_reasoning_effort": false
     },
     "gpt-5.5-pro-2026-04-23": {
         "cache_read_input_token_cost": 3e-06,
@@ -40963,7 +41079,8 @@
         "supports_web_search": true,
         "supports_none_reasoning_effort": false,
         "supports_xhigh_reasoning_effort": true,
-        "supports_minimal_reasoning_effort": true
+        "supports_minimal_reasoning_effort": false,
+        "supports_low_reasoning_effort": false
     },
     "azure/gpt-4o-realtime-preview-2024-10-01": {
         "cache_creation_input_audio_token_cost": 2e-05,
@@ -41121,6 +41238,7 @@
         "supports_assistant_prefill": true,
         "supports_function_calling": true,
         "supports_reasoning": true,
+        "supports_minimal_reasoning_effort": true,
         "supports_tool_choice": true
     },
     "elevenlabs/eleven_multilingual_v2": {
@@ -45240,7 +45358,8 @@
         ],
         "supports_function_calling": true,
         "supports_parallel_function_calling": true,
-        "supports_vision": true
+        "supports_vision": true,
+        "supports_minimal_reasoning_effort": true
     },
     "github_copilot/claude-opus-4.6-fast": {
         "litellm_provider": "github_copilot",
@@ -45956,7 +46075,8 @@
         "mode": "responses",
         "supports_web_search": true,
         "supports_reasoning": false,
-        "supports_function_calling": true
+        "supports_function_calling": true,
+        "supports_minimal_reasoning_effort": true
     },
     "perplexity/anthropic/claude-opus-4-6": {
         "litellm_provider": "perplexity",

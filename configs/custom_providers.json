@@ -5,6 +5,26 @@
         "api_env_key_name": "OPENROUTER_API_KEY",
         "api_key_required": false,
         "model_specs": {
+            "openai/gpt-chat-latest": {
+                "input_cost_per_token": 5e-06,
+                "output_cost_per_token": 3e-05,
+                "max_input_tokens": 400000,
+                "max_output_tokens": 128000,
+                "metadata": {
+                    "notes": "GPT Chat Latest points to OpenAI's stable API alias `chat-latest` that always resolves to the latest Instant chat model used in ChatGPT. As OpenAI rolls out new Instant model updates..."
+                },
+                "litellm_provider": "openrouter",
+                "openai/gpt-chat-latest": {
+                    "input_cost_per_token": 5e-06,
+                    "output_cost_per_token": 3e-05,
+                    "max_input_tokens": 400000,
+                    "max_output_tokens": 128000,
+                    "metadata": {
+                        "notes": "GPT Chat Latest points to OpenAI's stable API alias `chat-latest` that always resolves to the latest Instant chat model used in ChatGPT. As OpenAI rolls out new Instant model updates..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "x-ai/grok-4.3": {
                 "input_cost_per_token": 1.25e-06,
                 "output_cost_per_token": 2.5e-06,
@@ -710,6 +730,7 @@
                 "supports_prompt_caching": true,
                 "supports_reasoning": true,
                 "supports_response_schema": true,
+                "supports_max_reasoning_effort": true,
                 "supports_tool_choice": true,
                 "supports_vision": true,
                 "supports_xhigh_reasoning_effort": true,
@@ -1687,6 +1708,7 @@
                 "supports_function_calling": true,
                 "supports_prompt_caching": true,
                 "supports_reasoning": true,
+                "supports_max_reasoning_effort": true,
                 "supports_tool_choice": true,
                 "supports_vision": true,
                 "tool_use_system_prompt_tokens": 159,
@@ -1827,10 +1849,10 @@
                 "input_cost_per_token": 6e-07,
                 "litellm_provider": "openrouter",
                 "max_input_tokens": 202752,
-                "max_output_tokens": 16384,
+                "max_output_tokens": 128000,
                 "max_tokens": 128000,
                 "mode": "chat",
-                "output_cost_per_token": 2.08e-06,
+                "output_cost_per_token": 1.92e-06,
                 "source": "https://openrouter.ai/z-ai/glm-5",
                 "supports_function_calling": true,
                 "supports_reasoning": true,
@@ -1840,9 +1862,8 @@
                 },
                 "z-ai/glm-5": {
                     "input_cost_per_token": 6e-07,
-                    "output_cost_per_token": 2.08e-06,
+                    "output_cost_per_token": 1.92e-06,
                     "max_input_tokens": 202752,
-                    "max_output_tokens": 16384,
                     "metadata": {
                         "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
                     },
@@ -1884,6 +1905,7 @@
                 "supports_function_calling": true,
                 "supports_prompt_caching": true,
                 "supports_reasoning": true,
+                "supports_max_reasoning_effort": true,
                 "supports_tool_choice": true,
                 "supports_vision": true,
                 "tool_use_system_prompt_tokens": 346,
@@ -2951,6 +2973,7 @@
                 "supports_assistant_prefill": true,
                 "supports_computer_use": true,
                 "supports_function_calling": true,
+                "supports_minimal_reasoning_effort": true,
                 "supports_prompt_caching": true,
                 "supports_reasoning": true,
                 "supports_tool_choice": true,
@@ -3359,6 +3382,26 @@
                     "max_input_tokens": 131000,
                     "metadata": {
                         "notes": "Granite-4.0-H-Micro is a 3B parameter from the Granite 4 family of models. These models are the latest in a series of models released by IBM. They are fine-tuned for long..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "microsoft/phi-4-mini-instruct": {
+                "input_cost_per_token": 8e-08,
+                "output_cost_per_token": 3.5e-07,
+                "max_input_tokens": 128000,
+                "max_output_tokens": 128000,
+                "metadata": {
+                    "notes": "Phi-4-mini-instruct is a lightweight open model built upon synthetic data and filtered publicly available websites - with a focus on high-quality, reasoning dense data. The model belongs to the Phi-4..."
+                },
+                "litellm_provider": "openrouter",
+                "microsoft/phi-4-mini-instruct": {
+                    "input_cost_per_token": 8e-08,
+                    "output_cost_per_token": 3.5e-07,
+                    "max_input_tokens": 128000,
+                    "max_output_tokens": 128000,
+                    "metadata": {
+                        "notes": "Phi-4-mini-instruct is a lightweight open model built upon synthetic data and filtered publicly available websites - with a focus on high-quality, reasoning dense data. The model belongs to the Phi-4..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -5070,26 +5113,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "google/gemma-3n-e2b-it:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 8192,
-                "max_output_tokens": 2048,
-                "metadata": {
-                    "notes": "Gemma 3n E2B IT is a multimodal, instruction-tuned model developed by Google DeepMind, designed to operate efficiently at an effective parameter size of 2B while leveraging a 6B architecture. Based..."
-                },
-                "litellm_provider": "openrouter",
-                "google/gemma-3n-e2b-it:free": {
-                    "input_cost_per_token": 0.0,
-                    "output_cost_per_token": 0.0,
-                    "max_input_tokens": 8192,
-                    "max_output_tokens": 2048,
-                    "metadata": {
-                        "notes": "Gemma 3n E2B IT is a multimodal, instruction-tuned model developed by Google DeepMind, designed to operate efficiently at an effective parameter size of 2B while leveraging a 6B architecture. Based..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "tencent/hunyuan-a13b-instruct": {
                 "input_cost_per_token": 1.4e-07,
                 "output_cost_per_token": 5.7e-07,
@@ -5536,26 +5559,6 @@
                     "max_output_tokens": 64000,
                     "metadata": {
                         "notes": "Claude Sonnet 4 significantly enhances the capabilities of its predecessor, Sonnet 3.7, excelling in both coding and reasoning tasks with improved precision and controllability. Achieving state-of-the-art performance on SWE-bench (72.7%),..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "google/gemma-3n-e4b-it:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 8192,
-                "max_output_tokens": 2048,
-                "metadata": {
-                    "notes": "Gemma 3n E4B-it is optimized for efficient execution on mobile and low-resource devices, such as phones, laptops, and tablets. It supports multimodal inputs\u2014including text, visual data, and audio\u2014enabling diverse tasks..."
-                },
-                "litellm_provider": "openrouter",
-                "google/gemma-3n-e4b-it:free": {
-                    "input_cost_per_token": 0.0,
-                    "output_cost_per_token": 0.0,
-                    "max_input_tokens": 8192,
-                    "max_output_tokens": 2048,
-                    "metadata": {
-                        "notes": "Gemma 3n E4B-it is optimized for efficient execution on mobile and low-resource devices, such as phones, laptops, and tablets. It supports multimodal inputs\u2014including text, visual data, and audio\u2014enabling diverse tasks..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -6150,30 +6153,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "google/gemma-3-4b-it:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 32768,
-                "max_output_tokens": 8192,
-                "mode": "chat",
-                "supports_vision": true,
-                "metadata": {
-                    "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-                },
-                "litellm_provider": "openrouter",
-                "google/gemma-3-4b-it:free": {
-                    "input_cost_per_token": 0.0,
-                    "output_cost_per_token": 0.0,
-                    "max_input_tokens": 32768,
-                    "max_output_tokens": 8192,
-                    "mode": "chat",
-                    "supports_vision": true,
-                    "metadata": {
-                        "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "google/gemma-3-4b-it": {
                 "input_cost_per_token": 4e-08,
                 "output_cost_per_token": 8e-08,
@@ -6190,30 +6169,6 @@
                     "output_cost_per_token": 8e-08,
                     "max_input_tokens": 131072,
                     "max_output_tokens": 16384,
-                    "mode": "chat",
-                    "supports_vision": true,
-                    "metadata": {
-                        "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "google/gemma-3-12b-it:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 32768,
-                "max_output_tokens": 8192,
-                "mode": "chat",
-                "supports_vision": true,
-                "metadata": {
-                    "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-                },
-                "litellm_provider": "openrouter",
-                "google/gemma-3-12b-it:free": {
-                    "input_cost_per_token": 0.0,
-                    "output_cost_per_token": 0.0,
-                    "max_input_tokens": 32768,
-                    "max_output_tokens": 8192,
                     "mode": "chat",
                     "supports_vision": true,
                     "metadata": {
@@ -6325,30 +6280,6 @@
                         "notes": "Reka Flash 3 is a general-purpose, instruction-tuned large language model with 21 billion parameters, developed by Reka. It excels at general chat, coding tasks, instruction-following, and function calling. Featuring a..."
                     },
                     "supports_function_calling": true,
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "google/gemma-3-27b-it:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 131072,
-                "max_output_tokens": 8192,
-                "mode": "chat",
-                "supports_vision": true,
-                "metadata": {
-                    "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-                },
-                "litellm_provider": "openrouter",
-                "google/gemma-3-27b-it:free": {
-                    "input_cost_per_token": 0.0,
-                    "output_cost_per_token": 0.0,
-                    "max_input_tokens": 131072,
-                    "max_output_tokens": 8192,
-                    "mode": "chat",
-                    "supports_vision": true,
-                    "metadata": {
-                        "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-                    },
                     "litellm_provider": "openrouter"
                 }
             },
@@ -6655,7 +6586,7 @@
                 "max_audio_length_hours": 8.4,
                 "max_audio_per_prompt": 1,
                 "max_images_per_prompt": 3000,
-                "max_input_tokens": 1000000,
+                "max_input_tokens": 1048576,
                 "max_output_tokens": 8192,
                 "max_pdf_size_mb": 30,
                 "max_tokens": 8192,
@@ -6677,7 +6608,7 @@
                     "input_cost_per_token": 1e-07,
                     "output_cost_per_token": 4e-07,
                     "input_cost_per_image": 1e-07,
-                    "max_input_tokens": 1000000,
+                    "max_input_tokens": 1048576,
                     "max_output_tokens": 8192,
                     "metadata": {
                         "notes": "Gemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It..."
@@ -8797,62 +8728,6 @@
                 "max_input_tokens": 32768,
                 "metadata": {
                     "notes": "Venice Uncensored Dolphin Mistral 24B Venice Edition is a fine-tuned variant of Mistral-Small-24B-Instruct-2501, developed by dphn.ai in collaboration with Venice.ai. This model is designed as an \u201cuncensored\u201d instruct-tuned LLM, preserving..."
-                },
-                "litellm_provider": "openrouter"
-            },
-            "google/gemma-3n-e2b-it:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 8192,
-                "max_output_tokens": 2048,
-                "metadata": {
-                    "notes": "Gemma 3n E2B IT is a multimodal, instruction-tuned model developed by Google DeepMind, designed to operate efficiently at an effective parameter size of 2B while leveraging a 6B architecture. Based..."
-                },
-                "litellm_provider": "openrouter"
-            },
-            "google/gemma-3n-e4b-it:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 8192,
-                "max_output_tokens": 2048,
-                "metadata": {
-                    "notes": "Gemma 3n E4B-it is optimized for efficient execution on mobile and low-resource devices, such as phones, laptops, and tablets. It supports multimodal inputs\u2014including text, visual data, and audio\u2014enabling diverse tasks..."
-                },
-                "litellm_provider": "openrouter"
-            },
-            "google/gemma-3-4b-it:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 32768,
-                "max_output_tokens": 8192,
-                "mode": "chat",
-                "supports_vision": true,
-                "metadata": {
-                    "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-                },
-                "litellm_provider": "openrouter"
-            },
-            "google/gemma-3-12b-it:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 32768,
-                "max_output_tokens": 8192,
-                "mode": "chat",
-                "supports_vision": true,
-                "metadata": {
-                    "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-                },
-                "litellm_provider": "openrouter"
-            },
-            "google/gemma-3-27b-it:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 131072,
-                "max_output_tokens": 8192,
-                "mode": "chat",
-                "supports_vision": true,
-                "metadata": {
-                    "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
                 },
                 "litellm_provider": "openrouter"
             },

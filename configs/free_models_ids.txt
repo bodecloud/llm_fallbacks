@@ -85,7 +85,6 @@ nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
 google/gemma-4-26b-a4b-it:free
 google/gemma-4-31b-it:free
 inclusionai/ling-2.6-1t:free
-google/gemma-3-27b-it:free
 baidu/qianfan-ocr-fast:free
 openai/gpt-oss-120b:free
 z-ai/glm-4.5-air:free
@@ -131,8 +130,6 @@ together_ai/mistralai/mistral-7b-instruct-v0.1
 together_ai/qwen/qwen2.5-72b-instruct-turbo
 together_ai/qwen/qwen2.5-7b-instruct-turbo
 snowflake/reka-flash
-google/gemma-3-12b-it:free
-google/gemma-3-4b-it:free
 codestral/codestral-2405
 codestral/codestral-latest
 github_copilot/gpt-4
@@ -232,8 +229,6 @@ snowflake/snowflake-llama-3.3-70b
 github_copilot/text-embedding-3-small
 github_copilot/text-embedding-3-small-inference
 github_copilot/text-embedding-ada-002
-google/gemma-3n-e2b-it:free
-google/gemma-3n-e4b-it:free
 publicai/swiss-ai/apertus-70b-instruct
 publicai/swiss-ai/apertus-8b-instruct
 snowflake/llama2-70b-chat
