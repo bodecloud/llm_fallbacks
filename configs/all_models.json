@@ -185,26 +185,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "tencent/hy3-preview:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
-        "metadata": {
-            "notes": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to..."
-        },
-        "litellm_provider": "openrouter",
-        "tencent/hy3-preview:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
-            "metadata": {
-                "notes": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "qwen/qwen3-coder:free": {
         "input_cost_per_token": 0.0,
         "output_cost_per_token": 0.0,
@@ -240,6 +220,26 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_tool_choice": true
+    },
+    "inclusionai/ring-2.6-1t:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool..."
+        },
+        "litellm_provider": "openrouter",
+        "inclusionai/ring-2.6-1t:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "lemonade/qwen3-4b-instruct-2507-gguf": {
         "input_cost_per_token": 0,
@@ -5831,26 +5831,6 @@
         "supports_function_calling": true,
         "source": "https://nebius.com/prices-ai-studio"
     },
-    "qwen/qwen3-32b": {
-        "input_cost_per_token": 8e-08,
-        "output_cost_per_token": 2.4e-07,
-        "max_input_tokens": 40960,
-        "max_output_tokens": 40960,
-        "metadata": {
-            "notes": "Qwen3-32B is a dense 32.8B parameter causal language model from the Qwen3 series, optimized for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3-32b": {
-            "input_cost_per_token": 8e-08,
-            "output_cost_per_token": 2.4e-07,
-            "max_input_tokens": 40960,
-            "max_output_tokens": 40960,
-            "metadata": {
-                "notes": "Qwen3-32B is a dense 32.8B parameter causal language model from the Qwen3 series, optimized for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "vercel_ai_gateway/alibaba/qwen-3-14b": {
         "input_cost_per_token": 8e-08,
         "litellm_provider": "vercel_ai_gateway",
@@ -5883,6 +5863,26 @@
             "max_output_tokens": 65536,
             "metadata": {
                 "notes": "The Qwen3.5 native vision-language Flash models are built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. Compared to the..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "tencent/hy3-preview": {
+        "input_cost_per_token": 6.6e-08,
+        "output_cost_per_token": 2.6e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "metadata": {
+            "notes": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to..."
+        },
+        "litellm_provider": "openrouter",
+        "tencent/hy3-preview": {
+            "input_cost_per_token": 6.6e-08,
+            "output_cost_per_token": 2.6e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "metadata": {
+                "notes": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to..."
             },
             "litellm_provider": "openrouter"
         }
@@ -6131,6 +6131,26 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "qwen/qwen3-32b": {
+        "input_cost_per_token": 8e-08,
+        "output_cost_per_token": 2.8e-07,
+        "max_input_tokens": 40960,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "Qwen3-32B is a dense 32.8B parameter causal language model from the Qwen3 series, optimized for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3-32b": {
+            "input_cost_per_token": 8e-08,
+            "output_cost_per_token": 2.8e-07,
+            "max_input_tokens": 40960,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "Qwen3-32B is a dense 32.8B parameter causal language model from the Qwen3 series, optimized for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "deepinfra/qwen/qwen3-30b-a3b": {
         "max_tokens": 40960,
         "max_input_tokens": 40960,
@@ -6316,35 +6336,6 @@
             "supports_vision": true,
             "metadata": {
                 "notes": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "xiaomi/mimo-v2-flash": {
-        "input_cost_per_token": 9e-08,
-        "output_cost_per_token": 2.9e-07,
-        "cache_creation_input_token_cost": 0.0,
-        "cache_read_input_token_cost": 0.0,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 262144,
-        "max_output_tokens": 65536,
-        "max_tokens": 16384,
-        "mode": "chat",
-        "supports_function_calling": true,
-        "supports_tool_choice": true,
-        "supports_reasoning": true,
-        "supports_vision": false,
-        "supports_prompt_caching": false,
-        "metadata": {
-            "notes": "MiMo-V2-Flash is an open-source foundation language model developed by Xiaomi. It is a Mixture-of-Experts model with 309B total parameters and 15B active parameters, adopting hybrid attention architecture. MiMo-V2-Flash supports a..."
-        },
-        "xiaomi/mimo-v2-flash": {
-            "input_cost_per_token": 9e-08,
-            "output_cost_per_token": 2.9e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "MiMo-V2-Flash is an open-source foundation language model developed by Xiaomi. It is a Mixture-of-Experts model with 309B total parameters and 15B active parameters, adopting hybrid attention architecture. MiMo-V2-Flash supports a..."
             },
             "litellm_provider": "openrouter"
         }
@@ -6815,6 +6806,35 @@
         "supports_function_calling": true,
         "supports_response_schema": true,
         "supports_tool_choice": true
+    },
+    "xiaomi/mimo-v2-flash": {
+        "input_cost_per_token": 1e-07,
+        "output_cost_per_token": 3e-07,
+        "cache_creation_input_token_cost": 0.0,
+        "cache_read_input_token_cost": 0.0,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 262144,
+        "max_output_tokens": 65536,
+        "max_tokens": 16384,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_tool_choice": true,
+        "supports_reasoning": true,
+        "supports_vision": false,
+        "supports_prompt_caching": false,
+        "metadata": {
+            "notes": "MiMo-V2-Flash is an open-source foundation language model developed by Xiaomi. It is a Mixture-of-Experts model with 309B total parameters and 15B active parameters, adopting hybrid attention architecture. MiMo-V2-Flash supports a..."
+        },
+        "xiaomi/mimo-v2-flash": {
+            "input_cost_per_token": 1e-07,
+            "output_cost_per_token": 3e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "MiMo-V2-Flash is an open-source foundation language model developed by Xiaomi. It is a Mixture-of-Experts model with 309B total parameters and 15B active parameters, adopting hybrid attention architecture. MiMo-V2-Flash supports a..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "stepfun/step-3.5-flash": {
         "input_cost_per_token": 1e-07,
@@ -13661,7 +13681,7 @@
         "max_audio_length_hours": 8.4,
         "max_audio_per_prompt": 1,
         "max_images_per_prompt": 3000,
-        "max_input_tokens": 1048576,
+        "max_input_tokens": 1000000,
         "max_output_tokens": 8192,
         "max_pdf_size_mb": 30,
         "max_tokens": 8192,
@@ -13683,7 +13703,7 @@
             "input_cost_per_token": 1e-07,
             "output_cost_per_token": 4e-07,
             "input_cost_per_image": 1e-07,
-            "max_input_tokens": 1048576,
+            "max_input_tokens": 1000000,
             "max_output_tokens": 8192,
             "metadata": {
                 "notes": "Gemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It..."
@@ -14120,26 +14140,6 @@
         "litellm_provider": "deepinfra",
         "mode": "chat",
         "supports_tool_choice": false
-    },
-    "tngtech/deepseek-r1t2-chimera": {
-        "input_cost_per_token": 3e-07,
-        "output_cost_per_token": 1.1e-06,
-        "max_input_tokens": 163840,
-        "max_output_tokens": 163840,
-        "metadata": {
-            "notes": "DeepSeek-TNG-R1T2-Chimera is the second-generation Chimera model from TNG Tech. It is a 671 B-parameter mixture-of-experts text-generation model assembled from DeepSeek-AI\u2019s R1-0528, R1, and V3-0324 checkpoints with an Assembly-of-Experts merge. The..."
-        },
-        "litellm_provider": "openrouter",
-        "tngtech/deepseek-r1t2-chimera": {
-            "input_cost_per_token": 3e-07,
-            "output_cost_per_token": 1.1e-06,
-            "max_input_tokens": 163840,
-            "max_output_tokens": 163840,
-            "metadata": {
-                "notes": "DeepSeek-TNG-R1T2-Chimera is the second-generation Chimera model from TNG Tech. It is a 671 B-parameter mixture-of-experts text-generation model assembled from DeepSeek-AI\u2019s R1-0528, R1, and V3-0324 checkpoints with an Assembly-of-Experts merge. The..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "sao10k/l3.3-euryale-70b": {
         "input_cost_per_token": 6.5e-07,
@@ -17906,13 +17906,13 @@
         }
     },
     "z-ai/glm-4.7": {
-        "input_cost_per_token": 3.8e-07,
-        "output_cost_per_token": 1.74e-06,
+        "input_cost_per_token": 4e-07,
+        "output_cost_per_token": 1.75e-06,
         "cache_creation_input_token_cost": 0.0,
         "cache_read_input_token_cost": 0.0,
         "litellm_provider": "openrouter",
         "max_input_tokens": 202752,
-        "max_output_tokens": 64000,
+        "max_output_tokens": 131072,
         "max_tokens": 64000,
         "mode": "chat",
         "supports_function_calling": true,
@@ -17925,9 +17925,10 @@
             "notes": "GLM-4.7 is Z.ai\u2019s latest flagship model, featuring upgrades in two key areas: enhanced programming capabilities and more stable multi-step reasoning/execution. It demonstrates significant improvements in executing complex agent tasks while..."
         },
         "z-ai/glm-4.7": {
-            "input_cost_per_token": 3.8e-07,
-            "output_cost_per_token": 1.74e-06,
+            "input_cost_per_token": 4e-07,
+            "output_cost_per_token": 1.75e-06,
             "max_input_tokens": 202752,
+            "max_output_tokens": 131072,
             "metadata": {
                 "notes": "GLM-4.7 is Z.ai\u2019s latest flagship model, featuring upgrades in two key areas: enhanced programming capabilities and more stable multi-step reasoning/execution. It demonstrates significant improvements in executing complex agent tasks while..."
             },
@@ -23052,26 +23053,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "xiaomi/mimo-v2.5-pro": {
-        "input_cost_per_token": 1e-06,
-        "output_cost_per_token": 3e-06,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 131072,
-        "metadata": {
-            "notes": "MiMo-V2.5-Pro is Xiaomi\u2019s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro...."
-        },
-        "litellm_provider": "openrouter",
-        "xiaomi/mimo-v2.5-pro": {
-            "input_cost_per_token": 1e-06,
-            "output_cost_per_token": 3e-06,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 131072,
-            "metadata": {
-                "notes": "MiMo-V2.5-Pro is Xiaomi\u2019s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro...."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "~google/gemini-flash-latest": {
         "input_cost_per_token": 5e-07,
         "output_cost_per_token": 3e-06,
@@ -23090,6 +23071,26 @@
             "max_output_tokens": 65536,
             "metadata": {
                 "notes": "This model always redirects to the latest model in the Google Gemini Flash family."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "xiaomi/mimo-v2.5-pro": {
+        "input_cost_per_token": 1e-06,
+        "output_cost_per_token": 3e-06,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "MiMo-V2.5-Pro is Xiaomi\u2019s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro...."
+        },
+        "litellm_provider": "openrouter",
+        "xiaomi/mimo-v2.5-pro": {
+            "input_cost_per_token": 1e-06,
+            "output_cost_per_token": 3e-06,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "MiMo-V2.5-Pro is Xiaomi\u2019s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro...."
             },
             "litellm_provider": "openrouter"
         }
@@ -46040,14 +46041,14 @@
         "input_cost_per_token": -1.0,
         "output_cost_per_token": -1.0,
         "metadata": {
-            "notes": "\"Your prompt will be processed by a meta-model and routed to one of dozens of models (see below), optimizing for the best possible output. To see which model was used,..."
+            "notes": "\"Your prompt will be processed by a meta-model and routed to one of dozens of models (see below), optimizing for the best possible output.\\n\\nTo see which model was used, visit..."
         },
         "litellm_provider": "openrouter",
         "openrouter/auto": {
             "input_cost_per_token": -1.0,
             "output_cost_per_token": -1.0,
             "metadata": {
-                "notes": "\"Your prompt will be processed by a meta-model and routed to one of dozens of models (see below), optimizing for the best possible output. To see which model was used,..."
+                "notes": "\"Your prompt will be processed by a meta-model and routed to one of dozens of models (see below), optimizing for the best possible output.\\n\\nTo see which model was used, visit..."
             },
             "litellm_provider": "openrouter"
         }
@@ -46072,14 +46073,14 @@
         "input_cost_per_token": -1.0,
         "output_cost_per_token": -1.0,
         "metadata": {
-            "notes": "The Pareto Router is a way to have OpenRouter always pick a strong coding model for your needs without committing to a specific one. You express a single `min_coding_score` preference..."
+            "notes": "The Pareto Router maintains a tiered shortlist of strong coding models, ranked by [Artificial Analysis](https://artificialanalysis.ai/) coding percentiles. Set min_coding_score between 0 and 1 on the [pareto-router plugin](https://openrouter.ai/docs/guides/routing/routers/pareto-router#the-min_coding_score-parameter) to control how..."
         },
         "litellm_provider": "openrouter",
         "openrouter/pareto-code": {
             "input_cost_per_token": -1.0,
             "output_cost_per_token": -1.0,
             "metadata": {
-                "notes": "The Pareto Router is a way to have OpenRouter always pick a strong coding model for your needs without committing to a specific one. You express a single `min_coding_score` preference..."
+                "notes": "The Pareto Router maintains a tiered shortlist of strong coding models, ranked by [Artificial Analysis](https://artificialanalysis.ai/) coding percentiles. Set min_coding_score between 0 and 1 on the [pareto-router plugin](https://openrouter.ai/docs/guides/routing/routers/pareto-router#the-min_coding_score-parameter) to control how..."
             },
             "litellm_provider": "openrouter"
         }
