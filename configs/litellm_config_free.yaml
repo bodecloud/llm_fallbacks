@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-a00c859743fe42c6a183d4bf4c98aca1
+  master_key: sk-6bff546c0556454c922bf6276f88e93c
   alerting:
   - slack
   - email
@@ -477,9 +477,9 @@ model_list:
     input_cost_per_token: -1.0
     output_cost_per_token: -1.0
     metadata:
-      notes: '"Your prompt will be processed by a meta-model and routed to one of
-        dozens of models (see below), optimizing for the best possible output.\n\nTo
-        see which model was used, visit...'
+      notes: Your prompt will be processed by a meta-model and routed to one of dozens
+        of models (see below), optimizing for the best possible output. To see which
+        model was used,...
     litellm_provider: openrouter
 router_settings:
   allowed_fails: 3

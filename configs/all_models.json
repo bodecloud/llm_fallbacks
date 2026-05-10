@@ -15604,7 +15604,7 @@
         "cache_read_input_token_cost": 3e-08,
         "litellm_provider": "openrouter",
         "max_input_tokens": 196608,
-        "max_output_tokens": 131072,
+        "max_output_tokens": 196608,
         "max_tokens": 65536,
         "mode": "chat",
         "source": "https://openrouter.ai/minimax/minimax-m2.5",
@@ -15632,7 +15632,7 @@
             "supports_reasoning": true,
             "supports_system_messages": true,
             "max_input_tokens": 196608,
-            "max_output_tokens": 131072,
+            "max_output_tokens": 196608,
             "metadata": {
                 "notes": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1..."
             }
@@ -18599,13 +18599,20 @@
     },
     "qwen/qwen3.6-plus": {
         "input_cost_per_token": 3.25e-07,
-        "output_cost_per_token": 1.95e-06,
+        "litellm_provider": "openrouter",
         "max_input_tokens": 1000000,
         "max_output_tokens": 65536,
+        "max_tokens": 65536,
+        "mode": "chat",
+        "output_cost_per_token": 1.95e-06,
+        "source": "https://openrouter.ai/qwen/qwen3.6-plus",
+        "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
         "metadata": {
             "notes": "Qwen 3.6 Plus builds on a hybrid architecture that combines efficient linear attention with sparse mixture-of-experts routing, enabling strong scalability and high-performance inference. Compared to the 3.5 series, it delivers..."
         },
-        "litellm_provider": "openrouter",
         "qwen/qwen3.6-plus": {
             "input_cost_per_token": 3.25e-07,
             "output_cost_per_token": 1.95e-06,
@@ -46041,14 +46048,14 @@
         "input_cost_per_token": -1.0,
         "output_cost_per_token": -1.0,
         "metadata": {
-            "notes": "\"Your prompt will be processed by a meta-model and routed to one of dozens of models (see below), optimizing for the best possible output.\\n\\nTo see which model was used, visit..."
+            "notes": "Your prompt will be processed by a meta-model and routed to one of dozens of models (see below), optimizing for the best possible output. To see which model was used,..."
         },
         "litellm_provider": "openrouter",
         "openrouter/auto": {
             "input_cost_per_token": -1.0,
             "output_cost_per_token": -1.0,
             "metadata": {
-                "notes": "\"Your prompt will be processed by a meta-model and routed to one of dozens of models (see below), optimizing for the best possible output.\\n\\nTo see which model was used, visit..."
+                "notes": "Your prompt will be processed by a meta-model and routed to one of dozens of models (see below), optimizing for the best possible output. To see which model was used,..."
             },
             "litellm_provider": "openrouter"
         }
