@@ -73,6 +73,7 @@ vertex_ai/meta/llama-3.1-70b-instruct-maas
 vertex_ai/meta/llama-3.1-8b-instruct-maas
 vertex_ai/meta/llama-3.2-90b-vision-instruct-maas
 gigachat/gigachat-2-lite
+arcee-ai/trinity-large-thinking:free
 google/lyria-3-clip-preview
 google/lyria-3-pro-preview
 inclusionai/ring-2.6-1t:free

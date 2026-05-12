@@ -221,6 +221,26 @@
         "supports_reasoning": true,
         "supports_tool_choice": true
     },
+    "arcee-ai/trinity-large-thinking:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 80000,
+        "metadata": {
+            "notes": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7..."
+        },
+        "litellm_provider": "openrouter",
+        "arcee-ai/trinity-large-thinking:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 80000,
+            "metadata": {
+                "notes": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "inclusionai/ring-2.6-1t:free": {
         "input_cost_per_token": 0.0,
         "output_cost_per_token": 0.0,
@@ -8542,6 +8562,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "google/gemma-4-31b-it": {
+        "input_cost_per_token": 1.2e-07,
+        "output_cost_per_token": 3.7e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemma-4-31b-it": {
+            "input_cost_per_token": 1.2e-07,
+            "output_cost_per_token": 3.7e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "meta-llama/llama-3.2-11b-vision-instruct": {
         "input_cost_per_token": 2.45e-07,
         "output_cost_per_token": 2.45e-07,
@@ -8792,26 +8832,6 @@
         "supports_system_messages": true,
         "supports_tool_choice": true,
         "supports_vision": true
-    },
-    "google/gemma-4-31b-it": {
-        "input_cost_per_token": 1.3e-07,
-        "output_cost_per_token": 3.8e-07,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 16384,
-        "metadata": {
-            "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemma-4-31b-it": {
-            "input_cost_per_token": 1.3e-07,
-            "output_cost_per_token": 3.8e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "meta-llama/llama-guard-3-8b": {
         "input_cost_per_token": 4.8e-07,
@@ -11994,34 +12014,6 @@
         "source": "https://azuremarketplace.microsoft.com/en-us/marketplace/apps/metagenai.meta-llama-3-1-8b-instruct-offer?tab=PlansAndPrice",
         "supports_tool_choice": true
     },
-    "deepseek/deepseek-chat-v3.1": {
-        "input_cost_per_token": 1.5e-07,
-        "input_cost_per_token_cache_hit": 2e-08,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 32768,
-        "max_output_tokens": 7168,
-        "max_tokens": 163840,
-        "mode": "chat",
-        "output_cost_per_token": 7.5e-07,
-        "supports_assistant_prefill": true,
-        "supports_function_calling": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context..."
-        },
-        "deepseek/deepseek-chat-v3.1": {
-            "input_cost_per_token": 1.5e-07,
-            "output_cost_per_token": 7.5e-07,
-            "max_input_tokens": 32768,
-            "max_output_tokens": 7168,
-            "metadata": {
-                "notes": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "novita/deepseek/deepseek-v3.2": {
         "litellm_provider": "novita",
         "mode": "chat",
@@ -12365,6 +12357,34 @@
         "litellm_provider": "fireworks_ai",
         "output_cost_per_token": 5e-07
     },
+    "deepseek/deepseek-chat-v3.1": {
+        "input_cost_per_token": 2.1e-07,
+        "input_cost_per_token_cache_hit": 2e-08,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 163840,
+        "max_output_tokens": 32768,
+        "max_tokens": 163840,
+        "mode": "chat",
+        "output_cost_per_token": 7.9e-07,
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context..."
+        },
+        "deepseek/deepseek-chat-v3.1": {
+            "input_cost_per_token": 2.1e-07,
+            "output_cost_per_token": 7.9e-07,
+            "max_input_tokens": 163840,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "gemini-2.5-flash-lite-preview-06-17": {
         "deprecation_date": "2025-11-18",
         "cache_read_input_token_cost": 2.5e-08,
@@ -12550,7 +12570,7 @@
         "max_input_tokens": 262144,
         "max_output_tokens": 262144,
         "metadata": {
-            "notes": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7"
+            "notes": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7..."
         },
         "litellm_provider": "openrouter",
         "arcee-ai/trinity-large-thinking": {
@@ -12559,7 +12579,7 @@
             "max_input_tokens": 262144,
             "max_output_tokens": 262144,
             "metadata": {
-                "notes": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7"
+                "notes": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7..."
             },
             "litellm_provider": "openrouter"
         }
@@ -13681,7 +13701,7 @@
         "max_audio_length_hours": 8.4,
         "max_audio_per_prompt": 1,
         "max_images_per_prompt": 3000,
-        "max_input_tokens": 1000000,
+        "max_input_tokens": 1048576,
         "max_output_tokens": 8192,
         "max_pdf_size_mb": 30,
         "max_tokens": 8192,
@@ -13703,7 +13723,7 @@
             "input_cost_per_token": 1e-07,
             "output_cost_per_token": 4e-07,
             "input_cost_per_image": 1e-07,
-            "max_input_tokens": 1000000,
+            "max_input_tokens": 1048576,
             "max_output_tokens": 8192,
             "metadata": {
                 "notes": "Gemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It..."
@@ -23498,6 +23518,24 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "z-ai/glm-5.1": {
+        "input_cost_per_token": 9.8e-07,
+        "output_cost_per_token": 3.08e-06,
+        "max_input_tokens": 202752,
+        "metadata": {
+            "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.1": {
+            "input_cost_per_token": 9.8e-07,
+            "output_cost_per_token": 3.08e-06,
+            "max_input_tokens": 202752,
+            "metadata": {
+                "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "azure_ai/llama-3.2-90b-vision-instruct": {
         "input_cost_per_token": 2.04e-06,
         "litellm_provider": "azure_ai",
@@ -23619,6 +23657,54 @@
             "litellm_provider": "openrouter"
         }
     },
+    "moonshotai/kimi-k2.6": {
+        "input_cost_per_token": 7.4e-07,
+        "output_cost_per_token": 3.5e-06,
+        "max_input_tokens": 32768,
+        "max_output_tokens": 32768,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+        },
+        "litellm_provider": "openrouter",
+        "moonshotai/kimi-k2.6": {
+            "input_cost_per_token": 7.4e-07,
+            "output_cost_per_token": 3.5e-06,
+            "max_input_tokens": 32768,
+            "max_output_tokens": 32768,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "~moonshotai/kimi-latest": {
+        "input_cost_per_token": 7.4e-07,
+        "output_cost_per_token": 3.5e-06,
+        "max_input_tokens": 32768,
+        "max_output_tokens": 32768,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
+        },
+        "litellm_provider": "openrouter",
+        "~moonshotai/kimi-latest": {
+            "input_cost_per_token": 7.4e-07,
+            "output_cost_per_token": 3.5e-06,
+            "max_input_tokens": 32768,
+            "max_output_tokens": 32768,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "switchpoint/router": {
         "input_cost_per_token": 8.5e-07,
         "litellm_provider": "openrouter",
@@ -23638,54 +23724,6 @@
             "max_input_tokens": 131072,
             "metadata": {
                 "notes": "Switchpoint AI's router instantly analyzes your request and directs it to the optimal AI from an ever-evolving library. As the world of LLMs advances, our router gets smarter, ensuring you..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "moonshotai/kimi-k2.6": {
-        "input_cost_per_token": 7.5e-07,
-        "output_cost_per_token": 3.5e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 16384,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-        },
-        "litellm_provider": "openrouter",
-        "moonshotai/kimi-k2.6": {
-            "input_cost_per_token": 7.5e-07,
-            "output_cost_per_token": 3.5e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 16384,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "~moonshotai/kimi-latest": {
-        "input_cost_per_token": 7.5e-07,
-        "output_cost_per_token": 3.5e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 16384,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
-        },
-        "litellm_provider": "openrouter",
-        "~moonshotai/kimi-latest": {
-            "input_cost_per_token": 7.5e-07,
-            "output_cost_per_token": 3.5e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 16384,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
             },
             "litellm_provider": "openrouter"
         }
@@ -24033,26 +24071,6 @@
             "search_context_size_high": 0.014
         },
         "web_search_billing_unit": "per_query"
-    },
-    "z-ai/glm-5.1": {
-        "input_cost_per_token": 1.05e-06,
-        "output_cost_per_token": 3.5e-06,
-        "max_input_tokens": 202752,
-        "max_output_tokens": 65535,
-        "metadata": {
-            "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.1": {
-            "input_cost_per_token": 1.05e-06,
-            "output_cost_per_token": 3.5e-06,
-            "max_input_tokens": 202752,
-            "max_output_tokens": 65535,
-            "metadata": {
-                "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "oci/xai.grok-3-mini-fast": {
         "input_cost_per_token": 6e-07,
@@ -24959,8 +24977,6 @@
         "output_cost_per_token": 5e-06,
         "max_input_tokens": 200000,
         "max_output_tokens": 64000,
-        "mode": "chat",
-        "supports_vision": true,
         "metadata": {
             "notes": "This model always redirects to the latest model in the Anthropic Claude Haiku family."
         },
@@ -24970,8 +24986,6 @@
             "output_cost_per_token": 5e-06,
             "max_input_tokens": 200000,
             "max_output_tokens": 64000,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "This model always redirects to the latest model in the Anthropic Claude Haiku family."
             },
@@ -26072,8 +26086,6 @@
             "output_cost_per_token": 5e-06,
             "max_input_tokens": 200000,
             "max_output_tokens": 64000,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "Claude Haiku 4.5 is Anthropic\u2019s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4\u2019s performance..."
             },
@@ -28128,26 +28140,6 @@
             "max_output_tokens": 16384,
             "metadata": {
                 "notes": "GPT-5.1 Chat (AKA Instant is the fast, lightweight member of the 5.1 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively \u201cthink\u201d on..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "alpindale/goliath-120b": {
-        "input_cost_per_token": 3.75e-06,
-        "output_cost_per_token": 7.5e-06,
-        "max_input_tokens": 6144,
-        "max_output_tokens": 1024,
-        "metadata": {
-            "notes": "A large LLM created by combining two fine-tuned Llama 70B models into one 120B model. Combines Xwin and Euryale. Credits to - [@chargoddard](https://huggingface.co/chargoddard) for developing the framework used to merge..."
-        },
-        "litellm_provider": "openrouter",
-        "alpindale/goliath-120b": {
-            "input_cost_per_token": 3.75e-06,
-            "output_cost_per_token": 7.5e-06,
-            "max_input_tokens": 6144,
-            "max_output_tokens": 1024,
-            "metadata": {
-                "notes": "A large LLM created by combining two fine-tuned Llama 70B models into one 120B model. Combines Xwin and Euryale. Credits to - [@chargoddard](https://huggingface.co/chargoddard) for developing the framework used to merge..."
             },
             "litellm_provider": "openrouter"
         }
@@ -32066,8 +32058,6 @@
         "output_cost_per_token": 1.5e-05,
         "max_input_tokens": 1000000,
         "max_output_tokens": 128000,
-        "mode": "chat",
-        "supports_vision": true,
         "metadata": {
             "notes": "This model always redirects to the latest model in the Anthropic Claude Sonnet family."
         },
@@ -32077,8 +32067,6 @@
             "output_cost_per_token": 1.5e-05,
             "max_input_tokens": 1000000,
             "max_output_tokens": 128000,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "This model always redirects to the latest model in the Anthropic Claude Sonnet family."
             },
@@ -33453,8 +33441,6 @@
             "output_cost_per_token": 1.5e-05,
             "max_input_tokens": 1000000,
             "max_output_tokens": 128000,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "Sonnet 4.6 is Anthropic's most capable Sonnet-class model yet, with frontier performance across coding, agents, and professional work. It excels at iterative development, complex codebase navigation, end-to-end project management with..."
             },
@@ -35361,8 +35347,6 @@
         "output_cost_per_token": 2.5e-05,
         "max_input_tokens": 1000000,
         "max_output_tokens": 128000,
-        "mode": "chat",
-        "supports_vision": true,
         "metadata": {
             "notes": "This model always redirects to the latest model in the Claude Opus family."
         },
@@ -35372,8 +35356,6 @@
             "output_cost_per_token": 2.5e-05,
             "max_input_tokens": 1000000,
             "max_output_tokens": 128000,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "This model always redirects to the latest model in the Claude Opus family."
             },
@@ -36462,8 +36444,6 @@
             "output_cost_per_token": 2.5e-05,
             "max_input_tokens": 1000000,
             "max_output_tokens": 128000,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "Opus 4.6 is Anthropic\u2019s strongest model for coding and long-running professional tasks. It is built for agents that operate across entire workflows rather than single prompts, making it especially effective..."
             },
@@ -36500,8 +36480,6 @@
             "output_cost_per_token": 2.5e-05,
             "max_input_tokens": 1000000,
             "max_output_tokens": 128000,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on..."
             },
@@ -40234,8 +40212,6 @@
         "output_cost_per_token": 0.00015,
         "max_input_tokens": 1000000,
         "max_output_tokens": 128000,
-        "mode": "chat",
-        "supports_vision": true,
         "metadata": {
             "notes": "Fast-mode variant of [Opus 4.6](/anthropic/claude-opus-4.6) - identical capabilities with higher output speed at premium 6x pricing.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode"
         },
@@ -40245,8 +40221,6 @@
             "output_cost_per_token": 0.00015,
             "max_input_tokens": 1000000,
             "max_output_tokens": 128000,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "Fast-mode variant of [Opus 4.6](/anthropic/claude-opus-4.6) - identical capabilities with higher output speed at premium 6x pricing.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode"
             },
