@@ -207,6 +207,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "deepseek/deepseek-v4-flash:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 256000,
+        "max_output_tokens": 256000,
+        "metadata": {
+            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+        },
+        "litellm_provider": "openrouter",
+        "deepseek/deepseek-v4-flash:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 256000,
+            "max_output_tokens": 256000,
+            "metadata": {
+                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "glm-4-7-251222": {
         "input_cost_per_token": 0.0,
         "litellm_provider": "volcengine",
@@ -6305,6 +6325,26 @@
         "source": "https://techcommunity.microsoft.com/blog/Azure-AI-Services-blog/announcing-new-phi-pricing-empowering-your-business-with-small-language-models/4395112",
         "supports_function_calling": true
     },
+    "deepseek/deepseek-v4-flash": {
+        "input_cost_per_token": 1.26e-07,
+        "output_cost_per_token": 2.52e-07,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 131072,
+        "metadata": {
+            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+        },
+        "litellm_provider": "openrouter",
+        "deepseek/deepseek-v4-flash": {
+            "input_cost_per_token": 1.26e-07,
+            "output_cost_per_token": 2.52e-07,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "deepinfra/meta-llama/llama-4-scout-17b-16e-instruct": {
         "max_tokens": 327680,
         "max_input_tokens": 327680,
@@ -7761,26 +7801,6 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_web_search": true
-    },
-    "deepseek/deepseek-v4-flash": {
-        "input_cost_per_token": 1.4e-07,
-        "output_cost_per_token": 2.8e-07,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 384000,
-        "metadata": {
-            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-        },
-        "litellm_provider": "openrouter",
-        "deepseek/deepseek-v4-flash": {
-            "input_cost_per_token": 1.4e-07,
-            "output_cost_per_token": 2.8e-07,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 384000,
-            "metadata": {
-                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "hyperbolic/meta-llama/llama-3.3-70b-instruct": {
         "input_cost_per_token": 1.2e-07,
@@ -18064,6 +18084,33 @@
         "supports_tool_choice": true,
         "supports_web_search": true
     },
+    "z-ai/glm-4.6": {
+        "input_cost_per_token": 4.3e-07,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 202752,
+        "max_output_tokens": 131072,
+        "max_tokens": 131000,
+        "mode": "chat",
+        "output_cost_per_token": 1.74e-06,
+        "source": "https://openrouter.ai/z-ai/glm-4.6",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "Compared with GLM-4.5, this generation brings several key improvements: Longer context window: The context window has been expanded from 128K to 200K tokens, enabling the model to handle more complex..."
+        },
+        "z-ai/glm-4.6": {
+            "input_cost_per_token": 4.3e-07,
+            "output_cost_per_token": 1.74e-06,
+            "max_input_tokens": 202752,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "Compared with GLM-4.5, this generation brings several key improvements: Longer context window: The context window has been expanded from 128K to 200K tokens, enabling the model to handle more complex..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "gpt-5.4-nano": {
         "cache_read_input_token_cost": 2e-08,
         "cache_read_input_token_cost_flex": 1e-08,
@@ -18948,33 +18995,6 @@
         "supports_xhigh_reasoning_effort": false,
         "supports_minimal_reasoning_effort": true
     },
-    "z-ai/glm-4.6": {
-        "input_cost_per_token": 3.9e-07,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 204800,
-        "max_output_tokens": 204800,
-        "max_tokens": 131000,
-        "mode": "chat",
-        "output_cost_per_token": 1.9e-06,
-        "source": "https://openrouter.ai/z-ai/glm-4.6",
-        "supports_function_calling": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "Compared with GLM-4.5, this generation brings several key improvements: Longer context window: The context window has been expanded from 128K to 200K tokens, enabling the model to handle more complex..."
-        },
-        "z-ai/glm-4.6": {
-            "input_cost_per_token": 3.9e-07,
-            "output_cost_per_token": 1.9e-06,
-            "max_input_tokens": 204800,
-            "max_output_tokens": 204800,
-            "metadata": {
-                "notes": "Compared with GLM-4.5, this generation brings several key improvements: Longer context window: The context window has been expanded from 128K to 200K tokens, enabling the model to handle more complex..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "together_ai/deepseek-ai/deepseek-v3.1": {
         "input_cost_per_token": 6e-07,
         "litellm_provider": "together_ai",
@@ -19171,26 +19191,6 @@
         "supports_function_calling": true,
         "supports_response_schema": true,
         "supports_tool_choice": true
-    },
-    "moonshotai/kimi-k2-0905": {
-        "input_cost_per_token": 4e-07,
-        "output_cost_per_token": 2e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
-        "metadata": {
-            "notes": "Kimi K2 0905 is the September update of [Kimi K2 0711](moonshotai/kimi-k2). It is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32..."
-        },
-        "litellm_provider": "openrouter",
-        "moonshotai/kimi-k2-0905": {
-            "input_cost_per_token": 4e-07,
-            "output_cost_per_token": 2e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
-            "metadata": {
-                "notes": "Kimi K2 0905 is the September update of [Kimi K2 0711](moonshotai/kimi-k2). It is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "fireworks_ai/accounts/fireworks/models/cogito-671b-v2-p1": {
         "max_tokens": 163840,
@@ -21192,6 +21192,26 @@
         "supports_function_calling": true,
         "supports_tool_choice": true,
         "supports_web_search": true
+    },
+    "moonshotai/kimi-k2-0905": {
+        "input_cost_per_token": 6e-07,
+        "output_cost_per_token": 2.5e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "metadata": {
+            "notes": "Kimi K2 0905 is the September update of [Kimi K2 0711](moonshotai/kimi-k2). It is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32..."
+        },
+        "litellm_provider": "openrouter",
+        "moonshotai/kimi-k2-0905": {
+            "input_cost_per_token": 6e-07,
+            "output_cost_per_token": 2.5e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "metadata": {
+                "notes": "Kimi K2 0905 is the September update of [Kimi K2 0711](moonshotai/kimi-k2). It is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "moonshotai/kimi-k2-thinking": {
         "input_cost_per_token": 6e-07,
@@ -39137,6 +39157,38 @@
         "supports_tool_choice": true
     },
     "gpt-realtime-1.5": {
+        "cache_creation_input_audio_token_cost": 4e-07,
+        "cache_read_input_token_cost": 4e-07,
+        "input_cost_per_audio_token": 3.2e-05,
+        "input_cost_per_image": 5e-06,
+        "input_cost_per_token": 4e-06,
+        "litellm_provider": "openai",
+        "max_input_tokens": 32000,
+        "max_output_tokens": 4096,
+        "max_tokens": 4096,
+        "mode": "chat",
+        "output_cost_per_audio_token": 6.4e-05,
+        "output_cost_per_token": 1.6e-05,
+        "supported_endpoints": [
+            "/v1/realtime"
+        ],
+        "supported_modalities": [
+            "text",
+            "image",
+            "audio"
+        ],
+        "supported_output_modalities": [
+            "text",
+            "audio"
+        ],
+        "supports_audio_input": true,
+        "supports_audio_output": true,
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true
+    },
+    "gpt-realtime-2": {
         "cache_creation_input_audio_token_cost": 4e-07,
         "cache_read_input_token_cost": 4e-07,
         "input_cost_per_audio_token": 3.2e-05,
