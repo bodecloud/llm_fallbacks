@@ -77,6 +77,26 @@
         "supports_vision": true,
         "tpm": 4000000
     },
+    "deepseek/deepseek-v4-flash:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 384000,
+        "metadata": {
+            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+        },
+        "litellm_provider": "openrouter",
+        "deepseek/deepseek-v4-flash:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 384000,
+            "metadata": {
+                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "openrouter/owl-alpha": {
         "input_cost_per_token": 0.0,
         "output_cost_per_token": 0.0,
@@ -204,26 +224,6 @@
                 "notes": "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over..."
             },
             "supports_function_calling": true,
-            "litellm_provider": "openrouter"
-        }
-    },
-    "deepseek/deepseek-v4-flash:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 256000,
-        "max_output_tokens": 256000,
-        "metadata": {
-            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-        },
-        "litellm_provider": "openrouter",
-        "deepseek/deepseek-v4-flash:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 256000,
-            "max_output_tokens": 256000,
-            "metadata": {
-                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-            },
             "litellm_provider": "openrouter"
         }
     },
@@ -899,30 +899,6 @@
         "output_cost_per_token": 0.0,
         "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing#partner-models",
         "supports_tool_choice": true
-    },
-    "baidu/qianfan-ocr-fast:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 65536,
-        "max_output_tokens": 28672,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Qianfan-OCR-Fast is a domain-specific multimodal large model purpose-built for OCR. By leveraging specialized OCR training data while preserving versatile multimodal intelligence, it provides a powerful performance upgrade over Qianfan-OCR."
-        },
-        "litellm_provider": "openrouter",
-        "baidu/qianfan-ocr-fast:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 65536,
-            "max_output_tokens": 28672,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Qianfan-OCR-Fast is a domain-specific multimodal large model purpose-built for OCR. By leveraging specialized OCR training data while preserving versatile multimodal intelligence, it provides a powerful performance upgrade over Qianfan-OCR."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "sarvam/sarvam-m": {
         "cache_creation_input_token_cost": 0,
@@ -1995,6 +1971,26 @@
         "supports_parallel_function_calling": true,
         "supports_system_messages": true,
         "supports_tool_choice": true
+    },
+    "inclusionai/ling-2.6-flash": {
+        "input_cost_per_token": 1e-08,
+        "output_cost_per_token": 3e-08,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "Ling-2.6-flash is an instant (instruct) model from inclusionAI with 104B total parameters and 7.4B active parameters, designed for real-world agents that require fast responses, strong execution, and high token efficiency...."
+        },
+        "litellm_provider": "openrouter",
+        "inclusionai/ling-2.6-flash": {
+            "input_cost_per_token": 1e-08,
+            "output_cost_per_token": 3e-08,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "Ling-2.6-flash is an instant (instruct) model from inclusionAI with 104B total parameters and 7.4B active parameters, designed for real-world agents that require fast responses, strong execution, and high token efficiency...."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "nebius/qwen/qwen2.5-coder-7b": {
         "max_tokens": 32768,
@@ -3354,18 +3350,6 @@
         "max_input_tokens": 8192,
         "max_tokens": 8192,
         "mode": "embedding"
-    },
-    "vertex_ai/gemini-embedding-2-preview": {
-        "input_cost_per_token": 1.5e-07,
-        "litellm_provider": "vertex_ai",
-        "max_input_tokens": 8192,
-        "max_tokens": 8192,
-        "mode": "embedding",
-        "output_cost_per_token": 0,
-        "output_vector_size": 3072,
-        "source": "https://ai.google.dev/gemini-api/docs/embeddings#multimodal",
-        "supports_multimodal": true,
-        "uses_embed_content": true
     },
     "text-embedding-ada-002-v2": {
         "input_cost_per_token": 1e-07,
@@ -5523,26 +5507,6 @@
         "supports_response_schema": true,
         "supports_reasoning": true
     },
-    "qwen/qwen3-14b": {
-        "input_cost_per_token": 6e-08,
-        "output_cost_per_token": 2.4e-07,
-        "max_input_tokens": 40960,
-        "max_output_tokens": 40960,
-        "metadata": {
-            "notes": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3-14b": {
-            "input_cost_per_token": 6e-08,
-            "output_cost_per_token": 2.4e-07,
-            "max_input_tokens": 40960,
-            "max_output_tokens": 40960,
-            "metadata": {
-                "notes": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "novita/deepseek/deepseek-r1-distill-qwen-14b": {
         "litellm_provider": "novita",
         "mode": "chat",
@@ -5797,26 +5761,6 @@
         "supports_vision": true,
         "supports_system_messages": true
     },
-    "inclusionai/ling-2.6-flash": {
-        "input_cost_per_token": 8e-08,
-        "output_cost_per_token": 2.4e-07,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 32768,
-        "metadata": {
-            "notes": "Ling-2.6-flash is an instant (instruct) model from inclusionAI with 104B total parameters and 7.4B active parameters, designed for real-world agents that require fast responses, strong execution, and high token efficiency...."
-        },
-        "litellm_provider": "openrouter",
-        "inclusionai/ling-2.6-flash": {
-            "input_cost_per_token": 8e-08,
-            "output_cost_per_token": 2.4e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 32768,
-            "metadata": {
-                "notes": "Ling-2.6-flash is an instant (instruct) model from inclusionAI with 104B total parameters and 7.4B active parameters, designed for real-world agents that require fast responses, strong execution, and high token efficiency...."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "vercel_ai_gateway/meta/llama-3.2-11b": {
         "input_cost_per_token": 1.6e-07,
         "litellm_provider": "vercel_ai_gateway",
@@ -5903,6 +5847,26 @@
             "max_output_tokens": 262144,
             "metadata": {
                 "notes": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "qwen/qwen3-14b": {
+        "input_cost_per_token": 1e-07,
+        "output_cost_per_token": 2.4e-07,
+        "max_input_tokens": 40960,
+        "max_output_tokens": 40960,
+        "metadata": {
+            "notes": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3-14b": {
+            "input_cost_per_token": 1e-07,
+            "output_cost_per_token": 2.4e-07,
+            "max_input_tokens": 40960,
+            "max_output_tokens": 40960,
+            "metadata": {
+                "notes": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for..."
             },
             "litellm_provider": "openrouter"
         }
@@ -13885,6 +13849,26 @@
         "input_cost_per_token_cache_hit": 5.5e-08,
         "supports_reasoning": true
     },
+    "qwen/qwen3.6-flash": {
+        "input_cost_per_token": 1.875e-07,
+        "output_cost_per_token": 1.125e-06,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Qwen3.6 Flash is a fast, efficient language model from Alibaba's Qwen 3.6 series. It supports text, image, and video input with a 1M token context window. Tiered pricing kicks in..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3.6-flash": {
+            "input_cost_per_token": 1.875e-07,
+            "output_cost_per_token": 1.125e-06,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Qwen3.6 Flash is a fast, efficient language model from Alibaba's Qwen 3.6 series. It supports text, image, and video input with a 1M token context window. Tiered pricing kicks in..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "replicate/qwen/qwen3-235b-a22b-instruct-2507": {
         "input_cost_per_token": 2.64e-07,
         "output_cost_per_token": 1.06e-06,
@@ -14397,17 +14381,19 @@
         "supports_tool_choice": true
     },
     "minimax/minimax-m2.7": {
-        "input_cost_per_token": 2.8e-07,
+        "input_cost_per_token": 2.79e-07,
         "output_cost_per_token": 1.2e-06,
         "max_input_tokens": 196608,
+        "max_output_tokens": 131072,
         "metadata": {
             "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
         },
         "litellm_provider": "openrouter",
         "minimax/minimax-m2.7": {
-            "input_cost_per_token": 2.8e-07,
+            "input_cost_per_token": 2.79e-07,
             "output_cost_per_token": 1.2e-06,
             "max_input_tokens": 196608,
+            "max_output_tokens": 131072,
             "metadata": {
                 "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
             },
@@ -15719,26 +15705,6 @@
         "supports_function_calling": false,
         "supports_response_schema": true,
         "supports_tool_choice": false
-    },
-    "qwen/qwen3.6-flash": {
-        "input_cost_per_token": 2.5e-07,
-        "output_cost_per_token": 1.5e-06,
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "Qwen3.6 Flash is a fast, efficient language model from Alibaba's Qwen 3.6 series. It supports text, image, and video input with a 1M token context window. Tiered pricing kicks in..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3.6-flash": {
-            "input_cost_per_token": 2.5e-07,
-            "output_cost_per_token": 1.5e-06,
-            "max_input_tokens": 1000000,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "Qwen3.6 Flash is a fast, efficient language model from Alibaba's Qwen 3.6 series. It supports text, image, and video input with a 1M token context window. Tiered pricing kicks in..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "watsonx/meta-llama/llama-4-maverick-17b": {
         "max_tokens": 128000,
@@ -17165,8 +17131,6 @@
             "input_cost_per_token": 5e-07,
             "output_cost_per_token": 1.5e-06,
             "max_input_tokens": 262144,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "Mistral Large 3 2512 is Mistral\u2019s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license."
             },
@@ -17866,6 +17830,26 @@
         "supports_function_calling": true,
         "supports_tool_choice": true,
         "supports_response_schema": true
+    },
+    "qwen/qwen3.5-plus-20260420": {
+        "input_cost_per_token": 3e-07,
+        "output_cost_per_token": 1.8e-06,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Qwen3.5 Plus (April 2026) is a large-scale multimodal language model from Alibaba. It accepts text, image, and video input and produces text output, with a 1M token context window. This..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3.5-plus-20260420": {
+            "input_cost_per_token": 3e-07,
+            "output_cost_per_token": 1.8e-06,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Qwen3.5 Plus (April 2026) is a large-scale multimodal language model from Alibaba. It accepts text, image, and video input and produces text output, with a 1M token context window. This..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "sambanova/deepseek-r1-distill-llama-70b": {
         "input_cost_per_token": 7e-07,
@@ -19537,8 +19521,6 @@
         "input_cost_per_token": 4e-07,
         "output_cost_per_token": 2e-06,
         "max_input_tokens": 131072,
-        "mode": "chat",
-        "supports_vision": true,
         "metadata": {
             "notes": "Mistral Medium 3 is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances state-of-the-art reasoning and multimodal performance with 8\u00d7 lower cost..."
         },
@@ -19547,8 +19529,6 @@
             "input_cost_per_token": 4e-07,
             "output_cost_per_token": 2e-06,
             "max_input_tokens": 131072,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "Mistral Medium 3 is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances state-of-the-art reasoning and multimodal performance with 8\u00d7 lower cost..."
             },
@@ -19559,8 +19539,6 @@
         "input_cost_per_token": 4e-07,
         "output_cost_per_token": 2e-06,
         "max_input_tokens": 131072,
-        "mode": "chat",
-        "supports_vision": true,
         "metadata": {
             "notes": "Mistral Medium 3.1 is an updated version of Mistral Medium 3, which is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances..."
         },
@@ -19569,8 +19547,6 @@
             "input_cost_per_token": 4e-07,
             "output_cost_per_token": 2e-06,
             "max_input_tokens": 131072,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "Mistral Medium 3.1 is an updated version of Mistral Medium 3, which is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances..."
             },
@@ -20217,26 +20193,6 @@
             "max_output_tokens": 32768,
             "metadata": {
                 "notes": "May 28th update to the [original DeepSeek R1](/deepseek/deepseek-r1) Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "qwen/qwen3.5-plus-20260420": {
-        "input_cost_per_token": 4e-07,
-        "output_cost_per_token": 2.4e-06,
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "Qwen3.5 Plus (April 2026) is a large-scale multimodal language model from Alibaba. It accepts text, image, and video input and produces text output, with a 1M token context window. This..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3.5-plus-20260420": {
-            "input_cost_per_token": 4e-07,
-            "output_cost_per_token": 2.4e-06,
-            "max_input_tokens": 1000000,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "Qwen3.5 Plus (April 2026) is a large-scale multimodal language model from Alibaba. It accepts text, image, and video input and produces text output, with a 1M token context window. This..."
             },
             "litellm_provider": "openrouter"
         }
@@ -21842,6 +21798,30 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_web_search": false
+    },
+    "baidu/qianfan-ocr-fast": {
+        "input_cost_per_token": 6.8e-07,
+        "output_cost_per_token": 2.81e-06,
+        "max_input_tokens": 65536,
+        "max_output_tokens": 28672,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Qianfan-OCR-Fast is a domain-specific multimodal large model purpose-built for OCR. By leveraging specialized OCR training data while preserving versatile multimodal intelligence, it provides a powerful performance upgrade over Qianfan-OCR."
+        },
+        "litellm_provider": "openrouter",
+        "baidu/qianfan-ocr-fast": {
+            "input_cost_per_token": 6.8e-07,
+            "output_cost_per_token": 2.81e-06,
+            "max_input_tokens": 65536,
+            "max_output_tokens": 28672,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Qianfan-OCR-Fast is a domain-specific multimodal large model purpose-built for OCR. By leveraging specialized OCR training data while preserving versatile multimodal intelligence, it provides a powerful performance upgrade over Qianfan-OCR."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "gmi/google/gemini-3-flash-preview": {
         "input_cost_per_token": 5e-07,
@@ -23486,6 +23466,24 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "z-ai/glm-5.1": {
+        "input_cost_per_token": 9.8e-07,
+        "output_cost_per_token": 3.08e-06,
+        "max_input_tokens": 202752,
+        "metadata": {
+            "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.1": {
+            "input_cost_per_token": 9.8e-07,
+            "output_cost_per_token": 3.08e-06,
+            "max_input_tokens": 202752,
+            "metadata": {
+                "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "azure_ai/llama-3.2-90b-vision-instruct": {
         "input_cost_per_token": 2.04e-06,
         "litellm_provider": "azure_ai",
@@ -23608,8 +23606,8 @@
         }
     },
     "moonshotai/kimi-k2.6": {
-        "input_cost_per_token": 7.4e-07,
-        "output_cost_per_token": 3.5e-06,
+        "input_cost_per_token": 7.3e-07,
+        "output_cost_per_token": 3.49e-06,
         "max_input_tokens": 262142,
         "max_output_tokens": 262142,
         "mode": "chat",
@@ -23619,8 +23617,8 @@
         },
         "litellm_provider": "openrouter",
         "moonshotai/kimi-k2.6": {
-            "input_cost_per_token": 7.4e-07,
-            "output_cost_per_token": 3.5e-06,
+            "input_cost_per_token": 7.3e-07,
+            "output_cost_per_token": 3.49e-06,
             "max_input_tokens": 262142,
             "max_output_tokens": 262142,
             "mode": "chat",
@@ -23632,8 +23630,8 @@
         }
     },
     "~moonshotai/kimi-latest": {
-        "input_cost_per_token": 7.4e-07,
-        "output_cost_per_token": 3.5e-06,
+        "input_cost_per_token": 7.3e-07,
+        "output_cost_per_token": 3.49e-06,
         "max_input_tokens": 262142,
         "max_output_tokens": 262142,
         "mode": "chat",
@@ -23643,8 +23641,8 @@
         },
         "litellm_provider": "openrouter",
         "~moonshotai/kimi-latest": {
-            "input_cost_per_token": 7.4e-07,
-            "output_cost_per_token": 3.5e-06,
+            "input_cost_per_token": 7.3e-07,
+            "output_cost_per_token": 3.49e-06,
             "max_input_tokens": 262142,
             "max_output_tokens": 262142,
             "mode": "chat",
@@ -24021,26 +24019,6 @@
             "search_context_size_high": 0.014
         },
         "web_search_billing_unit": "per_query"
-    },
-    "z-ai/glm-5.1": {
-        "input_cost_per_token": 1.05e-06,
-        "output_cost_per_token": 3.5e-06,
-        "max_input_tokens": 202752,
-        "max_output_tokens": 65535,
-        "metadata": {
-            "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.1": {
-            "input_cost_per_token": 1.05e-06,
-            "output_cost_per_token": 3.5e-06,
-            "max_input_tokens": 202752,
-            "max_output_tokens": 65535,
-            "metadata": {
-                "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "oci/xai.grok-3-mini-fast": {
         "input_cost_per_token": 6e-07,
@@ -26287,6 +26265,54 @@
         "supports_reasoning": true,
         "source": "https://cloud.sambanova.ai/plans/pricing"
     },
+    "azure/gpt-4o-mini-transcribe": {
+        "input_cost_per_audio_token": 1.25e-06,
+        "input_cost_per_token": 1.25e-06,
+        "litellm_provider": "azure",
+        "max_input_tokens": 16000,
+        "max_output_tokens": 2000,
+        "mode": "audio_transcription",
+        "output_cost_per_token": 5e-06,
+        "supported_endpoints": [
+            "/v1/audio/transcriptions"
+        ]
+    },
+    "gpt-4o-mini-transcribe": {
+        "input_cost_per_audio_token": 1.25e-06,
+        "input_cost_per_token": 1.25e-06,
+        "litellm_provider": "openai",
+        "max_input_tokens": 16000,
+        "max_output_tokens": 2000,
+        "mode": "audio_transcription",
+        "output_cost_per_token": 5e-06,
+        "supported_endpoints": [
+            "/v1/audio/transcriptions"
+        ]
+    },
+    "gpt-4o-mini-transcribe-2025-03-20": {
+        "input_cost_per_audio_token": 1.25e-06,
+        "input_cost_per_token": 1.25e-06,
+        "litellm_provider": "openai",
+        "max_input_tokens": 16000,
+        "max_output_tokens": 2000,
+        "mode": "audio_transcription",
+        "output_cost_per_token": 5e-06,
+        "supported_endpoints": [
+            "/v1/audio/transcriptions"
+        ]
+    },
+    "gpt-4o-mini-transcribe-2025-12-15": {
+        "input_cost_per_audio_token": 1.25e-06,
+        "input_cost_per_token": 1.25e-06,
+        "litellm_provider": "openai",
+        "max_input_tokens": 16000,
+        "max_output_tokens": 2000,
+        "mode": "audio_transcription",
+        "output_cost_per_token": 5e-06,
+        "supported_endpoints": [
+            "/v1/audio/transcriptions"
+        ]
+    },
     "databricks/databricks-mpt-7b-instruct": {
         "input_cost_per_token": 5.0001e-07,
         "input_dbu_cost_per_token": 7.143e-06,
@@ -26699,8 +26725,6 @@
         "input_cost_per_token": 2e-06,
         "output_cost_per_token": 6e-06,
         "max_input_tokens": 131072,
-        "mode": "chat",
-        "supports_vision": true,
         "metadata": {
             "notes": "Pixtral Large is a 124B parameter, open-weight, multimodal model built on top of [Mistral Large 2](/mistralai/mistral-large-2411). The model is able to understand documents, charts and natural images. The model is..."
         },
@@ -26709,8 +26733,6 @@
             "input_cost_per_token": 2e-06,
             "output_cost_per_token": 6e-06,
             "max_input_tokens": 131072,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "Pixtral Large is a 124B parameter, open-weight, multimodal model built on top of [Mistral Large 2](/mistralai/mistral-large-2411). The model is able to understand documents, charts and natural images. The model is..."
             },
@@ -27062,8 +27084,6 @@
         "input_cost_per_token": 1.5e-06,
         "output_cost_per_token": 7.5e-06,
         "max_input_tokens": 262144,
-        "mode": "chat",
-        "supports_vision": true,
         "metadata": {
             "notes": "Mistral Medium 3.5 is a dense 128B instruction-following model from Mistral AI. It supports text and image inputs with text output, and is designed for agentic workflows, coding, and complex..."
         },
@@ -27072,8 +27092,6 @@
             "input_cost_per_token": 1.5e-06,
             "output_cost_per_token": 7.5e-06,
             "max_input_tokens": 262144,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "Mistral Medium 3.5 is a dense 128B instruction-following model from Mistral AI. It supports text and image inputs with text output, and is designed for agentic workflows, coding, and complex..."
             },
@@ -27127,54 +27145,6 @@
         "output_cost_per_token": 4.5003000000000007e-07,
         "output_dbu_cost_per_token": 6.429000000000001e-06,
         "source": "https://www.databricks.com/product/pricing/foundation-model-serving"
-    },
-    "azure/gpt-4o-mini-transcribe": {
-        "input_cost_per_audio_token": 3e-06,
-        "input_cost_per_token": 1.25e-06,
-        "litellm_provider": "azure",
-        "max_input_tokens": 16000,
-        "max_output_tokens": 2000,
-        "mode": "audio_transcription",
-        "output_cost_per_token": 5e-06,
-        "supported_endpoints": [
-            "/v1/audio/transcriptions"
-        ]
-    },
-    "gpt-4o-mini-transcribe": {
-        "input_cost_per_audio_token": 3e-06,
-        "input_cost_per_token": 1.25e-06,
-        "litellm_provider": "openai",
-        "max_input_tokens": 16000,
-        "max_output_tokens": 2000,
-        "mode": "audio_transcription",
-        "output_cost_per_token": 5e-06,
-        "supported_endpoints": [
-            "/v1/audio/transcriptions"
-        ]
-    },
-    "gpt-4o-mini-transcribe-2025-03-20": {
-        "input_cost_per_audio_token": 3e-06,
-        "input_cost_per_token": 1.25e-06,
-        "litellm_provider": "openai",
-        "max_input_tokens": 16000,
-        "max_output_tokens": 2000,
-        "mode": "audio_transcription",
-        "output_cost_per_token": 5e-06,
-        "supported_endpoints": [
-            "/v1/audio/transcriptions"
-        ]
-    },
-    "gpt-4o-mini-transcribe-2025-12-15": {
-        "input_cost_per_audio_token": 3e-06,
-        "input_cost_per_token": 1.25e-06,
-        "litellm_provider": "openai",
-        "max_input_tokens": 16000,
-        "max_output_tokens": 2000,
-        "mode": "audio_transcription",
-        "output_cost_per_token": 5e-06,
-        "supported_endpoints": [
-            "/v1/audio/transcriptions"
-        ]
     },
     "moonshot/kimi-k2-thinking-turbo": {
         "cache_read_input_token_cost": 1.5e-07,
@@ -30576,6 +30546,54 @@
         "supports_response_schema": true,
         "supports_vision": true
     },
+    "azure/gpt-4o-transcribe": {
+        "input_cost_per_audio_token": 2.5e-06,
+        "input_cost_per_token": 2.5e-06,
+        "litellm_provider": "azure",
+        "max_input_tokens": 16000,
+        "max_output_tokens": 2000,
+        "mode": "audio_transcription",
+        "output_cost_per_token": 1e-05,
+        "supported_endpoints": [
+            "/v1/audio/transcriptions"
+        ]
+    },
+    "azure/gpt-4o-transcribe-diarize": {
+        "input_cost_per_audio_token": 2.5e-06,
+        "input_cost_per_token": 2.5e-06,
+        "litellm_provider": "azure",
+        "max_input_tokens": 16000,
+        "max_output_tokens": 2000,
+        "mode": "audio_transcription",
+        "output_cost_per_token": 1e-05,
+        "supported_endpoints": [
+            "/v1/audio/transcriptions"
+        ]
+    },
+    "gpt-4o-transcribe": {
+        "input_cost_per_audio_token": 2.5e-06,
+        "input_cost_per_token": 2.5e-06,
+        "litellm_provider": "openai",
+        "max_input_tokens": 16000,
+        "max_output_tokens": 2000,
+        "mode": "audio_transcription",
+        "output_cost_per_token": 1e-05,
+        "supported_endpoints": [
+            "/v1/audio/transcriptions"
+        ]
+    },
+    "gpt-4o-transcribe-diarize": {
+        "input_cost_per_audio_token": 2.5e-06,
+        "input_cost_per_token": 2.5e-06,
+        "litellm_provider": "openai",
+        "max_input_tokens": 16000,
+        "max_output_tokens": 2000,
+        "mode": "audio_transcription",
+        "output_cost_per_token": 1e-05,
+        "supported_endpoints": [
+            "/v1/audio/transcriptions"
+        ]
+    },
     "azure/computer-use-preview": {
         "input_cost_per_token": 3e-06,
         "litellm_provider": "azure",
@@ -32501,54 +32519,6 @@
         "supports_tool_choice": true,
         "supports_response_schema": true,
         "supports_prompt_caching": true
-    },
-    "azure/gpt-4o-transcribe": {
-        "input_cost_per_audio_token": 6e-06,
-        "input_cost_per_token": 2.5e-06,
-        "litellm_provider": "azure",
-        "max_input_tokens": 16000,
-        "max_output_tokens": 2000,
-        "mode": "audio_transcription",
-        "output_cost_per_token": 1e-05,
-        "supported_endpoints": [
-            "/v1/audio/transcriptions"
-        ]
-    },
-    "azure/gpt-4o-transcribe-diarize": {
-        "input_cost_per_audio_token": 6e-06,
-        "input_cost_per_token": 2.5e-06,
-        "litellm_provider": "azure",
-        "max_input_tokens": 16000,
-        "max_output_tokens": 2000,
-        "mode": "audio_transcription",
-        "output_cost_per_token": 1e-05,
-        "supported_endpoints": [
-            "/v1/audio/transcriptions"
-        ]
-    },
-    "gpt-4o-transcribe": {
-        "input_cost_per_audio_token": 6e-06,
-        "input_cost_per_token": 2.5e-06,
-        "litellm_provider": "openai",
-        "max_input_tokens": 16000,
-        "max_output_tokens": 2000,
-        "mode": "audio_transcription",
-        "output_cost_per_token": 1e-05,
-        "supported_endpoints": [
-            "/v1/audio/transcriptions"
-        ]
-    },
-    "gpt-4o-transcribe-diarize": {
-        "input_cost_per_audio_token": 6e-06,
-        "input_cost_per_token": 2.5e-06,
-        "litellm_provider": "openai",
-        "max_input_tokens": 16000,
-        "max_output_tokens": 2000,
-        "mode": "audio_transcription",
-        "output_cost_per_token": 1e-05,
-        "supported_endpoints": [
-            "/v1/audio/transcriptions"
-        ]
     },
     "xai/grok-3": {
         "cache_read_input_token_cost": 7.5e-07,
@@ -40743,7 +40713,22 @@
         "mode": "embedding",
         "output_cost_per_token": 0,
         "output_vector_size": 3072,
-        "source": "https://ai.google.dev/gemini-api/docs/embeddings#multimodal",
+        "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+        "supports_multimodal": true,
+        "uses_embed_content": true
+    },
+    "vertex_ai/gemini-embedding-2-preview": {
+        "input_cost_per_audio_per_second": 0.00016,
+        "input_cost_per_image": 0.00012,
+        "input_cost_per_token": 2e-07,
+        "input_cost_per_video_per_second": 0.00079,
+        "litellm_provider": "vertex_ai",
+        "max_input_tokens": 8192,
+        "max_tokens": 8192,
+        "mode": "embedding",
+        "output_cost_per_token": 0,
+        "output_vector_size": 3072,
+        "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
         "supports_multimodal": true,
         "uses_embed_content": true
     },

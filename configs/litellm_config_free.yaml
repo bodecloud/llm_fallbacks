@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-2334034a3e094218b12bd07b67b09fa4
+  master_key: sk-26a2d889b981446a8416296599be2bbd
   alerting:
   - slack
   - email
@@ -144,8 +144,8 @@ model_list:
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: 0.0
     output_cost_per_token: 0.0
-    max_input_tokens: 256000
-    max_output_tokens: 256000
+    max_input_tokens: 1048576
+    max_output_tokens: 384000
     metadata:
       notes: DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model
         from DeepSeek with 284B total parameters and 13B activated parameters, supporting
@@ -163,22 +163,6 @@ model_list:
         ranked by [Artificial Analysis](https://artificialanalysis.ai/) coding percentiles.
         Set min_coding_score between 0 and 1 on the [pareto-router plugin](https://openrouter.ai/docs/guides/routing/routers/pareto-router#the-min_coding_score-parameter)
         to control how...
-    litellm_provider: openrouter
-- model_name: baidu/qianfan-ocr-fast:free
-  litellm_params:
-    model: openai/baidu/qianfan-ocr-fast:free
-    api_base: https://openrouter.ai/api/v1
-    api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 0.0
-    output_cost_per_token: 0.0
-    max_input_tokens: 65536
-    max_output_tokens: 28672
-    mode: chat
-    supports_vision: true
-    metadata:
-      notes: Qianfan-OCR-Fast is a domain-specific multimodal large model purpose-built
-        for OCR. By leveraging specialized OCR training data while preserving versatile
-        multimodal intelligence, it provides a powerful performance upgrade over Qianfan-OCR.
     litellm_provider: openrouter
 - model_name: google/gemma-4-26b-a4b-it:free
   litellm_params:
@@ -527,6 +511,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -534,7 +519,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
@@ -553,6 +537,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -560,7 +545,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -579,13 +563,13 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
     - openrouter/google/lyria-3-pro-preview
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -605,6 +589,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -612,7 +597,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -631,6 +615,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -638,7 +623,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -657,6 +641,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -664,7 +649,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -709,6 +693,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -716,7 +701,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -731,36 +715,11 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-  - baidu/qianfan-ocr-fast:free:
-    - openrouter/free
-    - gemini/gemini-exp-1206
-    - gemini/gemini-exp-1114
-    - openrouter/owl-alpha
-    - bedrock/anthropic.claude-mythos-preview
-    - openrouter/google/lyria-3-clip-preview
-    - openrouter/google/lyria-3-pro-preview
-    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
-    - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
-    - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
-    - openrouter/inclusionai/ring-2.6-1t:free
-    - lemonade/qwen3-4b-instruct-2507-gguf
-    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
-    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
-    - openrouter/google/gemma-4-26b-a4b-it:free
-    - openrouter/google/gemma-4-31b-it:free
-    - volcengine/kimi-k2-thinking-251104
-    - openrouter/openai/gpt-oss-120b:free
-    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
-    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
-    - openrouter/minimax/minimax-m2.5:free
   - google/gemma-4-26b-a4b-it:free:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -768,7 +727,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -787,6 +745,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -794,7 +753,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -813,6 +771,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -820,7 +779,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/inclusionai/ring-2.6-1t:free
     - lemonade/qwen3-4b-instruct-2507-gguf
@@ -839,13 +797,13 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -865,13 +823,13 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-pro-preview
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -891,13 +849,13 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
     - openrouter/google/lyria-3-pro-preview
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -917,6 +875,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -924,7 +883,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -942,13 +900,13 @@ router_settings:
   - openrouter/free:
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -969,6 +927,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -976,7 +935,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -995,6 +953,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1002,7 +961,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1021,6 +979,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1028,7 +987,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1047,6 +1005,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1054,7 +1013,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1073,6 +1031,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1080,7 +1039,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1099,6 +1057,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1106,7 +1065,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1125,6 +1083,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1132,7 +1091,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1151,6 +1109,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1158,7 +1117,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1177,6 +1135,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1184,7 +1143,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1203,6 +1161,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1210,7 +1169,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1229,13 +1187,13 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
     - openrouter/google/lyria-3-pro-preview
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1255,6 +1213,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1262,7 +1221,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1281,6 +1239,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1288,7 +1247,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1307,6 +1265,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1314,7 +1273,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1333,6 +1291,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1340,7 +1299,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
@@ -1359,6 +1317,7 @@ router_settings:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
+    - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
@@ -1366,7 +1325,6 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
-    - openrouter/deepseek/deepseek-v4-flash:free
     - volcengine/glm-4-7-251222
     - openrouter/arcee-ai/trinity-large-thinking:free
     - openrouter/inclusionai/ring-2.6-1t:free
