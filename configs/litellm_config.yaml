@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-9843d848b9af447abbd7ccdd56c08e84
+  master_key: sk-3fa20968e7db46e4b11ff10f3e7944e9
   alerting:
   - slack
   - email
@@ -1006,18 +1006,20 @@ model_list:
     model: openai/google/gemma-4-26b-a4b-it
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 6.0e-08
-    output_cost_per_token: 3.3e-07
+    input_cost_per_token: 7.0e-08
+    output_cost_per_token: 3.4e-07
     max_input_tokens: 262144
+    max_output_tokens: 16384
     metadata: &id045
       notes: Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model
         from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per
         token during inference — delivering near-31B quality at...
     litellm_provider: openrouter
     google/gemma-4-26b-a4b-it:
-      input_cost_per_token: 6.0e-08
-      output_cost_per_token: 3.3e-07
+      input_cost_per_token: 7.0e-08
+      output_cost_per_token: 3.4e-07
       max_input_tokens: 262144
+      max_output_tokens: 16384
       metadata: *id045
       litellm_provider: openrouter
 - model_name: google/gemma-4-31b-it:free
@@ -1452,18 +1454,20 @@ model_list:
     model: openai/nvidia/nemotron-3-super-120b-a12b
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 9.0e-08
-    output_cost_per_token: 4.5e-07
+    input_cost_per_token: 1.0e-07
+    output_cost_per_token: 5.0e-07
     max_input_tokens: 262144
+    max_output_tokens: 16384
     metadata: &id066
       notes: NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating
         just 12B parameters for maximum compute efficiency and accuracy in complex
         multi-agent applications. Built on a hybrid Mamba-Transformer...
     litellm_provider: openrouter
     nvidia/nemotron-3-super-120b-a12b:
-      input_cost_per_token: 9.0e-08
-      output_cost_per_token: 4.5e-07
+      input_cost_per_token: 1.0e-07
+      output_cost_per_token: 5.0e-07
       max_input_tokens: 262144
+      max_output_tokens: 16384
       metadata: *id066
       litellm_provider: openrouter
 - model_name: bytedance-seed/seed-2.0-lite
@@ -4888,10 +4892,10 @@ model_list:
     input_cost_per_token: 3.9e-08
     litellm_provider: openrouter
     max_input_tokens: 131072
-    max_output_tokens: 32768
+    max_output_tokens: 131072
     max_tokens: 32768
     mode: chat
-    output_cost_per_token: 1.8e-07
+    output_cost_per_token: 1.9e-07
     source: https://openrouter.ai/openai/gpt-oss-120b
     supports_function_calling: true
     supports_parallel_function_calling: true
@@ -4905,8 +4909,9 @@ model_list:
         optimized...
     openai/gpt-oss-120b:
       input_cost_per_token: 3.9e-08
-      output_cost_per_token: 1.8e-07
+      output_cost_per_token: 1.9e-07
       max_input_tokens: 131072
+      max_output_tokens: 131072
       metadata: *id202
       litellm_provider: openrouter
 - model_name: openai/gpt-oss-20b:free
@@ -7947,8 +7952,9 @@ model_list:
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: 2.0e-08
-    output_cost_per_token: 3.0e-08
+    output_cost_per_token: 4.0e-08
     max_input_tokens: 131072
+    max_output_tokens: 16384
     metadata: &id334
       notes: A 12B parameter model with a 128k token context length built by Mistral
         in collaboration with NVIDIA. The model is multilingual, supporting English,
@@ -7956,8 +7962,9 @@ model_list:
     litellm_provider: openrouter
     mistralai/mistral-nemo:
       input_cost_per_token: 2.0e-08
-      output_cost_per_token: 3.0e-08
+      output_cost_per_token: 4.0e-08
       max_input_tokens: 131072
+      max_output_tokens: 16384
       metadata: *id334
       litellm_provider: openrouter
 - model_name: openai/gpt-4o-mini-2024-07-18

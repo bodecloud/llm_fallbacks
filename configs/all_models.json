@@ -2070,24 +2070,6 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
-    "mistralai/mistral-nemo": {
-        "input_cost_per_token": 2e-08,
-        "output_cost_per_token": 3e-08,
-        "max_input_tokens": 131072,
-        "metadata": {
-            "notes": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,..."
-        },
-        "litellm_provider": "openrouter",
-        "mistralai/mistral-nemo": {
-            "input_cost_per_token": 2e-08,
-            "output_cost_per_token": 3e-08,
-            "max_input_tokens": 131072,
-            "metadata": {
-                "notes": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "voyage/rerank-2.5": {
         "input_cost_per_token": 5e-08,
         "litellm_provider": "voyage",
@@ -2178,6 +2160,26 @@
         "mode": "chat",
         "supports_tool_choice": true,
         "supports_function_calling": true
+    },
+    "mistralai/mistral-nemo": {
+        "input_cost_per_token": 2e-08,
+        "output_cost_per_token": 4e-08,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,..."
+        },
+        "litellm_provider": "openrouter",
+        "mistralai/mistral-nemo": {
+            "input_cost_per_token": 2e-08,
+            "output_cost_per_token": 4e-08,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "lambda_ai/hermes3-8b": {
         "input_cost_per_token": 2.5e-08,
@@ -4620,33 +4622,6 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
-    "openai/gpt-oss-120b": {
-        "input_cost_per_token": 3.9e-08,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 131072,
-        "max_output_tokens": 32768,
-        "max_tokens": 32768,
-        "mode": "chat",
-        "output_cost_per_token": 1.8e-07,
-        "source": "https://openrouter.ai/openai/gpt-oss-120b",
-        "supports_function_calling": true,
-        "supports_parallel_function_calling": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
-        },
-        "openai/gpt-oss-120b": {
-            "input_cost_per_token": 3.9e-08,
-            "output_cost_per_token": 1.8e-07,
-            "max_input_tokens": 131072,
-            "metadata": {
-                "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "gemini/gemini-1.5-flash": {
         "deprecation_date": "2025-09-29",
         "input_cost_per_token": 7.5e-08,
@@ -4676,6 +4651,34 @@
             "max_input_tokens": 60000,
             "metadata": {
                 "notes": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-oss-120b": {
+        "input_cost_per_token": 3.9e-08,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 131072,
+        "max_output_tokens": 131072,
+        "max_tokens": 32768,
+        "mode": "chat",
+        "output_cost_per_token": 1.9e-07,
+        "source": "https://openrouter.ai/openai/gpt-oss-120b",
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
+        },
+        "openai/gpt-oss-120b": {
+            "input_cost_per_token": 3.9e-08,
+            "output_cost_per_token": 1.9e-07,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
             },
             "litellm_provider": "openrouter"
         }
@@ -6445,24 +6448,6 @@
         "supports_response_schema": true,
         "supports_vision": true
     },
-    "google/gemma-4-26b-a4b-it": {
-        "input_cost_per_token": 6e-08,
-        "output_cost_per_token": 3.3e-07,
-        "max_input_tokens": 262144,
-        "metadata": {
-            "notes": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference \u2014 delivering near-31B quality at..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemma-4-26b-a4b-it": {
-            "input_cost_per_token": 6e-08,
-            "output_cost_per_token": 3.3e-07,
-            "max_input_tokens": 262144,
-            "metadata": {
-                "notes": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference \u2014 delivering near-31B quality at..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "fireworks_ai/accounts/fireworks/models/qwen3-4b-instruct-2507": {
         "max_tokens": 262144,
         "max_input_tokens": 262144,
@@ -7712,6 +7697,26 @@
         "litellm_provider": "together_ai",
         "mode": "chat",
         "output_cost_per_token": 2e-07
+    },
+    "google/gemma-4-26b-a4b-it": {
+        "input_cost_per_token": 7e-08,
+        "output_cost_per_token": 3.4e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference \u2014 delivering near-31B quality at..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemma-4-26b-a4b-it": {
+            "input_cost_per_token": 7e-08,
+            "output_cost_per_token": 3.4e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference \u2014 delivering near-31B quality at..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "groq/openai/gpt-oss-safeguard-20b": {
         "cache_read_input_token_cost": 3.7e-08,
@@ -9003,24 +9008,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "nvidia/nemotron-3-super-120b-a12b": {
-        "input_cost_per_token": 9e-08,
-        "output_cost_per_token": 4.5e-07,
-        "max_input_tokens": 262144,
-        "metadata": {
-            "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
-        },
-        "litellm_provider": "openrouter",
-        "nvidia/nemotron-3-super-120b-a12b": {
-            "input_cost_per_token": 9e-08,
-            "output_cost_per_token": 4.5e-07,
-            "max_input_tokens": 262144,
-            "metadata": {
-                "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "novita/qwen/qwen3-30b-a3b-fp8": {
         "litellm_provider": "novita",
         "mode": "chat",
@@ -9315,6 +9302,26 @@
         "supports_assistant_prefill": true,
         "supports_response_schema": true,
         "supports_tool_choice": true
+    },
+    "nvidia/nemotron-3-super-120b-a12b": {
+        "input_cost_per_token": 1e-07,
+        "output_cost_per_token": 5e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
+        },
+        "litellm_provider": "openrouter",
+        "nvidia/nemotron-3-super-120b-a12b": {
+            "input_cost_per_token": 1e-07,
+            "output_cost_per_token": 5e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "nousresearch/hermes-3-llama-3.1-70b": {
         "input_cost_per_token": 3e-07,
@@ -14291,6 +14298,100 @@
         "supports_web_search": true,
         "supports_none_reasoning_effort": false,
         "supports_xhigh_reasoning_effort": false
+    },
+    "azure_ai/gpt-5.4-nano": {
+        "cache_read_input_token_cost": 2e-08,
+        "cache_read_input_token_cost_above_272k_tokens": 4e-08,
+        "cache_read_input_token_cost_priority": 4e-08,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 8e-08,
+        "input_cost_per_token": 2e-07,
+        "input_cost_per_token_above_272k_tokens": 4e-07,
+        "input_cost_per_token_priority": 4e-07,
+        "input_cost_per_token_above_272k_tokens_priority": 8e-07,
+        "litellm_provider": "azure_ai",
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1.25e-06,
+        "output_cost_per_token_above_272k_tokens": 1.875e-06,
+        "output_cost_per_token_priority": 2.5e-06,
+        "output_cost_per_token_above_272k_tokens_priority": 3.75e-06,
+        "source": "https://ai.azure.com/catalog/models/gpt-5.4-nano",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_service_tier": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_none_reasoning_effort": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false
+    },
+    "azure_ai/gpt-5.4-nano-2026-03-17": {
+        "cache_read_input_token_cost": 2e-08,
+        "cache_read_input_token_cost_above_272k_tokens": 4e-08,
+        "cache_read_input_token_cost_priority": 4e-08,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 8e-08,
+        "input_cost_per_token": 2e-07,
+        "input_cost_per_token_above_272k_tokens": 4e-07,
+        "input_cost_per_token_priority": 4e-07,
+        "input_cost_per_token_above_272k_tokens_priority": 8e-07,
+        "litellm_provider": "azure_ai",
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1.25e-06,
+        "output_cost_per_token_above_272k_tokens": 1.875e-06,
+        "output_cost_per_token_priority": 2.5e-06,
+        "output_cost_per_token_above_272k_tokens_priority": 3.75e-06,
+        "source": "https://ai.azure.com/catalog/models/gpt-5.4-nano",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_service_tier": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_none_reasoning_effort": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false
     },
     "azure_ai/meta-llama-3-70b-instruct": {
         "input_cost_per_token": 1.1e-06,
@@ -24437,6 +24538,100 @@
         "supports_none_reasoning_effort": false,
         "supports_xhigh_reasoning_effort": false
     },
+    "azure_ai/gpt-5.4-mini": {
+        "cache_read_input_token_cost": 7.5e-08,
+        "cache_read_input_token_cost_above_272k_tokens": 1.5e-07,
+        "cache_read_input_token_cost_priority": 1.5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 3e-07,
+        "input_cost_per_token": 7.5e-07,
+        "input_cost_per_token_above_272k_tokens": 1.5e-06,
+        "input_cost_per_token_priority": 1.5e-06,
+        "input_cost_per_token_above_272k_tokens_priority": 3e-06,
+        "litellm_provider": "azure_ai",
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 4.5e-06,
+        "output_cost_per_token_above_272k_tokens": 6.75e-06,
+        "output_cost_per_token_priority": 9e-06,
+        "output_cost_per_token_above_272k_tokens_priority": 1.35e-05,
+        "source": "https://ai.azure.com/catalog/models/gpt-5.4-mini",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_service_tier": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_none_reasoning_effort": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false
+    },
+    "azure_ai/gpt-5.4-mini-2026-03-17": {
+        "cache_read_input_token_cost": 7.5e-08,
+        "cache_read_input_token_cost_above_272k_tokens": 1.5e-07,
+        "cache_read_input_token_cost_priority": 1.5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 3e-07,
+        "input_cost_per_token": 7.5e-07,
+        "input_cost_per_token_above_272k_tokens": 1.5e-06,
+        "input_cost_per_token_priority": 1.5e-06,
+        "input_cost_per_token_above_272k_tokens_priority": 3e-06,
+        "litellm_provider": "azure_ai",
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 4.5e-06,
+        "output_cost_per_token_above_272k_tokens": 6.75e-06,
+        "output_cost_per_token_priority": 9e-06,
+        "output_cost_per_token_above_272k_tokens_priority": 1.35e-05,
+        "source": "https://ai.azure.com/catalog/models/gpt-5.4-mini",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_service_tier": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_none_reasoning_effort": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false
+    },
     "gradient_ai/openai-o3-mini": {
         "input_cost_per_token": 1.1e-06,
         "litellm_provider": "gradient_ai",
@@ -31923,6 +32118,100 @@
         "supports_service_tier": true,
         "supports_vision": true
     },
+    "azure_ai/gpt-5.4": {
+        "cache_read_input_token_cost": 2.5e-07,
+        "cache_read_input_token_cost_above_272k_tokens": 5e-07,
+        "cache_read_input_token_cost_priority": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 1e-06,
+        "input_cost_per_token": 2.5e-06,
+        "input_cost_per_token_above_272k_tokens": 5e-06,
+        "input_cost_per_token_priority": 5e-06,
+        "input_cost_per_token_above_272k_tokens_priority": 1e-05,
+        "litellm_provider": "azure_ai",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1.5e-05,
+        "output_cost_per_token_above_272k_tokens": 2.25e-05,
+        "output_cost_per_token_priority": 3e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 4.5e-05,
+        "source": "https://ai.azure.com/catalog/models/gpt-5.4",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_service_tier": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_none_reasoning_effort": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": true
+    },
+    "azure_ai/gpt-5.4-2026-03-05": {
+        "cache_read_input_token_cost": 2.5e-07,
+        "cache_read_input_token_cost_above_272k_tokens": 5e-07,
+        "cache_read_input_token_cost_priority": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 1e-06,
+        "input_cost_per_token": 2.5e-06,
+        "input_cost_per_token_above_272k_tokens": 5e-06,
+        "input_cost_per_token_priority": 5e-06,
+        "input_cost_per_token_above_272k_tokens_priority": 1e-05,
+        "litellm_provider": "azure_ai",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1.5e-05,
+        "output_cost_per_token_above_272k_tokens": 2.25e-05,
+        "output_cost_per_token_priority": 3e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 4.5e-05,
+        "source": "https://ai.azure.com/catalog/models/gpt-5.4",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_service_tier": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_none_reasoning_effort": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": true
+    },
     "~anthropic/claude-sonnet-latest": {
         "input_cost_per_token": 3e-06,
         "output_cost_per_token": 1.5e-05,
@@ -34611,6 +34900,35 @@
         "supports_minimal_reasoning_effort": true
     },
     "eu.anthropic.claude-sonnet-4-6": {
+        "cache_creation_input_token_cost": 4.125e-06,
+        "cache_read_input_token_cost": 3.3e-07,
+        "input_cost_per_token": 3.3e-06,
+        "litellm_provider": "bedrock_converse",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 64000,
+        "max_tokens": 64000,
+        "mode": "chat",
+        "output_cost_per_token": 1.65e-05,
+        "search_context_cost_per_query": {
+            "search_context_size_high": 0.01,
+            "search_context_size_low": 0.01,
+            "search_context_size_medium": 0.01
+        },
+        "supports_assistant_prefill": true,
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_max_reasoning_effort": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "tool_use_system_prompt_tokens": 346,
+        "supports_native_structured_output": true,
+        "supports_minimal_reasoning_effort": true
+    },
+    "jp.anthropic.claude-sonnet-4-6": {
         "cache_creation_input_token_cost": 4.125e-06,
         "cache_read_input_token_cost": 3.3e-07,
         "input_cost_per_token": 3.3e-06,
@@ -40480,6 +40798,98 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_web_search": true
+    },
+    "azure_ai/gpt-5.4-pro": {
+        "cache_read_input_token_cost": 3e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 6e-06,
+        "cache_read_input_token_cost_priority": 6e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 1.2e-05,
+        "input_cost_per_token": 3e-05,
+        "input_cost_per_token_above_272k_tokens": 6e-05,
+        "input_cost_per_token_priority": 6e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 0.00012,
+        "litellm_provider": "azure_ai",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "responses",
+        "output_cost_per_token": 0.00018,
+        "output_cost_per_token_above_272k_tokens": 0.00027,
+        "output_cost_per_token_priority": 0.00036,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00054,
+        "source": "https://ai.azure.com/catalog/models/gpt-5.4-pro",
+        "supported_endpoints": [
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": false,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_service_tier": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_none_reasoning_effort": false,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": true
+    },
+    "azure_ai/gpt-5.4-pro-2026-03-05": {
+        "cache_read_input_token_cost": 3e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 6e-06,
+        "cache_read_input_token_cost_priority": 6e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 1.2e-05,
+        "input_cost_per_token": 3e-05,
+        "input_cost_per_token_above_272k_tokens": 6e-05,
+        "input_cost_per_token_priority": 6e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 0.00012,
+        "litellm_provider": "azure_ai",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "responses",
+        "output_cost_per_token": 0.00018,
+        "output_cost_per_token_above_272k_tokens": 0.00027,
+        "output_cost_per_token_priority": 0.00036,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00054,
+        "source": "https://ai.azure.com/catalog/models/gpt-5.4-pro",
+        "supported_endpoints": [
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": false,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_service_tier": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_none_reasoning_effort": false,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": true
     },
     "gemini-embedding-2": {
         "input_cost_per_audio_per_second": 0.00016,
