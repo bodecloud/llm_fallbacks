@@ -83,6 +83,7 @@ github_copilot/gpt-4o-2024-08-06
 meta_llama/llama-3.3-70b-instruct
 meta_llama/llama-3.3-8b-instruct
 nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+z-ai/glm-5.1
 google/gemma-4-26b-a4b-it:free
 google/gemma-4-31b-it:free
 baidu/cobuddy:free

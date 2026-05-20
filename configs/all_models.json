@@ -241,6 +241,26 @@
         "supports_reasoning": true,
         "supports_tool_choice": true
     },
+    "z-ai/glm-5.1": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 202800,
+        "max_output_tokens": 202800,
+        "metadata": {
+            "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.1": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 202800,
+            "max_output_tokens": 202800,
+            "metadata": {
+                "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "arcee-ai/trinity-large-thinking:free": {
         "input_cost_per_token": 0.0,
         "output_cost_per_token": 0.0,
@@ -12665,10 +12685,10 @@
         "supports_function_calling": true
     },
     "qwen/qwen3.5-35b-a3b": {
-        "input_cost_per_token": 1.4e-07,
+        "input_cost_per_token": 1.39e-07,
         "litellm_provider": "openrouter",
         "max_input_tokens": 262144,
-        "max_output_tokens": 81920,
+        "max_output_tokens": 65536,
         "max_tokens": 65536,
         "mode": "chat",
         "output_cost_per_token": 1e-06,
@@ -12681,10 +12701,9 @@
             "notes": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall..."
         },
         "qwen/qwen3.5-35b-a3b": {
-            "input_cost_per_token": 1.4e-07,
+            "input_cost_per_token": 1.39e-07,
             "output_cost_per_token": 1e-06,
             "max_input_tokens": 262144,
-            "max_output_tokens": 81920,
             "metadata": {
                 "notes": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall..."
             },
@@ -23036,28 +23055,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "~google/gemini-flash-latest": {
-        "input_cost_per_token": 5e-07,
-        "output_cost_per_token": 3e-06,
-        "input_cost_per_image": 5e-07,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "This model always redirects to the latest model in the Google Gemini Flash family."
-        },
-        "litellm_provider": "openrouter",
-        "~google/gemini-flash-latest": {
-            "input_cost_per_token": 5e-07,
-            "output_cost_per_token": 3e-06,
-            "input_cost_per_image": 5e-07,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "This model always redirects to the latest model in the Google Gemini Flash family."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "xiaomi/mimo-v2.5-pro": {
         "input_cost_per_token": 1e-06,
         "output_cost_per_token": 3e-06,
@@ -23473,24 +23470,6 @@
         "supports_parallel_function_calling": true,
         "supports_response_schema": true,
         "supports_tool_choice": true
-    },
-    "z-ai/glm-5.1": {
-        "input_cost_per_token": 9.8e-07,
-        "output_cost_per_token": 3.08e-06,
-        "max_input_tokens": 202752,
-        "metadata": {
-            "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.1": {
-            "input_cost_per_token": 9.8e-07,
-            "output_cost_per_token": 3.08e-06,
-            "max_input_tokens": 202752,
-            "metadata": {
-                "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "azure_ai/llama-3.2-90b-vision-instruct": {
         "input_cost_per_token": 2.04e-06,
@@ -29483,6 +29462,228 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true
+    },
+    "gemini-3.5-flash": {
+        "cache_read_input_token_cost": 1.5e-07,
+        "input_cost_per_audio_token": 1e-06,
+        "input_cost_per_token": 1.5e-06,
+        "litellm_provider": "vertex_ai-language-models",
+        "max_audio_length_hours": 8.4,
+        "max_audio_per_prompt": 1,
+        "max_images_per_prompt": 3000,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65535,
+        "max_pdf_size_mb": 30,
+        "max_tokens": 65535,
+        "max_video_length": 1,
+        "max_videos_per_prompt": 10,
+        "mode": "chat",
+        "output_cost_per_reasoning_token": 9e-06,
+        "output_cost_per_token": 9e-06,
+        "source": "https://ai.google.dev/pricing/gemini-3",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/completions",
+            "/v1/batch"
+        ],
+        "supported_modalities": [
+            "text",
+            "image",
+            "audio",
+            "video"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_audio_output": false,
+        "supports_audio_input": true,
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_url_context": true,
+        "supports_video_input": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_native_streaming": true,
+        "input_cost_per_token_priority": 2.7e-06,
+        "input_cost_per_audio_token_priority": 1.8e-06,
+        "output_cost_per_token_priority": 1.62e-05,
+        "cache_read_input_token_cost_priority": 2.7e-07,
+        "supports_service_tier": true,
+        "search_context_cost_per_query": {
+            "search_context_size_low": 0.014,
+            "search_context_size_medium": 0.014,
+            "search_context_size_high": 0.014
+        },
+        "web_search_billing_unit": "per_query"
+    },
+    "gemini/gemini-3.5-flash": {
+        "cache_read_input_token_cost": 1.5e-07,
+        "input_cost_per_audio_token": 1e-06,
+        "input_cost_per_token": 1.5e-06,
+        "litellm_provider": "gemini",
+        "max_audio_length_hours": 8.4,
+        "max_audio_per_prompt": 1,
+        "max_images_per_prompt": 3000,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65535,
+        "max_pdf_size_mb": 30,
+        "max_tokens": 65535,
+        "max_video_length": 1,
+        "max_videos_per_prompt": 10,
+        "mode": "chat",
+        "output_cost_per_reasoning_token": 9e-06,
+        "output_cost_per_token": 9e-06,
+        "rpm": 2000,
+        "source": "https://ai.google.dev/pricing/gemini-3",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/completions",
+            "/v1/batch"
+        ],
+        "supported_modalities": [
+            "text",
+            "image",
+            "audio",
+            "video"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_audio_output": false,
+        "supports_audio_input": true,
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_url_context": true,
+        "supports_video_input": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_native_streaming": true,
+        "tpm": 800000,
+        "input_cost_per_token_priority": 2.7e-06,
+        "input_cost_per_audio_token_priority": 1.8e-06,
+        "output_cost_per_token_priority": 1.62e-05,
+        "cache_read_input_token_cost_priority": 2.7e-07,
+        "supports_service_tier": true,
+        "search_context_cost_per_query": {
+            "search_context_size_low": 0.014,
+            "search_context_size_medium": 0.014,
+            "search_context_size_high": 0.014
+        },
+        "web_search_billing_unit": "per_query"
+    },
+    "vertex_ai/gemini-3.5-flash": {
+        "cache_read_input_token_cost": 1.5e-07,
+        "input_cost_per_token": 1.5e-06,
+        "input_cost_per_audio_token": 1e-06,
+        "litellm_provider": "vertex_ai",
+        "max_audio_length_hours": 8.4,
+        "max_audio_per_prompt": 1,
+        "max_images_per_prompt": 3000,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65535,
+        "max_pdf_size_mb": 30,
+        "max_tokens": 65535,
+        "max_video_length": 1,
+        "max_videos_per_prompt": 10,
+        "mode": "chat",
+        "output_cost_per_reasoning_token": 9e-06,
+        "output_cost_per_token": 9e-06,
+        "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/completions",
+            "/v1/batch"
+        ],
+        "supported_modalities": [
+            "text",
+            "image",
+            "audio",
+            "video"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_audio_input": true,
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_url_context": true,
+        "supports_video_input": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_native_streaming": true,
+        "input_cost_per_token_priority": 2.7e-06,
+        "input_cost_per_audio_token_priority": 1.8e-06,
+        "output_cost_per_token_priority": 1.62e-05,
+        "cache_read_input_token_cost_priority": 2.7e-07,
+        "supports_service_tier": true,
+        "search_context_cost_per_query": {
+            "search_context_size_low": 0.014,
+            "search_context_size_medium": 0.014,
+            "search_context_size_high": 0.014
+        },
+        "web_search_billing_unit": "per_query"
+    },
+    "google/gemini-3.5-flash": {
+        "input_cost_per_token": 1.5e-06,
+        "output_cost_per_token": 9e-06,
+        "input_cost_per_image": 1.5e-06,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Gemini 3.5 Flash is Google's high-efficiency multimodal model, bringing near-Pro level coding and reasoning at Flash-tier cost and speed. It is highly optimized for coding proficiency and parallel agentic execution..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemini-3.5-flash": {
+            "input_cost_per_token": 1.5e-06,
+            "output_cost_per_token": 9e-06,
+            "input_cost_per_image": 1.5e-06,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Gemini 3.5 Flash is Google's high-efficiency multimodal model, bringing near-Pro level coding and reasoning at Flash-tier cost and speed. It is highly optimized for coding proficiency and parallel agentic execution..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "~google/gemini-flash-latest": {
+        "input_cost_per_token": 1.5e-06,
+        "output_cost_per_token": 9e-06,
+        "input_cost_per_image": 1.5e-06,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "This model always redirects to the latest model in the Google Gemini Flash family."
+        },
+        "litellm_provider": "openrouter",
+        "~google/gemini-flash-latest": {
+            "input_cost_per_token": 1.5e-06,
+            "output_cost_per_token": 9e-06,
+            "input_cost_per_image": 1.5e-06,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "This model always redirects to the latest model in the Google Gemini Flash family."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "xai/grok-2": {
         "input_cost_per_token": 2e-06,
