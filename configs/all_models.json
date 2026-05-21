@@ -6473,6 +6473,26 @@
         "supports_response_schema": true,
         "supports_vision": true
     },
+    "stepfun/step-3.5-flash": {
+        "input_cost_per_token": 9e-08,
+        "output_cost_per_token": 3e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "Step 3.5 Flash is StepFun's most capable open-source foundation model. Built on a sparse Mixture of Experts (MoE) architecture, it selectively activates only 11B of its 196B parameters per token...."
+        },
+        "litellm_provider": "openrouter",
+        "stepfun/step-3.5-flash": {
+            "input_cost_per_token": 9e-08,
+            "output_cost_per_token": 3e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "Step 3.5 Flash is StepFun's most capable open-source foundation model. Built on a sparse Mixture of Experts (MoE) architecture, it selectively activates only 11B of its 196B parameters per token...."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "google/gemma-4-26b-a4b-it": {
         "input_cost_per_token": 6e-08,
         "output_cost_per_token": 3.3e-07,
@@ -6842,26 +6862,6 @@
             "max_output_tokens": 65536,
             "metadata": {
                 "notes": "MiMo-V2-Flash is an open-source foundation language model developed by Xiaomi. It is a Mixture-of-Experts model with 309B total parameters and 15B active parameters, adopting hybrid attention architecture. MiMo-V2-Flash supports a..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "stepfun/step-3.5-flash": {
-        "input_cost_per_token": 1e-07,
-        "output_cost_per_token": 3e-07,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "Step 3.5 Flash is StepFun's most capable open-source foundation model. Built on a sparse Mixture of Experts (MoE) architecture, it selectively activates only 11B of its 196B parameters per token...."
-        },
-        "litellm_provider": "openrouter",
-        "stepfun/step-3.5-flash": {
-            "input_cost_per_token": 1e-07,
-            "output_cost_per_token": 3e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "Step 3.5 Flash is StepFun's most capable open-source foundation model. Built on a sparse Mixture of Experts (MoE) architecture, it selectively activates only 11B of its 196B parameters per token...."
             },
             "litellm_provider": "openrouter"
         }
@@ -9925,6 +9925,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "inclusionai/ling-2.6-1t": {
+        "input_cost_per_token": 7.5e-08,
+        "output_cost_per_token": 6.25e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "Ling-2.6-1T is an instant (instruct) model from inclusionAI and the company\u2019s trillion-parameter flagship, designed for real-world agents that require fast execution and high efficiency at scale. It uses a \u201cfast..."
+        },
+        "litellm_provider": "openrouter",
+        "inclusionai/ling-2.6-1t": {
+            "input_cost_per_token": 7.5e-08,
+            "output_cost_per_token": 6.25e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "Ling-2.6-1T is an instant (instruct) model from inclusionAI and the company\u2019s trillion-parameter flagship, designed for real-world agents that require fast execution and high efficiency at scale. It uses a \u201cfast..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "llamagate/qwen3-vl-8b": {
         "max_tokens": 8192,
         "max_input_tokens": 32768,
@@ -12711,19 +12731,17 @@
         }
     },
     "qwen/qwen3.6-35b-a3b": {
-        "input_cost_per_token": 1.5e-07,
+        "input_cost_per_token": 1.49e-07,
         "output_cost_per_token": 1e-06,
         "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
         "metadata": {
             "notes": "Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud with 35 billion total parameters and 3 billion active parameters per token. It uses a hybrid sparse mixture-of-experts architecture combining Gated..."
         },
         "litellm_provider": "openrouter",
         "qwen/qwen3.6-35b-a3b": {
-            "input_cost_per_token": 1.5e-07,
+            "input_cost_per_token": 1.49e-07,
             "output_cost_per_token": 1e-06,
             "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
             "metadata": {
                 "notes": "Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud with 35 billion total parameters and 3 billion active parameters per token. It uses a hybrid sparse mixture-of-experts architecture combining Gated..."
             },
@@ -13591,7 +13609,7 @@
         "max_audio_length_hours": 8.4,
         "max_audio_per_prompt": 1,
         "max_images_per_prompt": 3000,
-        "max_input_tokens": 1048576,
+        "max_input_tokens": 1000000,
         "max_output_tokens": 8192,
         "max_pdf_size_mb": 30,
         "max_tokens": 8192,
@@ -13613,7 +13631,7 @@
             "input_cost_per_token": 1e-07,
             "output_cost_per_token": 4e-07,
             "input_cost_per_image": 1e-07,
-            "max_input_tokens": 1048576,
+            "max_input_tokens": 1000000,
             "max_output_tokens": 8192,
             "metadata": {
                 "notes": "Gemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It..."
@@ -20366,26 +20384,6 @@
         "supports_function_calling": true,
         "supports_tool_choice": true
     },
-    "inclusionai/ling-2.6-1t": {
-        "input_cost_per_token": 3e-07,
-        "output_cost_per_token": 2.5e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 32768,
-        "metadata": {
-            "notes": "Ling-2.6-1T is an instant (instruct) model from inclusionAI and the company\u2019s trillion-parameter flagship, designed for real-world agents that require fast execution and high efficiency at scale. It uses a \u201cfast..."
-        },
-        "litellm_provider": "openrouter",
-        "inclusionai/ling-2.6-1t": {
-            "input_cost_per_token": 3e-07,
-            "output_cost_per_token": 2.5e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 32768,
-            "metadata": {
-                "notes": "Ling-2.6-1T is an instant (instruct) model from inclusionAI and the company\u2019s trillion-parameter flagship, designed for real-world agents that require fast execution and high efficiency at scale. It uses a \u201cfast..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "z-ai/glm-4.5": {
         "input_cost_per_token": 6e-07,
         "output_cost_per_token": 2.2e-06,
@@ -20768,6 +20766,28 @@
         "supports_parallel_function_calling": true,
         "supports_system_messages": true,
         "supports_tool_choice": true
+    },
+    "x-ai/grok-build-0.1": {
+        "input_cost_per_token": 1e-06,
+        "output_cost_per_token": 2e-06,
+        "max_input_tokens": 256000,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Grok Build 0.1 is xAI\u2019s fast coding model trained specifically for agentic software engineering workflows. It supports text and image inputs with text output, and is optimized for interactive coding..."
+        },
+        "litellm_provider": "openrouter",
+        "x-ai/grok-build-0.1": {
+            "input_cost_per_token": 1e-06,
+            "output_cost_per_token": 2e-06,
+            "max_input_tokens": 256000,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Grok Build 0.1 is xAI\u2019s fast coding model trained specifically for agentic software engineering workflows. It supports text and image inputs with text output, and is optimized for interactive coding..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "openai/gpt-audio-mini": {
         "input_cost_per_token": 6e-07,
