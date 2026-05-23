@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-a3902321ef2e43519a518ad2768bffbd
+  master_key: sk-f9a0a18184e14a4eb36cc51cbffaa146
   alerting:
   - slack
   - email
@@ -189,16 +189,58 @@ model_list:
     model: openai/google/gemini-3.1-flash-lite
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
+    cache_read_input_token_cost: 2.5e-08
+    cache_read_input_token_cost_per_audio_token: 5.0e-08
+    input_cost_per_audio_token: 5.0e-07
     input_cost_per_token: 2.5e-07
-    output_cost_per_token: 1.5e-06
-    input_cost_per_image: 2.5e-07
+    litellm_provider: openrouter
+    max_audio_length_hours: 8.4
+    max_audio_per_prompt: 1
+    max_images_per_prompt: 3000
     max_input_tokens: 1048576
     max_output_tokens: 65536
+    max_pdf_size_mb: 30
+    max_tokens: 65536
+    max_video_length: 1
+    max_videos_per_prompt: 10
+    mode: chat
+    output_cost_per_reasoning_token: 1.5e-06
+    output_cost_per_token: 1.5e-06
+    rpm: 2000
+    source: https://ai.google.dev/gemini-api/docs/pricing#gemini-3.1-flash-lite
+    supported_endpoints:
+    - /v1/chat/completions
+    - /v1/completions
+    - /v1/batch
+    supported_modalities:
+    - text
+    - image
+    - audio
+    - video
+    supported_output_modalities:
+    - text
+    supports_audio_input: true
+    supports_audio_output: false
+    supports_code_execution: true
+    supports_file_search: true
+    supports_function_calling: true
+    supports_parallel_function_calling: true
+    supports_pdf_input: true
+    supports_prompt_caching: true
+    supports_reasoning: true
+    supports_response_schema: true
+    supports_system_messages: true
+    supports_tool_choice: true
+    supports_url_context: true
+    supports_video_input: true
+    supports_vision: true
+    supports_web_search: true
+    tpm: 800000
+    input_cost_per_image: 2.5e-07
     metadata: &id007
       notes: Gemini 3.1 Flash Lite is Google’s GA high-efficiency multimodal model
         optimized for low-latency, high-volume workloads. It supports text, image,
         video, audio, and PDF inputs, and is designed for lightweight agentic...
-    litellm_provider: openrouter
     google/gemini-3.1-flash-lite:
       input_cost_per_token: 2.5e-07
       output_cost_per_token: 1.5e-06
@@ -570,8 +612,8 @@ model_list:
     model: openai/qwen/qwen3.6-flash
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 1.2375e-07
-    output_cost_per_token: 7.425e-07
+    input_cost_per_token: 1.875e-07
+    output_cost_per_token: 1.125e-06
     max_input_tokens: 1000000
     max_output_tokens: 65536
     metadata: &id025
@@ -580,8 +622,8 @@ model_list:
         window. Tiered pricing kicks in...
     litellm_provider: openrouter
     qwen/qwen3.6-flash:
-      input_cost_per_token: 1.2375e-07
-      output_cost_per_token: 7.425e-07
+      input_cost_per_token: 1.875e-07
+      output_cost_per_token: 1.125e-06
       max_input_tokens: 1000000
       max_output_tokens: 65536
       metadata: *id025
@@ -593,8 +635,8 @@ model_list:
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: 1.5e-07
     output_cost_per_token: 1.0e-06
-    max_input_tokens: 262144
-    max_output_tokens: 262144
+    max_input_tokens: 262140
+    max_output_tokens: 262140
     metadata: &id026
       notes: Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud
         with 35 billion total parameters and 3 billion active parameters per token.
@@ -603,8 +645,8 @@ model_list:
     qwen/qwen3.6-35b-a3b:
       input_cost_per_token: 1.5e-07
       output_cost_per_token: 1.0e-06
-      max_input_tokens: 262144
-      max_output_tokens: 262144
+      max_input_tokens: 262140
+      max_output_tokens: 262140
       metadata: *id026
       litellm_provider: openrouter
 - model_name: qwen/qwen3.6-max-preview
@@ -633,20 +675,20 @@ model_list:
     model: openai/qwen/qwen3.6-27b
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 3.17e-07
+    input_cost_per_token: 3.0e-07
     output_cost_per_token: 3.2e-06
-    max_input_tokens: 262140
-    max_output_tokens: 262140
+    max_input_tokens: 262144
+    max_output_tokens: 262144
     metadata: &id028
       notes: Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen
         Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities
         — accepting text, image, and video inputs...
     litellm_provider: openrouter
     qwen/qwen3.6-27b:
-      input_cost_per_token: 3.17e-07
+      input_cost_per_token: 3.0e-07
       output_cost_per_token: 3.2e-06
-      max_input_tokens: 262140
-      max_output_tokens: 262140
+      max_input_tokens: 262144
+      max_output_tokens: 262144
       metadata: *id028
       litellm_provider: openrouter
 - model_name: openai/gpt-5.5-pro
@@ -738,18 +780,20 @@ model_list:
     model: openai/deepseek/deepseek-v4-flash
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 1.12e-07
-    output_cost_per_token: 2.24e-07
-    max_input_tokens: 1048575
+    input_cost_per_token: 1.0e-07
+    output_cost_per_token: 2.0e-07
+    max_input_tokens: 1048576
+    max_output_tokens: 16384
     metadata: &id033
       notes: DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model
         from DeepSeek with 284B total parameters and 13B activated parameters, supporting
         a 1M-token context window. It is designed for fast inference and...
     litellm_provider: openrouter
     deepseek/deepseek-v4-flash:
-      input_cost_per_token: 1.12e-07
-      output_cost_per_token: 2.24e-07
-      max_input_tokens: 1048575
+      input_cost_per_token: 1.0e-07
+      output_cost_per_token: 2.0e-07
+      max_input_tokens: 1048576
+      max_output_tokens: 16384
       metadata: *id033
       litellm_provider: openrouter
 - model_name: inclusionai/ling-2.6-1t
@@ -801,14 +845,24 @@ model_list:
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: 1.0e-06
     output_cost_per_token: 3.0e-06
+    cache_creation_input_token_cost: 0.0
+    cache_read_input_token_cost: 2.0e-07
+    litellm_provider: openrouter
     max_input_tokens: 1048576
     max_output_tokens: 16384
+    max_tokens: 16384
+    mode: chat
+    supports_function_calling: true
+    supports_tool_choice: true
+    supports_reasoning: true
+    supports_vision: false
+    supports_response_schema: true
+    supports_prompt_caching: true
     metadata: &id036
       notes: MiMo-V2.5-Pro is Xiaomi’s flagship model, delivering strong performance
         in general agentic capabilities, complex software engineering, and long-horizon
         tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench
         Pro....
-    litellm_provider: openrouter
     xiaomi/mimo-v2.5-pro:
       input_cost_per_token: 1.0e-06
       output_cost_per_token: 3.0e-06
@@ -823,13 +877,25 @@ model_list:
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: 4.0e-07
     output_cost_per_token: 2.0e-06
+    cache_creation_input_token_cost: 0.0
+    cache_read_input_token_cost: 8.0e-08
+    litellm_provider: openrouter
     max_input_tokens: 1048576
     max_output_tokens: 131072
+    max_tokens: 131072
+    mode: chat
+    supports_function_calling: true
+    supports_tool_choice: true
+    supports_reasoning: true
+    supports_vision: true
+    supports_audio_input: true
+    supports_video_input: true
+    supports_response_schema: true
+    supports_prompt_caching: true
     metadata: &id037
       notes: MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level
         agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni
         in multimodal perception across image and video understanding...
-    litellm_provider: openrouter
     xiaomi/mimo-v2.5:
       input_cost_per_token: 4.0e-07
       output_cost_per_token: 2.0e-06
@@ -1134,13 +1200,13 @@ model_list:
     model: openai/qwen/qwen3.6-plus
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 1.794e-07
+    input_cost_per_token: 3.25e-07
     litellm_provider: openrouter
     max_input_tokens: 1000000
     max_output_tokens: 65536
     max_tokens: 65536
     mode: chat
-    output_cost_per_token: 1.07315e-06
+    output_cost_per_token: 1.95e-06
     source: https://openrouter.ai/qwen/qwen3.6-plus
     supports_function_calling: true
     supports_reasoning: true
@@ -1151,8 +1217,8 @@ model_list:
         linear attention with sparse mixture-of-experts routing, enabling strong scalability
         and high-performance inference. Compared to the 3.5 series, it delivers...
     qwen/qwen3.6-plus:
-      input_cost_per_token: 1.794e-07
-      output_cost_per_token: 1.07315e-06
+      input_cost_per_token: 3.25e-07
+      output_cost_per_token: 1.95e-06
       max_input_tokens: 1000000
       max_output_tokens: 65536
       metadata: *id051
@@ -1833,7 +1899,7 @@ model_list:
     input_cost_per_token: 2.6e-07
     litellm_provider: openrouter
     max_input_tokens: 262144
-    max_output_tokens: 65536
+    max_output_tokens: 262144
     max_tokens: 65536
     mode: chat
     output_cost_per_token: 2.08e-06
@@ -1850,7 +1916,7 @@ model_list:
       input_cost_per_token: 2.6e-07
       output_cost_per_token: 2.08e-06
       max_input_tokens: 262144
-      max_output_tokens: 65536
+      max_output_tokens: 262144
       metadata: *id081
       litellm_provider: openrouter
 - model_name: qwen/qwen3.5-flash-02-23
@@ -2742,7 +2808,7 @@ model_list:
     input_cost_per_token: 1.0e-07
     output_cost_per_token: 3.0e-07
     cache_creation_input_token_cost: 0.0
-    cache_read_input_token_cost: 0.0
+    cache_read_input_token_cost: 1.0e-08
     litellm_provider: openrouter
     max_input_tokens: 262144
     max_output_tokens: 65536
@@ -2752,7 +2818,7 @@ model_list:
     supports_tool_choice: true
     supports_reasoning: true
     supports_vision: false
-    supports_prompt_caching: false
+    supports_prompt_caching: true
     metadata: &id114
       notes: MiMo-V2-Flash is an open-source foundation language model developed by
         Xiaomi. It is a Mixture-of-Experts model with 309B total parameters and 15B
@@ -8825,7 +8891,6 @@ router_settings:
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
     - openrouter/google/lyria-3-pro-preview
-    - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -8842,6 +8907,7 @@ router_settings:
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
     - openrouter/minimax/minimax-m2.5:free
+    - openrouter/baidu/cobuddy:free
   - baidu/cobuddy:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -9571,15 +9637,10 @@ router_settings:
     - openrouter/z-ai/glm-4.5-air:free
     - openrouter/minimax/minimax-m2.5:free
   - xiaomi/mimo-v2.5-pro:
-    - openrouter/free
-    - gemini/gemini-exp-1206
-    - gemini/gemini-exp-1114
     - openrouter/deepseek/deepseek-v4-flash:free
     - openrouter/owl-alpha
-    - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
     - openrouter/google/lyria-3-pro-preview
-    - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -9596,6 +9657,11 @@ router_settings:
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
     - openrouter/minimax/minimax-m2.5:free
+    - openrouter/baidu/cobuddy:free
+    - lemonade/gpt-oss-120b-mxfp-gguf
+    - lemonade/gpt-oss-20b-mxfp4-gguf
+    - volcengine/deepseek-v3-2-251201
+    - zai/glm-4.5-flash
   - xiaomi/mimo-v2.5:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -9605,7 +9671,6 @@ router_settings:
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
     - openrouter/google/lyria-3-pro-preview
-    - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -9622,6 +9687,7 @@ router_settings:
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
     - openrouter/minimax/minimax-m2.5:free
+    - openrouter/baidu/cobuddy:free
   - openai/gpt-5.4-image-2:
     - openrouter/free
     - gemini/gemini-exp-1206

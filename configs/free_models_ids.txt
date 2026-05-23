@@ -384,6 +384,8 @@ parallel_ai/search-pro
 perplexity/search
 recraft/recraftv2
 recraft/recraftv3
+reducto/parse-legacy
+reducto/parse-v3
 rerank-english-v2.0
 rerank-english-v3.0
 rerank-multilingual-v2.0
