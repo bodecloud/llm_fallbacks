@@ -2780,6 +2780,15 @@
         "output_vector_size": 1024,
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing"
     },
+    "oci/cohere.embed-multilingual-image-v3.0": {
+        "input_cost_per_token": 1e-07,
+        "litellm_provider": "oci",
+        "max_input_tokens": 512,
+        "mode": "embedding",
+        "output_vector_size": 1024,
+        "source": "https://www.oracle.com/cloud/ai/generative-ai/pricing/",
+        "supports_vision": true
+    },
     "vercel_ai_gateway/mistral/mistral-embed": {
         "input_cost_per_token": 1e-07,
         "litellm_provider": "vercel_ai_gateway",
@@ -6205,7 +6214,8 @@
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
         "supports_function_calling": true,
         "supports_response_schema": true,
-        "supports_vision": true
+        "supports_vision": true,
+        "supports_native_streaming": true
     },
     "vercel_ai_gateway/google/gemini-2.0-flash-lite": {
         "deprecation_date": "2026-06-01",
@@ -8030,6 +8040,21 @@
         "output_cost_per_token": 2.2e-07,
         "supports_function_calling": true,
         "supports_tool_choice": false
+    },
+    "oci/openai.gpt-5-nano": {
+        "input_cost_per_token": 5e-08,
+        "litellm_provider": "oci",
+        "max_input_tokens": 272000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 4e-07,
+        "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_vision": true
     },
     "groq/meta-llama/llama-4-scout-17b-16e-instruct": {
         "input_cost_per_token": 1.1e-07,
@@ -10137,7 +10162,8 @@
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
         "supports_function_calling": true,
         "supports_response_schema": true,
-        "supports_vision": true
+        "supports_vision": true,
+        "supports_native_streaming": true
     },
     "meta-llama/llama-4-maverick": {
         "input_cost_per_token": 1.5e-07,
@@ -10954,7 +10980,8 @@
         "output_cost_per_token": 5e-07,
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
         "supports_function_calling": true,
-        "supports_response_schema": false
+        "supports_response_schema": false,
+        "supports_native_streaming": true
     },
     "vercel_ai_gateway/xai/grok-3-mini": {
         "input_cost_per_token": 3e-07,
@@ -14114,29 +14141,32 @@
         "supports_function_calling": true,
         "supports_tool_choice": true
     },
-    "oci/meta.llama-4-maverick-17b-128e-instruct-fp8": {
-        "input_cost_per_token": 7.2e-07,
-        "litellm_provider": "oci",
-        "max_input_tokens": 512000,
-        "max_output_tokens": 4000,
-        "max_tokens": 4000,
-        "mode": "chat",
-        "output_cost_per_token": 7.2e-07,
-        "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
-        "supports_function_calling": true,
-        "supports_response_schema": false
-    },
     "oci/meta.llama-4-scout-17b-16e-instruct": {
         "input_cost_per_token": 7.2e-07,
         "litellm_provider": "oci",
-        "max_input_tokens": 192000,
-        "max_output_tokens": 4000,
-        "max_tokens": 4000,
+        "max_input_tokens": 10485760,
+        "max_output_tokens": 8192,
+        "max_tokens": 8192,
         "mode": "chat",
         "output_cost_per_token": 7.2e-07,
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
         "supports_function_calling": true,
-        "supports_response_schema": false
+        "supports_response_schema": false,
+        "supports_native_streaming": true
+    },
+    "oci/meta.llama-4-maverick-17b-128e-instruct-fp8": {
+        "input_cost_per_token": 7.2e-07,
+        "litellm_provider": "oci",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 8192,
+        "max_tokens": 8192,
+        "mode": "chat",
+        "output_cost_per_token": 7.2e-07,
+        "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
+        "supports_function_calling": true,
+        "supports_response_schema": false,
+        "supports_native_streaming": true,
+        "supports_vision": true
     },
     "vercel_ai_gateway/meta/llama-3.1-70b": {
         "input_cost_per_token": 7.2e-07,
@@ -14203,7 +14233,21 @@
         "output_cost_per_token": 7.2e-07,
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
         "supports_function_calling": true,
-        "supports_response_schema": false
+        "supports_response_schema": false,
+        "supports_native_streaming": true
+    },
+    "oci/meta.llama-3.1-8b-instruct": {
+        "input_cost_per_token": 7.2e-07,
+        "litellm_provider": "oci",
+        "max_input_tokens": 128000,
+        "max_output_tokens": 4000,
+        "max_tokens": 4000,
+        "mode": "chat",
+        "output_cost_per_token": 7.2e-07,
+        "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
+        "supports_function_calling": true,
+        "supports_response_schema": false,
+        "supports_native_streaming": true
     },
     "oci/meta.llama-3.3-70b-instruct": {
         "input_cost_per_token": 7.2e-07,
@@ -14215,7 +14259,8 @@
         "output_cost_per_token": 7.2e-07,
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
         "supports_function_calling": true,
-        "supports_response_schema": false
+        "supports_response_schema": false,
+        "supports_native_streaming": true
     },
     "oci/meta.llama-3.3-70b-instruct-fp8-dynamic": {
         "input_cost_per_token": 7.2e-07,
@@ -18330,6 +18375,21 @@
         "mode": "chat",
         "supports_reasoning": true
     },
+    "oci/openai.gpt-5-mini": {
+        "input_cost_per_token": 2.5e-07,
+        "litellm_provider": "oci",
+        "max_input_tokens": 272000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 2e-06,
+        "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_vision": true
+    },
     "openai/gpt-5.1-codex-mini": {
         "input_cost_per_token": 2.5e-07,
         "output_cost_per_token": 2e-06,
@@ -21426,6 +21486,33 @@
         "max_input_tokens": 1000000,
         "max_output_tokens": 8192
     },
+    "oci/cohere.command-a-reasoning": {
+        "input_cost_per_token": 1.56e-06,
+        "litellm_provider": "oci",
+        "max_input_tokens": 256000,
+        "max_output_tokens": 8192,
+        "max_tokens": 8192,
+        "mode": "chat",
+        "output_cost_per_token": 1.56e-06,
+        "source": "https://www.oracle.com/cloud/ai/generative-ai/pricing/",
+        "supports_function_calling": false,
+        "supports_response_schema": false,
+        "supports_native_streaming": true
+    },
+    "oci/cohere.command-a-vision": {
+        "input_cost_per_token": 1.56e-06,
+        "litellm_provider": "oci",
+        "max_input_tokens": 256000,
+        "max_output_tokens": 8192,
+        "max_tokens": 8192,
+        "mode": "chat",
+        "output_cost_per_token": 1.56e-06,
+        "source": "https://www.oracle.com/cloud/ai/generative-ai/pricing/",
+        "supports_function_calling": true,
+        "supports_response_schema": false,
+        "supports_native_streaming": true,
+        "supports_vision": true
+    },
     "oci/cohere.command-a-03-2025": {
         "input_cost_per_token": 1.56e-06,
         "litellm_provider": "oci",
@@ -21436,7 +21523,8 @@
         "output_cost_per_token": 1.56e-06,
         "source": "https://www.oracle.com/cloud/ai/generative-ai/pricing/",
         "supports_function_calling": true,
-        "supports_response_schema": false
+        "supports_response_schema": false,
+        "supports_native_streaming": true
     },
     "oci/cohere.command-a-reasoning-08-2025": {
         "input_cost_per_token": 1.56e-06,
@@ -21473,7 +21561,8 @@
         "output_cost_per_token": 1.56e-06,
         "source": "https://www.oracle.com/cloud/ai/generative-ai/pricing/",
         "supports_function_calling": true,
-        "supports_response_schema": false
+        "supports_response_schema": false,
+        "supports_native_streaming": true
     },
     "oci/cohere.command-plus-latest": {
         "input_cost_per_token": 1.56e-06,
@@ -21485,7 +21574,8 @@
         "output_cost_per_token": 1.56e-06,
         "source": "https://www.oracle.com/cloud/ai/generative-ai/pricing/",
         "supports_function_calling": true,
-        "supports_response_schema": false
+        "supports_response_schema": false,
+        "supports_native_streaming": true
     },
     "oci/cohere.command-r-plus-08-2024": {
         "input_cost_per_token": 1.56e-06,
@@ -23557,6 +23647,7 @@
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
         "supports_function_calling": true,
         "supports_response_schema": false,
+        "supports_native_streaming": true,
         "supports_vision": true
     },
     "nousresearch/hermes-4-405b": {
@@ -24306,7 +24397,8 @@
         "output_cost_per_token": 4e-06,
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
         "supports_function_calling": true,
-        "supports_response_schema": false
+        "supports_response_schema": false,
+        "supports_native_streaming": true
     },
     "vercel_ai_gateway/xai/grok-3-mini-fast": {
         "input_cost_per_token": 6e-07,
@@ -28397,6 +28489,22 @@
         "output_cost_per_token": 1e-05,
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
         "supports_function_calling": true,
+        "supports_response_schema": true,
+        "supports_vision": true,
+        "supports_native_streaming": true
+    },
+    "oci/openai.gpt-5": {
+        "input_cost_per_token": 1.25e-06,
+        "litellm_provider": "oci",
+        "max_input_tokens": 272000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1e-05,
+        "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_reasoning": true,
         "supports_response_schema": true,
         "supports_vision": true
     },
@@ -32876,7 +32984,8 @@
         "output_cost_per_token": 1.5e-05,
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
         "supports_function_calling": true,
-        "supports_response_schema": false
+        "supports_response_schema": false,
+        "supports_native_streaming": true
     },
     "oci/xai.grok-4.20": {
         "input_cost_per_token": 3e-06,
@@ -32923,7 +33032,8 @@
         "output_cost_per_token": 1.5e-05,
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
         "supports_function_calling": true,
-        "supports_response_schema": false
+        "supports_response_schema": false,
+        "supports_native_streaming": true
     },
     "v0/v0-1.0-md": {
         "input_cost_per_token": 3e-06,
@@ -34000,7 +34110,8 @@
         "output_cost_per_token": 1.068e-05,
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
         "supports_function_calling": true,
-        "supports_response_schema": false
+        "supports_response_schema": false,
+        "supports_native_streaming": true
     },
     "anthropic/claude-sonnet-4.6": {
         "cache_creation_input_token_cost": 3.75e-06,
@@ -35975,6 +36086,17 @@
         "supports_service_tier": true,
         "supports_vision": true
     },
+    "azure/speech/azure-stt": {
+        "audio_transcription_config": "azure_speech",
+        "input_cost_per_second": 0.0002777778,
+        "litellm_provider": "azure",
+        "mode": "audio_transcription",
+        "output_cost_per_second": 0.0,
+        "source": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/speech-services/",
+        "supported_endpoints": [
+            "/v1/audio/transcriptions"
+        ]
+    },
     "~anthropic/claude-opus-latest": {
         "input_cost_per_token": 5e-06,
         "output_cost_per_token": 2.5e-05,
@@ -36017,7 +36139,8 @@
         "output_cost_per_token": 2.5e-05,
         "source": "https://www.oracle.com/artificial-intelligence/generative-ai/generative-ai-service/pricing",
         "supports_function_calling": true,
-        "supports_response_schema": false
+        "supports_response_schema": false,
+        "supports_native_streaming": true
     },
     "oci/xai.grok-4-fast": {
         "input_cost_per_token": 5e-06,
