@@ -241,26 +241,6 @@
         "supports_reasoning": true,
         "supports_tool_choice": true
     },
-    "arcee-ai/trinity-large-thinking:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 80000,
-        "metadata": {
-            "notes": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7..."
-        },
-        "litellm_provider": "openrouter",
-        "arcee-ai/trinity-large-thinking:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 80000,
-            "metadata": {
-                "notes": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "lemonade/qwen3-4b-instruct-2507-gguf": {
         "input_cost_per_token": 0,
         "litellm_provider": "lemonade",
@@ -358,6 +338,26 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_tool_choice": true
+    },
+    "poolside/laguna-m.1:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 128K..."
+        },
+        "litellm_provider": "openrouter",
+        "poolside/laguna-m.1:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 128K..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "openai/gpt-oss-120b:free": {
         "input_cost_per_token": 0.0,
@@ -659,26 +659,6 @@
             "max_output_tokens": 8192,
             "metadata": {
                 "notes": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "poolside/laguna-m.1:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 8192,
-        "metadata": {
-            "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 128K..."
-        },
-        "litellm_provider": "openrouter",
-        "poolside/laguna-m.1:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 8192,
-            "metadata": {
-                "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 128K..."
             },
             "litellm_provider": "openrouter"
         }
@@ -8610,6 +8590,38 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
+    "xiaomi/mimo-v2.5": {
+        "input_cost_per_token": 1.4e-07,
+        "output_cost_per_token": 2.8e-07,
+        "cache_creation_input_token_cost": 0.0,
+        "cache_read_input_token_cost": 8e-08,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 131072,
+        "max_tokens": 131072,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_tool_choice": true,
+        "supports_reasoning": true,
+        "supports_vision": true,
+        "supports_audio_input": true,
+        "supports_video_input": true,
+        "supports_response_schema": true,
+        "supports_prompt_caching": true,
+        "metadata": {
+            "notes": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding..."
+        },
+        "xiaomi/mimo-v2.5": {
+            "input_cost_per_token": 1.4e-07,
+            "output_cost_per_token": 2.8e-07,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "mistral/codestral-mamba-latest": {
         "input_cost_per_token": 2.5e-07,
         "litellm_provider": "mistral",
@@ -11978,6 +11990,26 @@
         "mode": "chat",
         "supports_tool_choice": false
     },
+    "z-ai/glm-4.5-air": {
+        "input_cost_per_token": 1.25e-07,
+        "output_cost_per_token": 8.4e-07,
+        "max_input_tokens": 131070,
+        "max_output_tokens": 131070,
+        "metadata": {
+            "notes": "GLM-4.5-Air is the lightweight variant of our latest flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-4.5-air": {
+            "input_cost_per_token": 1.25e-07,
+            "output_cost_per_token": 8.4e-07,
+            "max_input_tokens": 131070,
+            "max_output_tokens": 131070,
+            "metadata": {
+                "notes": "GLM-4.5-Air is the lightweight variant of our latest flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "deepseek/deepseek-chat-v3-0324": {
         "input_cost_per_token": 2e-07,
         "litellm_provider": "openrouter",
@@ -12037,26 +12069,6 @@
         "supports_tool_choice": true,
         "supports_system_messages": true,
         "supports_reasoning": true
-    },
-    "z-ai/glm-4.5-air": {
-        "input_cost_per_token": 1.3e-07,
-        "output_cost_per_token": 8.5e-07,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 98304,
-        "metadata": {
-            "notes": "GLM-4.5-Air is the lightweight variant of our latest flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-4.5-air": {
-            "input_cost_per_token": 1.3e-07,
-            "output_cost_per_token": 8.5e-07,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 98304,
-            "metadata": {
-                "notes": "GLM-4.5-Air is the lightweight variant of our latest flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "fireworks_ai/accounts/fireworks/models/qwen3-30b-a3b-instruct-2507": {
         "max_tokens": 262144,
@@ -12719,8 +12731,8 @@
     "qwen/qwen3.6-35b-a3b": {
         "input_cost_per_token": 1.5e-07,
         "output_cost_per_token": 1e-06,
-        "max_input_tokens": 262140,
-        "max_output_tokens": 262140,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
         "metadata": {
             "notes": "Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud with 35 billion total parameters and 3 billion active parameters per token. It uses a hybrid sparse mixture-of-experts architecture combining Gated..."
         },
@@ -12728,8 +12740,8 @@
         "qwen/qwen3.6-35b-a3b": {
             "input_cost_per_token": 1.5e-07,
             "output_cost_per_token": 1e-06,
-            "max_input_tokens": 262140,
-            "max_output_tokens": 262140,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
             "metadata": {
                 "notes": "Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud with 35 billion total parameters and 3 billion active parameters per token. It uses a hybrid sparse mixture-of-experts architecture combining Gated..."
             },
@@ -14864,6 +14876,36 @@
         "supported_regions": [
             "us-central1"
         ]
+    },
+    "xiaomi/mimo-v2.5-pro": {
+        "input_cost_per_token": 4.35e-07,
+        "output_cost_per_token": 8.7e-07,
+        "cache_creation_input_token_cost": 0.0,
+        "cache_read_input_token_cost": 2e-07,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 131072,
+        "max_tokens": 16384,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_tool_choice": true,
+        "supports_reasoning": true,
+        "supports_vision": false,
+        "supports_response_schema": true,
+        "supports_prompt_caching": true,
+        "metadata": {
+            "notes": "MiMo-V2.5-Pro is Xiaomi\u2019s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro...."
+        },
+        "xiaomi/mimo-v2.5-pro": {
+            "input_cost_per_token": 4.35e-07,
+            "output_cost_per_token": 8.7e-07,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "MiMo-V2.5-Pro is Xiaomi\u2019s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro...."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "deepseek/deepseek-v3": {
         "cache_creation_input_token_cost": 0.0,
@@ -19023,6 +19065,26 @@
         "supports_xhigh_reasoning_effort": false,
         "supports_minimal_reasoning_effort": true
     },
+    "qwen/qwen3.6-27b": {
+        "input_cost_per_token": 3e-07,
+        "output_cost_per_token": 2e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3.6-27b": {
+            "input_cost_per_token": 3e-07,
+            "output_cost_per_token": 2e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "together_ai/deepseek-ai/deepseek-v3.1": {
         "input_cost_per_token": 6e-07,
         "litellm_provider": "together_ai",
@@ -19757,38 +19819,6 @@
         "supports_function_calling": true,
         "supports_reasoning": true,
         "supports_tool_choice": true
-    },
-    "xiaomi/mimo-v2.5": {
-        "input_cost_per_token": 4e-07,
-        "output_cost_per_token": 2e-06,
-        "cache_creation_input_token_cost": 0.0,
-        "cache_read_input_token_cost": 8e-08,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 131072,
-        "max_tokens": 131072,
-        "mode": "chat",
-        "supports_function_calling": true,
-        "supports_tool_choice": true,
-        "supports_reasoning": true,
-        "supports_vision": true,
-        "supports_audio_input": true,
-        "supports_video_input": true,
-        "supports_response_schema": true,
-        "supports_prompt_caching": true,
-        "metadata": {
-            "notes": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding..."
-        },
-        "xiaomi/mimo-v2.5": {
-            "input_cost_per_token": 4e-07,
-            "output_cost_per_token": 2e-06,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 131072,
-            "metadata": {
-                "notes": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "deepinfra/moonshotai/kimi-k2-instruct": {
         "max_tokens": 131072,
@@ -22192,26 +22222,6 @@
         "supports_function_calling": true,
         "supports_vision": true
     },
-    "qwen/qwen3.6-27b": {
-        "input_cost_per_token": 3e-07,
-        "output_cost_per_token": 3.2e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
-        "metadata": {
-            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3.6-27b": {
-            "input_cost_per_token": 3e-07,
-            "output_cost_per_token": 3.2e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
-            "metadata": {
-                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "google/gemini-3.1-flash-image-preview": {
         "input_cost_per_token": 5e-07,
         "output_cost_per_token": 3e-06,
@@ -23834,36 +23844,6 @@
         "supports_tool_choice": true,
         "supports_vision": true
     },
-    "xiaomi/mimo-v2.5-pro": {
-        "input_cost_per_token": 1e-06,
-        "output_cost_per_token": 3e-06,
-        "cache_creation_input_token_cost": 0.0,
-        "cache_read_input_token_cost": 2e-07,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 16384,
-        "max_tokens": 16384,
-        "mode": "chat",
-        "supports_function_calling": true,
-        "supports_tool_choice": true,
-        "supports_reasoning": true,
-        "supports_vision": false,
-        "supports_response_schema": true,
-        "supports_prompt_caching": true,
-        "metadata": {
-            "notes": "MiMo-V2.5-Pro is Xiaomi\u2019s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro...."
-        },
-        "xiaomi/mimo-v2.5-pro": {
-            "input_cost_per_token": 1e-06,
-            "output_cost_per_token": 3e-06,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "MiMo-V2.5-Pro is Xiaomi\u2019s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro...."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "bedrock/us-east-1/zai.glm-5": {
         "input_cost_per_token": 1e-06,
         "output_cost_per_token": 3.2e-06,
@@ -24612,6 +24592,26 @@
         "mode": "chat",
         "supports_reasoning": true,
         "supports_system_messages": true
+    },
+    "qwen/qwen3.7-max": {
+        "input_cost_per_token": 1.25e-06,
+        "output_cost_per_token": 3.75e-06,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Qwen3.7-Max is the flagship model in Alibaba's Qwen3.7 series. It supports text input and output and is designed for agent-centric workloads, with particular strengths in coding, office and productivity tasks,..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3.7-max": {
+            "input_cost_per_token": 1.25e-06,
+            "output_cost_per_token": 3.75e-06,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Qwen3.7-Max is the flagship model in Alibaba's Qwen3.7 series. It supports text input and output and is designed for agent-centric workloads, with particular strengths in coding, office and productivity tasks,..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "crusoe/moonshotai/kimi-k2-thinking": {
         "input_cost_per_token": 2.5e-06,
@@ -28005,26 +28005,6 @@
         "supports_system_messages": true,
         "supports_tool_choice": true,
         "supports_response_schema": true
-    },
-    "qwen/qwen3.7-max": {
-        "input_cost_per_token": 2.5e-06,
-        "output_cost_per_token": 7.5e-06,
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "Qwen3.7-Max is the flagship model in Alibaba's Qwen3.7 series. It supports text input and output and is designed for agent-centric workloads, with particular strengths in coding, office and productivity tasks,..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3.7-max": {
-            "input_cost_per_token": 2.5e-06,
-            "output_cost_per_token": 7.5e-06,
-            "max_input_tokens": 1000000,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "Qwen3.7-Max is the flagship model in Alibaba's Qwen3.7 series. It supports text input and output and is designed for agent-centric workloads, with particular strengths in coding, office and productivity tasks,..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "deepgram/whisper": {
         "input_cost_per_second": 0.0001,

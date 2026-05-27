@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-de4a009d5aba415499848502b4fdbae8
+  master_key: sk-009170acd8754969ac499abd79561654
   alerting:
   - slack
   - email
@@ -116,8 +116,8 @@ model_list:
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: 0.0
     output_cost_per_token: 0.0
-    max_input_tokens: 131072
-    max_output_tokens: 8192
+    max_input_tokens: 262144
+    max_output_tokens: 32768
     metadata:
       notes: Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai),
         optimized for complex software engineering tasks. Designed for agentic coding
@@ -177,20 +177,6 @@ model_list:
       notes: Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model
         supporting text and image input with text output. Features a 256K token context
         window, configurable thinking/reasoning mode, native function...
-    litellm_provider: openrouter
-- model_name: arcee-ai/trinity-large-thinking:free
-  litellm_params:
-    model: openai/arcee-ai/trinity-large-thinking:free
-    api_base: https://openrouter.ai/api/v1
-    api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 0.0
-    output_cost_per_token: 0.0
-    max_input_tokens: 262144
-    max_output_tokens: 80000
-    metadata:
-      notes: 'Trinity Large Thinking is a powerful open source reasoning model from
-        the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads,
-        and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7...'
     litellm_provider: openrouter
 - model_name: google/lyria-3-pro-preview
   litellm_params:
@@ -506,13 +492,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -531,13 +517,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -558,12 +544,12 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -584,13 +570,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -610,7 +596,6 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
@@ -623,6 +608,7 @@ router_settings:
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
     - openrouter/minimax/minimax-m2.5:free
+    - openrouter/baidu/cobuddy:free
   - deepseek/deepseek-v4-flash:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -635,13 +621,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -662,13 +648,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -688,12 +674,12 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -714,38 +700,12 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - volcengine/kimi-k2-thinking-251104
-    - openrouter/openai/gpt-oss-120b:free
-    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
-    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
-    - openrouter/minimax/minimax-m2.5:free
-    - openrouter/baidu/cobuddy:free
-  - arcee-ai/trinity-large-thinking:free:
-    - openrouter/free
-    - gemini/gemini-exp-1206
-    - gemini/gemini-exp-1114
-    - openrouter/deepseek/deepseek-v4-flash:free
-    - openrouter/owl-alpha
-    - bedrock/anthropic.claude-mythos-preview
-    - openrouter/google/lyria-3-clip-preview
-    - openrouter/google/lyria-3-pro-preview
-    - vertex_ai-language-models/gemini-flash-experimental
-    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
-    - openrouter/qwen/qwen3-coder:free
-    - volcengine/glm-4-7-251222
-    - lemonade/qwen3-4b-instruct-2507-gguf
-    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
-    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
-    - openrouter/google/gemma-4-26b-a4b-it:free
-    - openrouter/google/gemma-4-31b-it:free
-    - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -765,13 +725,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -791,13 +751,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -817,13 +777,13 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -844,13 +804,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -868,13 +828,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -896,13 +856,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -922,13 +882,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -948,13 +908,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
@@ -974,13 +934,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -1000,13 +960,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -1026,13 +986,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
@@ -1052,13 +1012,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -1078,13 +1038,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
@@ -1104,13 +1064,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -1130,13 +1090,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -1155,13 +1115,13 @@ router_settings:
     - vertex_ai-language-models/gemini-flash-experimental
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -1182,13 +1142,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -1208,13 +1168,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -1234,13 +1194,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -1260,13 +1220,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -1286,13 +1246,13 @@ router_settings:
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
-    - openrouter/arcee-ai/trinity-large-thinking:free
     - lemonade/qwen3-4b-instruct-2507-gguf
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-26b-a4b-it:free
     - openrouter/google/gemma-4-31b-it:free
     - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
