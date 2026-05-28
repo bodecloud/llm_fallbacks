@@ -82,10 +82,11 @@ github_copilot/gpt-4o-2024-08-06
 meta_llama/llama-3.3-70b-instruct
 meta_llama/llama-3.3-8b-instruct
 nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+moonshotai/kimi-k2.6:free
 google/gemma-4-26b-a4b-it:free
 google/gemma-4-31b-it:free
 poolside/laguna-m.1:free
-baidu/cobuddy:free
+poolside/laguna-xs.2:free
 openai/gpt-oss-120b:free
 z-ai/glm-4.5-air:free
 github_copilot/gpt-4-o-preview
@@ -95,6 +96,7 @@ nvidia/nemotron-nano-12b-v2-vl:free
 github_copilot/claude-opus-41
 gradient_ai/alibaba-qwen3-32b
 gemini-flash-experimental
+minimax/minimax-m2.5:free
 snowflake/jamba-1.5-large
 snowflake/jamba-1.5-mini
 snowflake/jamba-instruct
@@ -102,7 +104,6 @@ gemini-2.0-flash-exp-image-generation
 gemini/gemini-2.0-flash-exp-image-generation
 gemini/lyria-3-clip-preview
 gemini/lyria-3-pro-preview
-minimax/minimax-m2.5:free
 publicai/aisingapore/qwen-sea-lion-v4-32b-it
 publicai/allenai/olmo-3-32b-think
 publicai/allenai/olmo-3-7b-instruct
@@ -112,7 +113,6 @@ gradient_ai/openai-gpt-4o
 gradient_ai/openai-gpt-4o-mini
 nvidia/nemotron-3-nano-30b-a3b:free
 openai/gpt-oss-20b:free
-poolside/laguna-xs.2:free
 snowflake/llama3.1-405b
 snowflake/llama3.1-70b
 snowflake/llama3.1-8b

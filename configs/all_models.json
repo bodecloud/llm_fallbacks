@@ -359,6 +359,68 @@
             "litellm_provider": "openrouter"
         }
     },
+    "poolside/laguna-xs.2:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
+        },
+        "litellm_provider": "openrouter",
+        "poolside/laguna-xs.2:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "minimax/minimax-m2.5:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 8192,
+        "metadata": {
+            "notes": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1..."
+        },
+        "litellm_provider": "openrouter",
+        "minimax/minimax-m2.5:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 8192,
+            "metadata": {
+                "notes": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "moonshotai/kimi-k2.6:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 262144,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+        },
+        "litellm_provider": "openrouter",
+        "moonshotai/kimi-k2.6:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 262144,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "openai/gpt-oss-120b:free": {
         "input_cost_per_token": 0.0,
         "output_cost_per_token": 0.0,
@@ -451,46 +513,6 @@
             "max_output_tokens": 96000,
             "metadata": {
                 "notes": "GLM-4.5-Air is the lightweight variant of our latest flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "minimax/minimax-m2.5:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 196608,
-        "max_output_tokens": 8192,
-        "metadata": {
-            "notes": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1..."
-        },
-        "litellm_provider": "openrouter",
-        "minimax/minimax-m2.5:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 196608,
-            "max_output_tokens": 8192,
-            "metadata": {
-                "notes": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "baidu/cobuddy:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "CoBuddy is a code generation model from Baidu, optimized for coding tasks and AI Agent workflows. It features high inference throughput and low end-to-end latency, with native support for tool..."
-        },
-        "litellm_provider": "openrouter",
-        "baidu/cobuddy:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "CoBuddy is a code generation model from Baidu, optimized for coding tasks and AI Agent workflows. It features high inference throughput and low end-to-end latency, with native support for tool..."
             },
             "litellm_provider": "openrouter"
         }
@@ -659,26 +681,6 @@
             "max_output_tokens": 8192,
             "metadata": {
                 "notes": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "poolside/laguna-xs.2:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 8192,
-        "metadata": {
-            "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
-        },
-        "litellm_provider": "openrouter",
-        "poolside/laguna-xs.2:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 8192,
-            "metadata": {
-                "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
             },
             "litellm_provider": "openrouter"
         }
@@ -12729,19 +12731,19 @@
         }
     },
     "qwen/qwen3.6-35b-a3b": {
-        "input_cost_per_token": 1.5e-07,
+        "input_cost_per_token": 1.4e-07,
         "output_cost_per_token": 1e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
+        "max_input_tokens": 262140,
+        "max_output_tokens": 262140,
         "metadata": {
             "notes": "Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud with 35 billion total parameters and 3 billion active parameters per token. It uses a hybrid sparse mixture-of-experts architecture combining Gated..."
         },
         "litellm_provider": "openrouter",
         "qwen/qwen3.6-35b-a3b": {
-            "input_cost_per_token": 1.5e-07,
+            "input_cost_per_token": 1.4e-07,
             "output_cost_per_token": 1e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
+            "max_input_tokens": 262140,
+            "max_output_tokens": 262140,
             "metadata": {
                 "notes": "Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud with 35 billion total parameters and 3 billion active parameters per token. It uses a hybrid sparse mixture-of-experts architecture combining Gated..."
             },
@@ -18416,7 +18418,7 @@
         "input_cost_per_token": 2.5e-07,
         "output_cost_per_token": 2e-06,
         "max_input_tokens": 400000,
-        "max_output_tokens": 128000,
+        "max_output_tokens": 100000,
         "mode": "chat",
         "supports_vision": true,
         "metadata": {
@@ -18427,7 +18429,7 @@
             "input_cost_per_token": 2.5e-07,
             "output_cost_per_token": 2e-06,
             "max_input_tokens": 400000,
-            "max_output_tokens": 128000,
+            "max_output_tokens": 100000,
             "mode": "chat",
             "supports_vision": true,
             "metadata": {
@@ -19064,26 +19066,6 @@
         "supports_none_reasoning_effort": false,
         "supports_xhigh_reasoning_effort": false,
         "supports_minimal_reasoning_effort": true
-    },
-    "qwen/qwen3.6-27b": {
-        "input_cost_per_token": 3e-07,
-        "output_cost_per_token": 2e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3.6-27b": {
-            "input_cost_per_token": 3e-07,
-            "output_cost_per_token": 2e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "together_ai/deepseek-ai/deepseek-v3.1": {
         "input_cost_per_token": 6e-07,
@@ -22186,6 +22168,26 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_web_search": false
+    },
+    "qwen/qwen3.6-27b": {
+        "input_cost_per_token": 2.9e-07,
+        "output_cost_per_token": 3.2e-06,
+        "max_input_tokens": 262140,
+        "max_output_tokens": 262140,
+        "metadata": {
+            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3.6-27b": {
+            "input_cost_per_token": 2.9e-07,
+            "output_cost_per_token": 3.2e-06,
+            "max_input_tokens": 262140,
+            "max_output_tokens": 262140,
+            "metadata": {
+                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "baidu/qianfan-ocr-fast": {
         "input_cost_per_token": 6.8e-07,
@@ -28536,7 +28538,7 @@
         "input_cost_per_token": 1.25e-06,
         "output_cost_per_token": 1e-05,
         "max_input_tokens": 128000,
-        "max_output_tokens": 16384,
+        "max_output_tokens": 32000,
         "metadata": {
             "notes": "GPT-5.1 Chat (AKA Instant is the fast, lightweight member of the 5.1 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively \u201cthink\u201d on..."
         },
@@ -28545,7 +28547,7 @@
             "input_cost_per_token": 1.25e-06,
             "output_cost_per_token": 1e-05,
             "max_input_tokens": 128000,
-            "max_output_tokens": 16384,
+            "max_output_tokens": 32000,
             "metadata": {
                 "notes": "GPT-5.1 Chat (AKA Instant is the fast, lightweight member of the 5.1 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively \u201cthink\u201d on..."
             },
@@ -32045,34 +32047,6 @@
         "supports_xhigh_reasoning_effort": false,
         "supports_minimal_reasoning_effort": true
     },
-    "openai/gpt-5.2-chat": {
-        "input_cost_per_image": 0,
-        "cache_read_input_token_cost": 1.75e-07,
-        "input_cost_per_token": 1.75e-06,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 128000,
-        "max_output_tokens": 32000,
-        "max_tokens": 16384,
-        "mode": "chat",
-        "output_cost_per_token": 1.4e-05,
-        "supports_function_calling": true,
-        "supports_prompt_caching": true,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "metadata": {
-            "notes": "GPT-5.2 Chat (AKA Instant) is the fast, lightweight member of the 5.2 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively \u201cthink\u201d on..."
-        },
-        "openai/gpt-5.2-chat": {
-            "input_cost_per_token": 1.75e-06,
-            "output_cost_per_token": 1.4e-05,
-            "max_input_tokens": 128000,
-            "max_output_tokens": 32000,
-            "metadata": {
-                "notes": "GPT-5.2 Chat (AKA Instant) is the fast, lightweight member of the 5.2 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively \u201cthink\u201d on..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "azure/gpt-5.2-chat": {
         "cache_read_input_token_cost": 1.75e-07,
         "cache_read_input_token_cost_priority": 3.5e-07,
@@ -32251,6 +32225,34 @@
         "supports_none_reasoning_effort": false,
         "supports_xhigh_reasoning_effort": false,
         "supports_minimal_reasoning_effort": true
+    },
+    "openai/gpt-5.2-chat": {
+        "input_cost_per_image": 0,
+        "cache_read_input_token_cost": 1.75e-07,
+        "input_cost_per_token": 1.75e-06,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 128000,
+        "max_output_tokens": 16384,
+        "max_tokens": 16384,
+        "mode": "chat",
+        "output_cost_per_token": 1.4e-05,
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "metadata": {
+            "notes": "GPT-5.2 Chat (AKA Instant) is the fast, lightweight member of the 5.2 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively \u201cthink\u201d on..."
+        },
+        "openai/gpt-5.2-chat": {
+            "input_cost_per_token": 1.75e-06,
+            "output_cost_per_token": 1.4e-05,
+            "max_input_tokens": 128000,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "GPT-5.2 Chat (AKA Instant) is the fast, lightweight member of the 5.2 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively \u201cthink\u201d on..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "google/gemini-3.1-pro-preview-customtools": {
         "input_cost_per_token": 2e-06,
