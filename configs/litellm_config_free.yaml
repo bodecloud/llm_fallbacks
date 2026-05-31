@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-efc7eecbf5fc4d228c0e12e27c7bc964
+  master_key: sk-639ce8ea87674cac92a57dfe2eba86fd
   alerting:
   - slack
   - email
@@ -220,20 +220,6 @@ model_list:
       notes: NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating
         just 12B parameters for maximum compute efficiency and accuracy in complex
         multi-agent applications. Built on a hybrid Mamba-Transformer...
-    litellm_provider: openrouter
-- model_name: minimax/minimax-m2.5:free
-  litellm_params:
-    model: openai/minimax/minimax-m2.5:free
-    api_base: https://openrouter.ai/api/v1
-    api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 0.0
-    output_cost_per_token: 0.0
-    max_input_tokens: 196608
-    max_output_tokens: 8192
-    metadata:
-      notes: MiniMax-M2.5 is a SOTA large language model designed for real-world productivity.
-        Trained in a diverse range of complex real-world digital working environments,
-        M2.5 builds upon the coding expertise of M2.1...
     litellm_provider: openrouter
 - model_name: openrouter/free
   litellm_params:
@@ -661,7 +647,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-    - openrouter/minimax/minimax-m2.5:free
+    - lemonade/gpt-oss-120b-mxfp-gguf
   - google/gemma-4-26b-a4b-it:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -792,32 +778,6 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-  - minimax/minimax-m2.5:free:
-    - openrouter/free
-    - gemini/gemini-exp-1206
-    - gemini/gemini-exp-1114
-    - openrouter/deepseek/deepseek-v4-flash:free
-    - openrouter/owl-alpha
-    - bedrock/anthropic.claude-mythos-preview
-    - openrouter/google/lyria-3-clip-preview
-    - openrouter/google/lyria-3-pro-preview
-    - vertex_ai-language-models/gemini-flash-experimental
-    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
-    - openrouter/qwen/qwen3-coder:free
-    - volcengine/glm-4-7-251222
-    - lemonade/qwen3-4b-instruct-2507-gguf
-    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
-    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
-    - openrouter/google/gemma-4-26b-a4b-it:free
-    - openrouter/google/gemma-4-31b-it:free
-    - volcengine/kimi-k2-thinking-251104
-    - openrouter/poolside/laguna-m.1:free
-    - openrouter/poolside/laguna-xs.2:free
-    - openrouter/moonshotai/kimi-k2.6:free
-    - openrouter/openai/gpt-oss-120b:free
-    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
-    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - openrouter/free:
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -843,7 +803,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-    - openrouter/minimax/minimax-m2.5:free
+    - lemonade/gpt-oss-120b-mxfp-gguf
   - liquid/lfm-2.5-1.2b-thinking:free:
     - openrouter/free
     - gemini/gemini-exp-1206

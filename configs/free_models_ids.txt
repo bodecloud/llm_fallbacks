@@ -103,7 +103,6 @@ gemini-2.0-flash-exp-image-generation
 gemini/gemini-2.0-flash-exp-image-generation
 gemini/lyria-3-clip-preview
 gemini/lyria-3-pro-preview
-minimax/minimax-m2.5:free
 publicai/aisingapore/qwen-sea-lion-v4-32b-it
 publicai/allenai/olmo-3-32b-think
 publicai/allenai/olmo-3-7b-instruct

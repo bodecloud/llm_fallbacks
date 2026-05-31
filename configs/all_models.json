@@ -497,26 +497,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "minimax/minimax-m2.5:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 196608,
-        "max_output_tokens": 8192,
-        "metadata": {
-            "notes": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1..."
-        },
-        "litellm_provider": "openrouter",
-        "minimax/minimax-m2.5:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 196608,
-            "max_output_tokens": 8192,
-            "metadata": {
-                "notes": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "lemonade/gpt-oss-120b-mxfp-gguf": {
         "input_cost_per_token": 0,
         "litellm_provider": "lemonade",
@@ -3422,10 +3402,10 @@
         "mode": "image_generation"
     },
     "openai/gpt-oss-20b": {
-        "input_cost_per_token": 3e-08,
+        "input_cost_per_token": 2.9e-08,
         "litellm_provider": "openrouter",
         "max_input_tokens": 131072,
-        "max_output_tokens": 131072,
+        "max_output_tokens": 32768,
         "max_tokens": 32768,
         "mode": "chat",
         "output_cost_per_token": 1.4e-07,
@@ -3439,10 +3419,9 @@
             "notes": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for..."
         },
         "openai/gpt-oss-20b": {
-            "input_cost_per_token": 3e-08,
+            "input_cost_per_token": 2.9e-08,
             "output_cost_per_token": 1.4e-07,
             "max_input_tokens": 131072,
-            "max_output_tokens": 131072,
             "metadata": {
                 "notes": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for..."
             },
@@ -3858,6 +3837,32 @@
         "output_cost_per_token": 1e-07,
         "litellm_provider": "fireworks_ai",
         "mode": "chat"
+    },
+    "qwen/qwen3-235b-a22b-thinking-2507": {
+        "input_cost_per_token": 1e-07,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "max_tokens": 262144,
+        "mode": "chat",
+        "output_cost_per_token": 1e-07,
+        "source": "https://openrouter.ai/qwen/qwen3-235b-a22b-thinking-2507",
+        "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144..."
+        },
+        "qwen/qwen3-235b-a22b-thinking-2507": {
+            "input_cost_per_token": 1e-07,
+            "output_cost_per_token": 1e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "metadata": {
+                "notes": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "fireworks_ai/accounts/fireworks/models/ministral-3-3b-instruct-2512": {
         "max_tokens": 256000,
@@ -5710,26 +5715,6 @@
         "supports_response_schema": true,
         "supports_vision": true
     },
-    "mistralai/mistral-7b-instruct-v0.1": {
-        "input_cost_per_token": 1.1e-07,
-        "output_cost_per_token": 1.9e-07,
-        "max_input_tokens": 2824,
-        "max_output_tokens": 2824,
-        "metadata": {
-            "notes": "A 7.3B parameter model that outperforms Llama 2 13B on all benchmarks, with optimizations for speed and context length."
-        },
-        "litellm_provider": "openrouter",
-        "mistralai/mistral-7b-instruct-v0.1": {
-            "input_cost_per_token": 1.1e-07,
-            "output_cost_per_token": 1.9e-07,
-            "max_input_tokens": 2824,
-            "max_output_tokens": 2824,
-            "metadata": {
-                "notes": "A 7.3B parameter model that outperforms Llama 2 13B on all benchmarks, with optimizations for speed and context length."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "nscale/deepseek-ai/deepseek-r1-distill-qwen-32b": {
         "input_cost_per_token": 1.5e-07,
         "litellm_provider": "nscale",
@@ -5968,26 +5953,6 @@
         "supports_system_messages": true,
         "supports_reasoning": true
     },
-    "baidu/ernie-4.5-21b-a3b-thinking": {
-        "input_cost_per_token": 7e-08,
-        "output_cost_per_token": 2.8e-07,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "ERNIE-4.5-21B-A3B-Thinking is Baidu's upgraded lightweight MoE model, refined to boost reasoning depth and quality for top-tier performance in logical puzzles, math, science, coding, text generation, and expert-level academic benchmarks."
-        },
-        "litellm_provider": "openrouter",
-        "baidu/ernie-4.5-21b-a3b-thinking": {
-            "input_cost_per_token": 7e-08,
-            "output_cost_per_token": 2.8e-07,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "ERNIE-4.5-21B-A3B-Thinking is Baidu's upgraded lightweight MoE model, refined to boost reasoning depth and quality for top-tier performance in logical puzzles, math, science, coding, text generation, and expert-level academic benchmarks."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "novita/baidu/ernie-4.5-21b-a3b": {
         "litellm_provider": "novita",
         "mode": "chat",
@@ -6000,26 +5965,6 @@
         "supports_parallel_function_calling": true,
         "supports_tool_choice": true,
         "supports_system_messages": true
-    },
-    "baidu/ernie-4.5-21b-a3b": {
-        "input_cost_per_token": 7e-08,
-        "output_cost_per_token": 2.8e-07,
-        "max_input_tokens": 120000,
-        "max_output_tokens": 8000,
-        "metadata": {
-            "notes": "A sophisticated text-based Mixture-of-Experts (MoE) model featuring 21B total parameters with 3B activated per token, delivering exceptional multimodal understanding and generation through heterogeneous MoE structures and modality-isolated routing. Supporting an..."
-        },
-        "litellm_provider": "openrouter",
-        "baidu/ernie-4.5-21b-a3b": {
-            "input_cost_per_token": 7e-08,
-            "output_cost_per_token": 2.8e-07,
-            "max_input_tokens": 120000,
-            "max_output_tokens": 8000,
-            "metadata": {
-                "notes": "A sophisticated text-based Mixture-of-Experts (MoE) model featuring 21B total parameters with 3B activated per token, delivering exceptional multimodal understanding and generation through heterogeneous MoE structures and modality-isolated routing. Supporting an..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "perplexity/sonar-small-chat": {
         "input_cost_per_token": 7e-08,
@@ -10527,24 +10472,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "upstage/solar-pro-3": {
-        "input_cost_per_token": 1.5e-07,
-        "output_cost_per_token": 6e-07,
-        "max_input_tokens": 128000,
-        "metadata": {
-            "notes": "Solar Pro 3 is Upstage's powerful Mixture-of-Experts (MoE) language model. With 102B total parameters and 12B active parameters per forward pass, it delivers exceptional performance while maintaining computational efficiency. Optimized..."
-        },
-        "litellm_provider": "openrouter",
-        "upstage/solar-pro-3": {
-            "input_cost_per_token": 1.5e-07,
-            "output_cost_per_token": 6e-07,
-            "max_input_tokens": 128000,
-            "metadata": {
-                "notes": "Solar Pro 3 is Upstage's powerful Mixture-of-Experts (MoE) language model. With 102B total parameters and 12B active parameters per forward pass, it delivers exceptional performance while maintaining computational efficiency. Optimized..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "watsonx/openai/gpt-oss-120b": {
         "max_tokens": 8192,
         "max_input_tokens": 8192,
@@ -12687,10 +12614,10 @@
         "supports_function_calling": true
     },
     "qwen/qwen3.5-35b-a3b": {
-        "input_cost_per_token": 1.39e-07,
+        "input_cost_per_token": 1.4e-07,
         "litellm_provider": "openrouter",
         "max_input_tokens": 262144,
-        "max_output_tokens": 65536,
+        "max_output_tokens": 262144,
         "max_tokens": 65536,
         "mode": "chat",
         "output_cost_per_token": 1e-06,
@@ -12703,9 +12630,10 @@
             "notes": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall..."
         },
         "qwen/qwen3.5-35b-a3b": {
-            "input_cost_per_token": 1.39e-07,
+            "input_cost_per_token": 1.4e-07,
             "output_cost_per_token": 1e-06,
             "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
             "metadata": {
                 "notes": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall..."
             },
@@ -14292,6 +14220,24 @@
             "litellm_provider": "openrouter"
         }
     },
+    "minimax/minimax-m2.7": {
+        "input_cost_per_token": 2.6e-07,
+        "output_cost_per_token": 1.2e-06,
+        "max_input_tokens": 196608,
+        "metadata": {
+            "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
+        },
+        "litellm_provider": "openrouter",
+        "minimax/minimax-m2.7": {
+            "input_cost_per_token": 2.6e-07,
+            "output_cost_per_token": 1.2e-06,
+            "max_input_tokens": 196608,
+            "metadata": {
+                "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "azure/gpt-5.4-nano": {
         "cache_read_input_token_cost": 2e-08,
         "input_cost_per_token": 2e-07,
@@ -14467,26 +14413,6 @@
         "mode": "chat",
         "output_cost_per_token": 3.7e-07,
         "supports_tool_choice": true
-    },
-    "minimax/minimax-m2.7": {
-        "input_cost_per_token": 2.79e-07,
-        "output_cost_per_token": 1.2e-06,
-        "max_input_tokens": 196608,
-        "max_output_tokens": 131072,
-        "metadata": {
-            "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
-        },
-        "litellm_provider": "openrouter",
-        "minimax/minimax-m2.7": {
-            "input_cost_per_token": 2.79e-07,
-            "output_cost_per_token": 1.2e-06,
-            "max_input_tokens": 196608,
-            "max_output_tokens": 131072,
-            "metadata": {
-                "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "qwen/qwen3-vl-8b-thinking": {
         "input_cost_per_token": 1.17e-07,
@@ -15312,31 +15238,6 @@
         "supports_response_schema": true,
         "cache_read_input_token_cost": 6e-08,
         "input_cost_per_token_cache_hit": 6e-08
-    },
-    "qwen/qwen3-235b-a22b-thinking-2507": {
-        "input_cost_per_token": 1.495e-07,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 131072,
-        "max_output_tokens": 262144,
-        "max_tokens": 262144,
-        "mode": "chat",
-        "output_cost_per_token": 1.495e-06,
-        "source": "https://openrouter.ai/qwen/qwen3-235b-a22b-thinking-2507",
-        "supports_function_calling": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144..."
-        },
-        "qwen/qwen3-235b-a22b-thinking-2507": {
-            "input_cost_per_token": 1.495e-07,
-            "output_cost_per_token": 1.495e-06,
-            "max_input_tokens": 131072,
-            "metadata": {
-                "notes": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "minimax/minimax-m2.1": {
         "input_cost_per_token": 2.9e-07,
@@ -17682,26 +17583,6 @@
         "max_tokens": 4096,
         "mode": "chat",
         "output_cost_per_token": 1e-06
-    },
-    "alfredpros/codellama-7b-instruct-solidity": {
-        "input_cost_per_token": 8e-07,
-        "output_cost_per_token": 1.2e-06,
-        "max_input_tokens": 4096,
-        "max_output_tokens": 4096,
-        "metadata": {
-            "notes": "A finetuned 7 billion parameters Code LLaMA - Instruct model to generate Solidity smart contract using 4-bit QLoRA finetuning provided by PEFT library."
-        },
-        "litellm_provider": "openrouter",
-        "alfredpros/codellama-7b-instruct-solidity": {
-            "input_cost_per_token": 8e-07,
-            "output_cost_per_token": 1.2e-06,
-            "max_input_tokens": 4096,
-            "max_output_tokens": 4096,
-            "metadata": {
-                "notes": "A finetuned 7 billion parameters Code LLaMA - Instruct model to generate Solidity smart contract using 4-bit QLoRA finetuning provided by PEFT library."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "baseten/deepseek-ai/deepseek-v3.1": {
         "input_cost_per_token": 5e-07,
