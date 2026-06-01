@@ -73,7 +73,6 @@ vertex_ai/meta/llama-3.1-70b-instruct-maas
 vertex_ai/meta/llama-3.1-8b-instruct-maas
 vertex_ai/meta/llama-3.2-90b-vision-instruct-maas
 gigachat/gigachat-2-lite
-deepseek/deepseek-v4-flash:free
 google/lyria-3-clip-preview
 google/lyria-3-pro-preview
 nvidia/nemotron-3-super-120b-a12b:free

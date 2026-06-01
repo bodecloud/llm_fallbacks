@@ -77,26 +77,6 @@
         "supports_vision": true,
         "tpm": 4000000
     },
-    "deepseek/deepseek-v4-flash:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 384000,
-        "metadata": {
-            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-        },
-        "litellm_provider": "openrouter",
-        "deepseek/deepseek-v4-flash:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 384000,
-            "metadata": {
-                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "openrouter/owl-alpha": {
         "input_cost_per_token": 0.0,
         "output_cost_per_token": 0.0,
@@ -6825,24 +6805,6 @@
         "source": "https://azure.microsoft.com/en-us/pricing/details/ai-foundry-models/microsoft/",
         "supports_function_calling": true
     },
-    "mistralai/devstral-small": {
-        "input_cost_per_token": 1e-07,
-        "output_cost_per_token": 3e-07,
-        "max_input_tokens": 131072,
-        "metadata": {
-            "notes": "Devstral Small 1.1 is a 24B parameter open-weight language model for software engineering agents, developed by Mistral AI in collaboration with All Hands AI. Finetuned from Mistral Small 3.1 and..."
-        },
-        "litellm_provider": "openrouter",
-        "mistralai/devstral-small": {
-            "input_cost_per_token": 1e-07,
-            "output_cost_per_token": 3e-07,
-            "max_input_tokens": 131072,
-            "metadata": {
-                "notes": "Devstral Small 1.1 is a 24B parameter open-weight language model for software engineering agents, developed by Mistral AI in collaboration with All Hands AI. Finetuned from Mistral Small 3.1 and..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "fireworks_ai/accounts/fireworks/models/qwen3-14b": {
         "max_tokens": 40960,
         "max_input_tokens": 40960,
@@ -9848,26 +9810,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "inclusionai/ring-2.6-1t": {
-        "input_cost_per_token": 7.5e-08,
-        "output_cost_per_token": 6.25e-07,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool..."
-        },
-        "litellm_provider": "openrouter",
-        "inclusionai/ring-2.6-1t": {
-            "input_cost_per_token": 7.5e-08,
-            "output_cost_per_token": 6.25e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "inclusionai/ling-2.6-1t": {
         "input_cost_per_token": 7.5e-08,
         "output_cost_per_token": 6.25e-07,
@@ -10468,6 +10410,24 @@
             "max_output_tokens": 4000,
             "metadata": {
                 "notes": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "upstage/solar-pro-3": {
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 6e-07,
+        "max_input_tokens": 128000,
+        "metadata": {
+            "notes": "Solar Pro 3 is Upstage's powerful Mixture-of-Experts (MoE) language model. With 102B total parameters and 12B active parameters per forward pass, it delivers exceptional performance while maintaining computational efficiency. Optimized..."
+        },
+        "litellm_provider": "openrouter",
+        "upstage/solar-pro-3": {
+            "input_cost_per_token": 1.5e-07,
+            "output_cost_per_token": 6e-07,
+            "max_input_tokens": 128000,
+            "metadata": {
+                "notes": "Solar Pro 3 is Upstage's powerful Mixture-of-Experts (MoE) language model. With 102B total parameters and 12B active parameters per forward pass, it delivers exceptional performance while maintaining computational efficiency. Optimized..."
             },
             "litellm_provider": "openrouter"
         }
@@ -14513,6 +14473,26 @@
         ],
         "supports_function_calling": true,
         "supports_tool_choice": true
+    },
+    "minimax/minimax-m3": {
+        "input_cost_per_token": 3e-07,
+        "output_cost_per_token": 1.2e-06,
+        "max_input_tokens": 524288,
+        "max_output_tokens": 512000,
+        "metadata": {
+            "notes": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,..."
+        },
+        "litellm_provider": "openrouter",
+        "minimax/minimax-m3": {
+            "input_cost_per_token": 3e-07,
+            "output_cost_per_token": 1.2e-06,
+            "max_input_tokens": 524288,
+            "max_output_tokens": 512000,
+            "metadata": {
+                "notes": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "bedrock/us-east-1/minimax.minimax-m2.5": {
         "input_cost_per_token": 3e-07,
@@ -19247,26 +19227,6 @@
         "supports_function_calling": true,
         "source": "https://nebius.com/prices-ai-studio"
     },
-    "xiaomi/mimo-v2-omni": {
-        "input_cost_per_token": 4e-07,
-        "output_cost_per_token": 2e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "MiMo-V2-Omni is a frontier omni-modal model that natively processes image, video, and audio inputs within a unified architecture. It combines strong multimodal perception with agentic capability - visual grounding, multi-step..."
-        },
-        "litellm_provider": "openrouter",
-        "xiaomi/mimo-v2-omni": {
-            "input_cost_per_token": 4e-07,
-            "output_cost_per_token": 2e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "MiMo-V2-Omni is a frontier omni-modal model that natively processes image, video, and audio inputs within a unified architecture. It combines strong multimodal perception with agentic capability - visual grounding, multi-step..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "mistral.devstral-2-123b": {
         "input_cost_per_token": 4e-07,
         "litellm_provider": "bedrock_converse",
@@ -19452,24 +19412,6 @@
         "output_cost_per_token": 2e-06,
         "supports_function_calling": true,
         "supports_tool_choice": true
-    },
-    "mistralai/devstral-medium": {
-        "input_cost_per_token": 4e-07,
-        "output_cost_per_token": 2e-06,
-        "max_input_tokens": 131072,
-        "metadata": {
-            "notes": "Devstral Medium is a high-performance code generation and agentic reasoning model developed jointly by Mistral AI and All Hands AI. Positioned as a step up from Devstral Small, it achieves..."
-        },
-        "litellm_provider": "openrouter",
-        "mistralai/devstral-medium": {
-            "input_cost_per_token": 4e-07,
-            "output_cost_per_token": 2e-06,
-            "max_input_tokens": 131072,
-            "metadata": {
-                "notes": "Devstral Medium is a high-performance code generation and agentic reasoning model developed jointly by Mistral AI and All Hands AI. Positioned as a step up from Devstral Small, it achieves..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "mistralai/mistral-medium-3": {
         "input_cost_per_token": 4e-07,
@@ -20359,6 +20301,26 @@
         "output_cost_per_token": 2.2e-06,
         "supports_function_calling": true,
         "supports_tool_choice": true
+    },
+    "inclusionai/ring-2.6-1t": {
+        "input_cost_per_token": 3e-07,
+        "output_cost_per_token": 2.5e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool..."
+        },
+        "litellm_provider": "openrouter",
+        "inclusionai/ring-2.6-1t": {
+            "input_cost_per_token": 3e-07,
+            "output_cost_per_token": 2.5e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "z-ai/glm-4.5": {
         "input_cost_per_token": 6e-07,
@@ -23241,26 +23203,6 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_web_search": true
-    },
-    "xiaomi/mimo-v2-pro": {
-        "input_cost_per_token": 1e-06,
-        "output_cost_per_token": 3e-06,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 131072,
-        "metadata": {
-            "notes": "MiMo-V2-Pro is Xiaomi's flagship foundation model, featuring over 1T total parameters and a 1M context length, deeply optimized for agentic scenarios. It is highly adaptable to general agent frameworks like..."
-        },
-        "litellm_provider": "openrouter",
-        "xiaomi/mimo-v2-pro": {
-            "input_cost_per_token": 1e-06,
-            "output_cost_per_token": 3e-06,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 131072,
-            "metadata": {
-                "notes": "MiMo-V2-Pro is Xiaomi's flagship foundation model, featuring over 1T total parameters and a 1M context length, deeply optimized for agentic scenarios. It is highly adaptable to general agent frameworks like..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "hyperbolic/moonshotai/kimi-k2-instruct": {
         "input_cost_per_token": 2e-06,
@@ -27033,42 +26975,6 @@
             "max_input_tokens": 131072,
             "metadata": {
                 "notes": "This is Mistral AI's flagship model, Mistral Large 2 (version mistral-large-2407). It's a proprietary weights-available model and excels at reasoning, code, JSON, chat, and more. Read the launch announcement [here](https://mistral.ai/news/mistral-large-2407/)...."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "mistralai/mistral-large-2411": {
-        "input_cost_per_token": 2e-06,
-        "output_cost_per_token": 6e-06,
-        "max_input_tokens": 131072,
-        "metadata": {
-            "notes": "Mistral Large 2 2411 is an update of [Mistral Large 2](/mistralai/mistral-large) released together with [Pixtral Large 2411](/mistralai/pixtral-large-2411) It provides a significant upgrade on the previous [Mistral Large 24.07](/mistralai/mistral-large-2407), with notable..."
-        },
-        "litellm_provider": "openrouter",
-        "mistralai/mistral-large-2411": {
-            "input_cost_per_token": 2e-06,
-            "output_cost_per_token": 6e-06,
-            "max_input_tokens": 131072,
-            "metadata": {
-                "notes": "Mistral Large 2 2411 is an update of [Mistral Large 2](/mistralai/mistral-large) released together with [Pixtral Large 2411](/mistralai/pixtral-large-2411) It provides a significant upgrade on the previous [Mistral Large 24.07](/mistralai/mistral-large-2407), with notable..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "mistralai/pixtral-large-2411": {
-        "input_cost_per_token": 2e-06,
-        "output_cost_per_token": 6e-06,
-        "max_input_tokens": 131072,
-        "metadata": {
-            "notes": "Pixtral Large is a 124B parameter, open-weight, multimodal model built on top of [Mistral Large 2](/mistralai/mistral-large-2411). The model is able to understand documents, charts and natural images. The model is..."
-        },
-        "litellm_provider": "openrouter",
-        "mistralai/pixtral-large-2411": {
-            "input_cost_per_token": 2e-06,
-            "output_cost_per_token": 6e-06,
-            "max_input_tokens": 131072,
-            "metadata": {
-                "notes": "Pixtral Large is a 124B parameter, open-weight, multimodal model built on top of [Mistral Large 2](/mistralai/mistral-large-2411). The model is able to understand documents, charts and natural images. The model is..."
             },
             "litellm_provider": "openrouter"
         }
