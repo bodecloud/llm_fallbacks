@@ -4598,6 +4598,26 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
+    "qwen/qwen3-30b-a3b-instruct-2507": {
+        "input_cost_per_token": 4.28e-08,
+        "output_cost_per_token": 1.716e-07,
+        "max_input_tokens": 128000,
+        "max_output_tokens": 32000,
+        "metadata": {
+            "notes": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3-30b-a3b-instruct-2507": {
+            "input_cost_per_token": 4.28e-08,
+            "output_cost_per_token": 1.716e-07,
+            "max_input_tokens": 128000,
+            "max_output_tokens": 32000,
+            "metadata": {
+                "notes": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "openai/gpt-oss-120b": {
         "input_cost_per_token": 3.9e-08,
         "litellm_provider": "openrouter",
@@ -6351,26 +6371,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "qwen/qwen3-30b-a3b-instruct-2507": {
-        "input_cost_per_token": 9e-08,
-        "output_cost_per_token": 3e-07,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
-        "metadata": {
-            "notes": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3-30b-a3b-instruct-2507": {
-            "input_cost_per_token": 9e-08,
-            "output_cost_per_token": 3e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
-            "metadata": {
-                "notes": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "eu.amazon.nova-lite-v1:0": {
         "input_cost_per_token": 7.8e-08,
         "litellm_provider": "bedrock_converse",
@@ -7992,28 +7992,6 @@
         "supports_function_calling": true,
         "supports_system_messages": true
     },
-    "google/gemini-2.0-flash-lite-001": {
-        "input_cost_per_token": 7.5e-08,
-        "output_cost_per_token": 3e-07,
-        "input_cost_per_image": 7.5e-08,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 8192,
-        "metadata": {
-            "notes": "Gemini 2.0 Flash Lite offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5),..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemini-2.0-flash-lite-001": {
-            "input_cost_per_token": 7.5e-08,
-            "output_cost_per_token": 3e-07,
-            "input_cost_per_image": 7.5e-08,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 8192,
-            "metadata": {
-                "notes": "Gemini 2.0 Flash Lite offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5),..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "openai/gpt-5-nano": {
         "cache_read_input_token_cost": 5e-09,
         "input_cost_per_token": 5e-08,
@@ -9269,6 +9247,42 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "deepseek/deepseek-v3.2": {
+        "input_cost_per_token": 2.288e-07,
+        "input_cost_per_token_cache_hit": 2.8e-08,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 128000,
+        "max_output_tokens": 64000,
+        "max_tokens": 163840,
+        "mode": "chat",
+        "output_cost_per_token": 3.432e-07,
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism..."
+        },
+        "deepseek/deepseek-v3.2": {
+            "input_cost_per_token": 2.288e-07,
+            "input_cost_per_token_cache_hit": 2.8e-08,
+            "litellm_provider": "openrouter",
+            "max_input_tokens": 128000,
+            "max_output_tokens": 64000,
+            "max_tokens": 163840,
+            "mode": "chat",
+            "output_cost_per_token": 3.432e-07,
+            "supports_assistant_prefill": true,
+            "supports_function_calling": true,
+            "supports_prompt_caching": true,
+            "supports_reasoning": true,
+            "supports_tool_choice": true,
+            "metadata": {
+                "notes": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism..."
+            }
+        }
+    },
     "nousresearch/hermes-3-llama-3.1-70b": {
         "input_cost_per_token": 3e-07,
         "output_cost_per_token": 3e-07,
@@ -9552,42 +9566,6 @@
         "source": "https://azure.microsoft.com/en-us/pricing/details/phi-3/",
         "supports_tool_choice": true,
         "supports_vision": false
-    },
-    "deepseek/deepseek-v3.2": {
-        "input_cost_per_token": 2.52e-07,
-        "input_cost_per_token_cache_hit": 2.8e-08,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 131072,
-        "max_output_tokens": 65536,
-        "max_tokens": 163840,
-        "mode": "chat",
-        "output_cost_per_token": 3.78e-07,
-        "supports_assistant_prefill": true,
-        "supports_function_calling": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism..."
-        },
-        "deepseek/deepseek-v3.2": {
-            "input_cost_per_token": 2.52e-07,
-            "input_cost_per_token_cache_hit": 2.8e-08,
-            "litellm_provider": "openrouter",
-            "max_input_tokens": 131072,
-            "max_output_tokens": 65536,
-            "max_tokens": 163840,
-            "mode": "chat",
-            "output_cost_per_token": 3.78e-07,
-            "supports_assistant_prefill": true,
-            "supports_function_calling": true,
-            "supports_prompt_caching": true,
-            "supports_reasoning": true,
-            "supports_tool_choice": true,
-            "metadata": {
-                "notes": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism..."
-            }
-        }
     },
     "novita/qwen/qwen3-235b-a22b-instruct-2507": {
         "litellm_provider": "novita",
@@ -12344,6 +12322,60 @@
         "mode": "chat",
         "output_cost_per_token": 7.5e-07
     },
+    "deepseek/deepseek-chat": {
+        "input_cost_per_token": 2.002e-07,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 128000,
+        "max_output_tokens": 16000,
+        "max_tokens": 8192,
+        "mode": "chat",
+        "output_cost_per_token": 8.001e-07,
+        "supports_prompt_caching": true,
+        "supports_tool_choice": true,
+        "cache_creation_input_token_cost": 0.0,
+        "cache_read_input_token_cost": 2.8e-08,
+        "input_cost_per_token_cache_hit": 2.8e-08,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+            "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "metadata": {
+            "notes": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations..."
+        },
+        "deepseek/deepseek-chat": {
+            "cache_creation_input_token_cost": 0.0,
+            "cache_read_input_token_cost": 2.8e-08,
+            "input_cost_per_token": 2.002e-07,
+            "input_cost_per_token_cache_hit": 2.8e-08,
+            "litellm_provider": "openrouter",
+            "max_input_tokens": 128000,
+            "max_output_tokens": 16000,
+            "max_tokens": 8192,
+            "mode": "chat",
+            "output_cost_per_token": 8.001e-07,
+            "source": "https://api-docs.deepseek.com/quick_start/pricing",
+            "supported_endpoints": [
+                "/v1/chat/completions"
+            ],
+            "supports_assistant_prefill": true,
+            "supports_function_calling": true,
+            "supports_native_streaming": true,
+            "supports_parallel_function_calling": true,
+            "supports_prompt_caching": true,
+            "supports_response_schema": true,
+            "supports_system_messages": true,
+            "supports_tool_choice": true,
+            "metadata": {
+                "notes": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations..."
+            }
+        }
+    },
     "arcee-ai/trinity-large-thinking": {
         "input_cost_per_token": 2.2e-07,
         "output_cost_per_token": 8.5e-07,
@@ -12707,60 +12739,6 @@
                 "notes": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without \u201cthinking\u201d traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual..."
             },
             "litellm_provider": "openrouter"
-        }
-    },
-    "deepseek/deepseek-chat": {
-        "input_cost_per_token": 2.288e-07,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 128000,
-        "max_output_tokens": 16000,
-        "max_tokens": 8192,
-        "mode": "chat",
-        "output_cost_per_token": 9.144e-07,
-        "supports_prompt_caching": true,
-        "supports_tool_choice": true,
-        "cache_creation_input_token_cost": 0.0,
-        "cache_read_input_token_cost": 2.8e-08,
-        "input_cost_per_token_cache_hit": 2.8e-08,
-        "source": "https://api-docs.deepseek.com/quick_start/pricing",
-        "supported_endpoints": [
-            "/v1/chat/completions"
-        ],
-        "supports_assistant_prefill": true,
-        "supports_function_calling": true,
-        "supports_native_streaming": true,
-        "supports_parallel_function_calling": true,
-        "supports_response_schema": true,
-        "supports_system_messages": true,
-        "metadata": {
-            "notes": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations..."
-        },
-        "deepseek/deepseek-chat": {
-            "cache_creation_input_token_cost": 0.0,
-            "cache_read_input_token_cost": 2.8e-08,
-            "input_cost_per_token": 2.288e-07,
-            "input_cost_per_token_cache_hit": 2.8e-08,
-            "litellm_provider": "openrouter",
-            "max_input_tokens": 128000,
-            "max_output_tokens": 16000,
-            "max_tokens": 8192,
-            "mode": "chat",
-            "output_cost_per_token": 9.144e-07,
-            "source": "https://api-docs.deepseek.com/quick_start/pricing",
-            "supported_endpoints": [
-                "/v1/chat/completions"
-            ],
-            "supports_assistant_prefill": true,
-            "supports_function_calling": true,
-            "supports_native_streaming": true,
-            "supports_parallel_function_calling": true,
-            "supports_prompt_caching": true,
-            "supports_response_schema": true,
-            "supports_system_messages": true,
-            "supports_tool_choice": true,
-            "metadata": {
-                "notes": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations..."
-            }
         }
     },
     "mistral/codestral-2508": {
@@ -13475,44 +13453,6 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
-    "google/gemini-2.0-flash-001": {
-        "deprecation_date": "2026-06-01",
-        "input_cost_per_audio_token": 7e-07,
-        "input_cost_per_token": 1e-07,
-        "litellm_provider": "openrouter",
-        "max_audio_length_hours": 8.4,
-        "max_audio_per_prompt": 1,
-        "max_images_per_prompt": 3000,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 8192,
-        "max_pdf_size_mb": 30,
-        "max_tokens": 8192,
-        "max_video_length": 1,
-        "max_videos_per_prompt": 10,
-        "mode": "chat",
-        "output_cost_per_token": 4e-07,
-        "supports_audio_output": true,
-        "supports_function_calling": true,
-        "supports_response_schema": true,
-        "supports_system_messages": true,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "input_cost_per_image": 1e-07,
-        "metadata": {
-            "notes": "Gemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It..."
-        },
-        "google/gemini-2.0-flash-001": {
-            "input_cost_per_token": 1e-07,
-            "output_cost_per_token": 4e-07,
-            "input_cost_per_image": 1e-07,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 8192,
-            "metadata": {
-                "notes": "Gemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "arcee-ai/coder-large": {
         "input_cost_per_token": 5e-07,
         "output_cost_per_token": 8e-07,
@@ -14180,24 +14120,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "minimax/minimax-m2.7": {
-        "input_cost_per_token": 2.6e-07,
-        "output_cost_per_token": 1.2e-06,
-        "max_input_tokens": 196608,
-        "metadata": {
-            "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
-        },
-        "litellm_provider": "openrouter",
-        "minimax/minimax-m2.7": {
-            "input_cost_per_token": 2.6e-07,
-            "output_cost_per_token": 1.2e-06,
-            "max_input_tokens": 196608,
-            "metadata": {
-                "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "azure/gpt-5.4-nano": {
         "cache_read_input_token_cost": 2e-08,
         "input_cost_per_token": 2e-07,
@@ -14373,6 +14295,26 @@
         "mode": "chat",
         "output_cost_per_token": 3.7e-07,
         "supports_tool_choice": true
+    },
+    "minimax/minimax-m2.7": {
+        "input_cost_per_token": 2.79e-07,
+        "output_cost_per_token": 1.2e-06,
+        "max_input_tokens": 196608,
+        "max_output_tokens": 131072,
+        "metadata": {
+            "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
+        },
+        "litellm_provider": "openrouter",
+        "minimax/minimax-m2.7": {
+            "input_cost_per_token": 2.79e-07,
+            "output_cost_per_token": 1.2e-06,
+            "max_input_tokens": 196608,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "qwen/qwen3-vl-8b-thinking": {
         "input_cost_per_token": 1.17e-07,
@@ -19796,31 +19738,6 @@
         "supports_tool_choice": true,
         "supports_vision": true
     },
-    "z-ai/glm-5": {
-        "input_cost_per_token": 6e-07,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 202752,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 1.92e-06,
-        "source": "https://openrouter.ai/z-ai/glm-5",
-        "supports_function_calling": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
-        },
-        "z-ai/glm-5": {
-            "input_cost_per_token": 6e-07,
-            "output_cost_per_token": 1.92e-06,
-            "max_input_tokens": 202752,
-            "metadata": {
-                "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "google/gemini-3.1-flash-lite": {
         "cache_read_input_token_cost": 2.5e-08,
         "cache_read_input_token_cost_per_audio_token": 5e-08,
@@ -20005,6 +19922,32 @@
         "supports_system_messages": true,
         "supports_tool_choice": true,
         "source": "https://aws.amazon.com/bedrock/pricing/"
+    },
+    "z-ai/glm-5": {
+        "input_cost_per_token": 6e-07,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 202752,
+        "max_output_tokens": 16384,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 2.08e-06,
+        "source": "https://openrouter.ai/z-ai/glm-5",
+        "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
+        },
+        "z-ai/glm-5": {
+            "input_cost_per_token": 6e-07,
+            "output_cost_per_token": 2.08e-06,
+            "max_input_tokens": 202752,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "replicate/deepseek-ai/deepseek-v3.1": {
         "input_cost_per_token": 6.72e-07,
@@ -23605,6 +23548,7 @@
         "input_cost_per_token": 9.8e-07,
         "output_cost_per_token": 3.08e-06,
         "max_input_tokens": 202752,
+        "max_output_tokens": 131072,
         "metadata": {
             "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
         },
@@ -23613,6 +23557,7 @@
             "input_cost_per_token": 9.8e-07,
             "output_cost_per_token": 3.08e-06,
             "max_input_tokens": 202752,
+            "max_output_tokens": 131072,
             "metadata": {
                 "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
             },
