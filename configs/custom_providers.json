@@ -169,6 +169,22 @@
                     "litellm_provider": "openrouter"
                 }
             },
+            "openrouter/fusion": {
+                "input_cost_per_token": -1.0,
+                "output_cost_per_token": -1.0,
+                "metadata": {
+                    "notes": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a..."
+                },
+                "litellm_provider": "openrouter",
+                "openrouter/fusion": {
+                    "input_cost_per_token": -1.0,
+                    "output_cost_per_token": -1.0,
+                    "metadata": {
+                        "notes": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "perceptron/perceptron-mk1": {
                 "input_cost_per_token": 1.5e-07,
                 "output_cost_per_token": 1.5e-06,
@@ -190,8 +206,8 @@
                 }
             },
             "inclusionai/ring-2.6-1t": {
-                "input_cost_per_token": 3e-07,
-                "output_cost_per_token": 2.5e-06,
+                "input_cost_per_token": 7.5e-08,
+                "output_cost_per_token": 6.25e-07,
                 "max_input_tokens": 262144,
                 "max_output_tokens": 65536,
                 "metadata": {
@@ -199,8 +215,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "inclusionai/ring-2.6-1t": {
-                    "input_cost_per_token": 3e-07,
-                    "output_cost_per_token": 2.5e-06,
+                    "input_cost_per_token": 7.5e-08,
+                    "output_cost_per_token": 6.25e-07,
                     "max_input_tokens": 262144,
                     "max_output_tokens": 65536,
                     "metadata": {
@@ -5146,26 +5162,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "baidu/ernie-4.5-300b-a47b": {
-                "input_cost_per_token": 2.8e-07,
-                "output_cost_per_token": 1.1e-06,
-                "max_input_tokens": 123000,
-                "max_output_tokens": 12000,
-                "metadata": {
-                    "notes": "ERNIE-4.5-300B-A47B is a 300B parameter Mixture-of-Experts (MoE) language model developed by Baidu as part of the ERNIE 4.5 series. It activates 47B parameters per token and supports text generation in..."
-                },
-                "litellm_provider": "openrouter",
-                "baidu/ernie-4.5-300b-a47b": {
-                    "input_cost_per_token": 2.8e-07,
-                    "output_cost_per_token": 1.1e-06,
-                    "max_input_tokens": 123000,
-                    "max_output_tokens": 12000,
-                    "metadata": {
-                        "notes": "ERNIE-4.5-300B-A47B is a 300B parameter Mixture-of-Experts (MoE) language model developed by Baidu as part of the ERNIE 4.5 series. It activates 47B parameters per token and supports text generation in..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "mistralai/mistral-small-3.2-24b-instruct": {
                 "input_cost_per_token": 7.5e-08,
                 "litellm_provider": "openrouter",
@@ -7090,30 +7086,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "meta-llama/llama-3.2-11b-vision-instruct": {
-                "input_cost_per_token": 2.45e-07,
-                "output_cost_per_token": 2.45e-07,
-                "max_input_tokens": 131072,
-                "max_output_tokens": 16384,
-                "mode": "chat",
-                "supports_vision": true,
-                "metadata": {
-                    "notes": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and..."
-                },
-                "litellm_provider": "openrouter",
-                "meta-llama/llama-3.2-11b-vision-instruct": {
-                    "input_cost_per_token": 2.45e-07,
-                    "output_cost_per_token": 2.45e-07,
-                    "max_input_tokens": 131072,
-                    "max_output_tokens": 16384,
-                    "mode": "chat",
-                    "supports_vision": true,
-                    "metadata": {
-                        "notes": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "meta-llama/llama-3.2-3b-instruct:free": {
                 "input_cost_per_token": 0.0,
                 "output_cost_per_token": 0.0,
@@ -7152,6 +7124,30 @@
                     "litellm_provider": "openrouter"
                 }
             },
+            "meta-llama/llama-3.2-11b-vision-instruct": {
+                "input_cost_per_token": 2.45e-07,
+                "output_cost_per_token": 2.45e-07,
+                "max_input_tokens": 131072,
+                "max_output_tokens": 16384,
+                "mode": "chat",
+                "supports_vision": true,
+                "metadata": {
+                    "notes": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and..."
+                },
+                "litellm_provider": "openrouter",
+                "meta-llama/llama-3.2-11b-vision-instruct": {
+                    "input_cost_per_token": 2.45e-07,
+                    "output_cost_per_token": 2.45e-07,
+                    "max_input_tokens": 131072,
+                    "max_output_tokens": 16384,
+                    "mode": "chat",
+                    "supports_vision": true,
+                    "metadata": {
+                        "notes": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "qwen/qwen-2.5-72b-instruct": {
                 "input_cost_per_token": 3.6e-07,
                 "output_cost_per_token": 4e-07,
@@ -7172,26 +7168,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "cohere/command-r-08-2024": {
-                "input_cost_per_token": 1.5e-07,
-                "output_cost_per_token": 6e-07,
-                "max_input_tokens": 128000,
-                "max_output_tokens": 4000,
-                "metadata": {
-                    "notes": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and..."
-                },
-                "litellm_provider": "openrouter",
-                "cohere/command-r-08-2024": {
-                    "input_cost_per_token": 1.5e-07,
-                    "output_cost_per_token": 6e-07,
-                    "max_input_tokens": 128000,
-                    "max_output_tokens": 4000,
-                    "metadata": {
-                        "notes": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "cohere/command-r-plus-08-2024": {
                 "input_cost_per_token": 2.5e-06,
                 "output_cost_per_token": 1e-05,
@@ -7208,6 +7184,26 @@
                     "max_output_tokens": 4000,
                     "metadata": {
                         "notes": "command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus) with roughly 50% higher throughput and 25% lower latencies as compared to the previous Command R+ version, while keeping the hardware footprint..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "cohere/command-r-08-2024": {
+                "input_cost_per_token": 1.5e-07,
+                "output_cost_per_token": 6e-07,
+                "max_input_tokens": 128000,
+                "max_output_tokens": 4000,
+                "metadata": {
+                    "notes": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and..."
+                },
+                "litellm_provider": "openrouter",
+                "cohere/command-r-08-2024": {
+                    "input_cost_per_token": 1.5e-07,
+                    "output_cost_per_token": 6e-07,
+                    "max_input_tokens": 128000,
+                    "max_output_tokens": 4000,
+                    "metadata": {
+                        "notes": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -7330,26 +7326,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "meta-llama/llama-3.1-8b-instruct": {
-                "input_cost_per_token": 2e-08,
-                "output_cost_per_token": 5e-08,
-                "max_input_tokens": 16384,
-                "max_output_tokens": 16384,
-                "metadata": {
-                    "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
-                },
-                "litellm_provider": "openrouter",
-                "meta-llama/llama-3.1-8b-instruct": {
-                    "input_cost_per_token": 2e-08,
-                    "output_cost_per_token": 5e-08,
-                    "max_input_tokens": 16384,
-                    "max_output_tokens": 16384,
-                    "metadata": {
-                        "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "meta-llama/llama-3.1-70b-instruct": {
                 "input_cost_per_token": 4e-07,
                 "output_cost_per_token": 4e-07,
@@ -7366,6 +7342,26 @@
                     "max_output_tokens": 16384,
                     "metadata": {
                         "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 70B instruct-tuned version is optimized for high quality dialogue usecases. It has demonstrated strong..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "meta-llama/llama-3.1-8b-instruct": {
+                "input_cost_per_token": 2e-08,
+                "output_cost_per_token": 5e-08,
+                "max_input_tokens": 16384,
+                "max_output_tokens": 16384,
+                "metadata": {
+                    "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
+                },
+                "litellm_provider": "openrouter",
+                "meta-llama/llama-3.1-8b-instruct": {
+                    "input_cost_per_token": 2e-08,
+                    "output_cost_per_token": 5e-08,
+                    "max_input_tokens": 16384,
+                    "max_output_tokens": 16384,
+                    "metadata": {
+                        "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -7388,26 +7384,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "openai/gpt-4o-mini": {
-                "input_cost_per_token": 1.5e-07,
-                "output_cost_per_token": 6e-07,
-                "max_input_tokens": 128000,
-                "max_output_tokens": 16384,
-                "metadata": {
-                    "notes": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable..."
-                },
-                "litellm_provider": "openrouter",
-                "openai/gpt-4o-mini": {
-                    "input_cost_per_token": 1.5e-07,
-                    "output_cost_per_token": 6e-07,
-                    "max_input_tokens": 128000,
-                    "max_output_tokens": 16384,
-                    "metadata": {
-                        "notes": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "openai/gpt-4o-mini-2024-07-18": {
                 "input_cost_per_token": 1.5e-07,
                 "output_cost_per_token": 6e-07,
@@ -7418,6 +7394,26 @@
                 },
                 "litellm_provider": "openrouter",
                 "openai/gpt-4o-mini-2024-07-18": {
+                    "input_cost_per_token": 1.5e-07,
+                    "output_cost_per_token": 6e-07,
+                    "max_input_tokens": 128000,
+                    "max_output_tokens": 16384,
+                    "metadata": {
+                        "notes": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "openai/gpt-4o-mini": {
+                "input_cost_per_token": 1.5e-07,
+                "output_cost_per_token": 6e-07,
+                "max_input_tokens": 128000,
+                "max_output_tokens": 16384,
+                "metadata": {
+                    "notes": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable..."
+                },
+                "litellm_provider": "openrouter",
+                "openai/gpt-4o-mini": {
                     "input_cost_per_token": 1.5e-07,
                     "output_cost_per_token": 6e-07,
                     "max_input_tokens": 128000,
@@ -7488,32 +7484,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "openai/gpt-4o": {
-                "input_cost_per_token": 2.5e-06,
-                "litellm_provider": "openrouter",
-                "max_input_tokens": 128000,
-                "max_output_tokens": 16384,
-                "max_tokens": 4096,
-                "mode": "chat",
-                "output_cost_per_token": 1e-05,
-                "supports_function_calling": true,
-                "supports_parallel_function_calling": true,
-                "supports_tool_choice": true,
-                "supports_vision": true,
-                "metadata": {
-                    "notes": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as..."
-                },
-                "openai/gpt-4o": {
-                    "input_cost_per_token": 2.5e-06,
-                    "output_cost_per_token": 1e-05,
-                    "max_input_tokens": 128000,
-                    "max_output_tokens": 16384,
-                    "metadata": {
-                        "notes": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "openai/gpt-4o-2024-05-13": {
                 "input_cost_per_token": 5e-06,
                 "litellm_provider": "openrouter",
@@ -7540,22 +7510,28 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "meta-llama/llama-3-8b-instruct": {
-                "input_cost_per_token": 4e-08,
-                "output_cost_per_token": 4e-08,
-                "max_input_tokens": 8192,
-                "max_output_tokens": 8192,
-                "metadata": {
-                    "notes": "Meta's latest class of model (Llama 3) launched with a variety of sizes & flavors. This 8B instruct-tuned version was optimized for high quality dialogue usecases. It has demonstrated strong..."
-                },
+            "openai/gpt-4o": {
+                "input_cost_per_token": 2.5e-06,
                 "litellm_provider": "openrouter",
-                "meta-llama/llama-3-8b-instruct": {
-                    "input_cost_per_token": 4e-08,
-                    "output_cost_per_token": 4e-08,
-                    "max_input_tokens": 8192,
-                    "max_output_tokens": 8192,
+                "max_input_tokens": 128000,
+                "max_output_tokens": 16384,
+                "max_tokens": 4096,
+                "mode": "chat",
+                "output_cost_per_token": 1e-05,
+                "supports_function_calling": true,
+                "supports_parallel_function_calling": true,
+                "supports_tool_choice": true,
+                "supports_vision": true,
+                "metadata": {
+                    "notes": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as..."
+                },
+                "openai/gpt-4o": {
+                    "input_cost_per_token": 2.5e-06,
+                    "output_cost_per_token": 1e-05,
+                    "max_input_tokens": 128000,
+                    "max_output_tokens": 16384,
                     "metadata": {
-                        "notes": "Meta's latest class of model (Llama 3) launched with a variety of sizes & flavors. This 8B instruct-tuned version was optimized for high quality dialogue usecases. It has demonstrated strong..."
+                        "notes": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -7579,6 +7555,26 @@
                     "max_output_tokens": 8000,
                     "metadata": {
                         "notes": "Meta's latest class of model (Llama 3) launched with a variety of sizes & flavors. This 70B instruct-tuned version was optimized for high quality dialogue usecases. It has demonstrated strong..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "meta-llama/llama-3-8b-instruct": {
+                "input_cost_per_token": 4e-08,
+                "output_cost_per_token": 4e-08,
+                "max_input_tokens": 8192,
+                "max_output_tokens": 8192,
+                "metadata": {
+                    "notes": "Meta's latest class of model (Llama 3) launched with a variety of sizes & flavors. This 8B instruct-tuned version was optimized for high quality dialogue usecases. It has demonstrated strong..."
+                },
+                "litellm_provider": "openrouter",
+                "meta-llama/llama-3-8b-instruct": {
+                    "input_cost_per_token": 4e-08,
+                    "output_cost_per_token": 4e-08,
+                    "max_input_tokens": 8192,
+                    "max_output_tokens": 8192,
+                    "metadata": {
+                        "notes": "Meta's latest class of model (Llama 3) launched with a variety of sizes & flavors. This 8B instruct-tuned version was optimized for high quality dialogue usecases. It has demonstrated strong..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -7701,6 +7697,26 @@
                     "litellm_provider": "openrouter"
                 }
             },
+            "openai/gpt-3.5-turbo-0613": {
+                "input_cost_per_token": 1e-06,
+                "output_cost_per_token": 2e-06,
+                "max_input_tokens": 4095,
+                "max_output_tokens": 4096,
+                "metadata": {
+                    "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+                },
+                "litellm_provider": "openrouter",
+                "openai/gpt-3.5-turbo-0613": {
+                    "input_cost_per_token": 1e-06,
+                    "output_cost_per_token": 2e-06,
+                    "max_input_tokens": 4095,
+                    "max_output_tokens": 4096,
+                    "metadata": {
+                        "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "openai/gpt-4-turbo-preview": {
                 "input_cost_per_token": 1e-05,
                 "output_cost_per_token": 3e-05,
@@ -7720,26 +7736,6 @@
                         "notes": "The preview GPT-4 model with improved instruction following, JSON mode, reproducible outputs, parallel function calling, and more. Training data: up to Dec 2023. **Note:** heavily rate limited by OpenAI while..."
                     },
                     "supports_function_calling": true,
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "openai/gpt-3.5-turbo-0613": {
-                "input_cost_per_token": 1e-06,
-                "output_cost_per_token": 2e-06,
-                "max_input_tokens": 4095,
-                "max_output_tokens": 4096,
-                "metadata": {
-                    "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
-                },
-                "litellm_provider": "openrouter",
-                "openai/gpt-3.5-turbo-0613": {
-                    "input_cost_per_token": 1e-06,
-                    "output_cost_per_token": 2e-06,
-                    "max_input_tokens": 4095,
-                    "max_output_tokens": 4096,
-                    "metadata": {
-                        "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
-                    },
                     "litellm_provider": "openrouter"
                 }
             },
@@ -7893,25 +7889,22 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "openai/gpt-3.5-turbo": {
-                "input_cost_per_token": 5e-07,
-                "litellm_provider": "openrouter",
-                "max_tokens": 4096,
-                "mode": "chat",
-                "output_cost_per_token": 1.5e-06,
-                "supports_tool_choice": true,
-                "max_input_tokens": 16385,
+            "openai/gpt-4-0314": {
+                "input_cost_per_token": 3e-05,
+                "output_cost_per_token": 6e-05,
+                "max_input_tokens": 8191,
                 "max_output_tokens": 4096,
                 "metadata": {
-                    "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+                    "notes": "GPT-4-0314 is the first version of GPT-4 released, with a context length of 8,192 tokens, and was supported until June 14. Training data: up to Sep 2021."
                 },
-                "openai/gpt-3.5-turbo": {
-                    "input_cost_per_token": 5e-07,
-                    "output_cost_per_token": 1.5e-06,
-                    "max_input_tokens": 16385,
+                "litellm_provider": "openrouter",
+                "openai/gpt-4-0314": {
+                    "input_cost_per_token": 3e-05,
+                    "output_cost_per_token": 6e-05,
+                    "max_input_tokens": 8191,
                     "max_output_tokens": 4096,
                     "metadata": {
-                        "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+                        "notes": "GPT-4-0314 is the first version of GPT-4 released, with a context length of 8,192 tokens, and was supported until June 14. Training data: up to Sep 2021."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -7939,28 +7932,39 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "openai/gpt-4-0314": {
-                "input_cost_per_token": 3e-05,
-                "output_cost_per_token": 6e-05,
-                "max_input_tokens": 8191,
+            "openai/gpt-3.5-turbo": {
+                "input_cost_per_token": 5e-07,
+                "litellm_provider": "openrouter",
+                "max_tokens": 4096,
+                "mode": "chat",
+                "output_cost_per_token": 1.5e-06,
+                "supports_tool_choice": true,
+                "max_input_tokens": 16385,
                 "max_output_tokens": 4096,
                 "metadata": {
-                    "notes": "GPT-4-0314 is the first version of GPT-4 released, with a context length of 8,192 tokens, and was supported until June 14. Training data: up to Sep 2021."
+                    "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
                 },
-                "litellm_provider": "openrouter",
-                "openai/gpt-4-0314": {
-                    "input_cost_per_token": 3e-05,
-                    "output_cost_per_token": 6e-05,
-                    "max_input_tokens": 8191,
+                "openai/gpt-3.5-turbo": {
+                    "input_cost_per_token": 5e-07,
+                    "output_cost_per_token": 1.5e-06,
+                    "max_input_tokens": 16385,
                     "max_output_tokens": 4096,
                     "metadata": {
-                        "notes": "GPT-4-0314 is the first version of GPT-4 released, with a context length of 8,192 tokens, and was supported until June 14. Training data: up to Sep 2021."
+                        "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
                     },
                     "litellm_provider": "openrouter"
                 }
             }
         },
         "free_models": {
+            "openrouter/fusion": {
+                "input_cost_per_token": -1.0,
+                "output_cost_per_token": -1.0,
+                "metadata": {
+                    "notes": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a..."
+                },
+                "litellm_provider": "openrouter"
+            },
             "openrouter/owl-alpha": {
                 "input_cost_per_token": 0.0,
                 "output_cost_per_token": 0.0,

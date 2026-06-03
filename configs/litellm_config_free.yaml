@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-153bbafb05734082857d74e96b417d62
+  master_key: sk-4414d92a755c47ebb76721644af1fe52
   alerting:
   - slack
   - email
@@ -52,6 +52,18 @@ litellm_settings:
   set_verbose: false
   turn_off_message_logging: false
 model_list:
+- model_name: openrouter/fusion
+  litellm_params:
+    model: openai/openrouter/fusion
+    api_base: https://openrouter.ai/api/v1
+    api_key: os.environ/OPENROUTER_API_KEY
+    input_cost_per_token: -1.0
+    output_cost_per_token: -1.0
+    metadata:
+      notes: Fusion turns your prompt into a small multi-model deliberation. A panel
+        of expert models (see below) analyzes your prompt in parallel with web search
+        and web fetch enabled, then a...
+    litellm_provider: openrouter
 - model_name: openrouter/owl-alpha
   litellm_params:
     model: openai/openrouter/owl-alpha
@@ -452,6 +464,32 @@ router_settings:
   enable_pre_call_checks: true
   enable_tag_filtering: true
   fallbacks:
+  - openrouter/fusion:
+    - openrouter/free
+    - gemini/gemini-exp-1206
+    - gemini/gemini-exp-1114
+    - openrouter/owl-alpha
+    - bedrock/anthropic.claude-mythos-preview
+    - openrouter/google/lyria-3-clip-preview
+    - openrouter/google/lyria-3-pro-preview
+    - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
+    - openrouter/qwen/qwen3-coder:free
+    - volcengine/glm-4-7-251222
+    - lemonade/qwen3-4b-instruct-2507-gguf
+    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
+    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+    - openrouter/google/gemma-4-26b-a4b-it:free
+    - openrouter/google/gemma-4-31b-it:free
+    - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
+    - openrouter/poolside/laguna-xs.2:free
+    - openrouter/moonshotai/kimi-k2.6:free
+    - openrouter/openai/gpt-oss-120b:free
+    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
+    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
+    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
+    - openrouter/z-ai/glm-4.5-air:free
   - openrouter/owl-alpha:
     - openrouter/free
     - gemini/gemini-exp-1206

@@ -9788,6 +9788,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "inclusionai/ring-2.6-1t": {
+        "input_cost_per_token": 7.5e-08,
+        "output_cost_per_token": 6.25e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool..."
+        },
+        "litellm_provider": "openrouter",
+        "inclusionai/ring-2.6-1t": {
+            "input_cost_per_token": 7.5e-08,
+            "output_cost_per_token": 6.25e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "inclusionai/ling-2.6-1t": {
         "input_cost_per_token": 7.5e-08,
         "output_cost_per_token": 6.25e-07,
@@ -13841,26 +13861,6 @@
         "supports_tool_choice": true,
         "supports_system_messages": true,
         "supports_response_schema": true
-    },
-    "baidu/ernie-4.5-300b-a47b": {
-        "input_cost_per_token": 2.8e-07,
-        "output_cost_per_token": 1.1e-06,
-        "max_input_tokens": 123000,
-        "max_output_tokens": 12000,
-        "metadata": {
-            "notes": "ERNIE-4.5-300B-A47B is a 300B parameter Mixture-of-Experts (MoE) language model developed by Baidu as part of the ERNIE 4.5 series. It activates 47B parameters per token and supports text generation in..."
-        },
-        "litellm_provider": "openrouter",
-        "baidu/ernie-4.5-300b-a47b": {
-            "input_cost_per_token": 2.8e-07,
-            "output_cost_per_token": 1.1e-06,
-            "max_input_tokens": 123000,
-            "max_output_tokens": 12000,
-            "metadata": {
-                "notes": "ERNIE-4.5-300B-A47B is a 300B parameter Mixture-of-Experts (MoE) language model developed by Baidu as part of the ERNIE 4.5 series. It activates 47B parameters per token and supports text generation in..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "mistral/open-mixtral-8x7b": {
         "input_cost_per_token": 7e-07,
@@ -20244,26 +20244,6 @@
         "output_cost_per_token": 2.2e-06,
         "supports_function_calling": true,
         "supports_tool_choice": true
-    },
-    "inclusionai/ring-2.6-1t": {
-        "input_cost_per_token": 3e-07,
-        "output_cost_per_token": 2.5e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool..."
-        },
-        "litellm_provider": "openrouter",
-        "inclusionai/ring-2.6-1t": {
-            "input_cost_per_token": 3e-07,
-            "output_cost_per_token": 2.5e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "z-ai/glm-4.5": {
         "input_cost_per_token": 6e-07,
@@ -46801,6 +46781,22 @@
             "output_cost_per_token": -1.0,
             "metadata": {
                 "notes": "Transform your natural language requests into structured OpenRouter API request objects. Describe what you want to accomplish with AI models, and Body Builder will construct the appropriate API calls. Example:..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openrouter/fusion": {
+        "input_cost_per_token": -1.0,
+        "output_cost_per_token": -1.0,
+        "metadata": {
+            "notes": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a..."
+        },
+        "litellm_provider": "openrouter",
+        "openrouter/fusion": {
+            "input_cost_per_token": -1.0,
+            "output_cost_per_token": -1.0,
+            "metadata": {
+                "notes": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a..."
             },
             "litellm_provider": "openrouter"
         }

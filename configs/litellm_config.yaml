@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-f2bdec435b524bb18e6fc98a3c840456
+  master_key: sk-852e2c767e7b470f9378105f1bbceb96
   alerting:
   - slack
   - email
@@ -229,6 +229,23 @@ model_list:
       max_output_tokens: 128000
       metadata: *id008
       litellm_provider: openrouter
+- model_name: openrouter/fusion
+  litellm_params:
+    model: openai/openrouter/fusion
+    api_base: https://openrouter.ai/api/v1
+    api_key: os.environ/OPENROUTER_API_KEY
+    input_cost_per_token: -1.0
+    output_cost_per_token: -1.0
+    metadata: &id009
+      notes: Fusion turns your prompt into a small multi-model deliberation. A panel
+        of expert models (see below) analyzes your prompt in parallel with web search
+        and web fetch enabled, then a...
+    litellm_provider: openrouter
+    openrouter/fusion:
+      input_cost_per_token: -1.0
+      output_cost_per_token: -1.0
+      metadata: *id009
+      litellm_provider: openrouter
 - model_name: perceptron/perceptron-mk1
   litellm_params:
     model: openai/perceptron/perceptron-mk1
@@ -238,7 +255,7 @@ model_list:
     output_cost_per_token: 1.5e-06
     max_input_tokens: 32768
     max_output_tokens: 8192
-    metadata: &id009
+    metadata: &id010
       notes: Perceptron Mk1 (Mark One) is Perceptron's highest-quality vision-language
         model for video and embodied reasoning.** It accepts image and video inputs
         paired with natural language queries, and produces detailed visual understanding...
@@ -248,28 +265,28 @@ model_list:
       output_cost_per_token: 1.5e-06
       max_input_tokens: 32768
       max_output_tokens: 8192
-      metadata: *id009
+      metadata: *id010
       litellm_provider: openrouter
 - model_name: inclusionai/ring-2.6-1t
   litellm_params:
     model: openai/inclusionai/ring-2.6-1t
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 3.0e-07
-    output_cost_per_token: 2.5e-06
+    input_cost_per_token: 7.5e-08
+    output_cost_per_token: 6.25e-07
     max_input_tokens: 262144
     max_output_tokens: 65536
-    metadata: &id010
+    metadata: &id011
       notes: Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters,
         built for real-world agent workflows that require both strong capability and
         operational efficiency. It is optimized for coding agents, tool...
     litellm_provider: openrouter
     inclusionai/ring-2.6-1t:
-      input_cost_per_token: 3.0e-07
-      output_cost_per_token: 2.5e-06
+      input_cost_per_token: 7.5e-08
+      output_cost_per_token: 6.25e-07
       max_input_tokens: 262144
       max_output_tokens: 65536
-      metadata: *id010
+      metadata: *id011
       litellm_provider: openrouter
 - model_name: google/gemini-3.1-flash-lite
   litellm_params:
@@ -324,7 +341,7 @@ model_list:
     supports_web_search: true
     tpm: 800000
     input_cost_per_image: 2.5e-07
-    metadata: &id011
+    metadata: &id012
       notes: Gemini 3.1 Flash Lite is Google’s GA high-efficiency multimodal model
         optimized for low-latency, high-volume workloads. It supports text, image,
         video, audio, and PDF inputs, and is designed for lightweight agentic...
@@ -334,7 +351,7 @@ model_list:
       input_cost_per_image: 2.5e-07
       max_input_tokens: 1048576
       max_output_tokens: 65536
-      metadata: *id011
+      metadata: *id012
       litellm_provider: openrouter
 - model_name: openai/gpt-chat-latest
   litellm_params:
@@ -345,7 +362,7 @@ model_list:
     output_cost_per_token: 3.0e-05
     max_input_tokens: 400000
     max_output_tokens: 128000
-    metadata: &id012
+    metadata: &id013
       notes: GPT Chat Latest points to OpenAI's stable API alias `chat-latest` that
         always resolves to the latest Instant chat model used in ChatGPT. As OpenAI
         rolls out new Instant model updates...
@@ -355,7 +372,7 @@ model_list:
       output_cost_per_token: 3.0e-05
       max_input_tokens: 400000
       max_output_tokens: 128000
-      metadata: *id012
+      metadata: *id013
       litellm_provider: openrouter
 - model_name: x-ai/grok-4.3
   litellm_params:
@@ -367,7 +384,7 @@ model_list:
     max_input_tokens: 1000000
     mode: chat
     supports_vision: true
-    metadata: &id013
+    metadata: &id014
       notes: Grok 4.3 is a reasoning model from xAI. It accepts text and image inputs
         with text output, and is suited for agentic workflows, instruction-following
         tasks, and applications requiring high factual...
@@ -378,7 +395,7 @@ model_list:
       max_input_tokens: 1000000
       mode: chat
       supports_vision: true
-      metadata: *id013
+      metadata: *id014
       litellm_provider: openrouter
 - model_name: ibm-granite/granite-4.1-8b
   litellm_params:
@@ -389,7 +406,7 @@ model_list:
     output_cost_per_token: 1.0e-07
     max_input_tokens: 131072
     max_output_tokens: 131072
-    metadata: &id014
+    metadata: &id015
       notes: Granite 4.1 8B is a dense, decoder-only 8-billion-parameter language
         model from IBM, part of the Granite 4.1 family. It supports a 131K-token context
         window and is designed for enterprise tasks...
@@ -399,7 +416,7 @@ model_list:
       output_cost_per_token: 1.0e-07
       max_input_tokens: 131072
       max_output_tokens: 131072
-      metadata: *id014
+      metadata: *id015
       litellm_provider: openrouter
 - model_name: mistralai/mistral-medium-3-5
   litellm_params:
@@ -409,7 +426,7 @@ model_list:
     input_cost_per_token: 1.5e-06
     output_cost_per_token: 7.5e-06
     max_input_tokens: 262144
-    metadata: &id015
+    metadata: &id016
       notes: Mistral Medium 3.5 is a dense 128B instruction-following model from Mistral
         AI. It supports text and image inputs with text output, and is designed for
         agentic workflows, coding, and complex...
@@ -418,7 +435,7 @@ model_list:
       input_cost_per_token: 1.5e-06
       output_cost_per_token: 7.5e-06
       max_input_tokens: 262144
-      metadata: *id015
+      metadata: *id016
       litellm_provider: openrouter
 - model_name: openrouter/owl-alpha
   litellm_params:
@@ -429,7 +446,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 1048756
     max_output_tokens: 262144
-    metadata: &id016
+    metadata: &id017
       notes: Owl Alpha is a high-performance foundation model designed for agentic
         workloads. Natively supports tool use, and long-context tasks, with strong
         performance in code generation, automated workflows, and complex instruction
@@ -440,7 +457,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 1048756
       max_output_tokens: 262144
-      metadata: *id016
+      metadata: *id017
       litellm_provider: openrouter
 - model_name: nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
   litellm_params:
@@ -451,7 +468,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 256000
     max_output_tokens: 65536
-    metadata: &id017
+    metadata: &id018
       notes: NVIDIA Nemotron™ 3 Nano Omni is a 30B-A3B open multimodal model designed
         to function as a perception and context sub-agent in enterprise agent systems.
         It accepts text, image, video, and...
@@ -461,7 +478,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 256000
       max_output_tokens: 65536
-      metadata: *id017
+      metadata: *id018
       litellm_provider: openrouter
 - model_name: poolside/laguna-xs.2:free
   litellm_params:
@@ -472,7 +489,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 262144
     max_output_tokens: 32768
-    metadata: &id018
+    metadata: &id019
       notes: Laguna XS.2 is the second-generation model in the XS size class from
         [Poolside](https://poolside.ai), their efficient coding agent series. It combines
         tool calling and reasoning capabilities with a compact footprint, offering...
@@ -482,7 +499,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 262144
       max_output_tokens: 32768
-      metadata: *id018
+      metadata: *id019
       litellm_provider: openrouter
 - model_name: poolside/laguna-m.1:free
   litellm_params:
@@ -493,7 +510,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 262144
     max_output_tokens: 32768
-    metadata: &id019
+    metadata: &id020
       notes: Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai),
         optimized for complex software engineering tasks. Designed for agentic coding
         workflows, it supports tool calling and reasoning, with a 128K...
@@ -503,7 +520,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 262144
       max_output_tokens: 32768
-      metadata: *id019
+      metadata: *id020
       litellm_provider: openrouter
 - model_name: ~anthropic/claude-haiku-latest
   litellm_params:
@@ -514,7 +531,7 @@ model_list:
     output_cost_per_token: 5.0e-06
     max_input_tokens: 200000
     max_output_tokens: 64000
-    metadata: &id020
+    metadata: &id021
       notes: This model always redirects to the latest model in the Anthropic Claude
         Haiku family.
     litellm_provider: openrouter
@@ -523,7 +540,7 @@ model_list:
       output_cost_per_token: 5.0e-06
       max_input_tokens: 200000
       max_output_tokens: 64000
-      metadata: *id020
+      metadata: *id021
       litellm_provider: openrouter
 - model_name: ~openai/gpt-mini-latest
   litellm_params:
@@ -534,7 +551,7 @@ model_list:
     output_cost_per_token: 4.5e-06
     max_input_tokens: 400000
     max_output_tokens: 128000
-    metadata: &id021
+    metadata: &id022
       notes: This model always redirects to the latest model in the OpenAI GPT Mini
         family.
     litellm_provider: openrouter
@@ -543,7 +560,7 @@ model_list:
       output_cost_per_token: 4.5e-06
       max_input_tokens: 400000
       max_output_tokens: 128000
-      metadata: *id021
+      metadata: *id022
       litellm_provider: openrouter
 - model_name: ~google/gemini-pro-latest
   litellm_params:
@@ -555,7 +572,7 @@ model_list:
     input_cost_per_image: 2.0e-06
     max_input_tokens: 1048576
     max_output_tokens: 65536
-    metadata: &id022
+    metadata: &id023
       notes: This model always redirects to the latest model in the Google Gemini
         Pro family.
     litellm_provider: openrouter
@@ -565,7 +582,7 @@ model_list:
       input_cost_per_image: 2.0e-06
       max_input_tokens: 1048576
       max_output_tokens: 65536
-      metadata: *id022
+      metadata: *id023
       litellm_provider: openrouter
 - model_name: ~moonshotai/kimi-latest
   litellm_params:
@@ -578,7 +595,7 @@ model_list:
     max_output_tokens: 262144
     mode: chat
     supports_vision: true
-    metadata: &id023
+    metadata: &id024
       notes: This model always redirects to the latest model in the MoonshotAI Kimi
         family.
     litellm_provider: openrouter
@@ -589,7 +606,7 @@ model_list:
       max_output_tokens: 262144
       mode: chat
       supports_vision: true
-      metadata: *id023
+      metadata: *id024
       litellm_provider: openrouter
 - model_name: ~google/gemini-flash-latest
   litellm_params:
@@ -601,7 +618,7 @@ model_list:
     input_cost_per_image: 1.5e-06
     max_input_tokens: 1048576
     max_output_tokens: 65536
-    metadata: &id024
+    metadata: &id025
       notes: This model always redirects to the latest model in the Google Gemini
         Flash family.
     litellm_provider: openrouter
@@ -611,7 +628,7 @@ model_list:
       input_cost_per_image: 1.5e-06
       max_input_tokens: 1048576
       max_output_tokens: 65536
-      metadata: *id024
+      metadata: *id025
       litellm_provider: openrouter
 - model_name: ~anthropic/claude-sonnet-latest
   litellm_params:
@@ -622,7 +639,7 @@ model_list:
     output_cost_per_token: 1.5e-05
     max_input_tokens: 1000000
     max_output_tokens: 128000
-    metadata: &id025
+    metadata: &id026
       notes: This model always redirects to the latest model in the Anthropic Claude
         Sonnet family.
     litellm_provider: openrouter
@@ -631,7 +648,7 @@ model_list:
       output_cost_per_token: 1.5e-05
       max_input_tokens: 1000000
       max_output_tokens: 128000
-      metadata: *id025
+      metadata: *id026
       litellm_provider: openrouter
 - model_name: ~openai/gpt-latest
   litellm_params:
@@ -642,7 +659,7 @@ model_list:
     output_cost_per_token: 3.0e-05
     max_input_tokens: 1050000
     max_output_tokens: 128000
-    metadata: &id026
+    metadata: &id027
       notes: This model always redirects to the latest model in the OpenAI GPT family.
     litellm_provider: openrouter
     ~openai/gpt-latest:
@@ -650,7 +667,7 @@ model_list:
       output_cost_per_token: 3.0e-05
       max_input_tokens: 1050000
       max_output_tokens: 128000
-      metadata: *id026
+      metadata: *id027
       litellm_provider: openrouter
 - model_name: qwen/qwen3.5-plus-20260420
   litellm_params:
@@ -661,7 +678,7 @@ model_list:
     output_cost_per_token: 1.8e-06
     max_input_tokens: 1000000
     max_output_tokens: 65536
-    metadata: &id027
+    metadata: &id028
       notes: Qwen3.5 Plus (April 2026) is a large-scale multimodal language model
         from Alibaba. It accepts text, image, and video input and produces text output,
         with a 1M token context window. This...
@@ -671,7 +688,7 @@ model_list:
       output_cost_per_token: 1.8e-06
       max_input_tokens: 1000000
       max_output_tokens: 65536
-      metadata: *id027
+      metadata: *id028
       litellm_provider: openrouter
 - model_name: qwen/qwen3.6-flash
   litellm_params:
@@ -682,7 +699,7 @@ model_list:
     output_cost_per_token: 1.125e-06
     max_input_tokens: 1000000
     max_output_tokens: 65536
-    metadata: &id028
+    metadata: &id029
       notes: Qwen3.6 Flash is a fast, efficient language model from Alibaba's Qwen
         3.6 series. It supports text, image, and video input with a 1M token context
         window. Tiered pricing kicks in...
@@ -692,7 +709,7 @@ model_list:
       output_cost_per_token: 1.125e-06
       max_input_tokens: 1000000
       max_output_tokens: 65536
-      metadata: *id028
+      metadata: *id029
       litellm_provider: openrouter
 - model_name: qwen/qwen3.6-35b-a3b
   litellm_params:
@@ -703,7 +720,7 @@ model_list:
     output_cost_per_token: 1.0e-06
     max_input_tokens: 262140
     max_output_tokens: 262140
-    metadata: &id029
+    metadata: &id030
       notes: Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud
         with 35 billion total parameters and 3 billion active parameters per token.
         It uses a hybrid sparse mixture-of-experts architecture combining Gated...
@@ -713,7 +730,7 @@ model_list:
       output_cost_per_token: 1.0e-06
       max_input_tokens: 262140
       max_output_tokens: 262140
-      metadata: *id029
+      metadata: *id030
       litellm_provider: openrouter
 - model_name: qwen/qwen3.6-max-preview
   litellm_params:
@@ -724,7 +741,7 @@ model_list:
     output_cost_per_token: 6.24e-06
     max_input_tokens: 262144
     max_output_tokens: 65536
-    metadata: &id030
+    metadata: &id031
       notes: Qwen3.6-Max-Preview is a proprietary frontier model from Alibaba Cloud
         built on a sparse mixture-of-experts architecture with approximately 1 trillion
         total parameters. It is optimized for agentic coding, tool use, and...
@@ -734,7 +751,7 @@ model_list:
       output_cost_per_token: 6.24e-06
       max_input_tokens: 262144
       max_output_tokens: 65536
-      metadata: *id030
+      metadata: *id031
       litellm_provider: openrouter
 - model_name: qwen/qwen3.6-27b
   litellm_params:
@@ -745,7 +762,7 @@ model_list:
     output_cost_per_token: 3.2e-06
     max_input_tokens: 262140
     max_output_tokens: 262140
-    metadata: &id031
+    metadata: &id032
       notes: Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen
         Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities
         — accepting text, image, and video inputs...
@@ -755,7 +772,7 @@ model_list:
       output_cost_per_token: 3.2e-06
       max_input_tokens: 262140
       max_output_tokens: 262140
-      metadata: *id031
+      metadata: *id032
       litellm_provider: openrouter
 - model_name: openai/gpt-5.5-pro
   litellm_params:
@@ -766,7 +783,7 @@ model_list:
     output_cost_per_token: 0.00018
     max_input_tokens: 1050000
     max_output_tokens: 128000
-    metadata: &id032
+    metadata: &id033
       notes: GPT-5.5 Pro is OpenAI’s high-capability model optimized for deep reasoning
         and accuracy on complex, high-stakes workloads. It features a 1M+ token context
         window (922K input, 128K output) with support for...
@@ -776,7 +793,7 @@ model_list:
       output_cost_per_token: 0.00018
       max_input_tokens: 1050000
       max_output_tokens: 128000
-      metadata: *id032
+      metadata: *id033
       litellm_provider: openrouter
 - model_name: openai/gpt-5.5
   litellm_params:
@@ -787,7 +804,7 @@ model_list:
     output_cost_per_token: 3.0e-05
     max_input_tokens: 1050000
     max_output_tokens: 128000
-    metadata: &id033
+    metadata: &id034
       notes: GPT-5.5 is OpenAI’s frontier model designed for complex professional
         workloads, building on GPT-5.4 with stronger reasoning, higher reliability,
         and improved token efficiency on hard tasks. It features a 1M+ token...
@@ -797,7 +814,7 @@ model_list:
       output_cost_per_token: 3.0e-05
       max_input_tokens: 1050000
       max_output_tokens: 128000
-      metadata: *id033
+      metadata: *id034
       litellm_provider: openrouter
 - model_name: deepseek/deepseek-v4-pro
   litellm_params:
@@ -808,7 +825,7 @@ model_list:
     output_cost_per_token: 8.7e-07
     max_input_tokens: 1048576
     max_output_tokens: 384000
-    metadata: &id034
+    metadata: &id035
       notes: DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek
         with 1.6T total parameters and 49B activated parameters, supporting a 1M-token
         context window. It is designed for advanced reasoning, coding,...
@@ -818,7 +835,7 @@ model_list:
       output_cost_per_token: 8.7e-07
       max_input_tokens: 1048576
       max_output_tokens: 384000
-      metadata: *id034
+      metadata: *id035
       litellm_provider: openrouter
 - model_name: deepseek/deepseek-v4-flash
   litellm_params:
@@ -829,7 +846,7 @@ model_list:
     output_cost_per_token: 1.966e-07
     max_input_tokens: 1048576
     max_output_tokens: 131072
-    metadata: &id035
+    metadata: &id036
       notes: DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model
         from DeepSeek with 284B total parameters and 13B activated parameters, supporting
         a 1M-token context window. It is designed for fast inference and...
@@ -839,7 +856,7 @@ model_list:
       output_cost_per_token: 1.966e-07
       max_input_tokens: 1048576
       max_output_tokens: 131072
-      metadata: *id035
+      metadata: *id036
       litellm_provider: openrouter
 - model_name: inclusionai/ling-2.6-1t
   litellm_params:
@@ -850,7 +867,7 @@ model_list:
     output_cost_per_token: 6.25e-07
     max_input_tokens: 262144
     max_output_tokens: 32768
-    metadata: &id036
+    metadata: &id037
       notes: Ling-2.6-1T is an instant (instruct) model from inclusionAI and the company’s
         trillion-parameter flagship, designed for real-world agents that require fast
         execution and high efficiency at scale. It uses a “fast...
@@ -860,7 +877,7 @@ model_list:
       output_cost_per_token: 6.25e-07
       max_input_tokens: 262144
       max_output_tokens: 32768
-      metadata: *id036
+      metadata: *id037
       litellm_provider: openrouter
 - model_name: tencent/hy3-preview
   litellm_params:
@@ -870,7 +887,7 @@ model_list:
     input_cost_per_token: 6.3e-08
     output_cost_per_token: 2.1e-07
     max_input_tokens: 262144
-    metadata: &id037
+    metadata: &id038
       notes: Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent
         designed for agentic workflows and production use. It supports configurable
         reasoning levels across disabled, low, and high modes, allowing it to...
@@ -879,7 +896,7 @@ model_list:
       input_cost_per_token: 6.3e-08
       output_cost_per_token: 2.1e-07
       max_input_tokens: 262144
-      metadata: *id037
+      metadata: *id038
       litellm_provider: openrouter
 - model_name: xiaomi/mimo-v2.5-pro
   litellm_params:
@@ -901,7 +918,7 @@ model_list:
     supports_vision: false
     supports_response_schema: true
     supports_prompt_caching: true
-    metadata: &id038
+    metadata: &id039
       notes: MiMo-V2.5-Pro is Xiaomi’s flagship model, delivering strong performance
         in general agentic capabilities, complex software engineering, and long-horizon
         tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench
@@ -911,7 +928,7 @@ model_list:
       output_cost_per_token: 8.7e-07
       max_input_tokens: 1048576
       max_output_tokens: 131072
-      metadata: *id038
+      metadata: *id039
       litellm_provider: openrouter
 - model_name: xiaomi/mimo-v2.5
   litellm_params:
@@ -935,7 +952,7 @@ model_list:
     supports_video_input: true
     supports_response_schema: true
     supports_prompt_caching: true
-    metadata: &id039
+    metadata: &id040
       notes: MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level
         agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni
         in multimodal perception across image and video understanding...
@@ -944,7 +961,7 @@ model_list:
       output_cost_per_token: 2.8e-07
       max_input_tokens: 1048576
       max_output_tokens: 131072
-      metadata: *id039
+      metadata: *id040
       litellm_provider: openrouter
 - model_name: openai/gpt-5.4-image-2
   litellm_params:
@@ -955,7 +972,7 @@ model_list:
     output_cost_per_token: 1.5e-05
     max_input_tokens: 272000
     max_output_tokens: 128000
-    metadata: &id040
+    metadata: &id041
       notes: '[GPT-5.4](https://openrouter.ai/openai/gpt-5.4) Image 2 combines OpenAI''s
         GPT-5.4 model with state-of-the-art image generation capabilities from GPT
         Image 2. It enables rich multimodal workflows, allowing users to seamlessly
@@ -966,7 +983,7 @@ model_list:
       output_cost_per_token: 1.5e-05
       max_input_tokens: 272000
       max_output_tokens: 128000
-      metadata: *id040
+      metadata: *id041
       litellm_provider: openrouter
 - model_name: inclusionai/ling-2.6-flash
   litellm_params:
@@ -977,7 +994,7 @@ model_list:
     output_cost_per_token: 3.0e-08
     max_input_tokens: 262144
     max_output_tokens: 32768
-    metadata: &id041
+    metadata: &id042
       notes: Ling-2.6-flash is an instant (instruct) model from inclusionAI with 104B
         total parameters and 7.4B active parameters, designed for real-world agents
         that require fast responses, strong execution, and high token efficiency....
@@ -987,7 +1004,7 @@ model_list:
       output_cost_per_token: 3.0e-08
       max_input_tokens: 262144
       max_output_tokens: 32768
-      metadata: *id041
+      metadata: *id042
       litellm_provider: openrouter
 - model_name: ~anthropic/claude-opus-latest
   litellm_params:
@@ -998,7 +1015,7 @@ model_list:
     output_cost_per_token: 2.5e-05
     max_input_tokens: 1000000
     max_output_tokens: 128000
-    metadata: &id042
+    metadata: &id043
       notes: This model always redirects to the latest model in the Claude Opus family.
     litellm_provider: openrouter
     ~anthropic/claude-opus-latest:
@@ -1006,7 +1023,7 @@ model_list:
       output_cost_per_token: 2.5e-05
       max_input_tokens: 1000000
       max_output_tokens: 128000
-      metadata: *id042
+      metadata: *id043
       litellm_provider: openrouter
 - model_name: openrouter/pareto-code
   litellm_params:
@@ -1015,7 +1032,7 @@ model_list:
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: -1.0
     output_cost_per_token: -1.0
-    metadata: &id043
+    metadata: &id044
       notes: The Pareto Router maintains a tiered shortlist of strong coding models,
         ranked by [Artificial Analysis](https://artificialanalysis.ai/) coding percentiles.
         Set min_coding_score between 0 and 1 on the [pareto-router plugin](https://openrouter.ai/docs/guides/routing/routers/pareto-router#the-min_coding_score-parameter)
@@ -1024,7 +1041,7 @@ model_list:
     openrouter/pareto-code:
       input_cost_per_token: -1.0
       output_cost_per_token: -1.0
-      metadata: *id043
+      metadata: *id044
       litellm_provider: openrouter
 - model_name: moonshotai/kimi-k2.6:free
   litellm_params:
@@ -1036,7 +1053,7 @@ model_list:
     max_input_tokens: 262144
     mode: chat
     supports_vision: true
-    metadata: &id044
+    metadata: &id045
       notes: Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed
         for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration.
         It handles complex end-to-end coding tasks across Python, Rust, and Go, and...
@@ -1047,7 +1064,7 @@ model_list:
       max_input_tokens: 262144
       mode: chat
       supports_vision: true
-      metadata: *id044
+      metadata: *id045
       litellm_provider: openrouter
 - model_name: moonshotai/kimi-k2.6
   litellm_params:
@@ -1060,7 +1077,7 @@ model_list:
     max_output_tokens: 262144
     mode: chat
     supports_vision: true
-    metadata: &id045
+    metadata: &id046
       notes: Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed
         for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration.
         It handles complex end-to-end coding tasks across Python, Rust, and Go, and...
@@ -1072,7 +1089,7 @@ model_list:
       max_output_tokens: 262144
       mode: chat
       supports_vision: true
-      metadata: *id045
+      metadata: *id046
       litellm_provider: openrouter
 - model_name: anthropic/claude-opus-4.7
   litellm_params:
@@ -1099,7 +1116,7 @@ model_list:
     supports_tool_choice: true
     supports_vision: true
     supports_xhigh_reasoning_effort: true
-    metadata: &id046
+    metadata: &id047
       notes: Opus 4.7 is the next generation of Anthropic's Opus family, built for
         long-running, asynchronous agents. Building on the coding and agentic strengths
         of Opus 4.6, it delivers stronger performance on...
@@ -1108,7 +1125,7 @@ model_list:
       output_cost_per_token: 2.5e-05
       max_input_tokens: 1000000
       max_output_tokens: 128000
-      metadata: *id046
+      metadata: *id047
       litellm_provider: openrouter
 - model_name: anthropic/claude-opus-4.6-fast
   litellm_params:
@@ -1119,7 +1136,7 @@ model_list:
     output_cost_per_token: 0.00015
     max_input_tokens: 1000000
     max_output_tokens: 128000
-    metadata: &id047
+    metadata: &id048
       notes: 'Fast-mode variant of [Opus 4.6](/anthropic/claude-opus-4.6) - identical
         capabilities with higher output speed at premium 6x pricing.
 
@@ -1131,7 +1148,7 @@ model_list:
       output_cost_per_token: 0.00015
       max_input_tokens: 1000000
       max_output_tokens: 128000
-      metadata: *id047
+      metadata: *id048
       litellm_provider: openrouter
 - model_name: z-ai/glm-5.1
   litellm_params:
@@ -1142,7 +1159,7 @@ model_list:
     output_cost_per_token: 3.08e-06
     max_input_tokens: 202752
     max_output_tokens: 131072
-    metadata: &id048
+    metadata: &id049
       notes: GLM-5.1 delivers a major leap in coding capability, with particularly
         significant gains in handling long-horizon tasks. Unlike previous models built
         around minute-level interactions, GLM-5.1 can work independently and continuously
@@ -1153,7 +1170,7 @@ model_list:
       output_cost_per_token: 3.08e-06
       max_input_tokens: 202752
       max_output_tokens: 131072
-      metadata: *id048
+      metadata: *id049
       litellm_provider: openrouter
 - model_name: google/gemma-4-26b-a4b-it:free
   litellm_params:
@@ -1164,7 +1181,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 262144
     max_output_tokens: 32768
-    metadata: &id049
+    metadata: &id050
       notes: Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model
         from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per
         token during inference — delivering near-31B quality at...
@@ -1174,7 +1191,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 262144
       max_output_tokens: 32768
-      metadata: *id049
+      metadata: *id050
       litellm_provider: openrouter
 - model_name: google/gemma-4-26b-a4b-it
   litellm_params:
@@ -1184,7 +1201,7 @@ model_list:
     input_cost_per_token: 6.0e-08
     output_cost_per_token: 3.3e-07
     max_input_tokens: 262144
-    metadata: &id050
+    metadata: &id051
       notes: Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model
         from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per
         token during inference — delivering near-31B quality at...
@@ -1193,7 +1210,7 @@ model_list:
       input_cost_per_token: 6.0e-08
       output_cost_per_token: 3.3e-07
       max_input_tokens: 262144
-      metadata: *id050
+      metadata: *id051
       litellm_provider: openrouter
 - model_name: google/gemma-4-31b-it:free
   litellm_params:
@@ -1204,7 +1221,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 262144
     max_output_tokens: 32768
-    metadata: &id051
+    metadata: &id052
       notes: Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model
         supporting text and image input with text output. Features a 256K token context
         window, configurable thinking/reasoning mode, native function...
@@ -1214,7 +1231,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 262144
       max_output_tokens: 32768
-      metadata: *id051
+      metadata: *id052
       litellm_provider: openrouter
 - model_name: google/gemma-4-31b-it
   litellm_params:
@@ -1225,7 +1242,7 @@ model_list:
     output_cost_per_token: 3.7e-07
     max_input_tokens: 262144
     max_output_tokens: 16384
-    metadata: &id052
+    metadata: &id053
       notes: Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model
         supporting text and image input with text output. Features a 256K token context
         window, configurable thinking/reasoning mode, native function...
@@ -1235,7 +1252,7 @@ model_list:
       output_cost_per_token: 3.7e-07
       max_input_tokens: 262144
       max_output_tokens: 16384
-      metadata: *id052
+      metadata: *id053
       litellm_provider: openrouter
 - model_name: qwen/qwen3.6-plus
   litellm_params:
@@ -1254,7 +1271,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id053
+    metadata: &id054
       notes: Qwen 3.6 Plus builds on a hybrid architecture that combines efficient
         linear attention with sparse mixture-of-experts routing, enabling strong scalability
         and high-performance inference. Compared to the 3.5 series, it delivers...
@@ -1263,7 +1280,7 @@ model_list:
       output_cost_per_token: 1.95e-06
       max_input_tokens: 1000000
       max_output_tokens: 65536
-      metadata: *id053
+      metadata: *id054
       litellm_provider: openrouter
 - model_name: z-ai/glm-5v-turbo
   litellm_params:
@@ -1274,7 +1291,7 @@ model_list:
     output_cost_per_token: 4.0e-06
     max_input_tokens: 202752
     max_output_tokens: 131072
-    metadata: &id054
+    metadata: &id055
       notes: GLM-5V-Turbo is Z.ai’s first native multimodal agent foundation model,
         built for vision-based coding and agent-driven tasks. It natively handles
         image, video, and text inputs, excels at long-horizon planning, complex coding,...
@@ -1284,7 +1301,7 @@ model_list:
       output_cost_per_token: 4.0e-06
       max_input_tokens: 202752
       max_output_tokens: 131072
-      metadata: *id054
+      metadata: *id055
       litellm_provider: openrouter
 - model_name: arcee-ai/trinity-large-thinking
   litellm_params:
@@ -1295,7 +1312,7 @@ model_list:
     output_cost_per_token: 8.5e-07
     max_input_tokens: 262144
     max_output_tokens: 262144
-    metadata: &id055
+    metadata: &id056
       notes: 'Trinity Large Thinking is a powerful open source reasoning model from
         the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads,
         and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7...'
@@ -1305,7 +1322,7 @@ model_list:
       output_cost_per_token: 8.5e-07
       max_input_tokens: 262144
       max_output_tokens: 262144
-      metadata: *id055
+      metadata: *id056
       litellm_provider: openrouter
 - model_name: x-ai/grok-4.20-multi-agent
   litellm_params:
@@ -1315,7 +1332,7 @@ model_list:
     input_cost_per_token: 2.0e-06
     output_cost_per_token: 6.0e-06
     max_input_tokens: 2000000
-    metadata: &id056
+    metadata: &id057
       notes: Grok 4.20 Multi-Agent is a variant of xAI’s Grok 4.20 designed for collaborative,
         agent-based workflows. Multiple agents operate in parallel to conduct deep
         research, coordinate tool use, and synthesize information...
@@ -1324,7 +1341,7 @@ model_list:
       input_cost_per_token: 2.0e-06
       output_cost_per_token: 6.0e-06
       max_input_tokens: 2000000
-      metadata: *id056
+      metadata: *id057
       litellm_provider: openrouter
 - model_name: x-ai/grok-4.20
   litellm_params:
@@ -1334,7 +1351,7 @@ model_list:
     input_cost_per_token: 1.25e-06
     output_cost_per_token: 2.5e-06
     max_input_tokens: 2000000
-    metadata: &id057
+    metadata: &id058
       notes: Grok 4.20 is a reasoning model from xAI with industry-leading speed and
         agentic tool calling capabilities. It combines the lowest hallucination rate
         on the market with strict prompt adherance, delivering...
@@ -1343,7 +1360,7 @@ model_list:
       input_cost_per_token: 1.25e-06
       output_cost_per_token: 2.5e-06
       max_input_tokens: 2000000
-      metadata: *id057
+      metadata: *id058
       litellm_provider: openrouter
 - model_name: google/lyria-3-pro-preview
   litellm_params:
@@ -1354,7 +1371,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 1048576
     max_output_tokens: 65536
-    metadata: &id058
+    metadata: &id059
       notes: Full-length songs are priced at $0.08 per song. Lyria 3 is Google's family
         of music generation models, available through the Gemini API. With Lyria 3,
         you can generate high-quality, 48kHz...
@@ -1364,7 +1381,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 1048576
       max_output_tokens: 65536
-      metadata: *id058
+      metadata: *id059
       litellm_provider: openrouter
 - model_name: google/lyria-3-clip-preview
   litellm_params:
@@ -1375,7 +1392,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 1048576
     max_output_tokens: 65536
-    metadata: &id059
+    metadata: &id060
       notes: 30 second duration clips are priced at $0.04 per clip. Lyria 3 is Google's
         family of music generation models, available through the Gemini API. With
         Lyria 3, you can generate...
@@ -1385,7 +1402,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 1048576
       max_output_tokens: 65536
-      metadata: *id059
+      metadata: *id060
       litellm_provider: openrouter
 - model_name: kwaipilot/kat-coder-pro-v2
   litellm_params:
@@ -1396,7 +1413,7 @@ model_list:
     output_cost_per_token: 1.2e-06
     max_input_tokens: 256000
     max_output_tokens: 80000
-    metadata: &id060
+    metadata: &id061
       notes: KAT-Coder-Pro V2 is the latest high-performance model in KwaiKAT’s KAT-Coder
         series, designed for complex enterprise-grade software engineering and SaaS
         integration. It builds on the agentic coding strengths of earlier versions,...
@@ -1406,7 +1423,7 @@ model_list:
       output_cost_per_token: 1.2e-06
       max_input_tokens: 256000
       max_output_tokens: 80000
-      metadata: *id060
+      metadata: *id061
       litellm_provider: openrouter
 - model_name: rekaai/reka-edge
   litellm_params:
@@ -1417,7 +1434,7 @@ model_list:
     output_cost_per_token: 1.0e-07
     max_input_tokens: 16384
     max_output_tokens: 16384
-    metadata: &id061
+    metadata: &id062
       notes: Reka Edge is an extremely efficient 7B multimodal vision-language model
         that accepts image/video+text inputs and generates text outputs. This model
         is optimized specifically to deliver industry-leading performance in image
@@ -1428,7 +1445,7 @@ model_list:
       output_cost_per_token: 1.0e-07
       max_input_tokens: 16384
       max_output_tokens: 16384
-      metadata: *id061
+      metadata: *id062
       litellm_provider: openrouter
 - model_name: minimax/minimax-m2.7
   litellm_params:
@@ -1439,7 +1456,7 @@ model_list:
     output_cost_per_token: 1.2e-06
     max_input_tokens: 196608
     max_output_tokens: 131072
-    metadata: &id062
+    metadata: &id063
       notes: MiniMax-M2.7 is a next-generation large language model designed for autonomous,
         real-world productivity and continuous improvement. Built to actively participate
         in its own evolution, M2.7 integrates advanced agentic capabilities through
@@ -1450,7 +1467,7 @@ model_list:
       output_cost_per_token: 1.2e-06
       max_input_tokens: 196608
       max_output_tokens: 131072
-      metadata: *id062
+      metadata: *id063
       litellm_provider: openrouter
 - model_name: openai/gpt-5.4-nano
   litellm_params:
@@ -1461,7 +1478,7 @@ model_list:
     output_cost_per_token: 1.25e-06
     max_input_tokens: 400000
     max_output_tokens: 128000
-    metadata: &id063
+    metadata: &id064
       notes: GPT-5.4 nano is the most lightweight and cost-efficient variant of the
         GPT-5.4 family, optimized for speed-critical and high-volume tasks. It supports
         text and image inputs and is designed for low-latency...
@@ -1471,7 +1488,7 @@ model_list:
       output_cost_per_token: 1.25e-06
       max_input_tokens: 400000
       max_output_tokens: 128000
-      metadata: *id063
+      metadata: *id064
       litellm_provider: openrouter
 - model_name: openai/gpt-5.4-mini
   litellm_params:
@@ -1482,7 +1499,7 @@ model_list:
     output_cost_per_token: 4.5e-06
     max_input_tokens: 400000
     max_output_tokens: 128000
-    metadata: &id064
+    metadata: &id065
       notes: GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more
         efficient model optimized for high-throughput workloads. It supports text
         and image inputs with strong performance across reasoning, coding,...
@@ -1492,7 +1509,7 @@ model_list:
       output_cost_per_token: 4.5e-06
       max_input_tokens: 400000
       max_output_tokens: 128000
-      metadata: *id064
+      metadata: *id065
       litellm_provider: openrouter
 - model_name: mistralai/mistral-small-2603
   litellm_params:
@@ -1504,7 +1521,7 @@ model_list:
     max_input_tokens: 262144
     mode: chat
     supports_vision: true
-    metadata: &id065
+    metadata: &id066
       notes: Mistral Small 4 is the next major release in the Mistral Small family,
         unifying the capabilities of several flagship Mistral models into a single
         system. It combines strong reasoning from...
@@ -1515,7 +1532,7 @@ model_list:
       max_input_tokens: 262144
       mode: chat
       supports_vision: true
-      metadata: *id065
+      metadata: *id066
       litellm_provider: openrouter
 - model_name: z-ai/glm-5-turbo
   litellm_params:
@@ -1526,7 +1543,7 @@ model_list:
     output_cost_per_token: 4.0e-06
     max_input_tokens: 202752
     max_output_tokens: 131072
-    metadata: &id066
+    metadata: &id067
       notes: GLM-5 Turbo is a new model from Z.ai designed for fast inference and
         strong performance in agent-driven environments such as OpenClaw scenarios.
         It is deeply optimized for real-world agent workflows...
@@ -1536,7 +1553,7 @@ model_list:
       output_cost_per_token: 4.0e-06
       max_input_tokens: 202752
       max_output_tokens: 131072
-      metadata: *id066
+      metadata: *id067
       litellm_provider: openrouter
 - model_name: nvidia/nemotron-3-super-120b-a12b:free
   litellm_params:
@@ -1547,7 +1564,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 262144
     max_output_tokens: 262144
-    metadata: &id067
+    metadata: &id068
       notes: NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating
         just 12B parameters for maximum compute efficiency and accuracy in complex
         multi-agent applications. Built on a hybrid Mamba-Transformer...
@@ -1557,7 +1574,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 262144
       max_output_tokens: 262144
-      metadata: *id067
+      metadata: *id068
       litellm_provider: openrouter
 - model_name: nvidia/nemotron-3-super-120b-a12b
   litellm_params:
@@ -1567,7 +1584,7 @@ model_list:
     input_cost_per_token: 9.0e-08
     output_cost_per_token: 4.5e-07
     max_input_tokens: 262144
-    metadata: &id068
+    metadata: &id069
       notes: NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating
         just 12B parameters for maximum compute efficiency and accuracy in complex
         multi-agent applications. Built on a hybrid Mamba-Transformer...
@@ -1576,7 +1593,7 @@ model_list:
       input_cost_per_token: 9.0e-08
       output_cost_per_token: 4.5e-07
       max_input_tokens: 262144
-      metadata: *id068
+      metadata: *id069
       litellm_provider: openrouter
 - model_name: bytedance-seed/seed-2.0-lite
   litellm_params:
@@ -1587,7 +1604,7 @@ model_list:
     output_cost_per_token: 2.0e-06
     max_input_tokens: 262144
     max_output_tokens: 131072
-    metadata: &id069
+    metadata: &id070
       notes: Seed-2.0-Lite is a versatile, cost‑efficient enterprise workhorse that
         delivers strong multimodal and agent capabilities while offering noticeably
         lower latency, making it a practical default choice for most production workloads
@@ -1598,7 +1615,7 @@ model_list:
       output_cost_per_token: 2.0e-06
       max_input_tokens: 262144
       max_output_tokens: 131072
-      metadata: *id069
+      metadata: *id070
       litellm_provider: openrouter
 - model_name: qwen/qwen3.5-9b
   litellm_params:
@@ -1609,7 +1626,7 @@ model_list:
     output_cost_per_token: 1.5e-07
     max_input_tokens: 262144
     max_output_tokens: 81920
-    metadata: &id070
+    metadata: &id071
       notes: Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family,
         designed to deliver strong reasoning, coding, and visual understanding in
         an efficient 9B-parameter architecture. It uses a unified vision-language
@@ -1620,7 +1637,7 @@ model_list:
       output_cost_per_token: 1.5e-07
       max_input_tokens: 262144
       max_output_tokens: 81920
-      metadata: *id070
+      metadata: *id071
       litellm_provider: openrouter
 - model_name: openai/gpt-5.4-pro
   litellm_params:
@@ -1631,7 +1648,7 @@ model_list:
     output_cost_per_token: 0.00018
     max_input_tokens: 1050000
     max_output_tokens: 128000
-    metadata: &id071
+    metadata: &id072
       notes: GPT-5.4 Pro is OpenAI's most advanced model, building on GPT-5.4's unified
         architecture with enhanced reasoning capabilities for complex, high-stakes
         tasks. It features a 1M+ token context window (922K input, 128K...
@@ -1641,7 +1658,7 @@ model_list:
       output_cost_per_token: 0.00018
       max_input_tokens: 1050000
       max_output_tokens: 128000
-      metadata: *id071
+      metadata: *id072
       litellm_provider: openrouter
 - model_name: openai/gpt-5.4
   litellm_params:
@@ -1652,7 +1669,7 @@ model_list:
     output_cost_per_token: 1.5e-05
     max_input_tokens: 1050000
     max_output_tokens: 128000
-    metadata: &id072
+    metadata: &id073
       notes: GPT-5.4 is OpenAI’s latest frontier model, unifying the Codex and GPT
         lines into a single system. It features a 1M+ token context window (922K input,
         128K output) with support for...
@@ -1662,7 +1679,7 @@ model_list:
       output_cost_per_token: 1.5e-05
       max_input_tokens: 1050000
       max_output_tokens: 128000
-      metadata: *id072
+      metadata: *id073
       litellm_provider: openrouter
 - model_name: inception/mercury-2
   litellm_params:
@@ -1673,7 +1690,7 @@ model_list:
     output_cost_per_token: 7.5e-07
     max_input_tokens: 128000
     max_output_tokens: 50000
-    metadata: &id073
+    metadata: &id074
       notes: Mercury 2 is an extremely fast reasoning LLM, and the first reasoning
         diffusion LLM (dLLM). Instead of generating tokens sequentially, Mercury 2
         produces and refines multiple tokens in parallel, achieving...
@@ -1683,7 +1700,7 @@ model_list:
       output_cost_per_token: 7.5e-07
       max_input_tokens: 128000
       max_output_tokens: 50000
-      metadata: *id073
+      metadata: *id074
       litellm_provider: openrouter
 - model_name: openai/gpt-5.3-chat
   litellm_params:
@@ -1694,7 +1711,7 @@ model_list:
     output_cost_per_token: 1.4e-05
     max_input_tokens: 128000
     max_output_tokens: 16384
-    metadata: &id074
+    metadata: &id075
       notes: GPT-5.3 Chat is an update to ChatGPT's most-used model that makes everyday
         conversations smoother, more useful, and more directly helpful. It delivers
         more accurate answers with better contextualization and significantly...
@@ -1704,7 +1721,7 @@ model_list:
       output_cost_per_token: 1.4e-05
       max_input_tokens: 128000
       max_output_tokens: 16384
-      metadata: *id074
+      metadata: *id075
       litellm_provider: openrouter
 - model_name: google/gemini-3.1-flash-lite-preview
   litellm_params:
@@ -1759,7 +1776,7 @@ model_list:
     supports_web_search: true
     tpm: 800000
     input_cost_per_image: 2.5e-07
-    metadata: &id075
+    metadata: &id076
       notes: Gemini 3.1 Flash Lite Preview is Google's high-efficiency model optimized
         for high-volume use cases. It outperforms Gemini 2.5 Flash Lite on overall
         quality and approaches Gemini 2.5 Flash performance across...
@@ -1769,7 +1786,7 @@ model_list:
       input_cost_per_image: 2.5e-07
       max_input_tokens: 1048576
       max_output_tokens: 65536
-      metadata: *id075
+      metadata: *id076
       litellm_provider: openrouter
 - model_name: bytedance-seed/seed-2.0-mini
   litellm_params:
@@ -1780,7 +1797,7 @@ model_list:
     output_cost_per_token: 4.0e-07
     max_input_tokens: 262144
     max_output_tokens: 131072
-    metadata: &id076
+    metadata: &id077
       notes: Seed-2.0-mini targets latency-sensitive, high-concurrency, and cost-sensitive
         scenarios, emphasizing fast response and flexible inference deployment. It
         delivers performance comparable to ByteDance-Seed-1.6, supports 256k context,
@@ -1791,7 +1808,7 @@ model_list:
       output_cost_per_token: 4.0e-07
       max_input_tokens: 262144
       max_output_tokens: 131072
-      metadata: *id076
+      metadata: *id077
       litellm_provider: openrouter
 - model_name: google/gemini-3.1-flash-image-preview
   litellm_params:
@@ -1802,7 +1819,7 @@ model_list:
     output_cost_per_token: 3.0e-06
     max_input_tokens: 65536
     max_output_tokens: 65536
-    metadata: &id077
+    metadata: &id078
       notes: Gemini 3.1 Flash Image Preview, a.k.a. "Nano Banana 2," is Google’s latest
         state of the art image generation and editing model, delivering Pro-level
         visual quality at Flash speed. It combines...
@@ -1812,7 +1829,7 @@ model_list:
       output_cost_per_token: 3.0e-06
       max_input_tokens: 65536
       max_output_tokens: 65536
-      metadata: *id077
+      metadata: *id078
       litellm_provider: openrouter
 - model_name: qwen/qwen3.5-35b-a3b
   litellm_params:
@@ -1831,7 +1848,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id078
+    metadata: &id079
       notes: The Qwen3.5 Series 35B-A3B is a native vision-language model designed
         with a hybrid architecture that integrates linear attention mechanisms and
         a sparse mixture-of-experts model, achieving higher inference efficiency.
@@ -1841,7 +1858,7 @@ model_list:
       output_cost_per_token: 1.0e-06
       max_input_tokens: 262144
       max_output_tokens: 262144
-      metadata: *id078
+      metadata: *id079
       litellm_provider: openrouter
 - model_name: qwen/qwen3.5-27b
   litellm_params:
@@ -1860,7 +1877,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id079
+    metadata: &id080
       notes: The Qwen3.5 27B native vision-language Dense model incorporates a linear
         attention mechanism, delivering fast response times while balancing inference
         speed and performance. Its overall capabilities are comparable to those of...
@@ -1869,7 +1886,7 @@ model_list:
       output_cost_per_token: 1.56e-06
       max_input_tokens: 262144
       max_output_tokens: 65536
-      metadata: *id079
+      metadata: *id080
       litellm_provider: openrouter
 - model_name: qwen/qwen3.5-122b-a10b
   litellm_params:
@@ -1888,7 +1905,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id080
+    metadata: &id081
       notes: The Qwen3.5 122B-A10B native vision-language model is built on a hybrid
         architecture that integrates a linear attention mechanism with a sparse mixture-of-experts
         model, achieving higher inference efficiency. In terms of...
@@ -1897,7 +1914,7 @@ model_list:
       output_cost_per_token: 2.08e-06
       max_input_tokens: 262144
       max_output_tokens: 262144
-      metadata: *id080
+      metadata: *id081
       litellm_provider: openrouter
 - model_name: qwen/qwen3.5-flash-02-23
   litellm_params:
@@ -1916,7 +1933,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id081
+    metadata: &id082
       notes: The Qwen3.5 native vision-language Flash models are built on a hybrid
         architecture that integrates a linear attention mechanism with a sparse mixture-of-experts
         model, achieving higher inference efficiency. Compared to the...
@@ -1925,7 +1942,7 @@ model_list:
       output_cost_per_token: 2.6e-07
       max_input_tokens: 1000000
       max_output_tokens: 65536
-      metadata: *id081
+      metadata: *id082
       litellm_provider: openrouter
 - model_name: liquid/lfm-2-24b-a2b
   litellm_params:
@@ -1935,7 +1952,7 @@ model_list:
     input_cost_per_token: 3.0e-08
     output_cost_per_token: 1.2e-07
     max_input_tokens: 32768
-    metadata: &id082
+    metadata: &id083
       notes: LFM2-24B-A2B is the largest model in the LFM2 family of hybrid architectures
         designed for efficient on-device deployment. Built as a 24B parameter Mixture-of-Experts
         model with only 2B active parameters per...
@@ -1944,7 +1961,7 @@ model_list:
       input_cost_per_token: 3.0e-08
       output_cost_per_token: 1.2e-07
       max_input_tokens: 32768
-      metadata: *id082
+      metadata: *id083
       litellm_provider: openrouter
 - model_name: google/gemini-3.1-pro-preview-customtools
   litellm_params:
@@ -1956,7 +1973,7 @@ model_list:
     input_cost_per_image: 2.0e-06
     max_input_tokens: 1048576
     max_output_tokens: 65536
-    metadata: &id083
+    metadata: &id084
       notes: Gemini 3.1 Pro Preview Custom Tools is a variant of Gemini 3.1 Pro that
         improves tool selection behavior by preventing overuse of a general bash tool
         when more efficient third-party...
@@ -1967,7 +1984,7 @@ model_list:
       input_cost_per_image: 2.0e-06
       max_input_tokens: 1048576
       max_output_tokens: 65536
-      metadata: *id083
+      metadata: *id084
       litellm_provider: openrouter
 - model_name: openai/gpt-5.3-codex
   litellm_params:
@@ -1978,7 +1995,7 @@ model_list:
     output_cost_per_token: 1.4e-05
     max_input_tokens: 400000
     max_output_tokens: 128000
-    metadata: &id084
+    metadata: &id085
       notes: GPT-5.3-Codex is OpenAI’s most advanced agentic coding model, combining
         the frontier software engineering performance of GPT-5.2-Codex with the broader
         reasoning and professional knowledge capabilities of GPT-5.2. It achieves
@@ -1989,7 +2006,7 @@ model_list:
       output_cost_per_token: 1.4e-05
       max_input_tokens: 400000
       max_output_tokens: 128000
-      metadata: *id084
+      metadata: *id085
       litellm_provider: openrouter
 - model_name: aion-labs/aion-2.0
   litellm_params:
@@ -2000,7 +2017,7 @@ model_list:
     output_cost_per_token: 1.6e-06
     max_input_tokens: 131072
     max_output_tokens: 32768
-    metadata: &id085
+    metadata: &id086
       notes: Aion-2.0 is a variant of DeepSeek V3.2 optimized for immersive roleplaying
         and storytelling. It is particularly strong at introducing tension, crises,
         and conflict into stories, making narratives feel more engaging....
@@ -2010,7 +2027,7 @@ model_list:
       output_cost_per_token: 1.6e-06
       max_input_tokens: 131072
       max_output_tokens: 32768
-      metadata: *id085
+      metadata: *id086
       litellm_provider: openrouter
 - model_name: google/gemini-3.1-pro-preview
   litellm_params:
@@ -2047,7 +2064,7 @@ model_list:
     supports_tool_choice: true
     supports_vision: true
     input_cost_per_image: 2.0e-06
-    metadata: &id086
+    metadata: &id087
       notes: Gemini 3.1 Pro Preview is Google’s frontier reasoning model, delivering
         enhanced software engineering performance, improved agentic reliability, and
         more efficient token usage across complex workflows. Building on the multimodal
@@ -2058,7 +2075,7 @@ model_list:
       input_cost_per_image: 2.0e-06
       max_input_tokens: 1048576
       max_output_tokens: 65536
-      metadata: *id086
+      metadata: *id087
       litellm_provider: openrouter
 - model_name: anthropic/claude-sonnet-4.6
   litellm_params:
@@ -2087,7 +2104,7 @@ model_list:
     supports_max_reasoning_effort: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id087
+    metadata: &id088
       notes: Sonnet 4.6 is Anthropic's most capable Sonnet-class model yet, with frontier
         performance across coding, agents, and professional work. It excels at iterative
         development, complex codebase navigation, end-to-end project management with...
@@ -2096,7 +2113,7 @@ model_list:
       output_cost_per_token: 1.5e-05
       max_input_tokens: 1000000
       max_output_tokens: 128000
-      metadata: *id087
+      metadata: *id088
       litellm_provider: openrouter
 - model_name: qwen/qwen3.5-plus-02-15
   litellm_params:
@@ -2117,7 +2134,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id088
+    metadata: &id089
       notes: The Qwen3.5 native vision-language series Plus models are built on a
         hybrid architecture that integrates linear attention mechanisms with sparse
         mixture-of-experts models, achieving higher inference efficiency. In a variety
@@ -2127,7 +2144,7 @@ model_list:
       output_cost_per_token: 1.56e-06
       max_input_tokens: 1000000
       max_output_tokens: 65536
-      metadata: *id088
+      metadata: *id089
       litellm_provider: openrouter
 - model_name: qwen/qwen3.5-397b-a17b
   litellm_params:
@@ -2146,7 +2163,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id089
+    metadata: &id090
       notes: The Qwen3.5 series 397B-A17B native vision-language model is built on
         a hybrid architecture that integrates a linear attention mechanism with a
         sparse mixture-of-experts model, achieving higher inference efficiency. It
@@ -2156,7 +2173,7 @@ model_list:
       output_cost_per_token: 2.34e-06
       max_input_tokens: 262144
       max_output_tokens: 65536
-      metadata: *id089
+      metadata: *id090
       litellm_provider: openrouter
 - model_name: minimax/minimax-m2.5
   litellm_params:
@@ -2180,7 +2197,7 @@ model_list:
     supports_computer_use: false
     cache_creation_input_token_cost: 3.75e-07
     supports_system_messages: true
-    metadata: &id090
+    metadata: &id091
       notes: MiniMax-M2.5 is a SOTA large language model designed for real-world productivity.
         Trained in a diverse range of complex real-world digital working environments,
         M2.5 builds upon the coding expertise of M2.1...
@@ -2198,7 +2215,7 @@ model_list:
       supports_system_messages: true
       max_input_tokens: 196608
       max_output_tokens: 196608
-      metadata: *id090
+      metadata: *id091
 - model_name: z-ai/glm-5
   litellm_params:
     model: openai/z-ai/glm-5
@@ -2215,7 +2232,7 @@ model_list:
     supports_function_calling: true
     supports_reasoning: true
     supports_tool_choice: true
-    metadata: &id091
+    metadata: &id092
       notes: GLM-5 is Z.ai’s flagship open-source foundation model engineered for
         complex systems design and long-horizon agent workflows. Built for expert
         developers, it delivers production-grade performance on large-scale programming
@@ -2225,7 +2242,7 @@ model_list:
       output_cost_per_token: 2.08e-06
       max_input_tokens: 202752
       max_output_tokens: 16384
-      metadata: *id091
+      metadata: *id092
       litellm_provider: openrouter
 - model_name: qwen/qwen3-max-thinking
   litellm_params:
@@ -2236,7 +2253,7 @@ model_list:
     output_cost_per_token: 3.9e-06
     max_input_tokens: 262144
     max_output_tokens: 32768
-    metadata: &id092
+    metadata: &id093
       notes: Qwen3-Max-Thinking is the flagship reasoning model in the Qwen3 series,
         designed for high-stakes cognitive tasks that require deep, multi-step reasoning.
         By significantly scaling model capacity and reinforcement learning compute,
@@ -2247,7 +2264,7 @@ model_list:
       output_cost_per_token: 3.9e-06
       max_input_tokens: 262144
       max_output_tokens: 32768
-      metadata: *id092
+      metadata: *id093
       litellm_provider: openrouter
 - model_name: anthropic/claude-opus-4.6
   litellm_params:
@@ -2271,7 +2288,7 @@ model_list:
     supports_max_reasoning_effort: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id093
+    metadata: &id094
       notes: Opus 4.6 is Anthropic’s strongest model for coding and long-running professional
         tasks. It is built for agents that operate across entire workflows rather
         than single prompts, making it especially effective...
@@ -2280,7 +2297,7 @@ model_list:
       output_cost_per_token: 2.5e-05
       max_input_tokens: 1000000
       max_output_tokens: 128000
-      metadata: *id093
+      metadata: *id094
       litellm_provider: openrouter
 - model_name: qwen/qwen3-coder-next
   litellm_params:
@@ -2291,7 +2308,7 @@ model_list:
     output_cost_per_token: 8.0e-07
     max_input_tokens: 262144
     max_output_tokens: 262144
-    metadata: &id094
+    metadata: &id095
       notes: Qwen3-Coder-Next is an open-weight causal language model optimized for
         coding agents and local development workflows. It uses a sparse MoE design
         with 80B total parameters and only 3B activated per...
@@ -2301,7 +2318,7 @@ model_list:
       output_cost_per_token: 8.0e-07
       max_input_tokens: 262144
       max_output_tokens: 262144
-      metadata: *id094
+      metadata: *id095
       litellm_provider: openrouter
 - model_name: openrouter/free
   litellm_params:
@@ -2312,7 +2329,7 @@ model_list:
     output_cost_per_token: 0.0
     mode: chat
     supports_vision: true
-    metadata: &id095
+    metadata: &id096
       notes: The simplest way to get free inference. openrouter/free is a router that
         selects free models at random from the models available on OpenRouter. The
         router smartly filters for models that...
@@ -2322,7 +2339,7 @@ model_list:
       output_cost_per_token: 0.0
       mode: chat
       supports_vision: true
-      metadata: *id095
+      metadata: *id096
       litellm_provider: openrouter
 - model_name: stepfun/step-3.5-flash
   litellm_params:
@@ -2333,7 +2350,7 @@ model_list:
     output_cost_per_token: 3.0e-07
     max_input_tokens: 262144
     max_output_tokens: 16384
-    metadata: &id096
+    metadata: &id097
       notes: Step 3.5 Flash is StepFun's most capable open-source foundation model.
         Built on a sparse Mixture of Experts (MoE) architecture, it selectively activates
         only 11B of its 196B parameters per token....
@@ -2343,7 +2360,7 @@ model_list:
       output_cost_per_token: 3.0e-07
       max_input_tokens: 262144
       max_output_tokens: 16384
-      metadata: *id096
+      metadata: *id097
       litellm_provider: openrouter
 - model_name: moonshotai/kimi-k2.5
   litellm_params:
@@ -2363,7 +2380,7 @@ model_list:
     supports_tool_choice: true
     supports_video_input: true
     supports_vision: true
-    metadata: &id097
+    metadata: &id098
       notes: Kimi K2.5 is Moonshot AI's native multimodal model, delivering state-of-the-art
         visual coding capability and a self-directed agent swarm paradigm. Built on
         Kimi K2 with continued pretraining over approximately 15T mixed...
@@ -2374,7 +2391,7 @@ model_list:
       max_output_tokens: 262144
       mode: chat
       supports_vision: true
-      metadata: *id097
+      metadata: *id098
       litellm_provider: openrouter
 - model_name: upstage/solar-pro-3
   litellm_params:
@@ -2384,7 +2401,7 @@ model_list:
     input_cost_per_token: 1.5e-07
     output_cost_per_token: 6.0e-07
     max_input_tokens: 128000
-    metadata: &id098
+    metadata: &id099
       notes: Solar Pro 3 is Upstage's powerful Mixture-of-Experts (MoE) language model.
         With 102B total parameters and 12B active parameters per forward pass, it
         delivers exceptional performance while maintaining computational efficiency.
@@ -2394,7 +2411,7 @@ model_list:
       input_cost_per_token: 1.5e-07
       output_cost_per_token: 6.0e-07
       max_input_tokens: 128000
-      metadata: *id098
+      metadata: *id099
       litellm_provider: openrouter
 - model_name: minimax/minimax-m2-her
   litellm_params:
@@ -2405,7 +2422,7 @@ model_list:
     output_cost_per_token: 1.2e-06
     max_input_tokens: 65536
     max_output_tokens: 2048
-    metadata: &id099
+    metadata: &id100
       notes: MiniMax M2-her is a dialogue-first large language model built for immersive
         roleplay, character-driven chat, and expressive multi-turn conversations.
         Designed to stay consistent in tone and personality, it supports rich message...
@@ -2415,7 +2432,7 @@ model_list:
       output_cost_per_token: 1.2e-06
       max_input_tokens: 65536
       max_output_tokens: 2048
-      metadata: *id099
+      metadata: *id100
       litellm_provider: openrouter
 - model_name: writer/palmyra-x5
   litellm_params:
@@ -2426,7 +2443,7 @@ model_list:
     output_cost_per_token: 6.0e-06
     max_input_tokens: 1040000
     max_output_tokens: 8192
-    metadata: &id100
+    metadata: &id101
       notes: Palmyra X5 is Writer's most advanced model, purpose-built for building
         and scaling AI agents across the enterprise. It delivers industry-leading
         speed and efficiency on context windows up to 1 million...
@@ -2436,7 +2453,7 @@ model_list:
       output_cost_per_token: 6.0e-06
       max_input_tokens: 1040000
       max_output_tokens: 8192
-      metadata: *id100
+      metadata: *id101
       litellm_provider: openrouter
 - model_name: liquid/lfm-2.5-1.2b-thinking:free
   litellm_params:
@@ -2446,7 +2463,7 @@ model_list:
     input_cost_per_token: 0.0
     output_cost_per_token: 0.0
     max_input_tokens: 32768
-    metadata: &id101
+    metadata: &id102
       notes: LFM2.5-1.2B-Thinking is a lightweight reasoning-focused model optimized
         for agentic tasks, data extraction, and RAG—while still running comfortably
         on edge devices. It supports long context (up to 32K tokens) and is...
@@ -2455,7 +2472,7 @@ model_list:
       input_cost_per_token: 0.0
       output_cost_per_token: 0.0
       max_input_tokens: 32768
-      metadata: *id101
+      metadata: *id102
       litellm_provider: openrouter
 - model_name: liquid/lfm-2.5-1.2b-instruct:free
   litellm_params:
@@ -2465,7 +2482,7 @@ model_list:
     input_cost_per_token: 0.0
     output_cost_per_token: 0.0
     max_input_tokens: 32768
-    metadata: &id102
+    metadata: &id103
       notes: LFM2.5-1.2B-Instruct is a compact, high-performance instruction-tuned
         model built for fast on-device AI. It delivers strong chat quality in a 1.2B
         parameter footprint, with efficient edge inference and broad runtime support.
@@ -2474,7 +2491,7 @@ model_list:
       input_cost_per_token: 0.0
       output_cost_per_token: 0.0
       max_input_tokens: 32768
-      metadata: *id102
+      metadata: *id103
       litellm_provider: openrouter
 - model_name: openai/gpt-audio
   litellm_params:
@@ -2485,7 +2502,7 @@ model_list:
     output_cost_per_token: 1.0e-05
     max_input_tokens: 128000
     max_output_tokens: 16384
-    metadata: &id103
+    metadata: &id104
       notes: The gpt-audio model is OpenAI's first generally available audio model.
         The new snapshot features an upgraded decoder for more natural sounding voices
         and maintains better voice consistency. Audio is priced...
@@ -2495,7 +2512,7 @@ model_list:
       output_cost_per_token: 1.0e-05
       max_input_tokens: 128000
       max_output_tokens: 16384
-      metadata: *id103
+      metadata: *id104
       litellm_provider: openrouter
 - model_name: openai/gpt-audio-mini
   litellm_params:
@@ -2506,7 +2523,7 @@ model_list:
     output_cost_per_token: 2.4e-06
     max_input_tokens: 128000
     max_output_tokens: 16384
-    metadata: &id104
+    metadata: &id105
       notes: A cost-efficient version of GPT Audio. The new snapshot features an upgraded
         decoder for more natural sounding voices and maintains better voice consistency.
         Input is priced at $0.60 per million...
@@ -2516,7 +2533,7 @@ model_list:
       output_cost_per_token: 2.4e-06
       max_input_tokens: 128000
       max_output_tokens: 16384
-      metadata: *id104
+      metadata: *id105
       litellm_provider: openrouter
 - model_name: z-ai/glm-4.7-flash
   litellm_params:
@@ -2537,7 +2554,7 @@ model_list:
     supports_reasoning: true
     supports_vision: true
     supports_prompt_caching: false
-    metadata: &id105
+    metadata: &id106
       notes: As a 30B-class SOTA model, GLM-4.7-Flash offers a new option that balances
         performance and efficiency. It is further optimized for agentic coding use
         cases, strengthening coding capabilities, long-horizon task planning,...
@@ -2546,7 +2563,7 @@ model_list:
       output_cost_per_token: 4.0e-07
       max_input_tokens: 202752
       max_output_tokens: 16384
-      metadata: *id105
+      metadata: *id106
       litellm_provider: openrouter
 - model_name: openai/gpt-5.2-codex
   litellm_params:
@@ -2569,7 +2586,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id106
+    metadata: &id107
       notes: GPT-5.2-Codex is an upgraded version of GPT-5.1-Codex optimized for software
         engineering and coding workflows. It is designed for both interactive development
         sessions and long, independent execution of complex engineering tasks....
@@ -2580,7 +2597,7 @@ model_list:
       max_output_tokens: 128000
       mode: chat
       supports_vision: true
-      metadata: *id106
+      metadata: *id107
       litellm_provider: openrouter
 - model_name: bytedance-seed/seed-1.6-flash
   litellm_params:
@@ -2591,7 +2608,7 @@ model_list:
     output_cost_per_token: 3.0e-07
     max_input_tokens: 262144
     max_output_tokens: 32768
-    metadata: &id107
+    metadata: &id108
       notes: Seed 1.6 Flash is an ultra-fast multimodal deep thinking model by ByteDance
         Seed, supporting both text and visual understanding. It features a 256k context
         window and can generate outputs of...
@@ -2601,7 +2618,7 @@ model_list:
       output_cost_per_token: 3.0e-07
       max_input_tokens: 262144
       max_output_tokens: 32768
-      metadata: *id107
+      metadata: *id108
       litellm_provider: openrouter
 - model_name: bytedance-seed/seed-1.6
   litellm_params:
@@ -2612,7 +2629,7 @@ model_list:
     output_cost_per_token: 2.0e-06
     max_input_tokens: 262144
     max_output_tokens: 32768
-    metadata: &id108
+    metadata: &id109
       notes: Seed 1.6 is a general-purpose model released by the ByteDance Seed team.
         It incorporates multimodal capabilities and adaptive deep thinking with a
         256K context window.
@@ -2622,7 +2639,7 @@ model_list:
       output_cost_per_token: 2.0e-06
       max_input_tokens: 262144
       max_output_tokens: 32768
-      metadata: *id108
+      metadata: *id109
       litellm_provider: openrouter
 - model_name: minimax/minimax-m2.1
   litellm_params:
@@ -2645,7 +2662,7 @@ model_list:
     supports_prompt_caching: true
     supports_computer_use: false
     supports_system_messages: true
-    metadata: &id109
+    metadata: &id110
       notes: MiniMax-M2.1 is a lightweight, state-of-the-art large language model
         optimized for coding, agentic workflows, and modern application development.
         With only 10 billion activated parameters, it delivers a major jump in real-world...
@@ -2663,7 +2680,7 @@ model_list:
       supports_system_messages: true
       max_input_tokens: 196608
       max_output_tokens: 196608
-      metadata: *id109
+      metadata: *id110
 - model_name: z-ai/glm-4.7
   litellm_params:
     model: openai/z-ai/glm-4.7
@@ -2684,7 +2701,7 @@ model_list:
     supports_vision: true
     supports_prompt_caching: false
     supports_assistant_prefill: true
-    metadata: &id110
+    metadata: &id111
       notes: 'GLM-4.7 is Z.ai’s latest flagship model, featuring upgrades in two key
         areas: enhanced programming capabilities and more stable multi-step reasoning/execution.
         It demonstrates significant improvements in executing complex agent tasks
@@ -2694,7 +2711,7 @@ model_list:
       output_cost_per_token: 1.75e-06
       max_input_tokens: 202752
       max_output_tokens: 131072
-      metadata: *id110
+      metadata: *id111
       litellm_provider: openrouter
 - model_name: google/gemini-3-flash-preview
   litellm_params:
@@ -2744,7 +2761,7 @@ model_list:
     supports_web_search: true
     tpm: 800000
     input_cost_per_image: 5.0e-07
-    metadata: &id111
+    metadata: &id112
       notes: Gemini 3 Flash Preview is a high speed, high value thinking model designed
         for agentic workflows, multi turn chat, and coding assistance. It delivers
         near Pro level reasoning and tool...
@@ -2754,7 +2771,7 @@ model_list:
       input_cost_per_image: 5.0e-07
       max_input_tokens: 1048576
       max_output_tokens: 65536
-      metadata: *id111
+      metadata: *id112
       litellm_provider: openrouter
 - model_name: xiaomi/mimo-v2-flash
   litellm_params:
@@ -2775,7 +2792,7 @@ model_list:
     supports_reasoning: true
     supports_vision: false
     supports_prompt_caching: true
-    metadata: &id112
+    metadata: &id113
       notes: MiMo-V2-Flash is an open-source foundation language model developed by
         Xiaomi. It is a Mixture-of-Experts model with 309B total parameters and 15B
         active parameters, adopting hybrid attention architecture. MiMo-V2-Flash supports
@@ -2785,7 +2802,7 @@ model_list:
       output_cost_per_token: 3.0e-07
       max_input_tokens: 262144
       max_output_tokens: 65536
-      metadata: *id112
+      metadata: *id113
       litellm_provider: openrouter
 - model_name: nvidia/nemotron-3-nano-30b-a3b:free
   litellm_params:
@@ -2795,7 +2812,7 @@ model_list:
     input_cost_per_token: 0.0
     output_cost_per_token: 0.0
     max_input_tokens: 256000
-    metadata: &id113
+    metadata: &id114
       notes: NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest
         compute efficiency and accuracy for developers to build specialized agentic
         AI systems. The model is fully...
@@ -2804,7 +2821,7 @@ model_list:
       input_cost_per_token: 0.0
       output_cost_per_token: 0.0
       max_input_tokens: 256000
-      metadata: *id113
+      metadata: *id114
       litellm_provider: openrouter
 - model_name: nvidia/nemotron-3-nano-30b-a3b
   litellm_params:
@@ -2815,7 +2832,7 @@ model_list:
     output_cost_per_token: 2.0e-07
     max_input_tokens: 262144
     max_output_tokens: 228000
-    metadata: &id114
+    metadata: &id115
       notes: NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest
         compute efficiency and accuracy for developers to build specialized agentic
         AI systems. The model is fully...
@@ -2825,7 +2842,7 @@ model_list:
       output_cost_per_token: 2.0e-07
       max_input_tokens: 262144
       max_output_tokens: 228000
-      metadata: *id114
+      metadata: *id115
       litellm_provider: openrouter
 - model_name: openai/gpt-5.2-chat
   litellm_params:
@@ -2845,7 +2862,7 @@ model_list:
     supports_prompt_caching: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id115
+    metadata: &id116
       notes: GPT-5.2 Chat (AKA Instant) is the fast, lightweight member of the 5.2
         family, optimized for low-latency chat while retaining strong general intelligence.
         It uses adaptive reasoning to selectively “think” on...
@@ -2854,7 +2871,7 @@ model_list:
       output_cost_per_token: 1.4e-05
       max_input_tokens: 128000
       max_output_tokens: 16384
-      metadata: *id115
+      metadata: *id116
       litellm_provider: openrouter
 - model_name: openai/gpt-5.2-pro
   litellm_params:
@@ -2874,7 +2891,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id116
+    metadata: &id117
       notes: GPT-5.2 Pro is OpenAI’s most advanced model, offering major improvements
         in agentic coding and long context performance over GPT-5 Pro. It is optimized
         for complex tasks that require step-by-step reasoning,...
@@ -2883,7 +2900,7 @@ model_list:
       output_cost_per_token: 0.000168
       max_input_tokens: 400000
       max_output_tokens: 128000
-      metadata: *id116
+      metadata: *id117
       litellm_provider: openrouter
 - model_name: openai/gpt-5.2
   litellm_params:
@@ -2904,7 +2921,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id117
+    metadata: &id118
       notes: GPT-5.2 is the latest frontier-grade model in the GPT-5 series, offering
         stronger agentic and long context perfomance compared to GPT-5.1. It uses
         adaptive reasoning to allocate computation dynamically, responding quickly...
@@ -2913,7 +2930,7 @@ model_list:
       output_cost_per_token: 1.4e-05
       max_input_tokens: 400000
       max_output_tokens: 128000
-      metadata: *id117
+      metadata: *id118
       litellm_provider: openrouter
 - model_name: mistralai/devstral-2512
   litellm_params:
@@ -2932,7 +2949,7 @@ model_list:
     supports_prompt_caching: false
     supports_tool_choice: true
     supports_vision: false
-    metadata: &id118
+    metadata: &id119
       notes: Devstral 2 is a state-of-the-art open-source model by Mistral AI specializing
         in agentic coding. It is a 123B-parameter dense transformer model supporting
         a 256K context window. Devstral 2 supports exploring...
@@ -2940,7 +2957,7 @@ model_list:
       input_cost_per_token: 4.0e-07
       output_cost_per_token: 2.0e-06
       max_input_tokens: 262144
-      metadata: *id118
+      metadata: *id119
       litellm_provider: openrouter
 - model_name: relace/relace-search
   litellm_params:
@@ -2951,7 +2968,7 @@ model_list:
     output_cost_per_token: 3.0e-06
     max_input_tokens: 256000
     max_output_tokens: 128000
-    metadata: &id119
+    metadata: &id120
       notes: The relace-search model uses 4-12 `view_file` and `grep` tools in parallel
         to explore a codebase and return relevant files to the user request. In contrast
         to RAG, relace-search performs agentic...
@@ -2961,7 +2978,7 @@ model_list:
       output_cost_per_token: 3.0e-06
       max_input_tokens: 256000
       max_output_tokens: 128000
-      metadata: *id119
+      metadata: *id120
       litellm_provider: openrouter
 - model_name: z-ai/glm-4.6v
   litellm_params:
@@ -2972,7 +2989,7 @@ model_list:
     output_cost_per_token: 9.0e-07
     max_input_tokens: 131072
     max_output_tokens: 24000
-    metadata: &id120
+    metadata: &id121
       notes: GLM-4.6V is a large multimodal model designed for high-fidelity visual
         understanding and long-context reasoning across images, documents, and mixed
         media. It supports up to 128K tokens, processes complex page layouts...
@@ -2982,7 +2999,7 @@ model_list:
       output_cost_per_token: 9.0e-07
       max_input_tokens: 131072
       max_output_tokens: 24000
-      metadata: *id120
+      metadata: *id121
       litellm_provider: openrouter
 - model_name: nex-agi/deepseek-v3.1-nex-n1
   litellm_params:
@@ -2993,7 +3010,7 @@ model_list:
     output_cost_per_token: 5.0e-07
     max_input_tokens: 131072
     max_output_tokens: 163840
-    metadata: &id121
+    metadata: &id122
       notes: DeepSeek V3.1 Nex-N1 is the flagship release of the Nex-N1 series — a
         post-trained model designed to highlight agent autonomy, tool use, and real-world
         productivity. Nex-N1 demonstrates competitive performance across...
@@ -3003,7 +3020,7 @@ model_list:
       output_cost_per_token: 5.0e-07
       max_input_tokens: 131072
       max_output_tokens: 163840
-      metadata: *id121
+      metadata: *id122
       litellm_provider: openrouter
 - model_name: essentialai/rnj-1-instruct
   litellm_params:
@@ -3013,7 +3030,7 @@ model_list:
     input_cost_per_token: 1.5e-07
     output_cost_per_token: 1.5e-07
     max_input_tokens: 32768
-    metadata: &id122
+    metadata: &id123
       notes: Rnj-1 is an 8B-parameter, dense, open-weight model family developed by
         Essential AI and trained from scratch with a focus on programming, math, and
         scientific reasoning. The model demonstrates strong performance...
@@ -3022,7 +3039,7 @@ model_list:
       input_cost_per_token: 1.5e-07
       output_cost_per_token: 1.5e-07
       max_input_tokens: 32768
-      metadata: *id122
+      metadata: *id123
       litellm_provider: openrouter
 - model_name: openrouter/bodybuilder
   litellm_params:
@@ -3031,7 +3048,7 @@ model_list:
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: -1.0
     output_cost_per_token: -1.0
-    metadata: &id123
+    metadata: &id124
       notes: Transform your natural language requests into structured OpenRouter API
         request objects. Describe what you want to accomplish with AI models, and
         Body Builder will construct the appropriate API calls. Example:...
@@ -3039,7 +3056,7 @@ model_list:
     openrouter/bodybuilder:
       input_cost_per_token: -1.0
       output_cost_per_token: -1.0
-      metadata: *id123
+      metadata: *id124
       litellm_provider: openrouter
 - model_name: openai/gpt-5.1-codex-max
   litellm_params:
@@ -3065,7 +3082,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id124
+    metadata: &id125
       notes: GPT-5.1-Codex-Max is OpenAI’s latest agentic coding model, designed for
         long-running, high-context software development tasks. It is based on an updated
         version of the 5.1 reasoning stack and trained on agentic...
@@ -3076,7 +3093,7 @@ model_list:
       max_output_tokens: 128000
       mode: chat
       supports_vision: true
-      metadata: *id124
+      metadata: *id125
       litellm_provider: openrouter
 - model_name: amazon/nova-2-lite-v1
   litellm_params:
@@ -3087,7 +3104,7 @@ model_list:
     output_cost_per_token: 2.5e-06
     max_input_tokens: 1000000
     max_output_tokens: 65535
-    metadata: &id125
+    metadata: &id126
       notes: Nova 2 Lite is a fast, cost-effective reasoning model for everyday workloads
         that can process text, images, and videos to generate text. Nova 2 Lite demonstrates
         standout capabilities in processing...
@@ -3097,7 +3114,7 @@ model_list:
       output_cost_per_token: 2.5e-06
       max_input_tokens: 1000000
       max_output_tokens: 65535
-      metadata: *id125
+      metadata: *id126
       litellm_provider: openrouter
 - model_name: mistralai/ministral-14b-2512
   litellm_params:
@@ -3116,7 +3133,7 @@ model_list:
     supports_prompt_caching: false
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id126
+    metadata: &id127
       notes: The largest model in the Ministral 3 family, Ministral 3 14B offers frontier
         capabilities and performance comparable to its larger Mistral Small 3.2 24B
         counterpart. A powerful and efficient language...
@@ -3126,7 +3143,7 @@ model_list:
       max_input_tokens: 262144
       mode: chat
       supports_vision: true
-      metadata: *id126
+      metadata: *id127
       litellm_provider: openrouter
 - model_name: mistralai/ministral-8b-2512
   litellm_params:
@@ -3145,7 +3162,7 @@ model_list:
     supports_prompt_caching: false
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id127
+    metadata: &id128
       notes: A balanced model in the Ministral 3 family, Ministral 3 8B is a powerful,
         efficient tiny language model with vision capabilities.
     mistralai/ministral-8b-2512:
@@ -3154,7 +3171,7 @@ model_list:
       max_input_tokens: 262144
       mode: chat
       supports_vision: true
-      metadata: *id127
+      metadata: *id128
       litellm_provider: openrouter
 - model_name: mistralai/ministral-3b-2512
   litellm_params:
@@ -3173,7 +3190,7 @@ model_list:
     supports_prompt_caching: false
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id128
+    metadata: &id129
       notes: The smallest model in the Ministral 3 family, Ministral 3 3B is a powerful,
         efficient tiny language model with vision capabilities.
     mistralai/ministral-3b-2512:
@@ -3182,7 +3199,7 @@ model_list:
       max_input_tokens: 131072
       mode: chat
       supports_vision: true
-      metadata: *id128
+      metadata: *id129
       litellm_provider: openrouter
 - model_name: mistralai/mistral-large-2512
   litellm_params:
@@ -3201,7 +3218,7 @@ model_list:
     supports_prompt_caching: false
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id129
+    metadata: &id130
       notes: Mistral Large 3 2512 is Mistral’s most capable model to date, featuring
         a sparse mixture-of-experts architecture with 41B active parameters (675B
         total), and released under the Apache 2.0 license.
@@ -3209,7 +3226,7 @@ model_list:
       input_cost_per_token: 5.0e-07
       output_cost_per_token: 1.5e-06
       max_input_tokens: 262144
-      metadata: *id129
+      metadata: *id130
       litellm_provider: openrouter
 - model_name: arcee-ai/trinity-mini
   litellm_params:
@@ -3220,7 +3237,7 @@ model_list:
     output_cost_per_token: 1.5e-07
     max_input_tokens: 131072
     max_output_tokens: 131072
-    metadata: &id130
+    metadata: &id131
       notes: Trinity Mini is a 26B-parameter (3B active) sparse mixture-of-experts
         language model featuring 128 experts with 8 active per token. Engineered for
         efficient reasoning over long contexts (131k) with robust function...
@@ -3230,7 +3247,7 @@ model_list:
       output_cost_per_token: 1.5e-07
       max_input_tokens: 131072
       max_output_tokens: 131072
-      metadata: *id130
+      metadata: *id131
       litellm_provider: openrouter
 - model_name: deepseek/deepseek-v3.2
   litellm_params:
@@ -3250,7 +3267,7 @@ model_list:
     supports_prompt_caching: true
     supports_reasoning: true
     supports_tool_choice: true
-    metadata: &id131
+    metadata: &id132
       notes: DeepSeek-V3.2 is a large language model designed to harmonize high computational
         efficiency with strong reasoning and agentic tool-use performance. It introduces
         DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...
@@ -3268,7 +3285,7 @@ model_list:
       supports_prompt_caching: true
       supports_reasoning: true
       supports_tool_choice: true
-      metadata: *id131
+      metadata: *id132
 - model_name: prime-intellect/intellect-3
   litellm_params:
     model: openai/prime-intellect/intellect-3
@@ -3278,7 +3295,7 @@ model_list:
     output_cost_per_token: 1.1e-06
     max_input_tokens: 131072
     max_output_tokens: 131072
-    metadata: &id132
+    metadata: &id133
       notes: INTELLECT-3 is a 106B-parameter Mixture-of-Experts model (12B active)
         post-trained from GLM-4.5-Air-Base using supervised fine-tuning (SFT) followed
         by large-scale reinforcement learning (RL). It offers state-of-the-art performance
@@ -3289,7 +3306,7 @@ model_list:
       output_cost_per_token: 1.1e-06
       max_input_tokens: 131072
       max_output_tokens: 131072
-      metadata: *id132
+      metadata: *id133
       litellm_provider: openrouter
 - model_name: anthropic/claude-opus-4.5
   litellm_params:
@@ -3313,7 +3330,7 @@ model_list:
     supports_tool_choice: true
     supports_vision: true
     supports_output_config: true
-    metadata: &id133
+    metadata: &id134
       notes: Claude Opus 4.5 is Anthropic’s frontier reasoning model optimized for
         complex software engineering, agentic workflows, and long-horizon computer
         use. It offers strong multimodal capabilities, competitive performance across
@@ -3323,7 +3340,7 @@ model_list:
       output_cost_per_token: 2.5e-05
       max_input_tokens: 200000
       max_output_tokens: 64000
-      metadata: *id133
+      metadata: *id134
       litellm_provider: openrouter
 - model_name: allenai/olmo-3-32b-think
   litellm_params:
@@ -3334,7 +3351,7 @@ model_list:
     output_cost_per_token: 5.0e-07
     max_input_tokens: 65536
     max_output_tokens: 65536
-    metadata: &id134
+    metadata: &id135
       notes: Olmo 3 32B Think is a large-scale, 32-billion-parameter model purpose-built
         for deep reasoning, complex logic chains and advanced instruction-following
         scenarios. Its capacity enables strong performance on demanding evaluation
@@ -3345,7 +3362,7 @@ model_list:
       output_cost_per_token: 5.0e-07
       max_input_tokens: 65536
       max_output_tokens: 65536
-      metadata: *id134
+      metadata: *id135
       litellm_provider: openrouter
 - model_name: google/gemini-3-pro-image-preview
   litellm_params:
@@ -3357,7 +3374,7 @@ model_list:
     input_cost_per_image: 2.0e-06
     max_input_tokens: 65536
     max_output_tokens: 32768
-    metadata: &id135
+    metadata: &id136
       notes: Nano Banana Pro is Google’s most advanced image-generation and editing
         model, built on Gemini 3 Pro. It extends the original Nano Banana with significantly
         improved multimodal reasoning, real-world grounding, and...
@@ -3368,7 +3385,7 @@ model_list:
       input_cost_per_image: 2.0e-06
       max_input_tokens: 65536
       max_output_tokens: 32768
-      metadata: *id135
+      metadata: *id136
       litellm_provider: openrouter
 - model_name: deepcogito/cogito-v2.1-671b
   litellm_params:
@@ -3378,7 +3395,7 @@ model_list:
     input_cost_per_token: 1.25e-06
     output_cost_per_token: 1.25e-06
     max_input_tokens: 128000
-    metadata: &id136
+    metadata: &id137
       notes: Cogito v2.1 671B MoE represents one of the strongest open models globally,
         matching performance of frontier closed and open models. This model is trained
         using self play with reinforcement learning...
@@ -3387,7 +3404,7 @@ model_list:
       input_cost_per_token: 1.25e-06
       output_cost_per_token: 1.25e-06
       max_input_tokens: 128000
-      metadata: *id136
+      metadata: *id137
       litellm_provider: openrouter
 - model_name: openai/gpt-5.1
   litellm_params:
@@ -3398,7 +3415,7 @@ model_list:
     output_cost_per_token: 1.0e-05
     max_input_tokens: 400000
     max_output_tokens: 128000
-    metadata: &id137
+    metadata: &id138
       notes: GPT-5.1 is the latest frontier-grade model in the GPT-5 series, offering
         stronger general-purpose reasoning, improved instruction adherence, and a
         more natural conversational style compared to GPT-5. It uses adaptive reasoning...
@@ -3408,7 +3425,7 @@ model_list:
       output_cost_per_token: 1.0e-05
       max_input_tokens: 400000
       max_output_tokens: 128000
-      metadata: *id137
+      metadata: *id138
       litellm_provider: openrouter
 - model_name: openai/gpt-5.1-chat
   litellm_params:
@@ -3419,7 +3436,7 @@ model_list:
     output_cost_per_token: 1.0e-05
     max_input_tokens: 128000
     max_output_tokens: 32000
-    metadata: &id138
+    metadata: &id139
       notes: GPT-5.1 Chat (AKA Instant is the fast, lightweight member of the 5.1
         family, optimized for low-latency chat while retaining strong general intelligence.
         It uses adaptive reasoning to selectively “think” on...
@@ -3429,7 +3446,7 @@ model_list:
       output_cost_per_token: 1.0e-05
       max_input_tokens: 128000
       max_output_tokens: 32000
-      metadata: *id138
+      metadata: *id139
       litellm_provider: openrouter
 - model_name: openai/gpt-5.1-codex
   litellm_params:
@@ -3442,7 +3459,7 @@ model_list:
     max_output_tokens: 128000
     mode: chat
     supports_vision: true
-    metadata: &id139
+    metadata: &id140
       notes: GPT-5.1-Codex is a specialized version of GPT-5.1 optimized for software
         engineering and coding workflows. It is designed for both interactive development
         sessions and long, independent execution of complex engineering tasks....
@@ -3454,7 +3471,7 @@ model_list:
       max_output_tokens: 128000
       mode: chat
       supports_vision: true
-      metadata: *id139
+      metadata: *id140
       litellm_provider: openrouter
 - model_name: openai/gpt-5.1-codex-mini
   litellm_params:
@@ -3467,7 +3484,7 @@ model_list:
     max_output_tokens: 100000
     mode: chat
     supports_vision: true
-    metadata: &id140
+    metadata: &id141
       notes: GPT-5.1-Codex-Mini is a smaller and faster version of GPT-5.1-Codex
     litellm_provider: openrouter
     openai/gpt-5.1-codex-mini:
@@ -3477,7 +3494,7 @@ model_list:
       max_output_tokens: 100000
       mode: chat
       supports_vision: true
-      metadata: *id140
+      metadata: *id141
       litellm_provider: openrouter
 - model_name: moonshotai/kimi-k2-thinking
   litellm_params:
@@ -3488,7 +3505,7 @@ model_list:
     output_cost_per_token: 2.5e-06
     max_input_tokens: 262144
     max_output_tokens: 262144
-    metadata: &id141
+    metadata: &id142
       notes: Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model
         to date, extending the K2 series into agentic, long-horizon reasoning. Built
         on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced
@@ -3499,7 +3516,7 @@ model_list:
       output_cost_per_token: 2.5e-06
       max_input_tokens: 262144
       max_output_tokens: 262144
-      metadata: *id141
+      metadata: *id142
       litellm_provider: openrouter
 - model_name: amazon/nova-premier-v1
   litellm_params:
@@ -3512,7 +3529,7 @@ model_list:
     max_output_tokens: 32000
     mode: chat
     supports_vision: true
-    metadata: &id142
+    metadata: &id143
       notes: Amazon Nova Premier is the most capable of Amazon’s multimodal models
         for complex reasoning tasks and for use as the best teacher for distilling
         custom models.
@@ -3524,7 +3541,7 @@ model_list:
       max_output_tokens: 32000
       mode: chat
       supports_vision: true
-      metadata: *id142
+      metadata: *id143
       litellm_provider: openrouter
 - model_name: perplexity/sonar-pro-search
   litellm_params:
@@ -3537,7 +3554,7 @@ model_list:
     max_output_tokens: 8000
     mode: chat
     supports_vision: true
-    metadata: &id143
+    metadata: &id144
       notes: Exclusively available on the OpenRouter API, Sonar Pro's new Pro Search
         mode is Perplexity's most advanced agentic search system. It is designed for
         deeper reasoning and analysis. Pricing is based...
@@ -3549,7 +3566,7 @@ model_list:
       max_output_tokens: 8000
       mode: chat
       supports_vision: true
-      metadata: *id143
+      metadata: *id144
       litellm_provider: openrouter
 - model_name: mistralai/voxtral-small-24b-2507
   litellm_params:
@@ -3559,7 +3576,7 @@ model_list:
     input_cost_per_token: 1.0e-07
     output_cost_per_token: 3.0e-07
     max_input_tokens: 32000
-    metadata: &id144
+    metadata: &id145
       notes: Voxtral Small is an enhancement of Mistral Small 3, incorporating state-of-the-art
         audio input capabilities while retaining best-in-class text performance. It
         excels at speech transcription, translation and audio understanding. Input
@@ -3569,7 +3586,7 @@ model_list:
       input_cost_per_token: 1.0e-07
       output_cost_per_token: 3.0e-07
       max_input_tokens: 32000
-      metadata: *id144
+      metadata: *id145
       litellm_provider: openrouter
 - model_name: openai/gpt-oss-safeguard-20b
   litellm_params:
@@ -3580,7 +3597,7 @@ model_list:
     output_cost_per_token: 3.0e-07
     max_input_tokens: 131072
     max_output_tokens: 65536
-    metadata: &id145
+    metadata: &id146
       notes: gpt-oss-safeguard-20b is a safety reasoning model from OpenAI built upon
         gpt-oss-20b. This open-weight, 21B-parameter Mixture-of-Experts (MoE) model
         offers lower latency for safety tasks like content classification, LLM filtering,
@@ -3591,7 +3608,7 @@ model_list:
       output_cost_per_token: 3.0e-07
       max_input_tokens: 131072
       max_output_tokens: 65536
-      metadata: *id145
+      metadata: *id146
       litellm_provider: openrouter
 - model_name: nvidia/nemotron-nano-12b-v2-vl:free
   litellm_params:
@@ -3602,7 +3619,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 128000
     max_output_tokens: 128000
-    metadata: &id146
+    metadata: &id147
       notes: NVIDIA Nemotron Nano 2 VL is a 12-billion-parameter open multimodal reasoning
         model designed for video understanding and document intelligence. It introduces
         a hybrid Transformer-Mamba architecture, combining transformer-level accuracy
@@ -3613,7 +3630,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 128000
       max_output_tokens: 128000
-      metadata: *id146
+      metadata: *id147
       litellm_provider: openrouter
 - model_name: minimax/minimax-m2
   litellm_params:
@@ -3634,7 +3651,7 @@ model_list:
     cache_read_input_token_cost: 3.0e-08
     cache_creation_input_token_cost: 3.75e-07
     supports_system_messages: true
-    metadata: &id147
+    metadata: &id148
       notes: MiniMax-M2 is a compact, high-efficiency large language model optimized
         for end-to-end coding and agentic workflows. With 10 billion activated parameters
         (230 billion total), it delivers near-frontier intelligence across general
@@ -3653,7 +3670,7 @@ model_list:
       supports_system_messages: true
       max_input_tokens: 196608
       max_output_tokens: 196608
-      metadata: *id147
+      metadata: *id148
 - model_name: qwen/qwen3-vl-32b-instruct
   litellm_params:
     model: openai/qwen/qwen3-vl-32b-instruct
@@ -3665,7 +3682,7 @@ model_list:
     max_output_tokens: 32768
     mode: chat
     supports_vision: true
-    metadata: &id148
+    metadata: &id149
       notes: Qwen3-VL-32B-Instruct is a large-scale multimodal vision-language model
         designed for high-precision understanding and reasoning across text, images,
         and video. With 32 billion parameters, it combines deep visual perception
@@ -3678,7 +3695,7 @@ model_list:
       max_output_tokens: 32768
       mode: chat
       supports_vision: true
-      metadata: *id148
+      metadata: *id149
       litellm_provider: openrouter
 - model_name: ibm-granite/granite-4.0-h-micro
   litellm_params:
@@ -3689,7 +3706,7 @@ model_list:
     output_cost_per_token: 1.12e-07
     max_input_tokens: 131000
     max_output_tokens: 131000
-    metadata: &id149
+    metadata: &id150
       notes: Granite-4.0-H-Micro is a 3B parameter from the Granite 4 family of models.
         These models are the latest in a series of models released by IBM. They are
         fine-tuned for long...
@@ -3699,7 +3716,7 @@ model_list:
       output_cost_per_token: 1.12e-07
       max_input_tokens: 131000
       max_output_tokens: 131000
-      metadata: *id149
+      metadata: *id150
       litellm_provider: openrouter
 - model_name: microsoft/phi-4-mini-instruct
   litellm_params:
@@ -3710,7 +3727,7 @@ model_list:
     output_cost_per_token: 3.5e-07
     max_input_tokens: 128000
     max_output_tokens: 128000
-    metadata: &id150
+    metadata: &id151
       notes: Phi-4-mini-instruct is a lightweight open model built upon synthetic
         data and filtered publicly available websites - with a focus on high-quality,
         reasoning dense data. The model belongs to the Phi-4...
@@ -3720,7 +3737,7 @@ model_list:
       output_cost_per_token: 3.5e-07
       max_input_tokens: 128000
       max_output_tokens: 128000
-      metadata: *id150
+      metadata: *id151
       litellm_provider: openrouter
 - model_name: openai/gpt-5-image-mini
   litellm_params:
@@ -3731,7 +3748,7 @@ model_list:
     output_cost_per_token: 2.0e-06
     max_input_tokens: 400000
     max_output_tokens: 128000
-    metadata: &id151
+    metadata: &id152
       notes: GPT-5 Image Mini combines OpenAI's advanced language capabilities, powered
         by [GPT-5 Mini](https://openrouter.ai/openai/gpt-5-mini), with GPT Image 1
         Mini for efficient image generation. This natively multimodal model features
@@ -3742,7 +3759,7 @@ model_list:
       output_cost_per_token: 2.0e-06
       max_input_tokens: 400000
       max_output_tokens: 128000
-      metadata: *id151
+      metadata: *id152
       litellm_provider: openrouter
 - model_name: anthropic/claude-haiku-4.5
   litellm_params:
@@ -3765,7 +3782,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id152
+    metadata: &id153
       notes: Claude Haiku 4.5 is Anthropic’s fastest and most efficient model, delivering
         near-frontier intelligence at a fraction of the cost and latency of larger
         Claude models. Matching Claude Sonnet 4’s performance...
@@ -3774,7 +3791,7 @@ model_list:
       output_cost_per_token: 5.0e-06
       max_input_tokens: 200000
       max_output_tokens: 64000
-      metadata: *id152
+      metadata: *id153
       litellm_provider: openrouter
 - model_name: qwen/qwen3-vl-8b-thinking
   litellm_params:
@@ -3787,7 +3804,7 @@ model_list:
     max_output_tokens: 32768
     mode: chat
     supports_vision: true
-    metadata: &id153
+    metadata: &id154
       notes: Qwen3-VL-8B-Thinking is the reasoning-optimized variant of the Qwen3-VL-8B
         multimodal model, designed for advanced visual and textual reasoning across
         complex scenes, documents, and temporal sequences. It integrates enhanced
@@ -3800,7 +3817,7 @@ model_list:
       max_output_tokens: 32768
       mode: chat
       supports_vision: true
-      metadata: *id153
+      metadata: *id154
       litellm_provider: openrouter
 - model_name: qwen/qwen3-vl-8b-instruct
   litellm_params:
@@ -3813,7 +3830,7 @@ model_list:
     max_output_tokens: 32768
     mode: chat
     supports_vision: true
-    metadata: &id154
+    metadata: &id155
       notes: Qwen3-VL-8B-Instruct is a multimodal vision-language model from the Qwen3-VL
         series, built for high-fidelity understanding and reasoning across text, images,
         and video. It features improved multimodal fusion with Interleaved-MRoPE for
@@ -3826,7 +3843,7 @@ model_list:
       max_output_tokens: 32768
       mode: chat
       supports_vision: true
-      metadata: *id154
+      metadata: *id155
       litellm_provider: openrouter
 - model_name: openai/gpt-5-image
   litellm_params:
@@ -3837,7 +3854,7 @@ model_list:
     output_cost_per_token: 1.0e-05
     max_input_tokens: 400000
     max_output_tokens: 128000
-    metadata: &id155
+    metadata: &id156
       notes: '[GPT-5](https://openrouter.ai/openai/gpt-5) Image combines OpenAI''s
         GPT-5 model with state-of-the-art image generation capabilities. It offers
         major improvements in reasoning, code quality, and user experience while incorporating
@@ -3848,7 +3865,7 @@ model_list:
       output_cost_per_token: 1.0e-05
       max_input_tokens: 400000
       max_output_tokens: 128000
-      metadata: *id155
+      metadata: *id156
       litellm_provider: openrouter
 - model_name: openai/o3-deep-research
   litellm_params:
@@ -3859,7 +3876,7 @@ model_list:
     output_cost_per_token: 4.0e-05
     max_input_tokens: 200000
     max_output_tokens: 100000
-    metadata: &id156
+    metadata: &id157
       notes: 'o3-deep-research is OpenAI''s advanced model for deep research, designed
         to tackle complex, multi-step research tasks.
 
@@ -3872,7 +3889,7 @@ model_list:
       output_cost_per_token: 4.0e-05
       max_input_tokens: 200000
       max_output_tokens: 100000
-      metadata: *id156
+      metadata: *id157
       litellm_provider: openrouter
 - model_name: openai/o4-mini-deep-research
   litellm_params:
@@ -3883,7 +3900,7 @@ model_list:
     output_cost_per_token: 8.0e-06
     max_input_tokens: 200000
     max_output_tokens: 100000
-    metadata: &id157
+    metadata: &id158
       notes: 'o4-mini-deep-research is OpenAI''s faster, more affordable deep research
         model—ideal for tackling complex, multi-step research tasks.
 
@@ -3896,7 +3913,7 @@ model_list:
       output_cost_per_token: 8.0e-06
       max_input_tokens: 200000
       max_output_tokens: 100000
-      metadata: *id157
+      metadata: *id158
       litellm_provider: openrouter
 - model_name: nvidia/llama-3.3-nemotron-super-49b-v1.5
   litellm_params:
@@ -3907,7 +3924,7 @@ model_list:
     output_cost_per_token: 4.0e-07
     max_input_tokens: 131072
     max_output_tokens: 16384
-    metadata: &id158
+    metadata: &id159
       notes: Llama-3.3-Nemotron-Super-49B-v1.5 is a 49B-parameter, English-centric
         reasoning/chat model derived from Meta’s Llama-3.3-70B-Instruct with a 128K
         context. It’s post-trained for agentic workflows (RAG, tool calling) via SFT
@@ -3918,7 +3935,7 @@ model_list:
       output_cost_per_token: 4.0e-07
       max_input_tokens: 131072
       max_output_tokens: 16384
-      metadata: *id158
+      metadata: *id159
       litellm_provider: openrouter
 - model_name: google/gemini-2.5-flash-image
   litellm_params:
@@ -3930,7 +3947,7 @@ model_list:
     input_cost_per_image: 3.0e-07
     max_input_tokens: 32768
     max_output_tokens: 32768
-    metadata: &id159
+    metadata: &id160
       notes: Gemini 2.5 Flash Image, a.k.a. "Nano Banana," is now generally available.
         It is a state of the art image generation model with contextual understanding.
         It is capable of image generation,...
@@ -3941,7 +3958,7 @@ model_list:
       input_cost_per_image: 3.0e-07
       max_input_tokens: 32768
       max_output_tokens: 32768
-      metadata: *id159
+      metadata: *id160
       litellm_provider: openrouter
 - model_name: qwen/qwen3-vl-30b-a3b-thinking
   litellm_params:
@@ -3954,7 +3971,7 @@ model_list:
     max_output_tokens: 32768
     mode: chat
     supports_vision: true
-    metadata: &id160
+    metadata: &id161
       notes: Qwen3-VL-30B-A3B-Thinking is a multimodal model that unifies strong text
         generation with visual understanding for images and videos. Its Thinking variant
         enhances reasoning in STEM, math, and complex tasks. It excels...
@@ -3966,7 +3983,7 @@ model_list:
       max_output_tokens: 32768
       mode: chat
       supports_vision: true
-      metadata: *id160
+      metadata: *id161
       litellm_provider: openrouter
 - model_name: qwen/qwen3-vl-30b-a3b-instruct
   litellm_params:
@@ -3979,7 +3996,7 @@ model_list:
     max_output_tokens: 32768
     mode: chat
     supports_vision: true
-    metadata: &id161
+    metadata: &id162
       notes: Qwen3-VL-30B-A3B-Instruct is a multimodal model that unifies strong text
         generation with visual understanding for images and videos. Its Instruct variant
         optimizes instruction-following for general multimodal tasks. It excels in
@@ -3992,7 +4009,7 @@ model_list:
       max_output_tokens: 32768
       mode: chat
       supports_vision: true
-      metadata: *id161
+      metadata: *id162
       litellm_provider: openrouter
 - model_name: openai/gpt-5-pro
   litellm_params:
@@ -4003,7 +4020,7 @@ model_list:
     output_cost_per_token: 0.00012
     max_input_tokens: 400000
     max_output_tokens: 128000
-    metadata: &id162
+    metadata: &id163
       notes: GPT-5 Pro is OpenAI’s most advanced model, offering major improvements
         in reasoning, code quality, and user experience. It is optimized for complex
         tasks that require step-by-step reasoning, instruction following, and...
@@ -4013,7 +4030,7 @@ model_list:
       output_cost_per_token: 0.00012
       max_input_tokens: 400000
       max_output_tokens: 128000
-      metadata: *id162
+      metadata: *id163
       litellm_provider: openrouter
 - model_name: z-ai/glm-4.6
   litellm_params:
@@ -4032,7 +4049,7 @@ model_list:
     supports_prompt_caching: true
     supports_reasoning: true
     supports_tool_choice: true
-    metadata: &id163
+    metadata: &id164
       notes: 'Compared with GLM-4.5, this generation brings several key improvements:
         Longer context window: The context window has been expanded from 128K to 200K
         tokens, enabling the model to handle more complex...'
@@ -4041,7 +4058,7 @@ model_list:
       output_cost_per_token: 1.74e-06
       max_input_tokens: 202752
       max_output_tokens: 131072
-      metadata: *id163
+      metadata: *id164
       litellm_provider: openrouter
 - model_name: anthropic/claude-sonnet-4.5
   litellm_params:
@@ -4069,7 +4086,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id164
+    metadata: &id165
       notes: Claude Sonnet 4.5 is Anthropic’s most advanced Sonnet model to date,
         optimized for real-world agents and coding workflows. It delivers state-of-the-art
         performance on coding benchmarks such as SWE-bench Verified, with...
@@ -4078,7 +4095,7 @@ model_list:
       output_cost_per_token: 1.5e-05
       max_input_tokens: 1000000
       max_output_tokens: 64000
-      metadata: *id164
+      metadata: *id165
       litellm_provider: openrouter
 - model_name: deepseek/deepseek-v3.2-exp
   litellm_params:
@@ -4098,7 +4115,7 @@ model_list:
     supports_prompt_caching: true
     supports_reasoning: false
     supports_tool_choice: true
-    metadata: &id165
+    metadata: &id166
       notes: DeepSeek-V3.2-Exp is an experimental large language model released by
         DeepSeek as an intermediate step between V3.1 and future architectures. It
         introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention
@@ -4108,7 +4125,7 @@ model_list:
       output_cost_per_token: 4.1e-07
       max_input_tokens: 163840
       max_output_tokens: 65536
-      metadata: *id165
+      metadata: *id166
       litellm_provider: openrouter
 - model_name: thedrummer/cydonia-24b-v4.1
   litellm_params:
@@ -4119,7 +4136,7 @@ model_list:
     output_cost_per_token: 5.0e-07
     max_input_tokens: 131072
     max_output_tokens: 131072
-    metadata: &id166
+    metadata: &id167
       notes: Uncensored and creative writing model based on Mistral Small 3.2 24B
         with good recall, prompt adherence, and intelligence.
     litellm_provider: openrouter
@@ -4128,7 +4145,7 @@ model_list:
       output_cost_per_token: 5.0e-07
       max_input_tokens: 131072
       max_output_tokens: 131072
-      metadata: *id166
+      metadata: *id167
       litellm_provider: openrouter
 - model_name: relace/relace-apply-3
   litellm_params:
@@ -4139,7 +4156,7 @@ model_list:
     output_cost_per_token: 1.25e-06
     max_input_tokens: 256000
     max_output_tokens: 128000
-    metadata: &id167
+    metadata: &id168
       notes: Relace Apply 3 is a specialized code-patching LLM that merges AI-suggested
         edits straight into your source files. It can apply updates from GPT-4o, Claude,
         and others into your files at...
@@ -4149,7 +4166,7 @@ model_list:
       output_cost_per_token: 1.25e-06
       max_input_tokens: 256000
       max_output_tokens: 128000
-      metadata: *id167
+      metadata: *id168
       litellm_provider: openrouter
 - model_name: google/gemini-2.5-flash-lite-preview-09-2025
   litellm_params:
@@ -4161,7 +4178,7 @@ model_list:
     input_cost_per_image: 1.0e-07
     max_input_tokens: 1048576
     max_output_tokens: 65535
-    metadata: &id168
+    metadata: &id169
       notes: Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini
         2.5 family, optimized for ultra-low latency and cost efficiency. It offers
         improved throughput, faster token generation, and better performance...
@@ -4172,7 +4189,7 @@ model_list:
       input_cost_per_image: 1.0e-07
       max_input_tokens: 1048576
       max_output_tokens: 65535
-      metadata: *id168
+      metadata: *id169
       litellm_provider: openrouter
 - model_name: qwen/qwen3-vl-235b-a22b-thinking
   litellm_params:
@@ -4185,7 +4202,7 @@ model_list:
     max_output_tokens: 32768
     mode: chat
     supports_vision: true
-    metadata: &id169
+    metadata: &id170
       notes: Qwen3-VL-235B-A22B Thinking is a multimodal model that unifies strong
         text generation with visual understanding across images and video. The Thinking
         model is optimized for multimodal reasoning in STEM and math....
@@ -4197,7 +4214,7 @@ model_list:
       max_output_tokens: 32768
       mode: chat
       supports_vision: true
-      metadata: *id169
+      metadata: *id170
       litellm_provider: openrouter
 - model_name: qwen/qwen3-vl-235b-a22b-instruct
   litellm_params:
@@ -4210,7 +4227,7 @@ model_list:
     max_output_tokens: 16384
     mode: chat
     supports_vision: true
-    metadata: &id170
+    metadata: &id171
       notes: Qwen3-VL-235B-A22B Instruct is an open-weight multimodal model that unifies
         strong text generation with visual understanding across images and video.
         The Instruct model targets general vision-language use (VQA, document parsing,
@@ -4223,7 +4240,7 @@ model_list:
       max_output_tokens: 16384
       mode: chat
       supports_vision: true
-      metadata: *id170
+      metadata: *id171
       litellm_provider: openrouter
 - model_name: qwen/qwen3-max
   litellm_params:
@@ -4234,7 +4251,7 @@ model_list:
     output_cost_per_token: 3.9e-06
     max_input_tokens: 262144
     max_output_tokens: 32768
-    metadata: &id171
+    metadata: &id172
       notes: Qwen3-Max is an updated release built on the Qwen3 series, offering major
         improvements in reasoning, instruction following, multilingual support, and
         long-tail knowledge coverage compared to the January 2025 version. It...
@@ -4244,7 +4261,7 @@ model_list:
       output_cost_per_token: 3.9e-06
       max_input_tokens: 262144
       max_output_tokens: 32768
-      metadata: *id171
+      metadata: *id172
       litellm_provider: openrouter
 - model_name: qwen/qwen3-coder-plus
   litellm_params:
@@ -4262,7 +4279,7 @@ model_list:
     supports_function_calling: true
     supports_reasoning: true
     supports_tool_choice: true
-    metadata: &id172
+    metadata: &id173
       notes: Qwen3 Coder Plus is Alibaba's proprietary version of the Open Source
         Qwen3 Coder 480B A35B. It is a powerful coding agent model specializing in
         autonomous programming via tool calling and...
@@ -4271,7 +4288,7 @@ model_list:
       output_cost_per_token: 3.25e-06
       max_input_tokens: 1000000
       max_output_tokens: 65536
-      metadata: *id172
+      metadata: *id173
       litellm_provider: openrouter
 - model_name: openai/gpt-5-codex
   litellm_params:
@@ -4294,7 +4311,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id173
+    metadata: &id174
       notes: GPT-5-Codex is a specialized version of GPT-5 optimized for software
         engineering and coding workflows. It is designed for both interactive development
         sessions and long, independent execution of complex engineering tasks....
@@ -4305,7 +4322,7 @@ model_list:
       max_output_tokens: 128000
       mode: chat
       supports_vision: true
-      metadata: *id173
+      metadata: *id174
       litellm_provider: openrouter
 - model_name: deepseek/deepseek-v3.1-terminus
   litellm_params:
@@ -4316,7 +4333,7 @@ model_list:
     output_cost_per_token: 9.5e-07
     max_input_tokens: 163840
     max_output_tokens: 32768
-    metadata: &id174
+    metadata: &id175
       notes: DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1)
         that maintains the model's original capabilities while addressing issues reported
         by users, including language consistency and agent capabilities, further optimizing
@@ -4327,7 +4344,7 @@ model_list:
       output_cost_per_token: 9.5e-07
       max_input_tokens: 163840
       max_output_tokens: 32768
-      metadata: *id174
+      metadata: *id175
       litellm_provider: openrouter
 - model_name: qwen/qwen3-coder-flash
   litellm_params:
@@ -4338,7 +4355,7 @@ model_list:
     output_cost_per_token: 9.75e-07
     max_input_tokens: 1000000
     max_output_tokens: 65536
-    metadata: &id175
+    metadata: &id176
       notes: Qwen3 Coder Flash is Alibaba's fast and cost efficient version of their
         proprietary Qwen3 Coder Plus. It is a powerful coding agent model specializing
         in autonomous programming via tool calling...
@@ -4348,7 +4365,7 @@ model_list:
       output_cost_per_token: 9.75e-07
       max_input_tokens: 1000000
       max_output_tokens: 65536
-      metadata: *id175
+      metadata: *id176
       litellm_provider: openrouter
 - model_name: qwen/qwen3-next-80b-a3b-thinking
   litellm_params:
@@ -4359,7 +4376,7 @@ model_list:
     output_cost_per_token: 7.8e-07
     max_input_tokens: 131072
     max_output_tokens: 32768
-    metadata: &id176
+    metadata: &id177
       notes: Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next
         line that outputs structured “thinking” traces by default. It’s designed for
         hard multi-step problems; math proofs, code synthesis/debugging, logic, and
@@ -4370,7 +4387,7 @@ model_list:
       output_cost_per_token: 7.8e-07
       max_input_tokens: 131072
       max_output_tokens: 32768
-      metadata: *id176
+      metadata: *id177
       litellm_provider: openrouter
 - model_name: qwen/qwen3-next-80b-a3b-instruct:free
   litellm_params:
@@ -4380,7 +4397,7 @@ model_list:
     input_cost_per_token: 0.0
     output_cost_per_token: 0.0
     max_input_tokens: 262144
-    metadata: &id177
+    metadata: &id178
       notes: Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the
         Qwen3-Next series optimized for fast, stable responses without “thinking”
         traces. It targets complex tasks across reasoning, code generation, knowledge
@@ -4390,7 +4407,7 @@ model_list:
       input_cost_per_token: 0.0
       output_cost_per_token: 0.0
       max_input_tokens: 262144
-      metadata: *id177
+      metadata: *id178
       litellm_provider: openrouter
 - model_name: qwen/qwen3-next-80b-a3b-instruct
   litellm_params:
@@ -4401,7 +4418,7 @@ model_list:
     output_cost_per_token: 1.1e-06
     max_input_tokens: 262144
     max_output_tokens: 16384
-    metadata: &id178
+    metadata: &id179
       notes: Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the
         Qwen3-Next series optimized for fast, stable responses without “thinking”
         traces. It targets complex tasks across reasoning, code generation, knowledge
@@ -4412,7 +4429,7 @@ model_list:
       output_cost_per_token: 1.1e-06
       max_input_tokens: 262144
       max_output_tokens: 16384
-      metadata: *id178
+      metadata: *id179
       litellm_provider: openrouter
 - model_name: qwen/qwen-plus-2025-07-28:thinking
   litellm_params:
@@ -4423,7 +4440,7 @@ model_list:
     output_cost_per_token: 7.8e-07
     max_input_tokens: 1000000
     max_output_tokens: 32768
-    metadata: &id179
+    metadata: &id180
       notes: Qwen Plus 0728, based on the Qwen3 foundation model, is a 1 million context
         hybrid reasoning model with a balanced performance, speed, and cost combination.
     litellm_provider: openrouter
@@ -4432,7 +4449,7 @@ model_list:
       output_cost_per_token: 7.8e-07
       max_input_tokens: 1000000
       max_output_tokens: 32768
-      metadata: *id179
+      metadata: *id180
       litellm_provider: openrouter
 - model_name: qwen/qwen-plus-2025-07-28
   litellm_params:
@@ -4443,7 +4460,7 @@ model_list:
     output_cost_per_token: 7.8e-07
     max_input_tokens: 1000000
     max_output_tokens: 32768
-    metadata: &id180
+    metadata: &id181
       notes: Qwen Plus 0728, based on the Qwen3 foundation model, is a 1 million context
         hybrid reasoning model with a balanced performance, speed, and cost combination.
     litellm_provider: openrouter
@@ -4452,7 +4469,7 @@ model_list:
       output_cost_per_token: 7.8e-07
       max_input_tokens: 1000000
       max_output_tokens: 32768
-      metadata: *id180
+      metadata: *id181
       litellm_provider: openrouter
 - model_name: nvidia/nemotron-nano-9b-v2:free
   litellm_params:
@@ -4462,7 +4479,7 @@ model_list:
     input_cost_per_token: 0.0
     output_cost_per_token: 0.0
     max_input_tokens: 128000
-    metadata: &id181
+    metadata: &id182
       notes: NVIDIA-Nemotron-Nano-9B-v2 is a large language model (LLM) trained from
         scratch by NVIDIA, and designed as a unified model for both reasoning and
         non-reasoning tasks. It responds to user queries and...
@@ -4471,7 +4488,7 @@ model_list:
       input_cost_per_token: 0.0
       output_cost_per_token: 0.0
       max_input_tokens: 128000
-      metadata: *id181
+      metadata: *id182
       litellm_provider: openrouter
 - model_name: nvidia/nemotron-nano-9b-v2
   litellm_params:
@@ -4482,7 +4499,7 @@ model_list:
     output_cost_per_token: 1.6e-07
     max_input_tokens: 131072
     max_output_tokens: 16384
-    metadata: &id182
+    metadata: &id183
       notes: NVIDIA-Nemotron-Nano-9B-v2 is a large language model (LLM) trained from
         scratch by NVIDIA, and designed as a unified model for both reasoning and
         non-reasoning tasks. It responds to user queries and...
@@ -4492,7 +4509,7 @@ model_list:
       output_cost_per_token: 1.6e-07
       max_input_tokens: 131072
       max_output_tokens: 16384
-      metadata: *id182
+      metadata: *id183
       litellm_provider: openrouter
 - model_name: moonshotai/kimi-k2-0905
   litellm_params:
@@ -4503,7 +4520,7 @@ model_list:
     output_cost_per_token: 2.5e-06
     max_input_tokens: 262144
     max_output_tokens: 262144
-    metadata: &id183
+    metadata: &id184
       notes: Kimi K2 0905 is the September update of [Kimi K2 0711](moonshotai/kimi-k2).
         It is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot
         AI, featuring 1 trillion total parameters with 32...
@@ -4513,7 +4530,7 @@ model_list:
       output_cost_per_token: 2.5e-06
       max_input_tokens: 262144
       max_output_tokens: 262144
-      metadata: *id183
+      metadata: *id184
       litellm_provider: openrouter
 - model_name: qwen/qwen3-30b-a3b-thinking-2507
   litellm_params:
@@ -4524,7 +4541,7 @@ model_list:
     output_cost_per_token: 4.0e-07
     max_input_tokens: 131072
     max_output_tokens: 131072
-    metadata: &id184
+    metadata: &id185
       notes: Qwen3-30B-A3B-Thinking-2507 is a 30B parameter Mixture-of-Experts reasoning
         model optimized for complex tasks requiring extended multi-step thinking.
         The model is designed specifically for “thinking mode,” where internal reasoning
@@ -4535,7 +4552,7 @@ model_list:
       output_cost_per_token: 4.0e-07
       max_input_tokens: 131072
       max_output_tokens: 131072
-      metadata: *id184
+      metadata: *id185
       litellm_provider: openrouter
 - model_name: nousresearch/hermes-4-70b
   litellm_params:
@@ -4545,7 +4562,7 @@ model_list:
     input_cost_per_token: 1.3e-07
     output_cost_per_token: 4.0e-07
     max_input_tokens: 131072
-    metadata: &id185
+    metadata: &id186
       notes: Hermes 4 70B is a hybrid reasoning model from Nous Research, built on
         Meta-Llama-3.1-70B. It introduces the same hybrid mode as the larger 405B
         release, allowing the model to either...
@@ -4554,7 +4571,7 @@ model_list:
       input_cost_per_token: 1.3e-07
       output_cost_per_token: 4.0e-07
       max_input_tokens: 131072
-      metadata: *id185
+      metadata: *id186
       litellm_provider: openrouter
 - model_name: nousresearch/hermes-4-405b
   litellm_params:
@@ -4564,7 +4581,7 @@ model_list:
     input_cost_per_token: 1.0e-06
     output_cost_per_token: 3.0e-06
     max_input_tokens: 131072
-    metadata: &id186
+    metadata: &id187
       notes: Hermes 4 is a large-scale reasoning model built on Meta-Llama-3.1-405B
         and released by Nous Research. It introduces a hybrid reasoning mode, where
         the model can choose to deliberate internally with...
@@ -4573,7 +4590,7 @@ model_list:
       input_cost_per_token: 1.0e-06
       output_cost_per_token: 3.0e-06
       max_input_tokens: 131072
-      metadata: *id186
+      metadata: *id187
       litellm_provider: openrouter
 - model_name: deepseek/deepseek-chat-v3.1
   litellm_params:
@@ -4593,7 +4610,7 @@ model_list:
     supports_prompt_caching: true
     supports_reasoning: true
     supports_tool_choice: true
-    metadata: &id187
+    metadata: &id188
       notes: DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B
         active) that supports both thinking and non-thinking modes via prompt templates.
         It extends the DeepSeek-V3 base with a two-phase long-context...
@@ -4602,7 +4619,7 @@ model_list:
       output_cost_per_token: 7.9e-07
       max_input_tokens: 163840
       max_output_tokens: 32768
-      metadata: *id187
+      metadata: *id188
       litellm_provider: openrouter
 - model_name: mistralai/mistral-medium-3.1
   litellm_params:
@@ -4612,7 +4629,7 @@ model_list:
     input_cost_per_token: 4.0e-07
     output_cost_per_token: 2.0e-06
     max_input_tokens: 131072
-    metadata: &id188
+    metadata: &id189
       notes: Mistral Medium 3.1 is an updated version of Mistral Medium 3, which is
         a high-performance enterprise-grade language model designed to deliver frontier-level
         capabilities at significantly reduced operational cost. It balances...
@@ -4621,7 +4638,7 @@ model_list:
       input_cost_per_token: 4.0e-07
       output_cost_per_token: 2.0e-06
       max_input_tokens: 131072
-      metadata: *id188
+      metadata: *id189
       litellm_provider: openrouter
 - model_name: baidu/ernie-4.5-vl-28b-a3b
   litellm_params:
@@ -4634,7 +4651,7 @@ model_list:
     max_output_tokens: 8000
     mode: chat
     supports_vision: true
-    metadata: &id189
+    metadata: &id190
       notes: A powerful multimodal Mixture-of-Experts chat model featuring 28B total
         parameters with 3B activated per token, delivering exceptional text and vision
         understanding through its innovative heterogeneous MoE structure with modality-isolated
@@ -4647,7 +4664,7 @@ model_list:
       max_output_tokens: 8000
       mode: chat
       supports_vision: true
-      metadata: *id189
+      metadata: *id190
       litellm_provider: openrouter
 - model_name: z-ai/glm-4.5v
   litellm_params:
@@ -4660,7 +4677,7 @@ model_list:
     max_output_tokens: 16384
     mode: chat
     supports_vision: true
-    metadata: &id190
+    metadata: &id191
       notes: GLM-4.5V is a vision-language foundation model for multimodal agent applications.
         Built on a Mixture-of-Experts (MoE) architecture with 106B parameters and
         12B activated parameters, it achieves state-of-the-art results in video understanding,...
@@ -4672,7 +4689,7 @@ model_list:
       max_output_tokens: 16384
       mode: chat
       supports_vision: true
-      metadata: *id190
+      metadata: *id191
       litellm_provider: openrouter
 - model_name: ai21/jamba-large-1.7
   litellm_params:
@@ -4683,7 +4700,7 @@ model_list:
     output_cost_per_token: 8.0e-06
     max_input_tokens: 256000
     max_output_tokens: 4096
-    metadata: &id191
+    metadata: &id192
       notes: Jamba Large 1.7 is the latest model in the Jamba open family, offering
         improvements in grounding, instruction-following, and overall efficiency.
         Built on a hybrid SSM-Transformer architecture with a 256K context...
@@ -4693,7 +4710,7 @@ model_list:
       output_cost_per_token: 8.0e-06
       max_input_tokens: 256000
       max_output_tokens: 4096
-      metadata: *id191
+      metadata: *id192
       litellm_provider: openrouter
 - model_name: openai/gpt-5-chat
   litellm_params:
@@ -4715,7 +4732,7 @@ model_list:
     - text
     supports_reasoning: true
     supports_tool_choice: true
-    metadata: &id192
+    metadata: &id193
       notes: GPT-5 Chat is designed for advanced, natural, multimodal, and context-aware
         conversations for enterprise applications.
     openai/gpt-5-chat:
@@ -4723,7 +4740,7 @@ model_list:
       output_cost_per_token: 1.0e-05
       max_input_tokens: 128000
       max_output_tokens: 16384
-      metadata: *id192
+      metadata: *id193
       litellm_provider: openrouter
 - model_name: openai/gpt-5
   litellm_params:
@@ -4745,7 +4762,7 @@ model_list:
     - text
     supports_reasoning: true
     supports_tool_choice: true
-    metadata: &id193
+    metadata: &id194
       notes: GPT-5 is OpenAI’s most advanced model, offering major improvements in
         reasoning, code quality, and user experience. It is optimized for complex
         tasks that require step-by-step reasoning, instruction following, and accuracy...
@@ -4754,7 +4771,7 @@ model_list:
       output_cost_per_token: 1.0e-05
       max_input_tokens: 400000
       max_output_tokens: 128000
-      metadata: *id193
+      metadata: *id194
       litellm_provider: openrouter
 - model_name: openai/gpt-5-mini
   litellm_params:
@@ -4776,7 +4793,7 @@ model_list:
     - text
     supports_reasoning: true
     supports_tool_choice: true
-    metadata: &id194
+    metadata: &id195
       notes: GPT-5 Mini is a compact version of GPT-5, designed to handle lighter-weight
         reasoning tasks. It provides the same instruction-following and safety-tuning
         benefits as GPT-5, but with reduced latency and cost....
@@ -4785,7 +4802,7 @@ model_list:
       output_cost_per_token: 2.0e-06
       max_input_tokens: 400000
       max_output_tokens: 128000
-      metadata: *id194
+      metadata: *id195
       litellm_provider: openrouter
 - model_name: openai/gpt-5-nano
   litellm_params:
@@ -4807,7 +4824,7 @@ model_list:
     - text
     supports_reasoning: true
     supports_tool_choice: true
-    metadata: &id195
+    metadata: &id196
       notes: GPT-5-Nano is the smallest and fastest variant in the GPT-5 system, optimized
         for developer tools, rapid interactions, and ultra-low latency environments.
         While limited in reasoning depth compared to its larger...
@@ -4815,7 +4832,7 @@ model_list:
       input_cost_per_token: 5.0e-08
       output_cost_per_token: 4.0e-07
       max_input_tokens: 400000
-      metadata: *id195
+      metadata: *id196
       litellm_provider: openrouter
 - model_name: openai/gpt-oss-120b:free
   litellm_params:
@@ -4826,7 +4843,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 131072
     max_output_tokens: 131072
-    metadata: &id196
+    metadata: &id197
       notes: gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE)
         language model from OpenAI designed for high-reasoning, agentic, and general-purpose
         production use cases. It activates 5.1B parameters per forward pass and is
@@ -4837,7 +4854,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 131072
       max_output_tokens: 131072
-      metadata: *id196
+      metadata: *id197
       litellm_provider: openrouter
 - model_name: openai/gpt-oss-120b
   litellm_params:
@@ -4857,7 +4874,7 @@ model_list:
     supports_reasoning: true
     supports_response_schema: true
     supports_tool_choice: true
-    metadata: &id197
+    metadata: &id198
       notes: gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE)
         language model from OpenAI designed for high-reasoning, agentic, and general-purpose
         production use cases. It activates 5.1B parameters per forward pass and is
@@ -4866,7 +4883,7 @@ model_list:
       input_cost_per_token: 3.9e-08
       output_cost_per_token: 1.8e-07
       max_input_tokens: 131072
-      metadata: *id197
+      metadata: *id198
       litellm_provider: openrouter
 - model_name: openai/gpt-oss-20b:free
   litellm_params:
@@ -4877,7 +4894,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 131072
     max_output_tokens: 8192
-    metadata: &id198
+    metadata: &id199
       notes: gpt-oss-20b is an open-weight 21B parameter model released by OpenAI
         under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture
         with 3.6B active parameters per forward pass, optimized for...
@@ -4887,7 +4904,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 131072
       max_output_tokens: 8192
-      metadata: *id198
+      metadata: *id199
       litellm_provider: openrouter
 - model_name: openai/gpt-oss-20b
   litellm_params:
@@ -4907,7 +4924,7 @@ model_list:
     supports_reasoning: true
     supports_response_schema: true
     supports_tool_choice: true
-    metadata: &id199
+    metadata: &id200
       notes: gpt-oss-20b is an open-weight 21B parameter model released by OpenAI
         under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture
         with 3.6B active parameters per forward pass, optimized for...
@@ -4915,7 +4932,7 @@ model_list:
       input_cost_per_token: 2.9e-08
       output_cost_per_token: 1.4e-07
       max_input_tokens: 131072
-      metadata: *id199
+      metadata: *id200
       litellm_provider: openrouter
 - model_name: anthropic/claude-opus-4.1
   litellm_params:
@@ -4940,7 +4957,7 @@ model_list:
     supports_reasoning: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id200
+    metadata: &id201
       notes: Claude Opus 4.1 is an updated version of Anthropic’s flagship model,
         offering improved performance in coding, reasoning, and agentic tasks. It
         achieves 74.5% on SWE-bench Verified and shows notable gains...
@@ -4949,7 +4966,7 @@ model_list:
       output_cost_per_token: 7.5e-05
       max_input_tokens: 200000
       max_output_tokens: 32000
-      metadata: *id200
+      metadata: *id201
       litellm_provider: openrouter
 - model_name: mistralai/codestral-2508
   litellm_params:
@@ -4959,7 +4976,7 @@ model_list:
     input_cost_per_token: 3.0e-07
     output_cost_per_token: 9.0e-07
     max_input_tokens: 256000
-    metadata: &id201
+    metadata: &id202
       notes: 'Mistral''s cutting-edge language model for coding released end of July
         2025. Codestral specializes in low-latency, high-frequency tasks such as fill-in-the-middle
         (FIM), code correction and test generation.
@@ -4971,7 +4988,7 @@ model_list:
       input_cost_per_token: 3.0e-07
       output_cost_per_token: 9.0e-07
       max_input_tokens: 256000
-      metadata: *id201
+      metadata: *id202
       litellm_provider: openrouter
 - model_name: qwen/qwen3-coder-30b-a3b-instruct
   litellm_params:
@@ -4982,7 +4999,7 @@ model_list:
     output_cost_per_token: 2.7e-07
     max_input_tokens: 160000
     max_output_tokens: 32768
-    metadata: &id202
+    metadata: &id203
       notes: Qwen3-Coder-30B-A3B-Instruct is a 30.5B parameter Mixture-of-Experts
         (MoE) model with 128 experts (8 active per forward pass), designed for advanced
         code generation, repository-scale understanding, and agentic tool use. Built
@@ -4993,7 +5010,7 @@ model_list:
       output_cost_per_token: 2.7e-07
       max_input_tokens: 160000
       max_output_tokens: 32768
-      metadata: *id202
+      metadata: *id203
       litellm_provider: openrouter
 - model_name: qwen/qwen3-30b-a3b-instruct-2507
   litellm_params:
@@ -5004,7 +5021,7 @@ model_list:
     output_cost_per_token: 1.716e-07
     max_input_tokens: 128000
     max_output_tokens: 32000
-    metadata: &id203
+    metadata: &id204
       notes: Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language
         model from Qwen, with 3.3B active parameters per inference. It operates in
         non-thinking mode and is designed for high-quality instruction following,
@@ -5015,7 +5032,7 @@ model_list:
       output_cost_per_token: 1.716e-07
       max_input_tokens: 128000
       max_output_tokens: 32000
-      metadata: *id203
+      metadata: *id204
       litellm_provider: openrouter
 - model_name: z-ai/glm-4.5
   litellm_params:
@@ -5026,7 +5043,7 @@ model_list:
     output_cost_per_token: 2.2e-06
     max_input_tokens: 131072
     max_output_tokens: 98304
-    metadata: &id204
+    metadata: &id205
       notes: GLM-4.5 is our latest flagship foundation model, purpose-built for agent-based
         applications. It leverages a Mixture-of-Experts (MoE) architecture and supports
         a context length of up to 128k tokens. GLM-4.5 delivers significantly...
@@ -5036,7 +5053,7 @@ model_list:
       output_cost_per_token: 2.2e-06
       max_input_tokens: 131072
       max_output_tokens: 98304
-      metadata: *id204
+      metadata: *id205
       litellm_provider: openrouter
 - model_name: z-ai/glm-4.5-air:free
   litellm_params:
@@ -5047,7 +5064,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 131072
     max_output_tokens: 96000
-    metadata: &id205
+    metadata: &id206
       notes: GLM-4.5-Air is the lightweight variant of our latest flagship model family,
         also purpose-built for agent-centric applications. Like GLM-4.5, it adopts
         the Mixture-of-Experts (MoE) architecture but with a more compact parameter...
@@ -5057,7 +5074,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 131072
       max_output_tokens: 96000
-      metadata: *id205
+      metadata: *id206
       litellm_provider: openrouter
 - model_name: z-ai/glm-4.5-air
   litellm_params:
@@ -5068,7 +5085,7 @@ model_list:
     output_cost_per_token: 8.5e-07
     max_input_tokens: 131070
     max_output_tokens: 131070
-    metadata: &id206
+    metadata: &id207
       notes: GLM-4.5-Air is the lightweight variant of our latest flagship model family,
         also purpose-built for agent-centric applications. Like GLM-4.5, it adopts
         the Mixture-of-Experts (MoE) architecture but with a more compact parameter...
@@ -5078,7 +5095,7 @@ model_list:
       output_cost_per_token: 8.5e-07
       max_input_tokens: 131070
       max_output_tokens: 131070
-      metadata: *id206
+      metadata: *id207
       litellm_provider: openrouter
 - model_name: qwen/qwen3-235b-a22b-thinking-2507
   litellm_params:
@@ -5096,7 +5113,7 @@ model_list:
     supports_function_calling: true
     supports_reasoning: true
     supports_tool_choice: true
-    metadata: &id207
+    metadata: &id208
       notes: Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts
         (MoE) language model optimized for complex reasoning tasks. It activates 22B
         of its 235B parameters per forward pass and natively supports up to 262,144...
@@ -5105,7 +5122,7 @@ model_list:
       output_cost_per_token: 1.0e-07
       max_input_tokens: 262144
       max_output_tokens: 262144
-      metadata: *id207
+      metadata: *id208
       litellm_provider: openrouter
 - model_name: z-ai/glm-4-32b
   litellm_params:
@@ -5115,7 +5132,7 @@ model_list:
     input_cost_per_token: 1.0e-07
     output_cost_per_token: 1.0e-07
     max_input_tokens: 128000
-    metadata: &id208
+    metadata: &id209
       notes: GLM 4 32B is a cost-effective foundation language model. It can efficiently
         perform complex tasks and has significantly enhanced capabilities in tool
         use, online search, and code-related intelligent tasks. It...
@@ -5124,7 +5141,7 @@ model_list:
       input_cost_per_token: 1.0e-07
       output_cost_per_token: 1.0e-07
       max_input_tokens: 128000
-      metadata: *id208
+      metadata: *id209
       litellm_provider: openrouter
 - model_name: qwen/qwen3-coder:free
   litellm_params:
@@ -5135,7 +5152,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 262000
     max_output_tokens: 262000
-    metadata: &id209
+    metadata: &id210
       notes: Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation
         model developed by the Qwen team. It is optimized for agentic coding tasks
         such as function calling, tool use, and long-context reasoning over...
@@ -5146,7 +5163,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 262000
       max_output_tokens: 262000
-      metadata: *id209
+      metadata: *id210
       supports_function_calling: true
       litellm_provider: openrouter
 - model_name: qwen/qwen3-coder
@@ -5164,7 +5181,7 @@ model_list:
     source: https://openrouter.ai/qwen/qwen3-coder
     supports_tool_choice: true
     supports_function_calling: true
-    metadata: &id210
+    metadata: &id211
       notes: Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation
         model developed by the Qwen team. It is optimized for agentic coding tasks
         such as function calling, tool use, and long-context reasoning over...
@@ -5173,7 +5190,7 @@ model_list:
       output_cost_per_token: 1.8e-06
       max_input_tokens: 262144
       max_output_tokens: 65536
-      metadata: *id210
+      metadata: *id211
       supports_function_calling: true
       litellm_provider: openrouter
 - model_name: bytedance/ui-tars-1.5-7b
@@ -5191,7 +5208,7 @@ model_list:
     source: https://openrouter.ai/api/v1/models/bytedance/ui-tars-1.5-7b
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id211
+    metadata: &id212
       notes: UI-TARS-1.5 is a multimodal vision-language agent optimized for GUI-based
         environments, including desktop interfaces, web browsers, mobile systems,
         and games. Built by ByteDance, it builds upon the UI-TARS framework with reinforcement...
@@ -5202,7 +5219,7 @@ model_list:
       max_output_tokens: 2048
       mode: chat
       supports_vision: true
-      metadata: *id211
+      metadata: *id212
       litellm_provider: openrouter
 - model_name: google/gemini-2.5-flash-lite
   litellm_params:
@@ -5214,7 +5231,7 @@ model_list:
     input_cost_per_image: 1.0e-07
     max_input_tokens: 1048576
     max_output_tokens: 65535
-    metadata: &id212
+    metadata: &id213
       notes: Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini
         2.5 family, optimized for ultra-low latency and cost efficiency. It offers
         improved throughput, faster token generation, and better performance...
@@ -5225,7 +5242,7 @@ model_list:
       input_cost_per_image: 1.0e-07
       max_input_tokens: 1048576
       max_output_tokens: 65535
-      metadata: *id212
+      metadata: *id213
       litellm_provider: openrouter
 - model_name: qwen/qwen3-235b-a22b-2507
   litellm_params:
@@ -5242,7 +5259,7 @@ model_list:
     source: https://openrouter.ai/qwen/qwen3-235b-a22b-2507
     supports_function_calling: true
     supports_tool_choice: true
-    metadata: &id213
+    metadata: &id214
       notes: Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts
         language model based on the Qwen3-235B architecture, with 22B active parameters
         per forward pass. It is optimized for general-purpose text generation, including
@@ -5252,7 +5269,7 @@ model_list:
       output_cost_per_token: 1.0e-07
       max_input_tokens: 262144
       max_output_tokens: 16384
-      metadata: *id213
+      metadata: *id214
       litellm_provider: openrouter
 - model_name: switchpoint/router
   litellm_params:
@@ -5268,7 +5285,7 @@ model_list:
     output_cost_per_token: 3.4e-06
     source: https://openrouter.ai/switchpoint/router
     supports_tool_choice: true
-    metadata: &id214
+    metadata: &id215
       notes: Switchpoint AI's router instantly analyzes your request and directs it
         to the optimal AI from an ever-evolving library. As the world of LLMs advances,
         our router gets smarter, ensuring you...
@@ -5276,7 +5293,7 @@ model_list:
       input_cost_per_token: 8.5e-07
       output_cost_per_token: 3.4e-06
       max_input_tokens: 131072
-      metadata: *id214
+      metadata: *id215
       litellm_provider: openrouter
 - model_name: moonshotai/kimi-k2
   litellm_params:
@@ -5287,7 +5304,7 @@ model_list:
     output_cost_per_token: 2.3e-06
     max_input_tokens: 131072
     max_output_tokens: 32768
-    metadata: &id215
+    metadata: &id216
       notes: Kimi K2 Instruct is a large-scale Mixture-of-Experts (MoE) language model
         developed by Moonshot AI, featuring 1 trillion total parameters with 32 billion
         active per forward pass. It is optimized for...
@@ -5297,7 +5314,7 @@ model_list:
       output_cost_per_token: 2.3e-06
       max_input_tokens: 131072
       max_output_tokens: 32768
-      metadata: *id215
+      metadata: *id216
       litellm_provider: openrouter
 - model_name: cognitivecomputations/dolphin-mistral-24b-venice-edition:free
   litellm_params:
@@ -5307,7 +5324,7 @@ model_list:
     input_cost_per_token: 0.0
     output_cost_per_token: 0.0
     max_input_tokens: 32768
-    metadata: &id216
+    metadata: &id217
       notes: Venice Uncensored Dolphin Mistral 24B Venice Edition is a fine-tuned
         variant of Mistral-Small-24B-Instruct-2501, developed by dphn.ai in collaboration
         with Venice.ai. This model is designed as an “uncensored” instruct-tuned LLM,
@@ -5317,7 +5334,7 @@ model_list:
       input_cost_per_token: 0.0
       output_cost_per_token: 0.0
       max_input_tokens: 32768
-      metadata: *id216
+      metadata: *id217
       litellm_provider: openrouter
 - model_name: tencent/hunyuan-a13b-instruct
   litellm_params:
@@ -5328,7 +5345,7 @@ model_list:
     output_cost_per_token: 5.7e-07
     max_input_tokens: 131072
     max_output_tokens: 131072
-    metadata: &id217
+    metadata: &id218
       notes: Hunyuan-A13B is a 13B active parameter Mixture-of-Experts (MoE) language
         model developed by Tencent, with a total parameter count of 80B and support
         for reasoning via Chain-of-Thought. It offers competitive benchmark...
@@ -5338,7 +5355,7 @@ model_list:
       output_cost_per_token: 5.7e-07
       max_input_tokens: 131072
       max_output_tokens: 131072
-      metadata: *id217
+      metadata: *id218
       litellm_provider: openrouter
 - model_name: morph/morph-v3-large
   litellm_params:
@@ -5357,7 +5374,7 @@ model_list:
     supports_system_messages: true
     supports_tool_choice: false
     supports_vision: false
-    metadata: &id218
+    metadata: &id219
       notes: 'Morph''s high-accuracy apply model for complex code edits. ~4,500 tokens/sec
         with 98% accuracy for precise code transformations. The model requires the
         prompt to be in the following format: <instruction>{instruction}</instruction>
@@ -5375,7 +5392,7 @@ model_list:
       supports_system_messages: true
       supports_tool_choice: false
       supports_vision: false
-      metadata: *id218
+      metadata: *id219
 - model_name: morph/morph-v3-fast
   litellm_params:
     model: openai/morph/morph-v3-fast
@@ -5393,7 +5410,7 @@ model_list:
     supports_system_messages: true
     supports_tool_choice: false
     supports_vision: false
-    metadata: &id219
+    metadata: &id220
       notes: 'Morph''s fastest apply model for code edits. ~10,500 tokens/sec with
         96% accuracy for rapid code transformations. The model requires the prompt
         to be in the following format: <instruction>{instruction}</instruction> <code>{initial_code}</code>
@@ -5411,7 +5428,7 @@ model_list:
       supports_system_messages: true
       supports_tool_choice: false
       supports_vision: false
-      metadata: *id219
+      metadata: *id220
 - model_name: baidu/ernie-4.5-vl-424b-a47b
   litellm_params:
     model: openai/baidu/ernie-4.5-vl-424b-a47b
@@ -5423,7 +5440,7 @@ model_list:
     max_output_tokens: 16000
     mode: chat
     supports_vision: true
-    metadata: &id220
+    metadata: &id221
       notes: ERNIE-4.5-VL-424B-A47B is a multimodal Mixture-of-Experts (MoE) model
         from Baidu’s ERNIE 4.5 series, featuring 424B total parameters with 47B active
         per token. It is trained jointly on text and image data...
@@ -5435,27 +5452,6 @@ model_list:
       max_output_tokens: 16000
       mode: chat
       supports_vision: true
-      metadata: *id220
-      litellm_provider: openrouter
-- model_name: baidu/ernie-4.5-300b-a47b
-  litellm_params:
-    model: openai/baidu/ernie-4.5-300b-a47b
-    api_base: https://openrouter.ai/api/v1
-    api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 2.8e-07
-    output_cost_per_token: 1.1e-06
-    max_input_tokens: 123000
-    max_output_tokens: 12000
-    metadata: &id221
-      notes: ERNIE-4.5-300B-A47B is a 300B parameter Mixture-of-Experts (MoE) language
-        model developed by Baidu as part of the ERNIE 4.5 series. It activates 47B
-        parameters per token and supports text generation in...
-    litellm_provider: openrouter
-    baidu/ernie-4.5-300b-a47b:
-      input_cost_per_token: 2.8e-07
-      output_cost_per_token: 1.1e-06
-      max_input_tokens: 123000
-      max_output_tokens: 12000
       metadata: *id221
       litellm_provider: openrouter
 - model_name: mistralai/mistral-small-3.2-24b-instruct
@@ -7447,6 +7443,48 @@ model_list:
       max_output_tokens: 60000
       metadata: *id307
       litellm_provider: openrouter
+- model_name: meta-llama/llama-3.2-3b-instruct:free
+  litellm_params:
+    model: openai/meta-llama/llama-3.2-3b-instruct:free
+    api_base: https://openrouter.ai/api/v1
+    api_key: os.environ/OPENROUTER_API_KEY
+    input_cost_per_token: 0.0
+    output_cost_per_token: 0.0
+    max_input_tokens: 131072
+    metadata: &id308
+      notes: Llama 3.2 3B is a 3-billion-parameter multilingual large language model,
+        optimized for advanced natural language processing tasks like dialogue generation,
+        reasoning, and summarization. Designed with the latest transformer architecture,
+        it...
+    litellm_provider: openrouter
+    meta-llama/llama-3.2-3b-instruct:free:
+      input_cost_per_token: 0.0
+      output_cost_per_token: 0.0
+      max_input_tokens: 131072
+      metadata: *id308
+      litellm_provider: openrouter
+- model_name: meta-llama/llama-3.2-3b-instruct
+  litellm_params:
+    model: openai/meta-llama/llama-3.2-3b-instruct
+    api_base: https://openrouter.ai/api/v1
+    api_key: os.environ/OPENROUTER_API_KEY
+    input_cost_per_token: 5.09e-08
+    output_cost_per_token: 3.35e-07
+    max_input_tokens: 80000
+    max_output_tokens: 80000
+    metadata: &id309
+      notes: Llama 3.2 3B is a 3-billion-parameter multilingual large language model,
+        optimized for advanced natural language processing tasks like dialogue generation,
+        reasoning, and summarization. Designed with the latest transformer architecture,
+        it...
+    litellm_provider: openrouter
+    meta-llama/llama-3.2-3b-instruct:
+      input_cost_per_token: 5.09e-08
+      output_cost_per_token: 3.35e-07
+      max_input_tokens: 80000
+      max_output_tokens: 80000
+      metadata: *id309
+      litellm_provider: openrouter
 - model_name: meta-llama/llama-3.2-11b-vision-instruct
   litellm_params:
     model: openai/meta-llama/llama-3.2-11b-vision-instruct
@@ -7458,7 +7496,7 @@ model_list:
     max_output_tokens: 16384
     mode: chat
     supports_vision: true
-    metadata: &id308
+    metadata: &id310
       notes: Llama 3.2 11B Vision is a multimodal model with 11 billion parameters,
         designed to handle tasks combining visual and textual data. It excels in tasks
         such as image captioning and...
@@ -7470,48 +7508,6 @@ model_list:
       max_output_tokens: 16384
       mode: chat
       supports_vision: true
-      metadata: *id308
-      litellm_provider: openrouter
-- model_name: meta-llama/llama-3.2-3b-instruct:free
-  litellm_params:
-    model: openai/meta-llama/llama-3.2-3b-instruct:free
-    api_base: https://openrouter.ai/api/v1
-    api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 0.0
-    output_cost_per_token: 0.0
-    max_input_tokens: 131072
-    metadata: &id309
-      notes: Llama 3.2 3B is a 3-billion-parameter multilingual large language model,
-        optimized for advanced natural language processing tasks like dialogue generation,
-        reasoning, and summarization. Designed with the latest transformer architecture,
-        it...
-    litellm_provider: openrouter
-    meta-llama/llama-3.2-3b-instruct:free:
-      input_cost_per_token: 0.0
-      output_cost_per_token: 0.0
-      max_input_tokens: 131072
-      metadata: *id309
-      litellm_provider: openrouter
-- model_name: meta-llama/llama-3.2-3b-instruct
-  litellm_params:
-    model: openai/meta-llama/llama-3.2-3b-instruct
-    api_base: https://openrouter.ai/api/v1
-    api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 5.09e-08
-    output_cost_per_token: 3.35e-07
-    max_input_tokens: 80000
-    max_output_tokens: 80000
-    metadata: &id310
-      notes: Llama 3.2 3B is a 3-billion-parameter multilingual large language model,
-        optimized for advanced natural language processing tasks like dialogue generation,
-        reasoning, and summarization. Designed with the latest transformer architecture,
-        it...
-    litellm_provider: openrouter
-    meta-llama/llama-3.2-3b-instruct:
-      input_cost_per_token: 5.09e-08
-      output_cost_per_token: 3.35e-07
-      max_input_tokens: 80000
-      max_output_tokens: 80000
       metadata: *id310
       litellm_provider: openrouter
 - model_name: qwen/qwen-2.5-72b-instruct
@@ -7535,28 +7531,6 @@ model_list:
       max_output_tokens: 16384
       metadata: *id311
       litellm_provider: openrouter
-- model_name: cohere/command-r-08-2024
-  litellm_params:
-    model: openai/cohere/command-r-08-2024
-    api_base: https://openrouter.ai/api/v1
-    api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 1.5e-07
-    output_cost_per_token: 6.0e-07
-    max_input_tokens: 128000
-    max_output_tokens: 4000
-    metadata: &id312
-      notes: command-r-08-2024 is an update of the [Command R](/models/cohere/command-r)
-        with improved performance for multilingual retrieval-augmented generation
-        (RAG) and tool use. More broadly, it is better at math, code and reasoning
-        and...
-    litellm_provider: openrouter
-    cohere/command-r-08-2024:
-      input_cost_per_token: 1.5e-07
-      output_cost_per_token: 6.0e-07
-      max_input_tokens: 128000
-      max_output_tokens: 4000
-      metadata: *id312
-      litellm_provider: openrouter
 - model_name: cohere/command-r-plus-08-2024
   litellm_params:
     model: openai/cohere/command-r-plus-08-2024
@@ -7566,7 +7540,7 @@ model_list:
     output_cost_per_token: 1.0e-05
     max_input_tokens: 128000
     max_output_tokens: 4000
-    metadata: &id313
+    metadata: &id312
       notes: command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus)
         with roughly 50% higher throughput and 25% lower latencies as compared to
         the previous Command R+ version, while keeping the hardware footprint...
@@ -7574,6 +7548,28 @@ model_list:
     cohere/command-r-plus-08-2024:
       input_cost_per_token: 2.5e-06
       output_cost_per_token: 1.0e-05
+      max_input_tokens: 128000
+      max_output_tokens: 4000
+      metadata: *id312
+      litellm_provider: openrouter
+- model_name: cohere/command-r-08-2024
+  litellm_params:
+    model: openai/cohere/command-r-08-2024
+    api_base: https://openrouter.ai/api/v1
+    api_key: os.environ/OPENROUTER_API_KEY
+    input_cost_per_token: 1.5e-07
+    output_cost_per_token: 6.0e-07
+    max_input_tokens: 128000
+    max_output_tokens: 4000
+    metadata: &id313
+      notes: command-r-08-2024 is an update of the [Command R](/models/cohere/command-r)
+        with improved performance for multilingual retrieval-augmented generation
+        (RAG) and tool use. More broadly, it is better at math, code and reasoning
+        and...
+    litellm_provider: openrouter
+    cohere/command-r-08-2024:
+      input_cost_per_token: 1.5e-07
+      output_cost_per_token: 6.0e-07
       max_input_tokens: 128000
       max_output_tokens: 4000
       metadata: *id313
@@ -7703,27 +7699,6 @@ model_list:
       max_output_tokens: 16384
       metadata: *id319
       litellm_provider: openrouter
-- model_name: meta-llama/llama-3.1-8b-instruct
-  litellm_params:
-    model: openai/meta-llama/llama-3.1-8b-instruct
-    api_base: https://openrouter.ai/api/v1
-    api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 2.0e-08
-    output_cost_per_token: 5.0e-08
-    max_input_tokens: 16384
-    max_output_tokens: 16384
-    metadata: &id320
-      notes: Meta's latest class of model (Llama 3.1) launched with a variety of sizes
-        & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated
-        strong performance compared to...
-    litellm_provider: openrouter
-    meta-llama/llama-3.1-8b-instruct:
-      input_cost_per_token: 2.0e-08
-      output_cost_per_token: 5.0e-08
-      max_input_tokens: 16384
-      max_output_tokens: 16384
-      metadata: *id320
-      litellm_provider: openrouter
 - model_name: meta-llama/llama-3.1-70b-instruct
   litellm_params:
     model: openai/meta-llama/llama-3.1-70b-instruct
@@ -7733,7 +7708,7 @@ model_list:
     output_cost_per_token: 4.0e-07
     max_input_tokens: 131072
     max_output_tokens: 16384
-    metadata: &id321
+    metadata: &id320
       notes: Meta's latest class of model (Llama 3.1) launched with a variety of sizes
         & flavors. This 70B instruct-tuned version is optimized for high quality dialogue
         usecases. It has demonstrated strong...
@@ -7742,6 +7717,27 @@ model_list:
       input_cost_per_token: 4.0e-07
       output_cost_per_token: 4.0e-07
       max_input_tokens: 131072
+      max_output_tokens: 16384
+      metadata: *id320
+      litellm_provider: openrouter
+- model_name: meta-llama/llama-3.1-8b-instruct
+  litellm_params:
+    model: openai/meta-llama/llama-3.1-8b-instruct
+    api_base: https://openrouter.ai/api/v1
+    api_key: os.environ/OPENROUTER_API_KEY
+    input_cost_per_token: 2.0e-08
+    output_cost_per_token: 5.0e-08
+    max_input_tokens: 16384
+    max_output_tokens: 16384
+    metadata: &id321
+      notes: Meta's latest class of model (Llama 3.1) launched with a variety of sizes
+        & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated
+        strong performance compared to...
+    litellm_provider: openrouter
+    meta-llama/llama-3.1-8b-instruct:
+      input_cost_per_token: 2.0e-08
+      output_cost_per_token: 5.0e-08
+      max_input_tokens: 16384
       max_output_tokens: 16384
       metadata: *id321
       litellm_provider: openrouter
@@ -7764,9 +7760,9 @@ model_list:
       max_input_tokens: 131072
       metadata: *id322
       litellm_provider: openrouter
-- model_name: openai/gpt-4o-mini
+- model_name: openai/gpt-4o-mini-2024-07-18
   litellm_params:
-    model: openai/gpt-4o-mini
+    model: openai/gpt-4o-mini-2024-07-18
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: 1.5e-07
@@ -7778,16 +7774,16 @@ model_list:
         supporting both text and image inputs with text outputs. As their most advanced
         small model, it is many multiples more affordable...
     litellm_provider: openrouter
-    openai/gpt-4o-mini:
+    openai/gpt-4o-mini-2024-07-18:
       input_cost_per_token: 1.5e-07
       output_cost_per_token: 6.0e-07
       max_input_tokens: 128000
       max_output_tokens: 16384
       metadata: *id323
       litellm_provider: openrouter
-- model_name: openai/gpt-4o-mini-2024-07-18
+- model_name: openai/gpt-4o-mini
   litellm_params:
-    model: openai/gpt-4o-mini-2024-07-18
+    model: openai/gpt-4o-mini
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: 1.5e-07
@@ -7799,7 +7795,7 @@ model_list:
         supporting both text and image inputs with text outputs. As their most advanced
         small model, it is many multiples more affordable...
     litellm_provider: openrouter
-    openai/gpt-4o-mini-2024-07-18:
+    openai/gpt-4o-mini:
       input_cost_per_token: 1.5e-07
       output_cost_per_token: 6.0e-07
       max_input_tokens: 128000
@@ -7869,33 +7865,6 @@ model_list:
       max_output_tokens: 8192
       metadata: *id327
       litellm_provider: openrouter
-- model_name: openai/gpt-4o
-  litellm_params:
-    model: openai/gpt-4o
-    api_base: https://openrouter.ai/api/v1
-    api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 2.5e-06
-    litellm_provider: openrouter
-    max_input_tokens: 128000
-    max_output_tokens: 16384
-    max_tokens: 4096
-    mode: chat
-    output_cost_per_token: 1.0e-05
-    supports_function_calling: true
-    supports_parallel_function_calling: true
-    supports_tool_choice: true
-    supports_vision: true
-    metadata: &id328
-      notes: GPT-4o ("o" for "omni") is OpenAI's latest AI model, supporting both
-        text and image inputs with text outputs. It maintains the intelligence level
-        of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...
-    openai/gpt-4o:
-      input_cost_per_token: 2.5e-06
-      output_cost_per_token: 1.0e-05
-      max_input_tokens: 128000
-      max_output_tokens: 16384
-      metadata: *id328
-      litellm_provider: openrouter
 - model_name: openai/gpt-4o-2024-05-13
   litellm_params:
     model: openai/gpt-4o-2024-05-13
@@ -7912,7 +7881,7 @@ model_list:
     supports_parallel_function_calling: true
     supports_tool_choice: true
     supports_vision: true
-    metadata: &id329
+    metadata: &id328
       notes: GPT-4o ("o" for "omni") is OpenAI's latest AI model, supporting both
         text and image inputs with text outputs. It maintains the intelligence level
         of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...
@@ -7921,28 +7890,34 @@ model_list:
       output_cost_per_token: 1.5e-05
       max_input_tokens: 128000
       max_output_tokens: 4096
-      metadata: *id329
+      metadata: *id328
       litellm_provider: openrouter
-- model_name: meta-llama/llama-3-8b-instruct
+- model_name: openai/gpt-4o
   litellm_params:
-    model: openai/meta-llama/llama-3-8b-instruct
+    model: openai/gpt-4o
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 4.0e-08
-    output_cost_per_token: 4.0e-08
-    max_input_tokens: 8192
-    max_output_tokens: 8192
-    metadata: &id330
-      notes: Meta's latest class of model (Llama 3) launched with a variety of sizes
-        & flavors. This 8B instruct-tuned version was optimized for high quality dialogue
-        usecases. It has demonstrated strong...
+    input_cost_per_token: 2.5e-06
     litellm_provider: openrouter
-    meta-llama/llama-3-8b-instruct:
-      input_cost_per_token: 4.0e-08
-      output_cost_per_token: 4.0e-08
-      max_input_tokens: 8192
-      max_output_tokens: 8192
-      metadata: *id330
+    max_input_tokens: 128000
+    max_output_tokens: 16384
+    max_tokens: 4096
+    mode: chat
+    output_cost_per_token: 1.0e-05
+    supports_function_calling: true
+    supports_parallel_function_calling: true
+    supports_tool_choice: true
+    supports_vision: true
+    metadata: &id329
+      notes: GPT-4o ("o" for "omni") is OpenAI's latest AI model, supporting both
+        text and image inputs with text outputs. It maintains the intelligence level
+        of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...
+    openai/gpt-4o:
+      input_cost_per_token: 2.5e-06
+      output_cost_per_token: 1.0e-05
+      max_input_tokens: 128000
+      max_output_tokens: 16384
+      metadata: *id329
       litellm_provider: openrouter
 - model_name: meta-llama/llama-3-70b-instruct
   litellm_params:
@@ -7957,7 +7932,7 @@ model_list:
     supports_tool_choice: true
     max_input_tokens: 8192
     max_output_tokens: 8000
-    metadata: &id331
+    metadata: &id330
       notes: Meta's latest class of model (Llama 3) launched with a variety of sizes
         & flavors. This 70B instruct-tuned version was optimized for high quality
         dialogue usecases. It has demonstrated strong...
@@ -7966,6 +7941,27 @@ model_list:
       output_cost_per_token: 7.4e-07
       max_input_tokens: 8192
       max_output_tokens: 8000
+      metadata: *id330
+      litellm_provider: openrouter
+- model_name: meta-llama/llama-3-8b-instruct
+  litellm_params:
+    model: openai/meta-llama/llama-3-8b-instruct
+    api_base: https://openrouter.ai/api/v1
+    api_key: os.environ/OPENROUTER_API_KEY
+    input_cost_per_token: 4.0e-08
+    output_cost_per_token: 4.0e-08
+    max_input_tokens: 8192
+    max_output_tokens: 8192
+    metadata: &id331
+      notes: Meta's latest class of model (Llama 3) launched with a variety of sizes
+        & flavors. This 8B instruct-tuned version was optimized for high quality dialogue
+        usecases. It has demonstrated strong...
+    litellm_provider: openrouter
+    meta-llama/llama-3-8b-instruct:
+      input_cost_per_token: 4.0e-08
+      output_cost_per_token: 4.0e-08
+      max_input_tokens: 8192
+      max_output_tokens: 8192
       metadata: *id331
       litellm_provider: openrouter
 - model_name: mistralai/mixtral-8x22b-instruct
@@ -8100,29 +8096,6 @@ model_list:
       max_input_tokens: 128000
       metadata: *id336
       litellm_provider: openrouter
-- model_name: openai/gpt-4-turbo-preview
-  litellm_params:
-    model: openai/gpt-4-turbo-preview
-    api_base: https://openrouter.ai/api/v1
-    api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 1.0e-05
-    output_cost_per_token: 3.0e-05
-    max_input_tokens: 128000
-    max_output_tokens: 4096
-    metadata: &id337
-      notes: 'The preview GPT-4 model with improved instruction following, JSON mode,
-        reproducible outputs, parallel function calling, and more. Training data:
-        up to Dec 2023. **Note:** heavily rate limited by OpenAI while...'
-    supports_function_calling: true
-    litellm_provider: openrouter
-    openai/gpt-4-turbo-preview:
-      input_cost_per_token: 1.0e-05
-      output_cost_per_token: 3.0e-05
-      max_input_tokens: 128000
-      max_output_tokens: 4096
-      metadata: *id337
-      supports_function_calling: true
-      litellm_provider: openrouter
 - model_name: openai/gpt-3.5-turbo-0613
   litellm_params:
     model: openai/gpt-3.5-turbo-0613
@@ -8132,7 +8105,7 @@ model_list:
     output_cost_per_token: 2.0e-06
     max_input_tokens: 4095
     max_output_tokens: 4096
-    metadata: &id338
+    metadata: &id337
       notes: 'GPT-3.5 Turbo is OpenAI''s fastest model. It can understand and generate
         natural language or code, and is optimized for chat and traditional completion
         tasks.
@@ -8145,7 +8118,30 @@ model_list:
       output_cost_per_token: 2.0e-06
       max_input_tokens: 4095
       max_output_tokens: 4096
+      metadata: *id337
+      litellm_provider: openrouter
+- model_name: openai/gpt-4-turbo-preview
+  litellm_params:
+    model: openai/gpt-4-turbo-preview
+    api_base: https://openrouter.ai/api/v1
+    api_key: os.environ/OPENROUTER_API_KEY
+    input_cost_per_token: 1.0e-05
+    output_cost_per_token: 3.0e-05
+    max_input_tokens: 128000
+    max_output_tokens: 4096
+    metadata: &id338
+      notes: 'The preview GPT-4 model with improved instruction following, JSON mode,
+        reproducible outputs, parallel function calling, and more. Training data:
+        up to Dec 2023. **Note:** heavily rate limited by OpenAI while...'
+    supports_function_calling: true
+    litellm_provider: openrouter
+    openai/gpt-4-turbo-preview:
+      input_cost_per_token: 1.0e-05
+      output_cost_per_token: 3.0e-05
+      max_input_tokens: 128000
+      max_output_tokens: 4096
       metadata: *id338
+      supports_function_calling: true
       litellm_provider: openrouter
 - model_name: openrouter/auto
   litellm_params:
@@ -8302,30 +8298,24 @@ model_list:
       max_output_tokens: 4096
       metadata: *id345
       litellm_provider: openrouter
-- model_name: openai/gpt-3.5-turbo
+- model_name: openai/gpt-4-0314
   litellm_params:
-    model: openai/gpt-3.5-turbo
+    model: openai/gpt-4-0314
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 5.0e-07
-    litellm_provider: openrouter
-    max_tokens: 4096
-    mode: chat
-    output_cost_per_token: 1.5e-06
-    supports_tool_choice: true
-    max_input_tokens: 16385
+    input_cost_per_token: 3.0e-05
+    output_cost_per_token: 6.0e-05
+    max_input_tokens: 8191
     max_output_tokens: 4096
     metadata: &id346
-      notes: 'GPT-3.5 Turbo is OpenAI''s fastest model. It can understand and generate
-        natural language or code, and is optimized for chat and traditional completion
-        tasks.
-
-
-        Training data up to Sep 2021.'
-    openai/gpt-3.5-turbo:
-      input_cost_per_token: 5.0e-07
-      output_cost_per_token: 1.5e-06
-      max_input_tokens: 16385
+      notes: 'GPT-4-0314 is the first version of GPT-4 released, with a context length
+        of 8,192 tokens, and was supported until June 14. Training data: up to Sep
+        2021.'
+    litellm_provider: openrouter
+    openai/gpt-4-0314:
+      input_cost_per_token: 3.0e-05
+      output_cost_per_token: 6.0e-05
+      max_input_tokens: 8191
       max_output_tokens: 4096
       metadata: *id346
       litellm_provider: openrouter
@@ -8353,24 +8343,30 @@ model_list:
       max_output_tokens: 4096
       metadata: *id347
       litellm_provider: openrouter
-- model_name: openai/gpt-4-0314
+- model_name: openai/gpt-3.5-turbo
   litellm_params:
-    model: openai/gpt-4-0314
+    model: openai/gpt-3.5-turbo
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 3.0e-05
-    output_cost_per_token: 6.0e-05
-    max_input_tokens: 8191
+    input_cost_per_token: 5.0e-07
+    litellm_provider: openrouter
+    max_tokens: 4096
+    mode: chat
+    output_cost_per_token: 1.5e-06
+    supports_tool_choice: true
+    max_input_tokens: 16385
     max_output_tokens: 4096
     metadata: &id348
-      notes: 'GPT-4-0314 is the first version of GPT-4 released, with a context length
-        of 8,192 tokens, and was supported until June 14. Training data: up to Sep
-        2021.'
-    litellm_provider: openrouter
-    openai/gpt-4-0314:
-      input_cost_per_token: 3.0e-05
-      output_cost_per_token: 6.0e-05
-      max_input_tokens: 8191
+      notes: 'GPT-3.5 Turbo is OpenAI''s fastest model. It can understand and generate
+        natural language or code, and is optimized for chat and traditional completion
+        tasks.
+
+
+        Training data up to Sep 2021.'
+    openai/gpt-3.5-turbo:
+      input_cost_per_token: 5.0e-07
+      output_cost_per_token: 1.5e-06
+      max_input_tokens: 16385
       max_output_tokens: 4096
       metadata: *id348
       litellm_provider: openrouter
@@ -8571,6 +8567,32 @@ router_settings:
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
   - anthropic/claude-opus-4.7-fast:
+    - openrouter/free
+    - gemini/gemini-exp-1206
+    - gemini/gemini-exp-1114
+    - openrouter/owl-alpha
+    - bedrock/anthropic.claude-mythos-preview
+    - openrouter/google/lyria-3-clip-preview
+    - openrouter/google/lyria-3-pro-preview
+    - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
+    - openrouter/qwen/qwen3-coder:free
+    - volcengine/glm-4-7-251222
+    - lemonade/qwen3-4b-instruct-2507-gguf
+    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
+    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+    - openrouter/google/gemma-4-26b-a4b-it:free
+    - openrouter/google/gemma-4-31b-it:free
+    - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
+    - openrouter/poolside/laguna-xs.2:free
+    - openrouter/moonshotai/kimi-k2.6:free
+    - openrouter/openai/gpt-oss-120b:free
+    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
+    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
+    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
+    - openrouter/z-ai/glm-4.5-air:free
+  - openrouter/fusion:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -14108,32 +14130,6 @@ router_settings:
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
     - lemonade/gpt-oss-120b-mxfp-gguf
-  - baidu/ernie-4.5-300b-a47b:
-    - openrouter/free
-    - gemini/gemini-exp-1206
-    - gemini/gemini-exp-1114
-    - openrouter/owl-alpha
-    - bedrock/anthropic.claude-mythos-preview
-    - openrouter/google/lyria-3-clip-preview
-    - openrouter/google/lyria-3-pro-preview
-    - vertex_ai-language-models/gemini-flash-experimental
-    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
-    - openrouter/qwen/qwen3-coder:free
-    - volcengine/glm-4-7-251222
-    - lemonade/qwen3-4b-instruct-2507-gguf
-    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
-    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
-    - openrouter/google/gemma-4-26b-a4b-it:free
-    - openrouter/google/gemma-4-31b-it:free
-    - volcengine/kimi-k2-thinking-251104
-    - openrouter/poolside/laguna-m.1:free
-    - openrouter/poolside/laguna-xs.2:free
-    - openrouter/moonshotai/kimi-k2.6:free
-    - openrouter/openai/gpt-oss-120b:free
-    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
-    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - mistralai/mistral-small-3.2-24b-instruct:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -16240,32 +16236,6 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-  - meta-llama/llama-3.2-11b-vision-instruct:
-    - openrouter/free
-    - gemini/gemini-exp-1206
-    - gemini/gemini-exp-1114
-    - openrouter/owl-alpha
-    - bedrock/anthropic.claude-mythos-preview
-    - openrouter/google/lyria-3-clip-preview
-    - openrouter/google/lyria-3-pro-preview
-    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
-    - openrouter/qwen/qwen3-coder:free
-    - volcengine/glm-4-7-251222
-    - lemonade/qwen3-4b-instruct-2507-gguf
-    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
-    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
-    - openrouter/google/gemma-4-26b-a4b-it:free
-    - openrouter/google/gemma-4-31b-it:free
-    - volcengine/kimi-k2-thinking-251104
-    - openrouter/poolside/laguna-m.1:free
-    - openrouter/poolside/laguna-xs.2:free
-    - openrouter/moonshotai/kimi-k2.6:free
-    - openrouter/openai/gpt-oss-120b:free
-    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
-    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
-    - lemonade/gpt-oss-120b-mxfp-gguf
   - meta-llama/llama-3.2-3b-instruct:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -16318,6 +16288,32 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
+  - meta-llama/llama-3.2-11b-vision-instruct:
+    - openrouter/free
+    - gemini/gemini-exp-1206
+    - gemini/gemini-exp-1114
+    - openrouter/owl-alpha
+    - bedrock/anthropic.claude-mythos-preview
+    - openrouter/google/lyria-3-clip-preview
+    - openrouter/google/lyria-3-pro-preview
+    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
+    - openrouter/qwen/qwen3-coder:free
+    - volcengine/glm-4-7-251222
+    - lemonade/qwen3-4b-instruct-2507-gguf
+    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
+    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+    - openrouter/google/gemma-4-26b-a4b-it:free
+    - openrouter/google/gemma-4-31b-it:free
+    - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
+    - openrouter/poolside/laguna-xs.2:free
+    - openrouter/moonshotai/kimi-k2.6:free
+    - openrouter/openai/gpt-oss-120b:free
+    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
+    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
+    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
+    - openrouter/z-ai/glm-4.5-air:free
+    - lemonade/gpt-oss-120b-mxfp-gguf
   - qwen/qwen-2.5-72b-instruct:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -16344,7 +16340,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-  - cohere/command-r-08-2024:
+  - cohere/command-r-plus-08-2024:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -16370,7 +16366,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-  - cohere/command-r-plus-08-2024:
+  - cohere/command-r-08-2024:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -16552,7 +16548,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-  - meta-llama/llama-3.1-8b-instruct:
+  - meta-llama/llama-3.1-70b-instruct:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -16578,7 +16574,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-  - meta-llama/llama-3.1-70b-instruct:
+  - meta-llama/llama-3.1-8b-instruct:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -16630,7 +16626,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-  - openai/gpt-4o-mini:
+  - openai/gpt-4o-mini-2024-07-18:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -16656,7 +16652,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-  - openai/gpt-4o-mini-2024-07-18:
+  - openai/gpt-4o-mini:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -16760,6 +16756,32 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
+  - openai/gpt-4o-2024-05-13:
+    - openrouter/free
+    - gemini/gemini-exp-1206
+    - gemini/gemini-exp-1114
+    - openrouter/owl-alpha
+    - bedrock/anthropic.claude-mythos-preview
+    - openrouter/google/lyria-3-clip-preview
+    - openrouter/google/lyria-3-pro-preview
+    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
+    - openrouter/qwen/qwen3-coder:free
+    - volcengine/glm-4-7-251222
+    - lemonade/qwen3-4b-instruct-2507-gguf
+    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
+    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+    - openrouter/google/gemma-4-26b-a4b-it:free
+    - openrouter/google/gemma-4-31b-it:free
+    - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
+    - openrouter/poolside/laguna-xs.2:free
+    - openrouter/moonshotai/kimi-k2.6:free
+    - openrouter/openai/gpt-oss-120b:free
+    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
+    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
+    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
+    - openrouter/z-ai/glm-4.5-air:free
+    - lemonade/gpt-oss-120b-mxfp-gguf
   - openai/gpt-4o:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -16786,7 +16808,7 @@ router_settings:
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
     - lemonade/gpt-oss-120b-mxfp-gguf
-  - openai/gpt-4o-2024-05-13:
+  - meta-llama/llama-3-70b-instruct:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -16838,32 +16860,6 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-  - meta-llama/llama-3-70b-instruct:
-    - openrouter/free
-    - gemini/gemini-exp-1206
-    - gemini/gemini-exp-1114
-    - openrouter/owl-alpha
-    - bedrock/anthropic.claude-mythos-preview
-    - openrouter/google/lyria-3-clip-preview
-    - openrouter/google/lyria-3-pro-preview
-    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
-    - openrouter/qwen/qwen3-coder:free
-    - volcengine/glm-4-7-251222
-    - lemonade/qwen3-4b-instruct-2507-gguf
-    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
-    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
-    - openrouter/google/gemma-4-26b-a4b-it:free
-    - openrouter/google/gemma-4-31b-it:free
-    - volcengine/kimi-k2-thinking-251104
-    - openrouter/poolside/laguna-m.1:free
-    - openrouter/poolside/laguna-xs.2:free
-    - openrouter/moonshotai/kimi-k2.6:free
-    - openrouter/openai/gpt-oss-120b:free
-    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
-    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
-    - lemonade/gpt-oss-120b-mxfp-gguf
   - mistralai/mixtral-8x22b-instruct:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -16994,7 +16990,7 @@ router_settings:
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
     - lemonade/gpt-oss-120b-mxfp-gguf
-  - openai/gpt-4-turbo-preview:
+  - openai/gpt-3.5-turbo-0613:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -17020,7 +17016,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-  - openai/gpt-3.5-turbo-0613:
+  - openai/gpt-4-turbo-preview:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -17228,58 +17224,6 @@ router_settings:
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
     - lemonade/gpt-oss-120b-mxfp-gguf
-  - openai/gpt-3.5-turbo:
-    - openrouter/free
-    - gemini/gemini-exp-1206
-    - gemini/gemini-exp-1114
-    - openrouter/owl-alpha
-    - bedrock/anthropic.claude-mythos-preview
-    - openrouter/google/lyria-3-clip-preview
-    - openrouter/google/lyria-3-pro-preview
-    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
-    - openrouter/qwen/qwen3-coder:free
-    - volcengine/glm-4-7-251222
-    - lemonade/qwen3-4b-instruct-2507-gguf
-    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
-    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
-    - openrouter/google/gemma-4-26b-a4b-it:free
-    - openrouter/google/gemma-4-31b-it:free
-    - volcengine/kimi-k2-thinking-251104
-    - openrouter/poolside/laguna-m.1:free
-    - openrouter/poolside/laguna-xs.2:free
-    - openrouter/moonshotai/kimi-k2.6:free
-    - openrouter/openai/gpt-oss-120b:free
-    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
-    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
-    - lemonade/gpt-oss-120b-mxfp-gguf
-  - openai/gpt-4:
-    - openrouter/free
-    - gemini/gemini-exp-1206
-    - gemini/gemini-exp-1114
-    - openrouter/owl-alpha
-    - bedrock/anthropic.claude-mythos-preview
-    - openrouter/google/lyria-3-clip-preview
-    - openrouter/google/lyria-3-pro-preview
-    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
-    - openrouter/qwen/qwen3-coder:free
-    - volcengine/glm-4-7-251222
-    - lemonade/qwen3-4b-instruct-2507-gguf
-    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
-    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
-    - openrouter/google/gemma-4-26b-a4b-it:free
-    - openrouter/google/gemma-4-31b-it:free
-    - volcengine/kimi-k2-thinking-251104
-    - openrouter/poolside/laguna-m.1:free
-    - openrouter/poolside/laguna-xs.2:free
-    - openrouter/moonshotai/kimi-k2.6:free
-    - openrouter/openai/gpt-oss-120b:free
-    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
-    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
-    - lemonade/gpt-oss-120b-mxfp-gguf
   - openai/gpt-4-0314:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -17306,6 +17250,58 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
+  - openai/gpt-4:
+    - openrouter/free
+    - gemini/gemini-exp-1206
+    - gemini/gemini-exp-1114
+    - openrouter/owl-alpha
+    - bedrock/anthropic.claude-mythos-preview
+    - openrouter/google/lyria-3-clip-preview
+    - openrouter/google/lyria-3-pro-preview
+    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
+    - openrouter/qwen/qwen3-coder:free
+    - volcengine/glm-4-7-251222
+    - lemonade/qwen3-4b-instruct-2507-gguf
+    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
+    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+    - openrouter/google/gemma-4-26b-a4b-it:free
+    - openrouter/google/gemma-4-31b-it:free
+    - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
+    - openrouter/poolside/laguna-xs.2:free
+    - openrouter/moonshotai/kimi-k2.6:free
+    - openrouter/openai/gpt-oss-120b:free
+    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
+    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
+    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
+    - openrouter/z-ai/glm-4.5-air:free
+    - lemonade/gpt-oss-120b-mxfp-gguf
+  - openai/gpt-3.5-turbo:
+    - openrouter/free
+    - gemini/gemini-exp-1206
+    - gemini/gemini-exp-1114
+    - openrouter/owl-alpha
+    - bedrock/anthropic.claude-mythos-preview
+    - openrouter/google/lyria-3-clip-preview
+    - openrouter/google/lyria-3-pro-preview
+    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
+    - openrouter/qwen/qwen3-coder:free
+    - volcengine/glm-4-7-251222
+    - lemonade/qwen3-4b-instruct-2507-gguf
+    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
+    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+    - openrouter/google/gemma-4-26b-a4b-it:free
+    - openrouter/google/gemma-4-31b-it:free
+    - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
+    - openrouter/poolside/laguna-xs.2:free
+    - openrouter/moonshotai/kimi-k2.6:free
+    - openrouter/openai/gpt-oss-120b:free
+    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
+    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
+    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
+    - openrouter/z-ai/glm-4.5-air:free
+    - lemonade/gpt-oss-120b-mxfp-gguf
   retry_policy:
     AuthenticationErrorRetries: 3
     TimeoutErrorRetries: 3
