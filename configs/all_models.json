@@ -16954,6 +16954,30 @@
         "output_vector_size": 1024,
         "source": "https://www.databricks.com/product/pricing/foundation-model-serving"
     },
+    "qwen/qwen3.7-plus": {
+        "input_cost_per_token": 4e-07,
+        "output_cost_per_token": 1.6e-06,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 65536,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Qwen3.7-Plus is a cost-effective model in Alibaba's Qwen3.7 series. It supports text and image input with text output, building on the series' text capabilities with a comprehensive upgrade to its..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3.7-plus": {
+            "input_cost_per_token": 4e-07,
+            "output_cost_per_token": 1.6e-06,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 65536,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Qwen3.7-Plus is a cost-effective model in Alibaba's Qwen3.7 series. It supports text and image input with text output, building on the series' text capabilities with a comprehensive upgrade to its..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "deepinfra/qwen/qwen3-coder-480b-a35b-instruct": {
         "max_tokens": 262144,
         "max_input_tokens": 262144,
@@ -19738,6 +19762,31 @@
         "supports_tool_choice": true,
         "supports_vision": true
     },
+    "z-ai/glm-5": {
+        "input_cost_per_token": 6e-07,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 202752,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1.92e-06,
+        "source": "https://openrouter.ai/z-ai/glm-5",
+        "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
+        },
+        "z-ai/glm-5": {
+            "input_cost_per_token": 6e-07,
+            "output_cost_per_token": 1.92e-06,
+            "max_input_tokens": 202752,
+            "metadata": {
+                "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "google/gemini-3.1-flash-lite": {
         "cache_read_input_token_cost": 2.5e-08,
         "cache_read_input_token_cost_per_audio_token": 5e-08,
@@ -19922,32 +19971,6 @@
         "supports_system_messages": true,
         "supports_tool_choice": true,
         "source": "https://aws.amazon.com/bedrock/pricing/"
-    },
-    "z-ai/glm-5": {
-        "input_cost_per_token": 6e-07,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 202752,
-        "max_output_tokens": 16384,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 2.08e-06,
-        "source": "https://openrouter.ai/z-ai/glm-5",
-        "supports_function_calling": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
-        },
-        "z-ai/glm-5": {
-            "input_cost_per_token": 6e-07,
-            "output_cost_per_token": 2.08e-06,
-            "max_input_tokens": 202752,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "replicate/deepseek-ai/deepseek-v3.1": {
         "input_cost_per_token": 6.72e-07,
@@ -23528,7 +23551,6 @@
         "input_cost_per_token": 9.8e-07,
         "output_cost_per_token": 3.08e-06,
         "max_input_tokens": 202752,
-        "max_output_tokens": 131072,
         "metadata": {
             "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
         },
@@ -23537,7 +23559,6 @@
             "input_cost_per_token": 9.8e-07,
             "output_cost_per_token": 3.08e-06,
             "max_input_tokens": 202752,
-            "max_output_tokens": 131072,
             "metadata": {
                 "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
             },
@@ -39028,26 +39049,6 @@
             "max_output_tokens": 4096,
             "metadata": {
                 "notes": "OpenAI's flagship model, GPT-4 is a large-scale multimodal language model capable of solving difficult problems with greater accuracy than previous models due to its broader general knowledge and advanced reasoning..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "openai/gpt-4-0314": {
-        "input_cost_per_token": 3e-05,
-        "output_cost_per_token": 6e-05,
-        "max_input_tokens": 8191,
-        "max_output_tokens": 4096,
-        "metadata": {
-            "notes": "GPT-4-0314 is the first version of GPT-4 released, with a context length of 8,192 tokens, and was supported until June 14. Training data: up to Sep 2021."
-        },
-        "litellm_provider": "openrouter",
-        "openai/gpt-4-0314": {
-            "input_cost_per_token": 3e-05,
-            "output_cost_per_token": 6e-05,
-            "max_input_tokens": 8191,
-            "max_output_tokens": 4096,
-            "metadata": {
-                "notes": "GPT-4-0314 is the first version of GPT-4 released, with a context length of 8,192 tokens, and was supported until June 14. Training data: up to Sep 2021."
             },
             "litellm_provider": "openrouter"
         }
