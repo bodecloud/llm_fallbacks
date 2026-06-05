@@ -5,6 +5,70 @@
         "api_env_key_name": "OPENROUTER_API_KEY",
         "api_key_required": false,
         "model_specs": {
+            "nvidia/nemotron-3.5-content-safety:free": {
+                "input_cost_per_token": 0.0,
+                "output_cost_per_token": 0.0,
+                "max_input_tokens": 128000,
+                "max_output_tokens": 8192,
+                "mode": "chat",
+                "supports_vision": true,
+                "metadata": {
+                    "notes": "NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model from NVIDIA, fine-tuned from Google Gemma-3-4B. It moderates both inputs to and responses from LLMs and VLMs, accepting..."
+                },
+                "litellm_provider": "openrouter",
+                "nvidia/nemotron-3.5-content-safety:free": {
+                    "input_cost_per_token": 0.0,
+                    "output_cost_per_token": 0.0,
+                    "max_input_tokens": 128000,
+                    "max_output_tokens": 8192,
+                    "mode": "chat",
+                    "supports_vision": true,
+                    "metadata": {
+                        "notes": "NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model from NVIDIA, fine-tuned from Google Gemma-3-4B. It moderates both inputs to and responses from LLMs and VLMs, accepting..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "nvidia/nemotron-3-ultra-550b-a55b:free": {
+                "input_cost_per_token": 0.0,
+                "output_cost_per_token": 0.0,
+                "max_input_tokens": 1000000,
+                "max_output_tokens": 65536,
+                "metadata": {
+                    "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
+                },
+                "litellm_provider": "openrouter",
+                "nvidia/nemotron-3-ultra-550b-a55b:free": {
+                    "input_cost_per_token": 0.0,
+                    "output_cost_per_token": 0.0,
+                    "max_input_tokens": 1000000,
+                    "max_output_tokens": 65536,
+                    "metadata": {
+                        "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "nvidia/nemotron-3-ultra-550b-a55b": {
+                "input_cost_per_token": 5e-07,
+                "output_cost_per_token": 2.5e-06,
+                "max_input_tokens": 262144,
+                "max_output_tokens": 16384,
+                "metadata": {
+                    "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
+                },
+                "litellm_provider": "openrouter",
+                "nvidia/nemotron-3-ultra-550b-a55b": {
+                    "input_cost_per_token": 5e-07,
+                    "output_cost_per_token": 2.5e-06,
+                    "max_input_tokens": 262144,
+                    "max_output_tokens": 16384,
+                    "metadata": {
+                        "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "qwen/qwen3.7-plus": {
                 "input_cost_per_token": 4e-07,
                 "output_cost_per_token": 1.6e-06,
@@ -4765,8 +4829,8 @@
                 }
             },
             "qwen/qwen3-30b-a3b-instruct-2507": {
-                "input_cost_per_token": 4.28e-08,
-                "output_cost_per_token": 1.716e-07,
+                "input_cost_per_token": 4.815e-08,
+                "output_cost_per_token": 1.9305e-07,
                 "max_input_tokens": 128000,
                 "max_output_tokens": 32000,
                 "metadata": {
@@ -4774,8 +4838,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen3-30b-a3b-instruct-2507": {
-                    "input_cost_per_token": 4.28e-08,
-                    "output_cost_per_token": 1.716e-07,
+                    "input_cost_per_token": 4.815e-08,
+                    "output_cost_per_token": 1.9305e-07,
                     "max_input_tokens": 128000,
                     "max_output_tokens": 32000,
                     "metadata": {
@@ -7027,26 +7091,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "inflection/inflection-3-pi": {
-                "input_cost_per_token": 2.5e-06,
-                "output_cost_per_token": 1e-05,
-                "max_input_tokens": 8000,
-                "max_output_tokens": 1024,
-                "metadata": {
-                    "notes": "Inflection 3 Pi powers Inflection's [Pi](https://pi.ai) chatbot, including backstory, emotional intelligence, productivity, and safety. It has access to recent news, and excels in scenarios like customer support and roleplay. Pi..."
-                },
-                "litellm_provider": "openrouter",
-                "inflection/inflection-3-pi": {
-                    "input_cost_per_token": 2.5e-06,
-                    "output_cost_per_token": 1e-05,
-                    "max_input_tokens": 8000,
-                    "max_output_tokens": 1024,
-                    "metadata": {
-                        "notes": "Inflection 3 Pi powers Inflection's [Pi](https://pi.ai) chatbot, including backstory, emotional intelligence, productivity, and safety. It has access to recent news, and excels in scenarios like customer support and roleplay. Pi..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "inflection/inflection-3-productivity": {
                 "input_cost_per_token": 2.5e-06,
                 "output_cost_per_token": 1e-05,
@@ -7067,6 +7111,26 @@
                     "litellm_provider": "openrouter"
                 }
             },
+            "inflection/inflection-3-pi": {
+                "input_cost_per_token": 2.5e-06,
+                "output_cost_per_token": 1e-05,
+                "max_input_tokens": 8000,
+                "max_output_tokens": 1024,
+                "metadata": {
+                    "notes": "Inflection 3 Pi powers Inflection's [Pi](https://pi.ai) chatbot, including backstory, emotional intelligence, productivity, and safety. It has access to recent news, and excels in scenarios like customer support and roleplay. Pi..."
+                },
+                "litellm_provider": "openrouter",
+                "inflection/inflection-3-pi": {
+                    "input_cost_per_token": 2.5e-06,
+                    "output_cost_per_token": 1e-05,
+                    "max_input_tokens": 8000,
+                    "max_output_tokens": 1024,
+                    "metadata": {
+                        "notes": "Inflection 3 Pi powers Inflection's [Pi](https://pi.ai) chatbot, including backstory, emotional intelligence, productivity, and safety. It has access to recent news, and excels in scenarios like customer support and roleplay. Pi..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "thedrummer/rocinante-12b": {
                 "input_cost_per_token": 1.7e-07,
                 "output_cost_per_token": 4.3e-07,
@@ -7083,26 +7147,6 @@
                     "max_output_tokens": 32768,
                     "metadata": {
                         "notes": "Rocinante 12B is designed for engaging storytelling and rich prose. Early testers have reported: - Expanded vocabulary with unique and expressive word choices - Enhanced creativity for vivid narratives -..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "meta-llama/llama-3.2-1b-instruct": {
-                "input_cost_per_token": 2.7e-08,
-                "output_cost_per_token": 2.01e-07,
-                "max_input_tokens": 60000,
-                "max_output_tokens": 60000,
-                "metadata": {
-                    "notes": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate..."
-                },
-                "litellm_provider": "openrouter",
-                "meta-llama/llama-3.2-1b-instruct": {
-                    "input_cost_per_token": 2.7e-08,
-                    "output_cost_per_token": 2.01e-07,
-                    "max_input_tokens": 60000,
-                    "max_output_tokens": 60000,
-                    "metadata": {
-                        "notes": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -7141,6 +7185,26 @@
                     "max_output_tokens": 80000,
                     "metadata": {
                         "notes": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "meta-llama/llama-3.2-1b-instruct": {
+                "input_cost_per_token": 2.7e-08,
+                "output_cost_per_token": 2.01e-07,
+                "max_input_tokens": 60000,
+                "max_output_tokens": 60000,
+                "metadata": {
+                    "notes": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate..."
+                },
+                "litellm_provider": "openrouter",
+                "meta-llama/llama-3.2-1b-instruct": {
+                    "input_cost_per_token": 2.7e-08,
+                    "output_cost_per_token": 2.01e-07,
+                    "max_input_tokens": 60000,
+                    "max_output_tokens": 60000,
+                    "metadata": {
+                        "notes": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -7189,26 +7253,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "cohere/command-r-08-2024": {
-                "input_cost_per_token": 1.5e-07,
-                "output_cost_per_token": 6e-07,
-                "max_input_tokens": 128000,
-                "max_output_tokens": 4000,
-                "metadata": {
-                    "notes": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and..."
-                },
-                "litellm_provider": "openrouter",
-                "cohere/command-r-08-2024": {
-                    "input_cost_per_token": 1.5e-07,
-                    "output_cost_per_token": 6e-07,
-                    "max_input_tokens": 128000,
-                    "max_output_tokens": 4000,
-                    "metadata": {
-                        "notes": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "cohere/command-r-plus-08-2024": {
                 "input_cost_per_token": 2.5e-06,
                 "output_cost_per_token": 1e-05,
@@ -7225,6 +7269,26 @@
                     "max_output_tokens": 4000,
                     "metadata": {
                         "notes": "command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus) with roughly 50% higher throughput and 25% lower latencies as compared to the previous Command R+ version, while keeping the hardware footprint..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "cohere/command-r-08-2024": {
+                "input_cost_per_token": 1.5e-07,
+                "output_cost_per_token": 6e-07,
+                "max_input_tokens": 128000,
+                "max_output_tokens": 4000,
+                "metadata": {
+                    "notes": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and..."
+                },
+                "litellm_provider": "openrouter",
+                "cohere/command-r-08-2024": {
+                    "input_cost_per_token": 1.5e-07,
+                    "output_cost_per_token": 6e-07,
+                    "max_input_tokens": 128000,
+                    "max_output_tokens": 4000,
+                    "metadata": {
+                        "notes": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -7349,8 +7413,8 @@
             },
             "meta-llama/llama-3.1-8b-instruct": {
                 "input_cost_per_token": 2e-08,
-                "output_cost_per_token": 5e-08,
-                "max_input_tokens": 16384,
+                "output_cost_per_token": 3e-08,
+                "max_input_tokens": 131072,
                 "max_output_tokens": 16384,
                 "metadata": {
                     "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
@@ -7358,8 +7422,8 @@
                 "litellm_provider": "openrouter",
                 "meta-llama/llama-3.1-8b-instruct": {
                     "input_cost_per_token": 2e-08,
-                    "output_cost_per_token": 5e-08,
-                    "max_input_tokens": 16384,
+                    "output_cost_per_token": 3e-08,
+                    "max_input_tokens": 131072,
                     "max_output_tokens": 16384,
                     "metadata": {
                         "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
@@ -7718,26 +7782,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "openai/gpt-3.5-turbo-0613": {
-                "input_cost_per_token": 1e-06,
-                "output_cost_per_token": 2e-06,
-                "max_input_tokens": 4095,
-                "max_output_tokens": 4096,
-                "metadata": {
-                    "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
-                },
-                "litellm_provider": "openrouter",
-                "openai/gpt-3.5-turbo-0613": {
-                    "input_cost_per_token": 1e-06,
-                    "output_cost_per_token": 2e-06,
-                    "max_input_tokens": 4095,
-                    "max_output_tokens": 4096,
-                    "metadata": {
-                        "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "openai/gpt-4-turbo-preview": {
                 "input_cost_per_token": 1e-05,
                 "output_cost_per_token": 3e-05,
@@ -7757,6 +7801,26 @@
                         "notes": "The preview GPT-4 model with improved instruction following, JSON mode, reproducible outputs, parallel function calling, and more. Training data: up to Dec 2023. **Note:** heavily rate limited by OpenAI while..."
                     },
                     "supports_function_calling": true,
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "openai/gpt-3.5-turbo-0613": {
+                "input_cost_per_token": 1e-06,
+                "output_cost_per_token": 2e-06,
+                "max_input_tokens": 4095,
+                "max_output_tokens": 4096,
+                "metadata": {
+                    "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+                },
+                "litellm_provider": "openrouter",
+                "openai/gpt-3.5-turbo-0613": {
+                    "input_cost_per_token": 1e-06,
+                    "output_cost_per_token": 2e-06,
+                    "max_input_tokens": 4095,
+                    "max_output_tokens": 4096,
+                    "metadata": {
+                        "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+                    },
                     "litellm_provider": "openrouter"
                 }
             },
@@ -7910,29 +7974,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "openai/gpt-3.5-turbo": {
-                "input_cost_per_token": 5e-07,
-                "litellm_provider": "openrouter",
-                "max_tokens": 4096,
-                "mode": "chat",
-                "output_cost_per_token": 1.5e-06,
-                "supports_tool_choice": true,
-                "max_input_tokens": 16385,
-                "max_output_tokens": 4096,
-                "metadata": {
-                    "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
-                },
-                "openai/gpt-3.5-turbo": {
-                    "input_cost_per_token": 5e-07,
-                    "output_cost_per_token": 1.5e-06,
-                    "max_input_tokens": 16385,
-                    "max_output_tokens": 4096,
-                    "metadata": {
-                        "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "openai/gpt-4": {
                 "input_cost_per_token": 3e-05,
                 "litellm_provider": "openrouter",
@@ -7955,9 +7996,54 @@
                     },
                     "litellm_provider": "openrouter"
                 }
+            },
+            "openai/gpt-3.5-turbo": {
+                "input_cost_per_token": 5e-07,
+                "litellm_provider": "openrouter",
+                "max_tokens": 4096,
+                "mode": "chat",
+                "output_cost_per_token": 1.5e-06,
+                "supports_tool_choice": true,
+                "max_input_tokens": 16385,
+                "max_output_tokens": 4096,
+                "metadata": {
+                    "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+                },
+                "openai/gpt-3.5-turbo": {
+                    "input_cost_per_token": 5e-07,
+                    "output_cost_per_token": 1.5e-06,
+                    "max_input_tokens": 16385,
+                    "max_output_tokens": 4096,
+                    "metadata": {
+                        "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+                    },
+                    "litellm_provider": "openrouter"
+                }
             }
         },
         "free_models": {
+            "nvidia/nemotron-3.5-content-safety:free": {
+                "input_cost_per_token": 0.0,
+                "output_cost_per_token": 0.0,
+                "max_input_tokens": 128000,
+                "max_output_tokens": 8192,
+                "mode": "chat",
+                "supports_vision": true,
+                "metadata": {
+                    "notes": "NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model from NVIDIA, fine-tuned from Google Gemma-3-4B. It moderates both inputs to and responses from LLMs and VLMs, accepting..."
+                },
+                "litellm_provider": "openrouter"
+            },
+            "nvidia/nemotron-3-ultra-550b-a55b:free": {
+                "input_cost_per_token": 0.0,
+                "output_cost_per_token": 0.0,
+                "max_input_tokens": 1000000,
+                "max_output_tokens": 65536,
+                "metadata": {
+                    "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
+                },
+                "litellm_provider": "openrouter"
+            },
             "openrouter/fusion": {
                 "input_cost_per_token": -1.0,
                 "output_cost_per_token": -1.0,

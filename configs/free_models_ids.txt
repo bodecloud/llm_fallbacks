@@ -76,6 +76,7 @@ gigachat/gigachat-2-lite
 google/lyria-3-clip-preview
 google/lyria-3-pro-preview
 nvidia/nemotron-3-super-120b-a12b:free
+nvidia/nemotron-3-ultra-550b-a55b:free
 openrouter/owl-alpha
 github_copilot/gpt-4o-2024-08-06
 meta_llama/llama-3.3-70b-instruct
@@ -86,6 +87,7 @@ google/gemma-4-26b-a4b-it:free
 google/gemma-4-31b-it:free
 poolside/laguna-m.1:free
 poolside/laguna-xs.2:free
+nvidia/nemotron-3.5-content-safety:free
 openai/gpt-oss-120b:free
 z-ai/glm-4.5-air:free
 github_copilot/gpt-4-o-preview

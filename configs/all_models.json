@@ -152,6 +152,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "nvidia/nemotron-3-ultra-550b-a55b:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
+        },
+        "litellm_provider": "openrouter",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "gemini-flash-experimental": {
         "input_cost_per_character": 0,
         "input_cost_per_token": 0,
@@ -641,6 +661,30 @@
             "max_output_tokens": 8192,
             "metadata": {
                 "notes": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "nvidia/nemotron-3.5-content-safety:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 128000,
+        "max_output_tokens": 8192,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model from NVIDIA, fine-tuned from Google Gemma-3-4B. It moderates both inputs to and responses from LLMs and VLMs, accepting..."
+        },
+        "litellm_provider": "openrouter",
+        "nvidia/nemotron-3.5-content-safety:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 128000,
+            "max_output_tokens": 8192,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model from NVIDIA, fine-tuned from Google Gemma-3-4B. It moderates both inputs to and responses from LLMs and VLMs, accepting..."
             },
             "litellm_provider": "openrouter"
         }
@@ -2012,6 +2056,26 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
+    "meta-llama/llama-3.1-8b-instruct": {
+        "input_cost_per_token": 2e-08,
+        "output_cost_per_token": 3e-08,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
+        },
+        "litellm_provider": "openrouter",
+        "meta-llama/llama-3.1-8b-instruct": {
+            "input_cost_per_token": 2e-08,
+            "output_cost_per_token": 3e-08,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "mistralai/mistral-nemo": {
         "input_cost_per_token": 2e-08,
         "output_cost_per_token": 3e-08,
@@ -2199,26 +2263,6 @@
         "max_output_tokens": 16384,
         "max_tokens": 16384,
         "supports_system_messages": true
-    },
-    "meta-llama/llama-3.1-8b-instruct": {
-        "input_cost_per_token": 2e-08,
-        "output_cost_per_token": 5e-08,
-        "max_input_tokens": 16384,
-        "max_output_tokens": 16384,
-        "metadata": {
-            "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
-        },
-        "litellm_provider": "openrouter",
-        "meta-llama/llama-3.1-8b-instruct": {
-            "input_cost_per_token": 2e-08,
-            "output_cost_per_token": 5e-08,
-            "max_input_tokens": 16384,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "novita/qwen/qwen3-embedding-0.6b": {
         "litellm_provider": "novita",
@@ -4598,26 +4642,6 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
-    "qwen/qwen3-30b-a3b-instruct-2507": {
-        "input_cost_per_token": 4.28e-08,
-        "output_cost_per_token": 1.716e-07,
-        "max_input_tokens": 128000,
-        "max_output_tokens": 32000,
-        "metadata": {
-            "notes": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3-30b-a3b-instruct-2507": {
-            "input_cost_per_token": 4.28e-08,
-            "output_cost_per_token": 1.716e-07,
-            "max_input_tokens": 128000,
-            "max_output_tokens": 32000,
-            "metadata": {
-                "notes": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "openai/gpt-oss-120b": {
         "input_cost_per_token": 3.9e-08,
         "litellm_provider": "openrouter",
@@ -4790,6 +4814,26 @@
         "mode": "chat",
         "output_cost_per_token": 1.6e-07,
         "source": "https://cloud.sambanova.ai/plans/pricing"
+    },
+    "qwen/qwen3-30b-a3b-instruct-2507": {
+        "input_cost_per_token": 4.815e-08,
+        "output_cost_per_token": 1.9305e-07,
+        "max_input_tokens": 128000,
+        "max_output_tokens": 32000,
+        "metadata": {
+            "notes": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3-30b-a3b-instruct-2507": {
+            "input_cost_per_token": 4.815e-08,
+            "output_cost_per_token": 1.9305e-07,
+            "max_input_tokens": 128000,
+            "max_output_tokens": 32000,
+            "metadata": {
+                "notes": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "256-x-256/dall-e-2": {
         "input_cost_per_pixel": 2.4414e-07,
@@ -20650,6 +20694,26 @@
         "supports_parallel_function_calling": true,
         "supports_system_messages": true,
         "supports_tool_choice": true
+    },
+    "nvidia/nemotron-3-ultra-550b-a55b": {
+        "input_cost_per_token": 5e-07,
+        "output_cost_per_token": 2.5e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
+        },
+        "litellm_provider": "openrouter",
+        "nvidia/nemotron-3-ultra-550b-a55b": {
+            "input_cost_per_token": 5e-07,
+            "output_cost_per_token": 2.5e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "x-ai/grok-build-0.1": {
         "input_cost_per_token": 1e-06,
