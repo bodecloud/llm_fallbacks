@@ -5165,26 +5165,6 @@
         "supports_system_messages": true,
         "supports_response_schema": true
     },
-    "nousresearch/hermes-2-pro-llama-3-8b": {
-        "input_cost_per_token": 1.4e-07,
-        "output_cost_per_token": 1.4e-07,
-        "max_input_tokens": 8192,
-        "max_output_tokens": 8192,
-        "metadata": {
-            "notes": "Hermes 2 Pro is an upgraded, retrained version of Nous Hermes 2, consisting of an updated and cleaned version of the OpenHermes 2.5 Dataset, as well as a newly introduced..."
-        },
-        "litellm_provider": "openrouter",
-        "nousresearch/hermes-2-pro-llama-3-8b": {
-            "input_cost_per_token": 1.4e-07,
-            "output_cost_per_token": 1.4e-07,
-            "max_input_tokens": 8192,
-            "max_output_tokens": 8192,
-            "metadata": {
-                "notes": "Hermes 2 Pro is an upgraded, retrained version of Nous Hermes 2, consisting of an updated and cleaned version of the OpenHermes 2.5 Dataset, as well as a newly introduced..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "nvidia.nemotron-nano-9b-v2": {
         "input_cost_per_token": 6e-08,
         "litellm_provider": "bedrock_converse",
@@ -8445,6 +8425,26 @@
         "supports_response_schema": true,
         "supports_tool_choice": false
     },
+    "google/gemma-4-31b-it": {
+        "input_cost_per_token": 1.2e-07,
+        "output_cost_per_token": 3.6e-07,
+        "max_input_tokens": 256000,
+        "max_output_tokens": 8192,
+        "metadata": {
+            "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemma-4-31b-it": {
+            "input_cost_per_token": 1.2e-07,
+            "output_cost_per_token": 3.6e-07,
+            "max_input_tokens": 256000,
+            "max_output_tokens": 8192,
+            "metadata": {
+                "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "qwen/qwen3-30b-a3b-thinking-2507": {
         "input_cost_per_token": 8e-08,
         "output_cost_per_token": 4e-07,
@@ -8461,26 +8461,6 @@
             "max_output_tokens": 131072,
             "metadata": {
                 "notes": "Qwen3-30B-A3B-Thinking-2507 is a 30B parameter Mixture-of-Experts reasoning model optimized for complex tasks requiring extended multi-step thinking. The model is designed specifically for \u201cthinking mode,\u201d where internal reasoning traces are separated..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "google/gemma-4-31b-it": {
-        "input_cost_per_token": 1.2e-07,
-        "output_cost_per_token": 3.7e-07,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 16384,
-        "metadata": {
-            "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemma-4-31b-it": {
-            "input_cost_per_token": 1.2e-07,
-            "output_cost_per_token": 3.7e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
             },
             "litellm_provider": "openrouter"
         }
@@ -9011,7 +8991,7 @@
         "input_cost_per_token": 9e-08,
         "output_cost_per_token": 4.5e-07,
         "max_input_tokens": 40960,
-        "max_output_tokens": 20000,
+        "max_output_tokens": 16384,
         "metadata": {
             "notes": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique..."
         },
@@ -9020,7 +9000,7 @@
             "input_cost_per_token": 9e-08,
             "output_cost_per_token": 4.5e-07,
             "max_input_tokens": 40960,
-            "max_output_tokens": 20000,
+            "max_output_tokens": 16384,
             "metadata": {
                 "notes": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique..."
             },
@@ -14344,7 +14324,7 @@
         "input_cost_per_token": 2.79e-07,
         "output_cost_per_token": 1.2e-06,
         "max_input_tokens": 196608,
-        "max_output_tokens": 131072,
+        "max_output_tokens": 196608,
         "metadata": {
             "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
         },
@@ -14353,7 +14333,7 @@
             "input_cost_per_token": 2.79e-07,
             "output_cost_per_token": 1.2e-06,
             "max_input_tokens": 196608,
-            "max_output_tokens": 131072,
+            "max_output_tokens": 196608,
             "metadata": {
                 "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
             },
@@ -20644,26 +20624,6 @@
         "supports_parallel_function_calling": true,
         "supports_tool_choice": true,
         "supports_system_messages": true
-    },
-    "sao10k/l3-euryale-70b": {
-        "input_cost_per_token": 1.48e-06,
-        "output_cost_per_token": 1.48e-06,
-        "max_input_tokens": 8192,
-        "max_output_tokens": 8192,
-        "metadata": {
-            "notes": "Euryale 70B v2.1 is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). - Better prompt adherence. - Better anatomy / spatial awareness. - Adapts much better to unique and custom..."
-        },
-        "litellm_provider": "openrouter",
-        "sao10k/l3-euryale-70b": {
-            "input_cost_per_token": 1.48e-06,
-            "output_cost_per_token": 1.48e-06,
-            "max_input_tokens": 8192,
-            "max_output_tokens": 8192,
-            "metadata": {
-                "notes": "Euryale 70B v2.1 is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). - Better prompt adherence. - Better anatomy / spatial awareness. - Adapts much better to unique and custom..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "novita/zai-org/glm-4.6": {
         "litellm_provider": "novita",
