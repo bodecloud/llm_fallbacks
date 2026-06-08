@@ -2948,30 +2948,6 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
-    "google/gemma-3-4b-it": {
-        "input_cost_per_token": 4e-08,
-        "output_cost_per_token": 8e-08,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 16384,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemma-3-4b-it": {
-            "input_cost_per_token": 4e-08,
-            "output_cost_per_token": 8e-08,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 16384,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "llamagate/llama-3.2-3b": {
         "max_tokens": 8192,
         "max_input_tokens": 131072,
@@ -3258,6 +3234,30 @@
         "supports_system_messages": true,
         "supports_reasoning": true
     },
+    "google/gemma-3-4b-it": {
+        "input_cost_per_token": 5e-08,
+        "output_cost_per_token": 1e-07,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 16384,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemma-3-4b-it": {
+            "input_cost_per_token": 5e-08,
+            "output_cost_per_token": 1e-07,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 16384,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "lambda_ai/llama-4-maverick-17b-128e-instruct-fp8": {
         "input_cost_per_token": 5e-08,
         "litellm_provider": "lambda_ai",
@@ -3453,30 +3453,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "google/gemma-3-12b-it": {
-        "input_cost_per_token": 4e-08,
-        "output_cost_per_token": 1.3e-07,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 16384,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemma-3-12b-it": {
-            "input_cost_per_token": 4e-08,
-            "output_cost_per_token": 1.3e-07,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 16384,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "deepinfra/gryphe/mythomax-l2-13b": {
         "max_tokens": 4096,
         "max_input_tokens": 4096,
@@ -3487,31 +3463,6 @@
         "mode": "chat",
         "supports_tool_choice": true,
         "supports_function_calling": true
-    },
-    "qwen/qwen3-235b-a22b-2507": {
-        "input_cost_per_token": 7.1e-08,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 262144,
-        "max_output_tokens": 16384,
-        "max_tokens": 262144,
-        "mode": "chat",
-        "output_cost_per_token": 1e-07,
-        "source": "https://openrouter.ai/qwen/qwen3-235b-a22b-2507",
-        "supports_function_calling": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,..."
-        },
-        "qwen/qwen3-235b-a22b-2507": {
-            "input_cost_per_token": 7.1e-08,
-            "output_cost_per_token": 1e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "novita/zai-org/autoglm-phone-9b-multilingual": {
         "litellm_provider": "novita",
@@ -3764,6 +3715,31 @@
             "litellm_provider": "openrouter"
         }
     },
+    "qwen/qwen3-235b-a22b-2507": {
+        "input_cost_per_token": 9e-08,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 262144,
+        "max_output_tokens": 16384,
+        "max_tokens": 262144,
+        "mode": "chat",
+        "output_cost_per_token": 1e-07,
+        "source": "https://openrouter.ai/qwen/qwen3-235b-a22b-2507",
+        "supports_function_calling": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,..."
+        },
+        "qwen/qwen3-235b-a22b-2507": {
+            "input_cost_per_token": 9e-08,
+            "output_cost_per_token": 1e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "deepinfra/openai/gpt-oss-20b": {
         "max_tokens": 131072,
         "max_input_tokens": 131072,
@@ -3788,26 +3764,6 @@
         "supports_reasoning": true,
         "supports_response_schema": true,
         "supports_tool_choice": false
-    },
-    "qwen/qwen3.5-9b": {
-        "input_cost_per_token": 4e-08,
-        "output_cost_per_token": 1.5e-07,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 81920,
-        "metadata": {
-            "notes": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3.5-9b": {
-            "input_cost_per_token": 4e-08,
-            "output_cost_per_token": 1.5e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 81920,
-            "metadata": {
-                "notes": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "novita/openai/gpt-oss-20b": {
         "litellm_provider": "novita",
@@ -4097,6 +4053,30 @@
         "supports_function_calling": true,
         "supports_tool_choice": true,
         "source": "https://docs.z.ai/guides/overview/pricing"
+    },
+    "google/gemma-3-12b-it": {
+        "input_cost_per_token": 5e-08,
+        "output_cost_per_token": 1.5e-07,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 16384,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemma-3-12b-it": {
+            "input_cost_per_token": 5e-08,
+            "output_cost_per_token": 1.5e-07,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 16384,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "nvidia/nemotron-nano-9b-v2": {
         "input_cost_per_token": 4e-08,
@@ -4885,6 +4865,26 @@
         "supports_function_calling": true,
         "supports_reasoning": true,
         "supports_tool_choice": true
+    },
+    "qwen/qwen3.5-9b": {
+        "input_cost_per_token": 1e-07,
+        "output_cost_per_token": 1.5e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "metadata": {
+            "notes": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3.5-9b": {
+            "input_cost_per_token": 1e-07,
+            "output_cost_per_token": 1.5e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "metadata": {
+                "notes": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "nvidia/nemotron-3-nano-30b-a3b": {
         "input_cost_per_token": 5e-08,
@@ -6294,30 +6294,6 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
-    "meta-llama/llama-4-scout": {
-        "input_cost_per_token": 8e-08,
-        "output_cost_per_token": 3e-07,
-        "max_input_tokens": 327680,
-        "max_output_tokens": 16384,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input..."
-        },
-        "litellm_provider": "openrouter",
-        "meta-llama/llama-4-scout": {
-            "input_cost_per_token": 8e-08,
-            "output_cost_per_token": 3e-07,
-            "max_input_tokens": 327680,
-            "max_output_tokens": 16384,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "google.gemma-3-12b-it": {
         "input_cost_per_token": 9e-08,
         "litellm_provider": "bedrock_converse",
@@ -6786,6 +6762,30 @@
         "supports_function_calling": true,
         "supports_response_schema": true,
         "supports_tool_choice": true
+    },
+    "meta-llama/llama-4-scout": {
+        "input_cost_per_token": 1e-07,
+        "output_cost_per_token": 3e-07,
+        "max_input_tokens": 327680,
+        "max_output_tokens": 16384,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input..."
+        },
+        "litellm_provider": "openrouter",
+        "meta-llama/llama-4-scout": {
+            "input_cost_per_token": 1e-07,
+            "output_cost_per_token": 3e-07,
+            "max_input_tokens": 327680,
+            "max_output_tokens": 16384,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "fireworks_ai/accounts/fireworks/models/code-qwen-1p5-7b": {
         "max_tokens": 65536,
@@ -8489,30 +8489,6 @@
         "output_cost_per_token": 2.4e-07,
         "supports_system_messages": true
     },
-    "meta-llama/llama-3.2-11b-vision-instruct": {
-        "input_cost_per_token": 2.45e-07,
-        "output_cost_per_token": 2.45e-07,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 16384,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and..."
-        },
-        "litellm_provider": "openrouter",
-        "meta-llama/llama-3.2-11b-vision-instruct": {
-            "input_cost_per_token": 2.45e-07,
-            "output_cost_per_token": 2.45e-07,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 16384,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "deepinfra/google/gemini-2.0-flash-001": {
         "deprecation_date": "2026-06-01",
         "max_tokens": 1000000,
@@ -8646,26 +8622,6 @@
         "mode": "chat",
         "supports_function_calling": true,
         "source": "https://nebius.com/prices-ai-studio"
-    },
-    "nvidia/llama-3.3-nemotron-super-49b-v1.5": {
-        "input_cost_per_token": 1e-07,
-        "output_cost_per_token": 4e-07,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 16384,
-        "metadata": {
-            "notes": "Llama-3.3-Nemotron-Super-49B-v1.5 is a 49B-parameter, English-centric reasoning/chat model derived from Meta\u2019s Llama-3.3-70B-Instruct with a 128K context. It\u2019s post-trained for agentic workflows (RAG, tool calling) via SFT across math, code, science, and..."
-        },
-        "litellm_provider": "openrouter",
-        "nvidia/llama-3.3-nemotron-super-49b-v1.5": {
-            "input_cost_per_token": 1e-07,
-            "output_cost_per_token": 4e-07,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "Llama-3.3-Nemotron-Super-49B-v1.5 is a 49B-parameter, English-centric reasoning/chat model derived from Meta\u2019s Llama-3.3-70B-Instruct with a 128K context. It\u2019s post-trained for agentic workflows (RAG, tool calling) via SFT across math, code, science, and..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "mistral/mistral-tiny": {
         "input_cost_per_token": 2.5e-07,
@@ -9011,26 +8967,6 @@
         "supports_system_messages": true,
         "supports_reasoning": true
     },
-    "qwen/qwen3-30b-a3b": {
-        "input_cost_per_token": 9e-08,
-        "output_cost_per_token": 4.5e-07,
-        "max_input_tokens": 40960,
-        "max_output_tokens": 16384,
-        "metadata": {
-            "notes": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3-30b-a3b": {
-            "input_cost_per_token": 9e-08,
-            "output_cost_per_token": 4.5e-07,
-            "max_input_tokens": 40960,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "deepinfra/qwen/qwq-32b": {
         "max_tokens": 131072,
         "max_input_tokens": 131072,
@@ -9331,26 +9267,6 @@
             }
         }
     },
-    "nousresearch/hermes-3-llama-3.1-70b": {
-        "input_cost_per_token": 3e-07,
-        "output_cost_per_token": 3e-07,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 16384,
-        "metadata": {
-            "notes": "Hermes 3 is a generalist language model with many improvements over [Hermes 2](/models/nousresearch/nous-hermes-2-mistral-7b-dpo), including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the..."
-        },
-        "litellm_provider": "openrouter",
-        "nousresearch/hermes-3-llama-3.1-70b": {
-            "input_cost_per_token": 3e-07,
-            "output_cost_per_token": 3e-07,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "Hermes 3 is a generalist language model with many improvements over [Hermes 2](/models/nousresearch/nous-hermes-2-mistral-7b-dpo), including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "gradient_ai/mistral-nemo-instruct-2407": {
         "input_cost_per_token": 3e-07,
         "litellm_provider": "gradient_ai",
@@ -9465,6 +9381,26 @@
         "output_cost_per_token": 3.8e-07,
         "supports_system_messages": true,
         "supports_vision": true
+    },
+    "qwen/qwen3-30b-a3b": {
+        "input_cost_per_token": 1.2e-07,
+        "output_cost_per_token": 5e-07,
+        "max_input_tokens": 40960,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3-30b-a3b": {
+            "input_cost_per_token": 1.2e-07,
+            "output_cost_per_token": 5e-07,
+            "max_input_tokens": 40960,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "azure_ai/phi-4": {
         "input_cost_per_token": 1.25e-07,
@@ -9664,6 +9600,30 @@
         "mode": "chat",
         "supports_tool_choice": true,
         "supports_function_calling": true
+    },
+    "meta-llama/llama-3.2-11b-vision-instruct": {
+        "input_cost_per_token": 3.45e-07,
+        "output_cost_per_token": 3.45e-07,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 16384,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and..."
+        },
+        "litellm_provider": "openrouter",
+        "meta-llama/llama-3.2-11b-vision-instruct": {
+            "input_cost_per_token": 3.45e-07,
+            "output_cost_per_token": 3.45e-07,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 16384,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "azure_ai/grok-4-1-fast-non-reasoning": {
         "input_cost_per_token": 2e-07,
@@ -11029,6 +10989,26 @@
             "max_output_tokens": 16384,
             "metadata": {
                 "notes": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 70B instruct-tuned version is optimized for high quality dialogue usecases. It has demonstrated strong..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "nvidia/llama-3.3-nemotron-super-49b-v1.5": {
+        "input_cost_per_token": 4e-07,
+        "output_cost_per_token": 4e-07,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "Llama-3.3-Nemotron-Super-49B-v1.5 is a 49B-parameter, English-centric reasoning/chat model derived from Meta\u2019s Llama-3.3-70B-Instruct with a 128K context. It\u2019s post-trained for agentic workflows (RAG, tool calling) via SFT across math, code, science, and..."
+        },
+        "litellm_provider": "openrouter",
+        "nvidia/llama-3.3-nemotron-super-49b-v1.5": {
+            "input_cost_per_token": 4e-07,
+            "output_cost_per_token": 4e-07,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "Llama-3.3-Nemotron-Super-49B-v1.5 is a 49B-parameter, English-centric reasoning/chat model derived from Meta\u2019s Llama-3.3-70B-Instruct with a 128K context. It\u2019s post-trained for agentic workflows (RAG, tool calling) via SFT across math, code, science, and..."
             },
             "litellm_provider": "openrouter"
         }
@@ -13957,6 +13937,26 @@
         "supports_tool_choice": true,
         "supports_system_messages": true,
         "supports_response_schema": true
+    },
+    "nousresearch/hermes-3-llama-3.1-70b": {
+        "input_cost_per_token": 7e-07,
+        "output_cost_per_token": 7e-07,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "Hermes 3 is a generalist language model with many improvements over [Hermes 2](/models/nousresearch/nous-hermes-2-mistral-7b-dpo), including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the..."
+        },
+        "litellm_provider": "openrouter",
+        "nousresearch/hermes-3-llama-3.1-70b": {
+            "input_cost_per_token": 7e-07,
+            "output_cost_per_token": 7e-07,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "Hermes 3 is a generalist language model with many improvements over [Hermes 2](/models/nousresearch/nous-hermes-2-mistral-7b-dpo), including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "mistral/open-mixtral-8x7b": {
         "input_cost_per_token": 7e-07,

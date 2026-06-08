@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-d7785a4a4852490483e1fea17719e930
+  master_key: sk-6fa7ab735d734f35941a50a827a9e1e9
   alerting:
   - slack
   - email
@@ -1728,10 +1728,10 @@ model_list:
     model: openai/qwen/qwen3.5-9b
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 4.0e-08
+    input_cost_per_token: 1.0e-07
     output_cost_per_token: 1.5e-07
     max_input_tokens: 262144
-    max_output_tokens: 81920
+    max_output_tokens: 262144
     metadata: &id075
       notes: Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family,
         designed to deliver strong reasoning, coding, and visual understanding in
@@ -1739,10 +1739,10 @@ model_list:
         design...
     litellm_provider: openrouter
     qwen/qwen3.5-9b:
-      input_cost_per_token: 4.0e-08
+      input_cost_per_token: 1.0e-07
       output_cost_per_token: 1.5e-07
       max_input_tokens: 262144
-      max_output_tokens: 81920
+      max_output_tokens: 262144
       metadata: *id075
       litellm_provider: openrouter
 - model_name: openai/gpt-5.4-pro
@@ -4041,7 +4041,7 @@ model_list:
     model: openai/nvidia/llama-3.3-nemotron-super-49b-v1.5
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 1.0e-07
+    input_cost_per_token: 4.0e-07
     output_cost_per_token: 4.0e-07
     max_input_tokens: 131072
     max_output_tokens: 16384
@@ -4052,7 +4052,7 @@ model_list:
         across math, code, science, and...
     litellm_provider: openrouter
     nvidia/llama-3.3-nemotron-super-49b-v1.5:
-      input_cost_per_token: 1.0e-07
+      input_cost_per_token: 4.0e-07
       output_cost_per_token: 4.0e-07
       max_input_tokens: 131072
       max_output_tokens: 16384
@@ -5344,7 +5344,7 @@ model_list:
     model: openai/qwen/qwen3-235b-a22b-2507
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 7.1e-08
+    input_cost_per_token: 9.0e-08
     litellm_provider: openrouter
     max_input_tokens: 262144
     max_output_tokens: 16384
@@ -5360,7 +5360,7 @@ model_list:
         per forward pass. It is optimized for general-purpose text generation, including
         instruction following,...
     qwen/qwen3-235b-a22b-2507:
-      input_cost_per_token: 7.1e-08
+      input_cost_per_token: 9.0e-08
       output_cost_per_token: 1.0e-07
       max_input_tokens: 262144
       max_output_tokens: 16384
@@ -5975,8 +5975,8 @@ model_list:
     model: openai/qwen/qwen3-30b-a3b
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 9.0e-08
-    output_cost_per_token: 4.5e-07
+    input_cost_per_token: 1.2e-07
+    output_cost_per_token: 5.0e-07
     max_input_tokens: 40960
     max_output_tokens: 16384
     metadata: &id241
@@ -5985,8 +5985,8 @@ model_list:
         reasoning, multilingual support, and advanced agent tasks. Its unique...
     litellm_provider: openrouter
     qwen/qwen3-30b-a3b:
-      input_cost_per_token: 9.0e-08
-      output_cost_per_token: 4.5e-07
+      input_cost_per_token: 1.2e-07
+      output_cost_per_token: 5.0e-07
       max_input_tokens: 40960
       max_output_tokens: 16384
       metadata: *id241
@@ -6260,7 +6260,7 @@ model_list:
     model: openai/meta-llama/llama-4-scout
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 8.0e-08
+    input_cost_per_token: 1.0e-07
     output_cost_per_token: 3.0e-07
     max_input_tokens: 327680
     max_output_tokens: 16384
@@ -6272,7 +6272,7 @@ model_list:
         109B. It supports native multimodal input...
     litellm_provider: openrouter
     meta-llama/llama-4-scout:
-      input_cost_per_token: 8.0e-08
+      input_cost_per_token: 1.0e-07
       output_cost_per_token: 3.0e-07
       max_input_tokens: 327680
       max_output_tokens: 16384
@@ -6358,8 +6358,8 @@ model_list:
     model: openai/google/gemma-3-4b-it
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 4.0e-08
-    output_cost_per_token: 8.0e-08
+    input_cost_per_token: 5.0e-08
+    output_cost_per_token: 1.0e-07
     max_input_tokens: 131072
     max_output_tokens: 16384
     mode: chat
@@ -6370,8 +6370,8 @@ model_list:
         140 languages, and offers improved math, reasoning, and chat capabilities,...
     litellm_provider: openrouter
     google/gemma-3-4b-it:
-      input_cost_per_token: 4.0e-08
-      output_cost_per_token: 8.0e-08
+      input_cost_per_token: 5.0e-08
+      output_cost_per_token: 1.0e-07
       max_input_tokens: 131072
       max_output_tokens: 16384
       mode: chat
@@ -6383,8 +6383,8 @@ model_list:
     model: openai/google/gemma-3-12b-it
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 4.0e-08
-    output_cost_per_token: 1.3e-07
+    input_cost_per_token: 5.0e-08
+    output_cost_per_token: 1.5e-07
     max_input_tokens: 131072
     max_output_tokens: 16384
     mode: chat
@@ -6395,8 +6395,8 @@ model_list:
         140 languages, and offers improved math, reasoning, and chat capabilities,...
     litellm_provider: openrouter
     google/gemma-3-12b-it:
-      input_cost_per_token: 4.0e-08
-      output_cost_per_token: 1.3e-07
+      input_cost_per_token: 5.0e-08
+      output_cost_per_token: 1.5e-07
       max_input_tokens: 131072
       max_output_tokens: 16384
       mode: chat
@@ -7561,8 +7561,8 @@ model_list:
     model: openai/meta-llama/llama-3.2-11b-vision-instruct
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 2.45e-07
-    output_cost_per_token: 2.45e-07
+    input_cost_per_token: 3.45e-07
+    output_cost_per_token: 3.45e-07
     max_input_tokens: 131072
     max_output_tokens: 16384
     mode: chat
@@ -7573,8 +7573,8 @@ model_list:
         such as image captioning and...
     litellm_provider: openrouter
     meta-llama/llama-3.2-11b-vision-instruct:
-      input_cost_per_token: 2.45e-07
-      output_cost_per_token: 2.45e-07
+      input_cost_per_token: 3.45e-07
+      output_cost_per_token: 3.45e-07
       max_input_tokens: 131072
       max_output_tokens: 16384
       mode: chat
@@ -7670,8 +7670,8 @@ model_list:
     model: openai/nousresearch/hermes-3-llama-3.1-70b
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 3.0e-07
-    output_cost_per_token: 3.0e-07
+    input_cost_per_token: 7.0e-07
+    output_cost_per_token: 7.0e-07
     max_input_tokens: 131072
     max_output_tokens: 16384
     metadata: &id317
@@ -7681,8 +7681,8 @@ model_list:
         long context coherence, and improvements across the...
     litellm_provider: openrouter
     nousresearch/hermes-3-llama-3.1-70b:
-      input_cost_per_token: 3.0e-07
-      output_cost_per_token: 3.0e-07
+      input_cost_per_token: 7.0e-07
+      output_cost_per_token: 7.0e-07
       max_input_tokens: 131072
       max_output_tokens: 16384
       metadata: *id317
