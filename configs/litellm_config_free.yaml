@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-68edc4407a6540deb73592b8435f20b9
+  master_key: sk-2cba4d55192649af934b9e03743f99dc
   alerting:
   - slack
   - email
@@ -52,6 +52,22 @@ litellm_settings:
   set_verbose: false
   turn_off_message_logging: false
 model_list:
+- model_name: nex-agi/nex-n2-pro:free
+  litellm_params:
+    model: openai/nex-agi/nex-n2-pro:free
+    api_base: https://openrouter.ai/api/v1
+    api_key: os.environ/OPENROUTER_API_KEY
+    input_cost_per_token: 0.0
+    output_cost_per_token: 0.0
+    max_input_tokens: 262144
+    max_output_tokens: 262144
+    mode: chat
+    supports_vision: true
+    metadata:
+      notes: Nex-N2-Pro is an agentic mixture-of-experts model from Nex AGI, with
+        17B active parameters out of 397B total. Built on the Qwen3.5 architecture,
+        it accepts text and image input and produces...
+    litellm_provider: openrouter
 - model_name: nvidia/nemotron-3.5-content-safety:free
   litellm_params:
     model: openai/nvidia/nemotron-3.5-content-safety:free
@@ -494,7 +510,7 @@ router_settings:
   enable_pre_call_checks: true
   enable_tag_filtering: true
   fallbacks:
-  - nvidia/nemotron-3.5-content-safety:free:
+  - nex-agi/nex-n2-pro:free:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -520,7 +536,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-  - nvidia/nemotron-3-ultra-550b-a55b:free:
+  - nvidia/nemotron-3.5-content-safety:free:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -528,7 +544,8 @@ router_settings:
     - bedrock/anthropic.claude-mythos-preview
     - openrouter/google/lyria-3-clip-preview
     - openrouter/google/lyria-3-pro-preview
-    - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -545,7 +562,32 @@ router_settings:
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
+  - nvidia/nemotron-3-ultra-550b-a55b:free:
+    - openrouter/free
+    - gemini/gemini-exp-1206
+    - gemini/gemini-exp-1114
+    - openrouter/owl-alpha
+    - bedrock/anthropic.claude-mythos-preview
+    - openrouter/google/lyria-3-clip-preview
+    - openrouter/google/lyria-3-pro-preview
+    - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
+    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
+    - openrouter/qwen/qwen3-coder:free
+    - volcengine/glm-4-7-251222
+    - lemonade/qwen3-4b-instruct-2507-gguf
+    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
+    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+    - openrouter/google/gemma-4-26b-a4b-it:free
+    - openrouter/google/gemma-4-31b-it:free
+    - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
+    - openrouter/poolside/laguna-xs.2:free
+    - openrouter/moonshotai/kimi-k2.6:free
+    - openrouter/openai/gpt-oss-120b:free
+    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
+    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
+    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - openrouter/fusion:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -556,6 +598,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -571,7 +614,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - openrouter/owl-alpha:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -581,6 +623,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -597,7 +640,6 @@ router_settings:
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -608,6 +650,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -623,7 +666,6 @@ router_settings:
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - poolside/laguna-xs.2:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -634,6 +676,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -649,7 +692,6 @@ router_settings:
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - poolside/laguna-m.1:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -660,6 +702,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -675,7 +718,6 @@ router_settings:
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - openrouter/pareto-code:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -686,6 +728,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -701,7 +744,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - moonshotai/kimi-k2.6:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -711,6 +753,7 @@ router_settings:
     - openrouter/google/lyria-3-clip-preview
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -727,7 +770,6 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-    - lemonade/gpt-oss-120b-mxfp-gguf
   - google/gemma-4-26b-a4b-it:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -738,6 +780,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -753,7 +796,6 @@ router_settings:
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - google/gemma-4-31b-it:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -764,6 +806,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -779,7 +822,6 @@ router_settings:
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - google/lyria-3-pro-preview:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -789,6 +831,7 @@ router_settings:
     - openrouter/google/lyria-3-clip-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -805,7 +848,6 @@ router_settings:
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - google/lyria-3-clip-preview:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -815,6 +857,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -831,7 +874,6 @@ router_settings:
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - nvidia/nemotron-3-super-120b-a12b:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -842,6 +884,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
     - lemonade/qwen3-4b-instruct-2507-gguf
@@ -857,7 +900,6 @@ router_settings:
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - openrouter/free:
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -866,6 +908,7 @@ router_settings:
     - openrouter/google/lyria-3-clip-preview
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -883,7 +926,6 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - openrouter/z-ai/glm-4.5-air:free
-    - lemonade/gpt-oss-120b-mxfp-gguf
   - liquid/lfm-2.5-1.2b-thinking:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -894,6 +936,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -909,7 +952,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - liquid/lfm-2.5-1.2b-instruct:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -920,6 +962,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -935,7 +978,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - nvidia/nemotron-3-nano-30b-a3b:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -946,6 +988,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -961,7 +1004,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - openrouter/bodybuilder:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -972,6 +1014,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -987,7 +1030,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - nvidia/nemotron-nano-12b-v2-vl:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -998,6 +1040,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -1013,7 +1056,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/z-ai/glm-4.5-air:free
   - qwen/qwen3-next-80b-a3b-instruct:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -1024,6 +1066,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -1039,7 +1082,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - nvidia/nemotron-nano-9b-v2:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -1050,6 +1092,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -1065,7 +1108,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - openai/gpt-oss-120b:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -1076,6 +1118,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -1091,7 +1134,6 @@ router_settings:
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - openai/gpt-oss-20b:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -1102,6 +1144,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -1117,7 +1160,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - z-ai/glm-4.5-air:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -1128,6 +1170,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -1143,7 +1186,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - qwen/qwen3-coder:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -1154,6 +1196,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - volcengine/glm-4-7-251222
     - lemonade/qwen3-4b-instruct-2507-gguf
@@ -1169,7 +1212,6 @@ router_settings:
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-    - openrouter/z-ai/glm-4.5-air:free
   - cognitivecomputations/dolphin-mistral-24b-venice-edition:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -1180,6 +1222,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -1195,7 +1238,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - meta-llama/llama-3.3-70b-instruct:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -1206,6 +1248,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -1221,7 +1264,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - meta-llama/llama-3.2-3b-instruct:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -1232,6 +1274,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -1247,7 +1290,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - nousresearch/hermes-3-llama-3.1-405b:free:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -1258,6 +1300,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -1273,7 +1316,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - openrouter/auto:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -1284,6 +1326,7 @@ router_settings:
     - openrouter/google/lyria-3-pro-preview
     - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
     - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nex-agi/nex-n2-pro:free
     - openrouter/nvidia/nemotron-3-super-120b-a12b:free
     - openrouter/qwen/qwen3-coder:free
     - volcengine/glm-4-7-251222
@@ -1299,7 +1342,6 @@ router_settings:
     - openrouter/openai/gpt-oss-120b:free
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   retry_policy:
     AuthenticationErrorRetries: 3
     TimeoutErrorRetries: 3

@@ -62,6 +62,7 @@ gigachat/gigachat-2-max
 gigachat/gigachat-2-pro
 qwen/qwen3-coder:free
 lemonade/gemma-3-4b-it-gguf
+nex-agi/nex-n2-pro:free
 github_copilot/gpt-4o-2024-11-20
 zai/glm-4.5-flash
 meta_llama/llama-4-maverick-17b-128e-instruct-fp8
