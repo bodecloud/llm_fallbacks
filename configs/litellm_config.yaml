@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-ae75e07e76e34a078f8ef4773d1e1bb4
+  master_key: sk-63ef3159b97c4102af461fc719710e6f
   alerting:
   - slack
   - email
@@ -52,24 +52,47 @@ litellm_settings:
   set_verbose: false
   turn_off_message_logging: false
 model_list:
+- model_name: openrouter/fusion
+  litellm_params:
+    model: openai/openrouter/fusion
+    api_base: https://openrouter.ai/api/v1
+    api_key: os.environ/OPENROUTER_API_KEY
+    input_cost_per_token: -1.0
+    output_cost_per_token: -1.0
+    metadata: &id001
+      notes: Fusion turns your prompt into a small multi-model deliberation. A panel
+        of expert models (see below) analyzes your prompt in parallel with web search
+        and web fetch enabled, then a...
+    litellm_provider: openrouter
+    openrouter/fusion:
+      input_cost_per_token: -1.0
+      output_cost_per_token: -1.0
+      metadata: *id001
+      litellm_provider: openrouter
 - model_name: moonshotai/kimi-k2.7-code
   litellm_params:
     model: openai/moonshotai/kimi-k2.7-code
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 9.5e-07
-    output_cost_per_token: 4.0e-06
+    input_cost_per_token: 7.5e-07
+    output_cost_per_token: 3.5e-06
     max_input_tokens: 262144
-    metadata: &id001
+    max_output_tokens: 262144
+    mode: chat
+    supports_vision: true
+    metadata: &id002
       notes: 'MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI''s
         Kimi K2 family, built to complete end-to-end programming tasks reliably over
         long contexts. It uses a native multimodal mixture-of-experts...'
     litellm_provider: openrouter
     moonshotai/kimi-k2.7-code:
-      input_cost_per_token: 9.5e-07
-      output_cost_per_token: 4.0e-06
+      input_cost_per_token: 7.5e-07
+      output_cost_per_token: 3.5e-06
       max_input_tokens: 262144
-      metadata: *id001
+      max_output_tokens: 262144
+      mode: chat
+      supports_vision: true
+      metadata: *id002
       litellm_provider: openrouter
 - model_name: ~anthropic/claude-fable-latest
   litellm_params:
@@ -80,7 +103,7 @@ model_list:
     output_cost_per_token: 5.0e-05
     max_input_tokens: 1000000
     max_output_tokens: 128000
-    metadata: &id002
+    metadata: &id003
       notes: This model always redirects to the latest model in the Claude Fable family.
     litellm_provider: openrouter
     ~anthropic/claude-fable-latest:
@@ -88,7 +111,7 @@ model_list:
       output_cost_per_token: 5.0e-05
       max_input_tokens: 1000000
       max_output_tokens: 128000
-      metadata: *id002
+      metadata: *id003
       litellm_provider: openrouter
 - model_name: anthropic/claude-fable-5
   litellm_params:
@@ -99,7 +122,7 @@ model_list:
     output_cost_per_token: 5.0e-05
     max_input_tokens: 1000000
     max_output_tokens: 128000
-    metadata: &id003
+    metadata: &id004
       notes: Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous
         knowledge work and coding. It supports text, image, and file inputs with text
         output, with reasoning support and...
@@ -109,7 +132,7 @@ model_list:
       output_cost_per_token: 5.0e-05
       max_input_tokens: 1000000
       max_output_tokens: 128000
-      metadata: *id003
+      metadata: *id004
       litellm_provider: openrouter
 - model_name: nex-agi/nex-n2-pro:free
   litellm_params:
@@ -122,7 +145,7 @@ model_list:
     max_output_tokens: 262144
     mode: chat
     supports_vision: true
-    metadata: &id004
+    metadata: &id005
       notes: Nex-N2-Pro is an agentic mixture-of-experts model from Nex AGI, with
         17B active parameters out of 397B total. Built on the Qwen3.5 architecture,
         it accepts text and image input and produces...
@@ -134,7 +157,7 @@ model_list:
       max_output_tokens: 262144
       mode: chat
       supports_vision: true
-      metadata: *id004
+      metadata: *id005
       litellm_provider: openrouter
 - model_name: nvidia/nemotron-3.5-content-safety:free
   litellm_params:
@@ -147,7 +170,7 @@ model_list:
     max_output_tokens: 8192
     mode: chat
     supports_vision: true
-    metadata: &id005
+    metadata: &id006
       notes: NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal
         guardrail model from NVIDIA, fine-tuned from Google Gemma-3-4B. It moderates
         both inputs to and responses from LLMs and VLMs, accepting...
@@ -159,7 +182,7 @@ model_list:
       max_output_tokens: 8192
       mode: chat
       supports_vision: true
-      metadata: *id005
+      metadata: *id006
       litellm_provider: openrouter
 - model_name: nvidia/nemotron-3-ultra-550b-a55b:free
   litellm_params:
@@ -170,7 +193,7 @@ model_list:
     output_cost_per_token: 0.0
     max_input_tokens: 1000000
     max_output_tokens: 65536
-    metadata: &id006
+    metadata: &id007
       notes: NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration
         model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built
         on a hybrid Transformer-Mamba mixture-of-experts architecture, it...
@@ -180,7 +203,7 @@ model_list:
       output_cost_per_token: 0.0
       max_input_tokens: 1000000
       max_output_tokens: 65536
-      metadata: *id006
+      metadata: *id007
       litellm_provider: openrouter
 - model_name: nvidia/nemotron-3-ultra-550b-a55b
   litellm_params:
@@ -191,7 +214,7 @@ model_list:
     output_cost_per_token: 2.5e-06
     max_input_tokens: 262144
     max_output_tokens: 16384
-    metadata: &id007
+    metadata: &id008
       notes: NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration
         model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built
         on a hybrid Transformer-Mamba mixture-of-experts architecture, it...
@@ -201,7 +224,7 @@ model_list:
       output_cost_per_token: 2.5e-06
       max_input_tokens: 262144
       max_output_tokens: 16384
-      metadata: *id007
+      metadata: *id008
       litellm_provider: openrouter
 - model_name: qwen/qwen3.7-plus
   litellm_params:
@@ -214,7 +237,7 @@ model_list:
     max_output_tokens: 65536
     mode: chat
     supports_vision: true
-    metadata: &id008
+    metadata: &id009
       notes: Qwen3.7-Plus is a cost-effective model in Alibaba's Qwen3.7 series. It
         supports text and image input with text output, building on the series' text
         capabilities with a comprehensive upgrade to its...
@@ -226,7 +249,7 @@ model_list:
       max_output_tokens: 65536
       mode: chat
       supports_vision: true
-      metadata: *id008
+      metadata: *id009
       litellm_provider: openrouter
 - model_name: minimax/minimax-m3
   litellm_params:
@@ -246,7 +269,7 @@ model_list:
     supports_vision: true
     max_input_tokens: 524288
     max_output_tokens: 512000
-    metadata: &id009
+    metadata: &id010
       notes: MiniMax-M3 is a multimodal foundation model from MiniMax. It supports
         text, image, and video inputs with text output, a 1M-token context window,
         and is suited for long-horizon agentic work, coding,...
@@ -264,7 +287,7 @@ model_list:
       supports_vision: true
       max_input_tokens: 524288
       max_output_tokens: 512000
-      metadata: *id009
+      metadata: *id010
 - model_name: stepfun/step-3.7-flash
   litellm_params:
     model: openai/stepfun/step-3.7-flash
@@ -274,7 +297,7 @@ model_list:
     output_cost_per_token: 1.15e-06
     max_input_tokens: 256000
     max_output_tokens: 256000
-    metadata: &id010
+    metadata: &id011
       notes: Step 3.7 Flash is StepFun's latest high-efficiency multimodal Mixture-of-Experts
         model. It pairs a 196B-parameter language backbone with a vision encoder for
         native image and video understanding, activating roughly 11B parameters...
@@ -284,7 +307,7 @@ model_list:
       output_cost_per_token: 1.15e-06
       max_input_tokens: 256000
       max_output_tokens: 256000
-      metadata: *id010
+      metadata: *id011
       litellm_provider: openrouter
 - model_name: anthropic/claude-opus-4.8-fast
   litellm_params:
@@ -295,7 +318,7 @@ model_list:
     output_cost_per_token: 5.0e-05
     max_input_tokens: 1000000
     max_output_tokens: 128000
-    metadata: &id011
+    metadata: &id012
       notes: 'Fast-mode variant of [Opus 4.8](/anthropic/claude-opus-4.8) - identical
         capabilities with higher output speed at 2x pricing relative to regular Opus
         4.8.
@@ -308,7 +331,7 @@ model_list:
       output_cost_per_token: 5.0e-05
       max_input_tokens: 1000000
       max_output_tokens: 128000
-      metadata: *id011
+      metadata: *id012
       litellm_provider: openrouter
 - model_name: anthropic/claude-opus-4.8
   litellm_params:
@@ -319,7 +342,7 @@ model_list:
     output_cost_per_token: 2.5e-05
     max_input_tokens: 1000000
     max_output_tokens: 128000
-    metadata: &id012
+    metadata: &id013
       notes: Claude Opus 4.8 is Anthropic's most capable generally available model
         in the Opus family. It supports text, image, and file inputs with text output,
         with reasoning support and a 1M-token...
@@ -329,7 +352,7 @@ model_list:
       output_cost_per_token: 2.5e-05
       max_input_tokens: 1000000
       max_output_tokens: 128000
-      metadata: *id012
+      metadata: *id013
       litellm_provider: openrouter
 - model_name: qwen/qwen3.7-max
   litellm_params:
@@ -340,7 +363,7 @@ model_list:
     output_cost_per_token: 3.75e-06
     max_input_tokens: 1000000
     max_output_tokens: 65536
-    metadata: &id013
+    metadata: &id014
       notes: Qwen3.7-Max is the flagship model in Alibaba's Qwen3.7 series. It supports
         text input and output and is designed for agent-centric workloads, with particular
         strengths in coding, office and productivity tasks,...
@@ -350,7 +373,7 @@ model_list:
       output_cost_per_token: 3.75e-06
       max_input_tokens: 1000000
       max_output_tokens: 65536
-      metadata: *id013
+      metadata: *id014
       litellm_provider: openrouter
 - model_name: x-ai/grok-build-0.1
   litellm_params:
@@ -362,7 +385,7 @@ model_list:
     max_input_tokens: 256000
     mode: chat
     supports_vision: true
-    metadata: &id014
+    metadata: &id015
       notes: Grok Build 0.1 is xAI’s fast coding model trained specifically for agentic
         software engineering workflows. It supports text and image inputs with text
         output, and is optimized for interactive coding...
@@ -373,7 +396,7 @@ model_list:
       max_input_tokens: 256000
       mode: chat
       supports_vision: true
-      metadata: *id014
+      metadata: *id015
       litellm_provider: openrouter
 - model_name: google/gemini-3.5-flash
   litellm_params:
@@ -385,7 +408,7 @@ model_list:
     input_cost_per_image: 1.5e-06
     max_input_tokens: 1048576
     max_output_tokens: 65536
-    metadata: &id015
+    metadata: &id016
       notes: Gemini 3.5 Flash is Google's high-efficiency multimodal model, bringing
         near-Pro level coding and reasoning at Flash-tier cost and speed. It is highly
         optimized for coding proficiency and parallel agentic execution...
@@ -396,7 +419,7 @@ model_list:
       input_cost_per_image: 1.5e-06
       max_input_tokens: 1048576
       max_output_tokens: 65536
-      metadata: *id015
+      metadata: *id016
       litellm_provider: openrouter
 - model_name: anthropic/claude-opus-4.7-fast
   litellm_params:
@@ -407,7 +430,7 @@ model_list:
     output_cost_per_token: 0.00015
     max_input_tokens: 1000000
     max_output_tokens: 128000
-    metadata: &id016
+    metadata: &id017
       notes: 'Fast-mode variant of [Opus 4.7](/anthropic/claude-opus-4.7) - identical
         capabilities with higher output speed at premium 6x pricing.
 
@@ -419,23 +442,6 @@ model_list:
       output_cost_per_token: 0.00015
       max_input_tokens: 1000000
       max_output_tokens: 128000
-      metadata: *id016
-      litellm_provider: openrouter
-- model_name: openrouter/fusion
-  litellm_params:
-    model: openai/openrouter/fusion
-    api_base: https://openrouter.ai/api/v1
-    api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: -1.0
-    output_cost_per_token: -1.0
-    metadata: &id017
-      notes: Fusion turns your prompt into a small multi-model deliberation. A panel
-        of expert models (see below) analyzes your prompt in parallel with web search
-        and web fetch enabled, then a...
-    litellm_provider: openrouter
-    openrouter/fusion:
-      input_cost_per_token: -1.0
-      output_cost_per_token: -1.0
       metadata: *id017
       litellm_provider: openrouter
 - model_name: perceptron/perceptron-mk1
@@ -1034,18 +1040,20 @@ model_list:
     model: openai/deepseek/deepseek-v4-flash
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 9.8e-08
-    output_cost_per_token: 1.96e-07
-    max_input_tokens: 1048575
+    input_cost_per_token: 9.0e-08
+    output_cost_per_token: 1.8e-07
+    max_input_tokens: 1000000
+    max_output_tokens: 65536
     metadata: &id044
       notes: DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model
         from DeepSeek with 284B total parameters and 13B activated parameters, supporting
         a 1M-token context window. It is designed for fast inference and...
     litellm_provider: openrouter
     deepseek/deepseek-v4-flash:
-      input_cost_per_token: 9.8e-08
-      output_cost_per_token: 1.96e-07
-      max_input_tokens: 1048575
+      input_cost_per_token: 9.0e-08
+      output_cost_per_token: 1.8e-07
+      max_input_tokens: 1000000
+      max_output_tokens: 65536
       metadata: *id044
       litellm_provider: openrouter
 - model_name: inclusionai/ling-2.6-1t
@@ -8280,7 +8288,7 @@ router_settings:
   enable_pre_call_checks: true
   enable_tag_filtering: true
   fallbacks:
-  - moonshotai/kimi-k2.7-code:
+  - openrouter/fusion:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114
@@ -8306,6 +8314,32 @@ router_settings:
     - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
+  - moonshotai/kimi-k2.7-code:
+    - openrouter/free
+    - gemini/gemini-exp-1206
+    - gemini/gemini-exp-1114
+    - openrouter/owl-alpha
+    - bedrock/anthropic.claude-mythos-preview
+    - openrouter/google/lyria-3-clip-preview
+    - openrouter/google/lyria-3-pro-preview
+    - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
+    - openrouter/nex-agi/nex-n2-pro:free
+    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
+    - openrouter/qwen/qwen3-coder:free
+    - volcengine/glm-4-7-251222
+    - lemonade/qwen3-4b-instruct-2507-gguf
+    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
+    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+    - openrouter/google/gemma-4-26b-a4b-it:free
+    - openrouter/google/gemma-4-31b-it:free
+    - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
+    - openrouter/poolside/laguna-xs.2:free
+    - openrouter/openai/gpt-oss-120b:free
+    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
+    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
+    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
+    - lemonade/gpt-oss-120b-mxfp-gguf
   - ~anthropic/claude-fable-latest:
     - openrouter/free
     - gemini/gemini-exp-1206
@@ -8671,32 +8705,6 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
   - anthropic/claude-opus-4.7-fast:
-    - openrouter/free
-    - gemini/gemini-exp-1206
-    - gemini/gemini-exp-1114
-    - openrouter/owl-alpha
-    - bedrock/anthropic.claude-mythos-preview
-    - openrouter/google/lyria-3-clip-preview
-    - openrouter/google/lyria-3-pro-preview
-    - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
-    - vertex_ai-language-models/gemini-flash-experimental
-    - openrouter/nex-agi/nex-n2-pro:free
-    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
-    - openrouter/qwen/qwen3-coder:free
-    - volcengine/glm-4-7-251222
-    - lemonade/qwen3-4b-instruct-2507-gguf
-    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
-    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
-    - openrouter/google/gemma-4-26b-a4b-it:free
-    - openrouter/google/gemma-4-31b-it:free
-    - volcengine/kimi-k2-thinking-251104
-    - openrouter/poolside/laguna-m.1:free
-    - openrouter/poolside/laguna-xs.2:free
-    - openrouter/openai/gpt-oss-120b:free
-    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
-    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
-    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
-  - openrouter/fusion:
     - openrouter/free
     - gemini/gemini-exp-1206
     - gemini/gemini-exp-1114

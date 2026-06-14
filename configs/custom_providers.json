@@ -5,18 +5,40 @@
         "api_env_key_name": "OPENROUTER_API_KEY",
         "api_key_required": false,
         "model_specs": {
+            "openrouter/fusion": {
+                "input_cost_per_token": -1.0,
+                "output_cost_per_token": -1.0,
+                "metadata": {
+                    "notes": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a..."
+                },
+                "litellm_provider": "openrouter",
+                "openrouter/fusion": {
+                    "input_cost_per_token": -1.0,
+                    "output_cost_per_token": -1.0,
+                    "metadata": {
+                        "notes": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "moonshotai/kimi-k2.7-code": {
-                "input_cost_per_token": 9.5e-07,
-                "output_cost_per_token": 4e-06,
+                "input_cost_per_token": 7.5e-07,
+                "output_cost_per_token": 3.5e-06,
                 "max_input_tokens": 262144,
+                "max_output_tokens": 262144,
+                "mode": "chat",
+                "supports_vision": true,
                 "metadata": {
                     "notes": "MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI's Kimi K2 family, built to complete end-to-end programming tasks reliably over long contexts. It uses a native multimodal mixture-of-experts..."
                 },
                 "litellm_provider": "openrouter",
                 "moonshotai/kimi-k2.7-code": {
-                    "input_cost_per_token": 9.5e-07,
-                    "output_cost_per_token": 4e-06,
+                    "input_cost_per_token": 7.5e-07,
+                    "output_cost_per_token": 3.5e-06,
                     "max_input_tokens": 262144,
+                    "max_output_tokens": 262144,
+                    "mode": "chat",
+                    "supports_vision": true,
                     "metadata": {
                         "notes": "MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI's Kimi K2 family, built to complete end-to-end programming tasks reliably over long contexts. It uses a native multimodal mixture-of-experts..."
                     },
@@ -351,22 +373,6 @@
                     "max_output_tokens": 128000,
                     "metadata": {
                         "notes": "Fast-mode variant of [Opus 4.7](/anthropic/claude-opus-4.7) - identical capabilities with higher output speed at premium 6x pricing.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode"
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "openrouter/fusion": {
-                "input_cost_per_token": -1.0,
-                "output_cost_per_token": -1.0,
-                "metadata": {
-                    "notes": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a..."
-                },
-                "litellm_provider": "openrouter",
-                "openrouter/fusion": {
-                    "input_cost_per_token": -1.0,
-                    "output_cost_per_token": -1.0,
-                    "metadata": {
-                        "notes": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -947,17 +953,19 @@
                 }
             },
             "deepseek/deepseek-v4-flash": {
-                "input_cost_per_token": 9.8e-08,
-                "output_cost_per_token": 1.96e-07,
-                "max_input_tokens": 1048575,
+                "input_cost_per_token": 9e-08,
+                "output_cost_per_token": 1.8e-07,
+                "max_input_tokens": 1000000,
+                "max_output_tokens": 65536,
                 "metadata": {
                     "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
                 },
                 "litellm_provider": "openrouter",
                 "deepseek/deepseek-v4-flash": {
-                    "input_cost_per_token": 9.8e-08,
-                    "output_cost_per_token": 1.96e-07,
-                    "max_input_tokens": 1048575,
+                    "input_cost_per_token": 9e-08,
+                    "output_cost_per_token": 1.8e-07,
+                    "max_input_tokens": 1000000,
+                    "max_output_tokens": 65536,
                     "metadata": {
                         "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
                     },
@@ -7864,6 +7872,14 @@
             }
         },
         "free_models": {
+            "openrouter/fusion": {
+                "input_cost_per_token": -1.0,
+                "output_cost_per_token": -1.0,
+                "metadata": {
+                    "notes": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a..."
+                },
+                "litellm_provider": "openrouter"
+            },
             "nex-agi/nex-n2-pro:free": {
                 "input_cost_per_token": 0.0,
                 "output_cost_per_token": 0.0,
@@ -7895,14 +7911,6 @@
                 "max_output_tokens": 65536,
                 "metadata": {
                     "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
-                },
-                "litellm_provider": "openrouter"
-            },
-            "openrouter/fusion": {
-                "input_cost_per_token": -1.0,
-                "output_cost_per_token": -1.0,
-                "metadata": {
-                    "notes": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a..."
                 },
                 "litellm_provider": "openrouter"
             },
