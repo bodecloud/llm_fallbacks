@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-e1a65f8393a84be3876e69838fa48651
+  master_key: sk-6667ebebb3c24da791c8ae60b08caec7
   alerting:
   - slack
   - email
@@ -178,9 +178,9 @@ model_list:
     max_input_tokens: 262144
     max_output_tokens: 32768
     metadata:
-      notes: Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai),
+      notes: Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai/),
         optimized for complex software engineering tasks. Designed for agentic coding
-        workflows, it supports tool calling and reasoning, with a 128K...
+        workflows, it supports tool calling and reasoning, with a 256K...
     litellm_provider: openrouter
 - model_name: openrouter/pareto-code
   litellm_params:

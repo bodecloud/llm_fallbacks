@@ -349,7 +349,7 @@
         "max_input_tokens": 262144,
         "max_output_tokens": 32768,
         "metadata": {
-            "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 128K..."
+            "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai/), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 256K..."
         },
         "litellm_provider": "openrouter",
         "poolside/laguna-m.1:free": {
@@ -358,7 +358,7 @@
             "max_input_tokens": 262144,
             "max_output_tokens": 32768,
             "metadata": {
-                "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 128K..."
+                "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai/), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 256K..."
             },
             "litellm_provider": "openrouter"
         }
@@ -5364,6 +5364,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "poolside/laguna-xs.2": {
+        "input_cost_per_token": 1e-07,
+        "output_cost_per_token": 2e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai/), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
+        },
+        "litellm_provider": "openrouter",
+        "poolside/laguna-xs.2": {
+            "input_cost_per_token": 1e-07,
+            "output_cost_per_token": 2e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai/), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "nvidia.nemotron-nano-3-30b": {
         "input_cost_per_token": 6e-08,
         "litellm_provider": "bedrock_converse",
@@ -9164,6 +9184,26 @@
             }
         }
     },
+    "poolside/laguna-m.1": {
+        "input_cost_per_token": 2e-07,
+        "output_cost_per_token": 4e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai/), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 256K..."
+        },
+        "litellm_provider": "openrouter",
+        "poolside/laguna-m.1": {
+            "input_cost_per_token": 2e-07,
+            "output_cost_per_token": 4e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "Laguna M.1 is the flagship coding agent model from [Poolside](https://poolside.ai/), optimized for complex software engineering tasks. Designed for agentic coding workflows, it supports tool calling and reasoning, with a 256K..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "gradient_ai/mistral-nemo-instruct-2407": {
         "input_cost_per_token": 3e-07,
         "litellm_provider": "gradient_ai",
@@ -12549,7 +12589,7 @@
         "input_cost_per_token": 1.4e-07,
         "litellm_provider": "openrouter",
         "max_input_tokens": 262144,
-        "max_output_tokens": 81920,
+        "max_output_tokens": 262144,
         "max_tokens": 65536,
         "mode": "chat",
         "output_cost_per_token": 1e-06,
@@ -12565,7 +12605,7 @@
             "input_cost_per_token": 1.4e-07,
             "output_cost_per_token": 1e-06,
             "max_input_tokens": 262144,
-            "max_output_tokens": 81920,
+            "max_output_tokens": 262144,
             "metadata": {
                 "notes": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall..."
             },
@@ -12573,7 +12613,7 @@
         }
     },
     "qwen/qwen3.6-35b-a3b": {
-        "input_cost_per_token": 1.5e-07,
+        "input_cost_per_token": 1.4e-07,
         "output_cost_per_token": 1e-06,
         "max_input_tokens": 262144,
         "max_output_tokens": 262144,
@@ -12582,7 +12622,7 @@
         },
         "litellm_provider": "openrouter",
         "qwen/qwen3.6-35b-a3b": {
-            "input_cost_per_token": 1.5e-07,
+            "input_cost_per_token": 1.4e-07,
             "output_cost_per_token": 1e-06,
             "max_input_tokens": 262144,
             "max_output_tokens": 262144,
@@ -22072,6 +22112,26 @@
         "supports_function_calling": true,
         "supports_vision": true
     },
+    "google/gemini-3.1-flash-image": {
+        "input_cost_per_token": 5e-07,
+        "output_cost_per_token": 3e-06,
+        "max_input_tokens": 65536,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Gemini 3.1 Flash Image, a.k.a. \"Nano Banana 2,\" is Google\u2019s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines advanced..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemini-3.1-flash-image": {
+            "input_cost_per_token": 5e-07,
+            "output_cost_per_token": 3e-06,
+            "max_input_tokens": 65536,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Gemini 3.1 Flash Image, a.k.a. \"Nano Banana 2,\" is Google\u2019s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines advanced..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "google/gemini-3.1-flash-image-preview": {
         "input_cost_per_token": 5e-07,
         "output_cost_per_token": 3e-06,
@@ -23681,54 +23741,6 @@
         "supports_tool_choice": true,
         "supports_vision": true
     },
-    "moonshotai/kimi-k2.6": {
-        "input_cost_per_token": 6.8e-07,
-        "output_cost_per_token": 3.41e-06,
-        "max_input_tokens": 262142,
-        "max_output_tokens": 262142,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-        },
-        "litellm_provider": "openrouter",
-        "moonshotai/kimi-k2.6": {
-            "input_cost_per_token": 6.8e-07,
-            "output_cost_per_token": 3.41e-06,
-            "max_input_tokens": 262142,
-            "max_output_tokens": 262142,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "~moonshotai/kimi-latest": {
-        "input_cost_per_token": 6.8e-07,
-        "output_cost_per_token": 3.41e-06,
-        "max_input_tokens": 262142,
-        "max_output_tokens": 262142,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
-        },
-        "litellm_provider": "openrouter",
-        "~moonshotai/kimi-latest": {
-            "input_cost_per_token": 6.8e-07,
-            "output_cost_per_token": 3.41e-06,
-            "max_input_tokens": 262142,
-            "max_output_tokens": 262142,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "baseten/zai-org/glm-5": {
         "input_cost_per_token": 9.5e-07,
         "litellm_provider": "baseten",
@@ -23749,6 +23761,54 @@
         "supports_function_calling": true,
         "supports_tool_choice": true,
         "supports_vision": true
+    },
+    "moonshotai/kimi-k2.6": {
+        "input_cost_per_token": 6.7e-07,
+        "output_cost_per_token": 3.5e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+        },
+        "litellm_provider": "openrouter",
+        "moonshotai/kimi-k2.6": {
+            "input_cost_per_token": 6.7e-07,
+            "output_cost_per_token": 3.5e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "~moonshotai/kimi-latest": {
+        "input_cost_per_token": 6.7e-07,
+        "output_cost_per_token": 3.5e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
+        },
+        "litellm_provider": "openrouter",
+        "~moonshotai/kimi-latest": {
+            "input_cost_per_token": 6.7e-07,
+            "output_cost_per_token": 3.5e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "bedrock/us-east-1/zai.glm-5": {
         "input_cost_per_token": 1e-06,
@@ -24676,6 +24736,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "z-ai/glm-5.2": {
+        "input_cost_per_token": 1.2e-06,
+        "output_cost_per_token": 4.1e-06,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 131072,
+        "metadata": {
+            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.2": {
+            "input_cost_per_token": 1.2e-06,
+            "output_cost_per_token": 4.1e-06,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "azure/gpt-5.4-mini": {
         "cache_read_input_token_cost": 7.5e-08,
         "input_cost_per_token": 7.5e-07,
@@ -25116,26 +25196,6 @@
         "supports_function_calling": true,
         "supports_tool_choice": true,
         "supports_response_schema": true
-    },
-    "z-ai/glm-5.2": {
-        "input_cost_per_token": 1.4e-06,
-        "output_cost_per_token": 4.4e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
-        "metadata": {
-            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.2": {
-            "input_cost_per_token": 1.4e-06,
-            "output_cost_per_token": 4.4e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
-            "metadata": {
-                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "anthropic.claude-3-5-haiku-20241022-v1:0": {
         "cache_creation_input_token_cost": 1e-06,
@@ -32180,6 +32240,28 @@
             "max_output_tokens": 65536,
             "metadata": {
                 "notes": "This model always redirects to the latest model in the Google Gemini Pro family."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "google/gemini-3-pro-image": {
+        "input_cost_per_token": 2e-06,
+        "output_cost_per_token": 1.2e-05,
+        "input_cost_per_image": 2e-06,
+        "max_input_tokens": 65536,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "Nano Banana Pro is Google\u2019s most advanced image-generation and editing model, built on Gemini 3 Pro. It extends the original Nano Banana with significantly improved multimodal reasoning, real-world grounding, and..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemini-3-pro-image": {
+            "input_cost_per_token": 2e-06,
+            "output_cost_per_token": 1.2e-05,
+            "input_cost_per_image": 2e-06,
+            "max_input_tokens": 65536,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "Nano Banana Pro is Google\u2019s most advanced image-generation and editing model, built on Gemini 3 Pro. It extends the original Nano Banana with significantly improved multimodal reasoning, real-world grounding, and..."
             },
             "litellm_provider": "openrouter"
         }
