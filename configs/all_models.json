@@ -227,30 +227,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "nex-agi/nex-n2-pro:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 256000,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Nex-N2-Pro is an agentic mixture-of-experts model from Nex AGI, with 17B active parameters out of 397B total. Built on the Qwen3.5 architecture, it accepts text and image input and produces..."
-        },
-        "litellm_provider": "openrouter",
-        "nex-agi/nex-n2-pro:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 256000,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Nex-N2-Pro is an agentic mixture-of-experts model from Nex AGI, with 17B active parameters out of 397B total. Built on the Qwen3.5 architecture, it accepts text and image input and produces..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "glm-4-7-251222": {
         "input_cost_per_token": 0.0,
         "litellm_provider": "volcengine",
@@ -24634,6 +24610,24 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "z-ai/glm-5.2": {
+        "input_cost_per_token": 9.8e-07,
+        "output_cost_per_token": 3.08e-06,
+        "max_input_tokens": 1048576,
+        "metadata": {
+            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.2": {
+            "input_cost_per_token": 9.8e-07,
+            "output_cost_per_token": 3.08e-06,
+            "max_input_tokens": 1048576,
+            "metadata": {
+                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "z-ai/glm-5.1": {
         "input_cost_per_token": 9.8e-07,
         "output_cost_per_token": 3.08e-06,
@@ -24650,6 +24644,54 @@
             "max_output_tokens": 65535,
             "metadata": {
                 "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "moonshotai/kimi-k2.6": {
+        "input_cost_per_token": 6.6e-07,
+        "output_cost_per_token": 3.41e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+        },
+        "litellm_provider": "openrouter",
+        "moonshotai/kimi-k2.6": {
+            "input_cost_per_token": 6.6e-07,
+            "output_cost_per_token": 3.41e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "~moonshotai/kimi-latest": {
+        "input_cost_per_token": 6.6e-07,
+        "output_cost_per_token": 3.41e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
+        },
+        "litellm_provider": "openrouter",
+        "~moonshotai/kimi-latest": {
+            "input_cost_per_token": 6.6e-07,
+            "output_cost_per_token": 3.41e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
             },
             "litellm_provider": "openrouter"
         }
@@ -24687,54 +24729,6 @@
         "supports_function_calling": true,
         "supports_tool_choice": true,
         "supports_vision": true
-    },
-    "moonshotai/kimi-k2.6": {
-        "input_cost_per_token": 6.6e-07,
-        "output_cost_per_token": 3.5e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 65535,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-        },
-        "litellm_provider": "openrouter",
-        "moonshotai/kimi-k2.6": {
-            "input_cost_per_token": 6.6e-07,
-            "output_cost_per_token": 3.5e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 65535,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "~moonshotai/kimi-latest": {
-        "input_cost_per_token": 6.6e-07,
-        "output_cost_per_token": 3.5e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 65535,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
-        },
-        "litellm_provider": "openrouter",
-        "~moonshotai/kimi-latest": {
-            "input_cost_per_token": 6.6e-07,
-            "output_cost_per_token": 3.5e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 65535,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "tensormesh/qwen/qwen3.5-397b-a17b-fp8": {
         "litellm_provider": "tensormesh",
@@ -25407,26 +25401,6 @@
         "supports_reasoning": true,
         "source": "https://serverless.tensormesh.ai/v1/models/openrouter"
     },
-    "z-ai/glm-5.2": {
-        "input_cost_per_token": 1e-06,
-        "output_cost_per_token": 4e-06,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 32768,
-        "metadata": {
-            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.2": {
-            "input_cost_per_token": 1e-06,
-            "output_cost_per_token": 4e-06,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 32768,
-            "metadata": {
-                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "cerebras/zai-glm-4.6": {
         "deprecation_date": "2026-01-20",
         "input_cost_per_token": 2.25e-06,
@@ -25683,6 +25657,26 @@
             "max_output_tokens": 131072,
             "metadata": {
                 "notes": "GLM-5 Turbo is a new model from Z.ai designed for fast inference and strong performance in agent-driven environments such as OpenClaw scenarios. It is deeply optimized for real-world agent workflows..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "z-ai/glm-5v-turbo": {
+        "input_cost_per_token": 1.2e-06,
+        "output_cost_per_token": 4e-06,
+        "max_input_tokens": 202752,
+        "max_output_tokens": 131072,
+        "metadata": {
+            "notes": "GLM-5V-Turbo is Z.ai\u2019s first native multimodal agent foundation model, built for vision-based coding and agent-driven tasks. It natively handles image, video, and text inputs, excels at long-horizon planning, complex coding,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5v-turbo": {
+            "input_cost_per_token": 1.2e-06,
+            "output_cost_per_token": 4e-06,
+            "max_input_tokens": 202752,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "GLM-5V-Turbo is Z.ai\u2019s first native multimodal agent foundation model, built for vision-based coding and agent-driven tasks. It natively handles image, video, and text inputs, excels at long-horizon planning, complex coding,..."
             },
             "litellm_provider": "openrouter"
         }

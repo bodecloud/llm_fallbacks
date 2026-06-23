@@ -68,19 +68,17 @@
                 }
             },
             "z-ai/glm-5.2": {
-                "input_cost_per_token": 1e-06,
-                "output_cost_per_token": 4e-06,
+                "input_cost_per_token": 9.8e-07,
+                "output_cost_per_token": 3.08e-06,
                 "max_input_tokens": 1048576,
-                "max_output_tokens": 32768,
                 "metadata": {
                     "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
                 },
                 "litellm_provider": "openrouter",
                 "z-ai/glm-5.2": {
-                    "input_cost_per_token": 1e-06,
-                    "output_cost_per_token": 4e-06,
+                    "input_cost_per_token": 9.8e-07,
+                    "output_cost_per_token": 3.08e-06,
                     "max_input_tokens": 1048576,
-                    "max_output_tokens": 32768,
                     "metadata": {
                         "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
                     },
@@ -163,30 +161,6 @@
                     "max_output_tokens": 128000,
                     "metadata": {
                         "notes": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "nex-agi/nex-n2-pro:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 262144,
-                "max_output_tokens": 256000,
-                "mode": "chat",
-                "supports_vision": true,
-                "metadata": {
-                    "notes": "Nex-N2-Pro is an agentic mixture-of-experts model from Nex AGI, with 17B active parameters out of 397B total. Built on the Qwen3.5 architecture, it accepts text and image input and produces..."
-                },
-                "litellm_provider": "openrouter",
-                "nex-agi/nex-n2-pro:free": {
-                    "input_cost_per_token": 0.0,
-                    "output_cost_per_token": 0.0,
-                    "max_input_tokens": 262144,
-                    "max_output_tokens": 256000,
-                    "mode": "chat",
-                    "supports_vision": true,
-                    "metadata": {
-                        "notes": "Nex-N2-Pro is an agentic mixture-of-experts model from Nex AGI, with 17B active parameters out of 397B total. Built on the Qwen3.5 architecture, it accepts text and image input and produces..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -860,9 +834,9 @@
             },
             "~moonshotai/kimi-latest": {
                 "input_cost_per_token": 6.6e-07,
-                "output_cost_per_token": 3.5e-06,
+                "output_cost_per_token": 3.41e-06,
                 "max_input_tokens": 262144,
-                "max_output_tokens": 65535,
+                "max_output_tokens": 262144,
                 "mode": "chat",
                 "supports_vision": true,
                 "metadata": {
@@ -871,9 +845,9 @@
                 "litellm_provider": "openrouter",
                 "~moonshotai/kimi-latest": {
                     "input_cost_per_token": 6.6e-07,
-                    "output_cost_per_token": 3.5e-06,
+                    "output_cost_per_token": 3.41e-06,
                     "max_input_tokens": 262144,
-                    "max_output_tokens": 65535,
+                    "max_output_tokens": 262144,
                     "mode": "chat",
                     "supports_vision": true,
                     "metadata": {
@@ -1374,9 +1348,9 @@
             },
             "moonshotai/kimi-k2.6": {
                 "input_cost_per_token": 6.6e-07,
-                "output_cost_per_token": 3.5e-06,
+                "output_cost_per_token": 3.41e-06,
                 "max_input_tokens": 262144,
-                "max_output_tokens": 65535,
+                "max_output_tokens": 262144,
                 "mode": "chat",
                 "supports_vision": true,
                 "metadata": {
@@ -1385,9 +1359,9 @@
                 "litellm_provider": "openrouter",
                 "moonshotai/kimi-k2.6": {
                     "input_cost_per_token": 6.6e-07,
-                    "output_cost_per_token": 3.5e-06,
+                    "output_cost_per_token": 3.41e-06,
                     "max_input_tokens": 262144,
-                    "max_output_tokens": 65535,
+                    "max_output_tokens": 262144,
                     "mode": "chat",
                     "supports_vision": true,
                     "metadata": {
@@ -1572,6 +1546,26 @@
                     "max_output_tokens": 65536,
                     "metadata": {
                         "notes": "Qwen 3.6 Plus builds on a hybrid architecture that combines efficient linear attention with sparse mixture-of-experts routing, enabling strong scalability and high-performance inference. Compared to the 3.5 series, it delivers..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "z-ai/glm-5v-turbo": {
+                "input_cost_per_token": 1.2e-06,
+                "output_cost_per_token": 4e-06,
+                "max_input_tokens": 202752,
+                "max_output_tokens": 131072,
+                "metadata": {
+                    "notes": "GLM-5V-Turbo is Z.ai\u2019s first native multimodal agent foundation model, built for vision-based coding and agent-driven tasks. It natively handles image, video, and text inputs, excels at long-horizon planning, complex coding,..."
+                },
+                "litellm_provider": "openrouter",
+                "z-ai/glm-5v-turbo": {
+                    "input_cost_per_token": 1.2e-06,
+                    "output_cost_per_token": 4e-06,
+                    "max_input_tokens": 202752,
+                    "max_output_tokens": 131072,
+                    "metadata": {
+                        "notes": "GLM-5V-Turbo is Z.ai\u2019s first native multimodal agent foundation model, built for vision-based coding and agent-driven tasks. It natively handles image, video, and text inputs, excels at long-horizon planning, complex coding,..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -8016,18 +8010,6 @@
                 "output_cost_per_token": -1.0,
                 "metadata": {
                     "notes": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a..."
-                },
-                "litellm_provider": "openrouter"
-            },
-            "nex-agi/nex-n2-pro:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 262144,
-                "max_output_tokens": 256000,
-                "mode": "chat",
-                "supports_vision": true,
-                "metadata": {
-                    "notes": "Nex-N2-Pro is an agentic mixture-of-experts model from Nex AGI, with 17B active parameters out of 397B total. Built on the Qwen3.5 architecture, it accepts text and image input and produces..."
                 },
                 "litellm_provider": "openrouter"
             },
