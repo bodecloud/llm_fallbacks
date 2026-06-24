@@ -163,6 +163,7 @@ omni-moderation-latest
 text-moderation-007
 text-moderation-latest
 text-moderation-stable
+cloudflare/@cf/mistral/mistral-7b-instruct-v0.2-lora
 sarvam/sarvam-m
 1024-x-1024/gpt-image-1.5
 1024-x-1024/gpt-image-1.5-2025-12-16
@@ -212,6 +213,8 @@ perplexity/preset/deep-research
 perplexity/preset/fast-search
 perplexity/preset/pro-search
 perplexity/xai/grok-4-1-fast-non-reasoning
+cloudflare/@cf/google/gemma-2b-it-lora
+cloudflare/@cf/meta-llama/llama-2-7b-chat-hf-lora
 snowflake/gemma-7b
 snowflake/llama3-70b
 snowflake/llama3-8b
@@ -297,6 +300,7 @@ black_forest_labs/flux-pro-1.0-expand
 black_forest_labs/flux-pro-1.0-fill
 black_forest_labs/flux-pro-1.1
 black_forest_labs/flux-pro-1.1-ultra
+cloudflare/@cf/google/gemma-7b-it-lora
 dall-e-2
 dall-e-3
 dashscope/qwen-image-2.0
@@ -327,8 +331,6 @@ firecrawl/search
 fireworks-ai-default
 fireworks_ai/accounts/fireworks/models/fireworks-asr-large
 fireworks_ai/accounts/fireworks/models/fireworks-asr-v2
-fireworks_ai/accounts/fireworks/models/whisper-v3
-fireworks_ai/accounts/fireworks/models/whisper-v3-turbo
 gemini/imagen-3.0-fast-generate-001
 gemini/imagen-3.0-generate-001
 gemini/imagen-3.0-generate-002
