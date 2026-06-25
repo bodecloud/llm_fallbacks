@@ -5200,62 +5200,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "deepseek/deepseek-v4-flash": {
-        "cache_creation_input_token_cost": 0.0,
-        "cache_read_input_token_cost": 2.8e-09,
-        "input_cost_per_token": 9e-08,
-        "input_cost_per_token_cache_hit": 2.8e-09,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 65536,
-        "max_tokens": 8192,
-        "mode": "chat",
-        "output_cost_per_token": 1.8e-07,
-        "source": "https://api-docs.deepseek.com/quick_start/pricing",
-        "supported_endpoints": [
-            "/v1/chat/completions"
-        ],
-        "supports_assistant_prefill": true,
-        "supports_function_calling": true,
-        "supports_native_streaming": true,
-        "supports_parallel_function_calling": true,
-        "supports_prompt_caching": true,
-        "supports_response_schema": true,
-        "supports_system_messages": true,
-        "supports_tool_choice": true,
-        "supports_vision": false,
-        "metadata": {
-            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-        },
-        "deepseek/deepseek-v4-flash": {
-            "cache_creation_input_token_cost": 0.0,
-            "cache_read_input_token_cost": 2.8e-09,
-            "input_cost_per_token": 9e-08,
-            "input_cost_per_token_cache_hit": 2.8e-09,
-            "litellm_provider": "openrouter",
-            "max_input_tokens": 1000000,
-            "max_output_tokens": 65536,
-            "max_tokens": 8192,
-            "mode": "chat",
-            "output_cost_per_token": 1.8e-07,
-            "source": "https://api-docs.deepseek.com/quick_start/pricing",
-            "supported_endpoints": [
-                "/v1/chat/completions"
-            ],
-            "supports_assistant_prefill": true,
-            "supports_function_calling": true,
-            "supports_native_streaming": true,
-            "supports_parallel_function_calling": true,
-            "supports_prompt_caching": true,
-            "supports_response_schema": true,
-            "supports_system_messages": true,
-            "supports_tool_choice": true,
-            "supports_vision": false,
-            "metadata": {
-                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-            }
-        }
-    },
     "replicate/ibm-granite/granite-3.3-8b-instruct": {
         "input_cost_per_token": 3e-08,
         "output_cost_per_token": 2.5e-07,
@@ -5940,6 +5884,62 @@
         "supports_prompt_caching": true,
         "supports_response_schema": true,
         "supports_vision": true
+    },
+    "deepseek/deepseek-v4-flash": {
+        "cache_creation_input_token_cost": 0.0,
+        "cache_read_input_token_cost": 2.8e-09,
+        "input_cost_per_token": 8.9e-08,
+        "input_cost_per_token_cache_hit": 2.8e-09,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 8192,
+        "max_tokens": 8192,
+        "mode": "chat",
+        "output_cost_per_token": 2.24e-07,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+            "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": false,
+        "metadata": {
+            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+        },
+        "deepseek/deepseek-v4-flash": {
+            "cache_creation_input_token_cost": 0.0,
+            "cache_read_input_token_cost": 2.8e-09,
+            "input_cost_per_token": 8.9e-08,
+            "input_cost_per_token_cache_hit": 2.8e-09,
+            "litellm_provider": "openrouter",
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 8192,
+            "max_tokens": 8192,
+            "mode": "chat",
+            "output_cost_per_token": 2.24e-07,
+            "source": "https://api-docs.deepseek.com/quick_start/pricing",
+            "supported_endpoints": [
+                "/v1/chat/completions"
+            ],
+            "supports_assistant_prefill": true,
+            "supports_function_calling": true,
+            "supports_native_streaming": true,
+            "supports_parallel_function_calling": true,
+            "supports_prompt_caching": true,
+            "supports_response_schema": true,
+            "supports_system_messages": true,
+            "supports_tool_choice": true,
+            "supports_vision": false,
+            "metadata": {
+                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+            }
+        }
     },
     "novita/google/gemma-3-27b-it": {
         "litellm_provider": "novita",
@@ -13304,33 +13304,6 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
-    "qwen/qwen3.5-35b-a3b": {
-        "input_cost_per_token": 1.4e-07,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
-        "max_tokens": 65536,
-        "mode": "chat",
-        "output_cost_per_token": 1e-06,
-        "source": "https://openrouter.ai/qwen/qwen3.5-35b-a3b",
-        "supports_function_calling": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "metadata": {
-            "notes": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall..."
-        },
-        "qwen/qwen3.5-35b-a3b": {
-            "input_cost_per_token": 1.4e-07,
-            "output_cost_per_token": 1e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
-            "metadata": {
-                "notes": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "qwen/qwen3.6-35b-a3b": {
         "input_cost_per_token": 1.4e-07,
         "output_cost_per_token": 1e-06,
@@ -13347,6 +13320,33 @@
             "max_output_tokens": 262144,
             "metadata": {
                 "notes": "Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud with 35 billion total parameters and 3 billion active parameters per token. It uses a hybrid sparse mixture-of-experts architecture combining Gated..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "qwen/qwen3.5-35b-a3b": {
+        "input_cost_per_token": 1.4e-07,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 262144,
+        "max_output_tokens": 81920,
+        "max_tokens": 65536,
+        "mode": "chat",
+        "output_cost_per_token": 1e-06,
+        "source": "https://openrouter.ai/qwen/qwen3.5-35b-a3b",
+        "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "metadata": {
+            "notes": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall..."
+        },
+        "qwen/qwen3.5-35b-a3b": {
+            "input_cost_per_token": 1.4e-07,
+            "output_cost_per_token": 1e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 81920,
+            "metadata": {
+                "notes": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall..."
             },
             "litellm_provider": "openrouter"
         }
@@ -22384,7 +22384,7 @@
         "output_cost_per_token": 2.5e-06,
         "input_cost_per_image": 3e-07,
         "max_input_tokens": 32768,
-        "max_output_tokens": 8192,
+        "max_output_tokens": 32768,
         "metadata": {
             "notes": "Gemini 2.5 Flash Image, a.k.a. \"Nano Banana,\" is now generally available. It is a state of the art image generation model with contextual understanding. It is capable of image generation,..."
         },
@@ -22394,7 +22394,7 @@
             "output_cost_per_token": 2.5e-06,
             "input_cost_per_image": 3e-07,
             "max_input_tokens": 32768,
-            "max_output_tokens": 8192,
+            "max_output_tokens": 32768,
             "metadata": {
                 "notes": "Gemini 2.5 Flash Image, a.k.a. \"Nano Banana,\" is now generally available. It is a state of the art image generation model with contextual understanding. It is capable of image generation,..."
             },
@@ -23157,6 +23157,26 @@
         "supports_function_calling": true,
         "supports_vision": true
     },
+    "google/gemini-3.1-flash-image": {
+        "input_cost_per_token": 5e-07,
+        "output_cost_per_token": 3e-06,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "Gemini 3.1 Flash Image, a.k.a. \"Nano Banana 2,\" is Google\u2019s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines advanced..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemini-3.1-flash-image": {
+            "input_cost_per_token": 5e-07,
+            "output_cost_per_token": 3e-06,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "Gemini 3.1 Flash Image, a.k.a. \"Nano Banana 2,\" is Google\u2019s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines advanced..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "google/gemini-3.1-flash-image-preview": {
         "input_cost_per_token": 5e-07,
         "output_cost_per_token": 3e-06,
@@ -23173,26 +23193,6 @@
             "max_output_tokens": 32768,
             "metadata": {
                 "notes": "Gemini 3.1 Flash Image Preview, a.k.a. \"Nano Banana 2,\" is Google\u2019s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "google/gemini-3.1-flash-image": {
-        "input_cost_per_token": 5e-07,
-        "output_cost_per_token": 3e-06,
-        "max_input_tokens": 65536,
-        "max_output_tokens": 65536,
-        "metadata": {
-            "notes": "Gemini 3.1 Flash Image, a.k.a. \"Nano Banana 2,\" is Google\u2019s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines advanced..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemini-3.1-flash-image": {
-            "input_cost_per_token": 5e-07,
-            "output_cost_per_token": 3e-06,
-            "max_input_tokens": 65536,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "Gemini 3.1 Flash Image, a.k.a. \"Nano Banana 2,\" is Google\u2019s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines advanced..."
             },
             "litellm_provider": "openrouter"
         }
@@ -24795,7 +24795,6 @@
         "input_cost_per_token": 9.8e-07,
         "output_cost_per_token": 3.08e-06,
         "max_input_tokens": 202752,
-        "max_output_tokens": 65535,
         "metadata": {
             "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
         },
@@ -24804,7 +24803,6 @@
             "input_cost_per_token": 9.8e-07,
             "output_cost_per_token": 3.08e-06,
             "max_input_tokens": 202752,
-            "max_output_tokens": 65535,
             "metadata": {
                 "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
             },
@@ -38532,6 +38530,30 @@
             "max_output_tokens": 128000,
             "metadata": {
                 "notes": "This model always redirects to the latest model in the OpenAI GPT family."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "sakana/fugu-ultra": {
+        "input_cost_per_token": 5e-06,
+        "output_cost_per_token": 3e-05,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Fugu Ultra is the higher-performance model in Sakana AI's Fugu family. Rather than a single monolithic model, Fugu is a learned multi-agent orchestration system: a language model trained to route..."
+        },
+        "litellm_provider": "openrouter",
+        "sakana/fugu-ultra": {
+            "input_cost_per_token": 5e-06,
+            "output_cost_per_token": 3e-05,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 128000,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Fugu Ultra is the higher-performance model in Sakana AI's Fugu family. Rather than a single monolithic model, Fugu is a learned multi-agent orchestration system: a language model trained to route..."
             },
             "litellm_provider": "openrouter"
         }
