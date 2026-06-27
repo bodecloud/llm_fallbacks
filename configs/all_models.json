@@ -241,6 +241,21 @@
         "supports_reasoning": true,
         "supports_tool_choice": true
     },
+    "zai/glm-4.7-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 0,
+        "input_cost_per_token": 0,
+        "output_cost_per_token": 0,
+        "litellm_provider": "zai",
+        "max_input_tokens": 200000,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing"
+    },
     "lemonade/qwen3-4b-instruct-2507-gguf": {
         "input_cost_per_token": 0,
         "litellm_provider": "lemonade",
@@ -2578,6 +2593,15 @@
         "supports_system_messages": true,
         "supports_response_schema": true
     },
+    "amazon.titan-embed-g1-text-02": {
+        "input_cost_per_token": 1e-07,
+        "litellm_provider": "bedrock",
+        "max_input_tokens": 8192,
+        "max_tokens": 8192,
+        "mode": "embedding",
+        "output_cost_per_token": 0.0,
+        "output_vector_size": 1536
+    },
     "amazon.titan-embed-text-v1": {
         "input_cost_per_token": 1e-07,
         "litellm_provider": "bedrock",
@@ -3050,6 +3074,7 @@
         "supports_vision": true
     },
     "sambanova/meta-llama-3.2-1b-instruct": {
+        "deprecation_date": "2025-06-25",
         "input_cost_per_token": 4e-08,
         "litellm_provider": "sambanova",
         "max_input_tokens": 16384,
@@ -4856,6 +4881,7 @@
         }
     },
     "sambanova/meta-llama-3.2-3b-instruct": {
+        "deprecation_date": "2025-06-25",
         "input_cost_per_token": 8e-08,
         "litellm_provider": "sambanova",
         "max_input_tokens": 4096,
@@ -5780,6 +5806,7 @@
         "supports_function_calling": true
     },
     "sambanova/meta-llama-3.1-8b-instruct": {
+        "deprecation_date": "2026-04-14",
         "input_cost_per_token": 1e-07,
         "litellm_provider": "sambanova",
         "max_input_tokens": 16384,
@@ -9689,6 +9716,7 @@
         "source": "https://nebius.com/prices-ai-studio"
     },
     "sambanova/meta-llama-guard-3-8b": {
+        "deprecation_date": "2025-06-25",
         "input_cost_per_token": 3e-07,
         "litellm_provider": "sambanova",
         "max_input_tokens": 16384,
@@ -11977,6 +12005,19 @@
         },
         "supports_image_size": false
     },
+    "sambanova/gpt-oss-120b": {
+        "max_tokens": 131072,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 131072,
+        "input_cost_per_token": 2.2e-07,
+        "output_cost_per_token": 5.9e-07,
+        "litellm_provider": "sambanova",
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_tool_choice": true,
+        "supports_reasoning": true,
+        "source": "https://cloud.sambanova.ai/plans/pricing"
+    },
     "gemini/gemini-flash-lite-latest": {
         "cache_read_input_token_cost": 2.5e-08,
         "input_cost_per_audio_token": 3e-07,
@@ -13281,6 +13322,7 @@
         "supports_tool_choice": true
     },
     "sambanova/llama-4-scout-17b-16e-instruct": {
+        "deprecation_date": "2025-06-19",
         "input_cost_per_token": 4e-07,
         "litellm_provider": "sambanova",
         "max_input_tokens": 8192,
@@ -13791,6 +13833,7 @@
         "supports_tool_choice": true
     },
     "sambanova/qwen3-32b": {
+        "deprecation_date": "2026-04-06",
         "input_cost_per_token": 4e-07,
         "litellm_provider": "sambanova",
         "max_input_tokens": 8192,
@@ -15332,19 +15375,6 @@
         "supports_function_calling": true,
         "supports_tool_choice": true
     },
-    "sambanova/minimax-m2.7": {
-        "input_cost_per_token": 3e-07,
-        "litellm_provider": "sambanova",
-        "max_input_tokens": 204800,
-        "max_output_tokens": 131072,
-        "max_tokens": 131072,
-        "mode": "chat",
-        "output_cost_per_token": 1.2e-06,
-        "source": "https://cloud.sambanova.ai/plans/pricing",
-        "supports_function_calling": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true
-    },
     "tensormesh/minimaxai/minimax-m2.5": {
         "litellm_provider": "tensormesh",
         "mode": "chat",
@@ -15500,6 +15530,7 @@
         }
     },
     "sambanova/qwq-32b": {
+        "deprecation_date": "2025-06-25",
         "input_cost_per_token": 5e-07,
         "litellm_provider": "sambanova",
         "max_input_tokens": 16384,
@@ -15672,6 +15703,17 @@
         "supports_function_calling": true,
         "supports_response_schema": true,
         "supports_tool_choice": true
+    },
+    "sambanova/gemma-4-31b-it": {
+        "max_tokens": 131072,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 131072,
+        "input_cost_per_token": 3.8e-07,
+        "output_cost_per_token": 1.15e-06,
+        "litellm_provider": "sambanova",
+        "mode": "chat",
+        "supports_vision": true,
+        "source": "https://cloud.sambanova.ai/plans/pricing"
     },
     "deepinfra/qwen/qwen3-next-80b-a3b-instruct": {
         "max_tokens": 262144,
@@ -18823,6 +18865,7 @@
         }
     },
     "sambanova/deepseek-r1-distill-llama-70b": {
+        "deprecation_date": "2026-03-20",
         "input_cost_per_token": 7e-07,
         "litellm_provider": "sambanova",
         "max_input_tokens": 131072,
@@ -19080,7 +19123,7 @@
         "input_cost_per_token_flex": 1e-07,
         "input_cost_per_token_batches": 1e-07,
         "litellm_provider": "openai",
-        "max_input_tokens": 272000,
+        "max_input_tokens": 1050000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
@@ -19125,7 +19168,7 @@
         "input_cost_per_token_flex": 1e-07,
         "input_cost_per_token_batches": 1e-07,
         "litellm_provider": "openai",
-        "max_input_tokens": 272000,
+        "max_input_tokens": 1050000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
@@ -20178,7 +20221,7 @@
         "litellm_provider": "fireworks_ai",
         "mode": "chat"
     },
-    "mistral/mistral-medium-3-1-2508": {
+    "mistral/mistral-medium-2508": {
         "input_cost_per_token": 4e-07,
         "litellm_provider": "mistral",
         "max_input_tokens": 131072,
@@ -20193,7 +20236,7 @@
         "supports_tool_choice": true,
         "supports_vision": true
     },
-    "mistral/mistral-medium-latest": {
+    "mistral/mistral-medium-3-1-2508": {
         "input_cost_per_token": 4e-07,
         "litellm_provider": "mistral",
         "max_input_tokens": 131072,
@@ -20201,6 +20244,7 @@
         "max_tokens": 131072,
         "mode": "chat",
         "output_cost_per_token": 2e-06,
+        "source": "https://mistral.ai/news/mistral-medium-3",
         "supports_assistant_prefill": true,
         "supports_function_calling": true,
         "supports_response_schema": true,
@@ -21650,6 +21694,26 @@
         "supports_tool_choice": true,
         "source": "https://docs.z.ai/guides/overview/pricing"
     },
+    "qwen/qwen3.6-27b": {
+        "input_cost_per_token": 2.885e-07,
+        "output_cost_per_token": 2.65e-06,
+        "max_input_tokens": 262140,
+        "max_output_tokens": 262140,
+        "metadata": {
+            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3.6-27b": {
+            "input_cost_per_token": 2.885e-07,
+            "output_cost_per_token": 2.65e-06,
+            "max_input_tokens": 262140,
+            "max_output_tokens": 262140,
+            "metadata": {
+                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "bedrock/us-gov-east-1/meta.llama3-8b-instruct-v1:0": {
         "input_cost_per_token": 3e-07,
         "litellm_provider": "bedrock",
@@ -21801,6 +21865,19 @@
         "supports_function_calling": true,
         "supports_parallel_function_calling": true,
         "supports_system_messages": true,
+        "supports_tool_choice": true
+    },
+    "sambanova/minimax-m2.7": {
+        "input_cost_per_token": 6e-07,
+        "litellm_provider": "sambanova",
+        "max_input_tokens": 196608,
+        "max_output_tokens": 131072,
+        "max_tokens": 131072,
+        "mode": "chat",
+        "output_cost_per_token": 2.4e-06,
+        "source": "https://cloud.sambanova.ai/plans/pricing",
+        "supports_function_calling": true,
+        "supports_reasoning": true,
         "supports_tool_choice": true
     },
     "scaleway/qwen/qwen3-235b-a22b-instruct-2507": {
@@ -23129,26 +23206,6 @@
         "supports_vision": true,
         "supports_web_search": false
     },
-    "qwen/qwen3.6-27b": {
-        "input_cost_per_token": 2.885e-07,
-        "output_cost_per_token": 3.17e-06,
-        "max_input_tokens": 262140,
-        "max_output_tokens": 262140,
-        "metadata": {
-            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3.6-27b": {
-            "input_cost_per_token": 2.885e-07,
-            "output_cost_per_token": 3.17e-06,
-            "max_input_tokens": 262140,
-            "max_output_tokens": 262140,
-            "metadata": {
-                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "gmi/google/gemini-3-flash-preview": {
         "input_cost_per_token": 5e-07,
         "litellm_provider": "gmi",
@@ -23717,7 +23774,8 @@
             "audio"
         ],
         "supports_audio_input": true,
-        "supports_audio_output": true
+        "supports_audio_output": true,
+        "gemini_native_audio": true
     },
     "gemini-2.5-flash-native-audio-preview-09-2025": {
         "input_cost_per_audio_token": 1e-06,
@@ -23741,7 +23799,8 @@
             "audio"
         ],
         "supports_audio_input": true,
-        "supports_audio_output": true
+        "supports_audio_output": true,
+        "gemini_native_audio": true
     },
     "gemini-2.5-flash-native-audio-preview-12-2025": {
         "input_cost_per_audio_token": 1e-06,
@@ -23765,7 +23824,8 @@
             "audio"
         ],
         "supports_audio_input": true,
-        "supports_audio_output": true
+        "supports_audio_output": true,
+        "gemini_native_audio": true
     },
     "gemini/gemini-2.5-flash-native-audio-latest": {
         "input_cost_per_audio_token": 1e-06,
@@ -23791,7 +23851,8 @@
         "supports_audio_input": true,
         "supports_audio_output": true,
         "tpm": 250000,
-        "rpm": 10
+        "rpm": 10,
+        "gemini_native_audio": true
     },
     "gemini/gemini-2.5-flash-native-audio-preview-09-2025": {
         "input_cost_per_audio_token": 1e-06,
@@ -23817,7 +23878,8 @@
         "supports_audio_input": true,
         "supports_audio_output": true,
         "tpm": 250000,
-        "rpm": 10
+        "rpm": 10,
+        "gemini_native_audio": true
     },
     "gemini/gemini-2.5-flash-native-audio-preview-12-2025": {
         "input_cost_per_audio_token": 1e-06,
@@ -23843,7 +23905,8 @@
         "supports_audio_input": true,
         "supports_audio_output": true,
         "tpm": 250000,
-        "rpm": 10
+        "rpm": 10,
+        "gemini_native_audio": true
     },
     "google/gemini-2.5-flash": {
         "input_cost_per_audio_token": 7e-07,
@@ -24790,24 +24853,6 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
-    "z-ai/glm-5.1": {
-        "input_cost_per_token": 9.8e-07,
-        "output_cost_per_token": 3.08e-06,
-        "max_input_tokens": 202752,
-        "metadata": {
-            "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.1": {
-            "input_cost_per_token": 9.8e-07,
-            "output_cost_per_token": 3.08e-06,
-            "max_input_tokens": 202752,
-            "metadata": {
-                "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "moonshotai/kimi-k2.6": {
         "input_cost_per_token": 6.6e-07,
         "output_cost_per_token": 3.41e-06,
@@ -25376,6 +25421,34 @@
             "search_context_size_high": 0.014
         },
         "web_search_billing_unit": "per_query"
+    },
+    "z-ai/glm-5.1": {
+        "input_cost_per_token": 9.8e-07,
+        "output_cost_per_token": 3.08e-06,
+        "cache_read_input_token_cost": 5.25e-07,
+        "cache_creation_input_token_cost": 0.0,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 202752,
+        "max_output_tokens": 65535,
+        "max_tokens": 65535,
+        "mode": "chat",
+        "source": "https://openrouter.ai/z-ai/glm-5.1",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
+        },
+        "z-ai/glm-5.1": {
+            "input_cost_per_token": 9.8e-07,
+            "output_cost_per_token": 3.08e-06,
+            "max_input_tokens": 202752,
+            "metadata": {
+                "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "oci/xai.grok-3-mini-fast": {
         "input_cost_per_token": 6e-07,
@@ -26906,6 +26979,21 @@
         "supports_tool_choice": true,
         "supports_vision": false
     },
+    "zai/glm-5.1": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 2.6e-07,
+        "input_cost_per_token": 1.4e-06,
+        "output_cost_per_token": 4.4e-06,
+        "litellm_provider": "zai",
+        "max_input_tokens": 200000,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing"
+    },
     "snowflake/claude-haiku-4-5": {
         "max_tokens": 16384,
         "max_input_tokens": 200000,
@@ -28023,7 +28111,7 @@
         "mode": "chat",
         "output_cost_per_token": 4.2e-06
     },
-    "sambanova/gpt-oss-120b": {
+    "sambanova/deepseek-v3.1": {
         "max_tokens": 131072,
         "max_input_tokens": 131072,
         "max_output_tokens": 131072,
@@ -28037,6 +28125,7 @@
         "source": "https://cloud.sambanova.ai/plans/pricing"
     },
     "sambanova/deepseek-v3-0324": {
+        "deprecation_date": "2026-04-14",
         "input_cost_per_token": 3e-06,
         "litellm_provider": "sambanova",
         "max_input_tokens": 32768,
@@ -28049,7 +28138,7 @@
         "supports_reasoning": true,
         "supports_tool_choice": true
     },
-    "sambanova/deepseek-v3.1": {
+    "sambanova/deepseek-v3.2": {
         "max_tokens": 32768,
         "max_input_tokens": 32768,
         "max_output_tokens": 32768,
@@ -28059,7 +28148,6 @@
         "mode": "chat",
         "supports_function_calling": true,
         "supports_tool_choice": true,
-        "supports_reasoning": true,
         "source": "https://cloud.sambanova.ai/plans/pricing"
     },
     "azure/gpt-4o-mini-transcribe": {
@@ -28194,7 +28282,7 @@
         "input_cost_per_token_batches": 3.75e-07,
         "input_cost_per_token_priority": 1.5e-06,
         "litellm_provider": "openai",
-        "max_input_tokens": 272000,
+        "max_input_tokens": 1050000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
@@ -28242,7 +28330,7 @@
         "input_cost_per_token_batches": 3.75e-07,
         "input_cost_per_token_priority": 1.5e-06,
         "litellm_provider": "openai",
-        "max_input_tokens": 272000,
+        "max_input_tokens": 1050000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
@@ -28837,6 +28925,22 @@
         "supports_native_structured_output": true,
         "supports_pdf_input": true
     },
+    "mistral/mistral-medium-2604": {
+        "input_cost_per_token": 1.5e-06,
+        "litellm_provider": "mistral",
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "max_tokens": 262144,
+        "mode": "chat",
+        "output_cost_per_token": 7.5e-06,
+        "source": "https://docs.mistral.ai/models/model-cards/mistral-medium-3-5-26-04",
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+    },
     "mistral/mistral-medium-3-5": {
         "input_cost_per_token": 1.5e-06,
         "litellm_provider": "mistral",
@@ -28848,6 +28952,23 @@
         "source": "https://docs.mistral.ai/models/model-cards/mistral-medium-3-5-26-04",
         "supports_assistant_prefill": true,
         "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+    },
+    "mistral/mistral-medium-latest": {
+        "input_cost_per_token": 1.5e-06,
+        "litellm_provider": "mistral",
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "max_tokens": 262144,
+        "mode": "chat",
+        "output_cost_per_token": 7.5e-06,
+        "source": "https://docs.mistral.ai/models/model-cards/mistral-medium-3-5-26-04",
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_reasoning": true,
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true
@@ -32781,6 +32902,7 @@
         "supports_vision": true
     },
     "sambanova/meta-llama-3.1-405b-instruct": {
+        "deprecation_date": "2025-06-25",
         "input_cost_per_token": 5e-06,
         "litellm_provider": "sambanova",
         "max_input_tokens": 16384,
@@ -34018,7 +34140,8 @@
             "search_context_size_low": 0.035,
             "search_context_size_medium": 0.035,
             "search_context_size_high": 0.035
-        }
+        },
+        "gemini_native_audio": true
     },
     "gemini/gemini-live-2.5-flash-preview-native-audio-09-2025": {
         "cache_read_input_token_cost": 7.5e-08,
@@ -34069,7 +34192,8 @@
             "search_context_size_low": 0.035,
             "search_context_size_medium": 0.035,
             "search_context_size_high": 0.035
-        }
+        },
+        "gemini_native_audio": true
     },
     "openai/gpt-5.4": {
         "input_cost_per_token": 2.5e-06,
@@ -36917,7 +37041,8 @@
         "supports_audio_output": true,
         "supports_function_calling": true,
         "supports_vision": true,
-        "supports_web_search": true
+        "supports_web_search": true,
+        "gemini_audio_only_live": true
     },
     "gemini/gemini-3.1-flash-live-preview": {
         "input_cost_per_audio_token": 3e-06,
@@ -36951,7 +37076,8 @@
         "supports_vision": true,
         "supports_web_search": true,
         "tpm": 250000,
-        "rpm": 10
+        "rpm": 10,
+        "gemini_audio_only_live": true
     },
     "deepgram/enhanced": {
         "input_cost_per_second": 0.00024167,
@@ -38991,7 +39117,8 @@
             "fast": 6.0
         },
         "supports_output_config": true,
-        "supports_max_reasoning_effort": true
+        "supports_max_reasoning_effort": true,
+        "supports_speed": true
     },
     "claude-opus-4-6-20260205": {
         "cache_creation_input_token_cost": 6.25e-06,
@@ -39024,7 +39151,8 @@
             "fast": 6.0
         },
         "supports_max_reasoning_effort": true,
-        "supports_output_config": true
+        "supports_output_config": true,
+        "supports_speed": true
     },
     "claude-opus-4-7": {
         "cache_creation_input_token_cost": 6.25e-06,
@@ -39059,7 +39187,8 @@
             "us": 1.1,
             "fast": 6.0
         },
-        "supports_output_config": true
+        "supports_output_config": true,
+        "supports_speed": true
     },
     "claude-opus-4-7-20260416": {
         "cache_creation_input_token_cost": 6.25e-06,
@@ -39094,7 +39223,8 @@
             "us": 1.1,
             "fast": 6.0
         },
-        "supports_output_config": true
+        "supports_output_config": true,
+        "supports_speed": true
     },
     "claude-opus-4-8": {
         "cache_creation_input_token_cost": 6.25e-06,
@@ -39129,7 +39259,8 @@
             "us": 1.1,
             "fast": 2.0
         },
-        "supports_output_config": true
+        "supports_output_config": true,
+        "supports_speed": true
     },
     "global.anthropic.claude-opus-4-6-v1": {
         "cache_creation_input_token_cost": 6.25e-06,
@@ -41612,6 +41743,7 @@
         "supports_image_input": true
     },
     "sambanova/qwen2-audio-7b-instruct": {
+        "deprecation_date": "2025-06-19",
         "input_cost_per_token": 5e-07,
         "litellm_provider": "sambanova",
         "max_input_tokens": 4096,
@@ -43529,9 +43661,9 @@
         "input_cost_per_token": 1.5e-05,
         "input_cost_per_token_batches": 7.5e-06,
         "litellm_provider": "openai",
-        "max_input_tokens": 128000,
-        "max_output_tokens": 272000,
-        "max_tokens": 272000,
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
         "mode": "responses",
         "output_cost_per_token": 0.00012,
         "output_cost_per_token_batches": 6e-05,
@@ -43565,9 +43697,9 @@
         "input_cost_per_token": 1.5e-05,
         "input_cost_per_token_batches": 7.5e-06,
         "litellm_provider": "openai",
-        "max_input_tokens": 128000,
-        "max_output_tokens": 272000,
-        "max_tokens": 272000,
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
         "mode": "responses",
         "output_cost_per_token": 0.00012,
         "output_cost_per_token_batches": 6e-05,
@@ -46585,6 +46717,48 @@
         "litellm_provider": "wandb",
         "mode": "chat"
     },
+    "gemini/gemini-3.1-flash-image": {
+        "input_cost_per_token": 2.5e-07,
+        "input_cost_per_token_batches": 1.25e-07,
+        "litellm_provider": "gemini",
+        "max_input_tokens": 65536,
+        "max_output_tokens": 32768,
+        "max_tokens": 32768,
+        "mode": "image_generation",
+        "output_cost_per_image": 0.045,
+        "output_cost_per_image_token": 6e-05,
+        "output_cost_per_image_token_batches": 3e-05,
+        "output_cost_per_token": 1.5e-06,
+        "output_cost_per_token_batches": 7.5e-07,
+        "rpm": 1000,
+        "tpm": 4000000,
+        "source": "https://ai.google.dev/gemini-api/docs/pricing#gemini-3.1-flash-image",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/completions",
+            "/v1/batch"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text",
+            "image"
+        ],
+        "supports_function_calling": false,
+        "supports_prompt_caching": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "search_context_cost_per_query": {
+            "search_context_size_low": 0.014,
+            "search_context_size_medium": 0.014,
+            "search_context_size_high": 0.014
+        },
+        "web_search_billing_unit": "per_query"
+    },
     "gemini/gemini-3.1-flash-image-preview": {
         "input_cost_per_token": 2.5e-07,
         "input_cost_per_token_batches": 1.25e-07,
@@ -46755,6 +46929,19 @@
             "/v1/images/generations"
         ]
     },
+    "aiml/openai/gpt-image-2": {
+        "litellm_provider": "aiml",
+        "metadata": {
+            "notes": "OpenAI gpt-image-2 via AI/ML API - flagship multimodal image generation and editing model with reasoning and 2K output. output_cost_per_image is AI/ML's published medium-quality rate; like the other aiml image entries it is billed as a flat per-image price"
+        },
+        "mode": "image_generation",
+        "output_cost_per_image": 0.054,
+        "source": "https://docs.aimlapi.com/api-references/image-models/openai/gpt-image-2",
+        "supported_endpoints": [
+            "/v1/images/generations"
+        ],
+        "supports_vision": true
+    },
     "linkup/search-deep": {
         "input_cost_per_query": 0.05867,
         "litellm_provider": "linkup",
@@ -46903,6 +47090,44 @@
             "/v1/images/generations"
         ]
     },
+    "gemini-3.1-flash-image": {
+        "input_cost_per_image": 0.00056,
+        "input_cost_per_token": 5e-07,
+        "litellm_provider": "vertex_ai-language-models",
+        "max_input_tokens": 65536,
+        "max_output_tokens": 32768,
+        "max_tokens": 32768,
+        "mode": "image_generation",
+        "output_cost_per_image": 0.0672,
+        "output_cost_per_image_token": 6e-05,
+        "output_cost_per_token": 3e-06,
+        "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing#gemini-models",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/completions",
+            "/v1/batch"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text",
+            "image"
+        ],
+        "supports_function_calling": false,
+        "supports_prompt_caching": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "search_context_cost_per_query": {
+            "search_context_size_low": 0.014,
+            "search_context_size_medium": 0.014,
+            "search_context_size_high": 0.014
+        },
+        "web_search_billing_unit": "per_query"
+    },
     "gemini-3.1-flash-image-preview": {
         "input_cost_per_image": 0.00056,
         "input_cost_per_token": 5e-07,
@@ -46940,6 +47165,19 @@
             "search_context_size_high": 0.014
         },
         "web_search_billing_unit": "per_query"
+    },
+    "vertex_ai/gemini-3.1-flash-image": {
+        "input_cost_per_image": 0.00056,
+        "input_cost_per_token": 5e-07,
+        "litellm_provider": "vertex_ai-language-models",
+        "max_input_tokens": 65536,
+        "max_output_tokens": 32768,
+        "max_tokens": 32768,
+        "mode": "image_generation",
+        "output_cost_per_image": 0.0672,
+        "output_cost_per_image_token": 6e-05,
+        "output_cost_per_token": 3e-06,
+        "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing#gemini-models"
     },
     "vertex_ai/gemini-3.1-flash-image-preview": {
         "input_cost_per_image": 0.00056,
@@ -47173,6 +47411,47 @@
         "supports_vision": true,
         "supports_web_search": true
     },
+    "gemini-3-pro-image": {
+        "input_cost_per_image": 0.0011,
+        "input_cost_per_token": 2e-06,
+        "input_cost_per_token_batches": 1e-06,
+        "litellm_provider": "vertex_ai-language-models",
+        "max_input_tokens": 65536,
+        "max_output_tokens": 32768,
+        "max_tokens": 32768,
+        "mode": "image_generation",
+        "output_cost_per_image": 0.134,
+        "output_cost_per_image_token": 0.00012,
+        "output_cost_per_token": 1.2e-05,
+        "output_cost_per_token_batches": 6e-06,
+        "source": "https://ai.google.dev/gemini-api/docs/pricing#gemini-3-pro-image",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/completions",
+            "/v1/batch"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text",
+            "image"
+        ],
+        "supports_function_calling": false,
+        "supports_prompt_caching": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "search_context_cost_per_query": {
+            "search_context_size_low": 0.014,
+            "search_context_size_medium": 0.014,
+            "search_context_size_high": 0.014
+        },
+        "web_search_billing_unit": "per_query",
+        "supports_service_tier": true
+    },
     "gemini-3-pro-image-preview": {
         "input_cost_per_image": 0.0011,
         "input_cost_per_token": 2e-06,
@@ -47255,6 +47534,49 @@
             "search_context_size_high": 0.035
         }
     },
+    "gemini/gemini-3-pro-image": {
+        "input_cost_per_image": 0.0011,
+        "input_cost_per_token": 2e-06,
+        "input_cost_per_token_batches": 1e-06,
+        "litellm_provider": "gemini",
+        "max_input_tokens": 65536,
+        "max_output_tokens": 32768,
+        "max_tokens": 32768,
+        "mode": "image_generation",
+        "output_cost_per_image": 0.134,
+        "output_cost_per_image_token": 0.00012,
+        "output_cost_per_token": 1.2e-05,
+        "rpm": 1000,
+        "tpm": 4000000,
+        "output_cost_per_token_batches": 6e-06,
+        "source": "https://ai.google.dev/gemini-api/docs/pricing#gemini-3-pro-image",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/completions",
+            "/v1/batch"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text",
+            "image"
+        ],
+        "supports_function_calling": false,
+        "supports_prompt_caching": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "search_context_cost_per_query": {
+            "search_context_size_low": 0.014,
+            "search_context_size_medium": 0.014,
+            "search_context_size_high": 0.014
+        },
+        "web_search_billing_unit": "per_query",
+        "supports_service_tier": true
+    },
     "gemini/gemini-3-pro-image-preview": {
         "input_cost_per_image": 0.0011,
         "input_cost_per_token": 2e-06,
@@ -47299,6 +47621,21 @@
         "supports_service_tier": true
     },
     "vertex_ai/deep-research-pro-preview-12-2025": {
+        "input_cost_per_image": 0.0011,
+        "input_cost_per_token": 2e-06,
+        "input_cost_per_token_batches": 1e-06,
+        "litellm_provider": "vertex_ai-language-models",
+        "max_input_tokens": 65536,
+        "max_output_tokens": 32768,
+        "max_tokens": 32768,
+        "mode": "image_generation",
+        "output_cost_per_image": 0.134,
+        "output_cost_per_image_token": 0.00012,
+        "output_cost_per_token": 1.2e-05,
+        "output_cost_per_token_batches": 6e-06,
+        "source": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-pro-image"
+    },
+    "vertex_ai/gemini-3-pro-image": {
         "input_cost_per_image": 0.0011,
         "input_cost_per_token": 2e-06,
         "input_cost_per_token_batches": 1e-06,
@@ -49139,10 +49476,30 @@
         ],
         "source": "https://mistral.ai/pricing#api-pricing"
     },
+    "mistral/mistral-ocr-2512": {
+        "litellm_provider": "mistral",
+        "ocr_cost_per_page": 0.002,
+        "annotation_cost_per_page": 0.003,
+        "mode": "ocr",
+        "supported_endpoints": [
+            "/v1/ocr"
+        ],
+        "source": "https://mistral.ai/pricing#api-pricing"
+    },
+    "mistral/mistral-ocr-4-0": {
+        "litellm_provider": "mistral",
+        "ocr_cost_per_page": 0.004,
+        "annotation_cost_per_page": 0.005,
+        "mode": "ocr",
+        "supported_endpoints": [
+            "/v1/ocr"
+        ],
+        "source": "https://mistral.ai/pricing#api-pricing"
+    },
     "mistral/mistral-ocr-latest": {
         "litellm_provider": "mistral",
-        "ocr_cost_per_page": 0.001,
-        "annotation_cost_per_page": 0.003,
+        "ocr_cost_per_page": 0.004,
+        "annotation_cost_per_page": 0.005,
         "mode": "ocr",
         "supported_endpoints": [
             "/v1/ocr"

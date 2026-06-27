@@ -33,6 +33,7 @@ github_copilot/gemini-2.5-pro
 github_copilot/gemini-3-pro-preview
 kimi-k2-thinking-251104
 gemini/gemma-3-27b-it
+zai/glm-4.7-flash
 dashscope/qwen3-coder-flash
 dashscope/qwen3-coder-flash-2025-07-28
 dashscope/qwen3-coder-plus
@@ -213,6 +214,7 @@ perplexity/preset/deep-research
 perplexity/preset/fast-search
 perplexity/preset/pro-search
 perplexity/xai/grok-4-1-fast-non-reasoning
+aiml/openai/gpt-image-2
 cloudflare/@cf/google/gemma-2b-it-lora
 cloudflare/@cf/meta-llama/llama-2-7b-chat-hf-lora
 snowflake/gemma-7b
@@ -365,6 +367,8 @@ medium/1024-x-1536/gpt-image-1-mini
 medium/1536-x-1024/gpt-image-1
 medium/1536-x-1024/gpt-image-1-mini
 mistral/mistral-ocr-2505-completion
+mistral/mistral-ocr-2512
+mistral/mistral-ocr-4-0
 mistral/mistral-ocr-latest
 nscale/black-forest-labs/flux.1-schnell
 nscale/stabilityai/stable-diffusion-xl-base-1.0

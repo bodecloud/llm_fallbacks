@@ -1022,7 +1022,7 @@
             },
             "qwen/qwen3.6-27b": {
                 "input_cost_per_token": 2.885e-07,
-                "output_cost_per_token": 3.17e-06,
+                "output_cost_per_token": 2.65e-06,
                 "max_input_tokens": 262140,
                 "max_output_tokens": 262140,
                 "metadata": {
@@ -1031,7 +1031,7 @@
                 "litellm_provider": "openrouter",
                 "qwen/qwen3.6-27b": {
                     "input_cost_per_token": 2.885e-07,
-                    "output_cost_per_token": 3.17e-06,
+                    "output_cost_per_token": 2.65e-06,
                     "max_input_tokens": 262140,
                     "max_output_tokens": 262140,
                     "metadata": {
@@ -1449,11 +1449,21 @@
             "z-ai/glm-5.1": {
                 "input_cost_per_token": 9.8e-07,
                 "output_cost_per_token": 3.08e-06,
+                "cache_read_input_token_cost": 5.25e-07,
+                "cache_creation_input_token_cost": 0.0,
+                "litellm_provider": "openrouter",
                 "max_input_tokens": 202752,
+                "max_output_tokens": 65535,
+                "max_tokens": 65535,
+                "mode": "chat",
+                "source": "https://openrouter.ai/z-ai/glm-5.1",
+                "supports_function_calling": true,
+                "supports_prompt_caching": true,
+                "supports_reasoning": true,
+                "supports_tool_choice": true,
                 "metadata": {
                     "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
                 },
-                "litellm_provider": "openrouter",
                 "z-ai/glm-5.1": {
                     "input_cost_per_token": 9.8e-07,
                     "output_cost_per_token": 3.08e-06,
