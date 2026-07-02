@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-b984adbc848449fcb37e50e0a773e42e
+  master_key: sk-f1152884e7b94688b31b3e616c73d245
   alerting:
   - slack
   - email
