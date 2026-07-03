@@ -5,6 +5,46 @@
         "api_env_key_name": "OPENROUTER_API_KEY",
         "api_key_required": false,
         "model_specs": {
+            "poolside/laguna-xs-2.1:free": {
+                "input_cost_per_token": 0.0,
+                "output_cost_per_token": 0.0,
+                "max_input_tokens": 262144,
+                "max_output_tokens": 32768,
+                "metadata": {
+                    "notes": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines..."
+                },
+                "litellm_provider": "openrouter",
+                "poolside/laguna-xs-2.1:free": {
+                    "input_cost_per_token": 0.0,
+                    "output_cost_per_token": 0.0,
+                    "max_input_tokens": 262144,
+                    "max_output_tokens": 32768,
+                    "metadata": {
+                        "notes": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "poolside/laguna-xs-2.1": {
+                "input_cost_per_token": 6e-08,
+                "output_cost_per_token": 1.2e-07,
+                "max_input_tokens": 262144,
+                "max_output_tokens": 32768,
+                "metadata": {
+                    "notes": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines..."
+                },
+                "litellm_provider": "openrouter",
+                "poolside/laguna-xs-2.1": {
+                    "input_cost_per_token": 6e-08,
+                    "output_cost_per_token": 1.2e-07,
+                    "max_input_tokens": 262144,
+                    "max_output_tokens": 32768,
+                    "metadata": {
+                        "notes": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "anthropic/claude-sonnet-5": {
                 "input_cost_per_token": 2e-06,
                 "output_cost_per_token": 1e-05,
@@ -866,8 +906,8 @@
                 }
             },
             "~moonshotai/kimi-latest": {
-                "input_cost_per_token": 5.5e-07,
-                "output_cost_per_token": 3.2e-06,
+                "input_cost_per_token": 6.6e-07,
+                "output_cost_per_token": 3.41e-06,
                 "max_input_tokens": 262144,
                 "max_output_tokens": 262144,
                 "mode": "chat",
@@ -877,8 +917,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "~moonshotai/kimi-latest": {
-                    "input_cost_per_token": 5.5e-07,
-                    "output_cost_per_token": 3.2e-06,
+                    "input_cost_per_token": 6.6e-07,
+                    "output_cost_per_token": 3.41e-06,
                     "max_input_tokens": 262144,
                     "max_output_tokens": 262144,
                     "mode": "chat",
@@ -1150,11 +1190,11 @@
             "deepseek/deepseek-v4-flash": {
                 "cache_creation_input_token_cost": 0.0,
                 "cache_read_input_token_cost": 2.8e-09,
-                "input_cost_per_token": 9e-08,
+                "input_cost_per_token": 8.9e-08,
                 "input_cost_per_token_cache_hit": 2.8e-09,
                 "litellm_provider": "openrouter",
                 "max_input_tokens": 1048576,
-                "max_output_tokens": 16384,
+                "max_output_tokens": 8192,
                 "max_tokens": 8192,
                 "mode": "chat",
                 "output_cost_per_token": 1.8e-07,
@@ -1177,11 +1217,11 @@
                 "deepseek/deepseek-v4-flash": {
                     "cache_creation_input_token_cost": 0.0,
                     "cache_read_input_token_cost": 2.8e-09,
-                    "input_cost_per_token": 9e-08,
+                    "input_cost_per_token": 8.9e-08,
                     "input_cost_per_token_cache_hit": 2.8e-09,
                     "litellm_provider": "openrouter",
                     "max_input_tokens": 1048576,
-                    "max_output_tokens": 16384,
+                    "max_output_tokens": 8192,
                     "max_tokens": 8192,
                     "mode": "chat",
                     "output_cost_per_token": 1.8e-07,
@@ -1379,8 +1419,8 @@
                 }
             },
             "moonshotai/kimi-k2.6": {
-                "input_cost_per_token": 5.5e-07,
-                "output_cost_per_token": 3.2e-06,
+                "input_cost_per_token": 6.6e-07,
+                "output_cost_per_token": 3.41e-06,
                 "max_input_tokens": 262144,
                 "max_output_tokens": 262144,
                 "mode": "chat",
@@ -1390,8 +1430,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "moonshotai/kimi-k2.6": {
-                    "input_cost_per_token": 5.5e-07,
-                    "output_cost_per_token": 3.2e-06,
+                    "input_cost_per_token": 6.6e-07,
+                    "output_cost_per_token": 3.41e-06,
                     "max_input_tokens": 262144,
                     "max_output_tokens": 262144,
                     "mode": "chat",
@@ -3894,8 +3934,8 @@
                 }
             },
             "qwen/qwen3-vl-8b-instruct": {
-                "input_cost_per_token": 8e-08,
-                "output_cost_per_token": 5e-07,
+                "input_cost_per_token": 1.17e-07,
+                "output_cost_per_token": 4.55e-07,
                 "max_input_tokens": 131072,
                 "max_output_tokens": 32768,
                 "mode": "chat",
@@ -3905,8 +3945,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen3-vl-8b-instruct": {
-                    "input_cost_per_token": 8e-08,
-                    "output_cost_per_token": 5e-07,
+                    "input_cost_per_token": 1.17e-07,
+                    "output_cost_per_token": 4.55e-07,
                     "max_input_tokens": 131072,
                     "max_output_tokens": 32768,
                     "mode": "chat",
@@ -7091,26 +7131,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "inflection/inflection-3-pi": {
-                "input_cost_per_token": 2.5e-06,
-                "output_cost_per_token": 1e-05,
-                "max_input_tokens": 8000,
-                "max_output_tokens": 1024,
-                "metadata": {
-                    "notes": "Inflection 3 Pi powers Inflection's [Pi](https://pi.ai) chatbot, including backstory, emotional intelligence, productivity, and safety. It has access to recent news, and excels in scenarios like customer support and roleplay. Pi..."
-                },
-                "litellm_provider": "openrouter",
-                "inflection/inflection-3-pi": {
-                    "input_cost_per_token": 2.5e-06,
-                    "output_cost_per_token": 1e-05,
-                    "max_input_tokens": 8000,
-                    "max_output_tokens": 1024,
-                    "metadata": {
-                        "notes": "Inflection 3 Pi powers Inflection's [Pi](https://pi.ai) chatbot, including backstory, emotional intelligence, productivity, and safety. It has access to recent news, and excels in scenarios like customer support and roleplay. Pi..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "inflection/inflection-3-productivity": {
                 "input_cost_per_token": 2.5e-06,
                 "output_cost_per_token": 1e-05,
@@ -7131,6 +7151,26 @@
                     "litellm_provider": "openrouter"
                 }
             },
+            "inflection/inflection-3-pi": {
+                "input_cost_per_token": 2.5e-06,
+                "output_cost_per_token": 1e-05,
+                "max_input_tokens": 8000,
+                "max_output_tokens": 1024,
+                "metadata": {
+                    "notes": "Inflection 3 Pi powers Inflection's [Pi](https://pi.ai) chatbot, including backstory, emotional intelligence, productivity, and safety. It has access to recent news, and excels in scenarios like customer support and roleplay. Pi..."
+                },
+                "litellm_provider": "openrouter",
+                "inflection/inflection-3-pi": {
+                    "input_cost_per_token": 2.5e-06,
+                    "output_cost_per_token": 1e-05,
+                    "max_input_tokens": 8000,
+                    "max_output_tokens": 1024,
+                    "metadata": {
+                        "notes": "Inflection 3 Pi powers Inflection's [Pi](https://pi.ai) chatbot, including backstory, emotional intelligence, productivity, and safety. It has access to recent news, and excels in scenarios like customer support and roleplay. Pi..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "thedrummer/rocinante-12b": {
                 "input_cost_per_token": 2.5e-07,
                 "output_cost_per_token": 5e-07,
@@ -7145,6 +7185,44 @@
                     "max_input_tokens": 32768,
                     "metadata": {
                         "notes": "Rocinante 12B is designed for engaging storytelling and rich prose. Early testers have reported: - Expanded vocabulary with unique and expressive word choices - Enhanced creativity for vivid narratives -..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "meta-llama/llama-3.2-3b-instruct:free": {
+                "input_cost_per_token": 0.0,
+                "output_cost_per_token": 0.0,
+                "max_input_tokens": 131072,
+                "metadata": {
+                    "notes": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it..."
+                },
+                "litellm_provider": "openrouter",
+                "meta-llama/llama-3.2-3b-instruct:free": {
+                    "input_cost_per_token": 0.0,
+                    "output_cost_per_token": 0.0,
+                    "max_input_tokens": 131072,
+                    "metadata": {
+                        "notes": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "meta-llama/llama-3.2-3b-instruct": {
+                "input_cost_per_token": 5.09e-08,
+                "output_cost_per_token": 3.35e-07,
+                "max_input_tokens": 80000,
+                "max_output_tokens": 80000,
+                "metadata": {
+                    "notes": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it..."
+                },
+                "litellm_provider": "openrouter",
+                "meta-llama/llama-3.2-3b-instruct": {
+                    "input_cost_per_token": 5.09e-08,
+                    "output_cost_per_token": 3.35e-07,
+                    "max_input_tokens": 80000,
+                    "max_output_tokens": 80000,
+                    "metadata": {
+                        "notes": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -7189,44 +7267,6 @@
                     "supports_vision": true,
                     "metadata": {
                         "notes": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "meta-llama/llama-3.2-3b-instruct:free": {
-                "input_cost_per_token": 0.0,
-                "output_cost_per_token": 0.0,
-                "max_input_tokens": 131072,
-                "metadata": {
-                    "notes": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it..."
-                },
-                "litellm_provider": "openrouter",
-                "meta-llama/llama-3.2-3b-instruct:free": {
-                    "input_cost_per_token": 0.0,
-                    "output_cost_per_token": 0.0,
-                    "max_input_tokens": 131072,
-                    "metadata": {
-                        "notes": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "meta-llama/llama-3.2-3b-instruct": {
-                "input_cost_per_token": 5.09e-08,
-                "output_cost_per_token": 3.35e-07,
-                "max_input_tokens": 80000,
-                "max_output_tokens": 80000,
-                "metadata": {
-                    "notes": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it..."
-                },
-                "litellm_provider": "openrouter",
-                "meta-llama/llama-3.2-3b-instruct": {
-                    "input_cost_per_token": 5.09e-08,
-                    "output_cost_per_token": 3.35e-07,
-                    "max_input_tokens": 80000,
-                    "max_output_tokens": 80000,
-                    "metadata": {
-                        "notes": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -7467,26 +7507,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "openai/gpt-4o-mini-2024-07-18": {
-                "input_cost_per_token": 1.5e-07,
-                "output_cost_per_token": 6e-07,
-                "max_input_tokens": 128000,
-                "max_output_tokens": 16384,
-                "metadata": {
-                    "notes": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable..."
-                },
-                "litellm_provider": "openrouter",
-                "openai/gpt-4o-mini-2024-07-18": {
-                    "input_cost_per_token": 1.5e-07,
-                    "output_cost_per_token": 6e-07,
-                    "max_input_tokens": 128000,
-                    "max_output_tokens": 16384,
-                    "metadata": {
-                        "notes": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "openai/gpt-4o-mini": {
                 "input_cost_per_token": 1.5e-07,
                 "output_cost_per_token": 6e-07,
@@ -7497,6 +7517,26 @@
                 },
                 "litellm_provider": "openrouter",
                 "openai/gpt-4o-mini": {
+                    "input_cost_per_token": 1.5e-07,
+                    "output_cost_per_token": 6e-07,
+                    "max_input_tokens": 128000,
+                    "max_output_tokens": 16384,
+                    "metadata": {
+                        "notes": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "openai/gpt-4o-mini-2024-07-18": {
+                "input_cost_per_token": 1.5e-07,
+                "output_cost_per_token": 6e-07,
+                "max_input_tokens": 128000,
+                "max_output_tokens": 16384,
+                "metadata": {
+                    "notes": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable..."
+                },
+                "litellm_provider": "openrouter",
+                "openai/gpt-4o-mini-2024-07-18": {
                     "input_cost_per_token": 1.5e-07,
                     "output_cost_per_token": 6e-07,
                     "max_input_tokens": 128000,
@@ -7527,32 +7567,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "openai/gpt-4o-2024-05-13": {
-                "input_cost_per_token": 5e-06,
-                "litellm_provider": "openrouter",
-                "max_input_tokens": 128000,
-                "max_output_tokens": 4096,
-                "max_tokens": 4096,
-                "mode": "chat",
-                "output_cost_per_token": 1.5e-05,
-                "supports_function_calling": true,
-                "supports_parallel_function_calling": true,
-                "supports_tool_choice": true,
-                "supports_vision": true,
-                "metadata": {
-                    "notes": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as..."
-                },
-                "openai/gpt-4o-2024-05-13": {
-                    "input_cost_per_token": 5e-06,
-                    "output_cost_per_token": 1.5e-05,
-                    "max_input_tokens": 128000,
-                    "max_output_tokens": 4096,
-                    "metadata": {
-                        "notes": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "openai/gpt-4o": {
                 "input_cost_per_token": 2.5e-06,
                 "litellm_provider": "openrouter",
@@ -7573,6 +7587,32 @@
                     "output_cost_per_token": 1e-05,
                     "max_input_tokens": 128000,
                     "max_output_tokens": 16384,
+                    "metadata": {
+                        "notes": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "openai/gpt-4o-2024-05-13": {
+                "input_cost_per_token": 5e-06,
+                "litellm_provider": "openrouter",
+                "max_input_tokens": 128000,
+                "max_output_tokens": 4096,
+                "max_tokens": 4096,
+                "mode": "chat",
+                "output_cost_per_token": 1.5e-05,
+                "supports_function_calling": true,
+                "supports_parallel_function_calling": true,
+                "supports_tool_choice": true,
+                "supports_vision": true,
+                "metadata": {
+                    "notes": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as..."
+                },
+                "openai/gpt-4o-2024-05-13": {
+                    "input_cost_per_token": 5e-06,
+                    "output_cost_per_token": 1.5e-05,
+                    "max_input_tokens": 128000,
+                    "max_output_tokens": 4096,
                     "metadata": {
                         "notes": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as..."
                     },
@@ -7885,29 +7925,6 @@
                     "litellm_provider": "openrouter"
                 }
             },
-            "openai/gpt-3.5-turbo": {
-                "input_cost_per_token": 5e-07,
-                "litellm_provider": "openrouter",
-                "max_tokens": 4096,
-                "mode": "chat",
-                "output_cost_per_token": 1.5e-06,
-                "supports_tool_choice": true,
-                "max_input_tokens": 16385,
-                "max_output_tokens": 4096,
-                "metadata": {
-                    "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
-                },
-                "openai/gpt-3.5-turbo": {
-                    "input_cost_per_token": 5e-07,
-                    "output_cost_per_token": 1.5e-06,
-                    "max_input_tokens": 16385,
-                    "max_output_tokens": 4096,
-                    "metadata": {
-                        "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
             "openai/gpt-4": {
                 "input_cost_per_token": 3e-05,
                 "litellm_provider": "openrouter",
@@ -7930,9 +7947,42 @@
                     },
                     "litellm_provider": "openrouter"
                 }
+            },
+            "openai/gpt-3.5-turbo": {
+                "input_cost_per_token": 5e-07,
+                "litellm_provider": "openrouter",
+                "max_tokens": 4096,
+                "mode": "chat",
+                "output_cost_per_token": 1.5e-06,
+                "supports_tool_choice": true,
+                "max_input_tokens": 16385,
+                "max_output_tokens": 4096,
+                "metadata": {
+                    "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+                },
+                "openai/gpt-3.5-turbo": {
+                    "input_cost_per_token": 5e-07,
+                    "output_cost_per_token": 1.5e-06,
+                    "max_input_tokens": 16385,
+                    "max_output_tokens": 4096,
+                    "metadata": {
+                        "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+                    },
+                    "litellm_provider": "openrouter"
+                }
             }
         },
         "free_models": {
+            "poolside/laguna-xs-2.1:free": {
+                "input_cost_per_token": 0.0,
+                "output_cost_per_token": 0.0,
+                "max_input_tokens": 262144,
+                "max_output_tokens": 32768,
+                "metadata": {
+                    "notes": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines..."
+                },
+                "litellm_provider": "openrouter"
+            },
             "cohere/north-mini-code:free": {
                 "input_cost_per_token": 0.0,
                 "output_cost_per_token": 0.0,
