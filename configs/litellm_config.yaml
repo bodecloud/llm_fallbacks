@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-398da42cdd0441ab833f59c091916027
+  master_key: sk-d29e3de8dfb24ffdbdae8bc3b21d6c71
   alerting:
   - slack
   - email
@@ -231,20 +231,20 @@ model_list:
     model: openai/z-ai/glm-5.2
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 9.3e-07
-    output_cost_per_token: 3.0e-06
-    max_input_tokens: 1048576
-    max_output_tokens: 32768
+    input_cost_per_token: 9.1e-07
+    output_cost_per_token: 2.86e-06
+    max_input_tokens: 1024000
+    max_output_tokens: 128000
     metadata: &id009
       notes: GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text
         input and output with a 1M-token context window, and is suited for long-horizon
         agent workflows, project-level software engineering,...
     litellm_provider: openrouter
     z-ai/glm-5.2:
-      input_cost_per_token: 9.3e-07
-      output_cost_per_token: 3.0e-06
-      max_input_tokens: 1048576
-      max_output_tokens: 32768
+      input_cost_per_token: 9.1e-07
+      output_cost_per_token: 2.86e-06
+      max_input_tokens: 1024000
+      max_output_tokens: 128000
       metadata: *id009
       litellm_provider: openrouter
 - model_name: openrouter/fusion
@@ -1285,11 +1285,11 @@ model_list:
     api_key: os.environ/OPENROUTER_API_KEY
     cache_creation_input_token_cost: 0.0
     cache_read_input_token_cost: 2.8e-09
-    input_cost_per_token: 8.9e-08
+    input_cost_per_token: 9.0e-08
     input_cost_per_token_cache_hit: 2.8e-09
     litellm_provider: openrouter
     max_input_tokens: 1048576
-    max_output_tokens: 8192
+    max_output_tokens: 16384
     max_tokens: 8192
     mode: chat
     output_cost_per_token: 1.8e-07
@@ -1312,11 +1312,11 @@ model_list:
     deepseek/deepseek-v4-flash:
       cache_creation_input_token_cost: 0.0
       cache_read_input_token_cost: 2.8e-09
-      input_cost_per_token: 8.9e-08
+      input_cost_per_token: 9.0e-08
       input_cost_per_token_cache_hit: 2.8e-09
       litellm_provider: openrouter
       max_input_tokens: 1048576
-      max_output_tokens: 8192
+      max_output_tokens: 16384
       max_tokens: 8192
       mode: chat
       output_cost_per_token: 1.8e-07
@@ -1583,13 +1583,13 @@ model_list:
     model: openai/z-ai/glm-5.1
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 9.75e-07
-    output_cost_per_token: 4.3e-06
+    input_cost_per_token: 9.66e-07
+    output_cost_per_token: 3.036e-06
     cache_read_input_token_cost: 5.25e-07
     cache_creation_input_token_cost: 0.0
     litellm_provider: openrouter
-    max_input_tokens: 65536
-    max_output_tokens: 65535
+    max_input_tokens: 200000
+    max_output_tokens: 128000
     max_tokens: 65535
     mode: chat
     source: https://openrouter.ai/z-ai/glm-5.1
@@ -1603,9 +1603,10 @@ model_list:
         around minute-level interactions, GLM-5.1 can work independently and continuously
         on...
     z-ai/glm-5.1:
-      input_cost_per_token: 9.75e-07
-      output_cost_per_token: 4.3e-06
-      max_input_tokens: 65536
+      input_cost_per_token: 9.66e-07
+      output_cost_per_token: 3.036e-06
+      max_input_tokens: 200000
+      max_output_tokens: 128000
       metadata: *id067
       litellm_provider: openrouter
 - model_name: google/gemma-4-26b-a4b-it:free
@@ -2017,20 +2018,18 @@ model_list:
     model: openai/nvidia/nemotron-3-super-120b-a12b
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 8.5e-08
-    output_cost_per_token: 4.0e-07
+    input_cost_per_token: 8.0e-08
+    output_cost_per_token: 4.5e-07
     max_input_tokens: 262144
-    max_output_tokens: 16384
     metadata: &id087
       notes: NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating
         just 12B parameters for maximum compute efficiency and accuracy in complex
         multi-agent applications. Built on a hybrid Mamba-Transformer...
     litellm_provider: openrouter
     nvidia/nemotron-3-super-120b-a12b:
-      input_cost_per_token: 8.5e-08
-      output_cost_per_token: 4.0e-07
+      input_cost_per_token: 8.0e-08
+      output_cost_per_token: 4.5e-07
       max_input_tokens: 262144
-      max_output_tokens: 16384
       metadata: *id087
       litellm_provider: openrouter
 - model_name: bytedance-seed/seed-2.0-lite

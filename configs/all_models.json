@@ -5164,62 +5164,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "deepseek/deepseek-v4-flash": {
-        "cache_creation_input_token_cost": 0.0,
-        "cache_read_input_token_cost": 2.8e-09,
-        "input_cost_per_token": 8.9e-08,
-        "input_cost_per_token_cache_hit": 2.8e-09,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 8192,
-        "max_tokens": 8192,
-        "mode": "chat",
-        "output_cost_per_token": 1.8e-07,
-        "source": "https://api-docs.deepseek.com/quick_start/pricing",
-        "supported_endpoints": [
-            "/v1/chat/completions"
-        ],
-        "supports_assistant_prefill": true,
-        "supports_function_calling": true,
-        "supports_native_streaming": true,
-        "supports_parallel_function_calling": true,
-        "supports_prompt_caching": true,
-        "supports_response_schema": true,
-        "supports_system_messages": true,
-        "supports_tool_choice": true,
-        "supports_vision": false,
-        "metadata": {
-            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-        },
-        "deepseek/deepseek-v4-flash": {
-            "cache_creation_input_token_cost": 0.0,
-            "cache_read_input_token_cost": 2.8e-09,
-            "input_cost_per_token": 8.9e-08,
-            "input_cost_per_token_cache_hit": 2.8e-09,
-            "litellm_provider": "openrouter",
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 8192,
-            "max_tokens": 8192,
-            "mode": "chat",
-            "output_cost_per_token": 1.8e-07,
-            "source": "https://api-docs.deepseek.com/quick_start/pricing",
-            "supported_endpoints": [
-                "/v1/chat/completions"
-            ],
-            "supports_assistant_prefill": true,
-            "supports_function_calling": true,
-            "supports_native_streaming": true,
-            "supports_parallel_function_calling": true,
-            "supports_prompt_caching": true,
-            "supports_response_schema": true,
-            "supports_system_messages": true,
-            "supports_tool_choice": true,
-            "supports_vision": false,
-            "metadata": {
-                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-            }
-        }
-    },
     "deepinfra/mistralai/mistral-small-3.2-24b-instruct-2506": {
         "max_tokens": 128000,
         "max_input_tokens": 128000,
@@ -5257,6 +5201,62 @@
             },
             "supports_function_calling": true,
             "litellm_provider": "openrouter"
+        }
+    },
+    "deepseek/deepseek-v4-flash": {
+        "cache_creation_input_token_cost": 0.0,
+        "cache_read_input_token_cost": 2.8e-09,
+        "input_cost_per_token": 9e-08,
+        "input_cost_per_token_cache_hit": 2.8e-09,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 16384,
+        "max_tokens": 8192,
+        "mode": "chat",
+        "output_cost_per_token": 1.8e-07,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+            "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": false,
+        "metadata": {
+            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+        },
+        "deepseek/deepseek-v4-flash": {
+            "cache_creation_input_token_cost": 0.0,
+            "cache_read_input_token_cost": 2.8e-09,
+            "input_cost_per_token": 9e-08,
+            "input_cost_per_token_cache_hit": 2.8e-09,
+            "litellm_provider": "openrouter",
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 16384,
+            "max_tokens": 8192,
+            "mode": "chat",
+            "output_cost_per_token": 1.8e-07,
+            "source": "https://api-docs.deepseek.com/quick_start/pricing",
+            "supported_endpoints": [
+                "/v1/chat/completions"
+            ],
+            "supports_assistant_prefill": true,
+            "supports_function_calling": true,
+            "supports_native_streaming": true,
+            "supports_parallel_function_calling": true,
+            "supports_prompt_caching": true,
+            "supports_response_schema": true,
+            "supports_system_messages": true,
+            "supports_tool_choice": true,
+            "supports_vision": false,
+            "metadata": {
+                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+            }
         }
     },
     "replicate/ibm-granite/granite-3.3-8b-instruct": {
@@ -8096,6 +8096,32 @@
         "supports_reasoning": true,
         "source": "https://serverless.tensormesh.ai/v1/models/openrouter"
     },
+    "tencent/deepseek-v4-flash": {
+        "cache_creation_input_token_cost": 0.0,
+        "cache_read_input_token_cost": 2.8e-09,
+        "input_cost_per_token": 1.4e-07,
+        "input_cost_per_token_cache_hit": 2.8e-09,
+        "litellm_provider": "tencent",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 384000,
+        "max_tokens": 384000,
+        "mode": "chat",
+        "output_cost_per_token": 2.8e-07,
+        "source": "https://www.tencentcloud.com/products/tokenhub",
+        "supported_endpoints": [
+            "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_reasoning": true,
+        "supports_vision": false
+    },
     "deepseek-v4-flash": {
         "cache_creation_input_token_cost": 0.0,
         "cache_read_input_token_cost": 2.8e-09,
@@ -8714,26 +8740,6 @@
         "output_cost_per_token": 2.4e-07,
         "supports_system_messages": true
     },
-    "nvidia/nemotron-3-super-120b-a12b": {
-        "input_cost_per_token": 8.5e-08,
-        "output_cost_per_token": 4e-07,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 16384,
-        "metadata": {
-            "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
-        },
-        "litellm_provider": "openrouter",
-        "nvidia/nemotron-3-super-120b-a12b": {
-            "input_cost_per_token": 8.5e-08,
-            "output_cost_per_token": 4e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "deepinfra/google/gemini-2.0-flash-001": {
         "deprecation_date": "2026-06-01",
         "max_tokens": 1000000,
@@ -9138,6 +9144,24 @@
         "mode": "chat",
         "supports_function_calling": true,
         "source": "https://nebius.com/prices-ai-studio"
+    },
+    "nvidia/nemotron-3-super-120b-a12b": {
+        "input_cost_per_token": 8e-08,
+        "output_cost_per_token": 4.5e-07,
+        "max_input_tokens": 262144,
+        "metadata": {
+            "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
+        },
+        "litellm_provider": "openrouter",
+        "nvidia/nemotron-3-super-120b-a12b": {
+            "input_cost_per_token": 8e-08,
+            "output_cost_per_token": 4.5e-07,
+            "max_input_tokens": 262144,
+            "metadata": {
+                "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "nousresearch/hermes-4-70b": {
         "input_cost_per_token": 1.3e-07,
@@ -14247,6 +14271,32 @@
         "cache_read_input_token_cost": 5.5e-08,
         "input_cost_per_token_cache_hit": 5.5e-08,
         "supports_reasoning": true
+    },
+    "tencent/deepseek-v4-pro": {
+        "cache_creation_input_token_cost": 0.0,
+        "cache_read_input_token_cost": 3.625e-09,
+        "input_cost_per_token": 4.35e-07,
+        "input_cost_per_token_cache_hit": 3.625e-09,
+        "litellm_provider": "tencent",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 384000,
+        "max_tokens": 384000,
+        "mode": "chat",
+        "output_cost_per_token": 8.7e-07,
+        "source": "https://www.tencentcloud.com/products/tokenhub",
+        "supported_endpoints": [
+            "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_reasoning": true,
+        "supports_vision": false
     },
     "deepseek/deepseek-v4-pro": {
         "cache_creation_input_token_cost": 0.0,
@@ -23477,6 +23527,26 @@
         "supports_function_calling": true,
         "supports_reasoning": true
     },
+    "z-ai/glm-5.2": {
+        "input_cost_per_token": 9.1e-07,
+        "output_cost_per_token": 2.86e-06,
+        "max_input_tokens": 1024000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.2": {
+            "input_cost_per_token": 9.1e-07,
+            "output_cost_per_token": 2.86e-06,
+            "max_input_tokens": 1024000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "gemini-robotics-er-1.5-preview": {
         "cache_read_input_token_cost": 0,
         "input_cost_per_token": 3e-07,
@@ -24146,26 +24216,6 @@
         "input_cost_per_token_cache_hit": 3.5e-07,
         "supports_reasoning": true
     },
-    "z-ai/glm-5.2": {
-        "input_cost_per_token": 9.3e-07,
-        "output_cost_per_token": 3e-06,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 32768,
-        "metadata": {
-            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.2": {
-            "input_cost_per_token": 9.3e-07,
-            "output_cost_per_token": 3e-06,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 32768,
-            "metadata": {
-                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "xai/grok-4.3": {
         "cache_read_input_token_cost": 2e-07,
         "cache_read_input_token_cost_above_200k_tokens": 4e-07,
@@ -24207,6 +24257,26 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_web_search": true
+    },
+    "bedrock_mantle/xai.grok-4.3": {
+        "input_cost_per_token": 1.25e-06,
+        "output_cost_per_token": 2.5e-06,
+        "cache_read_input_token_cost": 2e-07,
+        "litellm_provider": "bedrock_mantle",
+        "max_input_tokens": 131072,
+        "max_output_tokens": 16384,
+        "max_tokens": 16384,
+        "mode": "chat",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/responses"
+        ],
+        "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "source": "https://aws.amazon.com/bedrock/pricing/"
     },
     "hyperbolic/moonshotai/kimi-k2-instruct": {
         "input_cost_per_token": 2e-06,
@@ -25005,6 +25075,35 @@
         "max_tokens": 4096,
         "mode": "chat",
         "output_cost_per_token": 2.56e-06
+    },
+    "z-ai/glm-5.1": {
+        "input_cost_per_token": 9.66e-07,
+        "output_cost_per_token": 3.036e-06,
+        "cache_read_input_token_cost": 5.25e-07,
+        "cache_creation_input_token_cost": 0.0,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 200000,
+        "max_output_tokens": 128000,
+        "max_tokens": 65535,
+        "mode": "chat",
+        "source": "https://openrouter.ai/z-ai/glm-5.1",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
+        },
+        "z-ai/glm-5.1": {
+            "input_cost_per_token": 9.66e-07,
+            "output_cost_per_token": 3.036e-06,
+            "max_input_tokens": 200000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "gemini-3-flash-preview": {
         "cache_read_input_token_cost": 5e-08,
@@ -26254,34 +26353,6 @@
         "supports_system_messages": true,
         "supports_reasoning": true,
         "source": "https://serverless.tensormesh.ai/v1/models/openrouter"
-    },
-    "z-ai/glm-5.1": {
-        "input_cost_per_token": 9.75e-07,
-        "output_cost_per_token": 4.3e-06,
-        "cache_read_input_token_cost": 5.25e-07,
-        "cache_creation_input_token_cost": 0.0,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 65536,
-        "max_output_tokens": 65535,
-        "max_tokens": 65535,
-        "mode": "chat",
-        "source": "https://openrouter.ai/z-ai/glm-5.1",
-        "supports_function_calling": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
-        },
-        "z-ai/glm-5.1": {
-            "input_cost_per_token": 9.75e-07,
-            "output_cost_per_token": 4.3e-06,
-            "max_input_tokens": 65536,
-            "metadata": {
-                "notes": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "anthropic.claude-3-5-haiku-20241022-v1:0": {
         "cache_creation_input_token_cost": 1e-06,
@@ -27644,7 +27715,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "anthropic.claude-haiku-4-5@20251001": {
         "cache_creation_input_token_cost": 1.25e-06,
@@ -27668,7 +27740,8 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_native_streaming": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "azure_ai/claude-haiku-4-5": {
         "cache_creation_input_token_cost": 1.25e-06,
@@ -27754,7 +27827,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "vercel_ai_gateway/anthropic/claude-haiku-4.5": {
         "cache_creation_input_token_cost": 1.25e-06,
@@ -28385,7 +28459,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "au.anthropic.claude-haiku-4-5-20251001-v1:0": {
         "cache_creation_input_token_cost": 1.375e-06,
@@ -28407,7 +28482,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "eu.anthropic.claude-haiku-4-5-20251001-v1:0": {
         "cache_creation_input_token_cost": 1.375e-06,
@@ -28431,7 +28507,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "jp.anthropic.claude-haiku-4-5-20251001-v1:0": {
         "cache_creation_input_token_cost": 1.375e-06,
@@ -28454,7 +28531,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "us.anthropic.claude-haiku-4-5-20251001-v1:0": {
         "cache_creation_input_token_cost": 1.375e-06,
@@ -28477,7 +28555,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "vertex_ai/xai/grok-4.20-non-reasoning": {
         "cache_read_input_token_cost": 2e-07,
@@ -28613,7 +28692,8 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_native_structured_output": true,
-        "supports_pdf_input": true
+        "supports_pdf_input": true,
+        "supports_parallel_tool_use_config": true
     },
     "bedrock/us-gov-west-1/anthropic.claude-haiku-4-5-20251001-v1:0": {
         "cache_creation_input_token_cost": 1.5e-06,
@@ -28636,7 +28716,8 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_native_structured_output": true,
-        "supports_pdf_input": true
+        "supports_pdf_input": true,
+        "supports_parallel_tool_use_config": true
     },
     "mistral/mistral-medium-2604": {
         "input_cost_per_token": 1.5e-06,
@@ -32409,6 +32490,198 @@
         "supports_tool_choice": true,
         "supports_response_schema": true
     },
+    "anthropic.claude-sonnet-5": {
+        "cache_creation_input_token_cost": 2.5e-06,
+        "cache_creation_input_token_cost_above_1hr": 4e-06,
+        "cache_read_input_token_cost": 2e-07,
+        "input_cost_per_token": 2e-06,
+        "litellm_provider": "bedrock_converse",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1e-05,
+        "search_context_cost_per_query": {
+            "search_context_size_high": 0.01,
+            "search_context_size_low": 0.01,
+            "search_context_size_medium": 0.01
+        },
+        "supports_adaptive_thinking": true,
+        "supports_assistant_prefill": false,
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_sampling_params": false,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_native_structured_output": true,
+        "supports_max_reasoning_effort": true,
+        "supports_output_config": true,
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
+    },
+    "azure_ai/claude-sonnet-5": {
+        "cache_creation_input_token_cost": 2.5e-06,
+        "cache_creation_input_token_cost_above_1hr": 4e-06,
+        "cache_read_input_token_cost": 2e-07,
+        "input_cost_per_token": 2e-06,
+        "litellm_provider": "azure_ai",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1e-05,
+        "search_context_cost_per_query": {
+            "search_context_size_high": 0.01,
+            "search_context_size_low": 0.01,
+            "search_context_size_medium": 0.01
+        },
+        "supports_adaptive_thinking": true,
+        "supports_assistant_prefill": false,
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_sampling_params": false,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_max_reasoning_effort": true
+    },
+    "claude-sonnet-5": {
+        "cache_creation_input_token_cost": 2.5e-06,
+        "cache_creation_input_token_cost_above_1hr": 4e-06,
+        "cache_read_input_token_cost": 2e-07,
+        "input_cost_per_token": 2e-06,
+        "litellm_provider": "anthropic",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1e-05,
+        "search_context_cost_per_query": {
+            "search_context_size_high": 0.01,
+            "search_context_size_low": 0.01,
+            "search_context_size_medium": 0.01
+        },
+        "supports_adaptive_thinking": true,
+        "supports_assistant_prefill": false,
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_sampling_params": false,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_max_reasoning_effort": true,
+        "provider_specific_entry": {
+            "us": 1.1
+        },
+        "supports_output_config": true
+    },
+    "global.anthropic.claude-sonnet-5": {
+        "cache_creation_input_token_cost": 2.5e-06,
+        "cache_creation_input_token_cost_above_1hr": 4e-06,
+        "cache_read_input_token_cost": 2e-07,
+        "input_cost_per_token": 2e-06,
+        "litellm_provider": "bedrock_converse",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1e-05,
+        "search_context_cost_per_query": {
+            "search_context_size_high": 0.01,
+            "search_context_size_low": 0.01,
+            "search_context_size_medium": 0.01
+        },
+        "supports_adaptive_thinking": true,
+        "supports_assistant_prefill": false,
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_sampling_params": false,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_native_structured_output": true,
+        "supports_max_reasoning_effort": true,
+        "supports_output_config": true,
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
+    },
+    "vertex_ai/claude-sonnet-5": {
+        "cache_creation_input_token_cost": 2.5e-06,
+        "cache_creation_input_token_cost_above_1hr": 4e-06,
+        "cache_read_input_token_cost": 2e-07,
+        "input_cost_per_token": 2e-06,
+        "litellm_provider": "vertex_ai-anthropic_models",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1e-05,
+        "search_context_cost_per_query": {
+            "search_context_size_high": 0.01,
+            "search_context_size_low": 0.01,
+            "search_context_size_medium": 0.01
+        },
+        "supports_adaptive_thinking": true,
+        "supports_assistant_prefill": false,
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_sampling_params": false,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_max_reasoning_effort": true
+    },
+    "vertex_ai/claude-sonnet-5@default": {
+        "cache_creation_input_token_cost": 2.5e-06,
+        "cache_creation_input_token_cost_above_1hr": 4e-06,
+        "cache_read_input_token_cost": 2e-07,
+        "input_cost_per_token": 2e-06,
+        "litellm_provider": "vertex_ai-anthropic_models",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1e-05,
+        "search_context_cost_per_query": {
+            "search_context_size_high": 0.01,
+            "search_context_size_low": 0.01,
+            "search_context_size_medium": 0.01
+        },
+        "supports_adaptive_thinking": true,
+        "supports_assistant_prefill": false,
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_sampling_params": false,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_max_reasoning_effort": true
+    },
     "azure/gpt-4o-2024-11-20": {
         "deprecation_date": "2026-03-01",
         "cache_read_input_token_cost": 1.25e-06,
@@ -33589,6 +33862,142 @@
             "/v1/audio/speech"
         ],
         "source": "https://aws.amazon.com/polly/pricing/"
+    },
+    "au.anthropic.claude-sonnet-5": {
+        "cache_creation_input_token_cost": 2.75e-06,
+        "cache_creation_input_token_cost_above_1hr": 4.4e-06,
+        "cache_read_input_token_cost": 2.2e-07,
+        "input_cost_per_token": 2.2e-06,
+        "litellm_provider": "bedrock_converse",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1.1e-05,
+        "search_context_cost_per_query": {
+            "search_context_size_high": 0.01,
+            "search_context_size_low": 0.01,
+            "search_context_size_medium": 0.01
+        },
+        "supports_adaptive_thinking": true,
+        "supports_assistant_prefill": false,
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_sampling_params": false,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_native_structured_output": true,
+        "supports_max_reasoning_effort": true,
+        "supports_output_config": true,
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
+    },
+    "eu.anthropic.claude-sonnet-5": {
+        "cache_creation_input_token_cost": 2.75e-06,
+        "cache_creation_input_token_cost_above_1hr": 4.4e-06,
+        "cache_read_input_token_cost": 2.2e-07,
+        "input_cost_per_token": 2.2e-06,
+        "litellm_provider": "bedrock_converse",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1.1e-05,
+        "search_context_cost_per_query": {
+            "search_context_size_high": 0.01,
+            "search_context_size_low": 0.01,
+            "search_context_size_medium": 0.01
+        },
+        "supports_adaptive_thinking": true,
+        "supports_assistant_prefill": false,
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_sampling_params": false,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_native_structured_output": true,
+        "supports_max_reasoning_effort": true,
+        "supports_output_config": true,
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
+    },
+    "jp.anthropic.claude-sonnet-5": {
+        "cache_creation_input_token_cost": 2.75e-06,
+        "cache_creation_input_token_cost_above_1hr": 4.4e-06,
+        "cache_read_input_token_cost": 2.2e-07,
+        "input_cost_per_token": 2.2e-06,
+        "litellm_provider": "bedrock_converse",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1.1e-05,
+        "search_context_cost_per_query": {
+            "search_context_size_high": 0.01,
+            "search_context_size_low": 0.01,
+            "search_context_size_medium": 0.01
+        },
+        "supports_adaptive_thinking": true,
+        "supports_assistant_prefill": false,
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_sampling_params": false,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_native_structured_output": true,
+        "supports_max_reasoning_effort": true,
+        "supports_output_config": true,
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
+    },
+    "us.anthropic.claude-sonnet-5": {
+        "cache_creation_input_token_cost": 2.75e-06,
+        "cache_creation_input_token_cost_above_1hr": 4.4e-06,
+        "cache_read_input_token_cost": 2.2e-07,
+        "input_cost_per_token": 2.2e-06,
+        "litellm_provider": "bedrock_converse",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1.1e-05,
+        "search_context_cost_per_query": {
+            "search_context_size_high": 0.01,
+            "search_context_size_low": 0.01,
+            "search_context_size_medium": 0.01
+        },
+        "supports_adaptive_thinking": true,
+        "supports_assistant_prefill": false,
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_sampling_params": false,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_native_structured_output": true,
+        "supports_max_reasoning_effort": true,
+        "supports_output_config": true,
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "google/gemini-3.1-pro-preview": {
         "cache_read_input_token_cost": 2e-07,
@@ -35340,39 +35749,6 @@
         "supports_response_schema": false,
         "supports_native_streaming": true
     },
-    "anthropic.claude-sonnet-5": {
-        "cache_creation_input_token_cost": 3.75e-06,
-        "cache_creation_input_token_cost_above_1hr": 6e-06,
-        "cache_read_input_token_cost": 3e-07,
-        "input_cost_per_token": 3e-06,
-        "litellm_provider": "bedrock_converse",
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 1.5e-05,
-        "search_context_cost_per_query": {
-            "search_context_size_high": 0.01,
-            "search_context_size_low": 0.01,
-            "search_context_size_medium": 0.01
-        },
-        "supports_adaptive_thinking": true,
-        "supports_assistant_prefill": false,
-        "supports_computer_use": true,
-        "supports_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_sampling_params": false,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "supports_xhigh_reasoning_effort": true,
-        "supports_native_structured_output": true,
-        "supports_max_reasoning_effort": true,
-        "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
-    },
     "anthropic/claude-sonnet-4.6": {
         "supports_adaptive_thinking": true,
         "cache_creation_input_token_cost": 3.75e-06,
@@ -35411,163 +35787,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "azure_ai/claude-sonnet-5": {
-        "cache_creation_input_token_cost": 3.75e-06,
-        "cache_creation_input_token_cost_above_1hr": 6e-06,
-        "cache_read_input_token_cost": 3e-07,
-        "input_cost_per_token": 3e-06,
-        "litellm_provider": "azure_ai",
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 1.5e-05,
-        "search_context_cost_per_query": {
-            "search_context_size_high": 0.01,
-            "search_context_size_low": 0.01,
-            "search_context_size_medium": 0.01
-        },
-        "supports_adaptive_thinking": true,
-        "supports_assistant_prefill": false,
-        "supports_computer_use": true,
-        "supports_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_sampling_params": false,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "supports_xhigh_reasoning_effort": true,
-        "supports_max_reasoning_effort": true
-    },
-    "claude-sonnet-5": {
-        "cache_creation_input_token_cost": 3.75e-06,
-        "cache_creation_input_token_cost_above_1hr": 6e-06,
-        "cache_read_input_token_cost": 3e-07,
-        "input_cost_per_token": 3e-06,
-        "litellm_provider": "anthropic",
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 1.5e-05,
-        "search_context_cost_per_query": {
-            "search_context_size_high": 0.01,
-            "search_context_size_low": 0.01,
-            "search_context_size_medium": 0.01
-        },
-        "supports_adaptive_thinking": true,
-        "supports_assistant_prefill": false,
-        "supports_computer_use": true,
-        "supports_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_sampling_params": false,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "supports_xhigh_reasoning_effort": true,
-        "supports_max_reasoning_effort": true,
-        "provider_specific_entry": {
-            "us": 1.1
-        },
-        "supports_output_config": true
-    },
-    "global.anthropic.claude-sonnet-5": {
-        "cache_creation_input_token_cost": 3.75e-06,
-        "cache_creation_input_token_cost_above_1hr": 6e-06,
-        "cache_read_input_token_cost": 3e-07,
-        "input_cost_per_token": 3e-06,
-        "litellm_provider": "bedrock_converse",
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 1.5e-05,
-        "search_context_cost_per_query": {
-            "search_context_size_high": 0.01,
-            "search_context_size_low": 0.01,
-            "search_context_size_medium": 0.01
-        },
-        "supports_adaptive_thinking": true,
-        "supports_assistant_prefill": false,
-        "supports_computer_use": true,
-        "supports_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_sampling_params": false,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "supports_xhigh_reasoning_effort": true,
-        "supports_native_structured_output": true,
-        "supports_max_reasoning_effort": true,
-        "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
-    },
-    "vertex_ai/claude-sonnet-5": {
-        "cache_creation_input_token_cost": 3.75e-06,
-        "cache_creation_input_token_cost_above_1hr": 6e-06,
-        "cache_read_input_token_cost": 3e-07,
-        "input_cost_per_token": 3e-06,
-        "litellm_provider": "vertex_ai-anthropic_models",
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 1.5e-05,
-        "search_context_cost_per_query": {
-            "search_context_size_high": 0.01,
-            "search_context_size_low": 0.01,
-            "search_context_size_medium": 0.01
-        },
-        "supports_adaptive_thinking": true,
-        "supports_assistant_prefill": false,
-        "supports_computer_use": true,
-        "supports_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_sampling_params": false,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "supports_xhigh_reasoning_effort": true,
-        "supports_max_reasoning_effort": true
-    },
-    "vertex_ai/claude-sonnet-5@default": {
-        "cache_creation_input_token_cost": 3.75e-06,
-        "cache_creation_input_token_cost_above_1hr": 6e-06,
-        "cache_read_input_token_cost": 3e-07,
-        "input_cost_per_token": 3e-06,
-        "litellm_provider": "vertex_ai-anthropic_models",
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 1.5e-05,
-        "search_context_cost_per_query": {
-            "search_context_size_high": 0.01,
-            "search_context_size_low": 0.01,
-            "search_context_size_medium": 0.01
-        },
-        "supports_adaptive_thinking": true,
-        "supports_assistant_prefill": false,
-        "supports_computer_use": true,
-        "supports_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_sampling_params": false,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "supports_xhigh_reasoning_effort": true,
-        "supports_max_reasoning_effort": true
-    },
     "anthropic.claude-sonnet-4-20250514-v1:0": {
         "cache_creation_input_token_cost": 3.75e-06,
         "cache_read_input_token_cost": 3e-07,
@@ -35595,7 +35814,8 @@
         "supports_reasoning": true,
         "supports_response_schema": true,
         "supports_tool_choice": true,
-        "supports_vision": true
+        "supports_vision": true,
+        "bedrock_converse_supports_strict_tools": false
     },
     "anthropic.claude-sonnet-4-6": {
         "supports_adaptive_thinking": true,
@@ -35625,7 +35845,8 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_native_structured_output": true,
-        "supports_output_config": true
+        "supports_output_config": true,
+        "supports_parallel_tool_use_config": true
     },
     "apac.anthropic.claude-sonnet-4-20250514-v1:0": {
         "cache_creation_input_token_cost": 3.75e-06,
@@ -35654,7 +35875,8 @@
         "supports_reasoning": true,
         "supports_response_schema": true,
         "supports_tool_choice": true,
-        "supports_vision": true
+        "supports_vision": true,
+        "bedrock_converse_supports_strict_tools": false
     },
     "azure_ai/claude-sonnet-4-6": {
         "supports_adaptive_thinking": true,
@@ -35797,7 +36019,8 @@
         "supports_reasoning": true,
         "supports_response_schema": true,
         "supports_tool_choice": true,
-        "supports_vision": true
+        "supports_vision": true,
+        "bedrock_converse_supports_strict_tools": false
     },
     "global.anthropic.claude-sonnet-4-20250514-v1:0": {
         "cache_creation_input_token_cost": 3.75e-06,
@@ -35826,7 +36049,8 @@
         "supports_reasoning": true,
         "supports_response_schema": true,
         "supports_tool_choice": true,
-        "supports_vision": true
+        "supports_vision": true,
+        "bedrock_converse_supports_strict_tools": false
     },
     "global.anthropic.claude-sonnet-4-6": {
         "supports_adaptive_thinking": true,
@@ -35856,7 +36080,8 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_native_structured_output": true,
-        "supports_output_config": true
+        "supports_output_config": true,
+        "supports_parallel_tool_use_config": true
     },
     "us.anthropic.claude-sonnet-4-20250514-v1:0": {
         "cache_creation_input_token_cost": 3.75e-06,
@@ -35885,7 +36110,8 @@
         "supports_reasoning": true,
         "supports_response_schema": true,
         "supports_tool_choice": true,
-        "supports_vision": true
+        "supports_vision": true,
+        "bedrock_converse_supports_strict_tools": false
     },
     "vercel_ai_gateway/anthropic/claude-sonnet-4.5": {
         "cache_creation_input_token_cost": 3.75e-06,
@@ -36044,9 +36270,7 @@
         "input_cost_per_token_above_200k_tokens": 6e-06,
         "output_cost_per_token_above_200k_tokens": 3e-05,
         "cache_creation_input_token_cost_above_200k_tokens": 7.5e-06,
-        "cache_read_input_token_cost_above_200k_tokens": 6e-07,
-        "cache_creation_input_token_cost_above_1hr": 7.5e-06,
-        "cache_creation_input_token_cost_above_1hr_above_200k_tokens": 1.5e-05
+        "cache_read_input_token_cost_above_200k_tokens": 6e-07
     },
     "anthropic.claude-3-5-sonnet-20240620-v1:0": {
         "input_cost_per_token": 3e-06,
@@ -36065,8 +36289,6 @@
         "output_cost_per_token_above_200k_tokens": 3e-05,
         "cache_creation_input_token_cost_above_200k_tokens": 7.5e-06,
         "cache_read_input_token_cost_above_200k_tokens": 6e-07,
-        "cache_creation_input_token_cost_above_1hr": 7.5e-06,
-        "cache_creation_input_token_cost_above_1hr_above_200k_tokens": 1.5e-05,
         "cache_creation_input_token_cost": 3.75e-06,
         "cache_read_input_token_cost": 3e-07
     },
@@ -36100,7 +36322,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "azure_ai/claude-sonnet-4-5": {
         "cache_creation_input_token_cost": 3.75e-06,
@@ -36238,7 +36461,8 @@
         "supports_reasoning": true,
         "supports_response_schema": true,
         "supports_tool_choice": true,
-        "supports_vision": true
+        "supports_vision": true,
+        "supports_parallel_tool_use_config": true
     },
     "global.anthropic.claude-sonnet-4-5-20250929-v1:0": {
         "cache_creation_input_token_cost": 3.75e-06,
@@ -36270,7 +36494,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "vercel_ai_gateway/anthropic/claude-3-7-sonnet": {
         "cache_creation_input_token_cost": 3.75e-06,
@@ -36939,138 +37164,6 @@
             "/v1/audio/transcriptions"
         ]
     },
-    "au.anthropic.claude-sonnet-5": {
-        "cache_creation_input_token_cost": 4.125e-06,
-        "cache_creation_input_token_cost_above_1hr": 6.6e-06,
-        "cache_read_input_token_cost": 3.3e-07,
-        "input_cost_per_token": 3.3e-06,
-        "litellm_provider": "bedrock_converse",
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 1.65e-05,
-        "search_context_cost_per_query": {
-            "search_context_size_high": 0.01,
-            "search_context_size_low": 0.01,
-            "search_context_size_medium": 0.01
-        },
-        "supports_adaptive_thinking": true,
-        "supports_assistant_prefill": false,
-        "supports_computer_use": true,
-        "supports_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_sampling_params": false,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "supports_xhigh_reasoning_effort": true,
-        "supports_native_structured_output": true,
-        "supports_max_reasoning_effort": true,
-        "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
-    },
-    "eu.anthropic.claude-sonnet-5": {
-        "cache_creation_input_token_cost": 4.125e-06,
-        "cache_creation_input_token_cost_above_1hr": 6.6e-06,
-        "cache_read_input_token_cost": 3.3e-07,
-        "input_cost_per_token": 3.3e-06,
-        "litellm_provider": "bedrock_converse",
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 1.65e-05,
-        "search_context_cost_per_query": {
-            "search_context_size_high": 0.01,
-            "search_context_size_low": 0.01,
-            "search_context_size_medium": 0.01
-        },
-        "supports_adaptive_thinking": true,
-        "supports_assistant_prefill": false,
-        "supports_computer_use": true,
-        "supports_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_sampling_params": false,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "supports_xhigh_reasoning_effort": true,
-        "supports_native_structured_output": true,
-        "supports_max_reasoning_effort": true,
-        "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
-    },
-    "jp.anthropic.claude-sonnet-5": {
-        "cache_creation_input_token_cost": 4.125e-06,
-        "cache_creation_input_token_cost_above_1hr": 6.6e-06,
-        "cache_read_input_token_cost": 3.3e-07,
-        "input_cost_per_token": 3.3e-06,
-        "litellm_provider": "bedrock_converse",
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 1.65e-05,
-        "search_context_cost_per_query": {
-            "search_context_size_high": 0.01,
-            "search_context_size_low": 0.01,
-            "search_context_size_medium": 0.01
-        },
-        "supports_adaptive_thinking": true,
-        "supports_assistant_prefill": false,
-        "supports_computer_use": true,
-        "supports_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_sampling_params": false,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "supports_xhigh_reasoning_effort": true,
-        "supports_native_structured_output": true,
-        "supports_max_reasoning_effort": true,
-        "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
-    },
-    "us.anthropic.claude-sonnet-5": {
-        "cache_creation_input_token_cost": 4.125e-06,
-        "cache_creation_input_token_cost_above_1hr": 6.6e-06,
-        "cache_read_input_token_cost": 3.3e-07,
-        "input_cost_per_token": 3.3e-06,
-        "litellm_provider": "bedrock_converse",
-        "max_input_tokens": 1000000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 1.65e-05,
-        "search_context_cost_per_query": {
-            "search_context_size_high": 0.01,
-            "search_context_size_low": 0.01,
-            "search_context_size_medium": 0.01
-        },
-        "supports_adaptive_thinking": true,
-        "supports_assistant_prefill": false,
-        "supports_computer_use": true,
-        "supports_function_calling": true,
-        "supports_pdf_input": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_sampling_params": false,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "supports_xhigh_reasoning_effort": true,
-        "supports_native_structured_output": true,
-        "supports_max_reasoning_effort": true,
-        "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
-    },
     "au.anthropic.claude-sonnet-4-6": {
         "supports_adaptive_thinking": true,
         "cache_creation_input_token_cost": 4.125e-06,
@@ -37099,7 +37192,8 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_native_structured_output": true,
-        "supports_output_config": true
+        "supports_output_config": true,
+        "supports_parallel_tool_use_config": true
     },
     "eu.anthropic.claude-sonnet-4-6": {
         "supports_adaptive_thinking": true,
@@ -37129,7 +37223,8 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_native_structured_output": true,
-        "supports_output_config": true
+        "supports_output_config": true,
+        "supports_parallel_tool_use_config": true
     },
     "jp.anthropic.claude-sonnet-4-6": {
         "supports_adaptive_thinking": true,
@@ -37159,7 +37254,8 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_native_structured_output": true,
-        "supports_output_config": true
+        "supports_output_config": true,
+        "supports_parallel_tool_use_config": true
     },
     "us.anthropic.claude-sonnet-4-6": {
         "supports_adaptive_thinking": true,
@@ -37189,7 +37285,8 @@
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_native_structured_output": true,
-        "supports_output_config": true
+        "supports_output_config": true,
+        "supports_parallel_tool_use_config": true
     },
     "au.anthropic.claude-sonnet-4-5-20250929-v1:0": {
         "cache_creation_input_token_cost": 4.125e-06,
@@ -37221,7 +37318,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "eu.anthropic.claude-sonnet-4-5-20250929-v1:0": {
         "cache_creation_input_token_cost": 4.125e-06,
@@ -37253,7 +37351,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "jp.anthropic.claude-sonnet-4-5-20250929-v1:0": {
         "cache_creation_input_token_cost": 4.125e-06,
@@ -37285,7 +37384,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "us.anthropic.claude-sonnet-4-5-20250929-v1:0": {
         "cache_creation_input_token_cost": 4.125e-06,
@@ -37317,7 +37417,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "xai/grok-vision-beta": {
         "input_cost_per_image": 5e-06,
@@ -37378,7 +37479,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "anthropic.claude-3-7-sonnet-20240620-v1:0": {
         "cache_creation_input_token_cost": 4.5e-06,
@@ -37436,7 +37538,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "bedrock/us-gov-east-1/claude-sonnet-4-5-20250929-v1:0": {
         "cache_creation_input_token_cost": 4.5e-06,
@@ -37458,7 +37561,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "bedrock/us-gov-west-1/anthropic.claude-3-5-sonnet-20240620-v1:0": {
         "input_cost_per_token": 3.6e-06,
@@ -37516,7 +37620,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "bedrock/us-gov-west-1/claude-sonnet-4-5-20250929-v1:0": {
         "cache_creation_input_token_cost": 4.5e-06,
@@ -37538,7 +37643,8 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
-        "supports_native_structured_output": true
+        "supports_native_structured_output": true,
+        "supports_parallel_tool_use_config": true
     },
     "gpt-5.4": {
         "cache_read_input_token_cost": 2.5e-07,
@@ -38873,9 +38979,11 @@
         "supports_native_structured_output": true,
         "supports_output_config": true,
         "supports_max_reasoning_effort": true,
-        "bedrock_output_config_effort_ceiling": "max"
+        "bedrock_output_config_effort_ceiling": "max",
+        "supports_parallel_tool_use_config": true
     },
     "anthropic.claude-opus-4-7": {
+        "bedrock_converse_supports_strict_tools": false,
         "supports_adaptive_thinking": true,
         "cache_creation_input_token_cost": 6.25e-06,
         "cache_creation_input_token_cost_above_1hr": 1e-05,
@@ -38906,9 +39014,11 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "anthropic.claude-opus-4-8": {
+        "bedrock_converse_supports_strict_tools": false,
         "supports_adaptive_thinking": true,
         "cache_creation_input_token_cost": 6.25e-06,
         "cache_creation_input_token_cost_above_1hr": 1e-05,
@@ -38939,7 +39049,8 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "anthropic/claude-opus-4.6": {
         "supports_adaptive_thinking": true,
@@ -39215,9 +39326,11 @@
         "supports_native_structured_output": true,
         "supports_output_config": true,
         "supports_max_reasoning_effort": true,
-        "bedrock_output_config_effort_ceiling": "max"
+        "bedrock_output_config_effort_ceiling": "max",
+        "supports_parallel_tool_use_config": true
     },
     "global.anthropic.claude-opus-4-7": {
+        "bedrock_converse_supports_strict_tools": false,
         "supports_adaptive_thinking": true,
         "cache_creation_input_token_cost": 6.25e-06,
         "cache_creation_input_token_cost_above_1hr": 1e-05,
@@ -39248,9 +39361,11 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "global.anthropic.claude-opus-4-8": {
+        "bedrock_converse_supports_strict_tools": false,
         "supports_adaptive_thinking": true,
         "cache_creation_input_token_cost": 6.25e-06,
         "cache_creation_input_token_cost_above_1hr": 1e-05,
@@ -39281,7 +39396,8 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "vertex_ai/claude-opus-4-6": {
         "supports_adaptive_thinking": true,
@@ -39577,7 +39693,8 @@
         "supports_vision": true,
         "supports_native_structured_output": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "high"
+        "bedrock_output_config_effort_ceiling": "high",
+        "supports_parallel_tool_use_config": true
     },
     "azure_ai/claude-opus-4-5": {
         "cache_creation_input_token_cost": 6.25e-06,
@@ -39681,7 +39798,8 @@
         "supports_vision": true,
         "supports_native_structured_output": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "high"
+        "bedrock_output_config_effort_ceiling": "high",
+        "supports_parallel_tool_use_config": true
     },
     "global.anthropic.claude-opus-4-5-20251101-v1:0": {
         "cache_creation_input_token_cost": 6.25e-06,
@@ -39710,7 +39828,8 @@
         "supports_vision": true,
         "supports_native_structured_output": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "high"
+        "bedrock_output_config_effort_ceiling": "high",
+        "supports_parallel_tool_use_config": true
     },
     "vercel_ai_gateway/anthropic/claude-opus-4.5": {
         "cache_creation_input_token_cost": 6.25e-06,
@@ -40122,9 +40241,11 @@
         "supports_native_structured_output": true,
         "supports_output_config": true,
         "supports_max_reasoning_effort": true,
-        "bedrock_output_config_effort_ceiling": "max"
+        "bedrock_output_config_effort_ceiling": "max",
+        "supports_parallel_tool_use_config": true
     },
     "au.anthropic.claude-opus-4-7": {
+        "bedrock_converse_supports_strict_tools": false,
         "supports_adaptive_thinking": true,
         "cache_creation_input_token_cost": 6.875e-06,
         "cache_creation_input_token_cost_above_1hr": 1.1e-05,
@@ -40155,9 +40276,11 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "au.anthropic.claude-opus-4-8": {
+        "bedrock_converse_supports_strict_tools": false,
         "supports_adaptive_thinking": true,
         "cache_creation_input_token_cost": 6.875e-06,
         "cache_creation_input_token_cost_above_1hr": 1.1e-05,
@@ -40188,7 +40311,8 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "eu.anthropic.claude-opus-4-6-v1": {
         "supports_adaptive_thinking": true,
@@ -40219,9 +40343,11 @@
         "supports_native_structured_output": true,
         "supports_output_config": true,
         "supports_max_reasoning_effort": true,
-        "bedrock_output_config_effort_ceiling": "max"
+        "bedrock_output_config_effort_ceiling": "max",
+        "supports_parallel_tool_use_config": true
     },
     "eu.anthropic.claude-opus-4-7": {
+        "bedrock_converse_supports_strict_tools": false,
         "supports_adaptive_thinking": true,
         "cache_creation_input_token_cost": 6.875e-06,
         "cache_creation_input_token_cost_above_1hr": 1.1e-05,
@@ -40252,9 +40378,11 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "eu.anthropic.claude-opus-4-8": {
+        "bedrock_converse_supports_strict_tools": false,
         "supports_adaptive_thinking": true,
         "cache_creation_input_token_cost": 6.875e-06,
         "cache_creation_input_token_cost_above_1hr": 1.1e-05,
@@ -40285,9 +40413,11 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "jp.anthropic.claude-opus-4-7": {
+        "bedrock_converse_supports_strict_tools": false,
         "cache_creation_input_token_cost": 6.875e-06,
         "cache_read_input_token_cost": 5.5e-07,
         "input_cost_per_token": 5.5e-06,
@@ -40316,7 +40446,8 @@
         "supports_xhigh_reasoning_effort": true,
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
-        "supports_minimal_reasoning_effort": true
+        "supports_minimal_reasoning_effort": true,
+        "supports_parallel_tool_use_config": true
     },
     "us.anthropic.claude-opus-4-6-v1": {
         "supports_adaptive_thinking": true,
@@ -40347,9 +40478,11 @@
         "supports_native_structured_output": true,
         "supports_output_config": true,
         "supports_max_reasoning_effort": true,
-        "bedrock_output_config_effort_ceiling": "max"
+        "bedrock_output_config_effort_ceiling": "max",
+        "supports_parallel_tool_use_config": true
     },
     "us.anthropic.claude-opus-4-7": {
+        "bedrock_converse_supports_strict_tools": false,
         "supports_adaptive_thinking": true,
         "cache_creation_input_token_cost": 6.875e-06,
         "cache_creation_input_token_cost_above_1hr": 1.1e-05,
@@ -40380,9 +40513,11 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "us.anthropic.claude-opus-4-8": {
+        "bedrock_converse_supports_strict_tools": false,
         "supports_adaptive_thinking": true,
         "cache_creation_input_token_cost": 6.875e-06,
         "cache_creation_input_token_cost_above_1hr": 1.1e-05,
@@ -40413,7 +40548,8 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "us.anthropic.claude-opus-4-5-20251101-v1:0": {
         "cache_creation_input_token_cost": 6.875e-06,
@@ -40442,7 +40578,8 @@
         "supports_vision": true,
         "supports_native_structured_output": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "high"
+        "bedrock_output_config_effort_ceiling": "high",
+        "supports_parallel_tool_use_config": true
     },
     "bedrock/eu-west-3/mistral.mistral-large-2402-v1:0": {
         "input_cost_per_token": 1.04e-05,
@@ -40925,7 +41062,8 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "azure_ai/claude-fable-5": {
         "input_cost_per_token": 1e-05,
@@ -41022,7 +41160,8 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "vertex_ai/claude-fable-5": {
         "cache_creation_input_token_cost": 1.25e-05,
@@ -41203,7 +41342,8 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "us.anthropic.claude-fable-5": {
         "cache_creation_input_token_cost": 1.375e-05,
@@ -41236,7 +41376,8 @@
         "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_output_config": true,
-        "bedrock_output_config_effort_ceiling": "xhigh"
+        "bedrock_output_config_effort_ceiling": "xhigh",
+        "supports_parallel_tool_use_config": true
     },
     "azure/o1": {
         "cache_read_input_token_cost": 7.5e-06,
