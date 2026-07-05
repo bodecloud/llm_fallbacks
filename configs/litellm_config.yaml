@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-d29e3de8dfb24ffdbdae8bc3b21d6c71
+  master_key: sk-da7ad44e082c4a1ea8ed38bbc0f65ceb
   alerting:
   - slack
   - email
@@ -231,20 +231,20 @@ model_list:
     model: openai/z-ai/glm-5.2
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 9.1e-07
-    output_cost_per_token: 2.86e-06
-    max_input_tokens: 1024000
-    max_output_tokens: 128000
+    input_cost_per_token: 7.406e-07
+    output_cost_per_token: 2.3276e-06
+    max_input_tokens: 1048576
+    max_output_tokens: 131072
     metadata: &id009
       notes: GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text
         input and output with a 1M-token context window, and is suited for long-horizon
         agent workflows, project-level software engineering,...
     litellm_provider: openrouter
     z-ai/glm-5.2:
-      input_cost_per_token: 9.1e-07
-      output_cost_per_token: 2.86e-06
-      max_input_tokens: 1024000
-      max_output_tokens: 128000
+      input_cost_per_token: 7.406e-07
+      output_cost_per_token: 2.3276e-06
+      max_input_tokens: 1048576
+      max_output_tokens: 131072
       metadata: *id009
       litellm_provider: openrouter
 - model_name: openrouter/fusion
