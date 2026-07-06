@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-da7ad44e082c4a1ea8ed38bbc0f65ceb
+  master_key: sk-26fba4d24a494ae79176c92d7897b35e
   alerting:
   - slack
   - email
@@ -231,8 +231,8 @@ model_list:
     model: openai/z-ai/glm-5.2
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 7.406e-07
-    output_cost_per_token: 2.3276e-06
+    input_cost_per_token: 6.86e-07
+    output_cost_per_token: 2.156e-06
     max_input_tokens: 1048576
     max_output_tokens: 131072
     metadata: &id009
@@ -241,8 +241,8 @@ model_list:
         agent workflows, project-level software engineering,...
     litellm_provider: openrouter
     z-ai/glm-5.2:
-      input_cost_per_token: 7.406e-07
-      output_cost_per_token: 2.3276e-06
+      input_cost_per_token: 6.86e-07
+      output_cost_per_token: 2.156e-06
       max_input_tokens: 1048576
       max_output_tokens: 131072
       metadata: *id009

@@ -172,8 +172,8 @@
                 }
             },
             "z-ai/glm-5.2": {
-                "input_cost_per_token": 7.406e-07,
-                "output_cost_per_token": 2.3276e-06,
+                "input_cost_per_token": 6.86e-07,
+                "output_cost_per_token": 2.156e-06,
                 "max_input_tokens": 1048576,
                 "max_output_tokens": 131072,
                 "metadata": {
@@ -181,8 +181,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "z-ai/glm-5.2": {
-                    "input_cost_per_token": 7.406e-07,
-                    "output_cost_per_token": 2.3276e-06,
+                    "input_cost_per_token": 6.86e-07,
+                    "output_cost_per_token": 2.156e-06,
                     "max_input_tokens": 1048576,
                     "max_output_tokens": 131072,
                     "metadata": {
