@@ -5254,7 +5254,7 @@
         "input_cost_per_token_cache_hit": 2.8e-09,
         "litellm_provider": "openrouter",
         "max_input_tokens": 1048576,
-        "max_output_tokens": 16384,
+        "max_output_tokens": 65536,
         "max_tokens": 8192,
         "mode": "chat",
         "output_cost_per_token": 1.8e-07,
@@ -5281,7 +5281,7 @@
             "input_cost_per_token_cache_hit": 2.8e-09,
             "litellm_provider": "openrouter",
             "max_input_tokens": 1048576,
-            "max_output_tokens": 16384,
+            "max_output_tokens": 65536,
             "max_tokens": 8192,
             "mode": "chat",
             "output_cost_per_token": 1.8e-07,
@@ -10912,6 +10912,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "thedrummer/rocinante-12b": {
+        "input_cost_per_token": 2.5e-07,
+        "output_cost_per_token": 5e-07,
+        "max_input_tokens": 65536,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Rocinante 12B is designed for engaging storytelling and rich prose. Early testers have reported: - Expanded vocabulary with unique and expressive word choices - Enhanced creativity for vivid narratives -..."
+        },
+        "litellm_provider": "openrouter",
+        "thedrummer/rocinante-12b": {
+            "input_cost_per_token": 2.5e-07,
+            "output_cost_per_token": 5e-07,
+            "max_input_tokens": 65536,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Rocinante 12B is designed for engaging storytelling and rich prose. Early testers have reported: - Expanded vocabulary with unique and expressive word choices - Enhanced creativity for vivid narratives -..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "upstage/solar-pro-3": {
         "input_cost_per_token": 1.5e-07,
         "output_cost_per_token": 6e-07,
@@ -10954,24 +10974,6 @@
         "supports_system_messages": true,
         "supports_vision": false,
         "source": "https://docs.libertai.io/apis/text/"
-    },
-    "thedrummer/rocinante-12b": {
-        "input_cost_per_token": 2.5e-07,
-        "output_cost_per_token": 5e-07,
-        "max_input_tokens": 32768,
-        "metadata": {
-            "notes": "Rocinante 12B is designed for engaging storytelling and rich prose. Early testers have reported: - Expanded vocabulary with unique and expressive word choices - Enhanced creativity for vivid narratives -..."
-        },
-        "litellm_provider": "openrouter",
-        "thedrummer/rocinante-12b": {
-            "input_cost_per_token": 2.5e-07,
-            "output_cost_per_token": 5e-07,
-            "max_input_tokens": 32768,
-            "metadata": {
-                "notes": "Rocinante 12B is designed for engaging storytelling and rich prose. Early testers have reported: - Expanded vocabulary with unique and expressive word choices - Enhanced creativity for vivid narratives -..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "watsonx/openai/gpt-oss-120b": {
         "max_tokens": 8192,
@@ -18884,22 +18886,22 @@
         "output_cost_per_token": 1.4e-06,
         "source": "https://cloud.sambanova.ai/plans/pricing"
     },
-    "aion-labs/aion-1.0-mini": {
+    "aion-labs/aion-3.0-mini": {
         "input_cost_per_token": 7e-07,
         "output_cost_per_token": 1.4e-06,
         "max_input_tokens": 131072,
         "max_output_tokens": 32768,
         "metadata": {
-            "notes": "Aion-1.0-Mini 32B parameter model is a distilled version of the DeepSeek-R1 model, designed for strong performance in reasoning domains such as mathematics, coding, and logic. It is a modified variant..."
+            "notes": "Aion-3.0 Mini is a multi-model roleplaying and storytelling system from AionLabs, built on the DeepSeek family of models. It uses a collaborative generation process in which multiple specialized models each..."
         },
         "litellm_provider": "openrouter",
-        "aion-labs/aion-1.0-mini": {
+        "aion-labs/aion-3.0-mini": {
             "input_cost_per_token": 7e-07,
             "output_cost_per_token": 1.4e-06,
             "max_input_tokens": 131072,
             "max_output_tokens": 32768,
             "metadata": {
-                "notes": "Aion-1.0-Mini 32B parameter model is a distilled version of the DeepSeek-R1 model, designed for strong performance in reasoning domains such as mathematics, coding, and logic. It is a modified variant..."
+                "notes": "Aion-3.0 Mini is a multi-model roleplaying and storytelling system from AionLabs, built on the DeepSeek family of models. It uses a collaborative generation process in which multiple specialized models each..."
             },
             "litellm_provider": "openrouter"
         }
@@ -21848,8 +21850,6 @@
         "input_cost_per_token": 1e-06,
         "output_cost_per_token": 2e-06,
         "max_input_tokens": 256000,
-        "mode": "chat",
-        "supports_vision": true,
         "metadata": {
             "notes": "Grok Build 0.1 is xAI\u2019s fast coding model trained specifically for agentic software engineering workflows. It supports text and image inputs with text output, and is optimized for interactive coding..."
         },
@@ -21858,8 +21858,6 @@
             "input_cost_per_token": 1e-06,
             "output_cost_per_token": 2e-06,
             "max_input_tokens": 256000,
-            "mode": "chat",
-            "supports_vision": true,
             "metadata": {
                 "notes": "Grok Build 0.1 is xAI\u2019s fast coding model trained specifically for agentic software engineering workflows. It supports text and image inputs with text output, and is optimized for interactive coding..."
             },
@@ -23591,26 +23589,6 @@
         "supports_function_calling": true,
         "supports_reasoning": true
     },
-    "z-ai/glm-5.2": {
-        "input_cost_per_token": 9.086e-07,
-        "output_cost_per_token": 2.8556e-06,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 131072,
-        "metadata": {
-            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.2": {
-            "input_cost_per_token": 9.086e-07,
-            "output_cost_per_token": 2.8556e-06,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 131072,
-            "metadata": {
-                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "gemini-robotics-er-1.5-preview": {
         "cache_read_input_token_cost": 0,
         "input_cost_per_token": 3e-07,
@@ -24279,6 +24257,26 @@
         "cache_read_input_token_cost": 3.5e-07,
         "input_cost_per_token_cache_hit": 3.5e-07,
         "supports_reasoning": true
+    },
+    "z-ai/glm-5.2": {
+        "input_cost_per_token": 9.3e-07,
+        "output_cost_per_token": 3e-06,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.2": {
+            "input_cost_per_token": 9.3e-07,
+            "output_cost_per_token": 3e-06,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "xai/grok-4.3": {
         "cache_read_input_token_cost": 2e-07,
@@ -28862,6 +28860,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "aion-labs/aion-3.0": {
+        "input_cost_per_token": 3e-06,
+        "output_cost_per_token": 6e-06,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "Aion-3.0 is a multi-model roleplaying and storytelling system from AionLabs, built on the GLM family of models. It uses a collaborative generation process in which multiple specialized models each contribute..."
+        },
+        "litellm_provider": "openrouter",
+        "aion-labs/aion-3.0": {
+            "input_cost_per_token": 3e-06,
+            "output_cost_per_token": 6e-06,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "Aion-3.0 is a multi-model roleplaying and storytelling system from AionLabs, built on the GLM family of models. It uses a collaborative generation process in which multiple specialized models each contribute..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "ft:gpt-3.5-turbo-0125": {
         "input_cost_per_token": 3e-06,
         "litellm_provider": "openai",
@@ -31513,26 +31531,6 @@
         "supports_function_calling": true,
         "supports_response_schema": true,
         "supports_tool_choice": true
-    },
-    "aion-labs/aion-1.0": {
-        "input_cost_per_token": 4e-06,
-        "output_cost_per_token": 8e-06,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 32768,
-        "metadata": {
-            "notes": "Aion-1.0 is a multi-model system designed for high performance across various tasks, including reasoning and coding. It is built on DeepSeek-R1, augmented with additional models and techniques such as Tree..."
-        },
-        "litellm_provider": "openrouter",
-        "aion-labs/aion-1.0": {
-            "input_cost_per_token": 4e-06,
-            "output_cost_per_token": 8e-06,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 32768,
-            "metadata": {
-                "notes": "Aion-1.0 is a multi-model system designed for high performance across various tasks, including reasoning and coding. It is built on DeepSeek-R1, augmented with additional models and techniques such as Tree..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "mistral.mistral-large-2407-v1:0": {
         "input_cost_per_token": 3e-06,
@@ -35090,6 +35088,146 @@
         "supports_tool_choice": true,
         "supports_vision": true
     },
+    "azure/eu/gpt-5.4": {
+        "cache_read_input_token_cost": 2.8e-07,
+        "cache_read_input_token_cost_priority": 5.5e-07,
+        "input_cost_per_token": 2.75e-06,
+        "input_cost_per_token_priority": 5.5e-06,
+        "output_cost_per_token": 1.65e-05,
+        "output_cost_per_token_priority": 3.3e-05,
+        "litellm_provider": "azure",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+    },
+    "azure/eu/gpt-5.4-2026-03-05": {
+        "cache_read_input_token_cost": 2.8e-07,
+        "cache_read_input_token_cost_priority": 5.5e-07,
+        "input_cost_per_token": 2.75e-06,
+        "input_cost_per_token_priority": 5.5e-06,
+        "output_cost_per_token": 1.65e-05,
+        "output_cost_per_token_priority": 3.3e-05,
+        "litellm_provider": "azure",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+    },
+    "azure/us/gpt-5.4": {
+        "cache_read_input_token_cost": 2.8e-07,
+        "cache_read_input_token_cost_priority": 5.5e-07,
+        "input_cost_per_token": 2.75e-06,
+        "input_cost_per_token_priority": 5.5e-06,
+        "output_cost_per_token": 1.65e-05,
+        "output_cost_per_token_priority": 3.3e-05,
+        "litellm_provider": "azure",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+    },
+    "azure/us/gpt-5.4-2026-03-05": {
+        "cache_read_input_token_cost": 2.8e-07,
+        "cache_read_input_token_cost_priority": 5.5e-07,
+        "input_cost_per_token": 2.75e-06,
+        "input_cost_per_token_priority": 5.5e-06,
+        "output_cost_per_token": 1.65e-05,
+        "output_cost_per_token_priority": 3.3e-05,
+        "litellm_provider": "azure",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+    },
     "deepinfra/anthropic/claude-4-sonnet": {
         "max_tokens": 200000,
         "max_input_tokens": 200000,
@@ -37803,6 +37941,19 @@
         "supports_tool_choice": true,
         "supports_vision": true
     },
+    "vertex_ai/chirp_3": {
+        "input_cost_per_second": 0.00026667,
+        "litellm_provider": "vertex_ai",
+        "metadata": {
+            "calculation": "$0.016/60 seconds = $0.00026667 per second",
+            "original_pricing_per_minute": 0.016
+        },
+        "mode": "audio_transcription",
+        "source": "https://cloud.google.com/speech-to-text/pricing",
+        "supported_endpoints": [
+            "/v1/audio/transcriptions"
+        ]
+    },
     "azure/speech/azure-stt": {
         "audio_transcription_config": "azure_speech",
         "input_cost_per_second": 0.0002777778,
@@ -40051,6 +40202,168 @@
         "mode": "completion",
         "output_cost_per_token": 2.8e-05,
         "source": "https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models#foundation_models"
+    },
+    "azure/eu/gpt-5.5": {
+        "cache_read_input_token_cost": 5.5e-07,
+        "cache_read_input_token_cost_above_272k_tokens": 1.1e-06,
+        "cache_read_input_token_cost_priority": 1.38e-06,
+        "input_cost_per_token": 5.5e-06,
+        "input_cost_per_token_above_272k_tokens": 1.1e-05,
+        "input_cost_per_token_priority": 1.375e-05,
+        "output_cost_per_token": 3.3e-05,
+        "output_cost_per_token_above_272k_tokens": 4.95e-05,
+        "output_cost_per_token_priority": 8.25e-05,
+        "litellm_provider": "azure",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_none_reasoning_effort": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false
+    },
+    "azure/eu/gpt-5.5-2026-04-23": {
+        "cache_read_input_token_cost": 5.5e-07,
+        "cache_read_input_token_cost_above_272k_tokens": 1.1e-06,
+        "cache_read_input_token_cost_priority": 1.38e-06,
+        "input_cost_per_token": 5.5e-06,
+        "input_cost_per_token_above_272k_tokens": 1.1e-05,
+        "input_cost_per_token_priority": 1.375e-05,
+        "output_cost_per_token": 3.3e-05,
+        "output_cost_per_token_above_272k_tokens": 4.95e-05,
+        "output_cost_per_token_priority": 8.25e-05,
+        "litellm_provider": "azure",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true
+    },
+    "azure/us/gpt-5.5": {
+        "cache_read_input_token_cost": 5.5e-07,
+        "cache_read_input_token_cost_above_272k_tokens": 1.1e-06,
+        "cache_read_input_token_cost_priority": 1.38e-06,
+        "input_cost_per_token": 5.5e-06,
+        "input_cost_per_token_above_272k_tokens": 1.1e-05,
+        "input_cost_per_token_priority": 1.375e-05,
+        "output_cost_per_token": 3.3e-05,
+        "output_cost_per_token_above_272k_tokens": 4.95e-05,
+        "output_cost_per_token_priority": 8.25e-05,
+        "litellm_provider": "azure",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_none_reasoning_effort": true,
+        "supports_xhigh_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false
+    },
+    "azure/us/gpt-5.5-2026-04-23": {
+        "cache_read_input_token_cost": 5.5e-07,
+        "cache_read_input_token_cost_above_272k_tokens": 1.1e-06,
+        "cache_read_input_token_cost_priority": 1.38e-06,
+        "input_cost_per_token": 5.5e-06,
+        "input_cost_per_token_above_272k_tokens": 1.1e-05,
+        "input_cost_per_token_priority": 1.375e-05,
+        "output_cost_per_token": 3.3e-05,
+        "output_cost_per_token_above_272k_tokens": 4.95e-05,
+        "output_cost_per_token_priority": 8.25e-05,
+        "litellm_provider": "azure",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true
     },
     "bedrock_mantle/openai.gpt-5.5": {
         "input_cost_per_token": 5.5e-06,
