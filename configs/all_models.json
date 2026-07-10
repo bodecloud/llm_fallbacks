@@ -362,26 +362,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "poolside/laguna-xs.2:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 32768,
-        "metadata": {
-            "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai/), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
-        },
-        "litellm_provider": "openrouter",
-        "poolside/laguna-xs.2:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 32768,
-            "metadata": {
-                "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai/), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "google/gemma-4-31b-it:free": {
         "input_cost_per_token": 0.0,
         "output_cost_per_token": 0.0,
@@ -3437,24 +3417,6 @@
         "supports_system_messages": true,
         "supports_tool_choice": true
     },
-    "liquid/lfm-2-24b-a2b": {
-        "input_cost_per_token": 3e-08,
-        "output_cost_per_token": 1.2e-07,
-        "max_input_tokens": 32768,
-        "metadata": {
-            "notes": "LFM2-24B-A2B is the largest model in the LFM2 family of hybrid architectures designed for efficient on-device deployment. Built as a 24B parameter Mixture-of-Experts model with only 2B active parameters per..."
-        },
-        "litellm_provider": "openrouter",
-        "liquid/lfm-2-24b-a2b": {
-            "input_cost_per_token": 3e-08,
-            "output_cost_per_token": 1.2e-07,
-            "max_input_tokens": 32768,
-            "metadata": {
-                "notes": "LFM2-24B-A2B is the largest model in the LFM2 family of hybrid architectures designed for efficient on-device deployment. Built as a 24B parameter Mixture-of-Experts model with only 2B active parameters per..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "mistral/codestral-embed": {
         "input_cost_per_token": 1.5e-07,
         "litellm_provider": "mistral",
@@ -3763,34 +3725,6 @@
         "mode": "chat",
         "supports_function_calling": true,
         "supports_response_schema": true
-    },
-    "openai/gpt-oss-120b": {
-        "input_cost_per_token": 3e-08,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 131072,
-        "max_output_tokens": 131072,
-        "max_tokens": 32768,
-        "mode": "chat",
-        "output_cost_per_token": 1.5e-07,
-        "source": "https://openrouter.ai/openai/gpt-oss-120b",
-        "supports_function_calling": true,
-        "supports_parallel_function_calling": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
-        },
-        "openai/gpt-oss-120b": {
-            "input_cost_per_token": 3e-08,
-            "output_cost_per_token": 1.5e-07,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 131072,
-            "metadata": {
-                "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "oci/cohere.command-a-translate-08-2025": {
         "input_cost_per_token": 9e-08,
@@ -4755,6 +4689,33 @@
             "litellm_provider": "openrouter"
         }
     },
+    "openai/gpt-oss-120b": {
+        "input_cost_per_token": 3.6e-08,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 131072,
+        "max_output_tokens": 32768,
+        "max_tokens": 32768,
+        "mode": "chat",
+        "output_cost_per_token": 1.8e-07,
+        "source": "https://openrouter.ai/openai/gpt-oss-120b",
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
+        },
+        "openai/gpt-oss-120b": {
+            "input_cost_per_token": 3.6e-08,
+            "output_cost_per_token": 1.8e-07,
+            "max_input_tokens": 131072,
+            "metadata": {
+                "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "gemini/gemini-1.5-flash": {
         "deprecation_date": "2025-09-29",
         "input_cost_per_token": 7.5e-08,
@@ -5574,26 +5535,6 @@
             "supports_vision": true,
             "metadata": {
                 "notes": "Amazon Nova Lite 1.0 is a very low-cost multimodal model from Amazon that focused on fast processing of image, video, and text inputs to generate text output. Amazon Nova Lite..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "poolside/laguna-xs.2": {
-        "input_cost_per_token": 1e-07,
-        "output_cost_per_token": 2e-07,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 32768,
-        "metadata": {
-            "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai/), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
-        },
-        "litellm_provider": "openrouter",
-        "poolside/laguna-xs.2": {
-            "input_cost_per_token": 1e-07,
-            "output_cost_per_token": 2e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 32768,
-            "metadata": {
-                "notes": "Laguna XS.2 is the second-generation model in the XS size class from [Poolside](https://poolside.ai/), their efficient coding agent series. It combines tool calling and reasoning capabilities with a compact footprint, offering..."
             },
             "litellm_provider": "openrouter"
         }
@@ -9451,28 +9392,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "google/gemini-2.5-flash-lite-preview-09-2025": {
-        "input_cost_per_token": 1e-07,
-        "output_cost_per_token": 4e-07,
-        "input_cost_per_image": 1e-07,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 65535,
-        "metadata": {
-            "notes": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemini-2.5-flash-lite-preview-09-2025": {
-            "input_cost_per_token": 1e-07,
-            "output_cost_per_token": 4e-07,
-            "input_cost_per_image": 1e-07,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 65535,
-            "metadata": {
-                "notes": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "ai21.jamba-1-5-mini-v1:0": {
         "input_cost_per_token": 2e-07,
         "litellm_provider": "bedrock",
@@ -12204,26 +12123,6 @@
         "supports_response_schema": false,
         "supports_tool_choice": true
     },
-    "minimax/minimax-m2.7": {
-        "input_cost_per_token": 1.8e-07,
-        "output_cost_per_token": 7.2e-07,
-        "max_input_tokens": 196608,
-        "max_output_tokens": 196608,
-        "metadata": {
-            "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
-        },
-        "litellm_provider": "openrouter",
-        "minimax/minimax-m2.7": {
-            "input_cost_per_token": 1.8e-07,
-            "output_cost_per_token": 7.2e-07,
-            "max_input_tokens": 196608,
-            "max_output_tokens": 196608,
-            "metadata": {
-                "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "pinstripes/ps/qwen3-coder-30b-a3b": {
         "max_tokens": 131072,
         "max_input_tokens": 131072,
@@ -12745,46 +12644,6 @@
         "litellm_provider": "fireworks_ai",
         "output_cost_per_token": 5e-07
     },
-    "minimax/minimax-m2.5": {
-        "input_cost_per_token": 1.2e-07,
-        "output_cost_per_token": 4.8e-07,
-        "cache_read_input_token_cost": 3e-08,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 196608,
-        "max_output_tokens": 196608,
-        "max_tokens": 65536,
-        "mode": "chat",
-        "source": "https://openrouter.ai/minimax/minimax-m2.5",
-        "supports_function_calling": true,
-        "supports_tool_choice": true,
-        "supports_reasoning": true,
-        "supports_vision": false,
-        "supports_prompt_caching": true,
-        "supports_computer_use": false,
-        "cache_creation_input_token_cost": 3.75e-07,
-        "supports_system_messages": true,
-        "metadata": {
-            "notes": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1..."
-        },
-        "minimax/minimax-m2.5": {
-            "input_cost_per_token": 1.2e-07,
-            "output_cost_per_token": 4.8e-07,
-            "cache_read_input_token_cost": 3e-08,
-            "cache_creation_input_token_cost": 3.75e-07,
-            "litellm_provider": "openrouter",
-            "mode": "chat",
-            "supports_function_calling": true,
-            "supports_tool_choice": true,
-            "supports_prompt_caching": true,
-            "supports_reasoning": true,
-            "supports_system_messages": true,
-            "max_input_tokens": 196608,
-            "max_output_tokens": 196608,
-            "metadata": {
-                "notes": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1..."
-            }
-        }
-    },
     "deepseek/deepseek-chat-v3.1": {
         "input_cost_per_token": 2.1e-07,
         "input_cost_per_token_cache_hit": 2e-08,
@@ -13245,6 +13104,26 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "cognitivecomputations/dolphin-mistral-24b-venice-edition": {
+        "input_cost_per_token": 2e-07,
+        "output_cost_per_token": 9e-07,
+        "max_input_tokens": 128000,
+        "max_output_tokens": 8192,
+        "metadata": {
+            "notes": "Venice Uncensored Dolphin Mistral 24B Venice Edition is a fine-tuned variant of Mistral-Small-24B-Instruct-2501, developed by dphn.ai in collaboration with Venice.ai. This model is designed as an \u201cuncensored\u201d instruct-tuned LLM, preserving..."
+        },
+        "litellm_provider": "openrouter",
+        "cognitivecomputations/dolphin-mistral-24b-venice-edition": {
+            "input_cost_per_token": 2e-07,
+            "output_cost_per_token": 9e-07,
+            "max_input_tokens": 128000,
+            "max_output_tokens": 8192,
+            "metadata": {
+                "notes": "Venice Uncensored Dolphin Mistral 24B Venice Edition is a fine-tuned variant of Mistral-Small-24B-Instruct-2501, developed by dphn.ai in collaboration with Venice.ai. This model is designed as an \u201cuncensored\u201d instruct-tuned LLM, preserving..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "sambanova/llama-4-scout-17b-16e-instruct": {
         "deprecation_date": "2025-06-19",
         "input_cost_per_token": 4e-07,
@@ -13517,6 +13396,26 @@
         "mode": "chat",
         "supports_tool_choice": true,
         "supports_function_calling": true
+    },
+    "minimax/minimax-m2.7": {
+        "input_cost_per_token": 2.4e-07,
+        "output_cost_per_token": 9.6e-07,
+        "max_input_tokens": 196608,
+        "max_output_tokens": 196608,
+        "metadata": {
+            "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
+        },
+        "litellm_provider": "openrouter",
+        "minimax/minimax-m2.7": {
+            "input_cost_per_token": 2.4e-07,
+            "output_cost_per_token": 9.6e-07,
+            "max_input_tokens": 196608,
+            "max_output_tokens": 196608,
+            "metadata": {
+                "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "cerebras/llama3.1-70b": {
         "input_cost_per_token": 6e-07,
@@ -14963,6 +14862,46 @@
             "litellm_provider": "openrouter"
         }
     },
+    "minimax/minimax-m2.5": {
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 9e-07,
+        "cache_read_input_token_cost": 3e-08,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 196608,
+        "max_output_tokens": 196608,
+        "max_tokens": 65536,
+        "mode": "chat",
+        "source": "https://openrouter.ai/minimax/minimax-m2.5",
+        "supports_function_calling": true,
+        "supports_tool_choice": true,
+        "supports_reasoning": true,
+        "supports_vision": false,
+        "supports_prompt_caching": true,
+        "supports_computer_use": false,
+        "cache_creation_input_token_cost": 3.75e-07,
+        "supports_system_messages": true,
+        "metadata": {
+            "notes": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1..."
+        },
+        "minimax/minimax-m2.5": {
+            "input_cost_per_token": 1.5e-07,
+            "output_cost_per_token": 9e-07,
+            "cache_read_input_token_cost": 3e-08,
+            "cache_creation_input_token_cost": 3.75e-07,
+            "litellm_provider": "openrouter",
+            "mode": "chat",
+            "supports_function_calling": true,
+            "supports_tool_choice": true,
+            "supports_prompt_caching": true,
+            "supports_reasoning": true,
+            "supports_system_messages": true,
+            "max_input_tokens": 196608,
+            "max_output_tokens": 196608,
+            "metadata": {
+                "notes": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1..."
+            }
+        }
+    },
     "azure/gpt-5.4-nano": {
         "cache_read_input_token_cost": 2e-08,
         "input_cost_per_token": 2e-07,
@@ -15838,8 +15777,8 @@
         "supports_reasoning": true,
         "supports_system_messages": true,
         "supports_vision": true,
-        "max_input_tokens": 524288,
-        "max_output_tokens": 512000,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 131072,
         "metadata": {
             "notes": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,..."
         },
@@ -15858,8 +15797,8 @@
             "supports_reasoning": true,
             "supports_system_messages": true,
             "supports_vision": true,
-            "max_input_tokens": 524288,
-            "max_output_tokens": 512000,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 131072,
             "metadata": {
                 "notes": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,..."
             }
@@ -20007,6 +19946,26 @@
         "supports_none_reasoning_effort": false,
         "supports_xhigh_reasoning_effort": false,
         "supports_minimal_reasoning_effort": true
+    },
+    "z-ai/glm-5.2": {
+        "input_cost_per_token": 5.4e-07,
+        "output_cost_per_token": 1.76e-06,
+        "max_input_tokens": 101376,
+        "max_output_tokens": 101376,
+        "metadata": {
+            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.2": {
+            "input_cost_per_token": 5.4e-07,
+            "output_cost_per_token": 1.76e-06,
+            "max_input_tokens": 101376,
+            "max_output_tokens": 101376,
+            "metadata": {
+                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "together_ai/deepseek-ai/deepseek-v3.1": {
         "input_cost_per_token": 6e-07,
@@ -24318,26 +24277,6 @@
         "supports_vision": true,
         "source": "https://aws.amazon.com/bedrock/pricing/"
     },
-    "z-ai/glm-5.2": {
-        "input_cost_per_token": 9e-07,
-        "output_cost_per_token": 3.08e-06,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 1048576,
-        "metadata": {
-            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.2": {
-            "input_cost_per_token": 9e-07,
-            "output_cost_per_token": 3.08e-06,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 1048576,
-            "metadata": {
-                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "hyperbolic/moonshotai/kimi-k2-instruct": {
         "input_cost_per_token": 2e-06,
         "litellm_provider": "hyperbolic",
@@ -24739,7 +24678,7 @@
         "supports_tool_choice": true
     },
     "moonshotai/kimi-k2.6": {
-        "input_cost_per_token": 6.5e-07,
+        "input_cost_per_token": 6.6e-07,
         "output_cost_per_token": 3.41e-06,
         "max_input_tokens": 262144,
         "max_output_tokens": 262144,
@@ -24750,7 +24689,7 @@
         },
         "litellm_provider": "openrouter",
         "moonshotai/kimi-k2.6": {
-            "input_cost_per_token": 6.5e-07,
+            "input_cost_per_token": 6.6e-07,
             "output_cost_per_token": 3.41e-06,
             "max_input_tokens": 262144,
             "max_output_tokens": 262144,
@@ -24763,7 +24702,7 @@
         }
     },
     "~moonshotai/kimi-latest": {
-        "input_cost_per_token": 6.5e-07,
+        "input_cost_per_token": 6.6e-07,
         "output_cost_per_token": 3.41e-06,
         "max_input_tokens": 262144,
         "max_output_tokens": 262144,
@@ -24774,7 +24713,7 @@
         },
         "litellm_provider": "openrouter",
         "~moonshotai/kimi-latest": {
-            "input_cost_per_token": 6.5e-07,
+            "input_cost_per_token": 6.6e-07,
             "output_cost_per_token": 3.41e-06,
             "max_input_tokens": 262144,
             "max_output_tokens": 262144,
@@ -24917,10 +24856,10 @@
         "supports_vision": true
     },
     "moonshotai/kimi-k2.7-code": {
-        "input_cost_per_token": 7.4e-07,
-        "output_cost_per_token": 3.5e-06,
+        "input_cost_per_token": 7.2e-07,
+        "output_cost_per_token": 3.49e-06,
         "max_input_tokens": 262144,
-        "max_output_tokens": 16384,
+        "max_output_tokens": 262144,
         "mode": "chat",
         "supports_vision": true,
         "metadata": {
@@ -24928,10 +24867,10 @@
         },
         "litellm_provider": "openrouter",
         "moonshotai/kimi-k2.7-code": {
-            "input_cost_per_token": 7.4e-07,
-            "output_cost_per_token": 3.5e-06,
+            "input_cost_per_token": 7.2e-07,
+            "output_cost_per_token": 3.49e-06,
             "max_input_tokens": 262144,
-            "max_output_tokens": 16384,
+            "max_output_tokens": 262144,
             "mode": "chat",
             "supports_vision": true,
             "metadata": {
@@ -27226,6 +27165,46 @@
         "output_dbu_cost_per_token": 5.714000000000001e-06,
         "source": "https://www.databricks.com/product/pricing/proprietary-foundation-model-serving"
     },
+    "openai/gpt-5.6-luna": {
+        "input_cost_per_token": 1e-06,
+        "output_cost_per_token": 6e-06,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-luna": {
+            "input_cost_per_token": 1e-06,
+            "output_cost_per_token": 6e-06,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.6-luna-pro": {
+        "input_cost_per_token": 1e-06,
+        "output_cost_per_token": 6e-06,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Luna Pro is the same underlying model as [GPT-5.6 Luna](https://openrouter.ai/openai/gpt-5.6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-luna-pro": {
+            "input_cost_per_token": 1e-06,
+            "output_cost_per_token": 6e-06,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Luna Pro is the same underlying model as [GPT-5.6 Luna](https://openrouter.ai/openai/gpt-5.6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "azure/gpt-35-turbo-16k": {
         "input_cost_per_token": 3e-06,
         "litellm_provider": "azure",
@@ -28726,6 +28705,48 @@
         "supports_function_calling": true,
         "supports_prompt_caching": true,
         "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true
+    },
+    "xai/grok-4.5": {
+        "cache_read_input_token_cost": 5e-07,
+        "cache_read_input_token_cost_above_200k_tokens": 1e-06,
+        "input_cost_per_token": 2e-06,
+        "input_cost_per_token_above_200k_tokens": 4e-06,
+        "litellm_provider": "xai",
+        "max_input_tokens": 500000,
+        "max_output_tokens": 500000,
+        "max_tokens": 500000,
+        "mode": "chat",
+        "output_cost_per_token": 6e-06,
+        "output_cost_per_token_above_200k_tokens": 1.2e-05,
+        "source": "https://docs.x.ai/docs/models",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true
+    },
+    "xai/grok-4.5-latest": {
+        "cache_read_input_token_cost": 5e-07,
+        "cache_read_input_token_cost_above_200k_tokens": 1e-06,
+        "input_cost_per_token": 2e-06,
+        "input_cost_per_token_above_200k_tokens": 4e-06,
+        "litellm_provider": "xai",
+        "max_input_tokens": 500000,
+        "max_output_tokens": 500000,
+        "max_tokens": 500000,
+        "mode": "chat",
+        "output_cost_per_token": 6e-06,
+        "output_cost_per_token_above_200k_tokens": 1.2e-05,
+        "source": "https://docs.x.ai/docs/models",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_web_search": true
@@ -31409,6 +31430,59 @@
             "search_context_size_high": 0.014
         },
         "web_search_billing_unit": "per_query"
+    },
+    "gpt-5.6-luna": {
+        "cache_creation_input_token_cost": 1.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-06,
+        "cache_creation_input_token_cost_flex": 6.25e-07,
+        "cache_creation_input_token_cost_priority": 2.5e-06,
+        "cache_read_input_token_cost": 1e-07,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-07,
+        "cache_read_input_token_cost_flex": 5e-08,
+        "cache_read_input_token_cost_priority": 2e-07,
+        "input_cost_per_token": 1e-06,
+        "input_cost_per_token_above_272k_tokens": 2e-06,
+        "input_cost_per_token_batches": 5e-07,
+        "input_cost_per_token_flex": 5e-07,
+        "input_cost_per_token_priority": 2e-06,
+        "litellm_provider": "openai",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 6e-06,
+        "output_cost_per_token_above_272k_tokens": 9e-06,
+        "output_cost_per_token_batches": 3e-06,
+        "output_cost_per_token_flex": 3e-06,
+        "output_cost_per_token_priority": 1.2e-05,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
     },
     "anthropic/claude-sonnet-5": {
         "input_cost_per_token": 2e-06,
@@ -34348,6 +34422,46 @@
             "max_output_tokens": 128000,
             "metadata": {
                 "notes": "GPT-5.4 is OpenAI\u2019s latest frontier model, unifying the Codex and GPT lines into a single system. It features a 1M+ token context window (922K input, 128K output) with support for..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.6-terra": {
+        "input_cost_per_token": 2.5e-06,
+        "output_cost_per_token": 1.5e-05,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Terra is a balanced model in OpenAI's GPT-5.6 series, positioned between the flagship Sol tier and the cost-efficient Luna tier. It is suited for everyday coding, reasoning, and agentic..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-terra": {
+            "input_cost_per_token": 2.5e-06,
+            "output_cost_per_token": 1.5e-05,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Terra is a balanced model in OpenAI's GPT-5.6 series, positioned between the flagship Sol tier and the cost-efficient Luna tier. It is suited for everyday coding, reasoning, and agentic..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.6-terra-pro": {
+        "input_cost_per_token": 2.5e-06,
+        "output_cost_per_token": 1.5e-05,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Terra Pro is the same underlying model as [GPT-5.6 Terra](https://openrouter.ai/openai/gpt-5.6-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-terra-pro": {
+            "input_cost_per_token": 2.5e-06,
+            "output_cost_per_token": 1.5e-05,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Terra Pro is the same underlying model as [GPT-5.6 Terra](https://openrouter.ai/openai/gpt-5.6-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
             },
             "litellm_provider": "openrouter"
         }
@@ -38010,6 +38124,59 @@
         ],
         "supports_audio_input": true
     },
+    "gpt-5.6-terra": {
+        "cache_creation_input_token_cost": 3.125e-06,
+        "cache_creation_input_token_cost_above_272k_tokens": 6.25e-06,
+        "cache_creation_input_token_cost_flex": 1.5625e-06,
+        "cache_creation_input_token_cost_priority": 6.25e-06,
+        "cache_read_input_token_cost": 2.5e-07,
+        "cache_read_input_token_cost_above_272k_tokens": 5e-07,
+        "cache_read_input_token_cost_flex": 1.25e-07,
+        "cache_read_input_token_cost_priority": 5e-07,
+        "input_cost_per_token": 2.5e-06,
+        "input_cost_per_token_above_272k_tokens": 5e-06,
+        "input_cost_per_token_batches": 1.25e-06,
+        "input_cost_per_token_flex": 1.25e-06,
+        "input_cost_per_token_priority": 5e-06,
+        "litellm_provider": "openai",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 1.5e-05,
+        "output_cost_per_token_above_272k_tokens": 2.25e-05,
+        "output_cost_per_token_batches": 7.5e-06,
+        "output_cost_per_token_flex": 7.5e-06,
+        "output_cost_per_token_priority": 3e-05,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+    },
     "anthropic/claude-opus-4.8": {
         "input_cost_per_token": 5e-06,
         "output_cost_per_token": 2.5e-05,
@@ -38762,6 +38929,41 @@
         "supports_system_messages": true,
         "supports_tool_choice": true
     },
+    "gpt-realtime-2.1-mini": {
+        "cache_creation_input_audio_token_cost": 3e-07,
+        "cache_read_input_audio_token_cost": 3e-07,
+        "cache_read_input_token_cost": 6e-08,
+        "input_cost_per_audio_token": 1e-05,
+        "input_cost_per_image": 8e-07,
+        "input_cost_per_token": 6e-07,
+        "litellm_provider": "openai",
+        "max_input_tokens": 128000,
+        "max_output_tokens": 4096,
+        "max_tokens": 4096,
+        "mode": "chat",
+        "output_cost_per_audio_token": 2e-05,
+        "output_cost_per_token": 2.4e-06,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "supported_endpoints": [
+            "/v1/realtime"
+        ],
+        "supported_modalities": [
+            "text",
+            "image",
+            "audio"
+        ],
+        "supported_output_modalities": [
+            "text",
+            "audio"
+        ],
+        "supports_audio_input": true,
+        "supports_audio_output": true,
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true
+    },
     "gpt-realtime-mini-2025-10-06": {
         "cache_creation_input_audio_token_cost": 3e-07,
         "cache_read_input_audio_token_cost": 3e-07,
@@ -38891,6 +39093,46 @@
             "max_output_tokens": 128000,
             "metadata": {
                 "notes": "GPT-5.5 is OpenAI\u2019s frontier model designed for complex professional workloads, building on GPT-5.4 with stronger reasoning, higher reliability, and improved token efficiency on hard tasks. It features a 1M+ token..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.6-sol": {
+        "input_cost_per_token": 5e-06,
+        "output_cost_per_token": 3e-05,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Sol is the flagship model in OpenAI's GPT-5.6 series. It is suited for complex reasoning, coding, and agentic workflows, and is particularly strong at command-line and multi-step coding tasks..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-sol": {
+            "input_cost_per_token": 5e-06,
+            "output_cost_per_token": 3e-05,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Sol is the flagship model in OpenAI's GPT-5.6 series. It is suited for complex reasoning, coding, and agentic workflows, and is particularly strong at command-line and multi-step coding tasks..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.6-sol-pro": {
+        "input_cost_per_token": 5e-06,
+        "output_cost_per_token": 3e-05,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Sol Pro is the same underlying model as [GPT-5.6 Sol](https://openrouter.ai/openai/gpt-5.6-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-sol-pro": {
+            "input_cost_per_token": 5e-06,
+            "output_cost_per_token": 3e-05,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Sol Pro is the same underlying model as [GPT-5.6 Sol](https://openrouter.ai/openai/gpt-5.6-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
             },
             "litellm_provider": "openrouter"
         }
@@ -41280,6 +41522,112 @@
         "mode": "chat",
         "supports_video_input": true
     },
+    "gpt-5.6": {
+        "cache_creation_input_token_cost": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens": 1.25e-05,
+        "cache_creation_input_token_cost_flex": 3.125e-06,
+        "cache_creation_input_token_cost_priority": 1.25e-05,
+        "cache_read_input_token_cost": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens": 1e-06,
+        "cache_read_input_token_cost_flex": 2.5e-07,
+        "cache_read_input_token_cost_priority": 1e-06,
+        "input_cost_per_token": 5e-06,
+        "input_cost_per_token_above_272k_tokens": 1e-05,
+        "input_cost_per_token_batches": 2.5e-06,
+        "input_cost_per_token_flex": 2.5e-06,
+        "input_cost_per_token_priority": 1e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 3e-05,
+        "output_cost_per_token_above_272k_tokens": 4.5e-05,
+        "output_cost_per_token_batches": 1.5e-05,
+        "output_cost_per_token_flex": 1.5e-05,
+        "output_cost_per_token_priority": 6e-05,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+    },
+    "gpt-5.6-sol": {
+        "cache_creation_input_token_cost": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens": 1.25e-05,
+        "cache_creation_input_token_cost_flex": 3.125e-06,
+        "cache_creation_input_token_cost_priority": 1.25e-05,
+        "cache_read_input_token_cost": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens": 1e-06,
+        "cache_read_input_token_cost_flex": 2.5e-07,
+        "cache_read_input_token_cost_priority": 1e-06,
+        "input_cost_per_token": 5e-06,
+        "input_cost_per_token_above_272k_tokens": 1e-05,
+        "input_cost_per_token_batches": 2.5e-06,
+        "input_cost_per_token_flex": 2.5e-06,
+        "input_cost_per_token_priority": 1e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 3e-05,
+        "output_cost_per_token_above_272k_tokens": 4.5e-05,
+        "output_cost_per_token_batches": 1.5e-05,
+        "output_cost_per_token_flex": 1.5e-05,
+        "output_cost_per_token_priority": 6e-05,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "supported_endpoints": [
+            "/v1/chat/completions",
+            "/v1/batch",
+            "/v1/responses"
+        ],
+        "supported_modalities": [
+            "text",
+            "image"
+        ],
+        "supported_output_modalities": [
+            "text"
+        ],
+        "supports_function_calling": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": true,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+    },
     "anthropic/claude-fable-5": {
         "input_cost_per_token": 1e-05,
         "output_cost_per_token": 5e-05,
@@ -43003,6 +43351,41 @@
         "mode": "chat",
         "output_cost_per_audio_token": 6.4e-05,
         "output_cost_per_token": 1.6e-05,
+        "supported_endpoints": [
+            "/v1/realtime"
+        ],
+        "supported_modalities": [
+            "text",
+            "image",
+            "audio"
+        ],
+        "supported_output_modalities": [
+            "text",
+            "audio"
+        ],
+        "supports_audio_input": true,
+        "supports_audio_output": true,
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true
+    },
+    "gpt-realtime-2.1": {
+        "cache_creation_input_audio_token_cost": 4e-07,
+        "cache_read_input_audio_token_cost": 4e-07,
+        "cache_read_input_token_cost": 4e-07,
+        "input_cost_per_audio_token": 3.2e-05,
+        "input_cost_per_image": 5e-06,
+        "input_cost_per_token": 4e-06,
+        "litellm_provider": "openai",
+        "max_input_tokens": 128000,
+        "max_output_tokens": 32000,
+        "max_tokens": 32000,
+        "mode": "chat",
+        "output_cost_per_audio_token": 6.4e-05,
+        "output_cost_per_token": 2.4e-05,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
         "supported_endpoints": [
             "/v1/realtime"
         ],
