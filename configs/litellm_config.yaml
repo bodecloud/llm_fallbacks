@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-df1fbe7305474adb923b43eca99a9845
+  master_key: sk-1bd1489a98f44a459cbc18116c3bab5f
   alerting:
   - slack
   - email
@@ -508,8 +508,8 @@ model_list:
     model: openai/z-ai/glm-5.2
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 5.6e-07
-    output_cost_per_token: 1.76e-06
+    input_cost_per_token: 4.2e-07
+    output_cost_per_token: 1.32e-06
     max_input_tokens: 1024000
     max_output_tokens: 128000
     metadata: &id022
@@ -518,8 +518,8 @@ model_list:
         agent workflows, project-level software engineering,...
     litellm_provider: openrouter
     z-ai/glm-5.2:
-      input_cost_per_token: 5.6e-07
-      output_cost_per_token: 1.76e-06
+      input_cost_per_token: 4.2e-07
+      output_cost_per_token: 1.32e-06
       max_input_tokens: 1024000
       max_output_tokens: 128000
       metadata: *id022
@@ -4551,11 +4551,11 @@ model_list:
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: 4.3e-07
     litellm_provider: openrouter
-    max_input_tokens: 202752
-    max_output_tokens: 131072
+    max_input_tokens: 198000
+    max_output_tokens: 16384
     max_tokens: 131000
     mode: chat
-    output_cost_per_token: 1.74e-06
+    output_cost_per_token: 1.75e-06
     source: https://openrouter.ai/z-ai/glm-4.6
     supports_function_calling: true
     supports_prompt_caching: true
@@ -4567,9 +4567,9 @@ model_list:
         tokens, enabling the model to handle more complex...'
     z-ai/glm-4.6:
       input_cost_per_token: 4.3e-07
-      output_cost_per_token: 1.74e-06
-      max_input_tokens: 202752
-      max_output_tokens: 131072
+      output_cost_per_token: 1.75e-06
+      max_input_tokens: 198000
+      max_output_tokens: 16384
       metadata: *id186
       litellm_provider: openrouter
 - model_name: anthropic/claude-sonnet-4.5
@@ -5656,7 +5656,7 @@ model_list:
     max_output_tokens: 16384
     max_tokens: 262144
     mode: chat
-    output_cost_per_token: 1.0e-07
+    output_cost_per_token: 5.5e-07
     source: https://openrouter.ai/qwen/qwen3-235b-a22b-2507
     supports_function_calling: true
     supports_tool_choice: true
@@ -5667,7 +5667,7 @@ model_list:
         instruction following,...
     qwen/qwen3-235b-a22b-2507:
       input_cost_per_token: 9.0e-08
-      output_cost_per_token: 1.0e-07
+      output_cost_per_token: 5.5e-07
       max_input_tokens: 262144
       max_output_tokens: 16384
       metadata: *id231
@@ -6506,8 +6506,8 @@ model_list:
     model: openai/meta-llama/llama-4-maverick
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 1.5e-07
-    output_cost_per_token: 6.0e-07
+    input_cost_per_token: 2.0e-07
+    output_cost_per_token: 8.0e-07
     max_input_tokens: 1048576
     max_output_tokens: 16384
     mode: chat
@@ -6518,8 +6518,8 @@ model_list:
         experts and 17 billion active parameters per forward...
     litellm_provider: openrouter
     meta-llama/llama-4-maverick:
-      input_cost_per_token: 1.5e-07
-      output_cost_per_token: 6.0e-07
+      input_cost_per_token: 2.0e-07
+      output_cost_per_token: 8.0e-07
       max_input_tokens: 1048576
       max_output_tokens: 16384
       mode: chat
