@@ -84,10 +84,10 @@ meta_llama/llama-3.3-70b-instruct
 meta_llama/llama-3.3-8b-instruct
 nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
 cohere/north-mini-code:free
+google/gemma-4-31b-it:free
 poolside/laguna-m.1:free
 poolside/laguna-xs-2.1:free
 nvidia/nemotron-3.5-content-safety:free
-openai/gpt-oss-120b:free
 github_copilot/gpt-4-o-preview
 github_copilot/gpt-4o-mini
 github_copilot/gpt-4o-mini-2024-07-18
@@ -96,7 +96,6 @@ github_copilot/claude-opus-41
 gradient_ai/alibaba-qwen3-32b
 gemini-flash-experimental
 google/gemma-4-26b-a4b-it:free
-google/gemma-4-31b-it:free
 openai/gpt-oss-20b:free
 snowflake/jamba-1.5-large
 snowflake/jamba-1.5-mini
@@ -157,8 +156,6 @@ text-completion-codestral/codestral-latest
 cognitivecomputations/dolphin-mistral-24b-venice-edition:free
 featherless_ai/featherless-ai/qwerky-72b
 featherless_ai/featherless-ai/qwerky-qwq-32b
-liquid/lfm-2.5-1.2b-instruct:free
-liquid/lfm-2.5-1.2b-thinking:free
 omni-moderation-2024-09-26
 omni-moderation-latest
 text-moderation-007

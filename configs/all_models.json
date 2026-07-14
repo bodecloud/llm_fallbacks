@@ -308,6 +308,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "google/gemma-4-31b-it:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemma-4-31b-it:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "kimi-k2-thinking-251104": {
         "input_cost_per_token": 0.0,
         "litellm_provider": "volcengine",
@@ -358,46 +378,6 @@
             "max_output_tokens": 32768,
             "metadata": {
                 "notes": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "google/gemma-4-31b-it:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 8192,
-        "metadata": {
-            "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemma-4-31b-it:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 8192,
-            "metadata": {
-                "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "openai/gpt-oss-120b:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 131072,
-        "metadata": {
-            "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
-        },
-        "litellm_provider": "openrouter",
-        "openai/gpt-oss-120b:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 131072,
-            "metadata": {
-                "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
             },
             "litellm_provider": "openrouter"
         }
@@ -1023,42 +1003,6 @@
             "max_input_tokens": 32768,
             "metadata": {
                 "notes": "Venice Uncensored Dolphin Mistral 24B Venice Edition is a fine-tuned variant of Mistral-Small-24B-Instruct-2501, developed by dphn.ai in collaboration with Venice.ai. This model is designed as an \u201cuncensored\u201d instruct-tuned LLM, preserving..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "liquid/lfm-2.5-1.2b-instruct:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 32768,
-        "metadata": {
-            "notes": "LFM2.5-1.2B-Instruct is a compact, high-performance instruction-tuned model built for fast on-device AI. It delivers strong chat quality in a 1.2B parameter footprint, with efficient edge inference and broad runtime support."
-        },
-        "litellm_provider": "openrouter",
-        "liquid/lfm-2.5-1.2b-instruct:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 32768,
-            "metadata": {
-                "notes": "LFM2.5-1.2B-Instruct is a compact, high-performance instruction-tuned model built for fast on-device AI. It delivers strong chat quality in a 1.2B parameter footprint, with efficient edge inference and broad runtime support."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "liquid/lfm-2.5-1.2b-thinking:free": {
-        "input_cost_per_token": 0.0,
-        "output_cost_per_token": 0.0,
-        "max_input_tokens": 32768,
-        "metadata": {
-            "notes": "LFM2.5-1.2B-Thinking is a lightweight reasoning-focused model optimized for agentic tasks, data extraction, and RAG\u2014while still running comfortably on edge devices. It supports long context (up to 32K tokens) and is..."
-        },
-        "litellm_provider": "openrouter",
-        "liquid/lfm-2.5-1.2b-thinking:free": {
-            "input_cost_per_token": 0.0,
-            "output_cost_per_token": 0.0,
-            "max_input_tokens": 32768,
-            "metadata": {
-                "notes": "LFM2.5-1.2B-Thinking is a lightweight reasoning-focused model optimized for agentic tasks, data extraction, and RAG\u2014while still running comfortably on edge devices. It supports long context (up to 32K tokens) and is..."
             },
             "litellm_provider": "openrouter"
         }
@@ -3726,6 +3670,34 @@
         "supports_function_calling": true,
         "supports_response_schema": true
     },
+    "openai/gpt-oss-120b": {
+        "input_cost_per_token": 3e-08,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 131072,
+        "max_output_tokens": 131072,
+        "max_tokens": 32768,
+        "mode": "chat",
+        "output_cost_per_token": 1.5e-07,
+        "source": "https://openrouter.ai/openai/gpt-oss-120b",
+        "supports_function_calling": true,
+        "supports_parallel_function_calling": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
+        },
+        "openai/gpt-oss-120b": {
+            "input_cost_per_token": 3e-08,
+            "output_cost_per_token": 1.5e-07,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "oci/cohere.command-a-translate-08-2025": {
         "input_cost_per_token": 9e-08,
         "litellm_provider": "oci",
@@ -4644,33 +4616,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "openai/gpt-oss-120b": {
-        "input_cost_per_token": 3.6e-08,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 131072,
-        "max_output_tokens": 32768,
-        "max_tokens": 32768,
-        "mode": "chat",
-        "output_cost_per_token": 1.8e-07,
-        "source": "https://openrouter.ai/openai/gpt-oss-120b",
-        "supports_function_calling": true,
-        "supports_parallel_function_calling": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
-        },
-        "openai/gpt-oss-120b": {
-            "input_cost_per_token": 3.6e-08,
-            "output_cost_per_token": 1.8e-07,
-            "max_input_tokens": 131072,
-            "metadata": {
-                "notes": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "gemini/gemini-1.5-flash": {
         "deprecation_date": "2025-09-29",
         "input_cost_per_token": 7.5e-08,
@@ -4761,62 +4706,6 @@
         "supports_function_calling": true,
         "supports_prompt_caching": true,
         "supports_response_schema": true
-    },
-    "deepseek/deepseek-v4-flash": {
-        "cache_creation_input_token_cost": 0.0,
-        "cache_read_input_token_cost": 2.8e-09,
-        "input_cost_per_token": 7.7e-08,
-        "input_cost_per_token_cache_hit": 2.8e-09,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 1024000,
-        "max_output_tokens": 384000,
-        "max_tokens": 8192,
-        "mode": "chat",
-        "output_cost_per_token": 1.54e-07,
-        "source": "https://api-docs.deepseek.com/quick_start/pricing",
-        "supported_endpoints": [
-            "/v1/chat/completions"
-        ],
-        "supports_assistant_prefill": true,
-        "supports_function_calling": true,
-        "supports_native_streaming": true,
-        "supports_parallel_function_calling": true,
-        "supports_prompt_caching": true,
-        "supports_response_schema": true,
-        "supports_system_messages": true,
-        "supports_tool_choice": true,
-        "supports_vision": false,
-        "metadata": {
-            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-        },
-        "deepseek/deepseek-v4-flash": {
-            "cache_creation_input_token_cost": 0.0,
-            "cache_read_input_token_cost": 2.8e-09,
-            "input_cost_per_token": 7.7e-08,
-            "input_cost_per_token_cache_hit": 2.8e-09,
-            "litellm_provider": "openrouter",
-            "max_input_tokens": 1024000,
-            "max_output_tokens": 384000,
-            "max_tokens": 8192,
-            "mode": "chat",
-            "output_cost_per_token": 1.54e-07,
-            "source": "https://api-docs.deepseek.com/quick_start/pricing",
-            "supported_endpoints": [
-                "/v1/chat/completions"
-            ],
-            "supports_assistant_prefill": true,
-            "supports_function_calling": true,
-            "supports_native_streaming": true,
-            "supports_parallel_function_calling": true,
-            "supports_prompt_caching": true,
-            "supports_response_schema": true,
-            "supports_system_messages": true,
-            "supports_tool_choice": true,
-            "supports_vision": false,
-            "metadata": {
-                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-            }
-        }
     },
     "mistral/mistral-small-3-2-2506": {
         "input_cost_per_token": 6e-08,
@@ -5217,6 +5106,62 @@
             },
             "supports_function_calling": true,
             "litellm_provider": "openrouter"
+        }
+    },
+    "deepseek/deepseek-v4-flash": {
+        "cache_creation_input_token_cost": 0.0,
+        "cache_read_input_token_cost": 2.8e-09,
+        "input_cost_per_token": 9e-08,
+        "input_cost_per_token_cache_hit": 2.8e-09,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65536,
+        "max_tokens": 8192,
+        "mode": "chat",
+        "output_cost_per_token": 1.8e-07,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+            "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": false,
+        "metadata": {
+            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+        },
+        "deepseek/deepseek-v4-flash": {
+            "cache_creation_input_token_cost": 0.0,
+            "cache_read_input_token_cost": 2.8e-09,
+            "input_cost_per_token": 9e-08,
+            "input_cost_per_token_cache_hit": 2.8e-09,
+            "litellm_provider": "openrouter",
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 65536,
+            "max_tokens": 8192,
+            "mode": "chat",
+            "output_cost_per_token": 1.8e-07,
+            "source": "https://api-docs.deepseek.com/quick_start/pricing",
+            "supported_endpoints": [
+                "/v1/chat/completions"
+            ],
+            "supports_assistant_prefill": true,
+            "supports_function_calling": true,
+            "supports_native_streaming": true,
+            "supports_parallel_function_calling": true,
+            "supports_prompt_caching": true,
+            "supports_response_schema": true,
+            "supports_system_messages": true,
+            "supports_tool_choice": true,
+            "supports_vision": false,
+            "metadata": {
+                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+            }
         }
     },
     "replicate/ibm-granite/granite-3.3-8b-instruct": {
@@ -8232,6 +8177,7 @@
             "input_cost_per_token": 5e-08,
             "output_cost_per_token": 4e-07,
             "max_input_tokens": 400000,
+            "max_output_tokens": 128000,
             "metadata": {
                 "notes": "GPT-5-Nano is the smallest and fastest variant in the GPT-5 system, optimized for developer tools, rapid interactions, and ultra-low latency environments. While limited in reasoning depth compared to its larger..."
             },
@@ -8437,7 +8383,7 @@
         "cache_creation_input_token_cost": 0.0,
         "cache_read_input_token_cost": 8e-08,
         "litellm_provider": "openrouter",
-        "max_input_tokens": 32000,
+        "max_input_tokens": 262144,
         "max_output_tokens": 131072,
         "max_tokens": 131072,
         "mode": "chat",
@@ -8455,7 +8401,7 @@
         "xiaomi/mimo-v2.5": {
             "input_cost_per_token": 1.05e-07,
             "output_cost_per_token": 2.8e-07,
-            "max_input_tokens": 32000,
+            "max_input_tokens": 262144,
             "metadata": {
                 "notes": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding..."
             },
@@ -12628,34 +12574,6 @@
         "litellm_provider": "fireworks_ai",
         "output_cost_per_token": 5e-07
     },
-    "deepseek/deepseek-chat-v3.1": {
-        "input_cost_per_token": 2.1e-07,
-        "input_cost_per_token_cache_hit": 2e-08,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 163840,
-        "max_output_tokens": 32768,
-        "max_tokens": 163840,
-        "mode": "chat",
-        "output_cost_per_token": 7.9e-07,
-        "supports_assistant_prefill": true,
-        "supports_function_calling": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context..."
-        },
-        "deepseek/deepseek-chat-v3.1": {
-            "input_cost_per_token": 2.1e-07,
-            "output_cost_per_token": 7.9e-07,
-            "max_input_tokens": 163840,
-            "max_output_tokens": 32768,
-            "metadata": {
-                "notes": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "gemini-2.5-flash-lite-preview-06-17": {
         "deprecation_date": "2025-11-18",
         "cache_read_input_token_cost": 2.5e-08,
@@ -13750,6 +13668,34 @@
         "mode": "chat",
         "supports_function_calling": true,
         "supports_system_messages": true
+    },
+    "deepseek/deepseek-chat-v3.1": {
+        "input_cost_per_token": 2.5e-07,
+        "input_cost_per_token_cache_hit": 2e-08,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 163840,
+        "max_output_tokens": 32768,
+        "max_tokens": 163840,
+        "mode": "chat",
+        "output_cost_per_token": 9.5e-07,
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context..."
+        },
+        "deepseek/deepseek-chat-v3.1": {
+            "input_cost_per_token": 2.5e-07,
+            "output_cost_per_token": 9.5e-07,
+            "max_input_tokens": 163840,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "deepseek/deepseek-v3.1-terminus": {
         "input_cost_per_token": 2.7e-07,
@@ -16468,26 +16414,6 @@
         "supports_reasoning": true,
         "supports_tool_choice": true,
         "deprecation_date": "2026-05-15"
-    },
-    "z-ai/glm-5.2": {
-        "input_cost_per_token": 4.2e-07,
-        "output_cost_per_token": 1.32e-06,
-        "max_input_tokens": 1024000,
-        "max_output_tokens": 128000,
-        "metadata": {
-            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.2": {
-            "input_cost_per_token": 4.2e-07,
-            "output_cost_per_token": 1.32e-06,
-            "max_input_tokens": 1024000,
-            "max_output_tokens": 128000,
-            "metadata": {
-                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "vercel_ai_gateway/deepseek/deepseek-r1-distill-llama-70b": {
         "input_cost_per_token": 7.5e-07,
@@ -20621,7 +20547,7 @@
         "cache_read_input_token_cost": 1e-07,
         "input_cost_per_token": 3.75e-07,
         "litellm_provider": "openrouter",
-        "max_input_tokens": 256000,
+        "max_input_tokens": 262144,
         "max_output_tokens": 262144,
         "max_tokens": 262144,
         "mode": "chat",
@@ -20637,7 +20563,7 @@
         "moonshotai/kimi-k2.5": {
             "input_cost_per_token": 3.75e-07,
             "output_cost_per_token": 2.025e-06,
-            "max_input_tokens": 256000,
+            "max_input_tokens": 262144,
             "mode": "chat",
             "supports_vision": true,
             "metadata": {
@@ -21014,26 +20940,6 @@
         "supports_tool_choice": true,
         "source": "https://aws.amazon.com/bedrock/pricing/"
     },
-    "qwen/qwen3.6-27b": {
-        "input_cost_per_token": 2.85e-07,
-        "output_cost_per_token": 2.4e-06,
-        "max_input_tokens": 262140,
-        "max_output_tokens": 262140,
-        "metadata": {
-            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3.6-27b": {
-            "input_cost_per_token": 2.85e-07,
-            "output_cost_per_token": 2.4e-06,
-            "max_input_tokens": 262140,
-            "max_output_tokens": 262140,
-            "metadata": {
-                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "replicate/deepseek-ai/deepseek-v3.1": {
         "input_cost_per_token": 6.72e-07,
         "output_cost_per_token": 2.016e-06,
@@ -21045,6 +20951,26 @@
         "supports_function_calling": true,
         "supports_reasoning": true,
         "supports_system_messages": true
+    },
+    "qwen/qwen3.6-27b": {
+        "input_cost_per_token": 2.89e-07,
+        "output_cost_per_token": 2.4e-06,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 131072,
+        "metadata": {
+            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3.6-27b": {
+            "input_cost_per_token": 2.89e-07,
+            "output_cost_per_token": 2.4e-06,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "nvidia/nemotron-3-ultra-550b-a55b": {
         "input_cost_per_token": 5e-07,
@@ -24175,6 +24101,26 @@
         "input_cost_per_token_cache_hit": 3.5e-07,
         "supports_reasoning": true
     },
+    "z-ai/glm-5.2": {
+        "input_cost_per_token": 9.3e-07,
+        "output_cost_per_token": 3e-06,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.2": {
+            "input_cost_per_token": 9.3e-07,
+            "output_cost_per_token": 3e-06,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "xai/grok-4.3": {
         "cache_read_input_token_cost": 2e-07,
         "cache_read_input_token_cost_above_200k_tokens": 4e-07,
@@ -24816,8 +24762,8 @@
         "supports_vision": true
     },
     "moonshotai/kimi-k2.7-code": {
-        "input_cost_per_token": 7.2e-07,
-        "output_cost_per_token": 3.5e-06,
+        "input_cost_per_token": 7.19e-07,
+        "output_cost_per_token": 3.49e-06,
         "max_input_tokens": 262144,
         "max_output_tokens": 262144,
         "mode": "chat",
@@ -24827,8 +24773,8 @@
         },
         "litellm_provider": "openrouter",
         "moonshotai/kimi-k2.7-code": {
-            "input_cost_per_token": 7.2e-07,
-            "output_cost_per_token": 3.5e-06,
+            "input_cost_per_token": 7.19e-07,
+            "output_cost_per_token": 3.49e-06,
             "max_input_tokens": 262144,
             "max_output_tokens": 262144,
             "mode": "chat",
