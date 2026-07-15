@@ -10455,6 +10455,26 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "kwaipilot/kat-coder-air-v2.5": {
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 6e-07,
+        "max_input_tokens": 256000,
+        "max_output_tokens": 80000,
+        "metadata": {
+            "notes": "KAT-Coder-Air V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make..."
+        },
+        "litellm_provider": "openrouter",
+        "kwaipilot/kat-coder-air-v2.5": {
+            "input_cost_per_token": 1.5e-07,
+            "output_cost_per_token": 6e-07,
+            "max_input_tokens": 256000,
+            "max_output_tokens": 80000,
+            "metadata": {
+                "notes": "KAT-Coder-Air V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "scaleway/google/gemma-4-26b-a4b-it": {
         "input_cost_per_token": 2.5e-07,
         "litellm_provider": "scaleway",
@@ -20741,7 +20761,7 @@
     "z-ai/glm-5": {
         "input_cost_per_token": 6e-07,
         "litellm_provider": "openrouter",
-        "max_input_tokens": 202752,
+        "max_input_tokens": 198000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
@@ -20756,7 +20776,8 @@
         "z-ai/glm-5": {
             "input_cost_per_token": 6e-07,
             "output_cost_per_token": 1.92e-06,
-            "max_input_tokens": 202752,
+            "max_input_tokens": 198000,
+            "max_output_tokens": 128000,
             "metadata": {
                 "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
             },
@@ -23345,6 +23366,26 @@
         "supports_response_schema": true,
         "supports_vision": true
     },
+    "kwaipilot/kat-coder-pro-v2.5": {
+        "input_cost_per_token": 7.4e-07,
+        "output_cost_per_token": 2.96e-06,
+        "max_input_tokens": 256000,
+        "max_output_tokens": 80000,
+        "metadata": {
+            "notes": "KAT-Coder-Pro V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make..."
+        },
+        "litellm_provider": "openrouter",
+        "kwaipilot/kat-coder-pro-v2.5": {
+            "input_cost_per_token": 7.4e-07,
+            "output_cost_per_token": 2.96e-06,
+            "max_input_tokens": 256000,
+            "max_output_tokens": 80000,
+            "metadata": {
+                "notes": "KAT-Coder-Pro V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "x-ai/grok-4.20": {
         "input_cost_per_token": 1.25e-06,
         "output_cost_per_token": 2.5e-06,
@@ -23395,6 +23436,26 @@
             "max_input_tokens": 1000000,
             "metadata": {
                 "notes": "Grok 4.3 is a reasoning model from xAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "z-ai/glm-5.2": {
+        "input_cost_per_token": 9.058e-07,
+        "output_cost_per_token": 2.8468e-06,
+        "max_input_tokens": 1024000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.2": {
+            "input_cost_per_token": 9.058e-07,
+            "output_cost_per_token": 2.8468e-06,
+            "max_input_tokens": 1024000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
             },
             "litellm_provider": "openrouter"
         }
@@ -24100,26 +24161,6 @@
         "cache_read_input_token_cost": 3.5e-07,
         "input_cost_per_token_cache_hit": 3.5e-07,
         "supports_reasoning": true
-    },
-    "z-ai/glm-5.2": {
-        "input_cost_per_token": 9.3e-07,
-        "output_cost_per_token": 3e-06,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 32768,
-        "metadata": {
-            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.2": {
-            "input_cost_per_token": 9.3e-07,
-            "output_cost_per_token": 3e-06,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 32768,
-            "metadata": {
-                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "xai/grok-4.3": {
         "cache_read_input_token_cost": 2e-07,
@@ -26477,24 +26518,6 @@
         "max_tokens": 8192,
         "mode": "completion",
         "output_cost_per_token": 3e-06
-    },
-    "sao10k/l3.1-70b-hanami-x1": {
-        "input_cost_per_token": 3e-06,
-        "output_cost_per_token": 3e-06,
-        "max_input_tokens": 16000,
-        "metadata": {
-            "notes": "This is [Sao10K](/sao10k)'s experiment over [Euryale v2.2](/sao10k/l3.1-euryale-70b)."
-        },
-        "litellm_provider": "openrouter",
-        "sao10k/l3.1-70b-hanami-x1": {
-            "input_cost_per_token": 3e-06,
-            "output_cost_per_token": 3e-06,
-            "max_input_tokens": 16000,
-            "metadata": {
-                "notes": "This is [Sao10K](/sao10k)'s experiment over [Euryale v2.2](/sao10k/l3.1-euryale-70b)."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "replicate/anthropic/claude-3.5-haiku": {
         "input_cost_per_token": 1e-06,
@@ -31555,6 +31578,70 @@
         "supports_web_search": true,
         "supports_xhigh_reasoning_effort": true
     },
+    "gemini-omni-flash-preview": {
+        "input_cost_per_audio_token": 1.5e-06,
+        "input_cost_per_token": 1.5e-06,
+        "litellm_provider": "vertex_ai-language-models",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65535,
+        "max_tokens": 65535,
+        "mode": "chat",
+        "output_cost_per_reasoning_token": 9e-06,
+        "output_cost_per_token": 9e-06,
+        "output_cost_per_video_token": 1.75e-05,
+        "source": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/omni-flash-preview",
+        "supported_endpoints": [
+            "/v1/chat/completions"
+        ],
+        "supported_modalities": [
+            "text",
+            "image",
+            "audio",
+            "video"
+        ],
+        "supported_output_modalities": [
+            "text",
+            "video"
+        ],
+        "supports_audio_input": true,
+        "supports_reasoning": true,
+        "supports_system_messages": true,
+        "supports_video_input": true,
+        "supports_vision": true
+    },
+    "gemini/gemini-omni-flash-preview": {
+        "input_cost_per_audio_token": 1.5e-06,
+        "input_cost_per_token": 1.5e-06,
+        "litellm_provider": "gemini",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65535,
+        "max_tokens": 65535,
+        "mode": "chat",
+        "output_cost_per_reasoning_token": 9e-06,
+        "output_cost_per_token": 9e-06,
+        "output_cost_per_video_token": 1.75e-05,
+        "rpm": 2000,
+        "source": "https://ai.google.dev/gemini-api/docs/pricing",
+        "supported_endpoints": [
+            "/v1/chat/completions"
+        ],
+        "supported_modalities": [
+            "text",
+            "image",
+            "audio",
+            "video"
+        ],
+        "supported_output_modalities": [
+            "text",
+            "video"
+        ],
+        "supports_audio_input": true,
+        "supports_reasoning": true,
+        "supports_system_messages": true,
+        "supports_video_input": true,
+        "supports_vision": true,
+        "tpm": 800000
+    },
     "anthropic/claude-sonnet-5": {
         "input_cost_per_token": 2e-06,
         "output_cost_per_token": 1e-05,
@@ -36520,6 +36607,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_native_structured_output": true,
         "supports_max_reasoning_effort": true,
         "supports_tool_choice": true,
         "supports_vision": true,
@@ -36935,6 +37023,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_native_structured_output": true,
         "supports_tool_choice": true,
         "supports_vision": true
     },
@@ -36966,6 +37055,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_native_structured_output": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_web_search": true
@@ -39910,6 +40000,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_native_structured_output": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "provider_specific_entry": {
@@ -39944,6 +40035,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_native_structured_output": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "provider_specific_entry": {
@@ -39978,6 +40070,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_native_structured_output": true,
         "supports_sampling_params": false,
         "supports_tool_choice": true,
         "supports_vision": true,
@@ -40014,6 +40107,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_native_structured_output": true,
         "supports_sampling_params": false,
         "supports_tool_choice": true,
         "supports_vision": true,
@@ -40050,6 +40144,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_native_structured_output": true,
         "supports_sampling_params": false,
         "supports_tool_choice": true,
         "supports_vision": true,
@@ -40507,6 +40602,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_native_structured_output": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_output_config": true
@@ -40534,6 +40630,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_native_structured_output": true,
         "supports_tool_choice": true,
         "supports_vision": true,
         "supports_output_config": true
@@ -43301,6 +43398,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_native_structured_output": true,
         "supports_tool_choice": true,
         "supports_vision": true
     },
@@ -43328,6 +43426,7 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_response_schema": true,
+        "supports_native_structured_output": true,
         "supports_tool_choice": true,
         "supports_vision": true
     },
@@ -47630,6 +47729,7 @@
         "supports_parallel_function_calling": true,
         "supports_pdf_input": true,
         "supports_prompt_caching": true,
+        "supports_reasoning": false,
         "supports_response_schema": true,
         "supports_system_messages": true,
         "supports_tool_choice": true,
@@ -48001,6 +48101,7 @@
         ],
         "supports_function_calling": false,
         "supports_prompt_caching": true,
+        "supports_reasoning": false,
         "supports_response_schema": true,
         "supports_system_messages": true,
         "supports_vision": true,
@@ -48042,6 +48143,7 @@
         ],
         "supports_function_calling": false,
         "supports_prompt_caching": true,
+        "supports_reasoning": false,
         "supports_response_schema": true,
         "supports_system_messages": true,
         "supports_vision": true,
@@ -48429,6 +48531,7 @@
         "output_cost_per_image": 0.0672,
         "output_cost_per_image_token": 6e-05,
         "output_cost_per_token": 3e-06,
+        "supports_reasoning": false,
         "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing#gemini-models"
     },
     "vertex_ai/gemini-3.1-flash-image-preview": {
@@ -48442,6 +48545,7 @@
         "output_cost_per_image": 0.0672,
         "output_cost_per_image_token": 6e-05,
         "output_cost_per_token": 3e-06,
+        "supports_reasoning": false,
         "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing#gemini-models"
     },
     "stability.stable-image-control-sketch-v1:0": {
@@ -48820,7 +48924,8 @@
             "search_context_size_medium": 0.014,
             "search_context_size_high": 0.014
         },
-        "web_search_billing_unit": "per_query"
+        "web_search_billing_unit": "per_query",
+        "supports_reasoning": false
     },
     "gemini/gemini-3-pro-image-preview": {
         "input_cost_per_image": 0.0011,
@@ -48853,6 +48958,7 @@
         ],
         "supports_function_calling": false,
         "supports_prompt_caching": true,
+        "supports_reasoning": false,
         "supports_response_schema": true,
         "supports_system_messages": true,
         "supports_vision": true,
@@ -48892,6 +48998,7 @@
         "output_cost_per_image_token": 0.00012,
         "output_cost_per_token": 1.2e-05,
         "output_cost_per_token_batches": 6e-06,
+        "supports_reasoning": false,
         "source": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-pro-image"
     },
     "vertex_ai/gemini-3-pro-image-preview": {
@@ -48907,6 +49014,7 @@
         "output_cost_per_image_token": 0.00012,
         "output_cost_per_token": 1.2e-05,
         "output_cost_per_token_batches": 6e-06,
+        "supports_reasoning": false,
         "source": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-pro-image"
     },
     "stability.stable-image-ultra-v1:0": {

@@ -5,6 +5,46 @@
         "api_env_key_name": "OPENROUTER_API_KEY",
         "api_key_required": false,
         "model_specs": {
+            "kwaipilot/kat-coder-air-v2.5": {
+                "input_cost_per_token": 1.5e-07,
+                "output_cost_per_token": 6e-07,
+                "max_input_tokens": 256000,
+                "max_output_tokens": 80000,
+                "metadata": {
+                    "notes": "KAT-Coder-Air V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make..."
+                },
+                "litellm_provider": "openrouter",
+                "kwaipilot/kat-coder-air-v2.5": {
+                    "input_cost_per_token": 1.5e-07,
+                    "output_cost_per_token": 6e-07,
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 80000,
+                    "metadata": {
+                        "notes": "KAT-Coder-Air V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "kwaipilot/kat-coder-pro-v2.5": {
+                "input_cost_per_token": 7.4e-07,
+                "output_cost_per_token": 2.96e-06,
+                "max_input_tokens": 256000,
+                "max_output_tokens": 80000,
+                "metadata": {
+                    "notes": "KAT-Coder-Pro V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make..."
+                },
+                "litellm_provider": "openrouter",
+                "kwaipilot/kat-coder-pro-v2.5": {
+                    "input_cost_per_token": 7.4e-07,
+                    "output_cost_per_token": 2.96e-06,
+                    "max_input_tokens": 256000,
+                    "max_output_tokens": 80000,
+                    "metadata": {
+                        "notes": "KAT-Coder-Pro V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "openai/gpt-5.6-luna-pro": {
                 "input_cost_per_token": 1e-06,
                 "output_cost_per_token": 6e-06,
@@ -430,19 +470,19 @@
                 }
             },
             "z-ai/glm-5.2": {
-                "input_cost_per_token": 9.3e-07,
-                "output_cost_per_token": 3e-06,
-                "max_input_tokens": 1048576,
-                "max_output_tokens": 32768,
+                "input_cost_per_token": 9.058e-07,
+                "output_cost_per_token": 2.8468e-06,
+                "max_input_tokens": 1024000,
+                "max_output_tokens": 128000,
                 "metadata": {
                     "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
                 },
                 "litellm_provider": "openrouter",
                 "z-ai/glm-5.2": {
-                    "input_cost_per_token": 9.3e-07,
-                    "output_cost_per_token": 3e-06,
-                    "max_input_tokens": 1048576,
-                    "max_output_tokens": 32768,
+                    "input_cost_per_token": 9.058e-07,
+                    "output_cost_per_token": 2.8468e-06,
+                    "max_input_tokens": 1024000,
+                    "max_output_tokens": 128000,
                     "metadata": {
                         "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
                     },
@@ -2710,7 +2750,7 @@
             "z-ai/glm-5": {
                 "input_cost_per_token": 6e-07,
                 "litellm_provider": "openrouter",
-                "max_input_tokens": 202752,
+                "max_input_tokens": 198000,
                 "max_output_tokens": 128000,
                 "max_tokens": 128000,
                 "mode": "chat",
@@ -2725,7 +2765,8 @@
                 "z-ai/glm-5": {
                     "input_cost_per_token": 6e-07,
                     "output_cost_per_token": 1.92e-06,
-                    "max_input_tokens": 202752,
+                    "max_input_tokens": 198000,
+                    "max_output_tokens": 128000,
                     "metadata": {
                         "notes": "GLM-5 is Z.ai\u2019s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading..."
                     },
@@ -6811,24 +6852,6 @@
                     "max_output_tokens": 16384,
                     "metadata": {
                         "notes": "[Microsoft Research](/microsoft) Phi-4 is designed to perform well in complex reasoning tasks and can operate efficiently in situations with limited memory or where quick responses are needed. At 14 billion..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "sao10k/l3.1-70b-hanami-x1": {
-                "input_cost_per_token": 3e-06,
-                "output_cost_per_token": 3e-06,
-                "max_input_tokens": 16000,
-                "metadata": {
-                    "notes": "This is [Sao10K](/sao10k)'s experiment over [Euryale v2.2](/sao10k/l3.1-euryale-70b)."
-                },
-                "litellm_provider": "openrouter",
-                "sao10k/l3.1-70b-hanami-x1": {
-                    "input_cost_per_token": 3e-06,
-                    "output_cost_per_token": 3e-06,
-                    "max_input_tokens": 16000,
-                    "metadata": {
-                        "notes": "This is [Sao10K](/sao10k)'s experiment over [Euryale v2.2](/sao10k/l3.1-euryale-70b)."
                     },
                     "litellm_provider": "openrouter"
                 }
