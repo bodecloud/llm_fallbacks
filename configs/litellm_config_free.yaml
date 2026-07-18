@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-e92247ff131046a0a26906a0ca9bf8cb
+  master_key: sk-9d162367382b44ee973ab5e19e14141f
   alerting:
   - slack
   - email
@@ -52,6 +52,18 @@ litellm_settings:
   set_verbose: false
   turn_off_message_logging: false
 model_list:
+- model_name: openrouter/auto-beta
+  litellm_params:
+    model: openai/openrouter/auto-beta
+    api_base: https://openrouter.ai/api/v1
+    api_key: os.environ/OPENROUTER_API_KEY
+    input_cost_per_token: -1.0
+    output_cost_per_token: -1.0
+    metadata:
+      notes: Auto Router (Beta) is a task-aware router from OpenRouter. It classifies
+        each request, then routes it the [most popular model](/rankings#task-spend)
+        for that task based on aggregate spend, filtered by your...
+    litellm_provider: openrouter
 - model_name: tencent/hy3:free
   litellm_params:
     model: openai/tencent/hy3:free
@@ -437,6 +449,32 @@ router_settings:
   enable_pre_call_checks: true
   enable_tag_filtering: true
   fallbacks:
+  - openrouter/auto-beta:
+    - openrouter/free
+    - gemini/gemini-exp-1206
+    - bedrock/anthropic.claude-mythos-preview
+    - openrouter/google/lyria-3-clip-preview
+    - openrouter/google/lyria-3-pro-preview
+    - openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
+    - gemini/gemini-exp-1114
+    - vertex_ai-language-models/gemini-flash-experimental
+    - openrouter/nvidia/nemotron-3-super-120b-a12b:free
+    - openrouter/tencent/hy3:free
+    - openrouter/qwen/qwen3-coder:free
+    - volcengine/glm-4-7-251222
+    - zai/glm-4.7-flash
+    - lemonade/qwen3-4b-instruct-2507-gguf
+    - lemonade/qwen3-coder-30b-a3b-instruct-gguf
+    - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+    - openrouter/cohere/north-mini-code:free
+    - openrouter/google/gemma-4-31b-it:free
+    - volcengine/kimi-k2-thinking-251104
+    - openrouter/poolside/laguna-m.1:free
+    - openrouter/poolside/laguna-xs-2.1:free
+    - openrouter/qwen/qwen3-next-80b-a3b-instruct:free
+    - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
+    - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
+    - lemonade/gpt-oss-120b-mxfp-gguf
   - tencent/hy3:free:
     - openrouter/free
     - gemini/gemini-exp-1206
