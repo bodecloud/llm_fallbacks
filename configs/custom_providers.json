@@ -606,8 +606,8 @@
                 }
             },
             "z-ai/glm-5.2": {
-                "input_cost_per_token": 4.186e-07,
-                "output_cost_per_token": 1.3156e-06,
+                "input_cost_per_token": 2.59e-07,
+                "output_cost_per_token": 8.14e-07,
                 "max_input_tokens": 1048576,
                 "max_output_tokens": 131072,
                 "metadata": {
@@ -615,8 +615,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "z-ai/glm-5.2": {
-                    "input_cost_per_token": 4.186e-07,
-                    "output_cost_per_token": 1.3156e-06,
+                    "input_cost_per_token": 2.59e-07,
+                    "output_cost_per_token": 8.14e-07,
                     "max_input_tokens": 1048576,
                     "max_output_tokens": 131072,
                     "metadata": {
@@ -642,8 +642,8 @@
                 }
             },
             "moonshotai/kimi-k2.7-code": {
-                "input_cost_per_token": 1e-06,
-                "output_cost_per_token": 4.4e-06,
+                "input_cost_per_token": 8.5e-07,
+                "output_cost_per_token": 3.8e-06,
                 "max_input_tokens": 262144,
                 "max_output_tokens": 262144,
                 "mode": "chat",
@@ -653,8 +653,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "moonshotai/kimi-k2.7-code": {
-                    "input_cost_per_token": 1e-06,
-                    "output_cost_per_token": 4.4e-06,
+                    "input_cost_per_token": 8.5e-07,
+                    "output_cost_per_token": 3.8e-06,
                     "max_input_tokens": 262144,
                     "max_output_tokens": 262144,
                     "mode": "chat",
@@ -1806,9 +1806,10 @@
                 }
             },
             "moonshotai/kimi-k2.6": {
-                "input_cost_per_token": 9.5e-07,
-                "output_cost_per_token": 4e-06,
+                "input_cost_per_token": 6.84e-07,
+                "output_cost_per_token": 3.42e-06,
                 "max_input_tokens": 262144,
+                "max_output_tokens": 262144,
                 "mode": "chat",
                 "supports_vision": true,
                 "metadata": {
@@ -1816,9 +1817,10 @@
                 },
                 "litellm_provider": "openrouter",
                 "moonshotai/kimi-k2.6": {
-                    "input_cost_per_token": 9.5e-07,
-                    "output_cost_per_token": 4e-06,
+                    "input_cost_per_token": 6.84e-07,
+                    "output_cost_per_token": 3.42e-06,
                     "max_input_tokens": 262144,
+                    "max_output_tokens": 262144,
                     "mode": "chat",
                     "supports_vision": true,
                     "metadata": {
@@ -1893,19 +1895,19 @@
                 }
             },
             "google/gemma-4-26b-a4b-it": {
-                "input_cost_per_token": 1e-07,
-                "output_cost_per_token": 3e-07,
-                "max_input_tokens": 256000,
-                "max_output_tokens": 256000,
+                "input_cost_per_token": 7e-08,
+                "output_cost_per_token": 3.4e-07,
+                "max_input_tokens": 262144,
+                "max_output_tokens": 16384,
                 "metadata": {
                     "notes": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference \u2014 delivering near-31B quality at..."
                 },
                 "litellm_provider": "openrouter",
                 "google/gemma-4-26b-a4b-it": {
-                    "input_cost_per_token": 1e-07,
-                    "output_cost_per_token": 3e-07,
-                    "max_input_tokens": 256000,
-                    "max_output_tokens": 256000,
+                    "input_cost_per_token": 7e-08,
+                    "output_cost_per_token": 3.4e-07,
+                    "max_input_tokens": 262144,
+                    "max_output_tokens": 16384,
                     "metadata": {
                         "notes": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference \u2014 delivering near-31B quality at..."
                     },
@@ -4093,13 +4095,13 @@
                 }
             },
             "minimax/minimax-m2": {
-                "input_cost_per_token": 2.55e-07,
+                "input_cost_per_token": 3e-07,
                 "litellm_provider": "openrouter",
                 "max_input_tokens": 204800,
                 "max_output_tokens": 131072,
                 "max_tokens": 204800,
                 "mode": "chat",
-                "output_cost_per_token": 1.02e-06,
+                "output_cost_per_token": 1.2e-06,
                 "supports_function_calling": true,
                 "supports_prompt_caching": true,
                 "supports_reasoning": true,
@@ -4111,8 +4113,8 @@
                     "notes": "MiniMax-M2 is a compact, high-efficiency large language model optimized for end-to-end coding and agentic workflows. With 10 billion activated parameters (230 billion total), it delivers near-frontier intelligence across general reasoning,..."
                 },
                 "minimax/minimax-m2": {
-                    "input_cost_per_token": 2.55e-07,
-                    "output_cost_per_token": 1.02e-06,
+                    "input_cost_per_token": 3e-07,
+                    "output_cost_per_token": 1.2e-06,
                     "cache_read_input_token_cost": 3e-08,
                     "cache_creation_input_token_cost": 3.75e-07,
                     "litellm_provider": "openrouter",
@@ -6045,19 +6047,19 @@
                 }
             },
             "qwen/qwen3-14b": {
-                "input_cost_per_token": 1.2e-07,
-                "output_cost_per_token": 2.4e-07,
-                "max_input_tokens": 40960,
-                "max_output_tokens": 16384,
+                "input_cost_per_token": 2.275e-07,
+                "output_cost_per_token": 9.1e-07,
+                "max_input_tokens": 131072,
+                "max_output_tokens": 8192,
                 "metadata": {
                     "notes": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for..."
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen3-14b": {
-                    "input_cost_per_token": 1.2e-07,
-                    "output_cost_per_token": 2.4e-07,
-                    "max_input_tokens": 40960,
-                    "max_output_tokens": 16384,
+                    "input_cost_per_token": 2.275e-07,
+                    "output_cost_per_token": 9.1e-07,
+                    "max_input_tokens": 131072,
+                    "max_output_tokens": 8192,
                     "metadata": {
                         "notes": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for..."
                     },
