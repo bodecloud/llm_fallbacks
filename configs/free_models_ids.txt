@@ -61,7 +61,6 @@ heroku/claude-3-7-sonnet
 heroku/claude-4-sonnet
 gigachat/gigachat-2-max
 gigachat/gigachat-2-pro
-qwen/qwen3-coder:free
 lemonade/gemma-3-4b-it-gguf
 github_copilot/gpt-4o-2024-11-20
 zai/glm-4.5-flash
@@ -108,7 +107,6 @@ publicai/aisingapore/qwen-sea-lion-v4-32b-it
 publicai/allenai/olmo-3-32b-think
 publicai/allenai/olmo-3-7b-instruct
 publicai/allenai/olmo-3-7b-think
-qwen/qwen3-next-80b-a3b-instruct:free
 gradient_ai/openai-gpt-4o
 gradient_ai/openai-gpt-4o-mini
 nvidia/nemotron-3-nano-30b-a3b:free
@@ -127,8 +125,6 @@ codestral/codestral-2405
 codestral/codestral-latest
 github_copilot/gpt-4
 github_copilot/gpt-4-0613
-meta-llama/llama-3.2-3b-instruct:free
-nousresearch/hermes-3-llama-3.1-405b:free
 publicai/bsc-lt/salamandra-7b-instruct-tools-16k
 fireworks_ai/accounts/fireworks/models/qwen3-embedding-4b
 fireworks_ai/accounts/fireworks/models/qwen3-reranker-0p6b
@@ -142,7 +138,6 @@ amazon.rerank-v1:0
 cohere.rerank-v3-5:0
 github_copilot/gpt-3.5-turbo
 github_copilot/gpt-3.5-turbo-0613
-meta-llama/llama-3.3-70b-instruct:free
 publicai/aisingapore/gemma-sea-lion-v4-27b-it
 publicai/bsc-lt/alia-40b-instruct_q8_0
 together_ai/mistralai/mistral-small-24b-instruct-2501
@@ -153,7 +148,6 @@ snowflake/mixtral-8x7b
 snowflake/reka-core
 text-completion-codestral/codestral-2405
 text-completion-codestral/codestral-latest
-cognitivecomputations/dolphin-mistral-24b-venice-edition:free
 featherless_ai/featherless-ai/qwerky-72b
 featherless_ai/featherless-ai/qwerky-qwq-32b
 omni-moderation-2024-09-26
