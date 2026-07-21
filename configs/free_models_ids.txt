@@ -77,7 +77,6 @@ google/lyria-3-clip-preview
 google/lyria-3-pro-preview
 nvidia/nemotron-3-super-120b-a12b:free
 nvidia/nemotron-3-ultra-550b-a55b:free
-tencent/hy3:free
 github_copilot/gpt-4o-2024-08-06
 meta_llama/llama-3.3-70b-instruct
 meta_llama/llama-3.3-8b-instruct
