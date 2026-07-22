@@ -84,6 +84,7 @@ nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
 cohere/north-mini-code:free
 google/gemma-4-31b-it:free
 poolside/laguna-m.1:free
+poolside/laguna-s-2.1:free
 poolside/laguna-xs-2.1:free
 nvidia/nemotron-3.5-content-safety:free
 github_copilot/gpt-4-o-preview
