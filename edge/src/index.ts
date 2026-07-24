@@ -120,12 +120,19 @@ function sseStreamFromText(text: string, origin: string | null, allowed: string[
 async function workersAIText(body: ChatBody, env: Env): Promise<string | null> {
   const model = env.WORKERS_AI_MODEL || DEFAULT_WORKERS_AI_MODEL;
   try {
-    const result = (await env.AI.run(model, {
+    const result = await env.AI.run(model, {
       messages: body.messages,
       max_tokens: body.max_tokens,
-    })) as { response?: string };
-    const content = result?.response?.trim();
-    return content || null;
+    });
+    if (typeof result === "string") {
+      return result.trim() || null;
+    }
+    if (result && typeof result === "object") {
+      const obj = result as { response?: string; text?: string; result?: string };
+      const content = (obj.response ?? obj.text ?? obj.result ?? "").trim();
+      return content || null;
+    }
+    return null;
   } catch {
     return null;
   }
