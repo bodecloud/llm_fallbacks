@@ -107,11 +107,15 @@ jobs:
       - name: Install Playwright browser
         run: npx playwright install chromium
 
-      - name: Run Pages chat e2e
+      - name: Run Pages chat e2e (mocked routes on live site)
+        env:
+          PAGES_BASE_URL: https://bodecloud.github.io/llm_fallbacks/
         run: npx playwright test --grep-invert live
 
       - name: Run live Pages chat e2e (real proxy)
-        run: PAGES_BASE_URL=https://bodecloud.github.io/llm_fallbacks/ npx playwright test tests/e2e/pages-chat-live.spec.ts
+        env:
+          PAGES_BASE_URL: https://bodecloud.github.io/llm_fallbacks/
+        run: npx playwright test tests/e2e/pages-chat-live.spec.ts
 
       - uses: actions/upload-artifact@v4
         if: failure()

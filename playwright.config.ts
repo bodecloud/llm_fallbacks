@@ -1,8 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const localBaseURL = "http://127.0.0.1:8765";
-const baseURL = process.env.PAGES_BASE_URL || localBaseURL;
-const useLocalServer = !process.env.PAGES_BASE_URL;
+/** Production GitHub Pages — no local http.server; tests always hit the live site. */
+export const PAGES_BASE_URL =
+  process.env.PAGES_BASE_URL || "https://bodecloud.github.io/llm_fallbacks/";
 
 export default defineConfig({
   testDir: "tests/e2e",
@@ -11,16 +11,9 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: 1,
   reporter: [["list"], ["html", { open: "never" }]],
-  timeout: 60_000,
-  webServer: useLocalServer
-    ? {
-        command: "python3 -m http.server 8765 --directory docs",
-        url: localBaseURL,
-        reuseExistingServer: !process.env.CI,
-      }
-    : undefined,
+  timeout: 90_000,
   use: {
-    baseURL,
+    baseURL: PAGES_BASE_URL,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     video: "retain-on-failure",

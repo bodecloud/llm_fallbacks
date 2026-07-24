@@ -4,7 +4,8 @@
   "description": "Playwright e2e tests for the GitHub Pages chat UI",
   "scripts": {
     "test:e2e": "playwright test tests/e2e/pages-chat.spec.ts",
-    "test:e2e:live": "playwright test tests/e2e/pages-chat-live.spec.ts"
+    "test:e2e:live": "playwright test tests/e2e/pages-chat-live.spec.ts",
+    "test:e2e:all": "playwright test"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1"
