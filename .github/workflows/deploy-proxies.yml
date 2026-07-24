@@ -34,6 +34,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          WORKER_URL_SECRET: ${{ secrets.WORKER_URL }}
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
             echo "CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID not set — skipping Worker deploy."
@@ -43,8 +44,19 @@ jobs:
           CHAIN=$(head -n 1 ../configs/free_models_ids.txt | paste -sd, -)
           npm install
           DEPLOY_LOG="$(mktemp)"
-          npx wrangler deploy --var "MODEL_CHAIN:${CHAIN}" 2>&1 | tee "$DEPLOY_LOG"
+          if ! npx wrangler deploy --var "MODEL_CHAIN:${CHAIN}" 2>&1 | tee "$DEPLOY_LOG"; then
+            echo "Wrangler deploy failed."
+            if [ -n "$WORKER_URL_SECRET" ]; then
+              echo "Using WORKER_URL secret; skipping chat_proxy.json update."
+              echo "deployed=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            exit 1
+          fi
           WORKER_URL="$(grep -oE 'https://[a-zA-Z0-9.-]+\.workers\.dev' "$DEPLOY_LOG" | tail -1)"
+          if [ -z "$WORKER_URL" ]; then
+            WORKER_URL="$WORKER_URL_SECRET"
+          fi
           if [ -z "$WORKER_URL" ]; then
             echo "Could not detect Worker URL from deploy output."
             exit 1

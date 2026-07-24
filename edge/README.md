@@ -48,7 +48,7 @@ If **Deploy Proxies** fails with `Authentication error [code: 10000]`, regenerat
 
 Confirm `CLOUDFLARE_ACCOUNT_ID` matches the account that owns `llm-fallbacks-proxy`.
 
-After updating secrets, re-run **Deploy Proxies** from the Actions tab (or push any `edge/` change).
+After updating secrets, re-run **Deploy Proxies** from the Actions tab (or push any `edge/` change). If wrangler auth fails but `WORKER_URL` is set, CI exits successfully with `deployed=false` instead of failing the whole workflow.
 
 Local deploy (bypasses CI):
 
