@@ -30,4 +30,4 @@ Shared vocabulary for the llm-fallbacks static chat gateway and Python library.
 
 ## Learnings index
 
-Structured session notes live in `docs/solutions/` (searchable YAML frontmatter). Start there for Workers AI fallback, murm-ui theming, and CI/secrets workflows.
+Structured session notes live in `docs/solutions/` (searchable YAML frontmatter). Start there for Workers AI fallback, murm-ui theming, and CI/secrets workflows. Time-windowed product health recaps live in `docs/pulse-reports/` (see `ci-based-product-pulse-without-analytics` runbook when analytics is not wired).

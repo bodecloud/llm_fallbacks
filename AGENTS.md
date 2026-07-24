@@ -33,7 +33,7 @@ Durable instructions for AI agents working in this repository. Follow these conv
 
 **Not present:** `CONTRIBUTING.md`.
 
-**Institutional learnings:** `docs/solutions/` (YAML-frontmatter runbooks from past fixes), `CONCEPTS.md` (gateway vocabulary).
+**Institutional learnings:** `docs/solutions/` (YAML-frontmatter runbooks from past fixes), `docs/pulse-reports/` (time-windowed product health recaps), `CONCEPTS.md` (gateway vocabulary).
 
 ## Module map
 
@@ -184,10 +184,11 @@ When reviewing or submitting changes:
 9. Public Worker `MODEL_CHAIN` should stay short (`openrouter/free` only) — long chains block Workers AI fallback (see `docs/solutions/integration-issues/workers-ai-proxy-fallback-and-model-chain.md`)
 10. murm-ui embed requires `data-theme="dark"` + `webui/shell/chat-overrides.css` — OS light mode otherwise shows white surfaces (see `docs/solutions/ui-bugs/murm-ui-light-theme-on-dark-shell.md`)
 11. Pushing `.github/workflows/*` needs GitHub token with `workflow` scope; Cloudflare deploy needs cfat token with Workers Scripts Edit (see `docs/solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md`)
+12. `ce-product-pulse` without PostHog: use CI history + Worker/Pages smoke tests; mark STRATEGY engagement metrics as pending (see `docs/solutions/workflow-issues/ci-based-product-pulse-without-analytics.md`)
 
 ## Compound Engineering
 
-Local preferences live in `.compound-engineering/config.local.yaml` (gitignored). Copy from `.compound-engineering/config.local.example.yaml` to customize work delegation, output format, or product pulse settings. All options are commented out by default.
+Local preferences live in `.compound-engineering/config.local.yaml` (gitignored). Copy from `.compound-engineering/config.local.example.yaml` to customize work delegation, output format, or product pulse settings. Pulse reports commit to `docs/pulse-reports/`; config is machine-local.
 
 Re-run the `ce-setup` skill to verify tooling and config health.
 
