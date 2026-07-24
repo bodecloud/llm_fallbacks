@@ -41,6 +41,7 @@ test.describe("Live GitHub Pages chat (no mocks)", () => {
     const mount = page.locator("#chatMount");
     await expect(mount).toHaveAttribute("data-theme", "dark");
     await expect(page.locator("html")).toHaveClass(/lf-chat-page/);
+    await expect(page.locator(".mur-toolbar-btn")).toHaveCount(0);
     const formBg = await page.locator(".mur-chat-form").evaluate((el) => getComputedStyle(el).backgroundColor);
     expect(formBg).not.toBe("rgb(255, 255, 255)");
   });

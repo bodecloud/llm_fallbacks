@@ -117,15 +117,100 @@ body.lf-chat-page::before {
 }
 
 #chatMount.mur-app-embedded .mur-main-header {
-  pointer-events: none;
-}
-
-#chatMount.mur-app-embedded .mur-header-title {
   display: none;
 }
 
-#chatMount .mur-main-header > button {
-  border: 1px solid rgba(157, 78, 221, 0.25);
+#chatMount.mur-app-embedded .mur-chat-history {
+  padding-top: 1.5rem;
+}
+
+/* Empty state: anchor input to bottom + welcome hero */
+#chatMount.mur-app-embedded.mur-chat-empty .mur-chat-form-container {
+  bottom: 1.25rem;
+  transform: none;
+}
+
+#chatMount.mur-app-embedded.mur-chat-empty .mur-chat-layout-wrapper::before {
+  content: "Free model chat";
+  display: block;
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 600;
+  color: #e8e8ef;
+  letter-spacing: -0.02em;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#chatMount.mur-app-embedded.mur-chat-empty .mur-chat-layout-wrapper::after {
+  content: "Zero-config demo — ranked free alias via edge proxy. Optional BYOK for browser-direct routes.";
+  display: block;
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(32rem, 88%);
+  text-align: center;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #8b8ba3;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Collapsed sidebar rail — icon only, no stray chrome */
+@media (min-width: 769px) {
+  #chatMount.mur-app-embedded.mur-sidebar-closed .mur-sidebar {
+    background: transparent;
+    border-right: none;
+    box-shadow: none;
+    align-items: center;
+    padding-top: 0.65rem;
+  }
+
+  #chatMount.mur-app-embedded.mur-sidebar-closed .mur-sidebar-header {
+    justify-content: center;
+    width: 100%;
+    padding-inline: 0.25rem;
+  }
+
+  #chatMount.mur-app-embedded.mur-sidebar-closed .mur-sidebar-actions {
+    display: none;
+  }
+
+  #chatMount.mur-app-embedded.mur-sidebar-closed .mur-sidebar-logo span:last-child {
+    display: none;
+  }
+}
+
+#chatMount .mur-message-assistant .mur-message-blocks-wrapper {
+  background: rgba(26, 26, 46, 0.65);
+  border: 1px solid rgba(157, 78, 221, 0.12);
+  border-radius: 12px;
+  padding: 0.65rem 0.85rem;
+}
+
+#chatMount .mur-message-user .mur-message-blocks-wrapper {
+  border-radius: 12px;
+}
+
+#chatMount .mur-send-btn.mur-action-btn.mur-form-icon-btn {
+  background: linear-gradient(135deg, #9d4edd, #7b2cbf);
+  color: #fff;
+  border: none;
+}
+
+#chatMount .mur-send-btn.mur-action-btn.mur-form-icon-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #b76fe8, #9d4edd);
+  color: #fff;
+}
+
+#chatMount .mur-send-btn.mur-action-btn:disabled {
+  background: rgba(157, 78, 221, 0.2);
+  color: var(--mur-text-muted);
 }
 
 #chatMount .mur-chat-form-container {
@@ -146,11 +231,6 @@ body.lf-chat-page::before {
   border-color: rgba(199, 125, 255, 0.55);
 }
 
-#chatMount .mur-send-btn.mur-action-btn {
-  background: linear-gradient(135deg, #9d4edd, #7b2cbf);
-  color: #fff;
-}
-
 #chatMount .mur-send-btn.mur-action-btn:hover:not(:disabled) {
   background: linear-gradient(135deg, #b76fe8, #9d4edd);
   color: #fff;
@@ -161,10 +241,6 @@ body.lf-chat-page::before {
   border: 1px solid rgba(157, 78, 221, 0.15);
 }
 
-#chatMount .mur-message-assistant .mur-message-blocks-wrapper {
-  background: transparent;
-}
-
 /* ── Top bar ────────────────────────────────────────────────── */
 .credits-bar.top-credits {
   backdrop-filter: blur(12px);
@@ -173,11 +249,26 @@ body.lf-chat-page::before {
 }
 
 .credits-content {
-  gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.credits-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: auto;
 }
 
 .credits-bar p {
   color: #d8d8e8;
+  flex: 1 1 12rem;
+  text-align: left;
+  min-width: 0;
 }
 
 .credits-bar p strong {
@@ -257,6 +348,63 @@ body.lf-chat-page::before {
   font-size: 0.85rem;
 }
 
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(157, 78, 221, 0.2);
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #e4c7ff;
+}
+
+.panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.panel-btn {
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(157, 78, 221, 0.35);
+  background: rgba(157, 78, 221, 0.12);
+  color: #e4c7ff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.panel-btn:hover {
+  background: rgba(157, 78, 221, 0.22);
+  border-color: rgba(199, 125, 255, 0.45);
+}
+
+.panel-btn-primary {
+  background: linear-gradient(135deg, #9d4edd, #7b2cbf);
+  border-color: transparent;
+  color: #fff;
+}
+
+.panel-btn-primary:hover {
+  background: linear-gradient(135deg, #b76fe8, #9d4edd);
+}
+
+.panel-hint code {
+  font-size: 0.82em;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  background: rgba(157, 78, 221, 0.15);
+}
+
 .panel-status {
   margin: 0.75rem 0;
   font-size: 0.85rem;
@@ -300,20 +448,21 @@ body.lf-chat-page::before {
 
 #closeSet {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
+  top: 0.75rem;
+  right: 0.75rem;
   z-index: 1400;
   display: none;
   border: 1px solid rgba(157, 78, 221, 0.35);
-  background: #1a1a2e;
+  background: #252545;
   color: #e4c7ff;
-  border-radius: 8px;
-  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
   cursor: pointer;
+  font-size: 0.82rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
-.shell-panel.open ~ #closeSet,
-.shell-panel-mask.visible ~ #closeSet {
+.shell-panel.open ~ #closeSet {
   display: block;
 }
 
@@ -327,13 +476,22 @@ body.lf-chat-page::before {
   }
 
   .credits-content {
-    flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .credits-actions {
+    margin-left: 0;
+    justify-content: center;
+    width: 100%;
   }
 
   .credits-bar p {
     flex: 1 1 100%;
     text-align: center;
     font-size: 0.8rem;
+  }
+
+  #closeSet {
+    right: 0.65rem;
   }
 }

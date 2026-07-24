@@ -5566,7 +5566,9 @@ function FailoverSettingsPlugin(deps) {
       window.registerShellPanel?.("failover", (root) => {
         const config = readRuntimeConfig();
         root.innerHTML = `
-          <h3>Failover &amp; Proxy</h3>
+          <header class="panel-header">
+            <h3>Failover &amp; Proxy</h3>
+          </header>
           <p class="panel-hint">Cloud proxy routes (one per line). Localhost is blocked.</p>
           <label>Proxy endpoints
             <textarea id="apiHostInput" rows="4" placeholder="https://your-worker.workers.dev"></textarea>
@@ -5578,8 +5580,10 @@ function FailoverSettingsPlugin(deps) {
             <input id="defaultModelInput" type="text" value="free" />
           </label>
           <div id="routeStatus" class="panel-status">Route: \u2014</div>
-          <button type="button" id="testConnectionBtn">Test connection</button>
-          <button type="button" id="saveFailoverBtn">Save</button>
+          <div class="panel-actions">
+            <button type="button" id="testConnectionBtn" class="panel-btn">Test connection</button>
+            <button type="button" id="saveFailoverBtn" class="panel-btn panel-btn-primary">Save</button>
+          </div>
         `;
         const endpointsEl = root.querySelector("#apiHostInput");
         const guestEl = root.querySelector("#guestTokenInput");
@@ -5663,11 +5667,15 @@ function ByokSettingsPlugin(deps) {
       window.registerShellPanel?.("byok", (root) => {
         const fields = [...new Set(Object.values(PROVIDER_KEY_FIELDS))];
         root.innerHTML = `
-          <h3>Bring Your Own Keys</h3>
+          <header class="panel-header">
+            <h3>Bring Your Own Keys</h3>
+          </header>
           <p class="panel-hint">Optional. Keys stay in this browser only \u2014 never sent to GitHub Pages.</p>
           <form id="byok-form">
             <div id="byok-fields"></div>
-            <button type="submit">Save keys</button>
+            <div class="panel-actions">
+              <button type="submit" class="panel-btn panel-btn-primary">Save keys</button>
+            </div>
           </form>
         `;
         const form = root.querySelector("#byok-form");
@@ -5703,48 +5711,6 @@ function ByokSettingsPlugin(deps) {
       });
     }
   };
-}
-
-// src/shell-panels.ts
-var panels = /* @__PURE__ */ new Map();
-function registerShellPanel(id, init) {
-  panels.set(id, init);
-  const el2 = document.getElementById(`panel-${id}`);
-  if (el2) init(el2);
-}
-function initShellPanels() {
-  window.registerShellPanel = registerShellPanel;
-  for (const [id, init] of panels) {
-    const el2 = document.getElementById(`panel-${id}`);
-    if (el2) init(el2);
-  }
-}
-function openShellPanel(id) {
-  document.querySelectorAll(".shell-panel").forEach((p) => p.classList.remove("open"));
-  const panel = document.getElementById(`shell-panel-${id}`);
-  const mask = document.getElementById("sysMask");
-  if (panel) panel.classList.add("open");
-  if (mask) {
-    mask.hidden = false;
-  }
-  const closeBtn = document.getElementById("closeSet");
-  if (closeBtn) closeBtn.style.display = "block";
-}
-function closeShellPanel(_id) {
-  document.querySelectorAll(".shell-panel").forEach((p) => p.classList.remove("open"));
-  const mask = document.getElementById("sysMask");
-  if (mask) mask.hidden = true;
-  const closeBtn = document.getElementById("closeSet");
-  if (closeBtn) closeBtn.style.display = "none";
-}
-function bindTopBarButtons() {
-  document.getElementById("sysSetting")?.addEventListener("click", () => openShellPanel("failover"));
-  document.getElementById("byokSetting")?.addEventListener("click", () => openShellPanel("byok"));
-  document.getElementById("explorerSetting")?.addEventListener("click", () => openShellPanel("explorer"));
-  document.getElementById("closeSet")?.addEventListener("click", () => closeShellPanel());
-  document.getElementById("sysMask")?.addEventListener("click", (e) => {
-    if (e.target === e.currentTarget) closeShellPanel();
-  });
 }
 
 // src/plugins/model-explorer/filters.ts
@@ -5809,7 +5775,9 @@ function ModelExplorerPlugin(deps) {
     onMount() {
       window.registerShellPanel?.("explorer", (root) => {
         root.innerHTML = `
-          <h3>Model Explorer</h3>
+          <header class="panel-header">
+            <h3>Model Explorer</h3>
+          </header>
           <p class="panel-hint">Browse and filter <code>free_models.json</code>.</p>
           <label>Filter method
             <select id="explorer-method">
@@ -5823,8 +5791,10 @@ function ModelExplorerPlugin(deps) {
           <label>Column <select id="explorer-column"></select></label>
           <label>Value <input id="explorer-value" type="text" placeholder="filter value" /></label>
           <label>Top N <input id="explorer-topn" type="number" min="1" value="10" /></label>
-          <button type="button" id="explorer-apply">Apply filter</button>
-          <button type="button" id="explorer-reload">Reload catalog</button>
+          <div class="panel-actions">
+            <button type="button" id="explorer-apply" class="panel-btn panel-btn-primary">Apply filter</button>
+            <button type="button" id="explorer-reload" class="panel-btn">Reload catalog</button>
+          </div>
           <div id="explorer-status" class="panel-status"></div>
           <div class="explorer-table-wrap"><table id="explorer-table"><thead></thead><tbody></tbody></table></div>
         `;
@@ -5898,20 +5868,53 @@ function ModelExplorerPlugin(deps) {
         populateColumns();
         renderTable(catalog);
       });
-    },
-    onInputMount(ctx) {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "mur-toolbar-btn";
-      btn.textContent = "Models";
-      btn.title = "Open model explorer";
-      btn.addEventListener("click", () => openShellPanel("explorer"));
-      ctx.container.prepend(btn);
     }
   };
 }
 function escapeHtml(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// src/shell-panels.ts
+var panels = /* @__PURE__ */ new Map();
+function registerShellPanel(id, init) {
+  panels.set(id, init);
+  const el2 = document.getElementById(`panel-${id}`);
+  if (el2) init(el2);
+}
+function initShellPanels() {
+  window.registerShellPanel = registerShellPanel;
+  for (const [id, init] of panels) {
+    const el2 = document.getElementById(`panel-${id}`);
+    if (el2) init(el2);
+  }
+}
+function openShellPanel(id) {
+  document.querySelectorAll(".shell-panel").forEach((p) => p.classList.remove("open"));
+  const panel = document.getElementById(`shell-panel-${id}`);
+  const mask = document.getElementById("sysMask");
+  if (panel) panel.classList.add("open");
+  if (mask) {
+    mask.hidden = false;
+  }
+  const closeBtn = document.getElementById("closeSet");
+  if (closeBtn) closeBtn.style.display = "block";
+}
+function closeShellPanel(_id) {
+  document.querySelectorAll(".shell-panel").forEach((p) => p.classList.remove("open"));
+  const mask = document.getElementById("sysMask");
+  if (mask) mask.hidden = true;
+  const closeBtn = document.getElementById("closeSet");
+  if (closeBtn) closeBtn.style.display = "none";
+}
+function bindTopBarButtons() {
+  document.getElementById("sysSetting")?.addEventListener("click", () => openShellPanel("failover"));
+  document.getElementById("byokSetting")?.addEventListener("click", () => openShellPanel("byok"));
+  document.getElementById("explorerSetting")?.addEventListener("click", () => openShellPanel("explorer"));
+  document.getElementById("closeSet")?.addEventListener("click", () => closeShellPanel());
+  document.getElementById("sysMask")?.addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) closeShellPanel();
+  });
 }
 
 // src/main.ts

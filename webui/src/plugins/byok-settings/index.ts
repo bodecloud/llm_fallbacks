@@ -18,11 +18,15 @@ export function ByokSettingsPlugin(deps: { onKeysSaved: () => void }): ChatPlugi
       window.registerShellPanel?.("byok", (root) => {
         const fields = [...new Set(Object.values(PROVIDER_KEY_FIELDS))];
         root.innerHTML = `
-          <h3>Bring Your Own Keys</h3>
+          <header class="panel-header">
+            <h3>Bring Your Own Keys</h3>
+          </header>
           <p class="panel-hint">Optional. Keys stay in this browser only — never sent to GitHub Pages.</p>
           <form id="byok-form">
             <div id="byok-fields"></div>
-            <button type="submit">Save keys</button>
+            <div class="panel-actions">
+              <button type="submit" class="panel-btn panel-btn-primary">Save keys</button>
+            </div>
           </form>
         `;
         const form = root.querySelector<HTMLFormElement>("#byok-form")!;

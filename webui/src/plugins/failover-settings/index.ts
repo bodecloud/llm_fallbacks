@@ -13,7 +13,9 @@ export function FailoverSettingsPlugin(deps: {
       window.registerShellPanel?.("failover", (root) => {
         const config = readRuntimeConfig();
         root.innerHTML = `
-          <h3>Failover &amp; Proxy</h3>
+          <header class="panel-header">
+            <h3>Failover &amp; Proxy</h3>
+          </header>
           <p class="panel-hint">Cloud proxy routes (one per line). Localhost is blocked.</p>
           <label>Proxy endpoints
             <textarea id="apiHostInput" rows="4" placeholder="https://your-worker.workers.dev"></textarea>
@@ -25,8 +27,10 @@ export function FailoverSettingsPlugin(deps: {
             <input id="defaultModelInput" type="text" value="free" />
           </label>
           <div id="routeStatus" class="panel-status">Route: —</div>
-          <button type="button" id="testConnectionBtn">Test connection</button>
-          <button type="button" id="saveFailoverBtn">Save</button>
+          <div class="panel-actions">
+            <button type="button" id="testConnectionBtn" class="panel-btn">Test connection</button>
+            <button type="button" id="saveFailoverBtn" class="panel-btn panel-btn-primary">Save</button>
+          </div>
         `;
 
         const endpointsEl = root.querySelector<HTMLTextAreaElement>("#apiHostInput")!;

@@ -1,5 +1,4 @@
 import type { ChatPlugin } from "murm-ui";
-import { openShellPanel } from "../../shell-panels";
 import { getColumns, applyFilter, sortRows, type FilterState } from "./filters";
 import type { CatalogEntry } from "../../providers/browser-router";
 
@@ -12,7 +11,9 @@ export function ModelExplorerPlugin(deps: {
     onMount() {
       window.registerShellPanel?.("explorer", (root) => {
         root.innerHTML = `
-          <h3>Model Explorer</h3>
+          <header class="panel-header">
+            <h3>Model Explorer</h3>
+          </header>
           <p class="panel-hint">Browse and filter <code>free_models.json</code>.</p>
           <label>Filter method
             <select id="explorer-method">
@@ -26,8 +27,10 @@ export function ModelExplorerPlugin(deps: {
           <label>Column <select id="explorer-column"></select></label>
           <label>Value <input id="explorer-value" type="text" placeholder="filter value" /></label>
           <label>Top N <input id="explorer-topn" type="number" min="1" value="10" /></label>
-          <button type="button" id="explorer-apply">Apply filter</button>
-          <button type="button" id="explorer-reload">Reload catalog</button>
+          <div class="panel-actions">
+            <button type="button" id="explorer-apply" class="panel-btn panel-btn-primary">Apply filter</button>
+            <button type="button" id="explorer-reload" class="panel-btn">Reload catalog</button>
+          </div>
           <div id="explorer-status" class="panel-status"></div>
           <div class="explorer-table-wrap"><table id="explorer-table"><thead></thead><tbody></tbody></table></div>
         `;
@@ -118,15 +121,6 @@ export function ModelExplorerPlugin(deps: {
         populateColumns();
         renderTable(catalog);
       });
-    },
-    onInputMount(ctx) {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "mur-toolbar-btn";
-      btn.textContent = "Models";
-      btn.title = "Open model explorer";
-      btn.addEventListener("click", () => openShellPanel("explorer"));
-      ctx.container.prepend(btn);
     },
   };
 }
