@@ -1,7 +1,9 @@
 # LLM Fallbacks
 
-[![Python Package](https://github.com/bolabaden/llm_fallbacks/actions/workflows/python-package.yml/badge.svg)](https://github.com/bolabaden/llm_fallbacks/actions/workflows/python-package.yml)
-[![Daily Config Update](https://github.com/bolabaden/llm_fallbacks/actions/workflows/daily-config-update.yml/badge.svg)](https://github.com/bolabaden/llm_fallbacks/actions/workflows/daily-config-update.yml)
+[![Python Package](https://github.com/bodecloud/llm_fallbacks/actions/workflows/python-package.yml/badge.svg)](https://github.com/bodecloud/llm_fallbacks/actions/workflows/python-package.yml)
+[![Daily Config Update](https://github.com/bodecloud/llm_fallbacks/actions/workflows/daily-config-update.yml/badge.svg)](https://github.com/bodecloud/llm_fallbacks/actions/workflows/daily-config-update.yml)
+[![GitHub Pages](https://img.shields.io/badge/chat-GitHub%20Pages-blue)](https://bolabaden.github.io/llm_fallbacks/)
+[![GitHub Pages](https://img.shields.io/badge/chat-GitHub%20Pages-blue)](https://bolabaden.github.io/llm_fallbacks/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A Python library for managing fallbacks for LLM API calls using the [LiteLLM](https://github.com/BerriAI/litellm) library.
@@ -14,6 +16,7 @@ A Python library for managing fallbacks for LLM API calls using the [LiteLLM](ht
 - 🧠 **Model Discovery**: Discover available models and their capabilities
 - 🏆 **Quality Scoring**: Transparent heuristic scoring of free models based on capabilities
 - 📦 **Machine-Consumable Artifacts**: Daily-updated JSON/text lists of free models, ready for downstream use
+- 🌐 **Web Chat UI**: Public GitHub Pages chat interface with proxy-backed failover routing
 - 🛠️ **GUI Tool**: Includes a GUI tool for exploring and filtering available models
 
 ## Installation
@@ -83,6 +86,7 @@ The `configs/` directory contains machine-consumable model lists that are **auto
 | [`free_models_ids.txt`](configs/free_models_ids.txt) | Plain text list of free model IDs, one per line (same order as JSON) |
 | [`all_models.json`](configs/all_models.json) | Full model-id → spec map for all known models |
 | [`custom_providers.json`](configs/custom_providers.json) | Serialised custom provider configurations |
+| [`provider_urls.json`](configs/provider_urls.json) | Provider name → OpenAI-compatible base URL map |
 | [`litellm_config.yaml`](configs/litellm_config.yaml) | LiteLLM proxy config with all models |
 | [`litellm_config_free.yaml`](configs/litellm_config_free.yaml) | LiteLLM proxy config with free models only |
 
@@ -142,9 +146,28 @@ Each free model in `free_models.json` includes a `quality_score` (0–100) compu
 
 The raw sum is normalised to 0–100. The score is a **capability heuristic**, not a benchmark — it reflects what the model _can do_, not how well it does it.
 
-### OpenRouter Enrichment
+### Supported Free Providers
 
-When the `OPENROUTER_API_KEY` repository secret is set, the daily workflow enriches the model list with additional models discovered via the OpenRouter `/models` API. This is optional — the generator works without it, using only LiteLLM's public model database.
+The library tracks 20+ free-tier API providers:
+
+| Provider | Free Tier | Sign-up |
+|----------|-----------|---------|
+| [OpenRouter](https://openrouter.ai) | 50 req/day, 24+ free models | No CC |
+| [Groq](https://console.groq.com) | 30–60 RPM, Llama 3.3 70B | No CC |
+| [Cerebras](https://cloud.cerebras.ai) | 30 RPM, 1M tokens/day | No CC |
+| [Google AI Studio](https://aistudio.google.com) | 250K TPM, Gemini models | No CC |
+| [Mistral](https://console.mistral.ai) | 1B tokens/month | Phone verify |
+| [DeepSeek](https://platform.deepseek.com) | V3, R1, generous limits | No CC |
+| [Together AI](https://api.together.xyz) | $5 credits, Llama 4 | No CC |
+| [Fireworks AI](https://fireworks.ai) | 10 RPM free tier | No CC |
+| [SambaNova](https://cloud.sambanova.ai) | $5 credits, Llama 3.3 70B | No CC |
+| [NVIDIA NIM](https://build.nvidia.com) | 40 RPM, 1K credits | No CC |
+| [Cohere](https://cohere.com) | 1K req/month, Command R+ | No CC |
+| [GitHub Models](https://github.com/marketplace/models) | 50–150 req/day | GitHub account |
+| [HuggingFace](https://huggingface.co) | 300+ models, small credits | No CC |
+| + Novita, Hyperbolic, Nebius, GLHF, Featherless, Chutes, Completions.me | | |
+
+When API keys for these providers are set as repository secrets, the daily workflow enriches the model list with additional models discovered via their `/models` endpoints. This is optional — the generator works without any keys, using LiteLLM's public model database plus OpenRouter when configured.
 
 ## Generating Configs Locally
 
