@@ -24,7 +24,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: Deploy Cloudflare Worker
         id: deploy_worker
@@ -36,6 +36,7 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           WORKER_URL_SECRET: ${{ secrets.WORKER_URL }}
         run: |
+          set -o pipefail
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
             echo "CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID not set — skipping Worker deploy."
             echo "deployed=false" >> "$GITHUB_OUTPUT"
