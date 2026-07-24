@@ -1,5 +1,7 @@
 {
-  "endpoints": ["https://llm-fallbacks-proxy.bocloud.workers.dev"],
+  "endpoints": [
+    "https://llm-fallbacks-proxy.bocloud.workers.dev"
+  ],
   "guestToken": "llm-fallbacks-public",
   "description": "Zero-config demo proxy for GitHub Pages chat."
 }
