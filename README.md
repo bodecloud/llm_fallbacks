@@ -15,7 +15,7 @@ A Python library for managing fallbacks for LLM API calls using the [LiteLLM](ht
 - 🧠 **Model Discovery**: Discover available models and their capabilities
 - 🏆 **Quality Scoring**: Transparent heuristic scoring of free models based on capabilities
 - 📦 **Machine-Consumable Artifacts**: Daily-updated JSON/text lists of free models, ready for downstream use
-- 🌐 **Web Chat UI**: Public GitHub Pages chat interface with proxy-backed failover routing
+- 🌐 **Web Chat UI**: Public GitHub Pages chat with browser-first llm-fallbacks routing (BYOK)
 - 🛠️ **GUI Tool**: Includes a GUI tool for exploring and filtering available models
 
 ## Installation
