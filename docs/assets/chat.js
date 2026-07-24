@@ -5660,6 +5660,7 @@ var KEY_LABELS = {
   together: "Together AI",
   fireworks: "Fireworks AI"
 };
+var PRIMARY_FIELDS = ["openrouter", "groq", "google", "mistral", "deepseek", "together", "fireworks"];
 function ByokSettingsPlugin(deps) {
   return {
     name: "byok-settings",
@@ -5672,27 +5673,42 @@ function ByokSettingsPlugin(deps) {
           </header>
           <p class="panel-hint">Optional. Keys stay in this browser only \u2014 never sent to GitHub Pages.</p>
           <form id="byok-form">
-            <div id="byok-fields"></div>
+            <div id="byok-fields-primary"></div>
+            <div id="byok-fields-extra" hidden></div>
+            <button type="button" id="byok-toggle-extra" class="panel-btn panel-btn-ghost">Show all providers</button>
             <div class="panel-actions">
               <button type="submit" class="panel-btn panel-btn-primary">Save keys</button>
             </div>
           </form>
         `;
         const form = root.querySelector("#byok-form");
-        const fieldsHost = root.querySelector("#byok-fields");
+        const primaryHost = root.querySelector("#byok-fields-primary");
+        const extraHost = root.querySelector("#byok-fields-extra");
+        const toggleBtn = root.querySelector("#byok-toggle-extra");
         const keys = loadKeys();
-        for (const field of fields) {
+        const addField = (host, field) => {
           const label = document.createElement("label");
           label.textContent = KEY_LABELS[field] || field;
           const input = document.createElement("input");
           input.type = "password";
           input.name = field;
           input.autocomplete = "off";
+          input.placeholder = "sk-\u2026";
           input.value = keys[field] || "";
           if (field === "openrouter") input.id = "keyInput";
           label.appendChild(input);
-          fieldsHost.appendChild(label);
-        }
+          host.appendChild(label);
+        };
+        const primary = fields.filter((f) => PRIMARY_FIELDS.includes(f));
+        const extra = fields.filter((f) => !PRIMARY_FIELDS.includes(f));
+        for (const field of primary) addField(primaryHost, field);
+        for (const field of extra) addField(extraHost, field);
+        if (extra.length === 0) toggleBtn.hidden = true;
+        toggleBtn.addEventListener("click", () => {
+          const open = extraHost.hidden;
+          extraHost.hidden = !open;
+          toggleBtn.textContent = open ? "Hide extra providers" : "Show all providers";
+        });
         form.addEventListener("submit", (e) => {
           e.preventDefault();
           const next = {};

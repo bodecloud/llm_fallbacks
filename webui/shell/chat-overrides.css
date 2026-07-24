@@ -120,8 +120,28 @@ body.lf-chat-page::before {
   display: none;
 }
 
+@media (max-width: 768px) {
+  /* Embedded shell hides the header globally — restore mobile sidebar toggle only */
+  #chatMount.mur-app-embedded .mur-main-header {
+    display: flex;
+    height: var(--mur-header-height, 3rem);
+    pointer-events: none;
+  }
+
+  #chatMount.mur-app-embedded .mur-open-sidebar-btn {
+    display: inline-flex !important;
+    pointer-events: auto;
+  }
+}
+
 #chatMount.mur-app-embedded .mur-chat-history {
   padding-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  #chatMount.mur-app-embedded .mur-chat-history {
+    padding-top: 3.5rem;
+  }
 }
 
 /* Empty state: anchor input to bottom + welcome hero */
@@ -134,7 +154,7 @@ body.lf-chat-page::before {
   content: "Free model chat";
   display: block;
   position: absolute;
-  top: 38%;
+  top: 36%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: clamp(1.35rem, 3vw, 1.85rem);
@@ -143,22 +163,28 @@ body.lf-chat-page::before {
   letter-spacing: -0.02em;
   pointer-events: none;
   z-index: 1;
+  text-shadow: 0 0 40px rgba(157, 78, 221, 0.25);
 }
 
 #chatMount.mur-app-embedded.mur-chat-empty .mur-chat-layout-wrapper::after {
   content: "Zero-config demo — ranked free alias via edge proxy. Optional BYOK for browser-direct routes.";
   display: block;
   position: absolute;
-  top: 46%;
+  top: 44%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: min(32rem, 88%);
   text-align: center;
   font-size: 0.92rem;
-  line-height: 1.5;
+  line-height: 1.55;
   color: #8b8ba3;
   pointer-events: none;
   z-index: 1;
+}
+
+#chatMount.mur-app-embedded.mur-chat-empty .mur-chat-scroll-area {
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 38%, rgba(157, 78, 221, 0.1), transparent 70%);
 }
 
 /* Collapsed sidebar rail — icon only, no stray chrome */
@@ -191,6 +217,15 @@ body.lf-chat-page::before {
   border: 1px solid rgba(157, 78, 221, 0.12);
   border-radius: 12px;
   padding: 0.65rem 0.85rem;
+}
+
+#chatMount .mur-message.mur-message-assistant {
+  width: auto;
+  max-width: min(88%, 36rem);
+}
+
+#chatMount .mur-message.mur-message-user {
+  max-width: min(78%, 28rem);
 }
 
 #chatMount .mur-message-user .mur-message-blocks-wrapper {
@@ -275,9 +310,12 @@ body.lf-chat-page::before {
   color: #c77dff;
 }
 
+.credits-actions .top-settings-button {
+  margin-left: 0;
+}
+
 .top-settings-button {
   cursor: pointer;
-  margin-left: 0.35rem;
   padding: 0.4rem 0.85rem;
   border-radius: 999px;
   border: 1px solid rgba(157, 78, 221, 0.3);
@@ -398,6 +436,19 @@ body.lf-chat-page::before {
   background: linear-gradient(135deg, #b76fe8, #9d4edd);
 }
 
+.panel-btn-ghost {
+  margin-top: 0.5rem;
+  background: transparent;
+  border-color: rgba(157, 78, 221, 0.2);
+  color: #8b8ba3;
+  width: 100%;
+}
+
+.panel-btn-ghost:hover {
+  color: #e4c7ff;
+  background: rgba(157, 78, 221, 0.08);
+}
+
 .panel-hint code {
   font-size: 0.82em;
   padding: 0.1rem 0.35rem;
@@ -425,9 +476,25 @@ body.lf-chat-page::before {
 
 .explorer-table-wrap th,
 .explorer-table-wrap td {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 0.25rem 0.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.35rem 0.5rem;
   text-align: left;
+}
+
+.explorer-table-wrap th {
+  position: sticky;
+  top: 0;
+  background: #252545;
+  color: #e4c7ff;
+  font-weight: 600;
+}
+
+.explorer-table-wrap tbody tr:nth-child(even) {
+  background: rgba(157, 78, 221, 0.06);
+}
+
+.explorer-table-wrap tbody tr:hover {
+  background: rgba(157, 78, 221, 0.12);
 }
 
 .mur-toolbar-btn {

@@ -11,6 +11,8 @@ const KEY_LABELS: Record<string, string> = {
   fireworks: "Fireworks AI",
 };
 
+const PRIMARY_FIELDS = ["openrouter", "groq", "google", "mistral", "deepseek", "together", "fireworks"];
+
 export function ByokSettingsPlugin(deps: { onKeysSaved: () => void }): ChatPlugin {
   return {
     name: "byok-settings",
@@ -23,28 +25,46 @@ export function ByokSettingsPlugin(deps: { onKeysSaved: () => void }): ChatPlugi
           </header>
           <p class="panel-hint">Optional. Keys stay in this browser only — never sent to GitHub Pages.</p>
           <form id="byok-form">
-            <div id="byok-fields"></div>
+            <div id="byok-fields-primary"></div>
+            <div id="byok-fields-extra" hidden></div>
+            <button type="button" id="byok-toggle-extra" class="panel-btn panel-btn-ghost">Show all providers</button>
             <div class="panel-actions">
               <button type="submit" class="panel-btn panel-btn-primary">Save keys</button>
             </div>
           </form>
         `;
         const form = root.querySelector<HTMLFormElement>("#byok-form")!;
-        const fieldsHost = root.querySelector<HTMLDivElement>("#byok-fields")!;
+        const primaryHost = root.querySelector<HTMLDivElement>("#byok-fields-primary")!;
+        const extraHost = root.querySelector<HTMLDivElement>("#byok-fields-extra")!;
+        const toggleBtn = root.querySelector<HTMLButtonElement>("#byok-toggle-extra")!;
         const keys = loadKeys();
 
-        for (const field of fields) {
+        const addField = (host: HTMLElement, field: string) => {
           const label = document.createElement("label");
           label.textContent = KEY_LABELS[field] || field;
           const input = document.createElement("input");
           input.type = "password";
           input.name = field;
           input.autocomplete = "off";
+          input.placeholder = "sk-…";
           input.value = keys[field] || "";
           if (field === "openrouter") input.id = "keyInput";
           label.appendChild(input);
-          fieldsHost.appendChild(label);
-        }
+          host.appendChild(label);
+        };
+
+        const primary = fields.filter((f) => PRIMARY_FIELDS.includes(f));
+        const extra = fields.filter((f) => !PRIMARY_FIELDS.includes(f));
+        for (const field of primary) addField(primaryHost, field);
+        for (const field of extra) addField(extraHost, field);
+
+        if (extra.length === 0) toggleBtn.hidden = true;
+
+        toggleBtn.addEventListener("click", () => {
+          const open = extraHost.hidden;
+          extraHost.hidden = !open;
+          toggleBtn.textContent = open ? "Hide extra providers" : "Show all providers";
+        });
 
         form.addEventListener("submit", (e) => {
           e.preventDefault();
