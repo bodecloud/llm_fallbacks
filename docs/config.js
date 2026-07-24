@@ -1,7 +1,8 @@
-// Local dev defaults — override via config.js from secrets in CI.
+// Generated on GitHub Pages deploy when WORKER_URL / LITELLM_URL secrets exist.
+// Browser-first routing uses localStorage API keys — no localhost required.
 window.LLM_FALLBACKS_CONFIG = {
-  endpoints: ["http://127.0.0.1:4000"],
-  guestToken: "dev-local-key",
+  endpoints: [],
+  guestToken: "",
   defaultModel: "free",
   catalogUrl:
     "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/free_models.json",

@@ -137,22 +137,97 @@
       font-family: "IBM Plex Mono", monospace;
     }
     a { color: var(--accent); }
+    .settings-panel {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 10;
+    }
+    .settings-panel[hidden] { display: none; }
+    .settings-dialog {
+      width: min(28rem, 100%);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    .settings-dialog h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+    }
+    .settings-dialog p {
+      margin: 0 0 1rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .field label { font-size: 0.8125rem; }
+    .field input {
+      font: inherit;
+      padding: 0.45rem 0.55rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+    }
+    .settings-actions {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
   <header>
     <div>
       <h1>llm-fallbacks</h1>
-      <p>Ranked free models · edge + PaaS failover</p>
+      <p>Ranked free models · browser-first failover</p>
     </div>
     <div class="controls">
       <label for="model">Model</label>
       <select id="model" aria-label="Model selection">
         <option value="free">free (ranked fallback chain)</option>
       </select>
+      <button type="button" class="secondary" id="settings">Settings</button>
       <button type="button" class="secondary" id="clear">Clear</button>
     </div>
   </header>
+
+  <div id="settings-panel" class="settings-panel" hidden>
+    <div class="settings-dialog" role="dialog" aria-labelledby="settings-title">
+      <h2 id="settings-title">API keys (browser only)</h2>
+      <p>
+        Keys are stored in <code>localStorage</code> on this device — never sent to GitHub Pages.
+        OpenRouter covers most free models in the ranked chain.
+        <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">Get an OpenRouter key</a>.
+      </p>
+      <form id="keys-form">
+        <div class="field">
+          <label for="key-openrouter">OpenRouter API key</label>
+          <input id="key-openrouter" type="password" autocomplete="off" placeholder="sk-or-…" />
+        </div>
+        <div class="field">
+          <label for="key-groq">Groq API key (optional)</label>
+          <input id="key-groq" type="password" autocomplete="off" placeholder="gsk_…" />
+        </div>
+        <div class="settings-actions">
+          <button type="button" class="secondary" id="settings-close">Cancel</button>
+          <button type="submit">Save keys</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <main id="chat" aria-live="polite"></main>
 
@@ -165,6 +240,7 @@
   </footer>
 
   <script src="config.js"></script>
+  <script src="client-router.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
