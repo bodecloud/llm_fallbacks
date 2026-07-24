@@ -142,6 +142,14 @@ window.LlmFallbacksClient = (function () {
     return { res, route: "browser/" + parsed.provider + "/" + parsed.apiModel };
   }
 
+  function isSkipReason(message) {
+    return (
+      /^no API key for /i.test(message) ||
+      /^unsupported provider:/i.test(message) ||
+      /^invalid model id:/i.test(message)
+    );
+  }
+
   async function chatWithBrowserFallback(options) {
     const keys = options.keys || loadKeys();
     if (!hasAnyKey(keys)) {
@@ -157,6 +165,7 @@ window.LlmFallbacksClient = (function () {
     }
 
     let lastError = "Browser fallback chain exhausted";
+    let attempted = false;
 
     for (let i = 0; i < chain.length; i++) {
       const modelId = chain[i];
@@ -169,9 +178,9 @@ window.LlmFallbacksClient = (function () {
           options.providerUrls
         );
         if (result.skipped) {
-          lastError = result.reason;
           continue;
         }
+        attempted = true;
         const res = result.res;
         if (res.ok) {
           return { data: await res.json(), route: result.route };
@@ -182,10 +191,17 @@ window.LlmFallbacksClient = (function () {
           throw new Error(lastError);
         }
       } catch (err) {
+        attempted = true;
         lastError = modelId + ": " + (err.message || String(err));
       }
     }
 
+    if (!attempted) {
+      throw new Error("BROWSER_UNAVAILABLE");
+    }
+    if (isSkipReason(lastError)) {
+      throw new Error("BROWSER_UNAVAILABLE");
+    }
     throw new Error(lastError);
   }
 

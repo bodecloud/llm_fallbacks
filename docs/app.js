@@ -107,25 +107,57 @@
     });
   }
 
+  function shouldTryBrowser(body, userKeys) {
+    const model = body.model || defaultModel;
+    if (model === "free") {
+      return client.hasAnyKey(userKeys) && client.buildFreeChain(catalog, userKeys).length > 0;
+    }
+    return client.hasAnyKey(userKeys) && client.hasKeyForModel(model, userKeys);
+  }
+
+  function shouldFallbackToProxy(browserErr) {
+    const msg = browserErr.message || String(browserErr);
+    return (
+      msg === "BROWSER_UNAVAILABLE" ||
+      msg === "PROXY_UNAVAILABLE" ||
+      /^no API key for /i.test(msg) ||
+      /^unsupported provider:/i.test(msg)
+    );
+  }
+
   async function chatWithFallback(body) {
     const userKeys = client.loadKeys();
     const model = body.model || defaultModel;
-    const canBrowser =
-      client.hasAnyKey(userKeys) &&
-      (model !== "free" ? client.hasKeyForModel(model, userKeys) : client.buildFreeChain(catalog, userKeys).length > 0);
 
-    if (canBrowser) {
+    if (proxyEndpoints.length) {
+      try {
+        return await chatWithProxyFallback(body);
+      } catch (proxyErr) {
+        if (!shouldTryBrowser(body, userKeys)) {
+          throw proxyErr;
+        }
+        setStatus("cloud proxy unavailable — trying optional browser route …");
+      }
+    }
+
+    if (model !== "free" && !client.hasKeyForModel(model, userKeys)) {
+      if (proxyEndpoints.length) {
+        return await chatWithProxyFallback({ ...body, model: "free" });
+      }
+      throw new Error(
+        "Selected model requires an API key for its provider. Choose free (ranked fallback chain) or add the provider key in Settings."
+      );
+    }
+
+    if (shouldTryBrowser(body, userKeys)) {
       try {
         return await chatWithBrowserFallback(body);
       } catch (browserErr) {
-        const msg = browserErr.message || String(browserErr);
-        if (msg === "BROWSER_UNAVAILABLE" && proxyEndpoints.length) {
-          setStatus("optional browser route unavailable — using cloud proxy …");
-        } else if (proxyEndpoints.length) {
-          setStatus("browser failed — trying cloud proxy …");
-        } else {
-          throw browserErr;
+        if (proxyEndpoints.length && shouldFallbackToProxy(browserErr)) {
+          setStatus("browser route failed — retrying cloud proxy …");
+          return await chatWithProxyFallback(body);
         }
+        throw browserErr;
       }
     }
 
@@ -183,6 +215,9 @@
         modelSelect.remove(1);
       }
       chatModels.slice(0, 40).forEach(function (m) {
+        if (m.id !== "free" && !client.hasKeyForModel(m.id, client.loadKeys())) {
+          return;
+        }
         const opt = document.createElement("option");
         opt.value = m.id;
         opt.textContent = m.id + " (q=" + (m.quality_score || "?") + ")";
