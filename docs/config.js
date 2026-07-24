@@ -4,8 +4,8 @@ window.LLM_FALLBACKS_CONFIG = {
   guestToken: "dev-local-key",
   defaultModel: "free",
   catalogUrl:
-    "https://raw.githubusercontent.com/bolabaden/llm_fallbacks/main/configs/free_models.json",
+    "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/free_models.json",
   providerUrlsUrl:
-    "https://raw.githubusercontent.com/bolabaden/llm_fallbacks/main/configs/provider_urls.json",
+    "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/provider_urls.json",
   maxTokens: 512,
 };

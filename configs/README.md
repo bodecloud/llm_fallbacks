@@ -41,7 +41,7 @@ The [GitHub Pages chat UI](../docs/index.html) loads this file at runtime to pop
 Plain text file with one model ID per line, in the same quality-score order as `free_models.json`. Useful for simple downstream consumption:
 
 ```bash
-curl -s https://raw.githubusercontent.com/bolabaden/llm_fallbacks/main/configs/free_models_ids.txt | head -10
+curl -s https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/free_models_ids.txt | head -10
 ```
 
 ### `all_models.json`

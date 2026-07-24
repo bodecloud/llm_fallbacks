@@ -95,7 +95,7 @@ async function callUpstream(
       headers: {
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://bolabaden.github.io/llm_fallbacks/",
+        "HTTP-Referer": "https://bodecloud.github.io/llm_fallbacks/",
         "X-Title": "llm-fallbacks",
       },
       body: JSON.stringify({ ...payload, model: litellmId.replace(/^openrouter\//, "") }),
