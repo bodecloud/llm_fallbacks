@@ -161,5 +161,12 @@ cython_debug/
 
 .history
 
+# Node / Playwright e2e
+node_modules/
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
 # Compound Engineering local config
 .compound-engineering/*.local.yaml

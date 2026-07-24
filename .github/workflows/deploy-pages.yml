@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - "docs/**"
+      - "tests/e2e/**"
+      - "playwright.config.ts"
+      - "package.json"
+      - "package-lock.json"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
@@ -28,7 +32,12 @@ jobs:
           WORKER_URL: ${{ secrets.WORKER_URL }}
           LITELLM_URL: ${{ secrets.LITELLM_URL }}
           PROXY_GUEST_TOKEN: ${{ secrets.PROXY_GUEST_TOKEN }}
+          APP_VERSION: ${{ github.sha }}
         run: |
+          APP_VERSION="${GITHUB_SHA::7}-$(date +%s)"
+          echo "APP_VERSION=$APP_VERSION" >> "$GITHUB_ENV"
+          sed -i "s/APP_VERSION/${APP_VERSION}/g" docs/index.html
+          export APP_VERSION
           python3 <<'PY'
           import json
           import os
@@ -46,6 +55,7 @@ jobs:
               "catalogUrl": "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/free_models.json",
               "providerUrlsUrl": "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/provider_urls.json",
               "maxTokens": 512,
+              "appVersion": os.environ.get("APP_VERSION", ""),
           }
           body = "window.LLM_FALLBACKS_CONFIG = " + json.dumps(cfg, indent=2) + ";\n"
           open("docs/config.js", "w", encoding="utf-8").write(body)
@@ -66,3 +76,32 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  e2e:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install chromium
+
+      - name: Run Pages chat e2e
+        env:
+          PAGES_BASE_URL: https://bodecloud.github.io/llm_fallbacks/
+        run: npx playwright test
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
