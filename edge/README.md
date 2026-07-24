@@ -38,6 +38,36 @@ npm run deploy
 
 Or push to `main` — `.github/workflows/deploy-proxies.yml` deploys when `edge/` changes.
 
+### CI deploy troubleshooting
+
+If **Deploy Proxies** fails with `Authentication error [code: 10000]`, regenerate the Cloudflare API token and update the `CLOUDFLARE_API_TOKEN` repository secret. The token needs at least:
+
+- **Account** → **Workers Scripts** → **Edit**
+- **Account** → **Workers AI** → **Read** (or Edit)
+- **Account** → **Account Settings** → **Read** (for `wrangler deploy`)
+
+Confirm `CLOUDFLARE_ACCOUNT_ID` matches the account that owns `llm-fallbacks-proxy`.
+
+After updating secrets, re-run **Deploy Proxies** from the Actions tab (or push any `edge/` change).
+
+Local deploy (bypasses CI):
+
+```bash
+npx wrangler login
+npm run deploy
+echo "$OPENROUTER_API_KEY" | npx wrangler secret put OPENROUTER_API_KEY
+```
+
+### Pages CI: webui build step
+
+Pushing changes to `.github/workflows/deploy-pages.yml` requires a GitHub token with the **`workflow`** scope. Refresh the active `gh` account:
+
+```bash
+gh auth refresh -h github.com -s workflow,repo
+```
+
+Then commit and push the webui build step (builds `webui/` into `docs/assets/` on each deploy).
+
 ## Required GitHub secrets
 
 | Secret | Purpose |
