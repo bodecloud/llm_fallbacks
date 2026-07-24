@@ -1,0 +1,146 @@
+/* llm-fallbacks shell panel overlay styles (ResearchWizard shell + murm-ui embed) */
+
+.main-chat-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0 1rem 1rem;
+}
+
+#chatMount {
+  flex: 1;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(15, 15, 25, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#chatMount .mur-app.mur-app-embedded {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+}
+
+.shell-panel-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1200;
+}
+
+.shell-panel-mask[hidden] {
+  display: none !important;
+}
+
+.shell-panel {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: min(400px, 92vw);
+  height: 100%;
+  background: #1a1a2e;
+  color: #eee;
+  z-index: 1300;
+  padding: 1.25rem;
+  overflow-y: auto;
+  transition: right 0.25s ease;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.45);
+}
+
+.shell-panel.open {
+  right: 0;
+}
+
+.shell-panel label {
+  display: block;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+
+.shell-panel input,
+.shell-panel textarea,
+.shell-panel select {
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.35);
+  color: inherit;
+}
+
+.panel-hint {
+  opacity: 0.75;
+  font-size: 0.85rem;
+}
+
+.panel-status {
+  margin: 0.75rem 0;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.explorer-table-wrap {
+  overflow: auto;
+  max-height: 50vh;
+  margin-top: 0.75rem;
+}
+
+.explorer-table-wrap table {
+  width: 100%;
+  font-size: 0.75rem;
+  border-collapse: collapse;
+}
+
+.explorer-table-wrap th,
+.explorer-table-wrap td {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.4rem;
+  text-align: left;
+}
+
+.top-settings-button {
+  cursor: pointer;
+  margin-left: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+}
+
+.top-settings-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.mur-toolbar-btn {
+  margin-right: 0.35rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  color: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.boot-error {
+  color: #f88;
+  padding: 1rem;
+}
+
+#closeSet {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1400;
+  display: none;
+}
+
+.shell-panel.open ~ #closeSet,
+.shell-panel-mask.visible ~ #closeSet {
+  display: block;
+}

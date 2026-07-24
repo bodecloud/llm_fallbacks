@@ -1,10 +1,11 @@
 {
-  "name": "ChatGPT",
-  "short_name": "ChatGPT",
-  "description": "简洁而强大的ChatGPT应用",
+  "name": "llm-fallbacks chat",
+  "short_name": "llm-fallbacks",
+  "description": "Zero-config free model chat with proxy failover",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#edeff2",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
   "icons": [
     {
       "src": "icon.png",

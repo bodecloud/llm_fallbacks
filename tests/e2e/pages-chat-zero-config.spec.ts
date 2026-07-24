@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { PAGES_BASE_URL } from "../../playwright.config";
-import { ERROR_RE, LOCALHOST_RE, lastAssistant, waitForAssistantText } from "./helpers";
+import { ERROR_RE, LOCALHOST_RE, lastUserMessage, waitForAssistantText } from "./helpers";
 
 test.describe("Zero-config production chat journey", () => {
   test("fresh visitor chats with streaming and no saved keys", async ({ page }) => {
@@ -14,11 +14,15 @@ test.describe("Zero-config production chat journey", () => {
     await page.reload({ waitUntil: "domcontentloaded" });
     await expect(page.locator("#chatinput")).toBeVisible({ timeout: 45_000 });
 
-    expect(await page.evaluate(() => localStorage.getItem("APIKey"))).toMatch(
-      /llm-fallbacks-public|.+/
+    const guestToken = await page.evaluate(() =>
+      localStorage.getItem("llm_fallbacks_guest_token")
     );
-    const host = await page.evaluate(() => localStorage.getItem("APIHost") || "");
-    expect(host).toMatch(/workers\.dev/);
+    expect(guestToken).toMatch(/llm-fallbacks-public|.+$/);
+
+    const endpointsRaw = await page.evaluate(() =>
+      localStorage.getItem("llm_fallbacks_proxy_endpoints")
+    );
+    expect(endpointsRaw).toMatch(/workers\.dev/);
 
     await page.locator("#sysSetting").click();
     await expect(page.locator("#sysMask")).toBeVisible();
@@ -27,7 +31,7 @@ test.describe("Zero-config production chat journey", () => {
     const msg1 = "Reply with exactly one word: alpha";
     await page.locator("#chatinput").fill(msg1);
     await page.locator("#sendbutton").click();
-    await expect(page.locator(".request").last()).toContainText(msg1);
+    await expect(lastUserMessage(page)).toContainText(msg1, { timeout: 30_000 });
 
     const reply1 = await waitForAssistantText(page);
     console.log("[zero-config] assistant reply 1:", reply1.slice(0, 120));

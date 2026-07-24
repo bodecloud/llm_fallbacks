@@ -19,7 +19,8 @@ Durable instructions for AI agents working in this repository. Follow these conv
 | `tests/` | Pytest suite (flat layout, no `conftest.py`) |
 | `configs/` | Generated model-list artifacts (committed; updated daily by CI) |
 | `deploy/` | Optional Docker Compose stack (LiteLLM proxy + config-updater); cloud via `Dockerfile.gateway` |
-| `docs/` | Static GitHub Pages chat UI (`index.html`, `app.js`, `config.js`) |
+| `docs/` | Static GitHub Pages output (`index.html`, `assets/`, `config.js`) — **source:** `webui/` |
+| `webui/` | Chat UI source (ResearchWizard shell + murm-ui + plugins); `npm run build` → `docs/` |
 | `edge/` | Cloudflare Worker primary proxy (TypeScript, Wrangler) |
 | `.github/workflows/` | CI, PyPI publish, daily config refresh |
 | `setup.py` | Packaging manifest (`setuptools`, `src/` layout) |
@@ -206,4 +207,6 @@ See `README.md` and `.github/workflows/python-package.yml` for canonical command
 - **Type check:** `mypy .`
 - **Tests:** `OPENROUTER_API_KEY=dummy pytest --cov=llm_fallbacks tests/ -v`
 - **Pages e2e:** `npm ci && npx playwright install chromium && npm run test:e2e`
+- **Web UI build:** `cd webui && npm ci && npm run build`
+- **Web UI unit tests:** `cd webui && npm test`
 - **Build:** `python3 -m build`

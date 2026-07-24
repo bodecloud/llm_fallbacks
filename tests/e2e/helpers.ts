@@ -2,7 +2,7 @@ import type { Page } from "@playwright/test";
 
 export const LOCALHOST_RE = /127\.0\.0\.1|localhost/i;
 export const ERROR_RE =
-  /no API key for|proxy pending|still deploying|NetworkError|Failed to fetch|401 Unauthorized/i;
+  /no API key for|proxy pending|still deploying|NetworkError|Failed to fetch|401 Unauthorized|PROXY_UNAVAILABLE/i;
 
 export const DEMO_PROXY = "https://demo-proxy.test";
 
@@ -58,19 +58,44 @@ export async function installTestConfigMock(page: Page) {
   await page.route("**/llm-fallbacks-proxy.bocloud.workers.dev/**", (route) =>
     route.abort("blockedbyclient")
   );
+
+  await page.route("**/free_models.json", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: "[]",
+    });
+  });
+
+  await page.route("**/provider_urls.json", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: "{}",
+    });
+  });
 }
 
 export function lastAssistant(page: Page) {
-  return page.locator(".response").last().locator(".markdown-body, .responseBody").first();
+  return page.locator(".mur-message-assistant").last().locator(".mur-message-blocks-wrapper");
+}
+
+export function lastAssistantMessage(page: Page) {
+  return page.locator(".mur-message-assistant").last();
+}
+
+export function lastUserMessage(page: Page) {
+  return page.locator(".mur-message-user").last();
 }
 
 export async function waitForAssistantText(page: Page, timeout = 90_000) {
-  const assistant = lastAssistant(page);
-  await assistant.waitFor({ state: "visible", timeout });
+  await lastAssistantMessage(page).waitFor({ state: "visible", timeout });
+  const blocks = lastAssistant(page);
+  const message = lastAssistantMessage(page);
   const start = Date.now();
   let last = "";
   while (Date.now() - start < timeout) {
-    const text = ((await assistant.textContent()) || "").trim();
+    const text = ((await blocks.textContent()) || (await message.textContent()) || "").trim();
     if (text.length > 2 && text !== "…" && !ERROR_RE.test(text)) {
       return text;
     }
@@ -80,4 +105,14 @@ export async function waitForAssistantText(page: Page, timeout = 90_000) {
     await page.waitForTimeout(250);
   }
   throw new Error(`Assistant reply timeout; last="${last}"`);
+}
+
+export function readStoredEndpoints(page: Page): Promise<string[]> {
+  return page.evaluate(() => {
+    try {
+      return JSON.parse(localStorage.getItem("llm_fallbacks_proxy_endpoints") || "[]");
+    } catch {
+      return [];
+    }
+  });
 }

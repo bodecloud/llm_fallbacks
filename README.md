@@ -15,7 +15,7 @@ A Python library for managing fallbacks for LLM API calls using the [LiteLLM](ht
 - 🧠 **Model Discovery**: Discover available models and their capabilities
 - 🏆 **Quality Scoring**: Transparent heuristic scoring of free models based on capabilities
 - 📦 **Machine-Consumable Artifacts**: Daily-updated JSON/text lists of free models, ready for downstream use
-- 🌐 **Web Chat UI**: Public GitHub Pages chat with browser-first llm-fallbacks routing (BYOK)
+- 🌐 **Web Chat UI**: Public GitHub Pages chat (ResearchWizard shell + murm-ui plugins, zero-config proxy)
 - 🛠️ **GUI Tool**: Includes a GUI tool for exploring and filtering available models
 
 ## Installation
@@ -61,17 +61,17 @@ See [deploy/README.md](deploy/README.md) for smoke tests, environment variables,
 
 ## Live Chat Demo (GitHub Pages)
 
-A static chat UI ships in [`docs/`](docs/index.html) and deploys to GitHub Pages as the project homepage:
+A static chat UI ships in [`docs/`](docs/index.html) (built from [`webui/`](webui/)) and deploys to GitHub Pages as the project homepage:
 
 **https://bodecloud.github.io/llm_fallbacks/**
 
 Architecture:
 
-- **Pages** — static UI loads `free_models.json`; no provider API keys in the browser
-- **Cloudflare Worker** — primary OpenAI-compatible proxy (guest token + short model chain)
+- **Pages** — ResearchWizard shell + murm-ui chat; loads `free_models.json`; optional BYOK in browser
+- **Cloudflare Worker** — primary OpenAI-compatible proxy (guest token + SSE streaming)
 - **Render/Koyeb LiteLLM** — secondary backend with full `free` alias fallback chain
 
-See [edge/README.md](edge/README.md), [STRATEGY.md](STRATEGY.md), and [docs/plans/2026-07-24-002-feat-static-chat-ha-gateway-plan.md](docs/plans/2026-07-24-002-feat-static-chat-ha-gateway-plan.md).
+Plugin authoring: [docs/chat-ui-plugins.md](docs/chat-ui-plugins.md). See [edge/README.md](edge/README.md), [STRATEGY.md](STRATEGY.md), and [docs/plans/2026-07-24-002-feat-static-chat-ha-gateway-plan.md](docs/plans/2026-07-24-002-feat-static-chat-ha-gateway-plan.md).
 
 ## Automated Model Lists
 

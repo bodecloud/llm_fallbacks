@@ -4,6 +4,8 @@ import {
   ERROR_RE,
   LOCALHOST_RE,
   lastAssistant,
+  lastUserMessage,
+  readStoredEndpoints,
   waitForAssistantText,
 } from "./helpers";
 
@@ -12,10 +14,9 @@ test.describe("Live GitHub Pages chat (no mocks)", () => {
     await page.goto(PAGES_BASE_URL, { waitUntil: "domcontentloaded" });
     await page.evaluate(() => {
       localStorage.removeItem("llm_fallbacks_api_keys");
-      localStorage.removeItem("APIKey");
-      localStorage.removeItem("APIHost");
-      localStorage.removeItem("APIModel");
-      localStorage.removeItem("modelVersion");
+      localStorage.removeItem("llm_fallbacks_proxy_endpoints");
+      localStorage.removeItem("llm_fallbacks_guest_token");
+      localStorage.removeItem("llm_fallbacks_default_model");
     });
     await page.reload({ waitUntil: "domcontentloaded" });
     await expect(page.locator("#chatinput")).toBeVisible({ timeout: 45_000 });
@@ -32,9 +33,9 @@ test.describe("Live GitHub Pages chat (no mocks)", () => {
       expect(endpoint).toMatch(/^https:\/\/.+\.workers\.dev$/);
     }
 
-    const storedHost = await page.evaluate(() => localStorage.getItem("APIHost") || "");
-    expect(storedHost).toMatch(/workers\.dev/);
-    expect(storedHost).not.toMatch(LOCALHOST_RE);
+    const endpoints = await readStoredEndpoints(page);
+    expect(endpoints.join(",")).toMatch(/workers\.dev/);
+    expect(endpoints.join(",")).not.toMatch(LOCALHOST_RE);
   });
 
   test("streams a real assistant reply via cloud proxy", async ({ page }) => {
@@ -47,7 +48,7 @@ test.describe("Live GitHub Pages chat (no mocks)", () => {
     await page.locator("#chatinput").fill(userMsg);
     await page.locator("#sendbutton").click();
 
-    await expect(page.locator(".request").last()).toContainText(userMsg);
+    await expect(lastUserMessage(page)).toContainText(userMsg, { timeout: 30_000 });
 
     const assistant = lastAssistant(page);
     let seenPartial = false;
