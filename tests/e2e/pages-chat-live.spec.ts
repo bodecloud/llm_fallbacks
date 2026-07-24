@@ -1,89 +1,86 @@
 import { expect, test } from "@playwright/test";
 import { PAGES_BASE_URL } from "../../playwright.config";
-
-const LOCALHOST_RE = /127\.0\.0\.1|localhost/i;
-const ERROR_RE = /no API key for|proxy pending|still deploying|NetworkError|Failed to fetch/i;
+import {
+  ERROR_RE,
+  LOCALHOST_RE,
+  lastAssistant,
+  waitForAssistantText,
+} from "./helpers";
 
 test.describe("Live GitHub Pages chat (no mocks)", () => {
   test.beforeEach(async ({ page }) => {
-    const requests: string[] = [];
-    page.on("request", (req) => requests.push(req.url()));
-
     await page.goto(PAGES_BASE_URL, { waitUntil: "domcontentloaded" });
-    await expect(page.getByRole("heading", { name: "llm-fallbacks" })).toBeVisible();
-    await expect(page.locator("#status")).toBeVisible({ timeout: 45_000 });
-
-    await page.evaluate(() => localStorage.removeItem("llm_fallbacks_api_keys"));
+    await page.evaluate(() => {
+      localStorage.removeItem("llm_fallbacks_api_keys");
+      localStorage.removeItem("APIKey");
+      localStorage.removeItem("APIHost");
+      localStorage.removeItem("APIModel");
+      localStorage.removeItem("modelVersion");
+    });
     await page.reload({ waitUntil: "domcontentloaded" });
-    await expect(page.locator("#status")).toBeVisible({ timeout: 45_000 });
-
-    // Store request log on window for assertions in each test.
-    await page.evaluate((urls) => {
-      (window as unknown as { __e2eRequests: string[] }).__e2eRequests = urls;
-    }, requests);
+    await expect(page.locator("#chatinput")).toBeVisible({ timeout: 45_000 });
   });
 
   test("loads zero-config UI with cloud routes only (no localhost)", async ({ page }) => {
-    await expect(page.getByText("zero-config cloud failover")).toBeVisible();
-    await expect(page.getByRole("button", { name: "Settings" })).toBeVisible();
+    await expect(page).toHaveTitle(/llm-fallbacks/i);
+    await expect(page.locator("#chatinput")).toBeVisible();
+    await expect(page.locator("#sendbutton")).toBeVisible();
 
     const config = await page.evaluate(() => window.LLM_FALLBACKS_CONFIG);
     expect(JSON.stringify(config)).not.toMatch(LOCALHOST_RE);
     for (const endpoint of config.endpoints || []) {
-      expect(endpoint).not.toMatch(LOCALHOST_RE);
-      expect(endpoint).toMatch(/^https:\/\//);
+      expect(endpoint).toMatch(/^https:\/\/.+\.workers\.dev$/);
     }
 
-    await expect(page.locator("#status")).toContainText(/cloud route|proxy\//, { timeout: 45_000 });
-    await expect(page.locator("#status")).not.toContainText(LOCALHOST_RE);
-    await expect(page.locator("body")).not.toContainText("Trying http://127.0.0.1");
+    const storedHost = await page.evaluate(() => localStorage.getItem("APIHost") || "");
+    expect(storedHost).toMatch(/workers\.dev/);
+    expect(storedHost).not.toMatch(LOCALHOST_RE);
   });
 
-  test("zero-config send returns a real assistant reply via cloud proxy", async ({ page }) => {
-    test.setTimeout(120_000);
+  test("streams a real assistant reply via cloud proxy", async ({ page }) => {
+    test.setTimeout(180_000);
 
     const requests: string[] = [];
     page.on("request", (req) => requests.push(req.url()));
 
-    await page.locator("#model").selectOption("free");
-    await page.getByLabel("Message input").fill("Reply with one short word: pong");
-    await page.getByRole("button", { name: "Send" }).click();
+    const userMsg = "Reply with one short word: pong";
+    await page.locator("#chatinput").fill(userMsg);
+    await page.locator("#sendbutton").click();
 
-    const assistant = page.locator(".msg.assistant").last();
-    await expect(assistant).toBeVisible({ timeout: 60_000 });
+    await expect(page.locator(".request").last()).toContainText(userMsg);
 
-    await expect
-      .poll(
-        async () => {
-          const text = (await assistant.textContent()) || "";
-          return text.length > 3 && text !== "…" && !ERROR_RE.test(text);
-        },
-        { timeout: 90_000 }
-      )
-      .toBeTruthy();
+    const assistant = lastAssistant(page);
+    let seenPartial = false;
+    const start = Date.now();
+    while (Date.now() - start < 90_000) {
+      const text = ((await assistant.textContent()) || "").trim();
+      if (text.length > 0 && text !== "…") {
+        seenPartial = true;
+      }
+      if (seenPartial && text.length > 2 && !ERROR_RE.test(text) && !text.endsWith("…")) {
+        break;
+      }
+      await page.waitForTimeout(200);
+    }
 
-    const reply = (await assistant.textContent()) || "";
+    const reply = await waitForAssistantText(page);
     expect(reply).not.toMatch(LOCALHOST_RE);
     expect(reply).not.toMatch(ERROR_RE);
+    expect(seenPartial).toBeTruthy();
 
     const hitProxy = requests.some(
       (u) => u.includes("workers.dev") && u.includes("/v1/chat/completions")
     );
     expect(hitProxy).toBeTruthy();
-    expect(requests.filter((u) => LOCALHOST_RE.test(u))).toEqual([]);
-
-    await expect(page.locator("#status")).toContainText(/ok · proxy\//, { timeout: 60_000 });
+    expect(requests.filter((u) => LOCALHOST_RE.test(u))).toHaveLength(0);
   });
 
-  test("settings panel opens and clear chat works", async ({ page }) => {
-    await page.getByRole("button", { name: "Settings" }).click();
-    await expect(page.getByRole("dialog")).toBeVisible();
-    await expect(page.getByLabel("OpenRouter API key")).toBeVisible();
-    await page.getByRole("button", { name: "Cancel" }).click();
-    await expect(page.getByRole("dialog")).toBeHidden();
-
-    await page.getByRole("button", { name: "Clear" }).click();
-    await expect(page.getByText("Chat cleared.")).toBeVisible();
+  test("settings dialog opens without requiring keys", async ({ page }) => {
+    await page.locator("#setting").click();
+    await expect(page.locator("#sysDialog")).toBeVisible();
+    await expect(page.locator("#apiHostInput")).toBeVisible();
+    await page.locator("#closeSet").click();
+    await expect(page.locator("#sysMask")).toBeHidden();
   });
 });
 

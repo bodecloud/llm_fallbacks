@@ -76,7 +76,48 @@ function upstreamModelId(litellmId: string): { provider: string; apiModel: strin
   return { provider, apiModel };
 }
 
-async function callWorkersAI(body: ChatBody, env: Env): Promise<Response> {
+function normalizeClientModel(model?: string): string {
+  if (!model || model === "free") return "free";
+  const pipe = model.indexOf("|");
+  if (pipe > 0) return model.slice(pipe + 1) || "free";
+  return model;
+}
+
+function sseStreamFromText(text: string, origin: string | null, allowed: string[]): Response {
+  const stream = new ReadableStream({
+    start(controller) {
+      const enc = new TextEncoder();
+      const id = `cf-${Date.now()}`;
+      const parts = text.match(/\S+\s*|\s+/g) || (text ? [text] : [""]);
+      for (const part of parts) {
+        const payload = JSON.stringify({
+          id,
+          object: "chat.completion.chunk",
+          choices: [{ index: 0, delta: { content: part }, finish_reason: null }],
+        });
+        controller.enqueue(enc.encode(`data: ${payload}\n\n`));
+      }
+      const donePayload = JSON.stringify({
+        id,
+        object: "chat.completion.chunk",
+        choices: [{ index: 0, delta: {}, finish_reason: "stop" }],
+      });
+      controller.enqueue(enc.encode(`data: ${donePayload}\n\n`));
+      controller.enqueue(enc.encode("data: [DONE]\n\n"));
+      controller.close();
+    },
+  });
+  return new Response(stream, {
+    status: 200,
+    headers: {
+      "Content-Type": "text/event-stream; charset=utf-8",
+      "Cache-Control": "no-cache",
+      ...corsHeaders(origin, allowed),
+    },
+  });
+}
+
+async function workersAIText(body: ChatBody, env: Env): Promise<string | null> {
   const model = env.WORKERS_AI_MODEL || DEFAULT_WORKERS_AI_MODEL;
   try {
     const result = (await env.AI.run(model, {
@@ -84,18 +125,33 @@ async function callWorkersAI(body: ChatBody, env: Env): Promise<Response> {
       max_tokens: body.max_tokens,
     })) as { response?: string };
     const content = result?.response?.trim();
-    if (!content) {
-      return new Response(JSON.stringify({ error: { message: "Empty Workers AI response" } }), {
-        status: 502,
-      });
-    }
-    return openAiCompletion(content);
-  } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
-    return new Response(JSON.stringify({ error: { message: `Workers AI failed: ${message}` } }), {
+    return content || null;
+  } catch {
+    return null;
+  }
+}
+
+async function callWorkersAI(body: ChatBody, env: Env): Promise<Response> {
+  const content = await workersAIText(body, env);
+  if (!content) {
+    return new Response(JSON.stringify({ error: { message: "Empty Workers AI response" } }), {
       status: 502,
     });
   }
+  return openAiCompletion(content);
+}
+
+async function callWorkersAIStream(
+  body: ChatBody,
+  env: Env,
+  origin: string | null,
+  allowed: string[],
+): Promise<Response> {
+  const content = await workersAIText(body, env);
+  if (!content) {
+    return jsonError("Workers AI failed", 502, origin, allowed);
+  }
+  return sseStreamFromText(content, origin, allowed);
 }
 
 async function callUpstream(
@@ -161,15 +217,19 @@ async function callUpstream(
   });
 }
 
-async function chatWithFallback(body: ChatBody, env: Env): Promise<Response> {
+async function chatWithFallback(
+  body: ChatBody,
+  env: Env,
+  origin: string | null,
+  allowed: string[],
+): Promise<Response> {
+  const normalized = { ...body, model: normalizeClientModel(body.model) };
   const chain =
-    body.model === "free" || !body.model
-      ? modelChain(env)
-      : [body.model];
+    normalized.model === "free" ? modelChain(env) : [normalized.model];
 
   let lastResponse: Response | null = null;
   for (const modelId of chain) {
-    const attemptBody = { ...body, model: modelId };
+    const attemptBody = { ...normalized, model: modelId };
     const res = await callUpstream(modelId, attemptBody, env);
     if (res.ok) {
       return res;
@@ -186,7 +246,11 @@ async function chatWithFallback(body: ChatBody, env: Env): Promise<Response> {
     lastResponse = res;
   }
 
-  const workersAi = await callWorkersAI(body, env);
+  if (normalized.stream) {
+    return callWorkersAIStream(normalized, env, origin, allowed);
+  }
+
+  const workersAi = await callWorkersAI(normalized, env);
   if (workersAi.ok) {
     return workersAi;
   }
@@ -237,10 +301,10 @@ export default {
       body.max_tokens = cap;
     }
 
-    body.model = body.model || "free";
+    body.model = normalizeClientModel(body.model) || "free";
     body.stream = body.stream ?? false;
 
-    const upstream = await chatWithFallback(body, env);
+    const upstream = await chatWithFallback(body, env, origin, allowed);
 
     const headers = new Headers(upstream.headers);
     for (const [k, v] of Object.entries(corsHeaders(origin, allowed))) {
