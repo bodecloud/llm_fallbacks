@@ -20,8 +20,8 @@ test.describe("Zero-config production chat journey", () => {
     const host = await page.evaluate(() => localStorage.getItem("APIHost") || "");
     expect(host).toMatch(/workers\.dev/);
 
-    await page.locator("#setting").click();
-    await expect(page.locator("#keyInput")).toBeVisible();
+    await page.locator("#sysSetting").click();
+    await expect(page.locator("#sysMask")).toBeVisible();
     await page.locator("#closeSet").click();
 
     const msg1 = "Reply with exactly one word: alpha";

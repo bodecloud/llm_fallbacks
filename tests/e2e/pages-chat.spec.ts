@@ -45,8 +45,8 @@ test.describe("GitHub Pages chat (mocked SSE on live site)", () => {
   });
 
   test("settings can store optional API key locally", async ({ page }) => {
-    await page.locator("#setting").click();
-    await expect(page.locator("#sysDialog")).toBeVisible();
+    await page.locator("#sysSetting").click();
+    await expect(page.locator("#sysMask")).toBeVisible();
     await page.locator("#keyInput").fill("sk-or-settings-test");
     await page.locator("#keyInput").dispatchEvent("change");
     await page.locator("#closeSet").click();

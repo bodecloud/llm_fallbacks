@@ -76,8 +76,8 @@ test.describe("Live GitHub Pages chat (no mocks)", () => {
   });
 
   test("settings dialog opens without requiring keys", async ({ page }) => {
-    await page.locator("#setting").click();
-    await expect(page.locator("#sysDialog")).toBeVisible();
+    await page.locator("#sysSetting").click();
+    await expect(page.locator("#sysMask")).toBeVisible();
     await expect(page.locator("#apiHostInput")).toBeVisible();
     await page.locator("#closeSet").click();
     await expect(page.locator("#sysMask")).toBeHidden();
