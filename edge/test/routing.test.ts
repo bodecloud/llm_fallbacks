@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { extractWorkersAIContent, isChainModelSupported, upstreamModelId } from "../src/routing";
+import {
+  extractWorkersAIContent,
+  isChainModelSupported,
+  normalizeClientModel,
+  upstreamModelId,
+} from "../src/routing";
 
 describe("upstreamModelId", () => {
   it("parses openrouter ids", () => {
@@ -11,6 +16,21 @@ describe("upstreamModelId", () => {
 
   it("rejects bare names", () => {
     expect(upstreamModelId("free")).toBeNull();
+  });
+});
+
+describe("normalizeClientModel", () => {
+  it("maps empty and free to free", () => {
+    expect(normalizeClientModel()).toBe("free");
+    expect(normalizeClientModel("free")).toBe("free");
+  });
+
+  it("strips provider prefix before pipe", () => {
+    expect(normalizeClientModel("openrouter|meta-llama/llama-3:free")).toBe("meta-llama/llama-3:free");
+  });
+
+  it("passes through bare model ids", () => {
+    expect(normalizeClientModel("openrouter/free")).toBe("openrouter/free");
   });
 });
 
