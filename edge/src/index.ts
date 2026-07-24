@@ -1,15 +1,18 @@
 /**
  * Cloudflare Worker — OpenAI-compatible edge proxy for the llm-fallbacks chat UI.
- * Holds provider secrets; static GitHub Pages UI calls this with a guest token only.
+ * Holds provider secrets; static GitHub Pages UI calls this with a public guest token.
+ * Falls back to Cloudflare Workers AI when upstream provider keys are not configured.
  */
 
 export interface Env {
+  AI: Ai;
   PROXY_GUEST_TOKEN: string;
   OPENROUTER_API_KEY?: string;
   GROQ_API_KEY?: string;
   ALLOWED_ORIGINS: string;
   MODEL_CHAIN: string;
   MAX_TOKENS_CAP: string;
+  WORKERS_AI_MODEL?: string;
 }
 
 type ChatMessage = { role: string; content: string };
@@ -22,6 +25,7 @@ type ChatBody = {
 };
 
 const RETRYABLE = new Set([408, 429, 500, 502, 503, 504]);
+const DEFAULT_WORKERS_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct";
 
 function parseOrigins(raw: string): string[] {
   return raw.split(",").map((o) => o.trim()).filter(Boolean);
@@ -51,6 +55,15 @@ function jsonError(message: string, status: number, origin: string | null, allow
   });
 }
 
+function openAiCompletion(content: string): Response {
+  return new Response(
+    JSON.stringify({
+      choices: [{ message: { role: "assistant", content } }],
+    }),
+    { status: 200, headers: { "Content-Type": "application/json" } },
+  );
+}
+
 function modelChain(env: Env): string[] {
   return env.MODEL_CHAIN.split(",").map((m) => m.trim()).filter(Boolean);
 }
@@ -61,6 +74,28 @@ function upstreamModelId(litellmId: string): { provider: string; apiModel: strin
   const provider = litellmId.slice(0, slash);
   const apiModel = litellmId.slice(slash + 1);
   return { provider, apiModel };
+}
+
+async function callWorkersAI(body: ChatBody, env: Env): Promise<Response> {
+  const model = env.WORKERS_AI_MODEL || DEFAULT_WORKERS_AI_MODEL;
+  try {
+    const result = (await env.AI.run(model, {
+      messages: body.messages,
+      max_tokens: body.max_tokens,
+    })) as { response?: string };
+    const content = result?.response?.trim();
+    if (!content) {
+      return new Response(JSON.stringify({ error: { message: "Empty Workers AI response" } }), {
+        status: 502,
+      });
+    }
+    return openAiCompletion(content);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    return new Response(JSON.stringify({ error: { message: `Workers AI failed: ${message}` } }), {
+      status: 502,
+    });
+  }
 }
 
 async function callUpstream(
@@ -138,11 +173,18 @@ async function chatWithFallback(body: ChatBody, env: Env): Promise<Response> {
       return res;
     }
     if (!RETRYABLE.has(res.status)) {
-      return res;
+      lastResponse = res;
+      break;
     }
     lastResponse = res;
   }
-  return lastResponse ?? new Response(JSON.stringify({ error: { message: "All models failed" } }), { status: 502 });
+
+  const workersAi = await callWorkersAI(body, env);
+  if (workersAi.ok) {
+    return workersAi;
+  }
+
+  return lastResponse ?? workersAi;
 }
 
 export default {

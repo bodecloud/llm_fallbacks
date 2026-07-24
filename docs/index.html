@@ -194,7 +194,7 @@
   <header>
     <div>
       <h1>llm-fallbacks</h1>
-      <p>Ranked free models · browser-first failover</p>
+      <p>Ranked free models · zero-config cloud failover</p>
     </div>
     <div class="controls">
       <label for="model">Model</label>
@@ -208,11 +208,11 @@
 
   <div id="settings-panel" class="settings-panel" hidden>
     <div class="settings-dialog" role="dialog" aria-labelledby="settings-title">
-      <h2 id="settings-title">API keys (browser only)</h2>
+      <h2 id="settings-title">Optional API keys</h2>
       <p>
-        Keys are stored in <code>localStorage</code> on this device — never sent to GitHub Pages.
-        OpenRouter covers most free models in the ranked chain.
-        <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">Get an OpenRouter key</a>.
+        Not required for the default <code>free</code> ranked chain — that uses the cloud proxy.
+        Add keys here only if you want extra providers routed directly from your browser.
+        Keys stay in <code>localStorage</code> on this device only.
       </p>
       <form id="keys-form">
         <div class="field">

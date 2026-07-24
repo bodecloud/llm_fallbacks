@@ -1,5 +1,5 @@
 /**
- * Static chat client — browser-first llm-fallbacks routing, optional cloud proxies last.
+ * Static chat client — zero-config cloud proxy first, optional browser BYOK second.
  */
 
 (function () {
@@ -20,18 +20,23 @@
   const RETRYABLE = client.RETRYABLE;
   const defaultModel = cfg.defaultModel || "free";
   const maxTokens = cfg.maxTokens || 512;
-  const guestToken = cfg.guestToken || "";
 
   let catalog = [];
   let providerUrls = {};
+  let guestToken = cfg.guestToken || "";
+  let proxyEndpoints = [];
 
   function isLocalEndpoint(url) {
     return /^(https?:\/\/)?(127\.0\.0\.1|localhost)(:\d+)?/i.test(url || "");
   }
 
-  const proxyEndpoints = (Array.isArray(cfg.endpoints) ? cfg.endpoints : []).filter(function (u) {
-    return u && !isLocalEndpoint(u);
-  });
+  function normalizeEndpoints(list) {
+    return (Array.isArray(list) ? list : []).filter(function (u) {
+      return u && !isLocalEndpoint(u);
+    });
+  }
+
+  proxyEndpoints = normalizeEndpoints(cfg.endpoints);
 
   function setStatus(text) {
     statusEl.textContent = text;
@@ -76,7 +81,6 @@
       try {
         const res = await chatViaProxy(base, body);
         if (res.ok) {
-          setStatus("via proxy " + base);
           return { data: await res.json(), route: "proxy/" + base };
         }
         const errText = await res.text();
@@ -91,8 +95,8 @@
     throw new Error(lastError);
   }
 
-  async function chatWithFallback(body) {
-    const request = {
+  async function chatWithBrowserFallback(body) {
+    return client.chatWithBrowserFallback({
       model: body.model,
       messages: body.messages,
       maxTokens: body.max_tokens,
@@ -100,33 +104,56 @@
       providerUrls: providerUrls,
       keys: client.loadKeys(),
       onStatus: setStatus,
-    };
+    });
+  }
 
+  async function chatWithFallback(body) {
+    const userKeys = client.loadKeys();
+    const model = body.model || defaultModel;
+    const canBrowser =
+      client.hasAnyKey(userKeys) &&
+      (model !== "free" ? client.hasKeyForModel(model, userKeys) : client.buildFreeChain(catalog, userKeys).length > 0);
+
+    if (canBrowser) {
+      try {
+        return await chatWithBrowserFallback(body);
+      } catch (browserErr) {
+        const msg = browserErr.message || String(browserErr);
+        if (msg === "BROWSER_UNAVAILABLE" && proxyEndpoints.length) {
+          setStatus("optional browser route unavailable — using cloud proxy …");
+        } else if (proxyEndpoints.length) {
+          setStatus("browser failed — trying cloud proxy …");
+        } else {
+          throw browserErr;
+        }
+      }
+    }
+
+    if (proxyEndpoints.length) {
+      return await chatWithProxyFallback(body);
+    }
+
+    throw new Error(
+      "No chat routes are available yet. The demo proxy is still deploying — refresh in a minute."
+    );
+  }
+
+  async function loadChatProxy() {
+    const chatProxyUrl = cfg.chatProxyUrl;
+    if (!chatProxyUrl) return;
     try {
-      return await client.chatWithBrowserFallback(request);
-    } catch (browserErr) {
-      const msg = browserErr.message || String(browserErr);
-      if (msg.startsWith("NO_BROWSER_KEYS") || msg.includes("Browser fallback chain exhausted")) {
-        if (proxyEndpoints.length) {
-          setStatus("browser keys missing or chain failed — trying cloud proxy …");
-          return await chatWithProxyFallback(body);
-        }
-        if (msg.startsWith("NO_BROWSER_KEYS")) {
-          throw new Error(
-            "Add an OpenRouter API key in Settings (free at openrouter.ai/keys). " +
-              "Keys stay in your browser only — no local server required."
-          );
-        }
+      const res = await fetch(chatProxyUrl);
+      if (!res.ok) return;
+      const proxyCfg = await res.json();
+      const merged = normalizeEndpoints([].concat(proxyEndpoints, proxyCfg.endpoints || []));
+      proxyEndpoints = merged.filter(function (v, i, a) {
+        return a.indexOf(v) === i;
+      });
+      if (proxyCfg.guestToken) {
+        guestToken = proxyCfg.guestToken;
       }
-      if (proxyEndpoints.length) {
-        setStatus("browser failed — trying cloud proxy …");
-        try {
-          return await chatWithProxyFallback(body);
-        } catch (proxyErr) {
-          throw new Error(msg + " | proxy: " + (proxyErr.message || String(proxyErr)));
-        }
-      }
-      throw browserErr;
+    } catch (_err) {
+      /* optional artifact */
     }
   }
 
@@ -138,6 +165,7 @@
       return;
     }
     try {
+      await loadChatProxy();
       const [catRes, puRes] = await Promise.all([
         fetch(catalogUrl),
         providerUrlsUrl ? fetch(providerUrlsUrl) : Promise.resolve(null),
@@ -151,6 +179,9 @@
       const chatModels = catalog.filter(function (m) {
         return m.mode === "chat" || m.mode === "" || m.mode === "responses";
       });
+      while (modelSelect.options.length > 1) {
+        modelSelect.remove(1);
+      }
       chatModels.slice(0, 40).forEach(function (m) {
         const opt = document.createElement("option");
         opt.value = m.id;
@@ -158,9 +189,9 @@
         modelSelect.appendChild(opt);
       });
 
-      const keyHint = client.hasAnyKey(client.loadKeys()) ? "keys set" : "add keys in Settings";
-      const proxyHint = proxyEndpoints.length ? proxyEndpoints.length + " proxy" : "no proxy";
-      setStatus("browser-first · " + keyHint + " · " + proxyHint + " · " + chatModels.length + " models");
+      const proxyHint = proxyEndpoints.length ? proxyEndpoints.length + " cloud route" : "proxy pending";
+      const keyHint = client.hasAnyKey(client.loadKeys()) ? "optional keys set" : "no keys required";
+      setStatus("zero-config · " + proxyHint + " · " + keyHint + " · " + chatModels.length + " models");
     } catch (err) {
       setStatus("Catalog load failed: " + err.message);
     }
@@ -187,7 +218,7 @@
       groq: document.getElementById("key-groq").value.trim(),
     });
     closeSettings();
-    appendMessage("system", "API keys saved locally in this browser.");
+    appendMessage("system", "Optional API keys saved locally in this browser.");
     loadArtifacts();
   });
 

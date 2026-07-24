@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "docs/**"
+      - "configs/chat_proxy.json"
       - "tests/e2e/**"
       - "playwright.config.ts"
       - "package.json"
@@ -41,6 +42,7 @@ jobs:
           python3 <<'PY'
           import json
           import os
+          from pathlib import Path
 
           endpoints = []
           for key in ("WORKER_URL", "LITELLM_URL"):
@@ -48,12 +50,23 @@ jobs:
               if val:
                   endpoints.append(val)
 
+          guest_token = os.environ.get("PROXY_GUEST_TOKEN") or "llm-fallbacks-public"
+          chat_proxy_path = Path("configs/chat_proxy.json")
+          if chat_proxy_path.is_file():
+              chat_proxy = json.loads(chat_proxy_path.read_text(encoding="utf-8"))
+              for val in chat_proxy.get("endpoints") or []:
+                  val = str(val).strip().rstrip("/")
+                  if val and val not in endpoints:
+                      endpoints.append(val)
+              guest_token = chat_proxy.get("guestToken") or guest_token
+
           cfg = {
               "endpoints": endpoints,
-              "guestToken": os.environ.get("PROXY_GUEST_TOKEN") or "",
+              "guestToken": guest_token,
               "defaultModel": "free",
               "catalogUrl": "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/free_models.json",
               "providerUrlsUrl": "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/provider_urls.json",
+              "chatProxyUrl": "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/chat_proxy.json",
               "maxTokens": 512,
               "appVersion": os.environ.get("APP_VERSION", ""),
           }
@@ -95,8 +108,6 @@ jobs:
         run: npx playwright install chromium
 
       - name: Run Pages chat e2e
-        env:
-          PAGES_BASE_URL: https://bodecloud.github.io/llm_fallbacks/
         run: npx playwright test
 
       - uses: actions/upload-artifact@v4
