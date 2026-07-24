@@ -1,0 +1,29 @@
+---
+description: Pytest conventions for llm-fallbacks
+globs: tests/**/*.py
+alwaysApply: false
+---
+
+# Testing conventions
+
+Always run tests with:
+
+```bash
+OPENROUTER_API_KEY=dummy pytest --cov=llm_fallbacks tests/ -v
+```
+
+## Layout
+
+Flat `tests/` — no `conftest.py`, no shared fixtures file.
+
+| File | Style |
+|------|-------|
+| `test_core.py` | Integration smoke against live LiteLLM registry; minimal mocking |
+| `test_generate.py`, `test_quality.py` | Unit tests with inline fixture dicts; class-based grouping |
+
+## Guidelines
+
+- Match the style of the file you extend (integration vs inline-fixture unit)
+- Use `from __future__ import annotations` and type annotations on locals when adding tests
+- `test_core.py` assertions may shift with upstream model registry changes — avoid brittle model-id lists unless necessary
+- Do not add drive-by lint fixes in test files

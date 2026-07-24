@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-8908a6de71304506a98d080374f87ab6
+  master_key: sk-4f41d54be96542dd835064edf4e19a7d
   alerting:
   - slack
   - email
@@ -283,7 +283,7 @@ model_list:
     output_cost_per_token: 0.0
     mode: chat
     supports_vision: true
-    metadata:
+    metadata: &id001
       notes: The simplest way to get free inference. openrouter/free is a router that
         selects free models at random from the models available on OpenRouter. The
         router smartly filters for models that...
@@ -366,6 +366,17 @@ model_list:
       notes: Your prompt will be processed by a meta-model and routed to one of dozens
         of models (see below), optimizing for the best possible output. To see which
         model was used,...
+    litellm_provider: openrouter
+- model_name: free
+  litellm_params:
+    model: openai/openrouter/free
+    api_base: https://openrouter.ai/api/v1
+    api_key: os.environ/OPENROUTER_API_KEY
+    input_cost_per_token: 0.0
+    output_cost_per_token: 0.0
+    mode: chat
+    supports_vision: true
+    metadata: *id001
     litellm_provider: openrouter
 router_settings:
   allowed_fails: 3
@@ -979,6 +990,29 @@ router_settings:
     - openrouter/nvidia/nemotron-nano-12b-v2-vl:free
     - lemonade/gpt-oss-120b-mxfp-gguf
     - lemonade/gpt-oss-20b-mxfp4-gguf
+  - free:
+    - google/lyria-3-clip-preview
+    - google/lyria-3-pro-preview
+    - nvidia/nemotron-3-super-120b-a12b:free
+    - nvidia/nemotron-3-ultra-550b-a55b:free
+    - nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+    - cohere/north-mini-code:free
+    - google/gemma-4-31b-it:free
+    - inclusionai/ling-3.0-flash:free
+    - poolside/laguna-m.1:free
+    - poolside/laguna-s-2.1:free
+    - poolside/laguna-xs-2.1:free
+    - nvidia/nemotron-3.5-content-safety:free
+    - nvidia/nemotron-nano-12b-v2-vl:free
+    - google/gemma-4-26b-a4b-it:free
+    - openai/gpt-oss-20b:free
+    - nvidia/nemotron-3-nano-30b-a3b:free
+    - nvidia/nemotron-nano-9b-v2:free
+    - openrouter/auto
+    - openrouter/auto-beta
+    - openrouter/bodybuilder
+    - openrouter/fusion
+    - openrouter/pareto-code
   retry_policy:
     AuthenticationErrorRetries: 3
     TimeoutErrorRetries: 3

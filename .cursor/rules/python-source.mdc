@@ -1,0 +1,34 @@
+---
+description: Python coding conventions for llm-fallbacks source
+globs: src/**/*.py
+alwaysApply: false
+---
+
+# Python source conventions
+
+## Style
+
+- Line length 120, 4-space indent, double quotes (black/ruff)
+- `from __future__ import annotations` in new modules
+- NumPy docstrings; isort single-line imports; 2 blank lines after imports
+- `snake_case` functions, `PascalCase` classes, `ALL_CAPS` constants, `_` private helpers
+
+## Module boundaries
+
+| Module | Edit when changing |
+|--------|-------------------|
+| `core.py` | Model registry, cost sorting, getters, fallbacks |
+| `config.py` | Providers, import-time model enrichment |
+| `filter_litellm.py` | `filter_models()`, priority order lists |
+| `quality.py` | Quality scoring heuristic |
+| `generate_configs.py` | Committed `configs/` artifacts |
+| `__main__.py` | Tkinter GUI |
+
+Re-export new public symbols from `__init__.py` and `__all__`.
+
+## Patterns in this codebase
+
+- Dataclasses for provider config
+- Module-level singletons computed at import (`ALL_MODELS`, priority lists)
+- `TYPE_CHECKING` blocks for heavy types; permissive mypy — match existing style
+- Re-import guards: `if "VAR" not in globals():`

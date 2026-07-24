@@ -1,0 +1,97 @@
+name: Deploy Proxies
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "edge/**"
+      - "deploy/**"
+      - "configs/litellm_config_free.yaml"
+      - "configs/free_models_ids.txt"
+      - "src/**"
+      - ".github/workflows/deploy-proxies.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-worker:
+    runs-on: ubuntu-latest
+    if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build MODEL_CHAIN from free_models_ids.txt
+        id: chain
+        run: |
+          CHAIN=$(head -n 10 configs/free_models_ids.txt | paste -sd, -)
+          echo "model_chain=${CHAIN}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install edge dependencies
+        working-directory: edge
+        run: npm install
+
+      - name: Deploy Cloudflare Worker
+        working-directory: edge
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx wrangler deploy \
+            --var "MODEL_CHAIN:${{ steps.chain.outputs.model_chain }}"
+
+      - name: Set Worker secrets
+        working-directory: edge
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PROXY_GUEST_TOKEN: ${{ secrets.PROXY_GUEST_TOKEN }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          echo "$PROXY_GUEST_TOKEN" | npx wrangler secret put PROXY_GUEST_TOKEN
+          echo "$OPENROUTER_API_KEY" | npx wrangler secret put OPENROUTER_API_KEY
+          if [ -n "$GROQ_API_KEY" ]; then
+            echo "$GROQ_API_KEY" | npx wrangler secret put GROQ_API_KEY
+          fi
+
+  trigger-render:
+    runs-on: ubuntu-latest
+    if: ${{ secrets.RENDER_DEPLOY_HOOK != '' }}
+    steps:
+      - name: Trigger Render deploy hook
+        run: curl -fsS -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+
+  generate-provider-urls:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install package
+        run: |
+          pip install -e .
+          pip install pyyaml
+
+      - name: Regenerate provider_urls.json if missing
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          python -m llm_fallbacks.generate_configs --output-dir configs
+          git diff --quiet configs/provider_urls.json || (
+            git config user.email "action@github.com" &&
+            git config user.name "GitHub Action" &&
+            git add configs/provider_urls.json &&
+            git commit -m "chore: update provider_urls.json" &&
+            git push
+          )
