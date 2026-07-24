@@ -31,7 +31,9 @@ Durable instructions for AI agents working in this repository. Follow these conv
 
 **Agent instruction files:** `AGENTS.md` (canonical), `CLAUDE.md` (shim → `@AGENTS.md`), `.cursor/rules/` (focused Cursor rules).
 
-**Not present:** `CONCEPTS.md`, `docs/`, `docs/solutions/`, `CONTRIBUTING.md`.
+**Not present:** `CONTRIBUTING.md`.
+
+**Institutional learnings:** `docs/solutions/` (YAML-frontmatter runbooks from past fixes), `CONCEPTS.md` (gateway vocabulary).
 
 ## Module map
 
@@ -179,6 +181,9 @@ When reviewing or submitting changes:
 6. GUI requires Tkinter (may be absent on minimal Linux images)
 7. No root `main.py` — entry points are `python -m llm_fallbacks` and `llm-fallbacks`
 8. `agentdecompile_projects/` is local Ghidra artifacts, not part of the package
+9. Public Worker `MODEL_CHAIN` should stay short (`openrouter/free` only) — long chains block Workers AI fallback (see `docs/solutions/integration-issues/workers-ai-proxy-fallback-and-model-chain.md`)
+10. murm-ui embed requires `data-theme="dark"` + `webui/shell/chat-overrides.css` — OS light mode otherwise shows white surfaces (see `docs/solutions/ui-bugs/murm-ui-light-theme-on-dark-shell.md`)
+11. Pushing `.github/workflows/*` needs GitHub token with `workflow` scope; Cloudflare deploy needs cfat token with Workers Scripts Edit (see `docs/solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md`)
 
 ## Compound Engineering
 
