@@ -109,15 +109,26 @@ jobs:
   trigger-render:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Render deploy hook
+      - name: Trigger Render redeploy
         env:
           RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
         run: |
-          if [ -z "$RENDER_DEPLOY_HOOK" ]; then
-            echo "RENDER_DEPLOY_HOOK not set — skipping Render redeploy."
+          if [ -n "$RENDER_DEPLOY_HOOK" ]; then
+            curl -fsS -X POST "$RENDER_DEPLOY_HOOK"
+            echo "Triggered Render via deploy hook."
             exit 0
           fi
-          curl -fsS -X POST "$RENDER_DEPLOY_HOOK"
+          if [ -n "$RENDER_API_KEY" ] && [ -n "$RENDER_SERVICE_ID" ]; then
+            curl -fsS -X POST "https://api.render.com/v1/services/${RENDER_SERVICE_ID}/deploys" \
+              -H "Authorization: Bearer ${RENDER_API_KEY}" \
+              -H "Content-Type: application/json" \
+              -d '{}'
+            echo "Triggered Render via API (service ${RENDER_SERVICE_ID})."
+            exit 0
+          fi
+          echo "RENDER_DEPLOY_HOOK and RENDER_API_KEY/RENDER_SERVICE_ID not set — skipping Render redeploy."
 
   generate-provider-urls:
     runs-on: ubuntu-latest
