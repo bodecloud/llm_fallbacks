@@ -1,0 +1,89 @@
+# Self-hosted free-model AI gateway (local development).
+# Run from repository root: docker compose -f deploy/docker-compose.yml up --build
+
+name: llm-fallbacks-gateway
+
+services:
+  config-init:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    command: ["--once"]
+    environment:
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-dummy}
+      LITELLM_LOCAL_MODEL_COST_MAP: ${LITELLM_LOCAL_MODEL_COST_MAP:-}
+    volumes:
+      - config-data:/config
+    restart: "no"
+
+  config-updater:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        while true; do
+          sleep "$${UPDATE_INTERVAL_SECONDS:-21600}"
+          /app/deploy/scripts/update-config.sh --once
+        done
+    environment:
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-dummy}
+      LITELLM_LOCAL_MODEL_COST_MAP: ${LITELLM_LOCAL_MODEL_COST_MAP:-}
+      UPDATE_INTERVAL_SECONDS: ${UPDATE_INTERVAL_SECONDS:-21600}
+      COMPOSE_FILE: /app/deploy/docker-compose.yml
+      COMPOSE_PROJECT_NAME: llm-fallbacks-gateway
+      RESTART_LITELLM: "true"
+    volumes:
+      - config-data:/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      config-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    networks:
+      - gateway
+    restart: unless-stopped
+
+  litellm:
+    image: ghcr.io/berriai/litellm:main-stable
+    command:
+      - litellm
+      - --config
+      - /config/litellm_config_free.yaml
+      - --port
+      - "4000"
+    environment:
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-dummy}
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?Set LITELLM_MASTER_KEY in deploy/.env}
+      REDIS_HOST: redis
+      DATABASE_URL: ${DATABASE_URL:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+    volumes:
+      - config-data:/config:ro
+    ports:
+      - "127.0.0.1:4000:4000"
+    networks:
+      - gateway
+    depends_on:
+      config-init:
+        condition: service_completed_successfully
+      redis:
+        condition: service_started
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health/liveliness"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+volumes:
+  config-data:
+
+networks:
+  gateway:

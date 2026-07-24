@@ -1,0 +1,38 @@
+---
+description: Core project commands, env vars, and verification for llm-fallbacks
+alwaysApply: true
+---
+
+# llm-fallbacks — core agent guidance
+
+Full reference: `AGENTS.md`. Prefer extending existing modules over new parallel abstractions.
+
+## Verify before claiming done
+
+```bash
+ruff check .
+black --check .
+OPENROUTER_API_KEY=dummy pytest --cov=llm_fallbacks tests/ -v
+python3 -m build
+```
+
+CI runs ruff, black, and pytest only — not mypy or isort. Pre-commit runs those locally.
+
+## Environment
+
+Always set `OPENROUTER_API_KEY=dummy` for tests and scripts that import the package. Importing `llm_fallbacks.config` may hit provider APIs and GitHub when keys are set.
+
+Install with `pip install -r requirements.txt && pip install -e .` — `setup.py` omits `requests` and `pyyaml`.
+
+## Do not fix unless asked
+
+- `RUF022` unsorted `__all__`
+- `RUF069` floating-point comparison
+- Missing stubs for `requests` / `yaml`
+
+## Pitfalls
+
+- Regenerate `configs/` via `generate_configs`, do not hand-edit
+- Self-hosted gateway: `deploy/` Docker Compose (see `deploy/README.md`)
+- No root `main.py` — use `python -m llm_fallbacks` or `llm-fallbacks`
+- Preserve public API in `src/llm_fallbacks/__init__.py` unless breaking change is requested

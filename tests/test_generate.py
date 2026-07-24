@@ -4,7 +4,15 @@ from __future__ import annotations
 
 import pytest
 
-from llm_fallbacks.generate_configs import build_free_models_list, is_local_model
+from llm_fallbacks.config import CustomProviderConfig
+from llm_fallbacks.generate_configs import (
+    FREE_ALIAS_MODEL_NAME,
+    build_free_alias_chain,
+    build_free_models_list,
+    build_provider_urls,
+    is_local_model,
+    to_litellm_config_yaml,
+)
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -177,3 +185,194 @@ class TestBuildFreeModelsList:
         ]
         result = build_free_models_list(local_only)
         assert result == []
+
+
+def _make_provider(*, provider_name: str = "openrouter", models: dict[str, dict[str, object]]) -> CustomProviderConfig:
+    return CustomProviderConfig(
+        provider_name=provider_name,
+        base_url="https://openrouter.ai/api/v1",
+        api_key_required=False,
+        auto_fetch_models=False,
+        raw_models=models,
+    )
+
+
+class TestBuildFreeAliasChain:
+    def test_excludes_non_deployable_and_embedding_models(self):
+        fixture = FIXTURE_FREE_MODELS + [
+            (
+                "openrouter/free",
+                {
+                    "litellm_provider": "openrouter",
+                    "mode": "chat",
+                    "input_cost_per_token": 0,
+                    "output_cost_per_token": 0,
+                },
+            )
+        ]
+        deployable = {"openrouter/free", "gemini/gemini-2.0-flash", "openai/gpt-4o-mini-free"}
+        chain = build_free_alias_chain(fixture, deployable)
+        assert "vertex_ai/text-embedding-004" not in chain
+        assert "ollama/llama3" not in chain
+        assert chain[0] == "openrouter/free"
+        assert set(chain).issubset(deployable)
+
+    def test_quality_order_among_deployable_chat_models(self):
+        deployable = {"gemini/gemini-2.0-flash", "openai/gpt-4o-mini-free"}
+        chain = build_free_alias_chain(FIXTURE_FREE_MODELS, deployable)
+        assert chain[0] == "gemini/gemini-2.0-flash"
+        assert chain[1] == "openai/gpt-4o-mini-free"
+
+    def test_empty_when_no_deployable_matches(self):
+        assert build_free_alias_chain(FIXTURE_FREE_MODELS, set()) == []
+
+    def test_includes_empty_mode_when_deployable(self):
+        models = [
+            (
+                "openrouter/some-model",
+                {"litellm_provider": "openrouter", "mode": "", "input_cost_per_token": 0, "output_cost_per_token": 0},
+            )
+        ]
+        chain = build_free_alias_chain(models, {"openrouter/some-model"})
+        assert chain == ["openrouter/some-model"]
+
+
+class TestToLiteLLMConfigYamlFreeAlias:
+    @pytest.fixture
+    def provider(self) -> CustomProviderConfig:
+        return _make_provider(
+            models={
+                "openrouter/free": {
+                    "litellm_provider": "openrouter",
+                    "mode": "chat",
+                    "input_cost_per_token": 0,
+                    "output_cost_per_token": 0,
+                },
+                "gemini/gemini-2.0-flash": {
+                    "litellm_provider": "gemini",
+                    "mode": "chat",
+                    "max_input_tokens": 1_000_000,
+                    "max_output_tokens": 8192,
+                    "supports_function_calling": True,
+                    "supports_vision": True,
+                    "input_cost_per_token": 0,
+                    "output_cost_per_token": 0,
+                },
+                "openai/gpt-4o-mini-free": {
+                    "litellm_provider": "openai",
+                    "mode": "chat",
+                    "max_input_tokens": 128_000,
+                    "input_cost_per_token": 0,
+                    "output_cost_per_token": 0,
+                },
+            }
+        )
+
+    def test_adds_free_alias_and_fallbacks(self, provider: CustomProviderConfig):
+        config = to_litellm_config_yaml([provider], free_only=True)
+        model_names = [entry["model_name"] for entry in config["model_list"]]
+        assert FREE_ALIAS_MODEL_NAME in model_names
+
+        free_entry = next(entry for entry in config["model_list"] if entry["model_name"] == FREE_ALIAS_MODEL_NAME)
+        primary_entry = next(entry for entry in config["model_list"] if entry["model_name"] == "openrouter/free")
+        assert free_entry["litellm_params"]["model"] == primary_entry["litellm_params"]["model"]
+
+        free_fallbacks = next(
+            (
+                entry[FREE_ALIAS_MODEL_NAME]
+                for entry in config["router_settings"]["fallbacks"]
+                if FREE_ALIAS_MODEL_NAME in entry
+            ),
+            None,
+        )
+        assert free_fallbacks is not None
+        assert "openrouter/free" not in free_fallbacks
+        assert free_fallbacks[0] == "gemini/gemini-2.0-flash"
+
+    def test_omits_free_alias_when_chain_empty(self):
+        provider = _make_provider(
+            models={
+                "vertex_ai/text-embedding-004": {
+                    "litellm_provider": "vertex_ai",
+                    "mode": "embedding",
+                    "input_cost_per_token": 0,
+                    "output_cost_per_token": 0,
+                }
+            }
+        )
+        config = to_litellm_config_yaml([provider], free_only=True)
+        model_names = [entry["model_name"] for entry in config["model_list"]]
+        assert FREE_ALIAS_MODEL_NAME not in model_names
+
+
+class TestDeployModeYaml:
+    def test_deploy_mode_uses_env_placeholders(self):
+        provider = _make_provider(
+            models={
+                "openrouter/free": {
+                    "litellm_provider": "openrouter",
+                    "mode": "chat",
+                    "input_cost_per_token": 0,
+                    "output_cost_per_token": 0,
+                }
+            }
+        )
+        config = to_litellm_config_yaml([provider], free_only=True, deploy_mode=True)
+        assert config["general_settings"]["master_key"] == "os.environ/LITELLM_MASTER_KEY"
+        assert config["cache"]["host"] == "os.environ/REDIS_HOST"
+        assert config["general_settings"]["database_url"] == "os.environ/DATABASE_URL"
+        assert config["litellm_settings"]["callbacks"] == []
+        assert config["litellm_settings"]["failure_callback"] == []
+        assert config["general_settings"]["disable_master_key_return"] is True
+
+    def test_default_mode_keeps_legacy_master_key_shape(self):
+        provider = _make_provider(
+            models={
+                "openrouter/free": {
+                    "litellm_provider": "openrouter",
+                    "mode": "chat",
+                    "input_cost_per_token": 0,
+                    "output_cost_per_token": 0,
+                }
+            }
+        )
+        config = to_litellm_config_yaml([provider], free_only=True, deploy_mode=False)
+        assert str(config["general_settings"]["master_key"]).startswith("sk-")
+        assert config["cache"]["host"] == "localhost"
+        assert config["litellm_settings"]["callbacks"] == ["otel"]
+
+
+class TestBuildProviderUrls:
+    def test_public_providers_included(self):
+        providers = [
+            CustomProviderConfig(
+                provider_name="openrouter",
+                base_url="https://openrouter.ai/api/v1",
+                api_key_required=False,
+                auto_fetch_models=False,
+                raw_models={},
+            ),
+            CustomProviderConfig(
+                provider_name="groq",
+                base_url="https://api.groq.com/openai/v1",
+                api_key_required=False,
+                auto_fetch_models=False,
+                raw_models={},
+            ),
+        ]
+        urls = build_provider_urls(providers)
+        assert urls["openrouter"] == "https://openrouter.ai/api/v1"
+        assert urls["groq"] == "https://api.groq.com/openai/v1"
+
+    def test_localhost_excluded(self):
+        providers = [
+            CustomProviderConfig(
+                provider_name="ollama",
+                base_url="http://127.0.0.1:11434/v1",
+                api_key_required=False,
+                auto_fetch_models=False,
+                raw_models={},
+            )
+        ]
+        urls = build_provider_urls(providers)
+        assert "ollama" not in urls

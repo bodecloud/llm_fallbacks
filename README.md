@@ -44,6 +44,33 @@ fallbacks = get_fallback_list("chat")
 print(f"Recommended fallback order: {fallbacks}")
 ```
 
+## Self-Hosted Gateway
+
+Run a local OpenAI-compatible proxy with a self-hosted `free` model alias (ranked fallback chain over discovered free models):
+
+```bash
+cp deploy/.env.example deploy/.env
+# Set LITELLM_MASTER_KEY and OPENROUTER_API_KEY in deploy/.env
+
+docker compose -f deploy/docker-compose.yml --env-file deploy/.env up --build
+```
+
+See [deploy/README.md](deploy/README.md) for smoke tests, environment variables, and the difference between `free` and `openrouter/free`.
+
+## Live Chat Demo (GitHub Pages)
+
+A static chat UI ships in [`docs/`](docs/index.html) and deploys to GitHub Pages as the project homepage:
+
+**https://bolabaden.github.io/llm_fallbacks/**
+
+Architecture:
+
+- **Pages** — static UI loads `free_models.json`; no provider API keys in the browser
+- **Cloudflare Worker** — primary OpenAI-compatible proxy (guest token + short model chain)
+- **Render/Koyeb LiteLLM** — secondary backend with full `free` alias fallback chain
+
+See [edge/README.md](edge/README.md), [STRATEGY.md](STRATEGY.md), and [docs/plans/2026-07-24-002-feat-static-chat-ha-gateway-plan.md](docs/plans/2026-07-24-002-feat-static-chat-ha-gateway-plan.md).
+
 ## Automated Model Lists
 
 The `configs/` directory contains machine-consumable model lists that are **automatically updated daily** at midnight UTC via GitHub Actions.

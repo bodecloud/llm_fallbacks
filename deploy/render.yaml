@@ -1,0 +1,24 @@
+# Render Blueprint — secondary LiteLLM backend for llm-fallbacks chat demo.
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: llm-fallbacks-gateway
+    runtime: docker
+    plan: free
+    dockerfilePath: deploy/Dockerfile.gateway
+    dockerContext: .
+    healthCheckPath: /health/liveliness
+    envVars:
+      - key: LITELLM_MASTER_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: LITELLM_LOCAL_MODEL_COST_MAP
+        value: "true"
+      - key: DATABASE_URL
+        value: ""

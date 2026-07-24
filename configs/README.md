@@ -50,13 +50,33 @@ Complete map of `model_id → spec` for all models known to LiteLLM (including p
 
 Serialised configurations for custom providers (OpenRouter, VertexAI, Yandex).
 
+### `provider_urls.json`
+
+Map of provider name to OpenAI-compatible base URL (public hosts only; excludes localhost):
+
+```json
+{
+  "groq": "https://api.groq.com/openai/v1",
+  "openrouter": "https://openrouter.ai/api/v1"
+}
+```
+
+Used by the GitHub Pages chat UI and edge proxy for metadata — not for browser-direct provider calls.
+
 ### `litellm_config.yaml` / `litellm_config_free.yaml`
 
-Ready-to-use LiteLLM proxy configurations:
+LiteLLM proxy configurations committed for library consumers and raw URL fetchers.
+
+**Library artifact (default generation):** includes the self-hosted `free` alias, random `master_key`, and localhost Redis/Postgres placeholders.
 
 ```bash
-# Run LiteLLM proxy with free models only
 litellm --config configs/litellm_config_free.yaml
+```
+
+**Deploy-ready YAML:** pass `--deploy` (or `LLM_FALLBACKS_DEPLOY=1`) for env placeholders and minimal observability — used by the [deploy/](../deploy/README.md) Docker stack.
+
+```bash
+python -m llm_fallbacks.generate_configs --output-dir configs --deploy
 ```
 
 ## Generation

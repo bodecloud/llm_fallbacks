@@ -1,0 +1,27 @@
+---
+description: Generated configs and artifact workflow
+globs: configs/**,src/llm_fallbacks/generate_configs.py,src/llm_fallbacks/quality.py
+alwaysApply: false
+---
+
+# Generated configs (`configs/`)
+
+Artifacts are committed and refreshed daily by `.github/workflows/daily-config-update.yml`.
+
+Key outputs: `free_models.json`, `free_models_ids.txt`, `all_models.json`, `litellm_config.yaml`, `litellm_config_free.yaml`.
+
+## After changing generation or scoring logic
+
+```bash
+python -m llm_fallbacks.generate_configs --output-dir configs
+# Optional OpenRouter enrichment:
+OPENROUTER_API_KEY=your-key python -m llm_fallbacks.generate_configs --output-dir configs
+```
+
+Expect large diffs. Do not hand-edit generated JSON/YAML.
+
+## Notes
+
+- Local providers (`ollama`, `vllm`, `lmstudio`, `xinference`) are excluded from the free list
+- Avoid loading entire `litellm_config.yaml` into context — files are very large
+- Daily CI auto-commits config updates if you skip local regeneration
