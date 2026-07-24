@@ -1,6 +1,7 @@
 {
   "endpoints": [
-    "https://llm-fallbacks-proxy.bocloud.workers.dev"
+    "https://llm-fallbacks-proxy.bocloud.workers.dev",
+    "https://llm-fallbacks-gateway.onrender.com"
   ],
   "guestToken": "llm-fallbacks-public",
   "description": "Zero-config demo proxy for GitHub Pages chat."
