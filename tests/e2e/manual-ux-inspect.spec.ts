@@ -88,6 +88,9 @@ test.describe("Manual UX + analytics inspection", () => {
     fs.writeFileSync(path.join(OUT, "audit-initial.json"), JSON.stringify(audit, null, 2));
     await page.screenshot({ path: path.join(OUT, "01-initial-desktop.png"), fullPage: false });
 
+    await expect(page.locator(".mur-toolbar-btn")).toHaveCount(0);
+    await expect(page.locator("#chatMount.mur-chat-empty .mur-chat-layout-wrapper")).toBeVisible();
+
     await page.setViewportSize({ width: 390, height: 844 });
     await page.waitForTimeout(500);
     await page.screenshot({ path: path.join(OUT, "02-mobile.png"), fullPage: false });
@@ -138,11 +141,5 @@ test.describe("Manual UX + analytics inspection", () => {
 
     expect(audit.whiteSurfaces).toEqual([]);
     expect(audit.chatForm?.bg).not.toBe("rgb(255, 255, 255)");
-
-    const toolbarModels = page.locator(".mur-toolbar-btn");
-    await expect(toolbarModels).toHaveCount(0);
-
-    const emptyHero = page.locator("#chatMount.mur-chat-empty .mur-chat-layout-wrapper");
-    await expect(emptyHero).toBeVisible();
   });
 });
