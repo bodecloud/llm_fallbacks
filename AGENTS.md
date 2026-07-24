@@ -205,4 +205,5 @@ See `README.md` and `.github/workflows/python-package.yml` for canonical command
 - **Format check:** `black --check .`
 - **Type check:** `mypy .`
 - **Tests:** `OPENROUTER_API_KEY=dummy pytest --cov=llm_fallbacks tests/ -v`
+- **Pages e2e:** `npm ci && npx playwright install chromium && npm run test:e2e`
 - **Build:** `python3 -m build`
