@@ -5860,6 +5860,9 @@ async function bootstrap() {
   seedZeroConfigFromPageConfig();
   initShellPanels();
   bindTopBarButtons();
+  const mount = document.querySelector("#chatMount");
+  mount?.classList.add("mur-app", "mur-app-embedded", "mur-sidebar-animated");
+  mount?.setAttribute("data-theme", "dark");
   const { catalog, providerUrls } = await loadCatalog();
   const config = readRuntimeConfig();
   const provider = new FailoverProvider(config);

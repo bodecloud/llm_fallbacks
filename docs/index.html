@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="lf-chat-page">
 <head>
   <meta charset="utf-8">
   <title>llm-fallbacks — free model chat</title>
   <meta name="description" content="Zero-config chat over ranked free LLM fallbacks">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./icon.png">
   <link rel="manifest" href="./manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,9 +14,9 @@
   <link rel="stylesheet" href="./assets/shell/styles.css">
   <link rel="stylesheet" href="./assets/shell/chat-overrides.css">
   <link rel="stylesheet" href="./assets/chat.css">
-  <script src="./config.js?v=dev"></script>
+  <script src="./config.js?v=dc9d747-1784916668"></script>
 </head>
-<body>
+<body class="lf-chat-page">
   <div class="credits-bar top-credits">
     <div class="credits-content">
       <p><strong>llm-fallbacks</strong> — zero-config free model chat</p>
@@ -26,7 +27,7 @@
   </div>
 
   <main class="main-chat-wrapper">
-    <div id="chatMount" class="mur-app mur-app-embedded mur-sidebar-animated">
+    <div id="chatMount" class="mur-app mur-app-embedded mur-sidebar-animated" data-theme="dark">
       <aside class="mur-sidebar">
         <header class="mur-sidebar-header">
           <div class="mur-sidebar-logo"><span>LF</span><span>llm-fallbacks</span></div>
@@ -66,6 +67,6 @@
   <aside id="shell-panel-explorer" class="shell-panel"><div id="panel-explorer"></div></aside>
   <button type="button" id="closeSet" title="Close panel">× Close</button>
 
-  <script type="module" src="./assets/chat.js?v=dev"></script>
+  <script type="module" src="./assets/chat.js?v=dc9d747-1784916668"></script>
 </body>
 </html>
