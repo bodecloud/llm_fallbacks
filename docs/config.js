@@ -1,6 +1,6 @@
 // Zero-config chat uses the cloud proxy from configs/chat_proxy.json.
 window.LLM_FALLBACKS_CONFIG = {
-  endpoints: [],
+  endpoints: ["https://llm-fallbacks-proxy.bocloud.workers.dev"],
   guestToken: "llm-fallbacks-public",
   defaultModel: "free",
   catalogUrl:
