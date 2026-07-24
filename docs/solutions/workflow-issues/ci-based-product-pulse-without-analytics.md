@@ -49,7 +49,7 @@ Reports save to `docs/pulse-reports/YYYY-MM-DD_HH-MM.md` (committed). Config sta
 |-----------------|--------------------------|------------------|
 | Gateway success rate | Deploy Pages live e2e + manual stream smoke | `gh run list --workflow "Deploy GitHub Pages"`; `curl` stream to Worker |
 | Config freshness lag | Daily config workflow + git log | `git log -1 --format='%ci' -- configs/free_models.json` |
-| Homepage engagement | Pending | Mark `no data` until client events land |
+| Homepage engagement | Worker KV counters via `/v1/metrics` | `curl -H "Authorization: Bearer llm-fallbacks-public" "$WORKER/v1/metrics?days=1"` |
 | Free-tier cost | Proxy errors + OpenRouter 429 in CI/logs | Note 429 → Workers AI fallback is expected on demo key |
 
 Apply the skill's **15-minute trailing buffer** on the lookback upper bound.
@@ -69,6 +69,10 @@ curl -sS -m 15 -N -X POST "https://llm-fallbacks-proxy.bocloud.workers.dev/v1/ch
 # Pages asset freshness
 curl -sS -o /dev/null -w '%{http_code} %{time_total}s\n' \
   "https://bodecloud.github.io/llm_fallbacks/"
+
+# Homepage engagement (KV counters, guest auth)
+curl -sS -H "Authorization: Bearer llm-fallbacks-public" \
+  "https://llm-fallbacks-proxy.bocloud.workers.dev/v1/metrics?days=1"
 
 # CI window (last 24h)
 gh run list --repo bodecloud/llm_fallbacks --limit 30 \

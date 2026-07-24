@@ -5085,6 +5085,63 @@ async function mergeChatProxyArtifact(config) {
   }
 }
 
+// src/analytics.ts
+var ANALYTICS_EVENTS = {
+  homepageSession: "homepage_session",
+  chatCompletionSuccess: "chat_completion_success",
+  zeroConfigReply: "zero_config_reply",
+  darkThemeLoaded: "dark_theme_loaded"
+};
+var SESSION_PREFIX = "llm_fallbacks_evt_";
+function sessionKey(event) {
+  return `${SESSION_PREFIX}${event}`;
+}
+function trackSessionEvent(event, meta = {}) {
+  try {
+    if (sessionStorage.getItem(sessionKey(event))) return;
+    sessionStorage.setItem(sessionKey(event), "1");
+    sendEventBeacon(event, meta);
+  } catch {
+  }
+}
+function eventsUrl(base) {
+  const trimmed = base.replace(/\/$/, "");
+  if (trimmed.endsWith("/v1/chat/completions")) {
+    return trimmed.replace(/\/v1\/chat\/completions$/, "/v1/events");
+  }
+  return `${trimmed}/v1/events`;
+}
+function sendEventBeacon(event, meta) {
+  const config = readRuntimeConfig();
+  const base = config.endpoints[0];
+  if (!base) return;
+  const body = JSON.stringify({
+    event,
+    token: config.guestToken,
+    ...meta.route ? { route: meta.route } : {},
+    ...meta.zeroConfig ? { zero_config: true } : {}
+  });
+  const url = eventsUrl(base);
+  const blob = new Blob([body], { type: "application/json" });
+  if (typeof navigator.sendBeacon === "function" && navigator.sendBeacon(url, blob)) {
+    return;
+  }
+  void fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body,
+    keepalive: true
+  }).catch(() => {
+  });
+}
+function trackChatCompletionSuccess(route, zeroConfig) {
+  const coarseRoute = route.startsWith("proxy/") ? "proxy" : "browser";
+  trackSessionEvent(ANALYTICS_EVENTS.chatCompletionSuccess, { route: coarseRoute });
+  if (zeroConfig) {
+    trackSessionEvent(ANALYTICS_EVENTS.zeroConfigReply, { route: coarseRoute, zeroConfig: true });
+  }
+}
+
 // src/providers/browser-router.ts
 var RETRYABLE = /* @__PURE__ */ new Set([408, 429, 500, 502, 503, 504]);
 var LOCAL_PROVIDERS = /* @__PURE__ */ new Set(["ollama", "vllm", "lmstudio", "xinference"]);
@@ -5368,6 +5425,23 @@ var FailoverProvider = class {
   setStatus(text) {
     for (const fn of this.statusListeners) fn(text);
   }
+  recordSuccessfulChat() {
+    const keys = loadKeys();
+    const zeroConfig = Object.keys(keys).length === 0;
+    trackChatCompletionSuccess(this.lastRoute || "unknown", zeroConfig);
+  }
+  async streamWithCompletionTracking(run, onEvent) {
+    let sawAssistantText = false;
+    await run((event) => {
+      if (event.type === "text_delta" && event.delta.trim()) {
+        sawAssistantText = true;
+      }
+      onEvent(event);
+    });
+    if (sawAssistantText) {
+      this.recordSuccessfulChat();
+    }
+  }
   getRuntimeConfig() {
     return readRuntimeConfig();
   }
@@ -5416,7 +5490,7 @@ var FailoverProvider = class {
     };
     const keys = loadKeys();
     const userKeys = keys;
-    const tryBrowser = async () => {
+    const tryBrowser = async (onEv) => {
       const result = await chatWithBrowserFallback({
         model,
         messages: openAiMessages,
@@ -5428,11 +5502,14 @@ var FailoverProvider = class {
       });
       this.lastRoute = result.route;
       window.LLM_FALLBACKS_ROUTE = result.route;
-      emitTextAsStreamEvents(result.content, onEvent);
+      emitTextAsStreamEvents(result.content, onEv);
     };
     if (config.endpoints.length) {
       try {
-        await this.streamProxyFallback(body, config, onEvent, request.signal);
+        await this.streamWithCompletionTracking(
+          (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
+          onEvent
+        );
         return;
       } catch (proxyErr) {
         if (!shouldTryBrowser(model, this.catalog, userKeys)) throw proxyErr;
@@ -5441,7 +5518,10 @@ var FailoverProvider = class {
     }
     if (model !== "free" && !shouldTryBrowser(model, this.catalog, userKeys)) {
       if (config.endpoints.length) {
-        await this.streamProxyFallback({ ...body, model: "free" }, config, onEvent, request.signal);
+        await this.streamWithCompletionTracking(
+          (onEv) => this.streamProxyFallback({ ...body, model: "free" }, config, onEv, request.signal),
+          onEvent
+        );
         return;
       }
       throw new Error(
@@ -5450,20 +5530,26 @@ var FailoverProvider = class {
     }
     if (shouldTryBrowser(model, this.catalog, userKeys)) {
       try {
-        await tryBrowser();
+        await this.streamWithCompletionTracking((onEv) => tryBrowser(onEv), onEvent);
         return;
       } catch (browserErr) {
         const err = browserErr instanceof Error ? browserErr : new Error(String(browserErr));
         if (config.endpoints.length && shouldFallbackToProxy(err)) {
           this.setStatus("browser route failed \u2014 retrying cloud proxy \u2026");
-          await this.streamProxyFallback(body, config, onEvent, request.signal);
+          await this.streamWithCompletionTracking(
+            (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
+            onEvent
+          );
           return;
         }
         throw err;
       }
     }
     if (config.endpoints.length) {
-      await this.streamProxyFallback(body, config, onEvent, request.signal);
+      await this.streamWithCompletionTracking(
+        (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
+        onEvent
+      );
       return;
     }
     throw new Error(
@@ -5863,6 +5949,8 @@ async function bootstrap() {
   const mount = document.querySelector("#chatMount");
   mount?.classList.add("mur-app", "mur-app-embedded", "mur-sidebar-animated", "mur-sidebar-closed");
   mount?.setAttribute("data-theme", "dark");
+  trackSessionEvent(ANALYTICS_EVENTS.darkThemeLoaded);
+  trackSessionEvent(ANALYTICS_EVENTS.homepageSession);
   const { catalog, providerUrls } = await loadCatalog();
   const config = readRuntimeConfig();
   const provider = new FailoverProvider(config);

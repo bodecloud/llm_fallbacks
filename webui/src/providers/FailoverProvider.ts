@@ -1,3 +1,4 @@
+import { trackChatCompletionSuccess } from "../analytics";
 import type { ChatProvider, ChatRequest, Message, StreamEvent } from "murm-ui";
 import type { AppConfig } from "../config";
 import { readRuntimeConfig } from "../config";
@@ -61,6 +62,28 @@ export class FailoverProvider implements ChatProvider {
 
   private setStatus(text: string): void {
     for (const fn of this.statusListeners) fn(text);
+  }
+
+  private recordSuccessfulChat(): void {
+    const keys = loadKeys();
+    const zeroConfig = Object.keys(keys).length === 0;
+    trackChatCompletionSuccess(this.lastRoute || "unknown", zeroConfig);
+  }
+
+  private async streamWithCompletionTracking(
+    run: (onEvent: (event: StreamEvent) => void) => Promise<void>,
+    onEvent: (event: StreamEvent) => void
+  ): Promise<void> {
+    let sawAssistantText = false;
+    await run((event) => {
+      if (event.type === "text_delta" && event.delta.trim()) {
+        sawAssistantText = true;
+      }
+      onEvent(event);
+    });
+    if (sawAssistantText) {
+      this.recordSuccessfulChat();
+    }
   }
 
   private getRuntimeConfig(): AppConfig {
@@ -127,7 +150,7 @@ export class FailoverProvider implements ChatProvider {
     const keys = loadKeys();
     const userKeys = keys;
 
-    const tryBrowser = async (): Promise<void> => {
+    const tryBrowser = async (onEv: (event: StreamEvent) => void): Promise<void> => {
       const result = await chatWithBrowserFallback({
         model,
         messages: openAiMessages,
@@ -139,12 +162,15 @@ export class FailoverProvider implements ChatProvider {
       });
       this.lastRoute = result.route;
       window.LLM_FALLBACKS_ROUTE = result.route;
-      emitTextAsStreamEvents(result.content, onEvent);
+      emitTextAsStreamEvents(result.content, onEv);
     };
 
     if (config.endpoints.length) {
       try {
-        await this.streamProxyFallback(body, config, onEvent, request.signal);
+        await this.streamWithCompletionTracking(
+          (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
+          onEvent
+        );
         return;
       } catch (proxyErr) {
         if (!shouldTryBrowser(model, this.catalog, userKeys)) throw proxyErr;
@@ -154,7 +180,10 @@ export class FailoverProvider implements ChatProvider {
 
     if (model !== "free" && !shouldTryBrowser(model, this.catalog, userKeys)) {
       if (config.endpoints.length) {
-        await this.streamProxyFallback({ ...body, model: "free" }, config, onEvent, request.signal);
+        await this.streamWithCompletionTracking(
+          (onEv) => this.streamProxyFallback({ ...body, model: "free" }, config, onEv, request.signal),
+          onEvent
+        );
         return;
       }
       throw new Error(
@@ -164,13 +193,16 @@ export class FailoverProvider implements ChatProvider {
 
     if (shouldTryBrowser(model, this.catalog, userKeys)) {
       try {
-        await tryBrowser();
+        await this.streamWithCompletionTracking((onEv) => tryBrowser(onEv), onEvent);
         return;
       } catch (browserErr) {
         const err = browserErr instanceof Error ? browserErr : new Error(String(browserErr));
         if (config.endpoints.length && shouldFallbackToProxy(err)) {
           this.setStatus("browser route failed — retrying cloud proxy …");
-          await this.streamProxyFallback(body, config, onEvent, request.signal);
+          await this.streamWithCompletionTracking(
+            (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
+            onEvent
+          );
           return;
         }
         throw err;
@@ -178,7 +210,10 @@ export class FailoverProvider implements ChatProvider {
     }
 
     if (config.endpoints.length) {
-      await this.streamProxyFallback(body, config, onEvent, request.signal);
+      await this.streamWithCompletionTracking(
+        (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
+        onEvent
+      );
       return;
     }
 

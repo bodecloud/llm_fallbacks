@@ -10,6 +10,10 @@ import type { CatalogEntry } from "./providers/browser-router";
 import { FailoverSettingsPlugin } from "./plugins/failover-settings";
 import { ByokSettingsPlugin } from "./plugins/byok-settings";
 import { ModelExplorerPlugin } from "./plugins/model-explorer";
+import {
+  ANALYTICS_EVENTS,
+  trackSessionEvent,
+} from "./analytics";
 import { bindTopBarButtons, initShellPanels } from "./shell-panels";
 
 async function loadCatalog(): Promise<{
@@ -57,6 +61,8 @@ async function bootstrap(): Promise<void> {
   const mount = document.querySelector("#chatMount");
   mount?.classList.add("mur-app", "mur-app-embedded", "mur-sidebar-animated", "mur-sidebar-closed");
   mount?.setAttribute("data-theme", "dark");
+  trackSessionEvent(ANALYTICS_EVENTS.darkThemeLoaded);
+  trackSessionEvent(ANALYTICS_EVENTS.homepageSession);
 
   const { catalog, providerUrls } = await loadCatalog();
   const config = readRuntimeConfig();

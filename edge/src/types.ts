@@ -1,5 +1,6 @@
 export interface Env {
   AI: Ai;
+  METRICS_KV?: KVNamespace;
   PROXY_GUEST_TOKEN: string;
   OPENROUTER_API_KEY?: string;
   GROQ_API_KEY?: string;

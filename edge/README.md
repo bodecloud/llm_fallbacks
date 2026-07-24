@@ -2,6 +2,17 @@
 
 Cloudflare Worker — primary OpenAI-compatible API for the [GitHub Pages chat UI](../docs/index.html).
 
+## Endpoints
+
+| Path | Method | Auth | Purpose |
+|------|--------|------|---------|
+| `/health` | GET | none | Liveness |
+| `/v1/chat/completions` | POST | guest token | Chat (OpenAI-compatible) |
+| `/v1/events` | POST | guest token (header or JSON `token`) | Privacy-preserving UI analytics counters |
+| `/v1/metrics` | GET | guest token | Daily event totals for pulse / STRATEGY metrics |
+
+Allowed events: `homepage_session`, `chat_completion_success`, `zero_config_reply`, `dark_theme_loaded`. No message content or user IDs are stored.
+
 ## Setup
 
 ```bash

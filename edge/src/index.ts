@@ -7,6 +7,7 @@
 export type { Env } from "./types";
 
 import { corsHeaders, jsonError, parseOrigins, unauthorized } from "./http";
+import { handleEventsPost, handleMetricsGet } from "./events";
 import {
   isChainModelSupported,
   modelChain,
@@ -134,6 +135,14 @@ export default {
       return new Response(JSON.stringify({ status: "ok" }), {
         headers: { "Content-Type": "application/json", ...corsHeaders(origin, allowed) },
       });
+    }
+
+    if (url.pathname === "/v1/events" && request.method === "POST") {
+      return handleEventsPost(request, env, origin, allowed);
+    }
+
+    if (url.pathname === "/v1/metrics" && request.method === "GET") {
+      return handleMetricsGet(request, env, origin, allowed);
     }
 
     if (url.pathname !== "/v1/chat/completions" || request.method !== "POST") {

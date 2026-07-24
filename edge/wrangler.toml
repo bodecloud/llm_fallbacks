@@ -12,5 +12,10 @@ WORKERS_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct-fast"
 [ai]
 binding = "AI"
 
+[[kv_namespaces]]
+binding = "METRICS_KV"
+id = "8401fa28ee874c5a95768932ff494cfe"
+preview_id = "79598ae6a9fc4d518a1a1d772690907f"
+
 # Optional secrets (set via `wrangler secret put` or CI):
 # OPENROUTER_API_KEY, GROQ_API_KEY — override PROXY_GUEST_TOKEN via secret if desired
