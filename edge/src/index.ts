@@ -125,6 +125,8 @@ async function callUpstream(
         status: 503,
       });
     }
+    const orModel =
+      litellmId === "openrouter/free" ? "openrouter/free" : litellmId.replace(/^openrouter\//, "");
     return fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -133,7 +135,7 @@ async function callUpstream(
         "HTTP-Referer": "https://bodecloud.github.io/llm_fallbacks/",
         "X-Title": "llm-fallbacks",
       },
-      body: JSON.stringify({ ...payload, model: litellmId.replace(/^openrouter\//, "") }),
+      body: JSON.stringify({ ...payload, model: orModel }),
     });
   }
 
@@ -155,7 +157,7 @@ async function callUpstream(
   }
 
   return new Response(JSON.stringify({ error: { message: `Unsupported provider: ${parsed.provider}` } }), {
-    status: 502,
+    status: 503,
   });
 }
 
@@ -173,6 +175,11 @@ async function chatWithFallback(body: ChatBody, env: Env): Promise<Response> {
       return res;
     }
     if (!RETRYABLE.has(res.status)) {
+      const errBody = await res.clone().text();
+      if (errBody.includes("Unsupported provider")) {
+        lastResponse = res;
+        continue;
+      }
       lastResponse = res;
       break;
     }
