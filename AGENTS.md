@@ -186,6 +186,9 @@ When reviewing or submitting changes:
 11. Pushing `.github/workflows/*` needs GitHub token with `workflow` scope; Cloudflare deploy needs cfat token with Workers Scripts Edit (see `docs/solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md`)
 12. `ce-product-pulse` without PostHog: use CI history + Worker `/v1/metrics?days=1` + smoke tests (see `docs/solutions/workflow-issues/ci-based-product-pulse-without-analytics.md`)
 13. Worker public demo: set `ALLOWED_MODELS` + `RATE_LIMIT_*` in `wrangler.toml` / deploy-proxies; guest token in `config.js` is not auth (see `edge/README.md`)
+14. **Bootstrap merge:** `FailoverProvider` must use `loadRuntimeConfig()` (merged `chat_proxy.json` endpoints), not raw `readRuntimeConfig()` alone — stale single-endpoint localStorage hides secondaries until cleared (see `docs/CAVEATS.md`)
+15. **Cloudflare auth 10000:** regenerate CF API token with Workers Scripts Edit; when deploy skips, `WORKER_URL` secret keeps Pages building (see `docs/solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md`)
+16. **Render deploy-mode YAML:** omit `DATABASE_URL` env var entirely — do not set empty string; deploy generator excludes `database_url` and `allowed_routes`
 
 ## Compound Engineering
 

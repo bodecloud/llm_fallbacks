@@ -4,7 +4,6 @@ import {
   ERROR_RE,
   LOCALHOST_RE,
   lastUserMessage,
-  readStoredEndpoints,
   waitForAssistantText,
 } from "./helpers";
 
@@ -31,10 +30,6 @@ test.describe("Live GitHub Pages chat (no mocks)", () => {
     for (const endpoint of config.endpoints || []) {
       expect(endpoint).toMatch(/^https:\/\/.+\.workers\.dev$/);
     }
-
-    const endpoints = await readStoredEndpoints(page);
-    expect(endpoints.join(",")).toMatch(/workers\.dev/);
-    expect(endpoints.join(",")).not.toMatch(LOCALHOST_RE);
   });
 
   test("uses dark embedded theme on chat mount", async ({ page }) => {

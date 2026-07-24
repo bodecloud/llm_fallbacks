@@ -53,10 +53,15 @@ git push "https://x-access-token:${GITHUB_TOKEN}@github.com/bodecloud/llm_fallba
 
 | Secret | Purpose |
 |--------|---------|
-| `CLOUDFLARE_API_TOKEN` | Must include Workers Scripts Edit + Workers AI; cfat/cfut tokens work |
+| `CLOUDFLARE_API_TOKEN` | Must include **Workers Scripts Edit** + **Workers AI Read**; cfat/cfut tokens work |
 | `CLOUDFLARE_ACCOUNT_ID` | Account owning `llm-fallbacks-proxy` |
 | `OPENROUTER_API_KEY` | Upstream for `openrouter/free` |
-| `WORKER_URL` | Injected into Pages `config.js` |
+| `PROXY_GUEST_TOKEN` | Guest auth — set as wrangler **secret** (not `wrangler.toml` `[vars]`) |
+| `WORKER_URL` | Injected into Pages `config.js`; enables graceful skip when deploy fails |
+
+**Authentication error [code: 10000]:** Token lacks Workers Scripts Edit or wrong account. Regenerate at Cloudflare dashboard → My Profile → API Tokens → Create Token → Edit Cloudflare Workers template. Update `CLOUDFLARE_API_TOKEN` via `gh secret set` or [`deploy/scripts/sync-github-secrets.sh`](../../deploy/scripts/sync-github-secrets.sh).
+
+**WORKER_URL skip path:** When wrangler deploy fails but `WORKER_URL` is set, `deploy-proxies.yml` sets `deployed=false` and exits 0. The committed `configs/chat_proxy.json` **dual endpoints are not overwritten**. Pages deploy still uses `WORKER_URL` from secrets at build time. Re-run Deploy Proxies after fixing the token.
 
 Local non-interactive deploy when CI secrets are wrong:
 
@@ -64,6 +69,7 @@ Local non-interactive deploy when CI secrets are wrong:
 source ~/.config/secrets.env
 cd edge && npx wrangler deploy --var "MODEL_CHAIN:openrouter/free"
 echo "$OPENROUTER_API_KEY" | npx wrangler secret put OPENROUTER_API_KEY
+echo "$LLM_FALLBACKS_PROXY_GUEST_TOKEN" | npx wrangler secret put PROXY_GUEST_TOKEN
 ```
 
 ## Why This Matters

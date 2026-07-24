@@ -1,4 +1,5 @@
 import { corsHeaders, jsonError, unauthorized } from "./http";
+import { checkRateLimit } from "./rate-limit";
 import type { Env } from "./types";
 
 export const ALLOWED_EVENTS = new Set([
@@ -85,6 +86,26 @@ export async function handleEventsPost(
 
   if (!authorized(request, env, bodyToken)) {
     return unauthorized(origin, allowed);
+  }
+
+  const rate = await checkRateLimit(request, env);
+  if (!rate.allowed) {
+    return new Response(
+      JSON.stringify({
+        error: {
+          message: `Rate limit exceeded (${rate.scope}). Try again later.`,
+          type: "rate_limit",
+        },
+      }),
+      {
+        status: 429,
+        headers: {
+          "Content-Type": "application/json",
+          "Retry-After": String(rate.retryAfterSeconds),
+          ...corsHeaders(origin, allowed),
+        },
+      },
+    );
   }
 
   const parsed = parseEventBody(body);

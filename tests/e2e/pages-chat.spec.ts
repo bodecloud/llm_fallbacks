@@ -6,7 +6,6 @@ import {
   installTestConfigMock,
   lastAssistant,
   lastUserMessage,
-  readStoredEndpoints,
   waitForAssistantText,
 } from "./helpers";
 
@@ -26,10 +25,7 @@ test.describe("GitHub Pages chat (mocked SSE on live site)", () => {
   test("loads UI without localhost endpoints", async ({ page }) => {
     const config = await page.evaluate(() => window.LLM_FALLBACKS_CONFIG);
     expect(JSON.stringify(config)).not.toMatch(LOCALHOST_RE);
-
-    const endpoints = await readStoredEndpoints(page);
-    expect(endpoints[0]).toBe(DEMO_PROXY);
-    expect(endpoints.join(",")).not.toMatch(LOCALHOST_RE);
+    expect(config.endpoints[0]).toBe(DEMO_PROXY);
   });
 
   test("send without keys streams mocked proxy reply", async ({ page }) => {

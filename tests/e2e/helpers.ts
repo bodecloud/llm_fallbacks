@@ -5,6 +5,8 @@ export const ERROR_RE =
   /no API key for|proxy pending|still deploying|NetworkError|Failed to fetch|401 Unauthorized|PROXY_UNAVAILABLE|HTTP 502|HTTP 429|Rate limit exceeded|Workers AI failed|proxy_erro/i;
 
 export const DEMO_PROXY = "https://demo-proxy.test";
+export const PRIMARY_FAIL_PROXY = "https://primary-fail.test";
+export const SECONDARY_OK_PROXY = "https://secondary-ok.test";
 
 export function mockProxySse(content: string): string {
   const words = content.split(/(\s+)/);
@@ -76,6 +78,61 @@ export async function installTestConfigMock(page: Page) {
   });
 }
 
+export async function installDualEndpointFailoverMocks(page: Page) {
+  await page.route("**/config.js*", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/javascript",
+      body:
+        "window.LLM_FALLBACKS_CONFIG = " +
+        JSON.stringify({
+          endpoints: [PRIMARY_FAIL_PROXY],
+          guestToken: "llm-fallbacks-public",
+          defaultModel: "free",
+          catalogUrl:
+            "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/free_models.json",
+          providerUrlsUrl:
+            "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/provider_urls.json",
+          chatProxyUrl:
+            "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/chat_proxy.json",
+          maxTokens: 512,
+        }) +
+        ";",
+    });
+  });
+
+  await page.route("**/chat_proxy.json", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        endpoints: [PRIMARY_FAIL_PROXY, SECONDARY_OK_PROXY],
+        guestToken: "llm-fallbacks-public",
+      }),
+    });
+  });
+
+  await page.route("**/free_models.json", async (route) => {
+    await route.fulfill({ status: 200, contentType: "application/json", body: "[]" });
+  });
+
+  await page.route("**/provider_urls.json", async (route) => {
+    await route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
+  });
+
+  await page.route(`${PRIMARY_FAIL_PROXY}/v1/chat/completions`, async (route) => {
+    await route.fulfill({ status: 503, body: "upstream unavailable" });
+  });
+
+  await page.route(`${SECONDARY_OK_PROXY}/v1/chat/completions`, async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "text/event-stream; charset=utf-8",
+      body: mockProxySse("failover secondary reply"),
+    });
+  });
+}
+
 export function lastAssistant(page: Page) {
   return page.locator(".mur-message-assistant").last().locator(".mur-message-blocks-wrapper");
 }
@@ -105,6 +162,22 @@ export async function waitForAssistantText(page: Page, timeout = 90_000) {
     await page.waitForTimeout(250);
   }
   throw new Error(`Assistant reply timeout; last="${last}"`);
+}
+
+export async function installLocalChatBundle(page: Page): Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const fs = require("node:fs") as typeof import("node:fs");
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const path = require("node:path") as typeof import("node:path");
+  const bundlePath = path.join(process.cwd(), "docs/assets/chat.js");
+  const body = fs.readFileSync(bundlePath, "utf8");
+  await page.route("**/assets/chat.js*", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/javascript",
+      body,
+    });
+  });
 }
 
 export function readStoredEndpoints(page: Page): Promise<string[]> {

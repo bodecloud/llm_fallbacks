@@ -1,6 +1,7 @@
 // Copy to config.js for local testing.
 window.LLM_FALLBACKS_CONFIG = {
-  endpoints: [],
+  // Primary Worker URL; secondary URLs merge from chatProxyUrl at runtime.
+  endpoints: ["https://llm-fallbacks-proxy.bocloud.workers.dev"],
   guestToken: "llm-fallbacks-public",
   defaultModel: "free",
   catalogUrl:

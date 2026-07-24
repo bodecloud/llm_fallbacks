@@ -71,7 +71,7 @@ Architecture:
 - **Cloudflare Worker** — primary OpenAI-compatible proxy (guest token + SSE streaming; per-IP rate limits + model allowlist)
 - **Render LiteLLM** — optional secondary backend with full `free` alias chain (configure `LITELLM_URL` repo secret)
 
-**Demo contract:** best-effort public demo — no SLA, shared guest token (not user auth), quotas may exhaust. See plan [Security Model](docs/plans/2026-07-24-002-feat-static-chat-ha-gateway-plan.md#u7-documentation-and-homepage-setup) for limits.
+**Demo contract:** best-effort public demo — no SLA, shared guest token (not user auth), quotas may exhaust. See [`docs/CAVEATS.md`](docs/CAVEATS.md) and the plan [Security Model](docs/plans/2026-07-24-002-feat-static-chat-ha-gateway-plan.md#u7-documentation-and-homepage-setup).
 
 Plugin authoring: [docs/chat-ui-plugins.md](docs/chat-ui-plugins.md). See [edge/README.md](edge/README.md), [STRATEGY.md](STRATEGY.md), and [docs/plans/2026-07-24-002-feat-static-chat-ha-gateway-plan.md](docs/plans/2026-07-24-002-feat-static-chat-ha-gateway-plan.md).
 
@@ -149,12 +149,12 @@ The raw sum is normalised to 0–100. The score is a **capability heuristic**, n
 
 ### Supported Free Providers
 
-The library tracks 20+ free-tier API providers:
+The library tracks 20+ free-tier API providers. **Verify current limits on each provider's official documentation** — quotas change frequently.
 
-| Provider | Free Tier | Sign-up |
-|----------|-----------|---------|
-| [OpenRouter](https://openrouter.ai) | 50 req/day, 24+ free models | No CC |
-| [Groq](https://console.groq.com) | 30–60 RPM, Llama 3.3 70B | No CC |
+| Provider | Free Tier [REPO] | Sign-up |
+|----------|------------------|---------|
+| [OpenRouter](https://openrouter.ai) [OFFICIAL] | 50 req/day, 24+ free models | No CC |
+| [Groq](https://console.groq.com) [OFFICIAL] | 30–60 RPM, Llama 3.3 70B | No CC |
 | [Cerebras](https://cloud.cerebras.ai) | 30 RPM, 1M tokens/day | No CC |
 | [Google AI Studio](https://aistudio.google.com) | 250K TPM, Gemini models | No CC |
 | [Mistral](https://console.mistral.ai) | 1B tokens/month | Phone verify |

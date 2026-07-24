@@ -5051,12 +5051,12 @@ function readRuntimeConfig() {
     maxTokens: cfg.maxTokens || 512
   };
 }
+async function loadRuntimeConfig() {
+  return mergeChatProxyArtifact(readRuntimeConfig());
+}
 function seedZeroConfigFromPageConfig() {
   const cfg = window.LLM_FALLBACKS_CONFIG;
   if (!cfg) return;
-  if (!localStorage.getItem(STORAGE_KEYS.endpoints) && cfg.endpoints?.length) {
-    saveJson(STORAGE_KEYS.endpoints, normalizeEndpoints(cfg.endpoints));
-  }
   if (!localStorage.getItem(STORAGE_KEYS.guestToken) && cfg.guestToken) {
     localStorage.setItem(STORAGE_KEYS.guestToken, cfg.guestToken);
   }
@@ -5443,7 +5443,7 @@ var FailoverProvider = class {
     }
   }
   getRuntimeConfig() {
-    return readRuntimeConfig();
+    return this.config;
   }
   async chatViaProxy(base, body, guestToken, signal) {
     return fetch(endpointUrl(base), {
@@ -5600,7 +5600,7 @@ function FailoverSettingsPlugin(deps) {
           statusEl.textContent = `Route: ${route}`;
         };
         setInterval(updateRoute, 1e3);
-        root.querySelector("#saveFailoverBtn")?.addEventListener("click", () => {
+        root.querySelector("#saveFailoverBtn")?.addEventListener("click", async () => {
           const lines = endpointsEl.value.split("\n").map((l) => l.trim()).filter(Boolean);
           const bad = lines.find((l) => isLocalEndpoint(l));
           if (bad) {
@@ -5611,7 +5611,7 @@ function FailoverSettingsPlugin(deps) {
           saveJson(STORAGE_KEYS.endpoints, endpoints);
           localStorage.setItem(STORAGE_KEYS.guestToken, guestEl.value.trim());
           localStorage.setItem(STORAGE_KEYS.defaultModel, modelEl.value.trim() || "free");
-          deps.provider.updateConfig(readRuntimeConfig());
+          deps.provider.updateConfig(await loadRuntimeConfig());
           deps.onConfigSaved();
           statusEl.textContent = `Saved ${endpoints.length} endpoint(s)`;
         });
@@ -5934,9 +5934,7 @@ function bindTopBarButtons() {
 }
 
 // src/main.ts
-async function loadCatalog() {
-  let config = readRuntimeConfig();
-  config = await mergeChatProxyArtifact(config);
+async function loadCatalog(config) {
   let catalog = [];
   let providerUrls = {};
   if (config.catalogUrl) {
@@ -5970,11 +5968,12 @@ async function bootstrap() {
   mount?.setAttribute("data-theme", "dark");
   trackSessionEvent(ANALYTICS_EVENTS.darkThemeLoaded);
   trackSessionEvent(ANALYTICS_EVENTS.homepageSession);
-  const { catalog, providerUrls } = await loadCatalog();
-  const config = readRuntimeConfig();
+  const config = await loadRuntimeConfig();
+  const { catalog, providerUrls } = await loadCatalog(config);
   const provider = new FailoverProvider(config);
   provider.setCatalog(catalog, providerUrls);
   let catalogRef = catalog;
+  let providerUrlsRef = providerUrls;
   const ui = new ChatUI({
     container: "#chatMount",
     provider,
@@ -5987,14 +5986,17 @@ async function bootstrap() {
       FailoverSettingsPlugin({
         provider,
         onConfigSaved: async () => {
-          const refreshed = await loadCatalog();
+          const refreshedConfig = await loadRuntimeConfig();
+          const refreshed = await loadCatalog(refreshedConfig);
           catalogRef = refreshed.catalog;
+          providerUrlsRef = refreshed.providerUrls;
+          provider.updateConfig(refreshedConfig);
           provider.setCatalog(refreshed.catalog, refreshed.providerUrls);
         }
       }),
       ByokSettingsPlugin({
         onKeysSaved: () => {
-          provider.setCatalog(catalogRef, providerUrls);
+          provider.setCatalog(catalogRef, providerUrlsRef);
         }
       }),
       ModelExplorerPlugin({

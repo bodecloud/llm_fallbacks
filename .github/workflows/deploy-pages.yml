@@ -120,7 +120,10 @@ jobs:
       - name: Run Pages chat e2e (mocked routes on live site)
         env:
           PAGES_BASE_URL: https://bodecloud.github.io/llm_fallbacks/
-        run: npx playwright test tests/e2e/pages-chat.spec.ts
+        run: |
+          cd webui && npm ci && npm run build
+          cd ..
+          npx playwright test tests/e2e/pages-chat.spec.ts tests/e2e/failover-dual-endpoint.spec.ts
 
       - name: Run live Pages chat e2e (real proxy)
         env:

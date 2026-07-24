@@ -1,6 +1,6 @@
 ---
-title: "feat: Static chat UI + free-tier HA proxy mesh"
-status: completed
+title: "feat: Static chat UI + best-effort free-tier proxy failover"
+status: completed_with_addendum
 date: 2026-07-24
 type: feat
 origin: STRATEGY.md, user-request (GitHub Pages chat + CF Worker + free PaaS HA)
@@ -9,6 +9,8 @@ strategy: STRATEGY.md
 ---
 
 # feat: Static chat UI + best-effort free-tier proxy failover
+
+> **Post-ship addendum:** As-built deltas, security decisions, and remediation status live in [`2026-07-24-002-post-ship-addendum.md`](2026-07-24-002-post-ship-addendum.md). Read that file before treating this plan as current operator truth.
 
 ## Summary
 
@@ -43,7 +45,7 @@ Research conclusion (see Sources): **pure browser-only provider routing with hid
 | KTD1 | **`webui/` → `docs/` build** + `deploy-pages.yml` | CI runs esbuild; murm-ui chat + ResearchWizard shell; output committed to Pages root |
 | KTD2 | **Worker holds provider secrets** | Only layer that can safely call OpenRouter/Groq from a public site |
 | KTD3 | **LiteLLM on Render/Koyeb, not Vercel/Fly** | LiteLLM needs long-running Python; Fly has no free tier for new users; Vercel cannot host LiteLLM container |
-| KTD4 | **Consume artifacts, don't port `config.py`** | Daily CI already publishes `free_models.json`; Worker caches top-N IDs in KV at deploy |
+| KTD4 | **Consume artifacts, don't port `config.py`** | Daily CI publishes `free_models.json`; Worker gets `MODEL_CHAIN` (first ID) + `ALLOWED_MODELS` (top 20) via wrangler vars at deploy — KV used for rate limits/metrics, not model-ID caching |
 | KTD5 | **Worker short chain + Workers AI; LiteLLM full `free` chain** | Worker CPU/subrequest limits favor thin routing (`openrouter/free` + Workers AI tail); full ranked chain on secondary LiteLLM only |
 | KTD6 | **Guest proxy token, not provider keys in browser** | `PROXY_GUEST_TOKEN` validated at Worker/LiteLLM; rotatable independently |
 | KTD7 | **Client endpoint list for failover** | Free tier lacks DNS LB; UI tries endpoints sequentially on failure (health pre-check optional v1.1) |
@@ -118,7 +120,7 @@ flowchart TB
 
 - Cloudflare AI Gateway managed fallbacks layer
 - Third backup endpoint (Northflank free tier evaluation)
-- Hot reload without LiteLLM restart (plan open question from gateway work)
+- Hot reload without LiteLLM restart (deferred — see plan 001 gateway work)
 - `packages/catalog` npm publish for external consumers
 - Keep-alive cron to reduce PaaS cold starts (document ToS tradeoffs)
 
@@ -130,7 +132,7 @@ flowchart TB
 |---------|--------|
 | `docs/` | New static chat UI (Pages root) |
 | `edge/` | Cloudflare Worker primary proxy |
-| `generate_configs.py` | Optional `provider_urls.json`; ensure `free` alias in committed YAML |
+| `generate_configs.py` | Adds `provider_urls.json` generation; ensure `free` alias in committed YAML |
 | `.github/workflows/` | `deploy-pages.yml`, `deploy-proxies.yml` |
 | `README.md` | Homepage demo link, architecture diagram |
 | `STRATEGY.md` | Already written; aligns tracks |
@@ -395,7 +397,7 @@ flowchart TB
 | Vite build vs single HTML file | webui/ esbuild pipeline (supersedes single HTML MVP) | Closed |
 | CF AI Gateway in front of Worker | Defer to follow-up | — |
 | Regenerate committed YAML with `free` alias before launch | Run `generate_configs` in CI or manual commit | Implementer |
-| Numeric rate limits (per IP, global daily) | TBD — specify before calling demo production-ready | Operator |
+| Numeric rate limits (per IP, global daily) | Closed — 30/min, 300/day in `edge/wrangler.toml` | Operator |
 | Accessibility requirements (keyboard panels, aria-live streaming) | TBD — add to U1 acceptance when shell panels stabilize | Implementer |
 | LiteLLM virtual key issuance automation | Manual setup for v1; automate in deploy-proxies follow-up | Implementer |
 
@@ -418,7 +420,7 @@ flowchart TB
 ## Acceptance Examples
 
 - AE1. Visitor opens `https://bodecloud.github.io/llm_fallbacks/`, sees chat UI, sends message with default `free`, receives streamed reply via Worker or secondary.
-- AE2. Worker outage (simulated): UI fails over to LiteLLM URL within client retry logic.
+- AE2. When secondary is configured (`LITELLM_URL` / dual endpoints in `chat_proxy.json`): UI fails over to LiteLLM URL within client retry logic on Worker outage (simulated 503).
 - AE3. View-source on Pages site shows no `OPENROUTER_API_KEY` or provider secrets.
 - AE4. Daily CI updates `free_models.json`; proxies align within 24h via redeploy-on-config-change (U5 `deploy-proxies` trigger on `configs/litellm_config_free.yaml`).
 

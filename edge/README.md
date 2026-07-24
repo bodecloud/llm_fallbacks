@@ -21,7 +21,7 @@ npm install
 cp ../docs/config.example.js ../docs/config.js  # local UI config
 ```
 
-Set secrets:
+Set secrets (required for deploy and local `wrangler dev`):
 
 ```bash
 npx wrangler secret put PROXY_GUEST_TOKEN
@@ -29,6 +29,8 @@ npx wrangler secret put OPENROUTER_API_KEY
 # optional:
 npx wrangler secret put GROQ_API_KEY
 ```
+
+`PROXY_GUEST_TOKEN` is **not** in `wrangler.toml` `[vars]` — use secret or `.dev.vars` locally.
 
 Update `wrangler.toml` `MODEL_CHAIN` and `ALLOWED_MODELS` (comma-separated LiteLLM model ids) or let CI set them from `configs/free_models_ids.txt` (chain: first line; allowlist: top 20).
 
@@ -57,15 +59,9 @@ Or push to `main` — `.github/workflows/deploy-proxies.yml` deploys when `edge/
 
 ### CI deploy troubleshooting
 
-If **Deploy Proxies** fails with `Authentication error [code: 10000]`, regenerate the Cloudflare API token and update the `CLOUDFLARE_API_TOKEN` repository secret. The token needs at least:
+If **Deploy Proxies** fails with `Authentication error [code: 10000]`, regenerate the Cloudflare API token and update the `CLOUDFLARE_API_TOKEN` repository secret. See [`docs/solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md`](../docs/solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md) for required scopes.
 
-- **Account** → **Workers Scripts** → **Edit**
-- **Account** → **Workers AI** → **Read** (or Edit)
-- **Account** → **Account Settings** → **Read** (for `wrangler deploy`)
-
-Confirm `CLOUDFLARE_ACCOUNT_ID` matches the account that owns `llm-fallbacks-proxy`.
-
-After updating secrets, re-run **Deploy Proxies** from the Actions tab (or push any `edge/` change). If wrangler auth fails but `WORKER_URL` is set, CI exits successfully with `deployed=false` instead of failing the whole workflow.
+After updating secrets, re-run **Deploy Proxies** from the Actions tab (or push any `edge/` change). If wrangler auth fails but `WORKER_URL` is set, CI exits successfully with `deployed=false` — the committed `chat_proxy.json` dual endpoints are preserved; Pages still serves the last known Worker URL from secrets at build time.
 
 Local deploy (bypasses CI):
 
@@ -87,15 +83,20 @@ Then commit and push the webui build step (builds `webui/` into `docs/assets/` o
 
 ## Required GitHub secrets
 
+Sync from `~/.config/secrets.env` with [`deploy/scripts/sync-github-secrets.sh`](../deploy/scripts/sync-github-secrets.sh):
+
 | Secret | Purpose |
 |--------|---------|
-| `CLOUDFLARE_API_TOKEN` | Wrangler deploy |
+| `CLOUDFLARE_API_TOKEN` | Wrangler deploy (Workers Scripts Edit + Workers AI Read) |
 | `CLOUDFLARE_ACCOUNT_ID` | Wrangler deploy |
-| `PROXY_GUEST_TOKEN` | Guest auth (same value in Pages `config.js`) |
+| `PROXY_GUEST_TOKEN` | Guest auth — same value in Pages `config.js` and Worker secret |
 | `OPENROUTER_API_KEY` | Upstream calls |
-| `WORKER_URL` | Pages config — deployed Worker base URL |
-| `LITELLM_URL` | Pages config — Render/Koyeb LiteLLM URL |
-| `RENDER_DEPLOY_HOOK` | Optional — redeploy secondary backend |
+| `GROQ_API_KEY` | Optional upstream |
+| `WORKER_URL` | Pages config + graceful skip when CF deploy fails (auth 10000) |
+| `LITELLM_URL` | Render LiteLLM secondary URL for `chat_proxy.json` |
+| `RENDER_API_KEY` | Render API redeploy when hook unset |
+| `RENDER_SERVICE_ID` | Render service id (e.g. `srv-…`) |
+| `RENDER_DEPLOY_HOOK` | Optional — redeploy secondary backend via hook |
 
 ## Security
 

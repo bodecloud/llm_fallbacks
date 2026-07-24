@@ -34,6 +34,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          PROXY_GUEST_TOKEN: ${{ secrets.PROXY_GUEST_TOKEN }}
           WORKER_URL_SECRET: ${{ secrets.WORKER_URL }}
         run: |
           set -o pipefail
@@ -71,6 +72,9 @@ jobs:
           if [ -n "$GROQ_API_KEY" ]; then
             echo "$GROQ_API_KEY" | npx wrangler secret put GROQ_API_KEY
           fi
+          if [ -n "$PROXY_GUEST_TOKEN" ]; then
+            echo "$PROXY_GUEST_TOKEN" | npx wrangler secret put PROXY_GUEST_TOKEN
+          fi
 
       - name: Update chat_proxy.json
         if: steps.deploy_worker.outputs.deployed == 'true'
@@ -85,10 +89,16 @@ jobs:
           litellm_url = os.environ.get("LITELLM_URL", "").strip()
           path = Path("configs/chat_proxy.json")
           data = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
-          endpoints = [worker_url]
-          if litellm_url:
+          existing = data.get("endpoints") or []
+          secondary = [
+              u.rstrip("/")
+              for u in existing
+              if u.rstrip("/") != worker_url.rstrip("/")
+          ]
+          endpoints = [worker_url.rstrip("/")] + secondary
+          if litellm_url and litellm_url.rstrip("/") not in endpoints:
               endpoints.append(litellm_url.rstrip("/"))
-          data["endpoints"] = endpoints
+          data["endpoints"] = list(dict.fromkeys(endpoints))
           data["guestToken"] = data.get("guestToken") or "llm-fallbacks-public"
           data["description"] = "Zero-config demo proxy for GitHub Pages chat."
           path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")

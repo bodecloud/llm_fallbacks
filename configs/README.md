@@ -67,17 +67,20 @@ Used by the GitHub Pages chat UI and edge proxy for metadata — not for browser
 
 ### `chat_proxy.json`
 
-Zero-config endpoint bootstrap for the public chat UI. Updated by `.github/workflows/deploy-proxies.yml` after Worker deploy (and optionally appends `LITELLM_URL` when configured):
+Zero-config endpoint bootstrap for the public chat UI. Updated by `.github/workflows/deploy-proxies.yml` after Worker deploy; **preserves existing secondary URLs** when `LITELLM_URL` is unset:
 
 ```json
 {
-  "endpoints": ["https://llm-fallbacks-proxy.example.workers.dev"],
+  "endpoints": [
+    "https://llm-fallbacks-proxy.bocloud.workers.dev",
+    "https://llm-fallbacks-gateway.onrender.com"
+  ],
   "guestToken": "llm-fallbacks-public",
   "description": "Zero-config demo proxy for GitHub Pages chat."
 }
 ```
 
-Pages build merges this file with `WORKER_URL` / `LITELLM_URL` secrets into `docs/config.js`.
+Bootstrap is three-layer: Pages CI writes `docs/config.js` (Worker URL), the browser fetches this file at runtime via `chatProxyUrl`, and `loadRuntimeConfig()` merges both into `FailoverProvider`.
 
 ### `litellm_config.yaml` / `litellm_config_free.yaml`
 

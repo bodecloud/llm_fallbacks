@@ -79,14 +79,19 @@ OPENROUTER_API_KEY=dummy CONFIG_DIR=/tmp/llm-fallbacks-config \
   bash deploy/scripts/update-config.sh --once
 ```
 
-## Cloud deploy (Render / Koyeb)
+## Cloud deploy (Render secondary)
 
 For the public chat demo secondary backend:
 
-1. Create a Render web service from [`deploy/render.yaml`](render.yaml) (or connect the repo manually).
-2. Set `LITELLM_MASTER_KEY` to a **operator-only** secret (never ship to Pages). Issue a separate chat-scoped virtual key for the public demo if LiteLLM secondary accepts browser traffic.
-3. Set `OPENROUTER_API_KEY` and optional provider keys.
-4. Add `RENDER_DEPLOY_HOOK` and `LITELLM_URL` to GitHub repo secrets — CI appends the secondary URL to `configs/chat_proxy.json` when set.
+1. Create a Render web service from [`deploy/render.yaml`](render.yaml) (or run [`deploy/scripts/render-setup-secondary.sh`](scripts/render-setup-secondary.sh)).
+2. Set `LITELLM_MASTER_KEY` to an **operator-only** secret (never ship to Pages). Browser failover uses the guest token on the Worker only; Render accepts the master key for operator smoke tests until a LiteLLM virtual key is issued (see [docs/CAVEATS.md](../docs/CAVEATS.md)).
+3. Set `OPENROUTER_API_KEY` and optional provider keys. **Do not** set empty `DATABASE_URL` — omit it for minimal deploy (deploy-mode YAML excludes `database_url`).
+4. Add GitHub repo secrets via [`deploy/scripts/sync-github-secrets.sh`](scripts/sync-github-secrets.sh):
+   - `LITELLM_URL` — Render service URL (appended to `chat_proxy.json`)
+   - `RENDER_API_KEY` + `RENDER_SERVICE_ID` — API redeploy when deploy hook is unset
+   - `RENDER_DEPLOY_HOOK` — optional alternative trigger
+
+CI appends the secondary URL to `configs/chat_proxy.json` and preserves existing secondaries on Worker-only redeploys.
 
 The container uses [`Dockerfile.gateway`](Dockerfile.gateway) — generates deploy-safe YAML on boot, then runs LiteLLM on port 4000.
 
@@ -100,7 +105,8 @@ The container uses [`Dockerfile.gateway`](Dockerfile.gateway) — generates depl
 ## Troubleshooting
 
 - **Proxy won't start:** Ensure `config-init` exited successfully (`docker compose logs config-init`).
-- **401 on chat requests:** Pass `Authorization: Bearer` with your `LITELLM_MASTER_KEY`.
+- **401 on chat requests (local Docker):** Pass `Authorization: Bearer` with your `LITELLM_MASTER_KEY`.
+- **401 on Render from browser guest token:** Expected until a LiteLLM virtual key is configured; public demo uses Worker primary with guest token. Use master key for operator curl smoke only.
 - **Provider errors:** Some free models require provider API keys; check logs and `.env`.
 - **Sidecar can't restart proxy:** Requires `/var/run/docker.sock` mount (local dev only).
 

@@ -1,5 +1,5 @@
 import type { ChatPlugin } from "murm-ui";
-import { isLocalEndpoint, normalizeEndpoints, readRuntimeConfig } from "../../config";
+import { isLocalEndpoint, loadRuntimeConfig, normalizeEndpoints, readRuntimeConfig } from "../../config";
 import type { FailoverProvider } from "../../providers/FailoverProvider";
 import { STORAGE_KEYS, saveJson } from "../../storage-keys";
 
@@ -52,7 +52,7 @@ export function FailoverSettingsPlugin(deps: {
         };
         setInterval(updateRoute, 1000);
 
-        root.querySelector("#saveFailoverBtn")?.addEventListener("click", () => {
+        root.querySelector("#saveFailoverBtn")?.addEventListener("click", async () => {
           const lines = endpointsEl.value
             .split("\n")
             .map((l) => l.trim())
@@ -66,7 +66,7 @@ export function FailoverSettingsPlugin(deps: {
           saveJson(STORAGE_KEYS.endpoints, endpoints);
           localStorage.setItem(STORAGE_KEYS.guestToken, guestEl.value.trim());
           localStorage.setItem(STORAGE_KEYS.defaultModel, modelEl.value.trim() || "free");
-          deps.provider.updateConfig(readRuntimeConfig());
+          deps.provider.updateConfig(await loadRuntimeConfig());
           deps.onConfigSaved();
           statusEl.textContent = `Saved ${endpoints.length} endpoint(s)`;
         });

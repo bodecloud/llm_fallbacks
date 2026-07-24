@@ -87,7 +87,7 @@ export class FailoverProvider implements ChatProvider {
   }
 
   private getRuntimeConfig(): AppConfig {
-    return readRuntimeConfig();
+    return this.config;
   }
 
   private async chatViaProxy(

@@ -3,7 +3,7 @@
   "private": true,
   "description": "Playwright e2e tests for the GitHub Pages chat UI",
   "scripts": {
-    "test:e2e": "playwright test tests/e2e/pages-chat.spec.ts",
+    "test:e2e": "playwright test tests/e2e/pages-chat.spec.ts tests/e2e/failover-dual-endpoint.spec.ts",
     "test:e2e:live": "playwright test tests/e2e/pages-chat-live.spec.ts",
     "test:e2e:zero-config": "playwright test tests/e2e/pages-chat-zero-config.spec.ts",
     "test:e2e:all": "playwright test"

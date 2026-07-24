@@ -48,13 +48,14 @@ export function readRuntimeConfig(): AppConfig {
   };
 }
 
+export async function loadRuntimeConfig(): Promise<AppConfig> {
+  return mergeChatProxyArtifact(readRuntimeConfig());
+}
+
 export function seedZeroConfigFromPageConfig(): void {
   const cfg = window.LLM_FALLBACKS_CONFIG;
   if (!cfg) return;
 
-  if (!localStorage.getItem(STORAGE_KEYS.endpoints) && cfg.endpoints?.length) {
-    saveJson(STORAGE_KEYS.endpoints, normalizeEndpoints(cfg.endpoints));
-  }
   if (!localStorage.getItem(STORAGE_KEYS.guestToken) && cfg.guestToken) {
     localStorage.setItem(STORAGE_KEYS.guestToken, cfg.guestToken);
   }

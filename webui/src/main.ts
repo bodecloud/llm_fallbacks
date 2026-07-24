@@ -1,9 +1,10 @@
 import { ChatUI, IndexedDBStorage } from "murm-ui/with-css";
 import { CopyPlugin } from "murm-ui/plugins/copy";
 import {
-  mergeChatProxyArtifact,
+  loadRuntimeConfig,
   readRuntimeConfig,
   seedZeroConfigFromPageConfig,
+  type AppConfig,
 } from "./config";
 import { FailoverProvider } from "./providers/FailoverProvider";
 import type { CatalogEntry } from "./providers/browser-router";
@@ -16,13 +17,10 @@ import {
 } from "./analytics";
 import { bindTopBarButtons, initShellPanels } from "./shell-panels";
 
-async function loadCatalog(): Promise<{
+async function loadCatalog(config: AppConfig): Promise<{
   catalog: CatalogEntry[];
   providerUrls: Record<string, string>;
 }> {
-  let config = readRuntimeConfig();
-  config = await mergeChatProxyArtifact(config);
-
   let catalog: CatalogEntry[] = [];
   let providerUrls: Record<string, string> = {};
 
@@ -64,12 +62,13 @@ async function bootstrap(): Promise<void> {
   trackSessionEvent(ANALYTICS_EVENTS.darkThemeLoaded);
   trackSessionEvent(ANALYTICS_EVENTS.homepageSession);
 
-  const { catalog, providerUrls } = await loadCatalog();
-  const config = readRuntimeConfig();
+  const config = await loadRuntimeConfig();
+  const { catalog, providerUrls } = await loadCatalog(config);
   const provider = new FailoverProvider(config);
   provider.setCatalog(catalog, providerUrls);
 
   let catalogRef = catalog;
+  let providerUrlsRef = providerUrls;
 
   const ui = new ChatUI({
     container: "#chatMount",
@@ -83,14 +82,17 @@ async function bootstrap(): Promise<void> {
       FailoverSettingsPlugin({
         provider,
         onConfigSaved: async () => {
-          const refreshed = await loadCatalog();
+          const refreshedConfig = await loadRuntimeConfig();
+          const refreshed = await loadCatalog(refreshedConfig);
           catalogRef = refreshed.catalog;
+          providerUrlsRef = refreshed.providerUrls;
+          provider.updateConfig(refreshedConfig);
           provider.setCatalog(refreshed.catalog, refreshed.providerUrls);
         },
       }),
       ByokSettingsPlugin({
         onKeysSaved: () => {
-          provider.setCatalog(catalogRef, providerUrls);
+          provider.setCatalog(catalogRef, providerUrlsRef);
         },
       }),
       ModelExplorerPlugin({

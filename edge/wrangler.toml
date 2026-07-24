@@ -10,8 +10,9 @@ ALLOWED_MODELS = "openrouter/free"
 RATE_LIMIT_PER_MINUTE = "30"
 RATE_LIMIT_PER_DAY = "300"
 RATE_LIMIT_WINDOW_SECONDS = "60"
-PROXY_GUEST_TOKEN = "llm-fallbacks-public"
 WORKERS_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct-fast"
+
+# Set via `wrangler secret put PROXY_GUEST_TOKEN` or CI deploy-proxies.yml — not committed in [vars].
 
 [ai]
 binding = "AI"

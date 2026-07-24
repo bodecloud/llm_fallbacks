@@ -320,7 +320,8 @@ class TestDeployModeYaml:
         config = to_litellm_config_yaml([provider], free_only=True, deploy_mode=True)
         assert config["general_settings"]["master_key"] == "os.environ/LITELLM_MASTER_KEY"
         assert config["cache"]["host"] == "os.environ/REDIS_HOST"
-        assert config["general_settings"]["database_url"] == "os.environ/DATABASE_URL"
+        assert "database_url" not in config["general_settings"]
+        assert "allowed_routes" not in config["general_settings"]
         assert config["litellm_settings"]["callbacks"] == []
         assert config["litellm_settings"]["failure_callback"] == []
         assert config["general_settings"]["disable_master_key_return"] is True
