@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "docs/**"
+      - "webui/**"
       - "configs/chat_proxy.json"
       - "tests/e2e/**"
       - "playwright.config.ts"
@@ -28,17 +29,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: webui/package-lock.json
+
+      - name: Build webui into docs/
+        env:
+          APP_VERSION: ${{ github.sha }}
+        run: |
+          APP_VERSION="${GITHUB_SHA::7}-$(date +%s)"
+          echo "APP_VERSION=$APP_VERSION" >> "$GITHUB_ENV"
+          cd webui && npm ci && npm run build
+
       - name: Generate docs/config.js from secrets
         env:
           WORKER_URL: ${{ secrets.WORKER_URL }}
           LITELLM_URL: ${{ secrets.LITELLM_URL }}
           PROXY_GUEST_TOKEN: ${{ secrets.PROXY_GUEST_TOKEN }}
-          APP_VERSION: ${{ github.sha }}
         run: |
-          APP_VERSION="${GITHUB_SHA::7}-$(date +%s)"
-          echo "APP_VERSION=$APP_VERSION" >> "$GITHUB_ENV"
-          sed -i "s/APP_VERSION/${APP_VERSION}/g" docs/index.html
-          export APP_VERSION
           python3 <<'PY'
           import json
           import os
