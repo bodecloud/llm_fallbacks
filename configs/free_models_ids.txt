@@ -83,6 +83,7 @@ meta_llama/llama-3.3-8b-instruct
 nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
 cohere/north-mini-code:free
 google/gemma-4-31b-it:free
+inclusionai/ling-3.0-flash:free
 poolside/laguna-m.1:free
 poolside/laguna-s-2.1:free
 poolside/laguna-xs-2.1:free

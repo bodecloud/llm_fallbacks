@@ -286,6 +286,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "inclusionai/ling-3.0-flash:free": {
+        "input_cost_per_token": 0.0,
+        "output_cost_per_token": 0.0,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers..."
+        },
+        "litellm_provider": "openrouter",
+        "inclusionai/ling-3.0-flash:free": {
+            "input_cost_per_token": 0.0,
+            "output_cost_per_token": 0.0,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "kimi-k2-thinking-251104": {
         "input_cost_per_token": 0.0,
         "litellm_provider": "volcengine",
@@ -3353,14 +3373,23 @@
         "supports_function_calling": true,
         "source": "https://nebius.com/prices-ai-studio"
     },
+    "fireworks_ai/accounts/fireworks/models/flux-kontext-max": {
+        "max_tokens": 4096,
+        "max_input_tokens": 4096,
+        "max_output_tokens": 4096,
+        "input_cost_per_token": 8e-08,
+        "output_cost_per_token": 8e-08,
+        "litellm_provider": "fireworks_ai",
+        "mode": "image_generation"
+    },
     "openai/gpt-oss-20b": {
-        "input_cost_per_token": 3e-08,
+        "input_cost_per_token": 2.9e-08,
         "litellm_provider": "openrouter",
         "max_input_tokens": 131072,
-        "max_output_tokens": 131072,
+        "max_output_tokens": 32768,
         "max_tokens": 32768,
         "mode": "chat",
-        "output_cost_per_token": 1.3e-07,
+        "output_cost_per_token": 1.4e-07,
         "source": "https://openrouter.ai/openai/gpt-oss-20b",
         "supports_function_calling": true,
         "supports_parallel_function_calling": true,
@@ -3371,24 +3400,14 @@
             "notes": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for..."
         },
         "openai/gpt-oss-20b": {
-            "input_cost_per_token": 3e-08,
-            "output_cost_per_token": 1.3e-07,
+            "input_cost_per_token": 2.9e-08,
+            "output_cost_per_token": 1.4e-07,
             "max_input_tokens": 131072,
-            "max_output_tokens": 131072,
             "metadata": {
                 "notes": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for..."
             },
             "litellm_provider": "openrouter"
         }
-    },
-    "fireworks_ai/accounts/fireworks/models/flux-kontext-max": {
-        "max_tokens": 4096,
-        "max_input_tokens": 4096,
-        "max_output_tokens": 4096,
-        "input_cost_per_token": 8e-08,
-        "output_cost_per_token": 8e-08,
-        "litellm_provider": "fireworks_ai",
-        "mode": "image_generation"
     },
     "deepinfra/gryphe/mythomax-l2-13b": {
         "max_tokens": 4096,
@@ -6768,28 +6787,6 @@
         "mode": "chat",
         "supports_reasoning": true
     },
-    "google/gemma-3-27b-it": {
-        "input_cost_per_token": 1e-07,
-        "output_cost_per_token": 3e-07,
-        "max_input_tokens": 110000,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemma-3-27b-it": {
-            "input_cost_per_token": 1e-07,
-            "output_cost_per_token": 3e-07,
-            "max_input_tokens": 110000,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "fireworks_ai/accounts/fireworks/models/hermes-2-pro-mistral-7b": {
         "max_tokens": 32768,
         "max_input_tokens": 32768,
@@ -7971,6 +7968,26 @@
         "supports_response_schema": true,
         "supports_vision": true
     },
+    "google/gemma-4-31b-it": {
+        "input_cost_per_token": 1e-07,
+        "output_cost_per_token": 3.5e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 8192,
+        "metadata": {
+            "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemma-4-31b-it": {
+            "input_cost_per_token": 1e-07,
+            "output_cost_per_token": 3.5e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 8192,
+            "metadata": {
+                "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "groq/meta-llama/llama-4-scout-17b-16e-instruct": {
         "input_cost_per_token": 1.1e-07,
         "litellm_provider": "groq",
@@ -8383,26 +8400,6 @@
             "max_output_tokens": 262144,
             "metadata": {
                 "notes": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference \u2014 delivering near-31B quality at..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "google/gemma-4-31b-it": {
-        "input_cost_per_token": 1.2e-07,
-        "output_cost_per_token": 3.5e-07,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
-        "metadata": {
-            "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
-        },
-        "litellm_provider": "openrouter",
-        "google/gemma-4-31b-it": {
-            "input_cost_per_token": 1.2e-07,
-            "output_cost_per_token": 3.5e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
-            "metadata": {
-                "notes": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function..."
             },
             "litellm_provider": "openrouter"
         }
@@ -8881,6 +8878,30 @@
         "mode": "chat",
         "supports_function_calling": true,
         "source": "https://nebius.com/prices-ai-studio"
+    },
+    "google/gemma-3-27b-it": {
+        "input_cost_per_token": 8e-08,
+        "output_cost_per_token": 4.5e-07,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 131072,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemma-3-27b-it": {
+            "input_cost_per_token": 8e-08,
+            "output_cost_per_token": 4.5e-07,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 131072,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "nvidia/nemotron-3-super-120b-a12b": {
         "input_cost_per_token": 8e-08,
@@ -13721,26 +13742,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "minimax/minimax-m2.7": {
-        "input_cost_per_token": 2.5e-07,
-        "output_cost_per_token": 1e-06,
-        "max_input_tokens": 196608,
-        "max_output_tokens": 131072,
-        "metadata": {
-            "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
-        },
-        "litellm_provider": "openrouter",
-        "minimax/minimax-m2.7": {
-            "input_cost_per_token": 2.5e-07,
-            "output_cost_per_token": 1e-06,
-            "max_input_tokens": 196608,
-            "max_output_tokens": 131072,
-            "metadata": {
-                "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "vertex_ai/qwen/qwen3-235b-a22b-instruct-2507-maas": {
         "input_cost_per_token": 2.5e-07,
         "litellm_provider": "vertex_ai-qwen_models",
@@ -13842,32 +13843,6 @@
             "metadata": {
                 "notes": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's..."
             },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "qwen/qwen3-coder": {
-        "input_cost_per_token": 3e-07,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 262144,
-        "max_output_tokens": 65536,
-        "max_tokens": 262100,
-        "mode": "chat",
-        "output_cost_per_token": 1e-06,
-        "source": "https://openrouter.ai/qwen/qwen3-coder",
-        "supports_tool_choice": true,
-        "supports_function_calling": true,
-        "metadata": {
-            "notes": "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over..."
-        },
-        "qwen/qwen3-coder": {
-            "input_cost_per_token": 3e-07,
-            "output_cost_per_token": 1e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over..."
-            },
-            "supports_function_calling": true,
             "litellm_provider": "openrouter"
         }
     },
@@ -15122,6 +15097,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "minimax/minimax-m2.7": {
+        "input_cost_per_token": 3e-07,
+        "output_cost_per_token": 1.2e-06,
+        "max_input_tokens": 204800,
+        "max_output_tokens": 131072,
+        "metadata": {
+            "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
+        },
+        "litellm_provider": "openrouter",
+        "minimax/minimax-m2.7": {
+            "input_cost_per_token": 3e-07,
+            "output_cost_per_token": 1.2e-06,
+            "max_input_tokens": 204800,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "gmi/minimaxai/minimax-m2.1": {
         "input_cost_per_token": 3e-07,
         "litellm_provider": "gmi",
@@ -16331,6 +16326,33 @@
         "max_tokens": 4096,
         "mode": "chat",
         "output_cost_per_token": 1e-06
+    },
+    "qwen/qwen3.5-27b": {
+        "input_cost_per_token": 1.95e-07,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 262144,
+        "max_output_tokens": 65536,
+        "max_tokens": 65536,
+        "mode": "chat",
+        "output_cost_per_token": 1.56e-06,
+        "source": "https://openrouter.ai/qwen/qwen3.5-27b",
+        "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "metadata": {
+            "notes": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of..."
+        },
+        "qwen/qwen3.5-27b": {
+            "input_cost_per_token": 1.95e-07,
+            "output_cost_per_token": 1.56e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "azure_ai/llama-4-maverick-17b-128e-instruct-fp8": {
         "input_cost_per_token": 1.41e-06,
@@ -17608,6 +17630,32 @@
             "metadata": {
                 "notes": "MiniMax-M2.1 is a lightweight, state-of-the-art large language model optimized for coding, agentic workflows, and modern application development. With only 10 billion activated parameters, it delivers a major jump in real-world..."
             }
+        }
+    },
+    "qwen/qwen3-coder": {
+        "input_cost_per_token": 3.8e-07,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 262144,
+        "max_output_tokens": 65536,
+        "max_tokens": 262100,
+        "mode": "chat",
+        "output_cost_per_token": 1.55e-06,
+        "source": "https://openrouter.ai/qwen/qwen3-coder",
+        "supports_tool_choice": true,
+        "supports_function_calling": true,
+        "metadata": {
+            "notes": "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over..."
+        },
+        "qwen/qwen3-coder": {
+            "input_cost_per_token": 3.8e-07,
+            "output_cost_per_token": 1.55e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over..."
+            },
+            "supports_function_calling": true,
+            "litellm_provider": "openrouter"
         }
     },
     "arcee-ai/virtuoso-large": {
@@ -20718,6 +20766,24 @@
         "supports_reasoning": true,
         "supports_system_messages": true
     },
+    "qwen/qwen3.6-27b": {
+        "input_cost_per_token": 2.88e-07,
+        "output_cost_per_token": 2.4e-06,
+        "max_input_tokens": 262144,
+        "metadata": {
+            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3.6-27b": {
+            "input_cost_per_token": 2.88e-07,
+            "output_cost_per_token": 2.4e-06,
+            "max_input_tokens": 262144,
+            "metadata": {
+                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "nvidia/nemotron-3-ultra-550b-a55b": {
         "input_cost_per_token": 5e-07,
         "output_cost_per_token": 2.2e-06,
@@ -21134,33 +21200,6 @@
         ],
         "tpm": 4000000,
         "rpm": 10
-    },
-    "qwen/qwen3.5-27b": {
-        "input_cost_per_token": 2.6e-07,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 262144,
-        "max_output_tokens": 81920,
-        "max_tokens": 65536,
-        "mode": "chat",
-        "output_cost_per_token": 2.6e-06,
-        "source": "https://openrouter.ai/qwen/qwen3.5-27b",
-        "supports_function_calling": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "metadata": {
-            "notes": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of..."
-        },
-        "qwen/qwen3.5-27b": {
-            "input_cost_per_token": 2.6e-07,
-            "output_cost_per_token": 2.6e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 81920,
-            "metadata": {
-                "notes": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "qwen/qwen3-vl-235b-a22b-thinking": {
         "input_cost_per_token": 2.6e-07,
@@ -22444,26 +22483,6 @@
         "supports_video_input": true,
         "supports_vision": true
     },
-    "z-ai/glm-5.2": {
-        "input_cost_per_token": 7.644e-07,
-        "output_cost_per_token": 2.4024e-06,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 131072,
-        "metadata": {
-            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.2": {
-            "input_cost_per_token": 7.644e-07,
-            "output_cost_per_token": 2.4024e-06,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 131072,
-            "metadata": {
-                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "qwen.qwen3-vl-235b-a22b": {
         "input_cost_per_token": 5.3e-07,
         "litellm_provider": "bedrock_converse",
@@ -22578,6 +22597,26 @@
         "supports_tool_choice": true,
         "supports_system_messages": true,
         "supports_reasoning": true
+    },
+    "z-ai/glm-5.2": {
+        "input_cost_per_token": 7.826e-07,
+        "output_cost_per_token": 2.4596e-06,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 131072,
+        "metadata": {
+            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.2": {
+            "input_cost_per_token": 7.826e-07,
+            "output_cost_per_token": 2.4596e-06,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "moonshot/kimi-k2-0905-preview": {
         "cache_read_input_token_cost": 1.5e-07,
@@ -24559,26 +24598,6 @@
         "supports_function_calling": true,
         "supports_tool_choice": true,
         "supports_vision": true
-    },
-    "qwen/qwen3.6-27b": {
-        "input_cost_per_token": 6e-07,
-        "output_cost_per_token": 3.6e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
-        "metadata": {
-            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3.6-27b": {
-            "input_cost_per_token": 6e-07,
-            "output_cost_per_token": 3.6e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
-            "metadata": {
-                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "tensormesh/qwen/qwen3.5-397b-a17b-fp8": {
         "litellm_provider": "tensormesh",
