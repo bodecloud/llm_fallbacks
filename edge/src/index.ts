@@ -336,6 +336,19 @@ async function chatWithFallback(
 
   let lastResponse: Response | null = null;
   for (const modelId of chain) {
+    const parsed = upstreamModelId(modelId);
+    if (!parsed) {
+      continue;
+    }
+    if (parsed.provider === "openrouter" && !env.OPENROUTER_API_KEY) {
+      continue;
+    }
+    if (parsed.provider === "groq" && !env.GROQ_API_KEY) {
+      continue;
+    }
+    if (parsed.provider !== "openrouter" && parsed.provider !== "groq") {
+      continue;
+    }
     const attemptBody = { ...normalized, model: modelId };
     const res = await callUpstream(modelId, attemptBody, env);
     if (res.ok) {

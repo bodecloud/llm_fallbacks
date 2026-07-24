@@ -40,7 +40,7 @@ jobs:
             echo "deployed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          CHAIN=$(head -n 10 ../configs/free_models_ids.txt | paste -sd, -)
+          CHAIN=$(head -n 1 ../configs/free_models_ids.txt | paste -sd, -)
           npm install
           DEPLOY_LOG="$(mktemp)"
           npx wrangler deploy --var "MODEL_CHAIN:${CHAIN}" 2>&1 | tee "$DEPLOY_LOG"
