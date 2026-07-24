@@ -34,6 +34,8 @@ Array of free model objects sorted by `quality_score` (descending). Each entry i
 
 Local-only models (ollama, vllm, lmstudio, xinference) are excluded.
 
+The [GitHub Pages chat UI](../docs/index.html) loads this file at runtime to populate the model picker.
+
 ### `free_models_ids.txt`
 
 Plain text file with one model ID per line, in the same quality-score order as `free_models.json`. Useful for simple downstream consumption:
@@ -48,7 +50,7 @@ Complete map of `model_id → spec` for all models known to LiteLLM (including p
 
 ### `custom_providers.json`
 
-Serialised configurations for custom providers (OpenRouter, VertexAI, Yandex).
+Serialised configurations for custom providers (OpenRouter, Groq, Cerebras, Google AI Studio, Mistral, DeepSeek, Together AI, Fireworks, SambaNova, NVIDIA NIM, Cohere, GitHub Models, HuggingFace, and others).
 
 ### `provider_urls.json`
 
