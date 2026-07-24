@@ -4,6 +4,32 @@ const LOCALHOST_RE = /127\.0\.0\.1|localhost:\d+/i;
 
 test.describe("GitHub Pages chat", () => {
   test.beforeEach(async ({ page }) => {
+    await page.route("**/config.js*", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/javascript",
+        body:
+          "window.LLM_FALLBACKS_CONFIG = " +
+          JSON.stringify({
+            endpoints: [],
+            guestToken: "llm-fallbacks-public",
+            defaultModel: "free",
+            catalogUrl:
+              "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/free_models.json",
+            providerUrlsUrl:
+              "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/provider_urls.json",
+            chatProxyUrl:
+              "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/chat_proxy.json",
+            maxTokens: 512,
+          }) +
+          ";",
+      });
+    });
+
+    await page.route("**/llm-fallbacks-proxy.bocloud.workers.dev/**", (route) =>
+      route.abort("blockedbyclient")
+    );
+
     await page.route("**/chat_proxy.json", async (route) => {
       await route.fulfill({
         status: 200,
