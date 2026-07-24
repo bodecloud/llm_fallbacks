@@ -8,12 +8,13 @@ on:
       - "deploy/**"
       - "configs/litellm_config_free.yaml"
       - "configs/free_models_ids.txt"
+      - "configs/chat_proxy.json"
       - "src/**"
       - ".github/workflows/deploy-proxies.yml"
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   deploy-worker:
@@ -26,26 +27,63 @@ jobs:
           node-version: "20"
 
       - name: Deploy Cloudflare Worker
+        id: deploy_worker
         working-directory: edge
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          PROXY_GUEST_TOKEN: ${{ secrets.PROXY_GUEST_TOKEN }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
             echo "CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID not set — skipping Worker deploy."
+            echo "deployed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           CHAIN=$(head -n 10 ../configs/free_models_ids.txt | paste -sd, -)
           npm install
-          npx wrangler deploy --var "MODEL_CHAIN:${CHAIN}"
-          echo "$PROXY_GUEST_TOKEN" | npx wrangler secret put PROXY_GUEST_TOKEN
-          echo "$OPENROUTER_API_KEY" | npx wrangler secret put OPENROUTER_API_KEY
+          DEPLOY_LOG="$(mktemp)"
+          npx wrangler deploy --var "MODEL_CHAIN:${CHAIN}" 2>&1 | tee "$DEPLOY_LOG"
+          WORKER_URL="$(grep -oE 'https://[a-zA-Z0-9.-]+\.workers\.dev' "$DEPLOY_LOG" | tail -1)"
+          if [ -z "$WORKER_URL" ]; then
+            echo "Could not detect Worker URL from deploy output."
+            exit 1
+          fi
+          echo "worker_url=$WORKER_URL" >> "$GITHUB_OUTPUT"
+          echo "deployed=true" >> "$GITHUB_OUTPUT"
+          if [ -n "$OPENROUTER_API_KEY" ]; then
+            echo "$OPENROUTER_API_KEY" | npx wrangler secret put OPENROUTER_API_KEY
+          fi
           if [ -n "$GROQ_API_KEY" ]; then
             echo "$GROQ_API_KEY" | npx wrangler secret put GROQ_API_KEY
           fi
+
+      - name: Update chat_proxy.json
+        if: steps.deploy_worker.outputs.deployed == 'true'
+        run: |
+          python3 <<PY
+          import json
+          from pathlib import Path
+          worker_url = "${{ steps.deploy_worker.outputs.worker_url }}"
+          path = Path("configs/chat_proxy.json")
+          data = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
+          data["endpoints"] = [worker_url]
+          data["guestToken"] = data.get("guestToken") or "llm-fallbacks-public"
+          data["description"] = "Zero-config demo proxy for GitHub Pages chat."
+          path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+          print("Updated chat_proxy.json with", worker_url)
+          PY
+
+      - name: Commit chat_proxy.json
+        if: steps.deploy_worker.outputs.deployed == 'true'
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add configs/chat_proxy.json
+          git diff --staged --quiet || (
+            git commit -m "chore: update chat_proxy.json from Worker deploy" &&
+            git push
+          )
 
   trigger-render:
     runs-on: ubuntu-latest

@@ -1,7 +1,7 @@
 /**
- * Browser-side llm-fallbacks routing — consumes daily artifacts, walks the ranked
- * free-model chain, and calls provider APIs directly (BYOK in localStorage).
- * No localhost or proxy required when the user has provider API keys.
+ * Browser-side llm-fallbacks routing — optional BYOK path only.
+ * Default zero-config chat uses the cloud proxy; this module handles
+ * extra providers when the user has chosen to add API keys in Settings.
  */
 window.LlmFallbacksClient = (function () {
   const RETRYABLE = new Set([408, 429, 500, 502, 503, 504]);
@@ -59,11 +59,24 @@ window.LlmFallbacksClient = (function () {
     return LOCAL_PROVIDERS.has(id.split("/")[0]) || /^https?:\/\/(127\.|localhost)/.test(id);
   }
 
-  function buildFreeChain(catalog) {
+  function resolveApiKey(provider, keys) {
+    const field = PROVIDER_KEY_FIELDS[provider] || provider;
+    const val = keys[field] || keys[provider];
+    return val && String(val).trim() ? String(val).trim() : null;
+  }
+
+  function hasKeyForModel(modelId, keys) {
+    const slash = modelId.indexOf("/");
+    if (slash <= 0) return false;
+    return !!resolveApiKey(modelId.slice(0, slash), keys);
+  }
+
+  function buildFreeChain(catalog, keys) {
     const chain = [];
     for (let i = 0; i < catalog.length; i++) {
       const entry = catalog[i];
       if (!isChatCapable(entry) || isLocalModel(entry.id)) continue;
+      if (!hasKeyForModel(entry.id, keys)) continue;
       chain.push(entry.id);
       if (chain.length >= MAX_CHAIN) break;
     }
@@ -74,12 +87,6 @@ window.LlmFallbacksClient = (function () {
     const slash = litellmId.indexOf("/");
     if (slash <= 0) return null;
     return { provider: litellmId.slice(0, slash), apiModel: litellmId.slice(slash + 1) };
-  }
-
-  function resolveApiKey(provider, keys) {
-    const field = PROVIDER_KEY_FIELDS[provider] || provider;
-    const val = keys[field] || keys[provider];
-    return val && String(val).trim() ? String(val).trim() : null;
   }
 
   async function callProvider(modelId, body, keys, providerUrls) {
@@ -136,15 +143,20 @@ window.LlmFallbacksClient = (function () {
   }
 
   async function chatWithBrowserFallback(options) {
-    const model = options.model || "free";
-    const chain = model === "free" ? buildFreeChain(options.catalog) : [model];
-    if (!chain.length) {
-      throw new Error("No chat-capable models in catalog for browser routing");
+    const keys = options.keys || loadKeys();
+    if (!hasAnyKey(keys)) {
+      throw new Error("BROWSER_UNAVAILABLE");
     }
 
-    const keys = options.keys || loadKeys();
+    const model = options.model || "free";
+    const chain =
+      model === "free" ? buildFreeChain(options.catalog, keys) : hasKeyForModel(model, keys) ? [model] : [];
+
+    if (!chain.length) {
+      throw new Error("BROWSER_UNAVAILABLE");
+    }
+
     let lastError = "Browser fallback chain exhausted";
-    let skippedAll = true;
 
     for (let i = 0; i < chain.length; i++) {
       const modelId = chain[i];
@@ -160,7 +172,6 @@ window.LlmFallbacksClient = (function () {
           lastError = result.reason;
           continue;
         }
-        skippedAll = false;
         const res = result.res;
         if (res.ok) {
           return { data: await res.json(), route: result.route };
@@ -171,16 +182,10 @@ window.LlmFallbacksClient = (function () {
           throw new Error(lastError);
         }
       } catch (err) {
-        skippedAll = false;
         lastError = modelId + ": " + (err.message || String(err));
       }
     }
 
-    if (skippedAll && !hasAnyKey(keys)) {
-      throw new Error(
-        "NO_BROWSER_KEYS — add an OpenRouter or Groq API key in Settings (stored locally in your browser)"
-      );
-    }
     throw new Error(lastError);
   }
 
@@ -189,6 +194,7 @@ window.LlmFallbacksClient = (function () {
     loadKeys,
     saveKeys,
     hasAnyKey,
+    hasKeyForModel,
     buildFreeChain,
     chatWithBrowserFallback,
   };
