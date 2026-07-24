@@ -2,8 +2,7 @@
 
 [![Python Package](https://github.com/bodecloud/llm_fallbacks/actions/workflows/python-package.yml/badge.svg)](https://github.com/bodecloud/llm_fallbacks/actions/workflows/python-package.yml)
 [![Daily Config Update](https://github.com/bodecloud/llm_fallbacks/actions/workflows/daily-config-update.yml/badge.svg)](https://github.com/bodecloud/llm_fallbacks/actions/workflows/daily-config-update.yml)
-[![GitHub Pages](https://img.shields.io/badge/chat-GitHub%20Pages-blue)](https://bolabaden.github.io/llm_fallbacks/)
-[![GitHub Pages](https://img.shields.io/badge/chat-GitHub%20Pages-blue)](https://bolabaden.github.io/llm_fallbacks/)
+[![GitHub Pages](https://img.shields.io/badge/chat-GitHub%20Pages-blue)](https://bodecloud.github.io/llm_fallbacks/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A Python library for managing fallbacks for LLM API calls using the [LiteLLM](https://github.com/BerriAI/litellm) library.
@@ -64,7 +63,7 @@ See [deploy/README.md](deploy/README.md) for smoke tests, environment variables,
 
 A static chat UI ships in [`docs/`](docs/index.html) and deploys to GitHub Pages as the project homepage:
 
-**https://bolabaden.github.io/llm_fallbacks/**
+**https://bodecloud.github.io/llm_fallbacks/**
 
 Architecture:
 
@@ -95,8 +94,8 @@ The `configs/` directory contains machine-consumable model lists that are **auto
 Downstream projects can fetch the latest lists directly:
 
 ```
-https://raw.githubusercontent.com/bolabaden/llm_fallbacks/main/configs/free_models.json
-https://raw.githubusercontent.com/bolabaden/llm_fallbacks/main/configs/free_models_ids.txt
+https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/free_models.json
+https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/free_models_ids.txt
 ```
 
 ### Consumer Examples
@@ -106,7 +105,7 @@ https://raw.githubusercontent.com/bolabaden/llm_fallbacks/main/configs/free_mode
 import json
 import urllib.request
 
-url = "https://raw.githubusercontent.com/bolabaden/llm_fallbacks/main/configs/free_models.json"
+url = "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/free_models.json"
 with urllib.request.urlopen(url) as resp:
     free_models = json.loads(resp.read())
 
@@ -118,10 +117,10 @@ for model in free_models[:5]:
 **curl:**
 ```bash
 # Get just the model IDs
-curl -s https://raw.githubusercontent.com/bolabaden/llm_fallbacks/main/configs/free_models_ids.txt
+curl -s https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/free_models_ids.txt
 
 # Get full JSON
-curl -s https://raw.githubusercontent.com/bolabaden/llm_fallbacks/main/configs/free_models.json | python3 -m json.tool | head -30
+curl -s https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/free_models.json | python3 -m json.tool | head -30
 ```
 
 ### Quality Scoring
