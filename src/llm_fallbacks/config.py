@@ -507,24 +507,163 @@ def _should_include_base_model(
 
 if "CUSTOM_PROVIDERS" not in globals():
     CUSTOM_PROVIDERS: list[CustomProviderConfig] = [
-        #        CustomProviderConfig(
-        #            provider_name="arliai",
-        #            base_url="https://api.arliai.com/v1",
-        #            api_key_required=True,
-        #        ),
-        #        CustomProviderConfig(
-        #            provider_name="awanllm",
-        #            base_url="https://api.awanllm.com/v1",
-        #            api_key_required=True,
-        #        ),
+        # --- Primary provider: OpenRouter (auto-fetch with custom parser) ---
         CustomProviderConfig(
             provider_name="openrouter",
             base_url="https://openrouter.ai/api/v1",
             api_key_required=False,
             parse_models_function=_parse_openrouter_models_response,
         ),
-        CustomProviderConfig(provider_name="openai", base_url="https://api.openai.com/v1", api_key_required=False),
-        CustomProviderConfig(provider_name="groq", base_url="https://api.groq.com/openai/v1", api_key_required=False),
+        CustomProviderConfig(
+            provider_name="openai",
+            base_url="https://api.openai.com/v1",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        # --- Free-tier providers (OpenAI-compatible) ---
+        CustomProviderConfig(
+            provider_name="groq",
+            base_url="https://api.groq.com/openai/v1",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="cerebras",
+            base_url="https://api.cerebras.ai/v1",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="google_ai_studio",
+            base_url="https://generativelanguage.googleapis.com/v1beta/openai",
+            api_env_key_name="GOOGLE_AI_STUDIO_API_KEY",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="mistral",
+            base_url="https://api.mistral.ai/v1",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="codestral",
+            base_url="https://codestral.mistral.ai/v1",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="deepseek",
+            base_url="https://api.deepseek.com/v1",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="together_ai",
+            base_url="https://api.together.xyz/v1",
+            api_env_key_name="TOGETHER_API_KEY",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="fireworks_ai",
+            base_url="https://api.fireworks.ai/inference/v1",
+            api_env_key_name="FIREWORKS_API_KEY",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="sambanova",
+            base_url="https://api.sambanova.ai/v1",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="nvidia_nim",
+            base_url="https://integrate.api.nvidia.com/v1",
+            api_env_key_name="NVIDIA_API_KEY",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="cohere",
+            base_url="https://api.cohere.com/v2",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="github_models",
+            base_url="https://models.inference.ai.azure.com",
+            api_env_key_name="GITHUB_MODELS_TOKEN",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="huggingface",
+            base_url="https://router.huggingface.co/v1",
+            api_env_key_name="HUGGINGFACE_API_KEY",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="novita",
+            base_url="https://api.novita.ai/v3/openai",
+            api_env_key_name="NOVITA_API_KEY",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="hyperbolic",
+            base_url="https://api.hyperbolic.xyz/v1",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="nebius",
+            base_url="https://api.studio.nebius.ai/v1",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="chutes",
+            base_url="https://api.chutes.ai/v1",
+            api_env_key_name="CHUTES_API_KEY",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="glhf",
+            base_url="https://glhf.chat/api/openai/v1",
+            api_env_key_name="GLHF_API_KEY",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="featherless",
+            base_url="https://api.featherless.ai/v1",
+            api_env_key_name="FEATHERLESS_API_KEY",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="completions_me",
+            base_url="https://api.completions.me/v1",
+            api_env_key_name="COMPLETIONS_API_KEY",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="vertexai",
+            base_url="https://us-central1-aiplatform.googleapis.com/v1",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
+        CustomProviderConfig(
+            provider_name="yandex",
+            base_url="https://llm.api.cloud.yandex.net",
+            api_key_required=False,
+            auto_fetch_models=False,
+        ),
     ]
 
 LIVE_PROVIDER_MODELS: Dict[str, set[str]] = {
