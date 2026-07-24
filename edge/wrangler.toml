@@ -7,7 +7,7 @@ ALLOWED_ORIGINS = "https://bodecloud.github.io"
 MAX_TOKENS_CAP = "1024"
 MODEL_CHAIN = "openrouter/free"
 PROXY_GUEST_TOKEN = "llm-fallbacks-public"
-WORKERS_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct"
+WORKERS_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct-fast"
 
 [ai]
 binding = "AI"

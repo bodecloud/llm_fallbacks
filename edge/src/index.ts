@@ -25,7 +25,7 @@ type ChatBody = {
 };
 
 const RETRYABLE = new Set([408, 429, 500, 502, 503, 504]);
-const DEFAULT_WORKERS_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct";
+const DEFAULT_WORKERS_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct-fast";
 
 function parseOrigins(raw: string): string[] {
   return raw.split(",").map((o) => o.trim()).filter(Boolean);
@@ -117,6 +117,30 @@ function sseStreamFromText(text: string, origin: string | null, allowed: string[
   });
 }
 
+function extractWorkersAIContent(result: unknown): string | null {
+  if (typeof result === "string") {
+    return result.trim() || null;
+  }
+  if (!result || typeof result !== "object") {
+    return null;
+  }
+  const obj = result as {
+    response?: string;
+    text?: string;
+    result?: unknown;
+    choices?: { message?: { content?: string }; delta?: { content?: string } }[];
+  };
+  const choiceContent =
+    obj.choices?.[0]?.message?.content ?? obj.choices?.[0]?.delta?.content ?? "";
+  const legacy = obj.response ?? obj.text ?? "";
+  const nested =
+    typeof obj.result === "string"
+      ? obj.result
+      : extractWorkersAIContent(obj.result) ?? "";
+  const content = (choiceContent || legacy || nested).trim();
+  return content || null;
+}
+
 async function workersAIText(body: ChatBody, env: Env): Promise<string | null> {
   const model = env.WORKERS_AI_MODEL || DEFAULT_WORKERS_AI_MODEL;
   try {
@@ -124,15 +148,7 @@ async function workersAIText(body: ChatBody, env: Env): Promise<string | null> {
       messages: body.messages,
       max_tokens: body.max_tokens,
     });
-    if (typeof result === "string") {
-      return result.trim() || null;
-    }
-    if (result && typeof result === "object") {
-      const obj = result as { response?: string; text?: string; result?: string };
-      const content = (obj.response ?? obj.text ?? obj.result ?? "").trim();
-      return content || null;
-    }
-    return null;
+    return extractWorkersAIContent(result);
   } catch {
     return null;
   }
@@ -200,8 +216,15 @@ function transformWorkersAIStream(
             const data = line.slice(5).trim();
             if (!data || data === "[DONE]") continue;
             try {
-              const parsed = JSON.parse(data) as { response?: string };
-              const text = parsed.response ?? "";
+              const parsed = JSON.parse(data) as {
+                response?: string;
+                choices?: { delta?: { content?: string }; message?: { content?: string } }[];
+              };
+              const text =
+                parsed.response ??
+                parsed.choices?.[0]?.delta?.content ??
+                parsed.choices?.[0]?.message?.content ??
+                "";
               if (!text) continue;
               const payload = JSON.stringify({
                 id,
