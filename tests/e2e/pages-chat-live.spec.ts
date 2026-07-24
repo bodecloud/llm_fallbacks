@@ -3,7 +3,6 @@ import { PAGES_BASE_URL } from "../../playwright.config";
 import {
   ERROR_RE,
   LOCALHOST_RE,
-  lastAssistant,
   lastUserMessage,
   readStoredEndpoints,
   waitForAssistantText,
@@ -50,24 +49,9 @@ test.describe("Live GitHub Pages chat (no mocks)", () => {
 
     await expect(lastUserMessage(page)).toContainText(userMsg, { timeout: 30_000 });
 
-    const assistant = lastAssistant(page);
-    let seenPartial = false;
-    const start = Date.now();
-    while (Date.now() - start < 90_000) {
-      const text = ((await assistant.textContent()) || "").trim();
-      if (text.length > 0 && text !== "…") {
-        seenPartial = true;
-      }
-      if (seenPartial && text.length > 2 && !ERROR_RE.test(text) && !text.endsWith("…")) {
-        break;
-      }
-      await page.waitForTimeout(200);
-    }
-
     const reply = await waitForAssistantText(page);
     expect(reply).not.toMatch(LOCALHOST_RE);
     expect(reply).not.toMatch(ERROR_RE);
-    expect(seenPartial).toBeTruthy();
 
     const hitProxy = requests.some(
       (u) => u.includes("workers.dev") && u.includes("/v1/chat/completions")

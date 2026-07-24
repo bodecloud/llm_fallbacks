@@ -2,7 +2,7 @@ import type { Page } from "@playwright/test";
 
 export const LOCALHOST_RE = /127\.0\.0\.1|localhost/i;
 export const ERROR_RE =
-  /no API key for|proxy pending|still deploying|NetworkError|Failed to fetch|401 Unauthorized|PROXY_UNAVAILABLE/i;
+  /no API key for|proxy pending|still deploying|NetworkError|Failed to fetch|401 Unauthorized|PROXY_UNAVAILABLE|HTTP 502|HTTP 429|Rate limit exceeded|Workers AI failed|proxy_erro/i;
 
 export const DEMO_PROXY = "https://demo-proxy.test";
 
