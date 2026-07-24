@@ -486,7 +486,7 @@ def get_parallel_function_calling_models() -> dict[str, LiteLLMBaseModelSpec]:
 
     Returns:
         dict[str, LiteLLMBaseModelSpec]: Dictionary of models supporting parallel function calling and their specifications
-    """  # noqa: E501
+    """  # ruff: ignore[line-too-long]
     return {
         model_name: model_spec
         for model_name, model_spec in get_litellm_models().items()

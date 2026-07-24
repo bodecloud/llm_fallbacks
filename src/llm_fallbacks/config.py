@@ -154,7 +154,7 @@ if TYPE_CHECKING:
         max_output_tokens: int  # max output tokens, if the provider specifies it. if not default to max_tokens
         max_pdf_size_mb: int  # maximum PDF size in MB
         max_query_tokens: int  # maximum number of tokens for queries
-        max_tokens: int  # LEGACY parameter. set to max_output_tokens if provider specifies it. IF not set to max_input_tokens, if provider specifies it.  # noqa: E501
+        max_tokens: int  # LEGACY parameter. set to max_output_tokens if provider specifies it. IF not set to max_input_tokens, if provider specifies it.  # ruff: ignore[line-too-long]
         max_video_length: int  # maximum length of video
         max_videos_per_prompt: int  # maximum number of videos per prompt
         metadata: dict[NotesKey, str]  # metadata associated with the model
@@ -336,9 +336,7 @@ class CustomProviderConfig(BaseProviderConfig):
     def _process_requested_models(self, models: Dict[str, LiteLLMBaseModelSpec]):
         parsed_requested_models: Dict[str, LiteLLMBaseModelSpec] = {}
         if self.parse_models_function is not None and self._requested_models is not None:
-            parsed_requested_models = self.parse_models_function(
-                self.provider_name, self._requested_models
-            )
+            parsed_requested_models = self.parse_models_function(self.provider_name, self._requested_models)
         elif isinstance(self._requested_models, list) and self._requested_models:
             first_entry = next(iter(self._requested_models))
             if isinstance(first_entry, str):
@@ -363,8 +361,7 @@ class CustomProviderConfig(BaseProviderConfig):
         models.update(parsed_requested_models)
         if self.live_fetch_succeeded:
             self.live_model_keys = {
-                _normalize_model_identifier(self.provider_name, model_name)
-                for model_name in parsed_requested_models
+                _normalize_model_identifier(self.provider_name, model_name) for model_name in parsed_requested_models
             }
 
     def _parse_models(self):
@@ -526,16 +523,8 @@ if "CUSTOM_PROVIDERS" not in globals():
             api_key_required=False,
             parse_models_function=_parse_openrouter_models_response,
         ),
-        CustomProviderConfig(
-            provider_name="openai",
-            base_url="https://api.openai.com/v1",
-            api_key_required=False,
-        ),
-        CustomProviderConfig(
-            provider_name="groq",
-            base_url="https://api.groq.com/openai/v1",
-            api_key_required=False,
-        ),
+        CustomProviderConfig(provider_name="openai", base_url="https://api.openai.com/v1", api_key_required=False),
+        CustomProviderConfig(provider_name="groq", base_url="https://api.groq.com/openai/v1", api_key_required=False),
     ]
 
 LIVE_PROVIDER_MODELS: Dict[str, set[str]] = {

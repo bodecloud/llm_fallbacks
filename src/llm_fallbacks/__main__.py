@@ -29,6 +29,7 @@ if TYPE_CHECKING:
         "correlation",
         "variance",
     ]
+    ComparisonOp = Literal[">", "<", ">=", "<=", "==", "!="]
 
     ModelCategory = Literal[
         # Model Modes
@@ -59,15 +60,16 @@ if TYPE_CHECKING:
 else:
     ModelCategory = str
     FilterMethod = str
+    ComparisonOp = str
     Literal = str
 
 
-def filter_model_specs(  # noqa: C901
+def filter_model_specs(  # ruff: ignore[complex-structure]
     method: FilterMethod,
     columns: list[str] | str | None = None,
     *,
     # Value filtering
-    comparison: Literal[">", "<", ">=", "<=", "==", "!="] | None = None,  # noqa: F722
+    comparison: ComparisonOp | None = None,
     value: Any = None,
     # Regex
     pattern: str | None = None,

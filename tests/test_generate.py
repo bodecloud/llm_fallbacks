@@ -187,11 +187,7 @@ class TestBuildFreeModelsList:
         assert result == []
 
 
-def _make_provider(
-    *,
-    provider_name: str = "openrouter",
-    models: dict[str, dict[str, object]],
-) -> CustomProviderConfig:
+def _make_provider(*, provider_name: str = "openrouter", models: dict[str, dict[str, object]]) -> CustomProviderConfig:
     return CustomProviderConfig(
         provider_name=provider_name,
         base_url="https://openrouter.ai/api/v1",
@@ -212,7 +208,7 @@ class TestBuildFreeAliasChain:
                     "input_cost_per_token": 0,
                     "output_cost_per_token": 0,
                 },
-            ),
+            )
         ]
         deployable = {"openrouter/free", "gemini/gemini-2.0-flash", "openai/gpt-4o-mini-free"}
         chain = build_free_alias_chain(fixture, deployable)
@@ -234,13 +230,8 @@ class TestBuildFreeAliasChain:
         models = [
             (
                 "openrouter/some-model",
-                {
-                    "litellm_provider": "openrouter",
-                    "mode": "",
-                    "input_cost_per_token": 0,
-                    "output_cost_per_token": 0,
-                },
-            ),
+                {"litellm_provider": "openrouter", "mode": "", "input_cost_per_token": 0, "output_cost_per_token": 0},
+            )
         ]
         chain = build_free_alias_chain(models, {"openrouter/some-model"})
         assert chain == ["openrouter/some-model"]
@@ -287,7 +278,11 @@ class TestToLiteLLMConfigYamlFreeAlias:
         assert free_entry["litellm_params"]["model"] == primary_entry["litellm_params"]["model"]
 
         free_fallbacks = next(
-            (entry[FREE_ALIAS_MODEL_NAME] for entry in config["router_settings"]["fallbacks"] if FREE_ALIAS_MODEL_NAME in entry),
+            (
+                entry[FREE_ALIAS_MODEL_NAME]
+                for entry in config["router_settings"]["fallbacks"]
+                if FREE_ALIAS_MODEL_NAME in entry
+            ),
             None,
         )
         assert free_fallbacks is not None
@@ -302,7 +297,7 @@ class TestToLiteLLMConfigYamlFreeAlias:
                     "mode": "embedding",
                     "input_cost_per_token": 0,
                     "output_cost_per_token": 0,
-                },
+                }
             }
         )
         config = to_litellm_config_yaml([provider], free_only=True)
@@ -319,7 +314,7 @@ class TestDeployModeYaml:
                     "mode": "chat",
                     "input_cost_per_token": 0,
                     "output_cost_per_token": 0,
-                },
+                }
             }
         )
         config = to_litellm_config_yaml([provider], free_only=True, deploy_mode=True)
@@ -338,7 +333,7 @@ class TestDeployModeYaml:
                     "mode": "chat",
                     "input_cost_per_token": 0,
                     "output_cost_per_token": 0,
-                },
+                }
             }
         )
         config = to_litellm_config_yaml([provider], free_only=True, deploy_mode=False)
@@ -377,8 +372,7 @@ class TestBuildProviderUrls:
                 api_key_required=False,
                 auto_fetch_models=False,
                 raw_models={},
-            ),
+            )
         ]
         urls = build_provider_urls(providers)
         assert "ollama" not in urls
-

@@ -415,16 +415,10 @@ def to_litellm_config_yaml(
         alias_chain = build_free_alias_chain(free_models_for_alias, deployable_model_names)
         if alias_chain:
             primary_name = alias_chain[0]
-            primary_entry = next(
-                (entry for entry in config["model_list"] if entry["model_name"] == primary_name),
-                None,
-            )
+            primary_entry = next((entry for entry in config["model_list"] if entry["model_name"] == primary_name), None)
             if primary_entry is not None:
                 config["model_list"].append(
-                    {
-                        "model_name": FREE_ALIAS_MODEL_NAME,
-                        "litellm_params": dict(primary_entry["litellm_params"]),
-                    }
+                    {"model_name": FREE_ALIAS_MODEL_NAME, "litellm_params": dict(primary_entry["litellm_params"])}
                 )
                 if len(alias_chain) > 1:
                     fallback_list = config["router_settings"].setdefault("fallbacks", [])
@@ -513,9 +507,7 @@ def main() -> None:
         "--output-dir", default="configs", help="Directory to write generated artifacts (default: configs)"
     )
     parser.add_argument(
-        "--deploy",
-        action="store_true",
-        help="Emit deploy-safe LiteLLM YAML (env placeholders, minimal observability)",
+        "--deploy", action="store_true", help="Emit deploy-safe LiteLLM YAML (env placeholders, minimal observability)"
     )
     args = parser.parse_args()
 
