@@ -115,7 +115,7 @@ if TYPE_CHECKING:
         infer_model_from_keys: bool  # Infer model from keys
         key_management_settings: list[
             dict[str, Any]
-        ]  # Settings for key management system (e.g. AWS KMS, Azure Key Vault). Doc on key management: https://docs.litellm.ai/docs/secret  # noqa: E501
+        ]  # Settings for key management system (e.g. AWS KMS, Azure Key Vault). Doc on key management: https://docs.litellm.ai/docs/secret
         key_management_system: str  # Key management system
         master_key: str  # Master key
         max_parallel_requests: int  # Maximum parallel requests
@@ -354,7 +354,9 @@ class CustomProviderConfig(BaseProviderConfig):
         elif isinstance(self._requested_models, dict):
             object_models_list = self._requested_models.get("object")
             if object_models_list == "list":
-                parsed_requested_models = self._parse_standard_model_response(self.provider_name, self._requested_models)
+                parsed_requested_models = self._parse_standard_model_response(
+                    self.provider_name, self._requested_models
+                )
             else:
                 parsed_requested_models = self._requested_models
 

@@ -20,7 +20,6 @@ from llm_fallbacks.core import (
     get_audio_output_models,
     get_audio_speech_models,
     get_audio_transcription_models,
-    get_chat_models,
     get_completion_models,
     get_embedding_models,
     get_function_calling_models,
