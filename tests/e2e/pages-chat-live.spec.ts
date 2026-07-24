@@ -37,6 +37,14 @@ test.describe("Live GitHub Pages chat (no mocks)", () => {
     expect(endpoints.join(",")).not.toMatch(LOCALHOST_RE);
   });
 
+  test("uses dark embedded theme on chat mount", async ({ page }) => {
+    const mount = page.locator("#chatMount");
+    await expect(mount).toHaveAttribute("data-theme", "dark");
+    await expect(page.locator("html")).toHaveClass(/lf-chat-page/);
+    const formBg = await page.locator(".mur-chat-form").evaluate((el) => getComputedStyle(el).backgroundColor);
+    expect(formBg).not.toBe("rgb(255, 255, 255)");
+  });
+
   test("streams a real assistant reply via cloud proxy", async ({ page }) => {
     test.setTimeout(180_000);
 

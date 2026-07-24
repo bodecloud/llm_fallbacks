@@ -55,7 +55,7 @@ async function bootstrap(): Promise<void> {
   bindTopBarButtons();
 
   const mount = document.querySelector("#chatMount");
-  mount?.classList.add("mur-app", "mur-app-embedded", "mur-sidebar-animated");
+  mount?.classList.add("mur-app", "mur-app-embedded", "mur-sidebar-animated", "mur-sidebar-closed");
   mount?.setAttribute("data-theme", "dark");
 
   const { catalog, providerUrls } = await loadCatalog();
