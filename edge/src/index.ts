@@ -6,8 +6,10 @@
 
 export type { Env } from "./types";
 
+import { isModelAllowed } from "./allowlist";
 import { corsHeaders, jsonError, parseOrigins, unauthorized } from "./http";
 import { handleEventsPost, handleMetricsGet } from "./events";
+import { checkRateLimit } from "./rate-limit";
 import {
   isChainModelSupported,
   modelChain,
@@ -155,6 +157,26 @@ export default {
       return unauthorized(origin, allowed);
     }
 
+    const rate = await checkRateLimit(request, env);
+    if (!rate.allowed) {
+      return new Response(
+        JSON.stringify({
+          error: {
+            message: `Rate limit exceeded (${rate.scope}). Try again later.`,
+            type: "rate_limit",
+          },
+        }),
+        {
+          status: 429,
+          headers: {
+            "Content-Type": "application/json",
+            "Retry-After": String(rate.retryAfterSeconds),
+            ...corsHeaders(origin, allowed),
+          },
+        },
+      );
+    }
+
     let body: ChatBody;
     try {
       body = (await request.json()) as ChatBody;
@@ -173,6 +195,10 @@ export default {
 
     body.model = normalizeClientModel(body.model) || "free";
     body.stream = body.stream ?? false;
+
+    if (!isModelAllowed(body.model, env)) {
+      return jsonError(`Model not allowlisted: ${body.model}`, 400, origin, allowed);
+    }
 
     const upstream = await chatWithFallback(body, env, origin, allowed);
 

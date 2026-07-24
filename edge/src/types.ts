@@ -6,7 +6,11 @@ export interface Env {
   GROQ_API_KEY?: string;
   ALLOWED_ORIGINS: string;
   MODEL_CHAIN: string;
+  ALLOWED_MODELS: string;
   MAX_TOKENS_CAP: string;
+  RATE_LIMIT_PER_MINUTE?: string;
+  RATE_LIMIT_PER_DAY?: string;
+  RATE_LIMIT_WINDOW_SECONDS?: string;
   WORKERS_AI_MODEL?: string;
 }
 

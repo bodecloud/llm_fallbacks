@@ -43,9 +43,10 @@ jobs:
             exit 0
           fi
           CHAIN=$(head -n 1 ../configs/free_models_ids.txt | paste -sd, -)
+          ALLOWED=$(head -n 20 ../configs/free_models_ids.txt | paste -sd, -)
           npm install
           DEPLOY_LOG="$(mktemp)"
-          if ! npx wrangler deploy --var "MODEL_CHAIN:${CHAIN}" 2>&1 | tee "$DEPLOY_LOG"; then
+          if ! npx wrangler deploy --var "MODEL_CHAIN:${CHAIN}" --var "ALLOWED_MODELS:${ALLOWED}" 2>&1 | tee "$DEPLOY_LOG"; then
             echo "Wrangler deploy failed."
             if [ -n "$WORKER_URL_SECRET" ]; then
               echo "Using WORKER_URL secret; skipping chat_proxy.json update."
@@ -73,14 +74,21 @@ jobs:
 
       - name: Update chat_proxy.json
         if: steps.deploy_worker.outputs.deployed == 'true'
+        env:
+          LITELLM_URL: ${{ secrets.LITELLM_URL }}
         run: |
           python3 <<PY
           import json
           from pathlib import Path
+          import os
           worker_url = "${{ steps.deploy_worker.outputs.worker_url }}"
+          litellm_url = os.environ.get("LITELLM_URL", "").strip()
           path = Path("configs/chat_proxy.json")
           data = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
-          data["endpoints"] = [worker_url]
+          endpoints = [worker_url]
+          if litellm_url:
+              endpoints.append(litellm_url.rstrip("/"))
+          data["endpoints"] = endpoints
           data["guestToken"] = data.get("guestToken") or "llm-fallbacks-public"
           data["description"] = "Zero-config demo proxy for GitHub Pages chat."
           path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")

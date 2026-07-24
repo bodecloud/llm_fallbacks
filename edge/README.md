@@ -30,7 +30,13 @@ npx wrangler secret put OPENROUTER_API_KEY
 npx wrangler secret put GROQ_API_KEY
 ```
 
-Update `wrangler.toml` `MODEL_CHAIN` (comma-separated LiteLLM model ids) or let CI set it from `configs/free_models_ids.txt`.
+Update `wrangler.toml` `MODEL_CHAIN` and `ALLOWED_MODELS` (comma-separated LiteLLM model ids) or let CI set them from `configs/free_models_ids.txt` (chain: first line; allowlist: top 20).
+
+## Rate limits and allowlist
+
+- **Rate limits:** KV-backed per-IP caps (`RATE_LIMIT_PER_MINUTE`, `RATE_LIMIT_PER_DAY` in `wrangler.toml`). Returns HTTP 429 with `Retry-After` when exceeded.
+- **Model allowlist:** Explicit `model` values must appear in `ALLOWED_MODELS` or `MODEL_CHAIN`; alias `free` is always allowed.
+- **Guest token:** Public demo capability gate in `docs/config.js` — not user authentication. Extractable via view-source; CORS does not protect server-side abuse.
 
 ## Local dev
 
