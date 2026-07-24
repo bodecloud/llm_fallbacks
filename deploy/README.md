@@ -84,9 +84,9 @@ OPENROUTER_API_KEY=dummy CONFIG_DIR=/tmp/llm-fallbacks-config \
 For the public chat demo secondary backend:
 
 1. Create a Render web service from [`deploy/render.yaml`](render.yaml) (or connect the repo manually).
-2. Set `LITELLM_MASTER_KEY` to the same value as GitHub secret `PROXY_GUEST_TOKEN`.
+2. Set `LITELLM_MASTER_KEY` to a **operator-only** secret (never ship to Pages). Issue a separate chat-scoped virtual key for the public demo if LiteLLM secondary accepts browser traffic.
 3. Set `OPENROUTER_API_KEY` and optional provider keys.
-4. Add `RENDER_DEPLOY_HOOK` and `LITELLM_URL` to GitHub repo secrets for CI + Pages config.
+4. Add `RENDER_DEPLOY_HOOK` and `LITELLM_URL` to GitHub repo secrets — CI appends the secondary URL to `configs/chat_proxy.json` when set.
 
 The container uses [`Dockerfile.gateway`](Dockerfile.gateway) — generates deploy-safe YAML on boot, then runs LiteLLM on port 4000.
 

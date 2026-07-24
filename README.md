@@ -68,8 +68,10 @@ A static chat UI ships in [`docs/`](docs/index.html) (built from [`webui/`](webu
 Architecture:
 
 - **Pages** — ResearchWizard shell + murm-ui chat; loads `free_models.json`; optional BYOK in browser
-- **Cloudflare Worker** — primary OpenAI-compatible proxy (guest token + SSE streaming)
-- **Render/Koyeb LiteLLM** — secondary backend with full `free` alias fallback chain
+- **Cloudflare Worker** — primary OpenAI-compatible proxy (guest token + SSE streaming; per-IP rate limits + model allowlist)
+- **Render LiteLLM** — optional secondary backend with full `free` alias chain (configure `LITELLM_URL` repo secret)
+
+**Demo contract:** best-effort public demo — no SLA, shared guest token (not user auth), quotas may exhaust. See plan [Security Model](docs/plans/2026-07-24-002-feat-static-chat-ha-gateway-plan.md#u7-documentation-and-homepage-setup) for limits.
 
 Plugin authoring: [docs/chat-ui-plugins.md](docs/chat-ui-plugins.md). See [edge/README.md](edge/README.md), [STRATEGY.md](STRATEGY.md), and [docs/plans/2026-07-24-002-feat-static-chat-ha-gateway-plan.md](docs/plans/2026-07-24-002-feat-static-chat-ha-gateway-plan.md).
 

@@ -1,6 +1,6 @@
 ---
 title: "feat: Static chat UI + free-tier HA proxy mesh"
-status: active
+status: completed
 date: 2026-07-24
 type: feat
 origin: STRATEGY.md, user-request (GitHub Pages chat + CF Worker + free PaaS HA)
@@ -8,28 +8,28 @@ depth: standard
 strategy: STRATEGY.md
 ---
 
-# feat: Static chat UI + free-tier HA proxy mesh
+# feat: Static chat UI + best-effort free-tier proxy failover
 
 ## Summary
 
-Ship a **static chat homepage** on GitHub Pages (repo default site) plus **GitHub Actions–driven deploys** to a **Cloudflare Worker** primary proxy and a **Render/Koyeb LiteLLM** secondary backend. Chat uses the existing `free` alias and daily `configs/` artifacts from llm-fallbacks—**not** a full TypeScript port of Python discovery. Best-effort HA via client + Worker endpoint failover; not paid-grade uptime.
+Ship a **static chat homepage** on GitHub Pages (repo default site) plus **GitHub Actions–driven deploys** to a **Cloudflare Worker** primary proxy and an optional **Render/Koyeb LiteLLM** secondary backend. Chat uses the existing `free` alias and daily `configs/` artifacts from llm-fallbacks—**not** a full TypeScript port of Python discovery. **Best-effort failover** between configured endpoints on $0 tiers — not SLA-grade HA.
 
 ## Problem Frame
 
 The repo already generates ranked free-model configs and a local Docker gateway (`deploy/`), but there is no public demo surface and no multi-surface free hosting story. The user wants Open WebUI-like chat as the default homepage, routed through llm-fallbacks ranking, with HA across free SaaS/PaaS—and preferably no backend.
 
-Research conclusion (see Sources): **pure browser-only provider routing with hidden keys is infeasible**. A **thin edge proxy + optional container LiteLLM** is the minimal secure architecture. **Full llm-fallbacks in TypeScript is unnecessary**; consume `free_models.json` and `litellm_config_free.yaml`. **True HA on $0** is not achievable (cold starts, Fly.io no free tier, quota limits); **best-effort failover** is the honest target.
+Research conclusion (see Sources): **pure browser-only provider routing with hidden repo-owned keys is infeasible** for zero-config demos. Optional **BYOK** (user keys in `localStorage`, no repo secrets) remains a valid browser-direct path. A **thin edge proxy + optional container LiteLLM** is the minimal secure architecture for the public demo. **Full llm-fallbacks in TypeScript is unnecessary**; consume `free_models.json` and `litellm_config_free.yaml`. **True HA on $0** is not achievable (cold starts, Fly.io no free tier, quota limits); **best-effort failover** is the honest target.
 
 ---
 
 ## Requirements
 
-- R1. GitHub Pages serves a static chat UI at the repo default homepage (`https://bolabaden.github.io/llm_fallbacks/`).
+- R1. GitHub Pages serves a static chat UI at the repo default homepage (`https://bodecloud.github.io/llm_fallbacks/`).
 - R2. UI loads model catalog from llm-fallbacks artifacts (`free_models.json`); default chat model is `free`.
 - R3. Chat requests never embed provider API keys in static assets; keys live only in Worker secrets or PaaS env vars.
 - R4. Primary OpenAI-compatible API: Cloudflare Worker with CORS allowlist, guest token auth, rate limits, model allowlist from `free_models_ids.txt`.
 - R5. Secondary API: LiteLLM on one free PaaS (Render **or** Koyeb) using `generate_configs --deploy` output and existing `free` alias chain.
-- R6. Client-side and/or Worker-side **endpoint failover** between primary Worker URL and secondary LiteLLM URL on 429/5xx/timeout.
+- R6. Client-side endpoint failover between primary Worker URL and secondary LiteLLM URL on 429/5xx/timeout.
 - R7. GitHub Actions deploy UI on `docs/**` changes; deploy/update proxies when configs or proxy code change; daily config refresh continues via existing workflow.
 - R8. No full TypeScript port of Python discovery; optional small TS module for `heuristic_v1` display only.
 - R9. Document cold-start behavior, security model, and `$0` HA limits in user-facing docs.
@@ -40,15 +40,15 @@ Research conclusion (see Sources): **pure browser-only provider routing with hid
 
 | ID | Decision | Rationale |
 |----|----------|-----------|
-| KTD1 | **Static UI in `docs/`** + `deploy-pages.yml` | Native GitHub Pages path; no build toolchain required for MVP (vanilla JS or Vite → `docs/`) |
+| KTD1 | **`webui/` → `docs/` build** + `deploy-pages.yml` | CI runs esbuild; murm-ui chat + ResearchWizard shell; output committed to Pages root |
 | KTD2 | **Worker holds provider secrets** | Only layer that can safely call OpenRouter/Groq from a public site |
 | KTD3 | **LiteLLM on Render/Koyeb, not Vercel/Fly** | LiteLLM needs long-running Python; Fly has no free tier for new users; Vercel cannot host LiteLLM container |
 | KTD4 | **Consume artifacts, don't port `config.py`** | Daily CI already publishes `free_models.json`; Worker caches top-N IDs in KV at deploy |
-| KTD5 | **Worker fallback chain (short) + LiteLLM `free` chain (full)** | Worker 10ms CPU / streaming limits favor thin routing; full chain on secondary |
+| KTD5 | **Worker short chain + Workers AI; LiteLLM full `free` chain** | Worker CPU/subrequest limits favor thin routing (`openrouter/free` + Workers AI tail); full ranked chain on secondary LiteLLM only |
 | KTD6 | **Guest proxy token, not provider keys in browser** | `PROXY_GUEST_TOKEN` validated at Worker/LiteLLM; rotatable independently |
-| KTD7 | **Client endpoint list for HA** | Free tier lacks DNS load balancing; UI tries `[workerURL, renderURL]` with health pre-check |
+| KTD7 | **Client endpoint list for failover** | Free tier lacks DNS LB; UI tries endpoints sequentially on failure (health pre-check optional v1.1) |
 | KTD8 | **Defer Open WebUI** | Resource-heavy Python app incompatible with Pages + 512MB free PaaS |
-| KTD9 | **Optional `provider_urls.json` artifact** | Replace hardcoded provider base URLs in UI; generated alongside `free_models.json` |
+| KTD9 | **`provider_urls.json` artifact** | Generated alongside `free_models.json`; removes hardcoded provider bases in UI/Worker |
 
 ---
 
@@ -68,6 +68,7 @@ flowchart TB
   subgraph artifacts [raw.githubusercontent.com]
     FM[free_models.json]
     PU[provider_urls.json]
+    CP[chat_proxy.json]
     YAML[litellm_config_free.yaml]
   end
 
@@ -79,28 +80,29 @@ flowchart TB
     LM[LiteLLM model: free]
   end
 
-  DAILY --> FM & PU & YAML
-  DEPLOY --> W & LM
+  DAILY --> FM & PU & CP & YAML
+  DEPLOY --> W & LM & CP
   UI -->|fetch catalog| FM
+  UI -->|zero-config endpoints| CP
   UI -->|chat + failover| W
   UI -->|fallback| LM
   W -->|short chain| PR[Provider APIs]
   LM -->|full chain| PR
 ```
 
-**Failover semantics:** UI (or Worker) retries only on 429, 5xx, timeout, model-not-found—not on 400. Secondary may cold-start 30–60s after spin-down.
+**Failover semantics:** Client UI retries the next configured endpoint on 5xx, timeout, model-not-found—not on 400. **429 (quota):** endpoint switching does not increase shared OpenRouter capacity; Worker internal Workers AI fallback handles upstream quota pressure. Worker handles in-proxy short chain + Workers AI internally. Secondary may cold-start 30–60s after spin-down — first retry may need user refresh.
 
 ---
 
 ## Scope Boundaries
 
-**In scope (Tier A + partial Tier B)**
+**In scope (v1)**
 
 - Static chat UI, Pages workflow, repo homepage config docs
 - CF Worker proxy (TypeScript)
 - One LiteLLM free PaaS deploy + deploy hook workflow
 - Client endpoint failover (2 URLs)
-- `provider_urls.json` generator (optional U2)
+- `provider_urls.json` generator (U2 — shipped in `configs/`)
 - Security: CORS allowlist, rate limit, model allowlist, max_tokens cap
 
 **Out of scope (v1)**
@@ -127,7 +129,7 @@ flowchart TB
 | Surface | Impact |
 |---------|--------|
 | `docs/` | New static chat UI (Pages root) |
-| `worker/` or `edge/` | New CF Worker project |
+| `edge/` | Cloudflare Worker primary proxy |
 | `generate_configs.py` | Optional `provider_urls.json`; ensure `free` alias in committed YAML |
 | `.github/workflows/` | `deploy-pages.yml`, `deploy-proxies.yml` |
 | `README.md` | Homepage demo link, architecture diagram |
@@ -155,40 +157,44 @@ flowchart TB
 
 ### U1. Static chat UI on GitHub Pages
 
-**Goal:** Minimal streaming chat SPA as repo homepage calling configured proxy endpoints.
+**Goal:** Streaming chat homepage built from `webui/` (murm-ui + ResearchWizard shell) calling configured proxy endpoints with client-side failover.
 
 **Requirements:** R1, R2, R6
 
-**Dependencies:** None
+**Dependencies:** U3, U4 (proxy URLs available in `configs/chat_proxy.json` / `docs/config.js`)
 
 **Files:**
 
-- `docs/index.html` (or `docs/chat/` + `docs/index.html` redirect)
-- `.github/workflows/deploy-pages.yml`
-- `docs/README.md` (optional, Pages-only notes)
+- `webui/` — source (plugins, FailoverProvider, shell panels)
+- `docs/index.html`, `docs/assets/*` — CI build output
+- `docs/chat-ui-plugins.md` — plugin authoring guide
+- `.github/workflows/deploy-pages.yml` — triggers on `docs/**`, `webui/**`, `configs/chat_proxy.json`
 
 **Approach:**
 
-- Vanilla JS or lightweight Vite build output committed to `docs/` (prefer no build step for MVP if prototype suffices).
-- Fetch `https://raw.githubusercontent.com/bolabaden/llm_fallbacks/main/configs/free_models.json`.
-- Default model `free`; allow picking catalog entries that proxy allowlists.
-- Implement `chatWithFallback(endpoints[], messages)` — try Worker URL then LiteLLM URL.
-- Store only `PROXY_GUEST_TOKEN` in UI config (public env via `docs/config.js` generated at deploy—not provider keys).
-- Streaming via `fetch` + SSE reader pattern.
+- `cd webui && npm ci && npm run build` writes `docs/assets/chat.js`, shell CSS, and `docs/index.html`.
+- **Chat engine:** murm-ui `ChatUI` + `IndexedDBStorage`.
+- **Routing:** `FailoverProvider` — cloud proxy first (SSE), optional browser BYOK fallback.
+- **Shell:** ai-researchwizard top bar + slide-in panels; plugins via `registerShellPanel` (failover-settings, byok-settings, model-explorer).
+- Fetch `free_models.json` and merge `configs/chat_proxy.json` for zero-config endpoints (`seedZeroConfigFromPageConfig`).
+- Default model `free`; model explorer browses catalog; default model set in Failover panel.
+- Store only `PROXY_GUEST_TOKEN` in UI config (public via `docs/config.js` — not provider keys).
 
-**Patterns to follow:** Prototype on branch `cursor/free-models-list-generation-734a` if merged; [chit-v2](https://github.com/Fortyseven/chit-v2) Pages pattern.
+- **Interaction states (v1):** catalog fetch loading/error; empty-chat welcome hero; streaming in progress; proxy failover status line; all-endpoints-failed error; bootstrap fatal (`.boot-error`); optional BYOK route messaging.
 
 **Test scenarios:**
 
-- Happy path: mock fetch returns model list; chat UI renders.
-- Failover: first endpoint returns 503, second succeeds (mock).
-- Edge: empty model list shows error state.
+- Happy path: Playwright loads Pages, sends chat, receives streamed assistant reply.
+- Failover: first endpoint returns 503, second succeeds (mock or live secondary when configured).
+- Edge: bootstrap failure shows `.boot-error`; empty catalog shows error state.
 
-**Verification:** Pages deploy succeeds; live site loads catalog; manual chat against staging proxy.
+**Verification:** Pages deploy succeeds; live site at `https://bodecloud.github.io/llm_fallbacks/`; Playwright e2e pass against production URL.
 
 ---
 
-### U2. Provider URLs artifact (optional but recommended)
+### U2. Provider URLs artifact
+
+**Status:** Shipped — `configs/provider_urls.json` generated by `generate_configs.py`.
 
 **Goal:** Generated map of provider → OpenAI-compatible base URL for UI metadata and Worker validation.
 
@@ -226,17 +232,18 @@ flowchart TB
 
 **Files:**
 
-- `edge/` or `worker/` — `src/index.ts`, `wrangler.toml`, `package.json`
+- `edge/` — `src/index.ts`, `wrangler.toml`, `package.json`
 - `.github/workflows/deploy-proxies.yml` (Worker job)
 
 **Approach:**
 
 - `POST /v1/chat/completions` — validate guest token header.
-- Load allowlisted model IDs from KV (populated at deploy from `free_models_ids.txt` top-N).
-- On `model: free`, iterate cached chain from `free_models.json` order (cap 5–10 at edge).
+- On `model: free`, use a **short** edge chain: primary upstream (e.g. `openrouter/free` from first line of `free_models_ids.txt`) then **Workers AI** terminal fallback when upstream returns 429/5xx or unsupported routes exhaust CPU budget.
+- `deploy-proxies.yml` sets `MODEL_CHAIN` from `head -n 1 configs/free_models_ids.txt` intentionally — do not expand to top-N at the edge.
+- Full ranked multi-provider `free` alias chain runs on LiteLLM secondary (U4), not in Worker v1.
 - Secrets: `OPENROUTER_API_KEY`, `GROQ_API_KEY`, `PROXY_GUEST_TOKEN`.
-- CORS: `Access-Control-Allow-Origin: https://bolabaden.github.io` (and custom domain if set).
-- Rate limit via KV counter per IP (simple fixed window).
+- CORS: `Access-Control-Allow-Origin: https://bodecloud.github.io` (and custom domain if set).
+- Rate limit via KV counter per IP (simple fixed window) — numeric thresholds TBD (see Open Questions).
 - Reference: [cloudflare-llm-gateway](https://github.com/leeguooooo/cloudflare-llm-gateway), [Stackbilt llm-providers](https://github.com/Stackbilt-dev/llm-providers).
 
 **Test scenarios:**
@@ -255,7 +262,7 @@ flowchart TB
 
 **Requirements:** R5, R7
 
-**Dependencies:** U1 (needs secondary URL in UI config)
+**Dependencies:** None (secondary URL injected via deploy-generated `configs/chat_proxy.json` / `docs/config.js`)
 
 **Files:**
 
@@ -266,16 +273,17 @@ flowchart TB
 **Approach:**
 
 - Slim profile: drop Redis if 512MB OOM; use deploy-mode YAML (`disable_spend_logs`, no observability callbacks).
-- Env: `LITELLM_MASTER_KEY`, `OPENROUTER_API_KEY`, `DATABASE_URL` empty.
+- Env: `LITELLM_MASTER_KEY` (operator-only, never shipped to Pages), `OPENROUTER_API_KEY`, `DATABASE_URL` empty.
+- **Public demo key:** issue a LiteLLM virtual key or route-scoped proxy credential limited to `POST /v1/chat/completions` and model `free` only. This value may appear in `docs/config.js` as `PROXY_GUEST_TOKEN` — **never** reuse `LITELLM_MASTER_KEY` as the browser token.
 - Bootstrap config: `update-config.sh --once` on start or mount raw YAML from GitHub at deploy.
-- Expose HTTPS URL to UI config (public).
+- Expose HTTPS URL to `configs/chat_proxy.json` (appended after deploy hook succeeds).
 - Render deploy hook or Koyeb API triggered from workflow after config artifact upload.
 
 **Test scenarios:**
 
 - Test expectation: none — manual smoke on platform.
 
-**Verification:** `/health/liveliness` returns OK; chat with `model: free` works with master key.
+**Verification:** `/health/liveliness` returns OK; chat with `model: free` works with the **scoped public demo key** (not master key).
 
 ---
 
@@ -294,35 +302,38 @@ flowchart TB
 
 **Approach:**
 
-- `deploy-pages`: on push to `main` paths `docs/**`, use `actions/deploy-pages@v4`.
+- `deploy-pages`: on push to `main` paths `docs/**`, `webui/**`, `configs/chat_proxy.json`; runs `cd webui && npm ci && npm run build`; uses `actions/deploy-pages@v4`.
 - `deploy-proxies`: on push paths `edge/**`, `deploy/**`, `configs/litellm_config_free.yaml`, or `workflow_dispatch`; jobs: generate artifact → wrangler deploy → trigger PaaS hook.
+- **Endpoint bootstrap:** after Worker deploy, commit/update `configs/chat_proxy.json` with Worker HTTPS URL; after U4 PaaS hook succeeds, append secondary URL from `LITELLM_URL` secret (launch gate — AE2 requires two endpoints when secondary is configured).
 - Reuse `OPENROUTER_API_KEY` secret from daily workflow pattern.
-- Document required repo secrets in `deploy/README.md`.
+- Document required repo secrets (`LITELLM_URL`, `RENDER_DEPLOY_HOOK`, etc.) in `deploy/README.md`.
 
 **Test scenarios:**
 
 - Workflow syntax valid (`act` or manual dispatch).
+- When `LITELLM_URL` is set: `chat_proxy.json` `endpoints` array contains Worker + secondary URLs.
 
-**Verification:** Push to branch triggers Pages; proxy workflow deploys without secret leakage in logs.
+**Verification:** Push to branch triggers Pages; proxy workflow deploys without secret leakage in logs; Playwright e2e can assert dual endpoints when secondary secret present.
 
 ---
 
-### U6. Client-side catalog module (minimal TS optional)
+### U6. Client-side catalog module (deferred from v1)
+
+**Status:** Deferred — `free_models.json` already ships `quality_score` from Python CI; UI reads pre-sorted order. No `packages/catalog/` npm publish in v1.
 
 **Goal:** Optional small TS library for quality score display—not discovery.
 
-**Requirements:** R8
+**Requirements:** R8 (optional)
 
-**Dependencies:** None (parallel)
+**Dependencies:** None (parallel when revived)
 
-**Files:**
+**Files (if revived):**
 
-- `packages/catalog/` or `docs/js/quality.js` (single file port of `heuristic_v1`)
+- `docs/js/quality.js` (single file port of `heuristic_v1`) — prefer over `packages/catalog/`
 
 **Approach:**
 
-- Port `compute_quality_score()` only (~80 lines math).
-- Used for sorting/badge in UI if not trusting pre-sorted JSON order.
+- Port `compute_quality_score()` only (~80 lines math) only if UI must recompute scores client-side.
 - **Do not** port `config.py`, `core.py`, or LiteLLM fetch.
 
 **Test scenarios:**
@@ -354,6 +365,20 @@ flowchart TB
 - Document: not HA in SLA sense; cold starts; guest token rotation.
 - AGENTS.md: add `docs/`, `edge/` scope.
 
+**Security Model (public demo):**
+
+- `PROXY_GUEST_TOKEN` in `docs/config.js` is a **public demo capability gate**, not user authentication. Anyone can extract it and call the Worker/LiteLLM API via curl — CORS only protects browser-origin chat, not scripted abuse.
+- Real abuse controls: per-IP rate limits, global daily caps, low `max_tokens`, monitoring via Worker analytics and `/v1/metrics`. Token rotation is incident response, not prevention.
+- Provider secrets (`OPENROUTER_API_KEY`, etc.) live only in Worker/PaaS env — never in Pages static assets.
+- Optional BYOK (user keys in `localStorage`) is a separate browser-direct path; distinct from zero-config demo routing.
+- Optional Cloudflare Access for operator-only deployments (personal use, not public demo).
+
+**Demo contract (public surface):**
+
+- **Supported:** zero-config ranked-free-model chat demo, BYOK for power users, best-effort endpoint failover when secondary is configured.
+- **Not supported:** SLA uptime, guaranteed availability, unlimited quota, abuse-free public access without rate limits.
+- Maintainer may throttle, rotate tokens, or disable the demo when quotas exhaust — document graceful degradation copy in UI.
+
 **Test scenarios:**
 
 - Test expectation: none.
@@ -366,10 +391,13 @@ flowchart TB
 
 | Question | Status | Owner |
 |----------|--------|-------|
-| Render vs Koyeb for secondary | Pick one for v1 (Render deploy hooks simpler) | User/implementer |
-| Vite build vs single HTML file | Default single HTML for MVP | Implementer |
+| Render vs Koyeb for secondary | Render chosen for v1 (render.yaml + deploy hooks) | Closed |
+| Vite build vs single HTML file | webui/ esbuild pipeline (supersedes single HTML MVP) | Closed |
 | CF AI Gateway in front of Worker | Defer to follow-up | — |
 | Regenerate committed YAML with `free` alias before launch | Run `generate_configs` in CI or manual commit | Implementer |
+| Numeric rate limits (per IP, global daily) | TBD — specify before calling demo production-ready | Operator |
+| Accessibility requirements (keyboard panels, aria-live streaming) | TBD — add to U1 acceptance when shell panels stabilize | Implementer |
+| LiteLLM virtual key issuance automation | Manual setup for v1; automate in deploy-proxies follow-up | Implementer |
 
 ---
 
@@ -389,10 +417,10 @@ flowchart TB
 
 ## Acceptance Examples
 
-- AE1. Visitor opens `https://bolabaden.github.io/llm_fallbacks/`, sees chat UI, sends message with default `free`, receives streamed reply via Worker or secondary.
+- AE1. Visitor opens `https://bodecloud.github.io/llm_fallbacks/`, sees chat UI, sends message with default `free`, receives streamed reply via Worker or secondary.
 - AE2. Worker outage (simulated): UI fails over to LiteLLM URL within client retry logic.
 - AE3. View-source on Pages site shows no `OPENROUTER_API_KEY` or provider secrets.
-- AE4. Daily CI updates `free_models.json`; within 24h proxies serve aligned model lists (via redeploy or KV refresh job).
+- AE4. Daily CI updates `free_models.json`; proxies align within 24h via redeploy-on-config-change (U5 `deploy-proxies` trigger on `configs/litellm_config_free.yaml`).
 
 ---
 
@@ -424,4 +452,4 @@ flowchart LR
 | No backend at all | ❌ Infeasible — thin proxy required |
 | Full llm-fallbacks in TypeScript | ❌ Unnecessary — consume JSON/YAML |
 | Open WebUI on free static hosting | ❌ Infeasible |
-| Completely free | ✅ With stated cold-start/ quota limits |
+| Completely free | ⚠️ Free hosting tiers; provider API spend borne by maintainer/BYOK |

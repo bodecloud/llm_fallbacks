@@ -185,6 +185,7 @@ When reviewing or submitting changes:
 10. murm-ui embed requires `data-theme="dark"` + `webui/shell/chat-overrides.css` — OS light mode otherwise shows white surfaces (see `docs/solutions/ui-bugs/murm-ui-light-theme-on-dark-shell.md`)
 11. Pushing `.github/workflows/*` needs GitHub token with `workflow` scope; Cloudflare deploy needs cfat token with Workers Scripts Edit (see `docs/solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md`)
 12. `ce-product-pulse` without PostHog: use CI history + Worker `/v1/metrics?days=1` + smoke tests (see `docs/solutions/workflow-issues/ci-based-product-pulse-without-analytics.md`)
+13. Worker public demo: set `ALLOWED_MODELS` + `RATE_LIMIT_*` in `wrangler.toml` / deploy-proxies; guest token in `config.js` is not auth (see `edge/README.md`)
 
 ## Compound Engineering
 

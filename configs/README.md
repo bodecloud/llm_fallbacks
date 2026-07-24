@@ -65,6 +65,20 @@ Map of provider name to OpenAI-compatible base URL (public hosts only; excludes 
 
 Used by the GitHub Pages chat UI and edge proxy for metadata — not for browser-direct provider calls.
 
+### `chat_proxy.json`
+
+Zero-config endpoint bootstrap for the public chat UI. Updated by `.github/workflows/deploy-proxies.yml` after Worker deploy (and optionally appends `LITELLM_URL` when configured):
+
+```json
+{
+  "endpoints": ["https://llm-fallbacks-proxy.example.workers.dev"],
+  "guestToken": "llm-fallbacks-public",
+  "description": "Zero-config demo proxy for GitHub Pages chat."
+}
+```
+
+Pages build merges this file with `WORKER_URL` / `LITELLM_URL` secrets into `docs/config.js`.
+
 ### `litellm_config.yaml` / `litellm_config_free.yaml`
 
 LiteLLM proxy configurations committed for library consumers and raw URL fetchers.
