@@ -12,6 +12,7 @@ export interface Env {
   RATE_LIMIT_PER_DAY?: string;
   RATE_LIMIT_WINDOW_SECONDS?: string;
   WORKERS_AI_MODEL?: string;
+  TURNSTILE_SECRET?: string;
 }
 
 export type ChatMessage = { role: string; content: string };

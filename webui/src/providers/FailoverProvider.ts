@@ -11,7 +11,9 @@ import {
   shouldFallbackToProxy,
   shouldTryBrowser,
 } from "./browser-router";
-import { ChatRouteError, mapHttpError, mapProxyChainFailure } from "./errors";
+import { ensureTurnstileToken } from "../turnstile-session";
+import { showRateLimitBanner } from "../plugins/status-strip";
+import { ChatRouteError, mapHttpError, mapProxyChainFailure, type RateLimitInfo, type RateLimitScope } from "./errors";
 import { setLastCompletionMeta, type CompletionMeta } from "./routing-metadata";
 import { emitOpenAiSseAsStreamEvents, emitTextAsStreamEvents } from "./sse";
 
@@ -49,6 +51,39 @@ function readRoutingHeaders(res: Response): Pick<CompletionMeta, "modelHeader" |
 
 function endpointLabel(base: string, res: Response): string {
   return res.headers.get("x-llm-fallbacks-endpoint") || base;
+}
+
+function parseRetryAfter(res: Response): number | undefined {
+  const raw = res.headers.get("Retry-After") ?? res.headers.get("retry-after");
+  if (!raw) return undefined;
+  const seconds = Number.parseInt(raw, 10);
+  return Number.isFinite(seconds) && seconds > 0 ? seconds : undefined;
+}
+
+function parseRateLimitScopeFromBody(bodyText: string): RateLimitScope | undefined {
+  try {
+    const parsed = JSON.parse(bodyText) as { error?: { message?: string } };
+    const message = parsed.error?.message ?? "";
+    if (/daily|\(day\)/i.test(message)) return "day";
+    if (/minute|\(minute\)/i.test(message)) return "minute";
+  } catch {
+    /* ignore */
+  }
+  return undefined;
+}
+
+function parseRetryAfterFromBody(bodyText: string): number | undefined {
+  try {
+    const parsed = JSON.parse(bodyText) as {
+      retry_after?: number;
+      error?: { retry_after?: number };
+    };
+    const raw = parsed.retry_after ?? parsed.error?.retry_after;
+    if (typeof raw === "number" && raw > 0) return raw;
+  } catch {
+    /* ignore */
+  }
+  return undefined;
 }
 
 export class FailoverProvider implements ChatProvider {
@@ -127,12 +162,17 @@ export class FailoverProvider implements ChatProvider {
     guestToken: string,
     signal: AbortSignal
   ): Promise<Response> {
+    const turnstileToken = await ensureTurnstileToken();
+    const headers: Record<string, string> = {
+      Authorization: `Bearer ${guestToken}`,
+      "Content-Type": "application/json",
+    };
+    if (turnstileToken) {
+      headers["CF-Turnstile-Response"] = turnstileToken;
+    }
     return fetch(endpointUrl(base), {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${guestToken}`,
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify({ ...body, stream: true }),
       signal,
     });
@@ -148,6 +188,7 @@ export class FailoverProvider implements ChatProvider {
 
     let lastError = "All proxy endpoints failed";
     let hopIndex = 0;
+    let lastRateLimit: RateLimitInfo | undefined;
     for (const base of config.endpoints) {
       this.setStatus(`proxy: ${base} …`);
       try {
@@ -165,10 +206,27 @@ export class FailoverProvider implements ChatProvider {
           await emitOpenAiSseAsStreamEvents(res, onEvent);
           return;
         }
-        const errText = await res.text();
-        lastError = `${base}: HTTP ${res.status} — ${errText.slice(0, 160)}`;
-        if (!RETRYABLE.has(res.status)) {
-          throw mapHttpError(res.status, errText, base);
+        if (!res.ok) {
+          const retryAfterHeader = res.status === 429 ? parseRetryAfter(res) : undefined;
+          const errText = await res.text();
+          const retryAfter =
+            retryAfterHeader ??
+            (res.status === 429 ? parseRetryAfterFromBody(errText) : undefined);
+          const rateScope = res.status === 429 ? parseRateLimitScopeFromBody(errText) : undefined;
+          lastError = `${base}: HTTP ${res.status} — ${errText.slice(0, 160)}`;
+          if (res.status === 429) {
+            lastRateLimit = {
+              retryAfterSeconds: retryAfter,
+              scope: rateScope,
+            };
+            showRateLimitBanner(retryAfter);
+          }
+          if (!RETRYABLE.has(res.status)) {
+            throw mapHttpError(res.status, errText, base, {
+              retryAfterSeconds: retryAfter,
+              scope: rateScope,
+            });
+          }
         }
       } catch (err) {
         if (signal.aborted) throw err;
@@ -179,7 +237,7 @@ export class FailoverProvider implements ChatProvider {
       }
       hopIndex += 1;
     }
-    throw mapProxyChainFailure(lastError);
+    throw mapProxyChainFailure(lastError, lastRateLimit);
   }
 
   async streamChat(request: ChatRequest, onEvent: (event: StreamEvent) => void): Promise<void> {

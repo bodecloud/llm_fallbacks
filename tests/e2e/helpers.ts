@@ -36,6 +36,14 @@ export async function installDemoProxyMock(page: Page, reply = "42 — zero-conf
 }
 
 export async function installTestConfigMock(page: Page) {
+  await page.route(`${DEMO_PROXY}/health`, async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ status: "ok" }),
+    });
+  });
+
   await page.route("**/config.js*", async (route) => {
     await route.fulfill({
       status: 200,

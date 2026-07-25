@@ -1,7 +1,29 @@
 import type { ChatPlugin } from "murm-ui";
 import { loadRuntimeConfig, normalizeEndpoints } from "../../config";
+import { healthPathForBase, probeEndpoint, type HealthProbeResult } from "../../health-probe";
 import type { FailoverProvider } from "../../providers/FailoverProvider";
 import { STORAGE_KEYS, saveJson } from "../../storage-keys";
+
+function stateLabel(state: HealthProbeResult["state"]): string {
+  if (state === "ok") return "Reachable";
+  if (state === "slow") return "Degraded";
+  return "Unreachable";
+}
+
+function renderHealthRow(base: string, result: HealthProbeResult): string {
+  const hint = result.authFailure
+    ? `<span class="lf-health-hint">Auth failed — see docs/CAVEATS.md</span>`
+    : "";
+  const statusCode = result.statusCode ? `HTTP ${result.statusCode}` : "No response";
+  return `
+    <li class="lf-health-row" data-endpoint="${base}">
+      <span class="lf-health-dot lf-health-${result.state}" aria-hidden="true"></span>
+      <span class="lf-health-url">${base}</span>
+      <span class="lf-health-meta">${stateLabel(result.state)} · ${result.ms}ms · ${statusCode}</span>
+      ${hint}
+    </li>
+  `;
+}
 
 export function FailoverSettingsPlugin(deps: {
   provider: FailoverProvider;
@@ -30,6 +52,14 @@ export function FailoverSettingsPlugin(deps: {
           <label>Server URLs
             <textarea id="apiHostInput" rows="4" placeholder="https://your-worker.workers.dev"></textarea>
           </label>
+          <div class="lf-endpoint-health">
+            <div class="lf-endpoint-health-header">
+              <span>Endpoint health</span>
+              <button type="button" id="checkEndpointsBtn" class="panel-btn">Check endpoints</button>
+            </div>
+            <ul id="endpointHealthList" class="lf-endpoint-health-list" aria-live="polite"></ul>
+            <p id="endpointHealthChecked" class="panel-hint lf-health-checked-at"></p>
+          </div>
           <label>Access token
             <input id="guestTokenInput" type="password" autocomplete="off" />
           </label>
@@ -47,6 +77,8 @@ export function FailoverSettingsPlugin(deps: {
         const guestEl = root.querySelector<HTMLInputElement>("#guestTokenInput")!;
         const modelEl = root.querySelector<HTMLInputElement>("#defaultModelInput")!;
         const statusEl = root.querySelector<HTMLDivElement>("#routeStatus")!;
+        const healthListEl = root.querySelector<HTMLUListElement>("#endpointHealthList")!;
+        const healthCheckedEl = root.querySelector<HTMLParagraphElement>("#endpointHealthChecked")!;
 
         fillPanelFromConfig(deps.provider.getConfig(), endpointsEl, guestEl, modelEl);
         void loadRuntimeConfig().then((config) => {
@@ -54,12 +86,48 @@ export function FailoverSettingsPlugin(deps: {
           deps.provider.updateConfig(config);
         });
 
+        const runHealthChecks = async () => {
+          const endpoints = normalizeEndpoints(
+            endpointsEl.value
+              .split("\n")
+              .map((l) => l.trim())
+              .filter(Boolean)
+          );
+          if (!endpoints.length) {
+            healthListEl.innerHTML = `<li class="lf-health-empty">No endpoints configured</li>`;
+            healthCheckedEl.textContent = "";
+            return;
+          }
+          healthListEl.innerHTML = endpoints
+            .map(
+              (base) =>
+                `<li class="lf-health-row lf-health-pending"><span class="lf-health-url">${base}</span> Checking…</li>`
+            )
+            .join("");
+          const results = await Promise.all(
+            endpoints.map(async (base) => ({ base, result: await probeEndpoint(base) }))
+          );
+          healthListEl.innerHTML = results
+            .map(({ base, result }) => renderHealthRow(base, result))
+            .join("");
+          healthCheckedEl.textContent = `Last checked ${new Date().toLocaleTimeString()}`;
+        };
+
+        let healthDebounce: ReturnType<typeof setTimeout> | undefined;
+        const scheduleHealthCheck = () => {
+          clearTimeout(healthDebounce);
+          healthDebounce = setTimeout(() => void runHealthChecks(), 400);
+        };
+
         document.getElementById("sysSetting")?.addEventListener("click", () => {
           void loadRuntimeConfig().then((config) => {
             fillPanelFromConfig(config, endpointsEl, guestEl, modelEl);
             deps.provider.updateConfig(config);
+            scheduleHealthCheck();
           });
         });
+
+        root.querySelector("#checkEndpointsBtn")?.addEventListener("click", () => void runHealthChecks());
 
         deps.provider.onStatus((s) => {
           statusEl.textContent = `Status: ${s}`;
@@ -84,6 +152,7 @@ export function FailoverSettingsPlugin(deps: {
           deps.provider.updateConfig(await loadRuntimeConfig());
           deps.onConfigSaved();
           statusEl.textContent = `Saved ${endpoints.length} endpoint(s)`;
+          scheduleHealthCheck();
         });
 
         root.querySelector("#testConnectionBtn")?.addEventListener("click", async () => {
@@ -120,6 +189,8 @@ export function FailoverSettingsPlugin(deps: {
             statusEl.textContent = `Error: ${err instanceof Error ? err.message : String(err)}`;
           }
         });
+
+        scheduleHealthCheck();
       });
     },
   };

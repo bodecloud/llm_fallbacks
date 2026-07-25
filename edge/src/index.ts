@@ -10,6 +10,7 @@ import { isModelAllowed } from "./allowlist";
 import { corsHeaders, jsonError, parseOrigins, unauthorized } from "./http";
 import { handleEventsPost, handleMetricsGet } from "./events";
 import { checkRateLimit } from "./rate-limit";
+import { checkTurnstile } from "./turnstile";
 import {
   isChainModelSupported,
   modelChain,
@@ -155,6 +156,11 @@ export default {
     const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
     if (!env.PROXY_GUEST_TOKEN || token !== env.PROXY_GUEST_TOKEN) {
       return unauthorized(origin, allowed);
+    }
+
+    const turnstile = await checkTurnstile(request, env, origin, allowed);
+    if (!turnstile.ok) {
+      return turnstile.response;
     }
 
     const rate = await checkRateLimit(request, env);

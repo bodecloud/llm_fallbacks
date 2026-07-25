@@ -5338,6 +5338,166 @@ function shouldFallbackToProxy(browserErr) {
   return msg === "BROWSER_UNAVAILABLE" || msg === "PROXY_UNAVAILABLE" || /^no API key for /i.test(msg) || /^unsupported provider:/i.test(msg);
 }
 
+// src/turnstile-session.ts
+var siteKey;
+var widgetId;
+var currentToken = null;
+var loadPromise = null;
+var pendingResolve = null;
+var SCRIPT_URL = "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback";
+function loadTurnstileScript() {
+  if (loadPromise) return loadPromise;
+  loadPromise = new Promise((resolve, reject) => {
+    if (window.turnstile) {
+      resolve();
+      return;
+    }
+    window.onloadTurnstileCallback = () => resolve();
+    const script = document.createElement("script");
+    script.src = SCRIPT_URL;
+    script.async = true;
+    script.defer = true;
+    script.onerror = () => reject(new Error("Turnstile script failed to load"));
+    document.head.appendChild(script);
+  });
+  return loadPromise;
+}
+function renderWidget(mount) {
+  if (!window.turnstile || !siteKey || widgetId) return;
+  widgetId = window.turnstile.render(mount, {
+    sitekey: siteKey,
+    size: "compact",
+    theme: "dark",
+    callback: (token) => {
+      currentToken = token;
+      pendingResolve?.(token);
+      pendingResolve = null;
+    },
+    "error-callback": () => {
+      pendingResolve?.("");
+      pendingResolve = null;
+    }
+  });
+}
+function initTurnstile(key, mount) {
+  siteKey = key?.trim() || void 0;
+  if (!siteKey) return;
+  void loadTurnstileScript().then(() => renderWidget(mount));
+}
+async function ensureTurnstileToken() {
+  if (!siteKey) return void 0;
+  if (currentToken) return currentToken;
+  await loadTurnstileScript();
+  if (!widgetId || !window.turnstile) return void 0;
+  return new Promise((resolve) => {
+    pendingResolve = (token) => resolve(token || void 0);
+    window.turnstile.execute(widgetId);
+  });
+}
+
+// src/health-probe.ts
+var SLOW_MS = 2e3;
+var TIMEOUT_MS = 5e3;
+function healthPathForBase(base) {
+  const trimmed = base.replace(/\/$/, "");
+  try {
+    const host = new URL(trimmed).hostname;
+    if (host.includes("onrender.com")) {
+      return `${trimmed}/health/liveliness`;
+    }
+  } catch {
+  }
+  return `${trimmed}/health`;
+}
+async function probeEndpoint(base, fetchFn = fetch) {
+  const url = healthPathForBase(base);
+  const start = Date.now();
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  try {
+    const res = await fetchFn(url, { method: "GET", signal: controller.signal, mode: "cors" });
+    const ms = Date.now() - start;
+    clearTimeout(timeout);
+    if (res.status === 401 || res.status === 403) {
+      return { state: "fail", ms, statusCode: res.status, authFailure: true };
+    }
+    if (!res.ok) {
+      return { state: "fail", ms, statusCode: res.status };
+    }
+    if (ms > SLOW_MS) {
+      return { state: "slow", ms, statusCode: res.status };
+    }
+    return { state: "ok", ms, statusCode: res.status };
+  } catch {
+    clearTimeout(timeout);
+    return { state: "fail", ms: Date.now() - start };
+  }
+}
+
+// src/plugins/status-strip/index.ts
+function StatusStripPlugin() {
+  return {
+    name: "status-strip",
+    onMount() {
+      const mount = document.getElementById("lfStatusStrip") ?? (() => {
+        const el2 = document.createElement("div");
+        el2.id = "lfStatusStrip";
+        el2.className = "lf-status-strip";
+        el2.setAttribute("aria-live", "polite");
+        const credits = document.querySelector(".credits-content");
+        const actions = credits?.querySelector(".credits-actions");
+        if (credits && actions) {
+          credits.insertBefore(el2, actions);
+        } else {
+          document.body.prepend(el2);
+        }
+        return el2;
+      })();
+      void refreshStatusStrip(mount);
+    }
+  };
+}
+async function refreshStatusStrip(mount) {
+  const config = await loadRuntimeConfig();
+  const base = config.endpoints[0];
+  if (!base) {
+    mount.hidden = true;
+    return;
+  }
+  mount.hidden = false;
+  mount.textContent = "Checking proxy\u2026";
+  let healthOk = false;
+  try {
+    const healthUrl = healthPathForBase(base);
+    const healthRes = await fetch(healthUrl, { method: "GET", mode: "cors" });
+    healthOk = healthRes.ok;
+  } catch {
+    healthOk = false;
+  }
+  let chatCount = 0;
+  try {
+    const metricsUrl = `${base.replace(/\/$/, "")}/v1/metrics?days=1`;
+    const metricsRes = await fetch(metricsUrl, {
+      headers: { Authorization: `Bearer ${config.guestToken}` }
+    });
+    if (metricsRes.ok) {
+      const metrics = await metricsRes.json();
+      chatCount = metrics.events?.chat_completion_success ?? 0;
+    }
+  } catch {
+  }
+  const dotClass = healthOk ? "lf-status-ok" : "lf-status-fail";
+  const statusText = healthOk ? "Proxy OK" : "Proxy unreachable";
+  const countText = chatCount > 0 ? ` \xB7 ${chatCount} chat${chatCount === 1 ? "" : "s"} today` : "";
+  mount.innerHTML = `<span class="lf-status-dot ${dotClass}" aria-hidden="true"></span><span class="lf-status-text">${statusText}${countText}</span>`;
+}
+function showRateLimitBanner(seconds) {
+  const mount = document.getElementById("lfStatusStrip");
+  if (!mount) return;
+  const suffix = seconds !== void 0 && seconds > 0 ? ` Try again in ${seconds} second${seconds === 1 ? "" : "s"}.` : " Wait and try again.";
+  mount.innerHTML = `<span class="lf-status-dot lf-status-warn" aria-hidden="true"></span><span class="lf-status-text">Rate limited.${suffix}</span>`;
+}
+
 // src/providers/errors.ts
 var ChatRouteError = class extends Error {
   kind;
@@ -5379,13 +5539,48 @@ var ProxyUnavailableError = class extends ChatRouteError {
 };
 var QUOTA_RE = /quota|credit|insufficient|billing|exhausted/i;
 var COLD_START_RE = /cold start|starting up|still deploying|proxy pending|503|502/i;
-function mapHttpError(status, bodyText, endpoint) {
+function formatRateLimitMessage(endpoint, info) {
+  const scope = info?.scope;
+  const seconds = info?.retryAfterSeconds;
+  let prefix = `Rate limit exceeded at ${endpoint}.`;
+  if (scope === "day") {
+    prefix = `Daily rate limit reached at ${endpoint}.`;
+  } else if (scope === "minute") {
+    prefix = `Per-minute rate limit reached at ${endpoint}.`;
+  }
+  if (seconds !== void 0 && seconds > 0) {
+    const unit = seconds === 1 ? "second" : "seconds";
+    return `${prefix} Try again in ${seconds} ${unit}.`;
+  }
+  return `${prefix} Wait and try again.`;
+}
+function parseRateLimitScope(bodyText) {
+  try {
+    const parsed = JSON.parse(bodyText);
+    const message = parsed.error?.message ?? "";
+    if (/daily|per day|\(day\)/i.test(message)) return "day";
+    if (/minute|\(minute\)/i.test(message)) return "minute";
+    if (parsed.error?.type === "rate_limit") {
+      if (/day/i.test(message)) return "day";
+      if (/minute/i.test(message)) return "minute";
+    }
+  } catch {
+  }
+  return void 0;
+}
+function mapHttpError(status, bodyText, endpoint, rateLimit) {
   const snippet = bodyText.slice(0, 200);
   if (status === 401 || status === 403) {
+    if (/turnstile/i.test(bodyText)) {
+      return new AuthError(
+        `Turnstile verification required at ${endpoint}. Complete the check and try again.`
+      );
+    }
     return new AuthError(`Authentication failed at ${endpoint}. Check your guest token in Server settings.`);
   }
   if (status === 429) {
-    return new RateLimitError(`Rate limit exceeded at ${endpoint}. Wait and try again.`);
+    const scope = rateLimit?.scope ?? parseRateLimitScope(bodyText);
+    return new RateLimitError(formatRateLimitMessage(endpoint, { ...rateLimit, scope }));
   }
   if (QUOTA_RE.test(bodyText)) {
     return new QuotaError(`Quota exhausted at ${endpoint}. ${snippet}`);
@@ -5395,11 +5590,19 @@ function mapHttpError(status, bodyText, endpoint) {
   }
   return new ProxyUnavailableError(`${endpoint}: HTTP ${status} \u2014 ${snippet}`);
 }
-function mapProxyChainFailure(lastError) {
+function endpointFromChainError(lastError) {
+  const match = lastError.match(/^(.+?): HTTP \d+/);
+  return match?.[1]?.trim() || "proxy";
+}
+function mapProxyChainFailure(lastError, rateLimit) {
   if (/401|403|Unauthorized/i.test(lastError)) {
     return new AuthError(lastError);
   }
   if (/429|rate limit/i.test(lastError)) {
+    const endpoint = endpointFromChainError(lastError);
+    if (rateLimit?.retryAfterSeconds || rateLimit?.scope) {
+      return new RateLimitError(formatRateLimitMessage(endpoint, rateLimit));
+    }
     return new RateLimitError(lastError);
   }
   if (QUOTA_RE.test(lastError)) {
@@ -5555,6 +5758,31 @@ function readRoutingHeaders(res) {
 function endpointLabel(base, res) {
   return res.headers.get("x-llm-fallbacks-endpoint") || base;
 }
+function parseRetryAfter(res) {
+  const raw = res.headers.get("Retry-After") ?? res.headers.get("retry-after");
+  if (!raw) return void 0;
+  const seconds = Number.parseInt(raw, 10);
+  return Number.isFinite(seconds) && seconds > 0 ? seconds : void 0;
+}
+function parseRateLimitScopeFromBody(bodyText) {
+  try {
+    const parsed = JSON.parse(bodyText);
+    const message = parsed.error?.message ?? "";
+    if (/daily|\(day\)/i.test(message)) return "day";
+    if (/minute|\(minute\)/i.test(message)) return "minute";
+  } catch {
+  }
+  return void 0;
+}
+function parseRetryAfterFromBody(bodyText) {
+  try {
+    const parsed = JSON.parse(bodyText);
+    const raw = parsed.retry_after ?? parsed.error?.retry_after;
+    if (typeof raw === "number" && raw > 0) return raw;
+  } catch {
+  }
+  return void 0;
+}
 var FailoverProvider = class {
   config;
   catalog = [];
@@ -5611,12 +5839,17 @@ var FailoverProvider = class {
     return sessionModel2 || this.config.defaultModel || "free";
   }
   async chatViaProxy(base, body, guestToken, signal) {
+    const turnstileToken = await ensureTurnstileToken();
+    const headers = {
+      Authorization: `Bearer ${guestToken}`,
+      "Content-Type": "application/json"
+    };
+    if (turnstileToken) {
+      headers["CF-Turnstile-Response"] = turnstileToken;
+    }
     return fetch(endpointUrl(base), {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${guestToken}`,
-        "Content-Type": "application/json"
-      },
+      headers,
       body: JSON.stringify({ ...body, stream: true }),
       signal
     });
@@ -5625,6 +5858,7 @@ var FailoverProvider = class {
     if (!config.endpoints.length) throw mapProxyChainFailure("PROXY_UNAVAILABLE");
     let lastError = "All proxy endpoints failed";
     let hopIndex = 0;
+    let lastRateLimit;
     for (const base of config.endpoints) {
       this.setStatus(`proxy: ${base} \u2026`);
       try {
@@ -5642,10 +5876,25 @@ var FailoverProvider = class {
           await emitOpenAiSseAsStreamEvents(res, onEvent);
           return;
         }
-        const errText = await res.text();
-        lastError = `${base}: HTTP ${res.status} \u2014 ${errText.slice(0, 160)}`;
-        if (!RETRYABLE.has(res.status)) {
-          throw mapHttpError(res.status, errText, base);
+        if (!res.ok) {
+          const retryAfterHeader = res.status === 429 ? parseRetryAfter(res) : void 0;
+          const errText = await res.text();
+          const retryAfter = retryAfterHeader ?? (res.status === 429 ? parseRetryAfterFromBody(errText) : void 0);
+          const rateScope = res.status === 429 ? parseRateLimitScopeFromBody(errText) : void 0;
+          lastError = `${base}: HTTP ${res.status} \u2014 ${errText.slice(0, 160)}`;
+          if (res.status === 429) {
+            lastRateLimit = {
+              retryAfterSeconds: retryAfter,
+              scope: rateScope
+            };
+            showRateLimitBanner(retryAfter);
+          }
+          if (!RETRYABLE.has(res.status)) {
+            throw mapHttpError(res.status, errText, base, {
+              retryAfterSeconds: retryAfter,
+              scope: rateScope
+            });
+          }
         }
       } catch (err) {
         if (signal.aborted) throw err;
@@ -5656,7 +5905,7 @@ var FailoverProvider = class {
       }
       hopIndex += 1;
     }
-    throw mapProxyChainFailure(lastError);
+    throw mapProxyChainFailure(lastError, lastRateLimit);
   }
   async streamChat(request, onEvent) {
     const config = this.getRuntimeConfig();
@@ -5742,6 +5991,23 @@ var FailoverProvider = class {
 };
 
 // src/plugins/failover-settings/index.ts
+function stateLabel(state) {
+  if (state === "ok") return "Reachable";
+  if (state === "slow") return "Degraded";
+  return "Unreachable";
+}
+function renderHealthRow(base, result) {
+  const hint = result.authFailure ? `<span class="lf-health-hint">Auth failed \u2014 see docs/CAVEATS.md</span>` : "";
+  const statusCode = result.statusCode ? `HTTP ${result.statusCode}` : "No response";
+  return `
+    <li class="lf-health-row" data-endpoint="${base}">
+      <span class="lf-health-dot lf-health-${result.state}" aria-hidden="true"></span>
+      <span class="lf-health-url">${base}</span>
+      <span class="lf-health-meta">${stateLabel(result.state)} \xB7 ${result.ms}ms \xB7 ${statusCode}</span>
+      ${hint}
+    </li>
+  `;
+}
 function FailoverSettingsPlugin(deps) {
   return {
     name: "failover-settings",
@@ -5760,6 +6026,14 @@ function FailoverSettingsPlugin(deps) {
           <label>Server URLs
             <textarea id="apiHostInput" rows="4" placeholder="https://your-worker.workers.dev"></textarea>
           </label>
+          <div class="lf-endpoint-health">
+            <div class="lf-endpoint-health-header">
+              <span>Endpoint health</span>
+              <button type="button" id="checkEndpointsBtn" class="panel-btn">Check endpoints</button>
+            </div>
+            <ul id="endpointHealthList" class="lf-endpoint-health-list" aria-live="polite"></ul>
+            <p id="endpointHealthChecked" class="panel-hint lf-health-checked-at"></p>
+          </div>
           <label>Access token
             <input id="guestTokenInput" type="password" autocomplete="off" />
           </label>
@@ -5776,17 +6050,44 @@ function FailoverSettingsPlugin(deps) {
         const guestEl = root.querySelector("#guestTokenInput");
         const modelEl = root.querySelector("#defaultModelInput");
         const statusEl = root.querySelector("#routeStatus");
+        const healthListEl = root.querySelector("#endpointHealthList");
+        const healthCheckedEl = root.querySelector("#endpointHealthChecked");
         fillPanelFromConfig(deps.provider.getConfig(), endpointsEl, guestEl, modelEl);
         void loadRuntimeConfig().then((config) => {
           fillPanelFromConfig(config, endpointsEl, guestEl, modelEl);
           deps.provider.updateConfig(config);
         });
+        const runHealthChecks = async () => {
+          const endpoints = normalizeEndpoints(
+            endpointsEl.value.split("\n").map((l) => l.trim()).filter(Boolean)
+          );
+          if (!endpoints.length) {
+            healthListEl.innerHTML = `<li class="lf-health-empty">No endpoints configured</li>`;
+            healthCheckedEl.textContent = "";
+            return;
+          }
+          healthListEl.innerHTML = endpoints.map(
+            (base) => `<li class="lf-health-row lf-health-pending"><span class="lf-health-url">${base}</span> Checking\u2026</li>`
+          ).join("");
+          const results = await Promise.all(
+            endpoints.map(async (base) => ({ base, result: await probeEndpoint(base) }))
+          );
+          healthListEl.innerHTML = results.map(({ base, result }) => renderHealthRow(base, result)).join("");
+          healthCheckedEl.textContent = `Last checked ${(/* @__PURE__ */ new Date()).toLocaleTimeString()}`;
+        };
+        let healthDebounce;
+        const scheduleHealthCheck = () => {
+          clearTimeout(healthDebounce);
+          healthDebounce = setTimeout(() => void runHealthChecks(), 400);
+        };
         document.getElementById("sysSetting")?.addEventListener("click", () => {
           void loadRuntimeConfig().then((config) => {
             fillPanelFromConfig(config, endpointsEl, guestEl, modelEl);
             deps.provider.updateConfig(config);
+            scheduleHealthCheck();
           });
         });
+        root.querySelector("#checkEndpointsBtn")?.addEventListener("click", () => void runHealthChecks());
         deps.provider.onStatus((s) => {
           statusEl.textContent = `Status: ${s}`;
         });
@@ -5805,6 +6106,7 @@ function FailoverSettingsPlugin(deps) {
           deps.provider.updateConfig(await loadRuntimeConfig());
           deps.onConfigSaved();
           statusEl.textContent = `Saved ${endpoints.length} endpoint(s)`;
+          scheduleHealthCheck();
         });
         root.querySelector("#testConnectionBtn")?.addEventListener("click", async () => {
           const endpoints = normalizeEndpoints(
@@ -5836,6 +6138,7 @@ function FailoverSettingsPlugin(deps) {
             statusEl.textContent = `Error: ${err instanceof Error ? err.message : String(err)}`;
           }
         });
+        scheduleHealthCheck();
       });
     }
   };
@@ -6231,10 +6534,12 @@ var ICON_REGEN = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" st
 var ICON_EDIT2 = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
 function MessageActionsPlugin() {
   let engine = null;
+  let root = null;
   return {
     name: "message-actions",
     onMount(ctx) {
       engine = ctx.engine;
+      root = ctx.container;
       const origStop = ctx.engine.stopGeneration.bind(ctx.engine);
       ctx.engine.stopGeneration = async () => {
         const generatingId = ctx.engine.state.generatingMessageId;
@@ -6242,6 +6547,10 @@ function MessageActionsPlugin() {
         if (generatingId) {
           const pending = ctx.engine.state.messages.find((m2) => m2.id === generatingId);
           if (pending) partialText = extractText(pending);
+        }
+        if (!partialText.trim() && root) {
+          const live = root.querySelector(".mur-message-assistant.mur-generating .mur-message-blocks-wrapper");
+          partialText = (live?.textContent ?? "").trim();
         }
         await origStop();
         await new Promise((r) => setTimeout(r, 50));
@@ -6299,6 +6608,26 @@ function MessageActionsPlugin() {
         ];
       }
       return [];
+    }
+  };
+}
+
+// src/plugins/turnstile-gate/index.ts
+function TurnstileGatePlugin() {
+  return {
+    name: "turnstile-gate",
+    onMount() {
+      const siteKey2 = window.LLM_FALLBACKS_CONFIG?.turnstileSiteKey;
+      if (!siteKey2) return;
+      let mount = document.getElementById("lf-turnstile-mount");
+      if (!mount) {
+        mount = document.createElement("div");
+        mount.id = "lf-turnstile-mount";
+        mount.className = "lf-turnstile-mount";
+        mount.setAttribute("aria-label", "Bot check");
+        document.body.appendChild(mount);
+      }
+      initTurnstile(siteKey2, mount);
     }
   };
 }
@@ -6404,6 +6733,8 @@ async function bootstrap() {
       ModelPickerPlugin(),
       MessageActionsPlugin(),
       RoutingChipPlugin(),
+      StatusStripPlugin(),
+      TurnstileGatePlugin(),
       FailoverSettingsPlugin({
         provider,
         onConfigSaved: async () => {
