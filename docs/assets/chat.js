@@ -6143,6 +6143,9 @@ function loadProviderTierSettings() {
     searxngUrl: raw.searxngUrl ?? ""
   });
 }
+function saveProviderTierSettings(settings) {
+  saveJson(STORAGE_KEYS.providerTiers, normalizeTierSettings(settings));
+}
 
 // src/providers/tiers/types.ts
 var TierOrchestratorError = class extends Error {
@@ -6732,6 +6735,155 @@ function ByokSettingsPlugin(deps) {
   };
 }
 
+// src/plugins/tier-settings/settings.ts
+var TIER_LABELS = {
+  quality_api: "Direct / BYOK routes",
+  web_ui: "Local web-UI runner (opt-in)",
+  searxng_discovery: "SearXNG discovery (opt-in)",
+  proxy_failover: "Cloud proxy failover"
+};
+var TIER_HINTS = {
+  quality_api: "Uses API keys stored in this browser. Skips when no key matches the selected model.",
+  web_ui: "Optional local companion that drives a browser chat UI. Off by default \u2014 you run it.",
+  searxng_discovery: "Optional self-hosted SearXNG. Suggests free chat URLs when higher tiers fail.",
+  proxy_failover: "Public Worker / Render endpoints from Server settings. Serves zero-config visitors."
+};
+function moveTier(settings, tierId, delta) {
+  const tiers = settings.tiers.map((t) => ({ ...t }));
+  const from = tiers.findIndex((t) => t.id === tierId);
+  if (from < 0) return settings;
+  const to = from + delta;
+  if (to < 0 || to >= tiers.length) return settings;
+  const [entry] = tiers.splice(from, 1);
+  tiers.splice(to, 0, entry);
+  return normalizeTierSettings({ ...settings, tiers });
+}
+function setTierEnabled(settings, tierId, enabled) {
+  const tiers = settings.tiers.map(
+    (t) => t.id === tierId ? { ...t, enabled } : { ...t }
+  );
+  return normalizeTierSettings({ ...settings, tiers });
+}
+function updateCompanionUrls(settings, urls) {
+  return normalizeTierSettings({
+    ...settings,
+    webRunnerUrl: urls.webRunnerUrl ?? settings.webRunnerUrl,
+    searxngUrl: urls.searxngUrl ?? settings.searxngUrl
+  });
+}
+function persistTierSettings(settings) {
+  const normalized = normalizeTierSettings(settings);
+  saveProviderTierSettings(normalized);
+  return loadProviderTierSettings();
+}
+
+// src/plugins/tier-settings/index.ts
+function renderTierList(settings) {
+  return settings.tiers.map((tier, index) => {
+    const label = TIER_LABELS[tier.id] ?? tier.id;
+    const hint = TIER_HINTS[tier.id] ?? "";
+    return `
+        <li class="lf-tier-row" data-tier-id="${tier.id}">
+          <div class="lf-tier-row-main">
+            <label class="lf-tier-enable">
+              <input type="checkbox" data-tier-enable="${tier.id}" ${tier.enabled ? "checked" : ""} />
+              <span>${label}</span>
+            </label>
+            <div class="lf-tier-move">
+              <button type="button" class="panel-btn panel-btn-ghost lf-tier-up" data-tier-up="${tier.id}" ${index === 0 ? "disabled" : ""} aria-label="Move ${label} up">\u2191</button>
+              <button type="button" class="panel-btn panel-btn-ghost lf-tier-down" data-tier-down="${tier.id}" ${index === settings.tiers.length - 1 ? "disabled" : ""} aria-label="Move ${label} down">\u2193</button>
+            </div>
+          </div>
+          <p class="panel-hint lf-tier-hint">${hint}</p>
+        </li>
+      `;
+  }).join("");
+}
+function TierSettingsPlugin() {
+  return {
+    name: "tier-settings",
+    onMount() {
+      window.registerShellPanel?.("tiers", (root) => {
+        let draft = loadProviderTierSettings();
+        const paint = () => {
+          root.innerHTML = `
+            <header class="panel-header">
+              <h3>Provider tiers</h3>
+            </header>
+            <p class="panel-hint">
+              Ordered routes we try for each chat. This is the <strong>omnifail stack</strong>
+              (which route to attempt), not cloud free-tier rate limits.
+              Exhausting enabled tiers still fails honestly \u2014 we do not promise never-fail.
+            </p>
+            <ol id="lf-tier-list" class="lf-tier-list">${renderTierList(draft)}</ol>
+            <label>Web-UI runner URL
+              <input id="lf-web-runner-url" type="url" autocomplete="off"
+                placeholder="http://127.0.0.1:8788" value="${draft.webRunnerUrl}" />
+            </label>
+            <p class="panel-hint">
+              Opt-in local companion. Off by default. You run it; it lowers pressure on the
+              public Worker demo. You are responsible for target-site terms \u2014 we do not
+              harvest credentials.
+            </p>
+            <label>SearXNG URL
+              <input id="lf-searxng-url" type="url" autocomplete="off"
+                placeholder="http://127.0.0.1:8080" value="${draft.searxngUrl}" />
+            </label>
+            <p class="panel-hint">
+              Opt-in self-hosted search. Empty disables discovery. Respect SearXNG and
+              target-site terms of service.
+            </p>
+            <div class="panel-actions">
+              <button type="button" id="lf-tier-reset" class="panel-btn">Reset defaults</button>
+              <button type="button" id="lf-tier-save" class="panel-btn panel-btn-primary">Save tiers</button>
+            </div>
+            <p id="lf-tier-status" class="panel-status" aria-live="polite"></p>
+          `;
+          const list = root.querySelector("#lf-tier-list");
+          list?.addEventListener("click", (event) => {
+            const target = event.target;
+            const up = target.closest("[data-tier-up]");
+            const down = target.closest("[data-tier-down]");
+            if (up?.dataset.tierUp) {
+              draft = moveTier(draft, up.dataset.tierUp, -1);
+              paint();
+              return;
+            }
+            if (down?.dataset.tierDown) {
+              draft = moveTier(draft, down.dataset.tierDown, 1);
+              paint();
+            }
+          });
+          list?.addEventListener("change", (event) => {
+            const input = event.target;
+            const tierId = input.dataset.tierEnable;
+            if (!tierId || input.type !== "checkbox") return;
+            draft = setTierEnabled(draft, tierId, input.checked);
+          });
+          root.querySelector("#lf-tier-reset")?.addEventListener("click", () => {
+            draft = persistTierSettings(defaultProviderTierSettings());
+            paint();
+            const status = root.querySelector("#lf-tier-status");
+            if (status) status.textContent = "Restored zero-config defaults.";
+          });
+          root.querySelector("#lf-tier-save")?.addEventListener("click", () => {
+            const webRunnerUrl = root.querySelector("#lf-web-runner-url")?.value ?? "";
+            const searxngUrl = root.querySelector("#lf-searxng-url")?.value ?? "";
+            draft = updateCompanionUrls(draft, { webRunnerUrl, searxngUrl });
+            draft = persistTierSettings(draft);
+            paint();
+            const status = root.querySelector("#lf-tier-status");
+            if (status) {
+              status.textContent = `Saved order: ${draft.tiers.filter((t) => t.enabled).map((t) => t.id).join(" \u2192 ") || "(none enabled)"}`;
+            }
+          });
+        };
+        paint();
+      });
+    }
+  };
+}
+
 // src/catalog-display.ts
 function formatContextLength(value) {
   if (value === void 0 || value <= 0) return "\u2014";
@@ -7259,6 +7411,7 @@ function closeShellPanel(_id) {
 function bindTopBarButtons() {
   document.getElementById("sysSetting")?.addEventListener("click", () => openShellPanel("failover"));
   document.getElementById("byokSetting")?.addEventListener("click", () => openShellPanel("byok"));
+  document.getElementById("tiersSetting")?.addEventListener("click", () => openShellPanel("tiers"));
   document.getElementById("explorerSetting")?.addEventListener("click", () => openShellPanel("explorer"));
   document.getElementById("closeSet")?.addEventListener("click", () => closeShellPanel());
   document.getElementById("sysMask")?.addEventListener("click", (e) => {
@@ -7710,6 +7863,7 @@ async function bootstrap() {
           provider.setCatalog(catalogRef2, providerUrlsRef);
         }
       }),
+      TierSettingsPlugin(),
       ModelExplorerPlugin({
         getCatalog: () => catalogRef2,
         getCatalogUrl: () => readRuntimeConfig().catalogUrl

@@ -8,7 +8,7 @@ The public chat at [`docs/index.html`](../index.html) is built from [`webui/`](.
 |-------|--------|------|
 | Shell | [ai-researchwizard](https://github.com/bolabaden/ai-researchwizard) (`webui/shell/styles.css`) | Top bar, slide panels, dark theme |
 | Chat engine | [murm-ui](https://github.com/levmv/murm-ui) | `ChatUI` + `IndexedDBStorage` |
-| Routing | `FailoverProvider` | Cloud proxy first (SSE), optional browser BYOK fallback |
+| Routing | `FailoverProvider` | Tier orchestrator: direct/BYOK → optional runner/SearXNG → cloud proxy SSE |
 
 ## Build
 
@@ -28,6 +28,7 @@ Set `APP_VERSION` when building for cache busting (CI sets this from `github.sha
 |--------|-------|---------|
 | `failover-settings` | Server (top bar) | Proxy endpoints, guest token, default model, test connection |
 | `byok-settings` | Your keys | Optional provider API keys (`localStorage` only) |
+| `tier-settings` | Tiers | Ordered omnifail route stack (enable/reorder + optional runner/SearXNG URLs) |
 | `model-explorer` | Models | Filter/sort `free_models.json`; **Use for chat** sets session model |
 | `model-picker` | Composer | Dropdown for `free`, `openrouter/free`, and top catalog models |
 | `routing-chip` | Messages | Endpoint / model / fallback metadata under assistant replies |
@@ -39,6 +40,8 @@ Set `APP_VERSION` when building for cache busting (CI sets this from `github.sha
 Wave 3 adds **catalog enrichment** (context + capability badges in Models panel and composer subtitle), **session export** (sidebar menu → Markdown/JSON), and **hash routing** (`#/chat/{sessionId}` via murm-ui `AppRouter`).
 
 Wave 4 adds **streaming polish** (plain-text tail during SSE, full markdown on completion — `patch-package` on murm-ui), **conversation import** (symmetry with export), **copy session link**, empty-state copy, and the shortcuts sheet.
+
+Wave 4B adds **provider tiers** (omnifail route stack in the Tiers panel), **image attachments** (composer tray → multimodal proxy requests), and (planned) compare mode / optional local runner + SearXNG.
 
 ## Session export, import, and hash links
 
@@ -69,6 +72,7 @@ ResearchWizard includes MCP config UI backed by a server. Static Pages cannot ho
 | `llm_fallbacks_guest_token` | Bearer token for proxy auth |
 | `llm_fallbacks_default_model` | Default chat model (usually `free`) |
 | `llm_fallbacks_api_keys` | Optional BYOK map |
+| `llm_fallbacks_provider_tiers` | Omnifail tier order, enable flags, runner/SearXNG URLs |
 | `llm_fallbacks_shortcuts_hint_dismissed` | `1` after user dismisses first-visit shortcuts hint |
 
 Zero-config values seed from `docs/config.js` on first visit (`seedZeroConfigFromPageConfig` in `webui/src/config.ts`).

@@ -11,6 +11,7 @@ import { FailoverProvider } from "./providers/FailoverProvider";
 import type { CatalogEntry } from "./providers/browser-router";
 import { FailoverSettingsPlugin } from "./plugins/failover-settings";
 import { ByokSettingsPlugin } from "./plugins/byok-settings";
+import { TierSettingsPlugin } from "./plugins/tier-settings";
 import { ModelExplorerPlugin } from "./plugins/model-explorer";
 import { ModelPickerPlugin } from "./plugins/model-picker";
 import { RoutingChipPlugin } from "./plugins/routing-chip";
@@ -241,6 +242,7 @@ async function bootstrap(): Promise<void> {
           provider.setCatalog(catalogRef, providerUrlsRef);
         },
       }),
+      TierSettingsPlugin(),
       ModelExplorerPlugin({
         getCatalog: () => catalogRef,
         getCatalogUrl: () => readRuntimeConfig().catalogUrl,

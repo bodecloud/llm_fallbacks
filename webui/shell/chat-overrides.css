@@ -973,3 +973,56 @@ body.lf-chat-page::before {
   border: 1px solid var(--mur-border);
 }
 
+/* Wave 4B: provider tier settings panel */
+.lf-tier-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.lf-tier-row {
+  border: 1px solid rgba(157, 78, 221, 0.22);
+  border-radius: 10px;
+  padding: 0.65rem 0.75rem;
+  background: rgba(26, 26, 46, 0.55);
+}
+
+.lf-tier-row-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.lf-tier-enable {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-weight: 600;
+  color: #e8e8ef;
+}
+
+.lf-tier-enable input {
+  width: auto;
+  margin: 0;
+}
+
+.lf-tier-move {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.lf-tier-move .panel-btn {
+  min-width: 2rem;
+  padding: 0.2rem 0.45rem;
+}
+
+.lf-tier-hint {
+  margin: 0.35rem 0 0;
+}
+
