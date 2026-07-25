@@ -960,3 +960,16 @@ body.lf-chat-page::before {
   color: #c77dff;
 }
 
+/* Wave 4B: image attachment tray — inherits murm-ui attachment vars from the
+   dark theme block above; these rules just tighten thumbnail framing so the
+   composer tray matches the dark shell. */
+#chatMount .mur-attachment-previews {
+  gap: 0.4rem;
+}
+
+#chatMount .mur-attachment-preview-item img,
+#chatMount .mur-attachment-image {
+  border-radius: 8px;
+  border: 1px solid var(--mur-border);
+}
+

@@ -1382,6 +1382,7 @@ function syncDOMNode(target, source) {
 var ICON_COPY = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
 var ICON_CHECK = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--mur-success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
 var ICON_EDIT = `<svg width="15" height="15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>`;
+var ICON_PAPERCLIP = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>`;
 var ICON_CHEVRON = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
 var ICON_MORE_VERTICAL = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>`;
 var ICON_PIN = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5"/><path d="M9 10.8a2 2 0 0 1-1.1 1.8l-1.8.9A2 2 0 0 0 5 15.2V16h14v-.8a2 2 0 0 0-1.1-1.8l-1.8-.9a2 2 0 0 1-1.1-1.8V7h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1z"/></svg>`;
@@ -5012,6 +5013,312 @@ function CopyPlugin() {
   };
 }
 
+// node_modules/murm-ui/dist/plugins/attachment/attachment-plugin.js
+var DEFAULT_ACCEPTED_TYPES = "image/*,text/*,.csv,.json,.md";
+var TEXT_FILE_EXTENSIONS = /* @__PURE__ */ new Set(["csv", "json", "md"]);
+function AttachmentPlugin(config) {
+  var _a, _b;
+  const maxSize = (_a = config === null || config === void 0 ? void 0 : config.maxFileSize) !== null && _a !== void 0 ? _a : 20 * 1024 * 1024;
+  const acceptedTypes = (_b = config === null || config === void 0 ? void 0 : config.acceptedTypes) !== null && _b !== void 0 ? _b : DEFAULT_ACCEPTED_TYPES;
+  let queue = [];
+  let fileInput;
+  let previewContainer;
+  let attachBtn;
+  let inputContext = null;
+  let dragDepth = 0;
+  let destroyed = false;
+  const syncSubmitState = () => inputContext === null || inputContext === void 0 ? void 0 : inputContext.requestSubmitStateSync();
+  const renderPreviews = () => {
+    if (!previewContainer)
+      return;
+    previewContainer.innerHTML = "";
+    previewContainer.hidden = queue.length === 0;
+    queue.forEach((item) => {
+      var _a2, _b2;
+      const previewItem = el("div", `mur-attachment-preview-item mur-attachment-${item.state}`);
+      previewItem.setAttribute("data-attachment-state", item.state);
+      if (item.state === "processing") {
+        previewItem.appendChild(el("div", "mur-file-preview", null, [
+          el("span", "mur-attachment-spinner"),
+          el("span", "", { textContent: (_a2 = item.statusText) !== null && _a2 !== void 0 ? _a2 : "Processing..." })
+        ]));
+      } else if (item.state === "error") {
+        previewItem.appendChild(el("div", "mur-file-preview", { textContent: (_b2 = item.error) !== null && _b2 !== void 0 ? _b2 : "Unsupported type" }));
+      } else {
+        renderReadyPreview(item, previewItem);
+      }
+      const removeBtn = el("button", "mur-attachment-remove-btn", {
+        innerHTML: "\xD7",
+        type: "button",
+        onclick: () => {
+          queue = queue.filter((queuedItem) => queuedItem.id !== item.id);
+          renderPreviews();
+          syncSubmitState();
+        }
+      });
+      removeBtn.setAttribute("aria-label", `Remove ${item.fileName}`);
+      previewItem.appendChild(removeBtn);
+      previewContainer.appendChild(previewItem);
+    });
+  };
+  const queueFiles = (files) => {
+    for (const file of files) {
+      void queueFile(file);
+    }
+  };
+  const queueFile = async (file) => {
+    var _a2, _b2;
+    const item = {
+      id: uuidv7(),
+      fileName: file.name || "Untitled file",
+      mimeType: file.type || "application/octet-stream",
+      state: "processing",
+      statusText: (config === null || config === void 0 ? void 0 : config.uploadFile) ? "Uploading..." : "Processing..."
+    };
+    queue.push(item);
+    renderPreviews();
+    syncSubmitState();
+    if (file.size > maxSize) {
+      updateItemError(item.id, "File too large");
+      (_a2 = config === null || config === void 0 ? void 0 : config.onSizeExceeded) === null || _a2 === void 0 ? void 0 : _a2.call(config, file, maxSize);
+      return;
+    }
+    try {
+      const block = await processFile(file);
+      updateItemReady(item.id, block);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unsupported type";
+      updateItemError(item.id, message);
+      if (message === "Unsupported type") {
+        (_b2 = config === null || config === void 0 ? void 0 : config.onUnsupportedFile) === null || _b2 === void 0 ? void 0 : _b2.call(config, file);
+      }
+    }
+  };
+  const updateItemReady = (id, block) => {
+    const item = queue.find((queuedItem) => queuedItem.id === id);
+    if (!item || destroyed)
+      return;
+    item.state = "ready";
+    item.block = block;
+    item.mimeType = getBlockMimeType(block, item.mimeType);
+    item.statusText = void 0;
+    item.error = void 0;
+    renderPreviews();
+    syncSubmitState();
+  };
+  const updateItemError = (id, error) => {
+    const item = queue.find((queuedItem) => queuedItem.id === id);
+    if (!item || destroyed)
+      return;
+    item.state = "error";
+    item.error = error;
+    item.statusText = void 0;
+    renderPreviews();
+    syncSubmitState();
+  };
+  const processFile = async (file) => {
+    var _a2, _b2;
+    const handler = (_a2 = config === null || config === void 0 ? void 0 : config.fileHandlers) === null || _a2 === void 0 ? void 0 : _a2.find((candidate) => candidate.accepts(file));
+    if (handler) {
+      return handler.process(file);
+    }
+    if (config === null || config === void 0 ? void 0 : config.uploadFile) {
+      const uploaded = await config.uploadFile(file);
+      return {
+        id: uuidv7(),
+        type: "file",
+        mimeType: uploaded.type,
+        name: (_b2 = uploaded.name) !== null && _b2 !== void 0 ? _b2 : file.name,
+        data: uploaded.data
+      };
+    }
+    if (file.type.startsWith("image/")) {
+      return {
+        id: uuidv7(),
+        type: "file",
+        mimeType: file.type,
+        name: file.name,
+        data: await readFile(file, "data-url")
+      };
+    }
+    if (isTextLikeFile(file)) {
+      return {
+        id: uuidv7(),
+        type: "file",
+        mimeType: file.type || mimeTypeFromName(file.name),
+        name: file.name,
+        data: await readFile(file, "text")
+      };
+    }
+    throw new Error("Unsupported type");
+  };
+  const onFileInputChange = () => {
+    queueFiles(Array.from(fileInput.files || []));
+    fileInput.value = "";
+  };
+  const onDragEnter = (event) => {
+    if (!hasDraggedFiles(event))
+      return;
+    event.preventDefault();
+    dragDepth++;
+    inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.classList.add("mur-attachment-drag-active");
+  };
+  const onDragOver = (event) => {
+    if (!hasDraggedFiles(event))
+      return;
+    event.preventDefault();
+  };
+  const onDragLeave = (event) => {
+    if (!hasDraggedFiles(event))
+      return;
+    event.preventDefault();
+    dragDepth = Math.max(0, dragDepth - 1);
+    if (dragDepth === 0) {
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.classList.remove("mur-attachment-drag-active");
+    }
+  };
+  const onDrop = (event) => {
+    var _a2;
+    if (!hasDraggedFiles(event))
+      return;
+    event.preventDefault();
+    dragDepth = 0;
+    inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.classList.remove("mur-attachment-drag-active");
+    queueFiles(Array.from(((_a2 = event.dataTransfer) === null || _a2 === void 0 ? void 0 : _a2.files) || []));
+  };
+  const onPaste = (event) => {
+    var _a2;
+    const files = Array.from(((_a2 = event.clipboardData) === null || _a2 === void 0 ? void 0 : _a2.files) || []);
+    if (files.length === 0)
+      return;
+    if (!hasClipboardText(event)) {
+      event.preventDefault();
+    }
+    queueFiles(files);
+  };
+  return {
+    name: "attachments",
+    onInputMount: (ctx) => {
+      inputContext = ctx;
+      destroyed = false;
+      previewContainer = el("div", "mur-attachment-previews");
+      previewContainer.hidden = true;
+      fileInput = el("input", "", { type: "file", hidden: true, multiple: true, accept: acceptedTypes });
+      attachBtn = el("button", "mur-form-icon-btn", {
+        type: "button",
+        innerHTML: ICON_PAPERCLIP,
+        onclick: () => fileInput.click()
+      });
+      attachBtn.setAttribute("aria-label", "Attach files");
+      attachBtn.title = "Attach files";
+      ctx.form.prepend(attachBtn);
+      if (config === null || config === void 0 ? void 0 : config.previewMountSelector) {
+        const selectorRoot = config.previewMountSelectorScope === "document" ? document : ctx.container;
+        const customTarget = selectorRoot.querySelector(config.previewMountSelector);
+        if (customTarget) {
+          customTarget.appendChild(previewContainer);
+        } else {
+          console.error(`AttachmentPlugin: Could not find element matching previewMountSelector "${config.previewMountSelector}". Image previews will not be visible.`);
+        }
+      } else {
+        ctx.form.before(previewContainer);
+      }
+      ctx.form.appendChild(fileInput);
+      fileInput.addEventListener("change", onFileInputChange);
+      ctx.container.addEventListener("dragenter", onDragEnter);
+      ctx.container.addEventListener("dragover", onDragOver);
+      ctx.container.addEventListener("dragleave", onDragLeave);
+      ctx.container.addEventListener("drop", onDrop);
+      ctx.input.addEventListener("paste", onPaste);
+    },
+    hasPendingData: () => queue.some((item) => item.state === "ready" && item.block),
+    isSubmitBlocked: () => queue.some((item) => item.state === "processing"),
+    onUserSubmit: (msg) => {
+      const readyBlocks = queue.flatMap((item) => item.state === "ready" && item.block ? [item.block] : []);
+      if (readyBlocks.length > 0) {
+        msg.blocks.unshift(...readyBlocks);
+        queue = queue.filter((item) => item.state !== "ready");
+        renderPreviews();
+        syncSubmitState();
+      }
+    },
+    destroy: () => {
+      destroyed = true;
+      fileInput === null || fileInput === void 0 ? void 0 : fileInput.removeEventListener("change", onFileInputChange);
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.removeEventListener("dragenter", onDragEnter);
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.removeEventListener("dragover", onDragOver);
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.removeEventListener("dragleave", onDragLeave);
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.removeEventListener("drop", onDrop);
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.input.removeEventListener("paste", onPaste);
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.classList.remove("mur-attachment-drag-active");
+      fileInput === null || fileInput === void 0 ? void 0 : fileInput.remove();
+      attachBtn === null || attachBtn === void 0 ? void 0 : attachBtn.remove();
+      previewContainer === null || previewContainer === void 0 ? void 0 : previewContainer.remove();
+      queue = [];
+      inputContext = null;
+      dragDepth = 0;
+    }
+  };
+}
+function renderReadyPreview(item, previewItem) {
+  var _a, _b;
+  const block = item.block;
+  if ((block === null || block === void 0 ? void 0 : block.type) === "file" && block.mimeType.startsWith("image/")) {
+    previewItem.appendChild(el("img", "", { src: block.data, alt: (_a = block.name) !== null && _a !== void 0 ? _a : item.fileName }));
+    return;
+  }
+  const label = (block === null || block === void 0 ? void 0 : block.type) === "file" ? (_b = block.name) !== null && _b !== void 0 ? _b : item.fileName : item.fileName;
+  previewItem.appendChild(el("div", "mur-file-preview", { textContent: `\u{1F4C4} ${label}` }));
+}
+function getBlockMimeType(block, fallback) {
+  return block.type === "file" ? block.mimeType : fallback;
+}
+function hasDraggedFiles(event) {
+  var _a;
+  const types = (_a = event.dataTransfer) === null || _a === void 0 ? void 0 : _a.types;
+  if (!types)
+    return false;
+  return Array.from(types).includes("Files");
+}
+function hasClipboardText(event) {
+  const data = event.clipboardData;
+  if (!data)
+    return false;
+  const types = Array.from(data.types || []);
+  return types.includes("text/plain") || types.includes("text/html") || typeof data.getData === "function" && data.getData("text/plain").length > 0;
+}
+function isTextLikeFile(file) {
+  if (file.type.startsWith("text/") || file.type === "application/json")
+    return true;
+  const extension = getFileExtension(file.name);
+  return extension !== "" && TEXT_FILE_EXTENSIONS.has(extension);
+}
+function mimeTypeFromName(fileName) {
+  return getFileExtension(fileName) === "json" ? "application/json" : "text/plain";
+}
+function getFileExtension(fileName) {
+  const index = fileName.lastIndexOf(".");
+  return index === -1 ? "" : fileName.slice(index + 1).toLowerCase();
+}
+function readFile(file, mode) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      var _a;
+      return resolve(String((_a = reader.result) !== null && _a !== void 0 ? _a : ""));
+    };
+    reader.onerror = () => {
+      var _a;
+      return reject((_a = reader.error) !== null && _a !== void 0 ? _a : new Error("Failed to read file"));
+    };
+    if (mode === "data-url") {
+      reader.readAsDataURL(file);
+    } else {
+      reader.readAsText(file);
+    }
+  });
+}
+
 // src/storage-keys.ts
 var STORAGE_KEYS = {
   endpoints: "llm_fallbacks_proxy_endpoints",
@@ -5628,6 +5935,42 @@ function mapProxyChainFailure(lastError, rateLimit) {
   return new ProxyUnavailableError(lastError);
 }
 
+// src/providers/message-openai.ts
+function isImageFileBlock(block) {
+  return block.type === "file" && typeof block.mimeType === "string" && block.mimeType.startsWith("image/") && typeof block.data === "string";
+}
+function messageText(message) {
+  return message.blocks.filter((b2) => b2.type === "text").map((b2) => b2.type === "text" ? b2.text : "").join("");
+}
+function messageHasImage(message) {
+  return message.blocks.some((b2) => isImageFileBlock(b2));
+}
+function messagesHaveImage(messages) {
+  return messages.some((m2) => messageHasImage(m2));
+}
+function messagesToOpenAi(messages) {
+  return messages.map((message) => {
+    const text = messageText(message);
+    const images = message.blocks.filter((b2) => isImageFileBlock(b2));
+    if (images.length === 0) {
+      return { role: message.role, content: text };
+    }
+    const parts = [];
+    if (text) parts.push({ type: "text", text });
+    for (const image of images) {
+      parts.push({ type: "image_url", image_url: { url: image.data } });
+    }
+    return { role: message.role, content: parts };
+  });
+}
+function messagesToPlainText(messages) {
+  return messages.map((message) => ({ role: message.role, content: messageText(message) }));
+}
+function modelSupportsVision(modelId, catalog) {
+  const entry = catalog.find((e) => e.id === modelId);
+  return entry?.supports_vision === true;
+}
+
 // src/providers/routing-metadata.ts
 var lastCompletionMeta = null;
 var COMPLETION_META_EVENT = "llm-fallbacks:completion-meta";
@@ -5886,12 +6229,6 @@ function endpointUrl(base) {
   const trimmed = base.replace(/\/$/, "");
   return trimmed.endsWith("/v1/chat/completions") ? trimmed : `${trimmed}/v1/chat/completions`;
 }
-function messagesToOpenAi(messages) {
-  return messages.map((m2) => {
-    const text = m2.blocks.filter((b2) => b2.type === "text").map((b2) => b2.type === "text" ? b2.text : "").join("");
-    return { role: m2.role, content: text };
-  });
-}
 function readRoutingHeaders(res) {
   const modelHeader = res.headers.get("x-litellm-model-name") || res.headers.get("x-litellm-model-id") || void 0;
   const durationRaw = res.headers.get("x-litellm-response-duration-ms");
@@ -6056,27 +6393,38 @@ var FailoverProvider = class {
   buildChatBody(request) {
     const config = this.getRuntimeConfig();
     const model = this.resolveModel(request);
-    const openAiMessages = messagesToOpenAi(request.messages);
     const body = {
       model,
-      messages: openAiMessages,
+      messages: messagesToOpenAi(request.messages),
       max_tokens: request.options.max_tokens ?? config.maxTokens
     };
-    return { config, model, body, openAiMessages };
+    return {
+      config,
+      model,
+      body,
+      plainMessages: messagesToPlainText(request.messages),
+      hasImage: messagesHaveImage(request.messages)
+    };
   }
   // quality_api tier: direct/BYOK provider routes only. Disjoint from
   // proxy_failover (KTD7) — this tier never touches the cloud proxy chain, so
   // a single request is not attempted twice against the same endpoint. Without
   // a usable key it skips, letting the orchestrator advance to proxy_failover.
   async streamQualityApiRoute(request, onEvent) {
-    const { model, body, openAiMessages } = this.buildChatBody(request);
+    const { model, body, plainMessages, hasImage } = this.buildChatBody(request);
     const userKeys = loadKeys();
+    if (hasImage) {
+      throw new TierSkipError(
+        "quality_api",
+        "Direct BYOK routes do not support image attachments yet \u2014 using the proxy tier."
+      );
+    }
     if (!shouldTryBrowser(model, this.catalog, userKeys)) {
       throw qualityApiTierUnavailable();
     }
     const result = await chatWithBrowserFallback({
       model,
-      messages: openAiMessages,
+      messages: plainMessages,
       maxTokens: body.max_tokens,
       catalog: this.catalog,
       providerUrls: this.providerUrls,
@@ -6110,6 +6458,15 @@ var FailoverProvider = class {
     throw new Error("SearXNG discovery tier is not connected yet.");
   }
   async streamChat(request, onEvent) {
+    if (messagesHaveImage(request.messages)) {
+      const model = this.resolveModel(request);
+      if (!modelSupportsVision(model, this.catalog)) {
+        throw new ChatRouteError(
+          "vision_unsupported",
+          `"${model}" can't read images. Pick a vision-capable model (filter by vision in the model explorer) or remove the attachment.`
+        );
+      }
+    }
     const orchestrator = new TierOrchestrator({
       qualityApi: (req, onEv) => this.streamWithCompletionTracking((inner) => this.streamQualityApiRoute(req, inner), onEv),
       webUi: (req, onEv) => this.streamWithCompletionTracking((inner) => this.streamWebUiRoute(req, inner), onEv),
@@ -6910,14 +7267,14 @@ function bindTopBarButtons() {
 }
 
 // src/export-session.ts
-function messageText(message) {
+function messageText2(message) {
   return message.blocks.filter((b2) => b2.type === "text").map((b2) => b2.type === "text" ? b2.text : "").join("").trim();
 }
 function toMarkdown(messages, meta) {
   const title = meta?.title?.trim() || "Chat export";
   const lines = [`# ${title}`, "", `_Exported from llm-fallbacks_`, ""];
   for (const message of messages) {
-    const text = messageText(message);
+    const text = messageText2(message);
     if (!text) continue;
     const heading = message.role === "user" ? "## User" : "## Assistant";
     lines.push(heading, "", text, "");
@@ -6933,7 +7290,7 @@ function toJson(messages, meta) {
       messages: messages.map((m2) => ({
         id: m2.id,
         role: m2.role,
-        text: messageText(m2)
+        text: messageText2(m2)
       }))
     },
     null,
@@ -7167,6 +7524,7 @@ function ShortcutsSheetPlugin() {
 }
 
 // src/main.ts
+var MAX_IMAGE_ATTACHMENT_BYTES = 4e6;
 async function loadCatalog(config) {
   let catalog = [];
   let providerUrls = {};
@@ -7317,6 +7675,19 @@ async function bootstrap() {
     },
     plugins: (engine) => [
       CopyPlugin(),
+      AttachmentPlugin({
+        acceptedTypes: "image/*",
+        maxFileSize: MAX_IMAGE_ATTACHMENT_BYTES,
+        onSizeExceeded: (file, maxSize) => {
+          const limitMb = Math.round(maxSize / 1e6);
+          showStatusMessage(
+            `"${file.name}" is too large. Images must be under ${limitMb} MB.`
+          );
+        },
+        onUnsupportedFile: (file) => {
+          showStatusMessage(`"${file.name}" isn't a supported image type.`);
+        }
+      }),
       ModelPickerPlugin(),
       MessageActionsPlugin(),
       RoutingChipPlugin(),

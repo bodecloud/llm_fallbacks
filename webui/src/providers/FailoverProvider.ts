@@ -1,6 +1,6 @@
 import { trackChatCompletionSuccess } from "../analytics";
 import { getActiveModel } from "../model-selection";
-import type { ChatProvider, ChatRequest, Message, StreamEvent } from "murm-ui";
+import type { ChatProvider, ChatRequest, StreamEvent } from "murm-ui";
 import type { AppConfig } from "../config";
 import { readRuntimeConfig } from "../config";
 import type { CatalogEntry } from "./browser-router";
@@ -13,6 +13,12 @@ import {
 import { ensureTurnstileToken } from "../turnstile-session";
 import { showRateLimitBanner } from "../plugins/status-strip";
 import { ChatRouteError, mapHttpError, mapProxyChainFailure, type RateLimitInfo, type RateLimitScope } from "./errors";
+import {
+  messagesHaveImage,
+  messagesToOpenAi,
+  messagesToPlainText,
+  modelSupportsVision,
+} from "./message-openai";
 import { setLastCompletionMeta, type CompletionMeta } from "./routing-metadata";
 import { emitOpenAiSseAsStreamEvents, emitTextAsStreamEvents } from "./sse";
 import {
@@ -22,7 +28,7 @@ import {
   webUiTierUnavailable,
 } from "./tiers/orchestrator";
 import { loadProviderTierSettings } from "./tiers/settings";
-import { TierOrchestratorError } from "./tiers/types";
+import { TierOrchestratorError, TierSkipError } from "./tiers/types";
 
 type StatusListener = (status: string) => void;
 
@@ -31,16 +37,6 @@ function endpointUrl(base: string): string {
   return trimmed.endsWith("/v1/chat/completions")
     ? trimmed
     : `${trimmed}/v1/chat/completions`;
-}
-
-function messagesToOpenAi(messages: readonly Message[]): { role: string; content: string }[] {
-  return messages.map((m) => {
-    const text = m.blocks
-      .filter((b) => b.type === "text")
-      .map((b) => (b.type === "text" ? b.text : ""))
-      .join("");
-    return { role: m.role, content: text };
-  });
 }
 
 function readRoutingHeaders(res: Response): Pick<CompletionMeta, "modelHeader" | "durationMs"> {
@@ -251,17 +247,25 @@ export class FailoverProvider implements ChatProvider {
     config: AppConfig;
     model: string;
     body: Record<string, unknown>;
-    openAiMessages: { role: string; content: string }[];
+    plainMessages: { role: string; content: string }[];
+    hasImage: boolean;
   } {
     const config = this.getRuntimeConfig();
     const model = this.resolveModel(request);
-    const openAiMessages = messagesToOpenAi(request.messages);
+    // Proxy body carries multimodal content parts; browser/BYOK routes use the
+    // text-only projection (they cannot forward inline images yet).
     const body = {
       model,
-      messages: openAiMessages,
+      messages: messagesToOpenAi(request.messages),
       max_tokens: request.options.max_tokens ?? config.maxTokens,
     };
-    return { config, model, body, openAiMessages };
+    return {
+      config,
+      model,
+      body,
+      plainMessages: messagesToPlainText(request.messages),
+      hasImage: messagesHaveImage(request.messages),
+    };
   }
 
   // quality_api tier: direct/BYOK provider routes only. Disjoint from
@@ -272,8 +276,17 @@ export class FailoverProvider implements ChatProvider {
     request: ChatRequest,
     onEvent: (event: StreamEvent) => void
   ): Promise<void> {
-    const { model, body, openAiMessages } = this.buildChatBody(request);
+    const { model, body, plainMessages, hasImage } = this.buildChatBody(request);
     const userKeys = loadKeys();
+
+    // Direct BYOK routes cannot forward inline images yet — skip so the
+    // orchestrator advances to a proxy tier rather than dropping the image.
+    if (hasImage) {
+      throw new TierSkipError(
+        "quality_api",
+        "Direct BYOK routes do not support image attachments yet — using the proxy tier."
+      );
+    }
 
     if (!shouldTryBrowser(model, this.catalog, userKeys)) {
       throw qualityApiTierUnavailable();
@@ -281,7 +294,7 @@ export class FailoverProvider implements ChatProvider {
 
     const result = await chatWithBrowserFallback({
       model,
-      messages: openAiMessages,
+      messages: plainMessages,
       maxTokens: body.max_tokens as number,
       catalog: this.catalog,
       providerUrls: this.providerUrls,
@@ -328,6 +341,19 @@ export class FailoverProvider implements ChatProvider {
   }
 
   async streamChat(request: ChatRequest, onEvent: (event: StreamEvent) => void): Promise<void> {
+    // Vision guard (R29): never silently drop attachments. If the turn carries
+    // an image but the selected model is not vision-capable, block clearly and
+    // point at the vision-badged models in the explorer (R30).
+    if (messagesHaveImage(request.messages)) {
+      const model = this.resolveModel(request);
+      if (!modelSupportsVision(model, this.catalog)) {
+        throw new ChatRouteError(
+          "vision_unsupported",
+          `"${model}" can't read images. Pick a vision-capable model (filter by vision in the model explorer) or remove the attachment.`
+        );
+      }
+    }
+
     const orchestrator = new TierOrchestrator({
       qualityApi: (req, onEv) =>
         this.streamWithCompletionTracking((inner) => this.streamQualityApiRoute(req, inner), onEv),
