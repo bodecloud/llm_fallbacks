@@ -1,5 +1,5 @@
 import type { ChatPlugin } from "murm-ui";
-import { isLocalEndpoint, loadRuntimeConfig, normalizeEndpoints, readRuntimeConfig } from "../../config";
+import { isLocalEndpoint, loadRuntimeConfig, normalizeEndpoints } from "../../config";
 import type { FailoverProvider } from "../../providers/FailoverProvider";
 import { STORAGE_KEYS, saveJson } from "../../storage-keys";
 
@@ -10,8 +10,18 @@ export function FailoverSettingsPlugin(deps: {
   return {
     name: "failover-settings",
     onMount() {
+      const fillPanelFromConfig = (
+        config: { endpoints: string[]; guestToken: string; defaultModel: string },
+        endpointsEl: HTMLTextAreaElement,
+        guestEl: HTMLInputElement,
+        modelEl: HTMLInputElement,
+      ): void => {
+        endpointsEl.value = config.endpoints.join("\n");
+        guestEl.value = config.guestToken;
+        modelEl.value = config.defaultModel;
+      };
+
       window.registerShellPanel?.("failover", (root) => {
-        const config = readRuntimeConfig();
         root.innerHTML = `
           <header class="panel-header">
             <h3>Failover &amp; Proxy</h3>
@@ -38,9 +48,18 @@ export function FailoverSettingsPlugin(deps: {
         const modelEl = root.querySelector<HTMLInputElement>("#defaultModelInput")!;
         const statusEl = root.querySelector<HTMLDivElement>("#routeStatus")!;
 
-        endpointsEl.value = config.endpoints.join("\n");
-        guestEl.value = config.guestToken;
-        modelEl.value = config.defaultModel;
+        fillPanelFromConfig(deps.provider.getConfig(), endpointsEl, guestEl, modelEl);
+        void loadRuntimeConfig().then((config) => {
+          fillPanelFromConfig(config, endpointsEl, guestEl, modelEl);
+          deps.provider.updateConfig(config);
+        });
+
+        document.getElementById("sysSetting")?.addEventListener("click", () => {
+          void loadRuntimeConfig().then((config) => {
+            fillPanelFromConfig(config, endpointsEl, guestEl, modelEl);
+            deps.provider.updateConfig(config);
+          });
+        });
 
         deps.provider.onStatus((s) => {
           statusEl.textContent = `Status: ${s}`;

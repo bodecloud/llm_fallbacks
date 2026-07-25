@@ -51,6 +51,10 @@ export class FailoverProvider implements ChatProvider {
     return this.lastRoute;
   }
 
+  getConfig(): AppConfig {
+    return this.config;
+  }
+
   updateConfig(config: AppConfig): void {
     this.config = config;
   }

@@ -5415,6 +5415,9 @@ var FailoverProvider = class {
   getLastRoute() {
     return this.lastRoute;
   }
+  getConfig() {
+    return this.config;
+  }
   updateConfig(config) {
     this.config = config;
   }
@@ -5563,8 +5566,12 @@ function FailoverSettingsPlugin(deps) {
   return {
     name: "failover-settings",
     onMount() {
+      const fillPanelFromConfig = (config, endpointsEl, guestEl, modelEl) => {
+        endpointsEl.value = config.endpoints.join("\n");
+        guestEl.value = config.guestToken;
+        modelEl.value = config.defaultModel;
+      };
       window.registerShellPanel?.("failover", (root) => {
-        const config = readRuntimeConfig();
         root.innerHTML = `
           <header class="panel-header">
             <h3>Failover &amp; Proxy</h3>
@@ -5589,9 +5596,17 @@ function FailoverSettingsPlugin(deps) {
         const guestEl = root.querySelector("#guestTokenInput");
         const modelEl = root.querySelector("#defaultModelInput");
         const statusEl = root.querySelector("#routeStatus");
-        endpointsEl.value = config.endpoints.join("\n");
-        guestEl.value = config.guestToken;
-        modelEl.value = config.defaultModel;
+        fillPanelFromConfig(deps.provider.getConfig(), endpointsEl, guestEl, modelEl);
+        void loadRuntimeConfig().then((config) => {
+          fillPanelFromConfig(config, endpointsEl, guestEl, modelEl);
+          deps.provider.updateConfig(config);
+        });
+        document.getElementById("sysSetting")?.addEventListener("click", () => {
+          void loadRuntimeConfig().then((config) => {
+            fillPanelFromConfig(config, endpointsEl, guestEl, modelEl);
+            deps.provider.updateConfig(config);
+          });
+        });
         deps.provider.onStatus((s) => {
           statusEl.textContent = `Status: ${s}`;
         });
