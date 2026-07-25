@@ -1,7 +1,7 @@
 {
   "name": "llm-fallbacks chat",
   "short_name": "llm-fallbacks",
-  "description": "Zero-config free model chat with proxy failover",
+  "description": "Chat with free AI models. No signup required.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#1a1a2e",

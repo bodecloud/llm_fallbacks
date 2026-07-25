@@ -21,11 +21,11 @@ related_components:
   - docs
 ---
 
-# murm-ui light surfaces on ResearchWizard dark shell embed
+# Light chat UI on a dark shell
 
 ## Problem
 
-After migrating to ResearchWizard shell + murm-ui embed, the live chat looked broken: harsh white sidebar, white input, and a glowing band above the message field — all clashing with the purple/navy shell gradient.
+After migrating to ResearchWizard shell + murm-ui embed, the live chat looked broken: white sidebar, white input, and a bright band above the message field — clashing with the purple/navy shell gradient.
 
 ## Symptoms
 

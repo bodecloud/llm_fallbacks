@@ -4,7 +4,7 @@ Durable instructions for AI agents working in this repository. Follow these conv
 
 ## Project overview
 
-`llm-fallbacks` is a Python library for managing LLM API fallbacks on top of [LiteLLM](https://github.com/BerriAI/litellm). It is a pure Python package — no HTTP server in `src/`. Optional gateway runtime lives in `deploy/` (Docker Compose).
+`llm-fallbacks` ranks free LLM models and builds fallback chains on [LiteLLM](https://github.com/BerriAI/litellm). Pure Python in `src/` — no HTTP server in the package. Optional gateway runtime: `deploy/` (Docker Compose) and `edge/` (Cloudflare Worker).
 
 - **Python:** 3.10+ (CI tests 3.10, 3.11, 3.12)
 - **License:** MIT

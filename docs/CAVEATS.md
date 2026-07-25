@@ -1,27 +1,27 @@
-# Product caveats register
+# What to expect
 
-Honest limits for the public demo and library. Complements the README demo contract and plan 002 security model.
+Honest limits for the public chat demo and the Python library.
 
-## Public demo
+## Public chat demo
 
-| Caveat | Detail |
-|--------|--------|
-| **Guest token abuse** | `PROXY_GUEST_TOKEN` is in view-source / `config.js`. It is a rate-limited capability gate, not user authentication. Rotate via [`deploy/scripts/sync-github-secrets.sh`](../deploy/scripts/sync-github-secrets.sh) workflow. |
-| **No SLA** | Free-tier Worker, Render, and provider quotas — best-effort failover only. |
-| **Cold start** | Render LiteLLM spins down when idle; expect 30–60s on first request after idle. |
-| **OpenRouter quota** | Daily free limits may exhaust; Worker falls back to Workers AI when configured. |
-| **Render failover auth (SG-01)** | Browser sends guest token to all configured endpoints. Worker accepts it; **Render LiteLLM may return 401** until a LiteLLM virtual key is issued. Operator smoke uses `LITELLM_MASTER_KEY` via curl only. |
-| **Stale localStorage** | Custom proxy endpoints in localStorage override merged `chat_proxy.json`. Clear site data if failover list looks wrong after deploy. |
-| **Analytics gap** | `/v1/events` counters are privacy-preserving but not a full product analytics pipeline. See pulse runbook. |
+| Topic | What you should know |
+|-------|----------------------|
+| **Shared access** | The demo uses a public token in the page source. It limits abuse but is not personal login. Anyone can use it. |
+| **No uptime promise** | Free Cloudflare, Render, and provider tiers can fail, rate-limit, or sleep when idle. |
+| **Cold starts** | The backup server on Render may take 30–60 seconds to wake up after idle. |
+| **Daily quotas** | OpenRouter free limits can run out. The Worker may switch to Cloudflare Workers AI when configured. |
+| **Backup server auth** | The browser sends the same guest token to every endpoint. The Worker accepts it; the Render backup may return 401 until a LiteLLM virtual key is set up. |
+| **Saved settings** | If you changed proxy URLs in the browser, old values stay in localStorage. Clear site data if the failover list looks wrong after an update. |
+| **Usage stats** | We count sessions and completions without storing message text. This is not full product analytics. |
 
-## Library / CI
+## Library and CI
 
-| Caveat | Detail |
-|--------|--------|
-| **Import-time network** | Setting `OPENROUTER_API_KEY` (even `dummy`) triggers enrichment at import. Use `OPENROUTER_API_KEY=dummy` in tests. |
-| **Cloudflare token scope** | Deploy Proxies needs Workers Scripts Edit; auth error **10000** means regenerate token — see [workflow runbook](solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md). |
-| **Provider free tiers** | README provider table reflects repo research; **verify limits on each provider's official docs** before relying on quotas in production. |
+| Topic | What you should know |
+|-------|----------------------|
+| **Import side effects** | Setting `OPENROUTER_API_KEY` (even to `dummy`) triggers live fetches at import. Use `OPENROUTER_API_KEY=dummy` in tests. |
+| **Cloudflare deploy token** | Deploy Proxies needs Workers Scripts Edit. Auth error **10000** means regenerate the token — see [workflow runbook](solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md). |
+| **Provider limits** | The README provider table is a snapshot. Verify limits on each provider's official docs before production use. |
 
-## Evidence labels (partial adoption)
+## Evidence labels
 
-Top README provider links are `[OFFICIAL]` vendor docs where noted. Full `[REPO|OFFICIAL|OPEN|UI]` relabel across all docs is deferred to a follow-up pass.
+Some README provider links point to official vendor docs. Full relabeling across all docs is a follow-up task.

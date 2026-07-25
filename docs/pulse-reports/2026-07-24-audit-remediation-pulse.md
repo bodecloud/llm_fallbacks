@@ -6,13 +6,13 @@ window: plan 003 U1–U12
 
 # Audit remediation pulse (July 2026)
 
-## Shipped in this pass
+## Shipped
 
 - **F001:** `loadRuntimeConfig()` merges `chat_proxy.json` into `FailoverProvider` bootstrap
 - **F002:** CI preserves secondary URLs in `chat_proxy.json`
 - **F003:** Deploy-mode generator tests aligned
 - **AE2:** Playwright dual-endpoint failover mock test
-- **Docs:** STRATEGY KB track, operator README reconciliation, plan 002 addendum, `docs/solutions/README.md`, `docs/CAVEATS.md`
+- **Docs:** STRATEGY KB track, operator README reconciliation, plan 002 addendum, solutions index, caveats register
 - **Security:** `/v1/events` rate limits; guest token via wrangler secret; rotation workflow documented
 
 ## Still open (v1.1)

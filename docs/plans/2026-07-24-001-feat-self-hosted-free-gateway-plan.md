@@ -11,15 +11,15 @@ depth: standard
 
 ## Summary
 
-Extend `llm-fallbacks` to emit a deployable LiteLLM proxy configuration with a self-hosted `free` alias (ranked fallback chain over discovered free models), and add a thin `deploy/` Docker Compose stack (LiteLLM proxy + config-updater sidecar) that keeps the alias current without manual gateway administration.
+Extend `llm-fallbacks` to emit deployable LiteLLM proxy config with a self-hosted `free` alias (ranked fallback chain over discovered free models), plus a `deploy/` Docker Compose stack (LiteLLM proxy + config-updater sidecar) that keeps the alias current without manual edits.
 
-## Problem Frame
+## Problem
 
-Open-source AI gateways (Portkey, LLM Gateway, LiteLLM Proxy, etc.) unify provider APIs and handle retries/failbacks, but none ship a turnkey `openrouter/free`-style alias that **automatically discovers, ranks, and refreshes free models** without manual config. Community lists and static YAML go stale quickly.
+Open-source AI gateways unify provider APIs and handle retries, but none ship a turnkey `openrouter/free`-style alias that **automatically discovers, ranks, and refreshes free models**. Static YAML goes stale quickly.
 
-This repository already implements the discovery/ranking brain: daily model ingestion from LiteLLM + OpenRouter, capability-based quality scoring, and generation of `configs/litellm_config_free.yaml`. What is missing is (1) a first-class **self-hosted `free` alias** independent of OpenRouter's router, (2) **deployment packaging** to run LiteLLM Proxy with live config refresh, and (3) **YAML templating** suitable for containerized environments.
+This repo already has the discovery brain: daily ingestion from LiteLLM + OpenRouter, capability-based quality scoring, and `configs/litellm_config_free.yaml`. Missing pieces: (1) a first-class **self-hosted `free` alias**, (2) **deployment packaging** with live config refresh, and (3) **YAML templating** for containers.
 
-The pasted strategy recommends building on an existing gateway with minimal glue — not forking a gateway or reimplementing failover logic. LiteLLM Proxy plus this repo's generated artifacts is the natural fit.
+Build on an existing gateway with minimal glue — not a gateway fork. LiteLLM Proxy plus this repo's artifacts is the fit.
 
 ---
 

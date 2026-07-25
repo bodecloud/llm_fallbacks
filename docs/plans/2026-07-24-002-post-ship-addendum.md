@@ -8,7 +8,7 @@ status: living
 
 # Plan 002 post-ship addendum
 
-This addendum records **as-built deltas** after plan 002 shipped. The original plan remains a historical RFC; do not silently edit completed units — update this file instead.
+This addendum records **as-built deltas** after plan 002 shipped. The original plan is a historical RFC — update this file instead of editing completed plan units.
 
 **Remediation track:** [Plan 003 audit remediation](2026-07-24-003-feat-audit-remediation-living-docs-plan.md) (if copied to repo) or Cursor living plan 4658a344.
 

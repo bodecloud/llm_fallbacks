@@ -1,4 +1,4 @@
-# llm-fallbacks Edge Proxy
+# Edge proxy
 
 Cloudflare Worker — primary OpenAI-compatible API for the [GitHub Pages chat UI](../docs/index.html).
 
@@ -8,10 +8,10 @@ Cloudflare Worker — primary OpenAI-compatible API for the [GitHub Pages chat U
 |------|--------|------|---------|
 | `/health` | GET | none | Liveness |
 | `/v1/chat/completions` | POST | guest token | Chat (OpenAI-compatible) |
-| `/v1/events` | POST | guest token (header or JSON `token`) | Privacy-preserving UI analytics counters |
+| `/v1/events` | POST | guest token (header or JSON `token`) | Privacy-preserving UI counters |
 | `/v1/metrics` | GET | guest token | Daily event totals for pulse / STRATEGY metrics |
 
-Allowed events: `homepage_session`, `chat_completion_success`, `zero_config_reply`, `dark_theme_loaded`. No message content or user IDs are stored.
+Allowed events: `homepage_session`, `chat_completion_success`, `zero_config_reply`, `dark_theme_loaded`. No message content or user IDs stored.
 
 ## Setup
 
@@ -21,7 +21,7 @@ npm install
 cp ../docs/config.example.js ../docs/config.js  # local UI config
 ```
 
-Set secrets (required for deploy and local `wrangler dev`):
+Set secrets (required for deploy and `wrangler dev`):
 
 ```bash
 npx wrangler secret put PROXY_GUEST_TOKEN
@@ -30,21 +30,21 @@ npx wrangler secret put OPENROUTER_API_KEY
 npx wrangler secret put GROQ_API_KEY
 ```
 
-`PROXY_GUEST_TOKEN` is **not** in `wrangler.toml` `[vars]` — use secret or `.dev.vars` locally.
+`PROXY_GUEST_TOKEN` is **not** in `wrangler.toml` `[vars]` — use a secret or `.dev.vars` locally.
 
-Update `wrangler.toml` `MODEL_CHAIN` and `ALLOWED_MODELS` (comma-separated LiteLLM model ids) or let CI set them from `configs/free_models_ids.txt` (chain: first line; allowlist: top 20).
+Update `wrangler.toml` `MODEL_CHAIN` and `ALLOWED_MODELS`, or let CI set them from `configs/free_models_ids.txt` (chain: first line; allowlist: top 20).
 
 ## Rate limits and allowlist
 
-- **Rate limits:** KV-backed per-IP caps (`RATE_LIMIT_PER_MINUTE`, `RATE_LIMIT_PER_DAY` in `wrangler.toml`). Returns HTTP 429 with `Retry-After` when exceeded.
+- **Rate limits:** KV-backed per-IP caps (`RATE_LIMIT_PER_MINUTE`, `RATE_LIMIT_PER_DAY`). Returns HTTP 429 with `Retry-After`.
 - **Model allowlist:** Explicit `model` values must appear in `ALLOWED_MODELS` or `MODEL_CHAIN`; alias `free` is always allowed.
-- **Guest token:** Public demo capability gate in `docs/config.js` — not user authentication. Extractable via view-source; CORS does not protect server-side abuse.
+- **Guest token:** Public demo gate in `docs/config.js` — not user auth. Visible in view-source; CORS does not stop server-side abuse.
 
 ## Local dev
 
 ```bash
 npm run dev
-# Worker default: http://127.0.0.1:8787
+# Default: http://127.0.0.1:8787
 ```
 
 Point `docs/config.js` `endpoints` at the dev URL.
@@ -59,9 +59,9 @@ Or push to `main` — `.github/workflows/deploy-proxies.yml` deploys when `edge/
 
 ### CI deploy troubleshooting
 
-If **Deploy Proxies** fails with `Authentication error [code: 10000]`, regenerate the Cloudflare API token and update the `CLOUDFLARE_API_TOKEN` repository secret. See [`docs/solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md`](../docs/solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md) for required scopes.
+**Authentication error [code: 10000]:** Regenerate the Cloudflare API token and update `CLOUDFLARE_API_TOKEN`. See [`docs/solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md`](../docs/solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md).
 
-After updating secrets, re-run **Deploy Proxies** from the Actions tab (or push any `edge/` change). If wrangler auth fails but `WORKER_URL` is set, CI exits successfully with `deployed=false` — the committed `chat_proxy.json` dual endpoints are preserved; Pages still serves the last known Worker URL from secrets at build time.
+If wrangler auth fails but `WORKER_URL` is set, CI exits with `deployed=false` — committed `chat_proxy.json` dual endpoints are preserved; Pages still serves the last known Worker URL from secrets at build time.
 
 Local deploy (bypasses CI):
 
@@ -73,13 +73,13 @@ echo "$OPENROUTER_API_KEY" | npx wrangler secret put OPENROUTER_API_KEY
 
 ### Pages CI: webui build step
 
-Pushing changes to `.github/workflows/deploy-pages.yml` requires a GitHub token with the **`workflow`** scope. Refresh the active `gh` account:
+Pushing `.github/workflows/deploy-pages.yml` needs a GitHub token with **`workflow`** scope:
 
 ```bash
 gh auth refresh -h github.com -s workflow,repo
 ```
 
-Then commit and push the webui build step (builds `webui/` into `docs/assets/` on each deploy).
+Then commit and push the webui build step.
 
 ## Required GitHub secrets
 
@@ -96,10 +96,10 @@ Sync from `~/.config/secrets.env` with [`deploy/scripts/sync-github-secrets.sh`]
 | `LITELLM_URL` | Render LiteLLM secondary URL for `chat_proxy.json` |
 | `RENDER_API_KEY` | Render API redeploy when hook unset |
 | `RENDER_SERVICE_ID` | Render service id (e.g. `srv-…`) |
-| `RENDER_DEPLOY_HOOK` | Optional — redeploy secondary backend via hook |
+| `RENDER_DEPLOY_HOOK` | Optional — redeploy secondary via hook |
 
 ## Security
 
 - Never commit provider API keys or guest tokens.
-- CORS allowlist is set in `wrangler.toml` (`ALLOWED_ORIGINS`).
+- CORS allowlist in `wrangler.toml` (`ALLOWED_ORIGINS`).
 - `MAX_TOKENS_CAP` limits abuse on the public demo.

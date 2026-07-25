@@ -18,7 +18,7 @@ tags:
 resolution_type: workflow_improvement
 ---
 
-# CI and smoke-test product pulse when analytics is not wired
+# Product pulse without analytics
 
 ## Context
 
@@ -94,9 +94,9 @@ Cross-reference existing runbooks:
 - `docs/solutions/integration-issues/workers-ai-proxy-fallback-and-model-chain.md`
 - `docs/solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md`
 
-## Why This Matters
+## Why this matters
 
-Without analytics, teams still need a repeatable "how are we doing?" loop after shipping gateway changes. CI + smoke tests catch regressions that STRATEGY metrics would eventually quantify; documenting the substitute sources prevents every pulse run from rediscovering `gh` queries and curl one-liners.
+Without analytics, teams still need a repeatable health check after shipping gateway changes. CI + smoke tests catch regressions that STRATEGY metrics would eventually quantify. Documenting substitute sources prevents every pulse run from rediscovering `gh` queries and curl one-liners.
 
 ## When to Apply
 

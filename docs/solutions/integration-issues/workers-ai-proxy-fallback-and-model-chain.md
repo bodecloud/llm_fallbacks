@@ -23,11 +23,11 @@ related_components:
   - github-actions
 ---
 
-# Cloudflare Worker proxy 502 on stream fallback and OpenRouter rate limits
+# Workers AI fallback and MODEL_CHAIN length
 
 ## Problem
 
-The public GitHub Pages chat calls `llm-fallbacks-proxy` with `model=free`. When OpenRouter rate-limits (`429`), the Worker should fall back to Cloudflare Workers AI and stream an OpenAI-compatible SSE response. Production returned `502 Workers AI failed`, breaking zero-config live Playwright tests.
+The public GitHub Pages chat calls the Worker with `model=free`. When OpenRouter rate-limits (429), the Worker should fall back to Cloudflare Workers AI and stream an OpenAI-compatible SSE response. Production returned `502 Workers AI failed`, breaking zero-config live Playwright tests.
 
 ## Symptoms
 
@@ -63,9 +63,9 @@ CHAIN=$(head -n 1 ../configs/free_models_ids.txt | paste -sd, -)
 
 5. **Default model** `@cf/meta/llama-3.1-8b-instruct-fast` (non-deprecated).
 
-## Why This Works
+## Why this works
 
-OpenRouter 429 is expected on the public demo key. Fallback only runs after the chain loop; a 10-model chain with eight unsupported providers added latency/subrequests so Workers AI never ran reliably on `model=free` streams. Response parsing failed silently when AI returned chat-completions JSON instead of legacy `{ response }`.
+OpenRouter 429 is expected on the public demo key. Fallback runs after the chain loop. A 10-model chain with eight unsupported providers added latency so Workers AI never ran reliably on `model=free` streams. Response parsing failed when AI returned chat-completions JSON instead of legacy `{ response }`.
 
 ## Prevention
 

@@ -19,11 +19,11 @@ tags:
 resolution_type: workflow_improvement
 ---
 
-# GitHub Pages webui CI build and non-interactive deploy credentials
+# GitHub Pages webui CI and deploy credentials
 
 ## Context
 
-The chat UI ships as static files under `docs/` from `webui/`. Worker deploy and workflow updates require secrets and token scopes that blocked hands-off pushes during the UI migration.
+The chat UI ships as static files under `docs/` built from `webui/`. Worker deploy and workflow updates need secrets and token scopes that block hands-off pushes if misconfigured.
 
 ## Guidance
 
@@ -72,7 +72,7 @@ echo "$OPENROUTER_API_KEY" | npx wrangler secret put OPENROUTER_API_KEY
 echo "$LLM_FALLBACKS_PROXY_GUEST_TOKEN" | npx wrangler secret put PROXY_GUEST_TOKEN
 ```
 
-## Why This Matters
+## Why this matters
 
 Without CI webui build, HTML/CSS/JS drift from `webui/src`. Without valid Cloudflare tokens, edge fixes never reach production even when merged. Live e2e tests catch proxy regressions only after deploy succeeds.
 

@@ -1,16 +1,16 @@
 # Third-party notices
 
-## Chat UI shell — ResearchWizard frontend styling
+## Chat UI shell — ResearchWizard
 
 - **Source:** [bolabaden/ai-researchwizard](https://github.com/bolabaden/ai-researchwizard) (`frontend/styles.css`, layout patterns)
-- **License:** Apache-2.0 (same org; synced via `webui/scripts/sync-researchwizard-shell.sh`)
-- **Changes:** Research workflow removed; chat mount, failover/BYOK/model-explorer panels for llm-fallbacks.
+- **License:** Apache-2.0 (synced via `webui/scripts/sync-researchwizard-shell.sh`)
+- **Changes:** Research workflow removed; chat mount and settings panels added for llm-fallbacks.
 
 ## Chat engine — murm-ui
 
 - **Source:** [levmv/murm-ui](https://github.com/levmv/murm-ui)
 - **License:** MIT
-- **Changes:** `FailoverProvider`, failover/BYOK/model-explorer plugins, ResearchWizard shell embed.
+- **Changes:** `FailoverProvider`, settings plugins, ResearchWizard shell embed.
 
 ## Archived — xqdoo00o/chatgpt-web
 
@@ -18,4 +18,4 @@
 - **License:** MIT
 - **Note:** Replaced by ResearchWizard shell + murm-ui (2026-07).
 
-Previous minimal chat UI preserved under `docs/legacy/simple-chat/`.
+Previous minimal chat UI: `docs/legacy/simple-chat/`.

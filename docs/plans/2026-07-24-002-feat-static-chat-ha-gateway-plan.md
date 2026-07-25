@@ -14,13 +14,13 @@ strategy: STRATEGY.md
 
 ## Summary
 
-Ship a **static chat homepage** on GitHub Pages (repo default site) plus **GitHub Actions–driven deploys** to a **Cloudflare Worker** primary proxy and an optional **Render/Koyeb LiteLLM** secondary backend. Chat uses the existing `free` alias and daily `configs/` artifacts from llm-fallbacks—**not** a full TypeScript port of Python discovery. **Best-effort failover** between configured endpoints on $0 tiers — not SLA-grade HA.
+Ship a **static chat homepage** on GitHub Pages plus GitHub Actions deploys to a **Cloudflare Worker** primary proxy and optional **Render LiteLLM** secondary. Chat uses the existing `free` alias and daily `configs/` artifacts — not a TypeScript port of Python discovery. **Best-effort failover** on $0 tiers, not SLA-grade HA.
 
-## Problem Frame
+## Problem
 
-The repo already generates ranked free-model configs and a local Docker gateway (`deploy/`), but there is no public demo surface and no multi-surface free hosting story. The user wants Open WebUI-like chat as the default homepage, routed through llm-fallbacks ranking, with HA across free SaaS/PaaS—and preferably no backend.
+The repo generates ranked free-model configs and a local Docker gateway (`deploy/`), but there was no public demo and no multi-surface free hosting story. Goal: Open WebUI-like chat as the default homepage, routed through llm-fallbacks ranking, with HA across free SaaS — preferably without running a backend.
 
-Research conclusion (see Sources): **pure browser-only provider routing with hidden repo-owned keys is infeasible** for zero-config demos. Optional **BYOK** (user keys in `localStorage`, no repo secrets) remains a valid browser-direct path. A **thin edge proxy + optional container LiteLLM** is the minimal secure architecture for the public demo. **Full llm-fallbacks in TypeScript is unnecessary**; consume `free_models.json` and `litellm_config_free.yaml`. **True HA on $0** is not achievable (cold starts, Fly.io no free tier, quota limits); **best-effort failover** is the honest target.
+Research conclusion: **browser-only routing with hidden repo keys is not viable** for zero-config demos. Optional **BYOK** (user keys in `localStorage`) remains valid. A **thin edge proxy + optional LiteLLM container** is the minimal secure architecture. **Full llm-fallbacks in TypeScript is unnecessary** — consume `free_models.json` and `litellm_config_free.yaml`. **True HA on $0** is not achievable; **best-effort failover** is the honest target.
 
 ---
 
