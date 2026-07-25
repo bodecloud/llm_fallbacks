@@ -46,13 +46,65 @@ export class ProxyUnavailableError extends ChatRouteError {
 const QUOTA_RE = /quota|credit|insufficient|billing|exhausted/i;
 const COLD_START_RE = /cold start|starting up|still deploying|proxy pending|503|502/i;
 
-export function mapHttpError(status: number, bodyText: string, endpoint: string): ChatRouteError {
+export type RateLimitScope = "minute" | "day";
+
+export interface RateLimitInfo {
+  retryAfterSeconds?: number;
+  scope?: RateLimitScope;
+}
+
+function formatRateLimitMessage(endpoint: string, info?: RateLimitInfo): string {
+  const scope = info?.scope;
+  const seconds = info?.retryAfterSeconds;
+  let prefix = `Rate limit exceeded at ${endpoint}.`;
+  if (scope === "day") {
+    prefix = `Daily rate limit reached at ${endpoint}.`;
+  } else if (scope === "minute") {
+    prefix = `Per-minute rate limit reached at ${endpoint}.`;
+  }
+  if (seconds !== undefined && seconds > 0) {
+    const unit = seconds === 1 ? "second" : "seconds";
+    return `${prefix} Try again in ${seconds} ${unit}.`;
+  }
+  return `${prefix} Wait and try again.`;
+}
+
+function parseRateLimitScope(bodyText: string): RateLimitScope | undefined {
+  try {
+    const parsed = JSON.parse(bodyText) as {
+      error?: { type?: string; message?: string };
+    };
+    const message = parsed.error?.message ?? "";
+    if (/daily|per day|\(day\)/i.test(message)) return "day";
+    if (/minute|\(minute\)/i.test(message)) return "minute";
+    if (parsed.error?.type === "rate_limit") {
+      if (/day/i.test(message)) return "day";
+      if (/minute/i.test(message)) return "minute";
+    }
+  } catch {
+    /* not JSON */
+  }
+  return undefined;
+}
+
+export function mapHttpError(
+  status: number,
+  bodyText: string,
+  endpoint: string,
+  rateLimit?: RateLimitInfo
+): ChatRouteError {
   const snippet = bodyText.slice(0, 200);
   if (status === 401 || status === 403) {
+    if (/turnstile/i.test(bodyText)) {
+      return new AuthError(
+        `Turnstile verification required at ${endpoint}. Complete the check and try again.`
+      );
+    }
     return new AuthError(`Authentication failed at ${endpoint}. Check your guest token in Server settings.`);
   }
   if (status === 429) {
-    return new RateLimitError(`Rate limit exceeded at ${endpoint}. Wait and try again.`);
+    const scope = rateLimit?.scope ?? parseRateLimitScope(bodyText);
+    return new RateLimitError(formatRateLimitMessage(endpoint, { ...rateLimit, scope }));
   }
   if (QUOTA_RE.test(bodyText)) {
     return new QuotaError(`Quota exhausted at ${endpoint}. ${snippet}`);
@@ -63,11 +115,20 @@ export function mapHttpError(status: number, bodyText: string, endpoint: string)
   return new ProxyUnavailableError(`${endpoint}: HTTP ${status} — ${snippet}`);
 }
 
-export function mapProxyChainFailure(lastError: string): ChatRouteError {
+function endpointFromChainError(lastError: string): string {
+  const match = lastError.match(/^(.+?): HTTP \d+/);
+  return match?.[1]?.trim() || "proxy";
+}
+
+export function mapProxyChainFailure(lastError: string, rateLimit?: RateLimitInfo): ChatRouteError {
   if (/401|403|Unauthorized/i.test(lastError)) {
     return new AuthError(lastError);
   }
   if (/429|rate limit/i.test(lastError)) {
+    const endpoint = endpointFromChainError(lastError);
+    if (rateLimit?.retryAfterSeconds || rateLimit?.scope) {
+      return new RateLimitError(formatRateLimitMessage(endpoint, rateLimit));
+    }
     return new RateLimitError(lastError);
   }
   if (QUOTA_RE.test(lastError)) {

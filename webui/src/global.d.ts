@@ -11,6 +11,7 @@ declare global {
       chatProxyUrl?: string;
       maxTokens: number;
       appVersion?: string;
+      turnstileSiteKey?: string;
     };
     LLM_FALLBACKS_ROUTE?: string;
     registerShellPanel?: (

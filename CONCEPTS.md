@@ -34,8 +34,10 @@ Shared vocabulary for the static chat gateway and Python library.
 |------|---------|
 | **Render secondary** | LiteLLM on Render (`llm-fallbacks-gateway.onrender.com` pattern) |
 | **loadRuntimeConfig** | `readRuntimeConfig()` + `mergeChatProxyArtifact()` — single bootstrap path for `FailoverProvider` |
-| **Routing chip** | Per-reply UI showing endpoint, resolved model, and fallback hops (planned) |
+| **Routing chip** | Per-reply UI showing endpoint, resolved model, and fallback hops |
 | **Model selector** | Composer picker over `free_models.json`; separate from Failover endpoint settings |
+| **Endpoint health probe** | Client-side GET to `/health` (or LiteLLM `/health/liveliness` on Render); ok / slow / fail |
+| **Turnstile session** | Optional bot check at Worker; 1h KV pass per IP after successful siteverify |
 
 ## Learnings index
 

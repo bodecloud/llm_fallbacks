@@ -48,6 +48,7 @@ jobs:
           WORKER_URL: ${{ secrets.WORKER_URL }}
           LITELLM_URL: ${{ secrets.LITELLM_URL }}
           PROXY_GUEST_TOKEN: ${{ secrets.PROXY_GUEST_TOKEN }}
+          TURNSTILE_SITE_KEY: ${{ secrets.TURNSTILE_SITE_KEY }}
         run: |
           python3 <<'PY'
           import json
@@ -61,6 +62,7 @@ jobs:
                   endpoints.append(val)
 
           guest_token = os.environ.get("PROXY_GUEST_TOKEN") or "llm-fallbacks-public"
+          turnstile_site_key = (os.environ.get("TURNSTILE_SITE_KEY") or "").strip()
           chat_proxy_path = Path("configs/chat_proxy.json")
           if chat_proxy_path.is_file():
               chat_proxy = json.loads(chat_proxy_path.read_text(encoding="utf-8"))
@@ -80,6 +82,8 @@ jobs:
               "maxTokens": 512,
               "appVersion": os.environ.get("APP_VERSION", ""),
           }
+          if turnstile_site_key:
+              cfg["turnstileSiteKey"] = turnstile_site_key
           body = "window.LLM_FALLBACKS_CONFIG = " + json.dumps(cfg, indent=2) + ";\n"
           open("docs/config.js", "w", encoding="utf-8").write(body)
           PY
@@ -123,7 +127,7 @@ jobs:
         run: |
           cd webui && npm ci && npm run build
           cd ..
-          npx playwright test tests/e2e/pages-chat.spec.ts tests/e2e/failover-dual-endpoint.spec.ts tests/e2e/model-picker.spec.ts tests/e2e/message-actions.spec.ts
+          npx playwright test tests/e2e/pages-chat.spec.ts tests/e2e/failover-dual-endpoint.spec.ts tests/e2e/model-picker.spec.ts tests/e2e/message-actions.spec.ts tests/e2e/health-panel.spec.ts tests/e2e/turnstile-gate.spec.ts
 
       - name: Run live Pages chat e2e (real proxy)
         env:

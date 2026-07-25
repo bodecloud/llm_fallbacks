@@ -14,6 +14,8 @@ import { ModelExplorerPlugin } from "./plugins/model-explorer";
 import { ModelPickerPlugin } from "./plugins/model-picker";
 import { RoutingChipPlugin } from "./plugins/routing-chip";
 import { MessageActionsPlugin } from "./plugins/message-actions";
+import { StatusStripPlugin } from "./plugins/status-strip";
+import { TurnstileGatePlugin } from "./plugins/turnstile-gate";
 import { initModelSelection, setCatalogRef } from "./model-selection";
 import {
   ANALYTICS_EVENTS,
@@ -92,6 +94,8 @@ async function bootstrap(): Promise<void> {
       ModelPickerPlugin(),
       MessageActionsPlugin(),
       RoutingChipPlugin(),
+      StatusStripPlugin(),
+      TurnstileGatePlugin(),
       FailoverSettingsPlugin({
         provider,
         onConfigSaved: async () => {

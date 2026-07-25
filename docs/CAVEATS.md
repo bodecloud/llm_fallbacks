@@ -13,6 +13,8 @@ Honest limits for the public chat demo and the Python library.
 | **Backup server auth** | The browser sends the same guest token to every endpoint. The Worker accepts it; the Render backup may return 401 until a LiteLLM virtual key is set up. |
 | **Saved settings** | If you changed proxy URLs in the browser, old values stay in localStorage. Clear site data if the failover list looks wrong after an update. |
 | **Usage stats** | We count sessions and completions without storing message text. This is not full product analytics. |
+| **Routing headers** | The routing chip reads `x-llm-fallbacks-endpoint` and LiteLLM headers from proxy responses. After edge changes, redeploy the Worker (`Deploy Proxies` workflow) for production to expose them. |
+| **Turnstile** | Optional bot check when `TURNSTILE_SECRET` is set on the Worker and `turnstileSiteKey` is in `docs/config.js`. Skipped in local dev when secrets are absent. |
 
 ## Library and CI
 

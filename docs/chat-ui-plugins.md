@@ -32,6 +32,8 @@ Set `APP_VERSION` when building for cache busting (CI sets this from `github.sha
 | `model-picker` | Composer | Dropdown for `free`, `openrouter/free`, and top catalog models |
 | `routing-chip` | Messages | Endpoint / model / fallback metadata under assistant replies |
 | `message-actions` | Messages | Regenerate, edit user message; stop preserves partial output when present |
+| `status-strip` | Top bar | Proxy liveness dot + optional daily chat count from `/v1/metrics` |
+| `turnstile-gate` | Body (optional) | Cloudflare Turnstile widget when `turnstileSiteKey` is in config |
 
 Plugins register murm-ui hooks **and** optional slide panels via `registerShellPanel(id, initFn)` — see `webui/src/shell-panels.ts`.
 

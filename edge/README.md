@@ -37,6 +37,7 @@ Update `wrangler.toml` `MODEL_CHAIN` and `ALLOWED_MODELS`, or let CI set them fr
 ## Rate limits and allowlist
 
 - **Rate limits:** KV-backed per-IP caps (`RATE_LIMIT_PER_MINUTE`, `RATE_LIMIT_PER_DAY`). Returns HTTP 429 with `Retry-After`.
+- **Turnstile (optional):** Set `TURNSTILE_SECRET` via `wrangler secret put TURNSTILE_SECRET`. Chat requests require a valid `CF-Turnstile-Response` header or an existing KV pass (`ts:pass:{ip}`, TTL 1h). When the secret is unset, verification is skipped (local dev / CI).
 - **Model allowlist:** Explicit `model` values must appear in `ALLOWED_MODELS` or `MODEL_CHAIN`; alias `free` is always allowed.
 - **Guest token:** Public demo gate in `docs/config.js` — not user auth. Visible in view-source; CORS does not stop server-side abuse.
 
