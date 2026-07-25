@@ -3098,7 +3098,6 @@ function isSafeUrl(url, allowedPrefixes) {
 }
 
 // node_modules/murm-ui/dist/components/message-node.js
-var MARKDOWN_THROTTLE_MS = 70;
 var MessageNode = class {
   constructor(msg, config) {
     this.config = config;
@@ -3229,17 +3228,22 @@ var MessageNode = class {
         clearTimeout(state.timer);
         state.timer = void 0;
       }
+      state.plainEl = void 0;
       state.renderSeq++;
       void this.applyMarkdown(block.id, block.text, state.renderSeq);
       return;
     }
-    if (state.timer)
-      return;
-    state.timer = window.setTimeout(() => {
+    if (state.timer) {
+      clearTimeout(state.timer);
       state.timer = void 0;
-      state.renderSeq++;
-      void this.applyMarkdown(block.id, block.text, state.renderSeq);
-    }, MARKDOWN_THROTTLE_MS);
+    }
+    if (!state.plainEl) {
+      state.container.replaceChildren();
+      state.plainEl = document.createElement("div");
+      state.plainEl.className = "mur-streaming-text";
+      state.container.appendChild(state.plainEl);
+    }
+    state.plainEl.textContent = block.text;
   }
   renderFileBlock(block, container) {
     if (container.hasChildNodes())
@@ -5500,6 +5504,16 @@ function showRateLimitBanner(seconds) {
   const suffix = seconds !== void 0 && seconds > 0 ? ` Try again in ${seconds} second${seconds === 1 ? "" : "s"}.` : " Wait and try again.";
   mount.innerHTML = `<span class="lf-status-dot lf-status-warn" aria-hidden="true"></span><span class="lf-status-text">Rate limited.${suffix}</span>`;
 }
+function showStatusMessage(text, durationMs = 3500) {
+  const mount = document.getElementById("lfStatusStrip");
+  if (!mount) return;
+  mount.innerHTML = `<span class="lf-status-dot lf-status-ok" aria-hidden="true"></span><span class="lf-status-text">${text}</span>`;
+  window.setTimeout(() => {
+    if (mount.querySelector(".lf-status-text")?.textContent === text) {
+      void refreshStatusStrip(mount);
+    }
+  }, durationMs);
+}
 
 // src/providers/errors.ts
 var ChatRouteError = class extends Error {
@@ -6813,6 +6827,210 @@ function downloadBlob(filename, content, mime) {
   URL.revokeObjectURL(url);
 }
 
+// src/import-session.ts
+var ImportError = class extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ImportError";
+  }
+};
+function newMessage(role, text) {
+  const id = crypto.randomUUID();
+  const now = Date.now();
+  return {
+    id,
+    role,
+    blocks: [{ id: crypto.randomUUID(), type: "text", text }],
+    runId: id,
+    createdAt: now,
+    updatedAt: now
+  };
+}
+function parseJsonExport(text) {
+  let parsed;
+  try {
+    parsed = JSON.parse(text);
+  } catch {
+    throw new ImportError("Invalid JSON \u2014 could not parse file.");
+  }
+  if (!parsed || typeof parsed !== "object") {
+    throw new ImportError("Invalid JSON \u2014 expected an object with a messages array.");
+  }
+  const payload = parsed;
+  if (!Array.isArray(payload.messages) || payload.messages.length === 0) {
+    throw new ImportError("Invalid JSON \u2014 messages array is missing or empty.");
+  }
+  const messages = [];
+  for (const item of payload.messages) {
+    if (!item || typeof item !== "object") continue;
+    const role = item.role;
+    const msgText = typeof item.text === "string" ? item.text.trim() : "";
+    if (role !== "user" && role !== "assistant") {
+      throw new ImportError(`Invalid JSON \u2014 unknown role "${String(role)}".`);
+    }
+    if (!msgText) continue;
+    messages.push(newMessage(role, msgText));
+  }
+  if (messages.length === 0) {
+    throw new ImportError("No messages with text found in JSON export.");
+  }
+  return messages;
+}
+function parseMarkdownExport(text) {
+  const trimmed = text.trim();
+  if (!trimmed) {
+    throw new ImportError("Markdown file is empty.");
+  }
+  const sections = trimmed.split(/^##\s+(User|Assistant)\s*$/im);
+  if (sections.length < 3) {
+    throw new ImportError("Could not find ## User / ## Assistant headings in Markdown.");
+  }
+  const messages = [];
+  for (let i = 1; i < sections.length; i += 2) {
+    const roleLabel = sections[i]?.toLowerCase();
+    const content = (sections[i + 1] ?? "").trim();
+    if (!content) continue;
+    const role = roleLabel === "user" ? "user" : "assistant";
+    messages.push(newMessage(role, content));
+  }
+  if (messages.length === 0) {
+    throw new ImportError("No message content found under headings.");
+  }
+  return messages;
+}
+function parseExportText(text, filename) {
+  if (filename.toLowerCase().endsWith(".json")) {
+    return parseJsonExport(text);
+  }
+  return parseMarkdownExport(text);
+}
+async function importMessagesFromFile(file) {
+  const text = await file.text();
+  return parseExportText(text, file.name);
+}
+function importTitleFromFile(text, filename) {
+  if (filename.toLowerCase().endsWith(".json")) {
+    try {
+      const parsed = JSON.parse(text);
+      const title = parsed.title?.trim();
+      if (title) return title;
+    } catch {
+    }
+  }
+  const base = filename.replace(/\.(md|json)$/i, "");
+  const slug = base.replace(/^llm-fallbacks-/, "").replace(/-\d{4}-\d{2}-\d{2}$/, "");
+  return slug.replace(/-/g, " ").trim() || void 0;
+}
+
+// src/plugins/shortcuts-sheet/index.ts
+var HINT_KEY = "llm_fallbacks_shortcuts_hint_dismissed";
+var SHORTCUTS = [
+  { keys: "Enter", action: "Send message" },
+  { keys: "Shift + Enter", action: "New line in composer" },
+  { keys: "Esc", action: "Stop generation (when streaming)" },
+  { keys: "/", action: "Focus composer" },
+  { keys: "?", action: "Show this shortcuts sheet" }
+];
+function isTypingTarget(target) {
+  if (!(target instanceof HTMLElement)) return false;
+  const tag = target.tagName;
+  return tag === "INPUT" || tag === "TEXTAREA" || target.isContentEditable;
+}
+function ensureModal() {
+  let modal = document.getElementById("lfShortcutsModal");
+  if (modal) return modal;
+  modal = document.createElement("div");
+  modal.id = "lfShortcutsModal";
+  modal.className = "lf-shortcuts-modal";
+  modal.hidden = true;
+  modal.innerHTML = `
+    <div class="lf-shortcuts-backdrop" data-close="true"></div>
+    <div class="lf-shortcuts-panel" role="dialog" aria-labelledby="lfShortcutsTitle" aria-modal="true">
+      <header class="lf-shortcuts-header">
+        <h2 id="lfShortcutsTitle">Keyboard shortcuts</h2>
+        <button type="button" class="lf-shortcuts-close" aria-label="Close">\xD7</button>
+      </header>
+      <ul class="lf-shortcuts-list"></ul>
+    </div>
+  `;
+  const list = modal.querySelector(".lf-shortcuts-list");
+  for (const { keys, action } of SHORTCUTS) {
+    const li = document.createElement("li");
+    li.innerHTML = `<kbd>${keys}</kbd><span>${action}</span>`;
+    list.appendChild(li);
+  }
+  document.body.appendChild(modal);
+  return modal;
+}
+function openModal() {
+  const modal = ensureModal();
+  modal.hidden = false;
+  modal.querySelector(".lf-shortcuts-close")?.focus();
+}
+function closeModal() {
+  const modal = document.getElementById("lfShortcutsModal");
+  if (modal) modal.hidden = true;
+}
+function ensureHint() {
+  let hint = document.getElementById("lfShortcutsHint");
+  if (hint) return hint;
+  hint = document.createElement("div");
+  hint.id = "lfShortcutsHint";
+  hint.className = "lf-shortcuts-hint";
+  hint.innerHTML = `
+    <span>Tip: press <kbd>?</kbd> for keyboard shortcuts</span>
+    <button type="button" class="lf-shortcuts-hint-dismiss" aria-label="Dismiss">\xD7</button>
+  `;
+  const mount = document.getElementById("chatMount");
+  if (mount) {
+    mount.appendChild(hint);
+  } else {
+    document.body.appendChild(hint);
+  }
+  return hint;
+}
+function ShortcutsSheetPlugin() {
+  return {
+    name: "shortcuts-sheet",
+    onMount() {
+      ensureModal();
+      const modal = document.getElementById("lfShortcutsModal");
+      modal.addEventListener("click", (e) => {
+        const target = e.target;
+        if (target.dataset.close || target.classList.contains("lf-shortcuts-close")) {
+          closeModal();
+        }
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeModal();
+          return;
+        }
+        if (e.key === "?" && !e.ctrlKey && !e.metaKey && !e.altKey && !isTypingTarget(e.target)) {
+          e.preventDefault();
+          openModal();
+        }
+      });
+      if (localStorage.getItem(HINT_KEY) !== "1") {
+        const hint = ensureHint();
+        hint.hidden = false;
+        hint.querySelector(".lf-shortcuts-hint-dismiss")?.addEventListener("click", () => {
+          hint.hidden = true;
+          localStorage.setItem(HINT_KEY, "1");
+        });
+      }
+      const footerLink = document.createElement("button");
+      footerLink.type = "button";
+      footerLink.className = "lf-shortcuts-footer-link";
+      footerLink.textContent = "Shortcuts";
+      footerLink.title = "Keyboard shortcuts (?)";
+      footerLink.addEventListener("click", () => openModal());
+      const credits = document.querySelector(".credits-actions");
+      credits?.appendChild(footerLink);
+    }
+  };
+}
+
 // src/main.ts
 async function loadCatalog(config) {
   let catalog = [];
@@ -6860,6 +7078,38 @@ async function bootstrap() {
   provider.setCatalog(catalog, providerUrls);
   let catalogRef2 = catalog;
   let providerUrlsRef = providerUrls;
+  const importInput = document.createElement("input");
+  importInput.type = "file";
+  importInput.accept = ".md,.json,text/markdown,application/json";
+  importInput.hidden = true;
+  document.body.appendChild(importInput);
+  let importEngine = null;
+  importInput.addEventListener("change", async () => {
+    const file = importInput.files?.[0];
+    importInput.value = "";
+    if (!file || !importEngine) return;
+    if (importEngine.state.generatingMessageId) {
+      showStatusMessage("Wait for the current reply to finish before importing.");
+      return;
+    }
+    try {
+      const text = await file.text();
+      const messages = await importMessagesFromFile(file);
+      await importEngine.sessions.create();
+      const ok = await importEngine.setMessages(messages);
+      if (!ok) {
+        throw new ImportError("Could not import while a reply is generating.");
+      }
+      const title = importTitleFromFile(text, file.name);
+      if (title) {
+        await importEngine.sessions.updateTitle(importEngine.state.currentSessionId, title);
+      }
+      showStatusMessage(`Imported ${messages.length} message${messages.length === 1 ? "" : "s"}.`);
+    } catch (err) {
+      const msg = err instanceof ImportError ? err.message : "Import failed.";
+      showStatusMessage(msg);
+    }
+  });
   const ui = new ChatUI({
     container: "#chatMount",
     provider,
@@ -6905,6 +7155,28 @@ async function bootstrap() {
               "application/json;charset=utf-8"
             );
           }
+        },
+        {
+          id: "import-conversation",
+          label: "Import conversation",
+          disabled: ctx.engine.state.generatingMessageId !== null,
+          onClick: () => {
+            importInput.click();
+          }
+        },
+        {
+          id: "copy-session-link",
+          label: "Copy session link",
+          onClick: async () => {
+            const hash = `#/chat/${encodeURIComponent(ctx.session.id)}`;
+            const url = `${window.location.origin}${window.location.pathname}${window.location.search}${hash}`;
+            try {
+              await navigator.clipboard.writeText(url);
+              showStatusMessage("Session link copied (local browser only).");
+            } catch {
+              window.prompt("Copy session link:", url);
+            }
+          }
         }
       ];
     },
@@ -6935,9 +7207,11 @@ async function bootstrap() {
       ModelExplorerPlugin({
         getCatalog: () => catalogRef2,
         getCatalogUrl: () => readRuntimeConfig().catalogUrl
-      })
+      }),
+      ShortcutsSheetPlugin()
     ]
   });
+  importEngine = ui.engine;
   wireChatInputIds(document.querySelector("#chatMount"));
   const observer = new MutationObserver(() => wireChatInputIds(document.querySelector("#chatMount")));
   observer.observe(document.querySelector("#chatMount"), { childList: true, subtree: true });
