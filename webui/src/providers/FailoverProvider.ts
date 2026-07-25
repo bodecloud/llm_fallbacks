@@ -33,6 +33,7 @@ import {
 } from "./tiers/searxng-discovery-tier";
 import { loadProviderTierSettings } from "./tiers/settings";
 import { TierOrchestratorError, TierSkipError } from "./tiers/types";
+import { streamFromWebRunner } from "./tiers/web-ui-tier";
 
 type StatusListener = (status: string) => void;
 
@@ -323,14 +324,40 @@ export class FailoverProvider implements ChatProvider {
   }
 
   private async streamWebUiRoute(
-    _request: ChatRequest,
-    _onEvent: (event: StreamEvent) => void
+    request: ChatRequest,
+    onEvent: (event: StreamEvent) => void
   ): Promise<void> {
     const settings = loadProviderTierSettings();
     if (!settings.webRunnerUrl) {
       throw webUiTierUnavailable();
     }
-    throw new Error("Web UI tier runner is not connected yet.");
+    const { model, body, plainMessages, hasImage } = this.buildChatBody(request);
+    if (hasImage) {
+      throw new TierSkipError(
+        "web_ui",
+        "The web runner does not support image attachments — using the proxy tier."
+      );
+    }
+    this.setStatus(`web runner: ${settings.webRunnerUrl} …`);
+    let metaSet = false;
+    await streamFromWebRunner({
+      runnerUrl: settings.webRunnerUrl,
+      model,
+      messages: plainMessages,
+      maxTokens: body.max_tokens as number,
+      signal: request.signal,
+      onEvent: (event) => {
+        // Record the route once the runner actually starts streaming, so a
+        // pre-stream failure never leaves stale web_ui routing metadata.
+        if (!metaSet) {
+          metaSet = true;
+          this.lastRoute = `web_ui/${settings.webRunnerUrl}`;
+          window.LLM_FALLBACKS_ROUTE = this.lastRoute;
+          setLastCompletionMeta({ endpoint: this.lastRoute, fallbackCount: 0 });
+        }
+        onEvent(event);
+      },
+    });
   }
 
   private async streamSearxngDiscoveryRoute(

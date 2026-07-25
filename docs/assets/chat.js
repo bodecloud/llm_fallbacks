@@ -6317,6 +6317,60 @@ function broadcastDiscoveryResults(candidates) {
   );
 }
 
+// src/providers/tiers/web-ui-tier.ts
+var WebRunnerNotConfiguredError = class extends Error {
+  constructor(runnerUrl, detail) {
+    super(
+      `Web runner at ${runnerUrl} has no adapter configured (${detail}). Set up runner/runner.config.json \u2014 see runner/README.md.`
+    );
+    this.name = "WebRunnerNotConfiguredError";
+  }
+};
+var WebRunnerUnavailableError = class extends Error {
+  constructor(runnerUrl, cause) {
+    super(
+      `Web runner at ${runnerUrl} is unreachable (${cause}). Check that the runner is started and the URL in Tiers settings is correct.`
+    );
+    this.name = "WebRunnerUnavailableError";
+  }
+};
+function runnerChatUrl(runnerUrl) {
+  return `${runnerUrl.replace(/\/$/, "")}/v1/chat/completions`;
+}
+async function streamFromWebRunner(options) {
+  const doFetch = options.fetchImpl ?? fetch;
+  let res;
+  try {
+    res = await doFetch(runnerChatUrl(options.runnerUrl), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: options.model,
+        messages: options.messages,
+        max_tokens: options.maxTokens,
+        stream: true
+      }),
+      signal: options.signal
+    });
+  } catch (err) {
+    if (options.signal.aborted) throw err;
+    const cause = err instanceof Error ? err.message : String(err);
+    throw new WebRunnerUnavailableError(options.runnerUrl, cause || "network/CORS error");
+  }
+  if (res.status === 501) {
+    const bodyText = await res.text();
+    throw new WebRunnerNotConfiguredError(options.runnerUrl, bodyText.slice(0, 160) || "HTTP 501");
+  }
+  if (!res.ok) {
+    const bodyText = await res.text();
+    throw new WebRunnerUnavailableError(
+      options.runnerUrl,
+      `HTTP ${res.status} \u2014 ${bodyText.slice(0, 160)}`
+    );
+  }
+  await emitOpenAiSseAsStreamEvents(res, options.onEvent);
+}
+
 // src/providers/FailoverProvider.ts
 function endpointUrl(base) {
   const trimmed = base.replace(/\/$/, "");
@@ -6536,12 +6590,36 @@ var FailoverProvider = class {
     const { config, body } = this.buildChatBody(request);
     await this.streamProxyFallback(body, config, onEvent, request.signal);
   }
-  async streamWebUiRoute(_request, _onEvent) {
+  async streamWebUiRoute(request, onEvent) {
     const settings = loadProviderTierSettings();
     if (!settings.webRunnerUrl) {
       throw webUiTierUnavailable();
     }
-    throw new Error("Web UI tier runner is not connected yet.");
+    const { model, body, plainMessages, hasImage } = this.buildChatBody(request);
+    if (hasImage) {
+      throw new TierSkipError(
+        "web_ui",
+        "The web runner does not support image attachments \u2014 using the proxy tier."
+      );
+    }
+    this.setStatus(`web runner: ${settings.webRunnerUrl} \u2026`);
+    let metaSet = false;
+    await streamFromWebRunner({
+      runnerUrl: settings.webRunnerUrl,
+      model,
+      messages: plainMessages,
+      maxTokens: body.max_tokens,
+      signal: request.signal,
+      onEvent: (event) => {
+        if (!metaSet) {
+          metaSet = true;
+          this.lastRoute = `web_ui/${settings.webRunnerUrl}`;
+          window.LLM_FALLBACKS_ROUTE = this.lastRoute;
+          setLastCompletionMeta({ endpoint: this.lastRoute, fallbackCount: 0 });
+        }
+        onEvent(event);
+      }
+    });
   }
   async streamSearxngDiscoveryRoute(request, _onEvent) {
     const settings = loadProviderTierSettings();
