@@ -1,4 +1,5 @@
 import type { ChatRequest, StreamEvent } from "murm-ui";
+import { classifyHopError, type RouteTrace } from "../route-trace";
 import { loadProviderTierSettings } from "./settings";
 import type { TierAttempt, TierId } from "./types";
 import { TierOrchestratorError, TierSkipError } from "./types";
@@ -19,7 +20,10 @@ function formatAttemptError(err: unknown): string {
 }
 
 export class TierOrchestrator {
-  constructor(private readonly handlers: TierHandlers) {}
+  constructor(
+    private readonly handlers: TierHandlers,
+    private readonly trace?: RouteTrace
+  ) {}
 
   async streamChat(
     request: ChatRequest,
@@ -36,13 +40,33 @@ export class TierOrchestrator {
 
       try {
         await handler(request, onEvent);
+        // Handlers like proxy_failover may already have recorded endpoint hops.
+        if (this.trace && !this.trace.hasTier(entry.id)) {
+          this.trace.record({ tier: entry.id, outcome: "success" });
+        }
         return;
       } catch (err) {
         if (err instanceof TierSkipError) {
           attempts.push({ tier: entry.id, error: err.message });
+          this.trace?.record({
+            tier: entry.id,
+            outcome: "skip",
+            errorClass: "skip",
+            reason: err.message,
+          });
           continue;
         }
         attempts.push({ tier: entry.id, error: formatAttemptError(err) });
+        // Proxy loop records its own endpoint hops; only add a tier-level error
+        // when the handler left no trail for this tier.
+        if (this.trace && !this.trace.hasTier(entry.id)) {
+          this.trace.record({
+            tier: entry.id,
+            outcome: "error",
+            errorClass: classifyHopError(err),
+            reason: formatAttemptError(err),
+          });
+        }
         if (request.signal.aborted) throw err;
       }
     }

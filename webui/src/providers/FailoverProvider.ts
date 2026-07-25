@@ -19,7 +19,12 @@ import {
   messagesToPlainText,
   modelSupportsVision,
 } from "./message-openai";
-import { setLastCompletionMeta, type CompletionMeta } from "./routing-metadata";
+import { classifyHopError, RouteTrace } from "./route-trace";
+import {
+  getLastCompletionMeta,
+  setLastCompletionMeta,
+  type CompletionMeta,
+} from "./routing-metadata";
 import { emitOpenAiSseAsStreamEvents, emitTextAsStreamEvents } from "./sse";
 import {
   TierOrchestrator,
@@ -100,6 +105,9 @@ export class FailoverProvider implements ChatProvider {
   private providerUrls: Record<string, string> = {};
   private statusListeners = new Set<StatusListener>();
   private lastRoute = "";
+  /** Active per-request hop trail (Wave 6A). */
+  private activeTrace: RouteTrace | null = null;
+  private requestStartedAt = 0;
 
   constructor(initialConfig?: AppConfig) {
     this.config = initialConfig || readRuntimeConfig();
@@ -197,21 +205,42 @@ export class FailoverProvider implements ChatProvider {
     let lastError = "All proxy endpoints failed";
     let hopIndex = 0;
     let lastRateLimit: RateLimitInfo | undefined;
+    const proxyBody = {
+      ...body,
+      // Ask proxies for a trailing usage chunk when supported (R58/R64).
+      stream_options: { include_usage: true },
+    };
     for (const base of config.endpoints) {
       this.setStatus(`proxy: ${base} …`);
       try {
-        const res = await this.chatViaProxy(base, body, config.guestToken, signal);
+        const res = await this.chatViaProxy(base, proxyBody, config.guestToken, signal);
         if (res.ok) {
           this.lastRoute = `proxy/${base}`;
           window.LLM_FALLBACKS_ROUTE = this.lastRoute;
           const headerMeta = readRoutingHeaders(res);
+          const endpoint = endpointLabel(base, res);
+          const timing = await emitOpenAiSseAsStreamEvents(
+            res,
+            onEvent,
+            this.requestStartedAt || performance.now()
+          );
+          this.activeTrace?.record({
+            tier: "proxy_failover",
+            endpoint,
+            model: headerMeta.modelHeader,
+            outcome: "success",
+            hopIndex,
+          });
           setLastCompletionMeta({
-            endpoint: endpointLabel(base, res),
+            endpoint,
             modelHeader: headerMeta.modelHeader,
             fallbackCount: hopIndex,
             durationMs: headerMeta.durationMs,
+            trace: this.activeTrace?.snapshot(),
+            usage: timing.usage,
+            ttftMs: timing.ttftMs,
+            totalMs: timing.totalMs,
           });
-          await emitOpenAiSseAsStreamEvents(res, onEvent);
           return;
         }
         if (!res.ok) {
@@ -222,6 +251,18 @@ export class FailoverProvider implements ChatProvider {
             (res.status === 429 ? parseRetryAfterFromBody(errText) : undefined);
           const rateScope = res.status === 429 ? parseRateLimitScopeFromBody(errText) : undefined;
           lastError = `${base}: HTTP ${res.status} — ${errText.slice(0, 160)}`;
+          const mapped = mapHttpError(res.status, errText, base, {
+            retryAfterSeconds: retryAfter,
+            scope: rateScope,
+          });
+          this.activeTrace?.record({
+            tier: "proxy_failover",
+            endpoint: base,
+            outcome: "error",
+            errorClass: mapped.kind,
+            reason: mapped.message,
+            hopIndex,
+          });
           if (res.status === 429) {
             lastRateLimit = {
               retryAfterSeconds: retryAfter,
@@ -230,18 +271,22 @@ export class FailoverProvider implements ChatProvider {
             showRateLimitBanner(retryAfter);
           }
           if (!RETRYABLE.has(res.status)) {
-            throw mapHttpError(res.status, errText, base, {
-              retryAfterSeconds: retryAfter,
-              scope: rateScope,
-            });
+            throw mapped;
           }
         }
       } catch (err) {
         if (signal.aborted) throw err;
-        if (err instanceof ChatRouteError) {
-          throw err;
-        }
+        // Non-retryable HTTP errors are already recorded above before throw.
+        if (err instanceof ChatRouteError) throw err;
         lastError = `${base}: ${err instanceof Error ? err.message : String(err)}`;
+        this.activeTrace?.record({
+          tier: "proxy_failover",
+          endpoint: base,
+          outcome: "error",
+          errorClass: classifyHopError(err),
+          reason: lastError,
+          hopIndex,
+        });
       }
       hopIndex += 1;
     }
@@ -308,9 +353,15 @@ export class FailoverProvider implements ChatProvider {
     });
     this.lastRoute = result.route;
     window.LLM_FALLBACKS_ROUTE = this.lastRoute;
+    const totalMs = this.requestStartedAt
+      ? Math.max(0, performance.now() - this.requestStartedAt)
+      : undefined;
     setLastCompletionMeta({
       endpoint: result.route,
       fallbackCount: 0,
+      trace: this.activeTrace?.snapshot(),
+      ttftMs: totalMs,
+      totalMs,
     });
     emitTextAsStreamEvents(result.content, onEvent);
   }
@@ -353,7 +404,16 @@ export class FailoverProvider implements ChatProvider {
           metaSet = true;
           this.lastRoute = `web_ui/${settings.webRunnerUrl}`;
           window.LLM_FALLBACKS_ROUTE = this.lastRoute;
-          setLastCompletionMeta({ endpoint: this.lastRoute, fallbackCount: 0 });
+          const totalMs = this.requestStartedAt
+            ? Math.max(0, performance.now() - this.requestStartedAt)
+            : undefined;
+          setLastCompletionMeta({
+            endpoint: this.lastRoute,
+            fallbackCount: 0,
+            trace: this.activeTrace?.snapshot(),
+            ttftMs: totalMs,
+            totalMs,
+          });
         }
         onEvent(event);
       },
@@ -397,27 +457,43 @@ export class FailoverProvider implements ChatProvider {
       }
     }
 
-    const orchestrator = new TierOrchestrator({
-      qualityApi: (req, onEv) =>
-        this.streamWithCompletionTracking((inner) => this.streamQualityApiRoute(req, inner), onEv),
-      webUi: (req, onEv) =>
-        this.streamWithCompletionTracking((inner) => this.streamWebUiRoute(req, inner), onEv),
-      searxngDiscovery: (req, onEv) =>
-        this.streamWithCompletionTracking(
-          (inner) => this.streamSearxngDiscoveryRoute(req, inner),
-          onEv
-        ),
-      proxyFailover: (req, onEv) =>
-        this.streamWithCompletionTracking((inner) => this.streamProxyFailoverRoute(req, inner), onEv),
-    });
+    this.activeTrace = new RouteTrace();
+    this.requestStartedAt = performance.now();
+    const orchestrator = new TierOrchestrator(
+      {
+        qualityApi: (req, onEv) =>
+          this.streamWithCompletionTracking((inner) => this.streamQualityApiRoute(req, inner), onEv),
+        webUi: (req, onEv) =>
+          this.streamWithCompletionTracking((inner) => this.streamWebUiRoute(req, inner), onEv),
+        searxngDiscovery: (req, onEv) =>
+          this.streamWithCompletionTracking(
+            (inner) => this.streamSearxngDiscoveryRoute(req, inner),
+            onEv
+          ),
+        proxyFailover: (req, onEv) =>
+          this.streamWithCompletionTracking(
+            (inner) => this.streamProxyFailoverRoute(req, inner),
+            onEv
+          ),
+      },
+      this.activeTrace
+    );
 
     try {
       await orchestrator.streamChat(request, onEvent);
+      // Handlers set meta mid-flight; refresh with the final hop trail after
+      // the orchestrator records the winning tier success (if it owns that hop).
+      const meta = getLastCompletionMeta();
+      if (meta && this.activeTrace) {
+        setLastCompletionMeta({ ...meta, trace: this.activeTrace.snapshot() });
+      }
     } catch (err) {
       if (err instanceof TierOrchestratorError) {
         throw this.mapTierFailure(err);
       }
       throw err;
+    } finally {
+      this.activeTrace = null;
     }
   }
 
@@ -425,6 +501,17 @@ export class FailoverProvider implements ChatProvider {
   // surfacing which tiers were tried and their last error (R40). A no-attempt
   // failure means every tier skipped or none were enabled.
   private mapTierFailure(err: TierOrchestratorError): Error {
+    // Attach the hop trail so UI can still show what was tried on total failure.
+    if (this.activeTrace && this.activeTrace.length > 0) {
+      setLastCompletionMeta({
+        endpoint: "—",
+        fallbackCount: Math.max(0, this.activeTrace.length - 1),
+        trace: this.activeTrace.snapshot(),
+        totalMs: this.requestStartedAt
+          ? Math.max(0, performance.now() - this.requestStartedAt)
+          : undefined,
+      });
+    }
     if (err.attempts.length === 0) {
       return mapProxyChainFailure(
         "No chat routes are available yet. Enable a provider tier in Settings, or wait for the demo proxy to finish deploying."

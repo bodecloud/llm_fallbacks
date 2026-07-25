@@ -33,7 +33,8 @@ Set `APP_VERSION` when building for cache busting (CI sets this from `github.sha
 | `discovery-picklist` | Above composer | SearXNG-discovered free chat links (manual open only, dismissible) |
 | `model-explorer` | Models | Filter/sort `free_models.json`; **Use for chat** sets session model |
 | `model-picker` | Composer | Dropdown for `free`, `openrouter/free`, and top catalog models |
-| `routing-chip` | Messages | Endpoint / model / fallback metadata under assistant replies |
+| `routing-chip` | Messages | Expandable failover timeline + usage/latency badge under assistant replies |
+| `session-usage` | Above composer | Client-side session totals (tokens when exposed + wall time) |
 | `message-actions` | Messages | Regenerate, edit user message; stop preserves partial output when present |
 | `status-strip` | Top bar | Proxy liveness dot + optional daily chat count from `/v1/metrics` |
 | `turnstile-gate` | Body (optional) | Cloudflare Turnstile widget when `turnstileSiteKey` is in config |
@@ -44,6 +45,8 @@ Wave 3 adds **catalog enrichment** (context + capability badges in Models panel 
 Wave 4 adds **streaming polish** (plain-text tail during SSE, full markdown on completion — `patch-package` on murm-ui), **conversation import** (symmetry with export), **copy session link**, empty-state copy, and the shortcuts sheet.
 
 Wave 4B adds **provider tiers** (omnifail route stack in the Tiers panel), **image attachments** (composer tray → multimodal proxy requests), **compare mode** (two-column dual streams), **SearXNG discovery** (suggested free chat links when the tier is enabled — never automated), and an **opt-in local web-UI runner** (`runner/` — OpenAI-shaped SSE over user-configured adapters, see `runner/README.md`).
+
+Wave 6A expands the routing chip into a **failover timeline** (ordered hop attempts with tier skip reasons) and adds a per-reply **usage/latency badge** plus a **session totals** row. Token counts appear only when the route exposes them — never fabricated.
 
 ## Session export, import, and hash links
 

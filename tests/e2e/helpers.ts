@@ -25,6 +25,88 @@ export function mockProxySse(content: string): string {
   return body;
 }
 
+/** SSE body with a trailing usage chunk (Wave 6A / R58). */
+export function mockProxySseWithUsage(
+  content: string,
+  usage: { prompt_tokens: number; completion_tokens: number; total_tokens: number } = {
+    prompt_tokens: 12,
+    completion_tokens: 4,
+    total_tokens: 16,
+  }
+): string {
+  let body = mockProxySse(content);
+  // Insert usage before [DONE].
+  body = body.replace(
+    "data: [DONE]\n\n",
+    `data: ${JSON.stringify({ usage })}\n\ndata: [DONE]\n\n`
+  );
+  return body;
+}
+
+/** Dual-endpoint mock: first 503, second succeeds with usage-bearing SSE. */
+export async function installFailoverTimelineMocks(
+  page: Page,
+  reply = "failover timeline reply"
+): Promise<void> {
+  await page.route("**/config.js*", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/javascript",
+      body:
+        "window.LLM_FALLBACKS_CONFIG = " +
+        JSON.stringify({
+          endpoints: [PRIMARY_FAIL_PROXY],
+          guestToken: "llm-fallbacks-public",
+          defaultModel: "free",
+          catalogUrl:
+            "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/free_models.json",
+          providerUrlsUrl:
+            "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/provider_urls.json",
+          chatProxyUrl:
+            "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/chat_proxy.json",
+          maxTokens: 512,
+        }) +
+        ";",
+    });
+  });
+
+  await page.route("**/chat_proxy.json", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        endpoints: [PRIMARY_FAIL_PROXY, SECONDARY_OK_PROXY],
+        guestToken: "llm-fallbacks-public",
+      }),
+    });
+  });
+
+  await page.route("**/free_models.json", async (route) => {
+    await route.fulfill({ status: 200, contentType: "application/json", body: "[]" });
+  });
+  await page.route("**/provider_urls.json", async (route) => {
+    await route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
+  });
+
+  await page.route(`${PRIMARY_FAIL_PROXY}/v1/chat/completions`, async (route) => {
+    await route.fulfill({ status: 503, body: "upstream unavailable" });
+  });
+
+  await page.route(`${SECONDARY_OK_PROXY}/v1/chat/completions`, async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "text/event-stream; charset=utf-8",
+      headers: {
+        "x-litellm-model-name": "openrouter/free",
+        "x-llm-fallbacks-endpoint": "secondary-ok.test",
+        "Access-Control-Expose-Headers":
+          "x-litellm-model-name,x-llm-fallbacks-endpoint",
+      },
+      body: mockProxySseWithUsage(reply),
+    });
+  });
+}
+
 export async function installDemoProxyMock(page: Page, reply = "42 — zero-config proxy reply") {
   await page.route(`${DEMO_PROXY}/v1/chat/completions`, async (route) => {
     await route.fulfill({
