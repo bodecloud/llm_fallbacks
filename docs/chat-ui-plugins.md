@@ -30,6 +30,7 @@ Set `APP_VERSION` when building for cache busting (CI sets this from `github.sha
 | `byok-settings` | Your keys | Optional provider API keys (`localStorage` only) |
 | `tier-settings` | Tiers | Ordered omnifail route stack (enable/reorder + optional runner/SearXNG URLs) |
 | `compare-mode` | Composer toggle | Two-column model compare (same prompt → dual proxy/BYOK streams) |
+| `discovery-picklist` | Above composer | SearXNG-discovered free chat links (manual open only, dismissible) |
 | `model-explorer` | Models | Filter/sort `free_models.json`; **Use for chat** sets session model |
 | `model-picker` | Composer | Dropdown for `free`, `openrouter/free`, and top catalog models |
 | `routing-chip` | Messages | Endpoint / model / fallback metadata under assistant replies |
@@ -42,7 +43,7 @@ Wave 3 adds **catalog enrichment** (context + capability badges in Models panel 
 
 Wave 4 adds **streaming polish** (plain-text tail during SSE, full markdown on completion — `patch-package` on murm-ui), **conversation import** (symmetry with export), **copy session link**, empty-state copy, and the shortcuts sheet.
 
-Wave 4B adds **provider tiers** (omnifail route stack in the Tiers panel), **image attachments** (composer tray → multimodal proxy requests), and (planned) compare mode / optional local runner + SearXNG.
+Wave 4B adds **provider tiers** (omnifail route stack in the Tiers panel), **image attachments** (composer tray → multimodal proxy requests), **compare mode** (two-column dual streams), **SearXNG discovery** (suggested free chat links when the tier is enabled — never automated), and (planned) an optional local web-UI runner.
 
 ## Session export, import, and hash links
 

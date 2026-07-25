@@ -13,6 +13,7 @@ import { FailoverSettingsPlugin } from "./plugins/failover-settings";
 import { ByokSettingsPlugin } from "./plugins/byok-settings";
 import { TierSettingsPlugin } from "./plugins/tier-settings";
 import { CompareModePlugin } from "./plugins/compare-mode";
+import { DiscoveryPicklistPlugin } from "./plugins/discovery-picklist";
 import { ModelExplorerPlugin } from "./plugins/model-explorer";
 import { ModelPickerPlugin } from "./plugins/model-picker";
 import { RoutingChipPlugin } from "./plugins/routing-chip";
@@ -248,6 +249,7 @@ async function bootstrap(): Promise<void> {
         provider,
         getCatalog: () => catalogRef,
       }),
+      DiscoveryPicklistPlugin(),
       ModelExplorerPlugin({
         getCatalog: () => catalogRef,
         getCatalogUrl: () => readRuntimeConfig().catalogUrl,

@@ -100,6 +100,48 @@ describe("FailoverProvider tier routing", () => {
     });
   });
 
+  it("searxng discovery suggests links then chain falls through to proxy (R39/R43)", async () => {
+    const { STORAGE_KEYS, saveJson } = await import("../storage-keys");
+    saveJson(STORAGE_KEYS.providerTiers, {
+      tiers: [
+        { id: "quality_api", enabled: true },
+        { id: "web_ui", enabled: false },
+        { id: "searxng_discovery", enabled: true },
+        { id: "proxy_failover", enabled: true },
+      ],
+      webRunnerUrl: "",
+      searxngUrl: "http://searx.test",
+    });
+
+    const fetchMock = vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input);
+      if (url.startsWith("http://searx.test")) {
+        return new Response(
+          JSON.stringify({
+            results: [
+              { url: "https://chat.example.com", title: "Example AI chat", content: "free chat" },
+            ],
+          }),
+          { status: 200 }
+        );
+      }
+      return sseResponse([
+        JSON.stringify({ choices: [{ delta: { content: "proxy answer" } }] }),
+        JSON.stringify({ choices: [{ finish_reason: "stop" }] }),
+      ]);
+    });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const provider = new FailoverProvider(config);
+    const events: StreamEvent[] = [];
+    await provider.streamChat(request(), (e) => events.push(e));
+
+    expect(collectDeltas(events)).toBe("proxy answer");
+    expect(provider.getLastRoute()).toMatch(/^proxy\//);
+    const urls = fetchMock.mock.calls.map((c) => String(c[0]));
+    expect(urls.some((u) => u.startsWith("http://searx.test/search"))).toBe(true);
+  });
+
   it("blocks an image attachment on a non-vision model (R29)", async () => {
     const fetchMock = vi.fn();
     vi.stubGlobal("fetch", fetchMock);

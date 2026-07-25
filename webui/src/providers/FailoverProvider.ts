@@ -27,6 +27,10 @@ import {
   searxngTierUnavailable,
   webUiTierUnavailable,
 } from "./tiers/orchestrator";
+import {
+  broadcastDiscoveryResults,
+  searchFreeChatCandidates,
+} from "./tiers/searxng-discovery-tier";
 import { loadProviderTierSettings } from "./tiers/settings";
 import { TierOrchestratorError, TierSkipError } from "./tiers/types";
 
@@ -330,14 +334,26 @@ export class FailoverProvider implements ChatProvider {
   }
 
   private async streamSearxngDiscoveryRoute(
-    _request: ChatRequest,
+    request: ChatRequest,
     _onEvent: (event: StreamEvent) => void
   ): Promise<void> {
     const settings = loadProviderTierSettings();
     if (!settings.searxngUrl) {
       throw searxngTierUnavailable();
     }
-    throw new Error("SearXNG discovery tier is not connected yet.");
+    this.setStatus("searxng: searching for free chat sites …");
+    const candidates = await searchFreeChatCandidates({
+      searxngUrl: settings.searxngUrl,
+      signal: request.signal,
+    });
+    broadcastDiscoveryResults(candidates);
+    // Discovery suggests links (R39) — it cannot answer the prompt itself.
+    // Record a descriptive attempt so the orchestrator moves to the next tier.
+    throw new Error(
+      `SearXNG found ${candidates.length} candidate chat site${
+        candidates.length === 1 ? "" : "s"
+      } — see suggestions below the chat.`
+    );
   }
 
   async streamChat(request: ChatRequest, onEvent: (event: StreamEvent) => void): Promise<void> {

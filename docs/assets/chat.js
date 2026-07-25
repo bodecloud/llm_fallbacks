@@ -6227,6 +6227,96 @@ function searxngTierUnavailable() {
   return new TierSkipError("searxng_discovery", "SearXNG discovery is not configured.");
 }
 
+// src/providers/tiers/searxng-discovery-tier.ts
+var DiscoveryEmptyError = class extends Error {
+  constructor(query) {
+    super(`SearXNG returned no candidate free chat sites for "${query}".`);
+    this.name = "DiscoveryEmptyError";
+  }
+};
+var DiscoveryUnavailableError = class extends Error {
+  constructor(endpoint, cause) {
+    super(
+      `SearXNG at ${endpoint} is unreachable (${cause}). Check the URL in Tiers settings and that the instance allows browser requests (CORS).`
+    );
+    this.name = "DiscoveryUnavailableError";
+  }
+};
+var DEFAULT_DISCOVERY_QUERY = "free AI chat online no signup";
+var CHAT_HINT_RE = /\b(chat|gpt|assistant|llm|ai)\b/i;
+var EXCLUDED_HOST_RE = /(^|\.)(wikipedia\.org|youtube\.com|reddit\.com|github\.com|medium\.com|x\.com|twitter\.com|facebook\.com|linkedin\.com)$/i;
+var MAX_CANDIDATES = 6;
+function hostOf(url) {
+  try {
+    return new URL(url).hostname;
+  } catch {
+    return null;
+  }
+}
+function filterChatCandidates(results) {
+  const seenHosts = /* @__PURE__ */ new Set();
+  const candidates = [];
+  for (const result of results) {
+    const url = result.url?.trim() ?? "";
+    if (!url.startsWith("https://")) continue;
+    const host = hostOf(url);
+    if (!host || seenHosts.has(host) || EXCLUDED_HOST_RE.test(host)) continue;
+    const haystack = `${url} ${result.title ?? ""} ${result.content ?? ""}`;
+    if (!CHAT_HINT_RE.test(haystack)) continue;
+    seenHosts.add(host);
+    candidates.push({
+      url,
+      title: result.title?.trim() || host,
+      snippet: (result.content ?? "").trim().slice(0, 200)
+    });
+    if (candidates.length >= MAX_CANDIDATES) break;
+  }
+  return candidates;
+}
+function discoverySearchUrl(searxngUrl, query) {
+  const base = searxngUrl.replace(/\/$/, "");
+  return `${base}/search?q=${encodeURIComponent(query)}&format=json`;
+}
+async function searchFreeChatCandidates(options) {
+  const query = options.query?.trim() || DEFAULT_DISCOVERY_QUERY;
+  const doFetch = options.fetchImpl ?? fetch;
+  const url = discoverySearchUrl(options.searxngUrl, query);
+  let res;
+  try {
+    res = await doFetch(url, {
+      headers: { Accept: "application/json" },
+      signal: options.signal
+    });
+  } catch (err) {
+    if (options.signal?.aborted) throw err;
+    const cause = err instanceof Error ? err.message : String(err);
+    throw new DiscoveryUnavailableError(options.searxngUrl, cause || "network/CORS error");
+  }
+  if (!res.ok) {
+    throw new DiscoveryUnavailableError(options.searxngUrl, `HTTP ${res.status}`);
+  }
+  let parsed;
+  try {
+    parsed = await res.json();
+  } catch {
+    throw new DiscoveryUnavailableError(
+      options.searxngUrl,
+      "non-JSON response \u2014 enable the JSON format in SearXNG settings"
+    );
+  }
+  const candidates = filterChatCandidates(parsed.results ?? []);
+  if (candidates.length === 0) {
+    throw new DiscoveryEmptyError(query);
+  }
+  return candidates;
+}
+var DISCOVERY_RESULTS_EVENT = "llm-fallbacks:discovery-results";
+function broadcastDiscoveryResults(candidates) {
+  window.dispatchEvent(
+    new CustomEvent(DISCOVERY_RESULTS_EVENT, { detail: { candidates } })
+  );
+}
+
 // src/providers/FailoverProvider.ts
 function endpointUrl(base) {
   const trimmed = base.replace(/\/$/, "");
@@ -6453,12 +6543,20 @@ var FailoverProvider = class {
     }
     throw new Error("Web UI tier runner is not connected yet.");
   }
-  async streamSearxngDiscoveryRoute(_request, _onEvent) {
+  async streamSearxngDiscoveryRoute(request, _onEvent) {
     const settings = loadProviderTierSettings();
     if (!settings.searxngUrl) {
       throw searxngTierUnavailable();
     }
-    throw new Error("SearXNG discovery tier is not connected yet.");
+    this.setStatus("searxng: searching for free chat sites \u2026");
+    const candidates = await searchFreeChatCandidates({
+      searxngUrl: settings.searxngUrl,
+      signal: request.signal
+    });
+    broadcastDiscoveryResults(candidates);
+    throw new Error(
+      `SearXNG found ${candidates.length} candidate chat site${candidates.length === 1 ? "" : "s"} \u2014 see suggestions below the chat.`
+    );
   }
   async streamChat(request, onEvent) {
     if (messagesHaveImage(request.messages)) {
@@ -7113,6 +7211,65 @@ function CompareModePlugin(deps) {
   };
 }
 
+// src/plugins/discovery-picklist/index.ts
+function escapeHtml(text) {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+function candidateRow(candidate) {
+  const title = escapeHtml(candidate.title);
+  const url = escapeHtml(candidate.url);
+  const snippet = escapeHtml(candidate.snippet);
+  return `
+    <li class="lf-discovery-item">
+      <a href="${url}" target="_blank" rel="noopener noreferrer nofollow">${title}</a>
+      <span class="lf-discovery-url">${url}</span>
+      ${snippet ? `<p class="lf-discovery-snippet">${snippet}</p>` : ""}
+    </li>
+  `;
+}
+function DiscoveryPicklistPlugin() {
+  let host = null;
+  let handler = null;
+  return {
+    name: "discovery-picklist",
+    onMount(ctx) {
+      host = document.createElement("div");
+      host.className = "lf-discovery-picklist";
+      host.hidden = true;
+      const layout = ctx.container.querySelector(".mur-chat-layout-wrapper");
+      const form = ctx.container.querySelector(".mur-chat-form-container");
+      if (layout && form) {
+        layout.insertBefore(host, form);
+      } else {
+        ctx.container.appendChild(host);
+      }
+      handler = (event) => {
+        const detail = event.detail;
+        const candidates = detail?.candidates ?? [];
+        if (!host || candidates.length === 0) return;
+        host.innerHTML = `
+          <div class="lf-discovery-header">
+            <span>Free chat sites found via your SearXNG (open manually \u2014 nothing is automated):</span>
+            <button type="button" class="panel-btn panel-btn-ghost lf-discovery-dismiss" aria-label="Dismiss suggestions">\xD7</button>
+          </div>
+          <ul class="lf-discovery-list">
+            ${candidates.map((c) => candidateRow(c)).join("")}
+          </ul>
+        `;
+        host.hidden = false;
+        host.querySelector(".lf-discovery-dismiss")?.addEventListener("click", () => {
+          if (host) host.hidden = true;
+        });
+      };
+      window.addEventListener(DISCOVERY_RESULTS_EVENT, handler);
+    },
+    destroy() {
+      if (handler) window.removeEventListener(DISCOVERY_RESULTS_EVENT, handler);
+      host?.remove();
+    }
+  };
+}
+
 // src/catalog-display.ts
 function formatContextLength(value) {
   if (value === void 0 || value <= 0) return "\u2014";
@@ -7267,25 +7424,25 @@ function ModelExplorerPlugin(deps) {
         }
         function cellHtml(row, col) {
           if (col.display === "context") {
-            return escapeHtml(formatContextLength(row.context_length));
+            return escapeHtml2(formatContextLength(row.context_length));
           }
           if (col.display === "capabilities") {
             return renderCapabilityBadgesHtml(row) || "\u2014";
           }
           if (col.key === "provider") {
             const provider = row.provider ?? String(row.id).split("/")[0] ?? "";
-            return escapeHtml(provider);
+            return escapeHtml2(provider);
           }
-          return escapeHtml(String(row[col.key] ?? ""));
+          return escapeHtml2(String(row[col.key] ?? ""));
         }
         function renderTable(rows) {
           thead.innerHTML = `<tr>${TABLE_COLUMNS.map(
             (c) => `<th data-col="${c.key}" style="cursor:pointer">${c.label}${sortColumn === c.key ? sortDir === "asc" ? " \u25B2" : " \u25BC" : ""}</th>`
           ).join("")}<th>Use</th></tr>`;
           tbody.innerHTML = rows.slice(0, 200).map(
-            (row, rowIdx) => `<tr data-row-idx="${rowIdx}" title="${escapeHtml(catalogSummaryLine(row))}">${TABLE_COLUMNS.map(
+            (row, rowIdx) => `<tr data-row-idx="${rowIdx}" title="${escapeHtml2(catalogSummaryLine(row))}">${TABLE_COLUMNS.map(
               (c) => `<td>${cellHtml(row, c)}</td>`
-            ).join("")}<td><button type="button" class="panel-btn lf-use-model-btn" data-model-id="${escapeHtml(String(row.id ?? ""))}">Use for chat</button></td></tr>`
+            ).join("")}<td><button type="button" class="panel-btn lf-use-model-btn" data-model-id="${escapeHtml2(String(row.id ?? ""))}">Use for chat</button></td></tr>`
           ).join("");
           statusEl.textContent = `${rows.length} model(s) shown${rows.length > 200 ? " (first 200)" : ""}`;
           thead.querySelectorAll("th").forEach((th) => {
@@ -7340,7 +7497,7 @@ function ModelExplorerPlugin(deps) {
     }
   };
 }
-function escapeHtml(s) {
+function escapeHtml2(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
@@ -8097,6 +8254,7 @@ async function bootstrap() {
         provider,
         getCatalog: () => catalogRef2
       }),
+      DiscoveryPicklistPlugin(),
       ModelExplorerPlugin({
         getCatalog: () => catalogRef2,
         getCatalogUrl: () => readRuntimeConfig().catalogUrl
