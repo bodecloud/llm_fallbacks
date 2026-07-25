@@ -39,6 +39,8 @@ import {
   importTitleFromFile,
 } from "./import-session";
 import { ShortcutsSheetPlugin } from "./plugins/shortcuts-sheet";
+import { ThinkingPlugin } from "murm-ui/plugins/thinking";
+import { ToolsPlugin } from "murm-ui/plugins/tools";
 import { showStatusMessage } from "./plugins/status-strip";
 
 // Published client-side image attachment cap (R31).
@@ -209,6 +211,8 @@ async function bootstrap(): Promise<void> {
       ];
     },
     plugins: (engine) => [
+      ThinkingPlugin(),
+      ToolsPlugin({ defaultExpanded: false }),
       CopyPlugin(),
       AttachmentPlugin({
         acceptedTypes: "image/*",

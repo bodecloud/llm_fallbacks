@@ -1,13 +1,15 @@
 ---
 title: Chat UI Wave 5 — agent UX trust layer
 date: 2026-07-25
-status: confirmed
+status: shipped_5a
 priority_wave: wave5-agent-ux
 refreshed: 2026-07-25
 origin: docs/brainstorms/2026-07-24-chat-ui-improvements-requirements.md
 prior_waves: [wave1, wave2, wave3, wave4, wave4b]
 blocked_by: wave6a
 strategy: STRATEGY.md
+shipped: 2026-07-25
+shipped_5a_details: "SSE mapper extended with reasoning + tool_call events (sse.ts), ThinkingPlugin + ToolsPlugin registered (main.ts), dark-theme CSS overrides (chat-overrides.css). R44-R49, R56 implemented."
 ---
 
 # Chat UI Wave 5 — agent UX trust layer

@@ -664,6 +664,13 @@ if "CUSTOM_PROVIDERS" not in globals():
             api_key_required=False,
             auto_fetch_models=False,
         ),
+        # --- OpenCode Zen (free tier, auto-fetch all available models) ---
+        CustomProviderConfig(
+            provider_name="opencode_zen",
+            base_url="https://opencode.ai/zen/v1",
+            api_key_required=False,
+            auto_fetch_models=True,
+        ),
     ]
 
 LIVE_PROVIDER_MODELS: Dict[str, set[str]] = {

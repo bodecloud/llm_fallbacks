@@ -810,6 +810,64 @@ body.lf-chat-page::before {
   display: none !important;
 }
 
+/* ── Wave 5A: thinking + tool blocks ────────────────────────── */
+#chatMount .mur-think-block {
+  background: rgba(157, 78, 221, 0.08);
+  border: 1px solid rgba(157, 78, 221, 0.15);
+  border-radius: 8px;
+  margin: 0.5rem 0;
+}
+
+#chatMount .mur-think-toggle {
+  color: #c4c4d4;
+  font-size: 0.78rem;
+  padding: 0.35rem 0.5rem;
+}
+
+#chatMount .mur-think-toggle:hover {
+  color: #e4c7ff;
+  background: rgba(157, 78, 221, 0.1);
+  border-radius: 6px;
+}
+
+#chatMount .mur-think-content {
+  font-size: 0.85rem;
+  color: #8b8ba3;
+  line-height: 1.45;
+  padding: 0 0.5rem 0.5rem;
+}
+
+#chatMount .mur-tool-call-card {
+  background: rgba(26, 26, 46, 0.65);
+  border: 1px solid rgba(157, 78, 221, 0.16);
+  border-radius: 8px;
+  margin: 0.4rem 0;
+}
+
+#chatMount .mur-tool-call-card:hover {
+  border-color: rgba(157, 78, 221, 0.3);
+}
+
+#chatMount .mur-tool-call-name {
+  color: #c77dff;
+  font-weight: 600;
+}
+
+#chatMount .mur-tool-call-status {
+  font-size: 0.75rem;
+}
+
+#chatMount .mur-tool-call-args {
+  font-size: 0.78rem;
+  color: #8b8ba3;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 0.35rem;
+  margin: 0.35rem 0 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
 /* ── Wave 1: hide unwired ResearchWizard chrome ─────────────── */
 #voiceInputBtn,
 .research-output-container,

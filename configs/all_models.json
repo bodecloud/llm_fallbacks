@@ -12652,26 +12652,6 @@
         "mode": "chat",
         "output_cost_per_token": 6.9e-07
     },
-    "arcee-ai/trinity-large-thinking": {
-        "input_cost_per_token": 2.5e-07,
-        "output_cost_per_token": 8e-07,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 80000,
-        "metadata": {
-            "notes": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7..."
-        },
-        "litellm_provider": "openrouter",
-        "arcee-ai/trinity-large-thinking": {
-            "input_cost_per_token": 2.5e-07,
-            "output_cost_per_token": 8e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 80000,
-            "metadata": {
-                "notes": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "baseten/nvidia/nemotron-120b-a12b": {
         "input_cost_per_token": 3e-07,
         "litellm_provider": "baseten",
@@ -12730,6 +12710,26 @@
             "metadata": {
                 "notes": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations..."
             }
+        }
+    },
+    "arcee-ai/trinity-large-thinking": {
+        "input_cost_per_token": 2.2e-07,
+        "output_cost_per_token": 8.5e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "metadata": {
+            "notes": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7..."
+        },
+        "litellm_provider": "openrouter",
+        "arcee-ai/trinity-large-thinking": {
+            "input_cost_per_token": 2.2e-07,
+            "output_cost_per_token": 8.5e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "metadata": {
+                "notes": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7..."
+            },
+            "litellm_provider": "openrouter"
         }
     },
     "bedrock/ap-south-1/meta.llama3-8b-instruct-v1:0": {
@@ -21454,6 +21454,26 @@
         "supports_tool_choice": true,
         "supports_system_messages": true
     },
+    "z-ai/glm-5.2": {
+        "input_cost_per_token": 7.168e-07,
+        "output_cost_per_token": 2.2528e-06,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 131072,
+        "metadata": {
+            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.2": {
+            "input_cost_per_token": 7.168e-07,
+            "output_cost_per_token": 2.2528e-06,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "novita/zai-org/glm-4.6": {
         "litellm_provider": "novita",
         "mode": "chat",
@@ -22642,26 +22662,6 @@
         "source": "https://platform.moonshot.ai/docs/pricing/chat#generation-model-kimi-k2",
         "supports_vision": true
     },
-    "z-ai/glm-5.2": {
-        "input_cost_per_token": 7.952e-07,
-        "output_cost_per_token": 2.4992e-06,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 131072,
-        "metadata": {
-            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.2": {
-            "input_cost_per_token": 7.952e-07,
-            "output_cost_per_token": 2.4992e-06,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 131072,
-            "metadata": {
-                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "together_ai/moonshotai/kimi-k2.5": {
         "input_cost_per_token": 5e-07,
         "litellm_provider": "together_ai",
@@ -22777,6 +22777,30 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_tool_choice": true
+    },
+    "moonshotai/kimi-k2.6": {
+        "input_cost_per_token": 6.46e-07,
+        "output_cost_per_token": 2.72e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+        },
+        "litellm_provider": "openrouter",
+        "moonshotai/kimi-k2.6": {
+            "input_cost_per_token": 6.46e-07,
+            "output_cost_per_token": 2.72e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "replicate/meta/llama-3-70b": {
         "input_cost_per_token": 6.5e-07,
@@ -24544,30 +24568,6 @@
         "litellm_provider": "baseten",
         "mode": "chat",
         "output_cost_per_token": 3.15e-06
-    },
-    "moonshotai/kimi-k2.6": {
-        "input_cost_per_token": 6.84e-07,
-        "output_cost_per_token": 3.42e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-        },
-        "litellm_provider": "openrouter",
-        "moonshotai/kimi-k2.6": {
-            "input_cost_per_token": 6.84e-07,
-            "output_cost_per_token": 3.42e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "moonshot/kimi-latest-32k": {
         "cache_read_input_token_cost": 1.5e-07,
@@ -51842,6 +51842,360 @@
         "supported_output_modalities": [
             "video"
         ]
+    },
+    "opencode_zen/big-pickle": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/big-pickle": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/claude-fable-5": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/claude-fable-5": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/claude-haiku-4-5": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/claude-haiku-4-5": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/claude-opus-4-1": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/claude-opus-4-1": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/claude-opus-4-5": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/claude-opus-4-5": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/claude-opus-4-6": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/claude-opus-4-6": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/claude-opus-4-7": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/claude-opus-4-7": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/claude-opus-4-8": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/claude-opus-4-8": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/claude-opus-5": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/claude-opus-5": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/claude-sonnet-4": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/claude-sonnet-4": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/claude-sonnet-4-5": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/claude-sonnet-4-5": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/claude-sonnet-4-6": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/claude-sonnet-4-6": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/claude-sonnet-5": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/claude-sonnet-5": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/deepseek-v4-flash": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/deepseek-v4-flash": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/deepseek-v4-flash-free": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/deepseek-v4-flash-free": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/deepseek-v4-pro": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/deepseek-v4-pro": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gemini-3-flash": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gemini-3-flash": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gemini-3.1-pro": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gemini-3.1-pro": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gemini-3.5-flash": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gemini-3.5-flash": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gemini-3.5-flash-lite": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gemini-3.5-flash-lite": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gemini-3.6-flash": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gemini-3.6-flash": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/glm-5": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/glm-5": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/glm-5.1": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/glm-5.1": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/glm-5.2": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/glm-5.2": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5-codex": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5-codex": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5-nano": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5-nano": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.1": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.1": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.1-codex": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.1-codex": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.1-codex-max": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.1-codex-max": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.1-codex-mini": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.1-codex-mini": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.2": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.2": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.2-codex": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.2-codex": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.3-codex": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.3-codex": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.3-codex-spark": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.3-codex-spark": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.4": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.4": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.4-mini": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.4-mini": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.4-nano": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.4-nano": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.4-pro": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.4-pro": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.5": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.5": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.5-pro": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.5-pro": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.6-luna": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.6-luna": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.6-sol": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.6-sol": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/gpt-5.6-terra": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/gpt-5.6-terra": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/grok-4.5": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/grok-4.5": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/grok-build-0.1": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/grok-build-0.1": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/kimi-k2.5": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/kimi-k2.5": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/kimi-k2.6": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/kimi-k2.6": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/kimi-k2.7-code": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/kimi-k2.7-code": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/laguna-s-2.1-free": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/laguna-s-2.1-free": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/ling-3.0-flash-free": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/ling-3.0-flash-free": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/mimo-v2.5-free": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/mimo-v2.5-free": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/minimax-m2.5": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/minimax-m2.5": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/minimax-m2.7": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/minimax-m2.7": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/minimax-m3": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/minimax-m3": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/nemotron-3-ultra-free": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/nemotron-3-ultra-free": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/north-mini-code-free": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/north-mini-code-free": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/qwen3.5-plus": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/qwen3.5-plus": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/qwen3.6-plus": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/qwen3.6-plus": {
+            "litellm_provider": "opencode_zen"
+        }
     },
     "openrouter/auto": {
         "input_cost_per_token": -1.0,

@@ -6059,6 +6059,7 @@ function formatUsageBadge(meta) {
 var FREE_ALIAS_NOTE = "`free` is our ranked quality-sorted alias; `openrouter/free` is OpenRouter's own meta-router.";
 
 // src/providers/sse.ts
+var REASONING_FIELDS = ["reasoning_content", "reasoning", "reasoning_text"];
 async function parseSSE(response, onMessage) {
   const reader = response.body?.getReader();
   if (!reader) throw new Error("Response body is not readable");
@@ -6089,6 +6090,20 @@ async function parseSSE(response, onMessage) {
 function randomId() {
   return `msg-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 }
+function extractReasoning(delta) {
+  if (delta.reasoning && typeof delta.reasoning === "object" && typeof delta.reasoning.encrypted === "string") {
+    return { text: "", encrypted: true };
+  }
+  if (typeof delta.reasoning_encrypted === "string") {
+    return { text: "", encrypted: true };
+  }
+  for (const field of REASONING_FIELDS) {
+    if (typeof delta[field] === "string" && delta[field].length > 0) {
+      return { text: delta[field], encrypted: false };
+    }
+  }
+  return null;
+}
 function parseUsage(raw) {
   if (!raw || typeof raw !== "object") return void 0;
   const u3 = raw;
@@ -6104,6 +6119,8 @@ async function emitOpenAiSseAsStreamEvents(response, onEvent, startedAt = perfor
   let messageStarted = false;
   let currentMessageId = randomId();
   let currentTextBlockId = null;
+  let currentReasoningBlockId = null;
+  const activeToolCalls = /* @__PURE__ */ new Map();
   let finishEmitted = false;
   let ttftMs;
   let usage;
@@ -6123,17 +6140,37 @@ async function emitOpenAiSseAsStreamEvents(response, onEvent, startedAt = perfor
     const parsedUsage = parseUsage(parsed.usage);
     if (parsedUsage) {
       usage = parsedUsage;
+      onEvent({
+        type: "usage",
+        input: parsedUsage.promptTokens ?? 0,
+        output: parsedUsage.completionTokens ?? 0,
+        total: parsedUsage.totalTokens ?? (parsedUsage.promptTokens ?? 0) + (parsedUsage.completionTokens ?? 0)
+      });
     }
     const choice = parsed.choices?.[0];
     if (!choice) return;
+    const delta = choice.delta ?? {};
     if (!messageStarted) {
+      currentMessageId = parsed.id || currentMessageId;
       onEvent({
         type: "message_start",
         message: { id: currentMessageId, role: "assistant", blocks: [] }
       });
       messageStarted = true;
     }
-    const delta = choice.delta ?? {};
+    const reasoningData = extractReasoning(delta);
+    if (reasoningData) {
+      if (!currentReasoningBlockId) currentReasoningBlockId = randomId();
+      currentTextBlockId = null;
+      markFirstToken();
+      onEvent({
+        type: "reasoning_delta",
+        messageId: currentMessageId,
+        blockId: currentReasoningBlockId,
+        delta: reasoningData.text,
+        encrypted: reasoningData.encrypted
+      });
+    }
     if (delta.content) {
       markFirstToken();
       if (!currentTextBlockId) currentTextBlockId = randomId();
@@ -6143,6 +6180,36 @@ async function emitOpenAiSseAsStreamEvents(response, onEvent, startedAt = perfor
         blockId: currentTextBlockId,
         delta: delta.content
       });
+    }
+    if (delta.tool_calls && Array.isArray(delta.tool_calls)) {
+      for (const tc of delta.tool_calls) {
+        const index = tc.index;
+        if (tc.id) {
+          currentTextBlockId = null;
+          const blockId = randomId();
+          activeToolCalls.set(index, blockId);
+          onEvent({
+            type: "tool_call_start",
+            messageId: currentMessageId,
+            block: {
+              id: blockId,
+              type: "tool_call",
+              toolCallId: tc.id,
+              name: tc.function?.name || "",
+              argsText: tc.function?.arguments || "",
+              status: "streaming"
+            }
+          });
+        } else if (activeToolCalls.has(index)) {
+          onEvent({
+            type: "tool_call_delta",
+            messageId: currentMessageId,
+            blockId: activeToolCalls.get(index),
+            name: tc.function?.name,
+            argsDelta: tc.function?.arguments || ""
+          });
+        }
+      }
     }
     if (choice.finish_reason && !finishEmitted) {
       const reasonMap = {
@@ -6157,6 +6224,9 @@ async function emitOpenAiSseAsStreamEvents(response, onEvent, startedAt = perfor
       finishEmitted = true;
     }
   });
+  if (!finishEmitted) {
+    onEvent({ type: "finish", reason: "stop" });
+  }
   return {
     usage,
     ttftMs,
@@ -8457,6 +8527,384 @@ function ShortcutsSheetPlugin() {
   };
 }
 
+// node_modules/murm-ui/dist/plugins/thinking/thinking-plugin.js
+var ENCRYPTED_REASONING_FALLBACK = "<i>Thought process is hidden by the model provider.</i>";
+function getReasoningDisplayContent(block) {
+  if (block.encrypted)
+    return ENCRYPTED_REASONING_FALLBACK;
+  return block.text;
+}
+function ThinkingPlugin() {
+  const stateMap = /* @__PURE__ */ new WeakMap();
+  return {
+    name: "thinking",
+    onBlockRender: (block, containerEl, isGenerating) => {
+      if (block.type !== "reasoning")
+        return false;
+      let state = stateMap.get(containerEl);
+      if (!state) {
+        const btn = el("button", "mur-think-toggle", {
+          innerHTML: ICON_CHEVRON + "<span>Thought Process</span>"
+        });
+        const btnSpan = btn.querySelector("span");
+        btn.setAttribute("aria-expanded", "false");
+        const contentEl = el("div", "mur-think-content");
+        contentEl.hidden = true;
+        const wrapper = el("div", "mur-think-wrapper", {}, [btn, contentEl]);
+        containerEl.innerHTML = "";
+        containerEl.appendChild(wrapper);
+        state = {
+          isExpanded: false,
+          cacheReasoning: "",
+          cacheIsGenerating: false,
+          contentEl,
+          btnSpan
+        };
+        btn.onclick = () => {
+          state.isExpanded = !state.isExpanded;
+          contentEl.hidden = !state.isExpanded;
+          btn.setAttribute("aria-expanded", String(state.isExpanded));
+          const displayContent2 = getReasoningDisplayContent(block);
+          if (state.isExpanded && state.cacheReasoning !== displayContent2) {
+            renderSafeHTML(contentEl, displayContent2);
+            state.cacheReasoning = displayContent2;
+          }
+        };
+        stateMap.set(containerEl, state);
+      }
+      if (state.cacheIsGenerating !== isGenerating) {
+        state.btnSpan.textContent = isGenerating ? "Thinking..." : "Thought Process";
+        state.cacheIsGenerating = isGenerating;
+      }
+      const displayContent = getReasoningDisplayContent(block);
+      if (state.isExpanded && state.cacheReasoning !== displayContent) {
+        renderSafeHTML(state.contentEl, displayContent);
+        state.cacheReasoning = displayContent;
+      }
+      return true;
+    }
+  };
+}
+
+// node_modules/murm-ui/dist/plugins/tools/tools-plugin.js
+var DEFAULT_MAX_LABEL_CHARS = 120;
+var DEFAULT_MAX_PREVIEW_CHARS = 240;
+var MAX_ARG_SUMMARY_VALUE_CHARS = 40;
+var EMPTY_MESSAGE = { id: "", role: "assistant", blocks: [] };
+function ToolsPlugin(config = {}) {
+  const stateMap = /* @__PURE__ */ new WeakMap();
+  return {
+    name: "tools",
+    onBlockRender: (block, containerEl, isGenerating, renderCtx) => {
+      var _a;
+      if (block.type !== "tool_call")
+        return false;
+      let state = stateMap.get(containerEl);
+      const ctx = createToolContext(block, renderCtx, isGenerating, state);
+      const renderer = (_a = config.tools) === null || _a === void 0 ? void 0 : _a[block.name];
+      if (!state) {
+        state = createToolState(containerEl, resolveDefaultExpanded(config.defaultExpanded, ctx));
+        containerEl.replaceChildren(state.buttonEl);
+        state.buttonEl.addEventListener("click", () => {
+          state.expanded = !state.expanded;
+          syncExpansion(state);
+        });
+        stateMap.set(containerEl, state);
+      }
+      cacheToolResult(state, block, renderCtx, ctx.toolResult);
+      renderTool(containerEl, state, ctx, renderer, config);
+      return true;
+    }
+  };
+}
+function createToolState(rootEl, expanded) {
+  const chevronEl = el("span", "mur-tool-chevron", { innerHTML: ICON_CHEVRON });
+  const titleEl = el("span", "mur-tool-title");
+  const statusEl = el("span", "mur-tool-status");
+  const buttonEl = el("button", "mur-tool-summary", { type: "button" }, [statusEl, titleEl, chevronEl]);
+  const state = {
+    expanded,
+    rootEl,
+    previewText: "",
+    buttonEl,
+    titleEl,
+    statusEl
+  };
+  syncExpansion(state);
+  return state;
+}
+function renderTool(containerEl, state, ctx, renderer, config) {
+  var _a, _b, _c, _d, _e2, _f;
+  const status = ((_a = ctx.toolResult) === null || _a === void 0 ? void 0 : _a.isError) ? "error" : ctx.toolCall.status;
+  containerEl.className = `mur-content-block mur-block-tool_call mur-tool mur-tool-${status}`;
+  const label = (_b = rendererLabel(renderer, ctx)) !== null && _b !== void 0 ? _b : defaultToolLabel(ctx.toolCall, ctx.args);
+  const preview = (_d = (_c = renderer === null || renderer === void 0 ? void 0 : renderer.preview) === null || _c === void 0 ? void 0 : _c.call(renderer, ctx)) !== null && _d !== void 0 ? _d : defaultPreview(ctx);
+  const statusText = statusLabel(status);
+  state.ctx = ctx;
+  state.renderer = renderer;
+  state.titleEl.textContent = truncateText(label, (_e2 = config.maxLabelChars) !== null && _e2 !== void 0 ? _e2 : DEFAULT_MAX_LABEL_CHARS);
+  state.statusEl.textContent = statusSymbol(status);
+  state.statusEl.title = statusText;
+  state.statusEl.setAttribute("aria-label", statusText);
+  state.buttonEl.setAttribute("aria-label", `${label} (${statusText})`);
+  state.previewText = truncateText(preview !== null && preview !== void 0 ? preview : "", (_f = config.maxPreviewChars) !== null && _f !== void 0 ? _f : DEFAULT_MAX_PREVIEW_CHARS);
+  syncExpansion(state);
+}
+function createToolContext(toolCall, ctx, isGenerating, state) {
+  var _a, _b, _c, _d;
+  const messages = (_a = ctx === null || ctx === void 0 ? void 0 : ctx.messages) !== null && _a !== void 0 ? _a : [];
+  const toolResult = resolveToolResult(toolCall, ctx, state);
+  const args = parseJson(toolCall.argsText);
+  const outputText = (_b = toolResult === null || toolResult === void 0 ? void 0 : toolResult.outputText) !== null && _b !== void 0 ? _b : "";
+  let resultParsed = false;
+  let parsedResult;
+  return {
+    toolCall,
+    toolResult,
+    message: (_c = ctx === null || ctx === void 0 ? void 0 : ctx.message) !== null && _c !== void 0 ? _c : EMPTY_MESSAGE,
+    messages,
+    blockIndex: (_d = ctx === null || ctx === void 0 ? void 0 : ctx.blockIndex) !== null && _d !== void 0 ? _d : -1,
+    isGenerating,
+    args,
+    argsText: toolCall.argsText,
+    outputText,
+    get result() {
+      if (!resultParsed) {
+        parsedResult = parseJson(outputText);
+        resultParsed = true;
+      }
+      return parsedResult;
+    }
+  };
+}
+function resolveToolResult(toolCall, ctx, state) {
+  const cached = state === null || state === void 0 ? void 0 : state.resultCache;
+  if (cached && ctx && cached.messages === ctx.messages && cached.messageId === ctx.message.id && cached.blockId === toolCall.id && cached.toolCallId === toolCall.toolCallId) {
+    return cached.result;
+  }
+  const result = findToolResult(toolCall.toolCallId, ctx);
+  if (state)
+    cacheToolResult(state, toolCall, ctx, result);
+  return result;
+}
+function cacheToolResult(state, toolCall, ctx, result) {
+  state.resultCache = result && ctx ? {
+    messages: ctx.messages,
+    messageId: ctx.message.id,
+    blockId: toolCall.id,
+    toolCallId: toolCall.toolCallId,
+    result
+  } : void 0;
+}
+function findToolResult(toolCallId, ctx) {
+  if (!ctx)
+    return void 0;
+  const messageIndex = ctx.messages.findIndex((message) => message.id === ctx.message.id);
+  const startIndex = messageIndex >= 0 ? messageIndex : 0;
+  for (let i = startIndex; i < ctx.messages.length; i++) {
+    const result = ctx.messages[i].blocks.find((block) => block.type === "tool_result" && block.toolCallId === toolCallId);
+    if (result)
+      return result;
+  }
+  return void 0;
+}
+function rendererLabel(renderer, ctx) {
+  if (!(renderer === null || renderer === void 0 ? void 0 : renderer.label))
+    return void 0;
+  return typeof renderer.label === "function" ? renderer.label(ctx) : renderer.label;
+}
+function resolveDefaultExpanded(defaultExpanded, ctx) {
+  if (typeof defaultExpanded === "function")
+    return defaultExpanded(ctx);
+  return defaultExpanded !== null && defaultExpanded !== void 0 ? defaultExpanded : false;
+}
+function syncExpansion(state) {
+  state.buttonEl.setAttribute("aria-expanded", String(state.expanded));
+  syncPreview(state);
+  if (state.expanded && state.ctx) {
+    renderDetails(state);
+    return;
+  }
+  clearDetails(state);
+}
+function renderDetails(state) {
+  var _a, _b, _c, _d, _e2, _f, _g;
+  const ctx = state.ctx;
+  if (!ctx)
+    return;
+  const detailsEl = ensureDetailsEl(state);
+  const details = ensureDetails(state);
+  detailsEl.hidden = false;
+  details.argsPre.textContent = (_c = (_b = (_a = state.renderer) === null || _a === void 0 ? void 0 : _a.formatArgs) === null || _b === void 0 ? void 0 : _b.call(_a, ctx)) !== null && _c !== void 0 ? _c : defaultArgsText(ctx);
+  details.resultTitleEl.textContent = ((_d = ctx.toolResult) === null || _d === void 0 ? void 0 : _d.isError) ? "Error" : "Result";
+  details.resultPre.textContent = (_g = (_f = (_e2 = state.renderer) === null || _e2 === void 0 ? void 0 : _e2.formatResult) === null || _f === void 0 ? void 0 : _f.call(_e2, ctx)) !== null && _g !== void 0 ? _g : defaultResultText(ctx);
+  details.resultSectionEl.hidden = false;
+}
+function clearDetails(state) {
+  if (state.detailsEl) {
+    state.detailsEl.remove();
+    state.detailsEl = void 0;
+  }
+  state.details = void 0;
+}
+function ensureDetails(state) {
+  if (state.details)
+    return state.details;
+  const argsTitleEl = el("div", "mur-tool-section-title", { textContent: "Arguments" });
+  const argsPre = el("pre", "mur-tool-pre");
+  const argsSectionEl = el("section", "mur-tool-section", {}, [argsTitleEl, argsPre]);
+  const resultTitleEl = el("div", "mur-tool-section-title", { textContent: "Result" });
+  const resultPre = el("pre", "mur-tool-pre");
+  const resultSectionEl = el("section", "mur-tool-section", {}, [resultTitleEl, resultPre]);
+  ensureDetailsEl(state).replaceChildren(argsSectionEl, resultSectionEl);
+  state.details = {
+    argsPre,
+    resultSectionEl,
+    resultTitleEl,
+    resultPre
+  };
+  return state.details;
+}
+function syncPreview(state) {
+  var _a;
+  if (!state.previewText || state.expanded) {
+    (_a = state.previewEl) === null || _a === void 0 ? void 0 : _a.remove();
+    state.previewEl = void 0;
+    return;
+  }
+  const previewEl = ensurePreviewEl(state);
+  previewEl.textContent = state.previewText;
+}
+function ensurePreviewEl(state) {
+  var _a;
+  if (state.previewEl)
+    return state.previewEl;
+  const previewEl = el("div", "mur-tool-preview");
+  state.rootEl.insertBefore(previewEl, (_a = state.detailsEl) !== null && _a !== void 0 ? _a : null);
+  state.previewEl = previewEl;
+  return previewEl;
+}
+function ensureDetailsEl(state) {
+  if (state.detailsEl)
+    return state.detailsEl;
+  const detailsEl = el("div", "mur-tool-details");
+  state.rootEl.appendChild(detailsEl);
+  state.detailsEl = detailsEl;
+  return detailsEl;
+}
+function defaultToolLabel(toolCall, args) {
+  const name = toolCall.name || "tool";
+  const summary = summarizeArgs(args, toolCall.argsText);
+  return summary ? `${name} ${summary}` : name;
+}
+function summarizeArgs(args, argsText) {
+  if (args && typeof args === "object" && !Array.isArray(args)) {
+    const entries = Object.entries(args).filter(([, value]) => value !== void 0 && value !== null);
+    if (entries.length === 0)
+      return "";
+    const preferred = [
+      "command",
+      "cmd",
+      "pattern",
+      "query",
+      "path",
+      "dir_path",
+      "file",
+      "filePath",
+      "filepath",
+      "url",
+      "name"
+    ];
+    const preferredEntries = [];
+    for (const key of preferred) {
+      const match = entries.find(([entryKey]) => entryKey === key);
+      if (match)
+        preferredEntries.push(match);
+      if (preferredEntries.length >= 2)
+        break;
+    }
+    const summaryEntries = preferredEntries.length > 0 ? preferredEntries : entries.slice(0, 2);
+    if (summaryEntries.length > 0) {
+      if (summaryEntries.length === 1 && preferredEntries.length === 1) {
+        return compactValue(summaryEntries[0][1]);
+      }
+      return summaryEntries.map(([key, value]) => `${key}=${compactValue(value)}`).join(" ");
+    }
+    return `${entries.length} args`;
+  }
+  if (Array.isArray(args))
+    return `${args.length} items`;
+  if (args !== void 0)
+    return compactValue(args);
+  const raw = argsText.trim().replace(/\s+/g, " ");
+  return raw === "{}" ? "" : raw;
+}
+function compactValue(value) {
+  const text = typeof value === "string" ? value : typeof value === "number" || typeof value === "boolean" || value === null ? String(value) : JSON.stringify(value);
+  return truncateText(text.replace(/\s+/g, " "), MAX_ARG_SUMMARY_VALUE_CHARS);
+}
+function defaultPreview(ctx) {
+  var _a;
+  if (!((_a = ctx.toolResult) === null || _a === void 0 ? void 0 : _a.isError))
+    return void 0;
+  return ctx.outputText || "Tool failed.";
+}
+function defaultArgsText(ctx) {
+  if (ctx.args !== void 0)
+    return JSON.stringify(ctx.args, null, 2);
+  return ctx.argsText.trim() || "{}";
+}
+function defaultResultText(ctx) {
+  if (!ctx.toolResult) {
+    if (ctx.toolCall.status === "running")
+      return "Running...";
+    if (ctx.toolCall.status === "pending")
+      return "Waiting for result...";
+    return "No result.";
+  }
+  if (ctx.result !== void 0)
+    return JSON.stringify(ctx.result, null, 2);
+  return ctx.outputText;
+}
+function parseJson(text) {
+  const firstChar = firstNonWhitespaceChar(text);
+  if (!firstChar || !'{["-0123456789tfn'.includes(firstChar))
+    return void 0;
+  try {
+    return JSON.parse(text);
+  } catch (_a) {
+    return void 0;
+  }
+}
+function firstNonWhitespaceChar(text) {
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    if (char !== " " && char !== "\n" && char !== "\r" && char !== "	")
+      return char;
+  }
+  return "";
+}
+function statusSymbol(status) {
+  switch (status) {
+    case "complete":
+      return "\u2713";
+    case "error":
+      return "\xD7";
+    default:
+      return "...";
+  }
+}
+function statusLabel(status) {
+  return status;
+}
+function truncateText(text, maxChars) {
+  if (text.length <= maxChars)
+    return text;
+  if (maxChars <= 3)
+    return text.slice(0, maxChars);
+  return `${text.slice(0, maxChars - 3)}...`;
+}
+
 // src/main.ts
 var MAX_IMAGE_ATTACHMENT_BYTES = 4e6;
 async function loadCatalog(config) {
@@ -8608,6 +9056,8 @@ async function bootstrap() {
       ];
     },
     plugins: (engine) => [
+      ThinkingPlugin(),
+      ToolsPlugin({ defaultExpanded: false }),
       CopyPlugin(),
       AttachmentPlugin({
         acceptedTypes: "image/*",

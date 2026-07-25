@@ -1,19 +1,21 @@
 ---
 title: "feat: Chat UI Wave 5 — agent UX trust layer"
-status: queued
+status: shipped_5a
 date: 2026-07-25
 type: feat
 origin: docs/brainstorms/2026-07-25-chat-ui-wave5-agent-ux-requirements.md
 strategy: STRATEGY.md
 wave: 5
-requirements: R44-R57
+requirements: R44-R49, R56
 prior_plan: docs/plans/2026-07-25-002-feat-chat-ui-wave4b-differentiation-plan.md
 blocked_by: wave6a
+shipped: 2026-07-25
+note: "Wave 5A (reasoning + tool-call cards) shipped. Wave 5B (voice + PWA) remains queued."
 ---
 
 # feat: Chat UI Wave 5 — agent UX trust layer
 
-> **Origin:** [Wave 5 agent UX brainstorm](../brainstorms/2026-07-25-chat-ui-wave5-agent-ux-requirements.md) — reasoning + tool-call cards (5A); voice + PWA optional (5B). **Prerequisite:** Wave **6A** (usage + failover timeline) merged before **implementation** starts. Wave 4B is already on `main`. Requirements refreshed 2026-07-25 (6A-before-5 sequencing; voice moved to 5B). **This plan predates the refresh** — re-run `ce-plan` against the refreshed Wave 5 doc before implementing, or plan Wave 6A first.
+> **Origin:** [Wave 5 agent UX brainstorm](../brainstorms/2026-07-25-chat-ui-wave5-agent-ux-requirements.md) — reasoning + tool-call cards (5A); voice + PWA optional (5B). **Prerequisite:** Wave **6A** (usage + failover timeline) merged before **implementation** starts. Wave 4B is already on `main`. **Wave 5A shipped 2026-07-25:** `webui/src/providers/sse.ts` extended with reasoning/tool SSE mapping, `ThinkingPlugin` + `ToolsPlugin` registered in `main.ts`, `chat-overrides.css` dark-theme overrides added. Wave 5B (voice + PWA) remains queued.
 
 ## Summary
 
