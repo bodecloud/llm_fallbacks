@@ -8,16 +8,16 @@ strategy: STRATEGY.md
 wave: 5
 requirements: R44-R57
 prior_plan: docs/plans/2026-07-25-002-feat-chat-ui-wave4b-differentiation-plan.md
-blocked_by: wave4b
+blocked_by: wave6a
 ---
 
 # feat: Chat UI Wave 5 — agent UX trust layer
 
-> **Origin:** [Wave 5 agent UX brainstorm](../brainstorms/2026-07-25-chat-ui-wave5-agent-ux-requirements.md) — reasoning blocks, tool-call cards, voice input, optional PWA (5B). **Prerequisite:** Wave 4B merged to `main` before **implementation** starts (planning already complete).
+> **Origin:** [Wave 5 agent UX brainstorm](../brainstorms/2026-07-25-chat-ui-wave5-agent-ux-requirements.md) — reasoning + tool-call cards (5A); voice + PWA optional (5B). **Prerequisite:** Wave **6A** (usage + failover timeline) merged before **implementation** starts. Wave 4B is already on `main`. Requirements refreshed 2026-07-25 (6A-before-5 sequencing; voice moved to 5B). **This plan predates the refresh** — re-run `ce-plan` against the refreshed Wave 5 doc before implementing, or plan Wave 6A first.
 
 ## Summary
 
-Wire **murm-ui's built-in thinking and tools plugins**, extend **FailoverProvider SSE mapping** so reasoning and tool-call stream events reach the renderer, add **composer voice dictation** (Web Speech API), and optionally ship **PWA shell + offline read** as Wave **5B**.
+After Wave 6A: wire **murm-ui's built-in thinking and tools plugins**, extend **FailoverProvider SSE mapping** so reasoning and tool-call stream events reach the renderer (**5A**). Optionally ship **composer voice dictation** + **PWA shell / offline read** as Wave **5B**.
 
 ## Problem Frame
 

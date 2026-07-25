@@ -15,6 +15,7 @@ import { TierSettingsPlugin } from "./plugins/tier-settings";
 import { CompareModePlugin } from "./plugins/compare-mode";
 import { DiscoveryPicklistPlugin } from "./plugins/discovery-picklist";
 import { ModelExplorerPlugin } from "./plugins/model-explorer";
+import { SessionUsagePlugin } from "./plugins/session-usage";
 import { ModelPickerPlugin } from "./plugins/model-picker";
 import { RoutingChipPlugin } from "./plugins/routing-chip";
 import { MessageActionsPlugin } from "./plugins/message-actions";
@@ -225,6 +226,7 @@ async function bootstrap(): Promise<void> {
       ModelPickerPlugin(),
       MessageActionsPlugin(),
       RoutingChipPlugin(),
+      SessionUsagePlugin(),
       StatusStripPlugin(),
       TurnstileGatePlugin(),
       FailoverSettingsPlugin({

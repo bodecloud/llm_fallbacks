@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { ChatRequest, StreamEvent } from "murm-ui";
 import { STORAGE_KEYS, saveJson } from "../../storage-keys";
 import { defaultProviderTierSettings } from "./defaults";
+import { RouteTrace } from "../route-trace";
 import {
   TierOrchestrator,
   searxngTierUnavailable,
@@ -176,5 +177,65 @@ describe("TierOrchestrator", () => {
     });
 
     await orchestrator.streamChat(baseRequest, () => {});
+  });
+
+  it("records skip then success hops on the shared RouteTrace (R61)", async () => {
+    saveJson(STORAGE_KEYS.providerTiers, {
+      ...defaultProviderTierSettings(),
+      tiers: [
+        { id: "quality_api", enabled: true },
+        { id: "web_ui", enabled: false },
+        { id: "searxng_discovery", enabled: false },
+        { id: "proxy_failover", enabled: true },
+      ],
+    });
+    const trace = new RouteTrace();
+    const orchestrator = new TierOrchestrator(
+      {
+        qualityApi: vi.fn(async () => {
+          throw new TierSkipError("quality_api", "no key");
+        }),
+        webUi: vi.fn(),
+        searxngDiscovery: vi.fn(),
+        proxyFailover: vi.fn(async (_req, onEvent: (e: StreamEvent) => void) => {
+          onEvent({ type: "text_delta", delta: "ok" });
+        }),
+      },
+      trace
+    );
+
+    await orchestrator.streamChat(baseRequest, () => {});
+
+    const hops = trace.snapshot();
+    expect(hops.map((h) => h.outcome)).toEqual(["skip", "success"]);
+    expect(hops[0].tier).toBe("quality_api");
+    expect(hops[0].reason).toMatch(/no key/);
+    expect(hops[1].tier).toBe("proxy_failover");
+    expect(hops[1].hopIndex).toBe(1);
+  });
+
+  it("does not double-record success when the handler already wrote hops", async () => {
+    saveJson(STORAGE_KEYS.providerTiers, defaultProviderTierSettings());
+    const trace = new RouteTrace();
+    const orchestrator = new TierOrchestrator(
+      {
+        qualityApi: vi.fn(async () => {
+          throw new TierSkipError("quality_api", "no key");
+        }),
+        webUi: vi.fn(),
+        searxngDiscovery: vi.fn(),
+        proxyFailover: vi.fn(async () => {
+          trace.record({
+            tier: "proxy_failover",
+            endpoint: "https://proxy.test",
+            outcome: "success",
+          });
+        }),
+      },
+      trace
+    );
+
+    await orchestrator.streamChat(baseRequest, () => {});
+    expect(trace.snapshot().filter((h) => h.tier === "proxy_failover")).toHaveLength(1);
   });
 });

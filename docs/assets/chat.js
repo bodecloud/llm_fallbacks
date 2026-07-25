@@ -5971,6 +5971,41 @@ function modelSupportsVision(modelId, catalog) {
   return entry?.supports_vision === true;
 }
 
+// src/providers/route-trace.ts
+var RouteTrace = class {
+  hops = [];
+  nextIndex = 0;
+  record(input) {
+    const hopIndex = input.hopIndex ?? this.nextIndex;
+    this.nextIndex = Math.max(this.nextIndex, hopIndex + 1);
+    const hop = { ...input, hopIndex };
+    this.hops.push(hop);
+    return hop;
+  }
+  hasTier(tier) {
+    return this.hops.some((h) => h.tier === tier);
+  }
+  snapshot() {
+    return this.hops.map((h) => ({ ...h }));
+  }
+  get length() {
+    return this.hops.length;
+  }
+};
+function classifyHopError(err) {
+  if (err && typeof err === "object" && "kind" in err && typeof err.kind === "string") {
+    return err.kind;
+  }
+  if (err instanceof Error) {
+    const msg = err.message;
+    if (/429|rate limit/i.test(msg)) return "rate_limit";
+    if (/quota|credit|exhausted/i.test(msg)) return "quota";
+    if (/503|502|cold start|unavailable/i.test(msg)) return "cold_start";
+    if (/401|403|auth|turnstile/i.test(msg)) return "auth";
+  }
+  return "error";
+}
+
 // src/providers/routing-metadata.ts
 var lastCompletionMeta = null;
 var COMPLETION_META_EVENT = "llm-fallbacks:completion-meta";
@@ -6003,6 +6038,25 @@ function formatRoutingChip(meta) {
   }
   return parts.join(" \xB7 ") || "\u2014";
 }
+function formatUsageBadge(meta) {
+  const latencyParts = [];
+  if (meta.ttftMs !== void 0 && Number.isFinite(meta.ttftMs)) {
+    latencyParts.push(`TTFT ${Math.round(meta.ttftMs)}ms`);
+  }
+  const total = meta.totalMs ?? meta.durationMs;
+  if (total !== void 0 && Number.isFinite(total)) {
+    latencyParts.push(`${Math.round(total)}ms`);
+  }
+  const usage = meta.usage;
+  if (usage && (usage.promptTokens !== void 0 || usage.completionTokens !== void 0)) {
+    const inTok = usage.promptTokens ?? "?";
+    const outTok = usage.completionTokens ?? "?";
+    const tokenPart = `${inTok}\u2192${outTok} tok`;
+    return latencyParts.length ? `${tokenPart} \xB7 ${latencyParts.join(" \xB7 ")}` : tokenPart;
+  }
+  return latencyParts.join(" \xB7 ") || "";
+}
+var FREE_ALIAS_NOTE = "`free` is our ranked quality-sorted alias; `openrouter/free` is OpenRouter's own meta-router.";
 
 // src/providers/sse.ts
 async function parseSSE(response, onMessage) {
@@ -6035,18 +6089,40 @@ async function parseSSE(response, onMessage) {
 function randomId() {
   return `msg-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 }
-function emitOpenAiSseAsStreamEvents(response, onEvent) {
+function parseUsage(raw) {
+  if (!raw || typeof raw !== "object") return void 0;
+  const u3 = raw;
+  const promptTokens = typeof u3.prompt_tokens === "number" ? u3.prompt_tokens : void 0;
+  const completionTokens = typeof u3.completion_tokens === "number" ? u3.completion_tokens : void 0;
+  const totalTokens = typeof u3.total_tokens === "number" ? u3.total_tokens : void 0;
+  if (promptTokens === void 0 && completionTokens === void 0 && totalTokens === void 0) {
+    return void 0;
+  }
+  return { promptTokens, completionTokens, totalTokens };
+}
+async function emitOpenAiSseAsStreamEvents(response, onEvent, startedAt = performance.now()) {
   let messageStarted = false;
   let currentMessageId = randomId();
   let currentTextBlockId = null;
   let finishEmitted = false;
-  return parseSSE(response, (data) => {
+  let ttftMs;
+  let usage;
+  const markFirstToken = () => {
+    if (ttftMs === void 0) {
+      ttftMs = Math.max(0, performance.now() - startedAt);
+    }
+  };
+  await parseSSE(response, (data) => {
     if (data === "[DONE]") return true;
     let parsed;
     try {
       parsed = JSON.parse(data);
     } catch {
       return;
+    }
+    const parsedUsage = parseUsage(parsed.usage);
+    if (parsedUsage) {
+      usage = parsedUsage;
     }
     const choice = parsed.choices?.[0];
     if (!choice) return;
@@ -6059,6 +6135,7 @@ function emitOpenAiSseAsStreamEvents(response, onEvent) {
     }
     const delta = choice.delta ?? {};
     if (delta.content) {
+      markFirstToken();
       if (!currentTextBlockId) currentTextBlockId = randomId();
       onEvent({
         type: "text_delta",
@@ -6080,6 +6157,11 @@ function emitOpenAiSseAsStreamEvents(response, onEvent) {
       finishEmitted = true;
     }
   });
+  return {
+    usage,
+    ttftMs,
+    totalMs: Math.max(0, performance.now() - startedAt)
+  };
 }
 function emitTextAsStreamEvents(text, onEvent) {
   const messageId = randomId();
@@ -6171,8 +6253,9 @@ function formatAttemptError(err) {
   return String(err);
 }
 var TierOrchestrator = class {
-  constructor(handlers) {
+  constructor(handlers, trace) {
     this.handlers = handlers;
+    this.trace = trace;
   }
   async streamChat(request, onEvent) {
     const settings = loadProviderTierSettings();
@@ -6183,13 +6266,30 @@ var TierOrchestrator = class {
       if (!handler) continue;
       try {
         await handler(request, onEvent);
+        if (this.trace && !this.trace.hasTier(entry.id)) {
+          this.trace.record({ tier: entry.id, outcome: "success" });
+        }
         return;
       } catch (err) {
         if (err instanceof TierSkipError) {
           attempts.push({ tier: entry.id, error: err.message });
+          this.trace?.record({
+            tier: entry.id,
+            outcome: "skip",
+            errorClass: "skip",
+            reason: err.message
+          });
           continue;
         }
         attempts.push({ tier: entry.id, error: formatAttemptError(err) });
+        if (this.trace && !this.trace.hasTier(entry.id)) {
+          this.trace.record({
+            tier: entry.id,
+            outcome: "error",
+            errorClass: classifyHopError(err),
+            reason: formatAttemptError(err)
+          });
+        }
         if (request.signal.aborted) throw err;
       }
     }
@@ -6419,6 +6519,9 @@ var FailoverProvider = class {
   providerUrls = {};
   statusListeners = /* @__PURE__ */ new Set();
   lastRoute = "";
+  /** Active per-request hop trail (Wave 6A). */
+  activeTrace = null;
+  requestStartedAt = 0;
   constructor(initialConfig) {
     this.config = initialConfig || readRuntimeConfig();
   }
@@ -6489,21 +6592,42 @@ var FailoverProvider = class {
     let lastError = "All proxy endpoints failed";
     let hopIndex = 0;
     let lastRateLimit;
+    const proxyBody = {
+      ...body,
+      // Ask proxies for a trailing usage chunk when supported (R58/R64).
+      stream_options: { include_usage: true }
+    };
     for (const base of config.endpoints) {
       this.setStatus(`proxy: ${base} \u2026`);
       try {
-        const res = await this.chatViaProxy(base, body, config.guestToken, signal);
+        const res = await this.chatViaProxy(base, proxyBody, config.guestToken, signal);
         if (res.ok) {
           this.lastRoute = `proxy/${base}`;
           window.LLM_FALLBACKS_ROUTE = this.lastRoute;
           const headerMeta = readRoutingHeaders(res);
+          const endpoint = endpointLabel(base, res);
+          const timing = await emitOpenAiSseAsStreamEvents(
+            res,
+            onEvent,
+            this.requestStartedAt || performance.now()
+          );
+          this.activeTrace?.record({
+            tier: "proxy_failover",
+            endpoint,
+            model: headerMeta.modelHeader,
+            outcome: "success",
+            hopIndex
+          });
           setLastCompletionMeta({
-            endpoint: endpointLabel(base, res),
+            endpoint,
             modelHeader: headerMeta.modelHeader,
             fallbackCount: hopIndex,
-            durationMs: headerMeta.durationMs
+            durationMs: headerMeta.durationMs,
+            trace: this.activeTrace?.snapshot(),
+            usage: timing.usage,
+            ttftMs: timing.ttftMs,
+            totalMs: timing.totalMs
           });
-          await emitOpenAiSseAsStreamEvents(res, onEvent);
           return;
         }
         if (!res.ok) {
@@ -6512,6 +6636,18 @@ var FailoverProvider = class {
           const retryAfter = retryAfterHeader ?? (res.status === 429 ? parseRetryAfterFromBody(errText) : void 0);
           const rateScope = res.status === 429 ? parseRateLimitScopeFromBody(errText) : void 0;
           lastError = `${base}: HTTP ${res.status} \u2014 ${errText.slice(0, 160)}`;
+          const mapped = mapHttpError(res.status, errText, base, {
+            retryAfterSeconds: retryAfter,
+            scope: rateScope
+          });
+          this.activeTrace?.record({
+            tier: "proxy_failover",
+            endpoint: base,
+            outcome: "error",
+            errorClass: mapped.kind,
+            reason: mapped.message,
+            hopIndex
+          });
           if (res.status === 429) {
             lastRateLimit = {
               retryAfterSeconds: retryAfter,
@@ -6520,18 +6656,21 @@ var FailoverProvider = class {
             showRateLimitBanner(retryAfter);
           }
           if (!RETRYABLE.has(res.status)) {
-            throw mapHttpError(res.status, errText, base, {
-              retryAfterSeconds: retryAfter,
-              scope: rateScope
-            });
+            throw mapped;
           }
         }
       } catch (err) {
         if (signal.aborted) throw err;
-        if (err instanceof ChatRouteError) {
-          throw err;
-        }
+        if (err instanceof ChatRouteError) throw err;
         lastError = `${base}: ${err instanceof Error ? err.message : String(err)}`;
+        this.activeTrace?.record({
+          tier: "proxy_failover",
+          endpoint: base,
+          outcome: "error",
+          errorClass: classifyHopError(err),
+          reason: lastError,
+          hopIndex
+        });
       }
       hopIndex += 1;
     }
@@ -6580,9 +6719,13 @@ var FailoverProvider = class {
     });
     this.lastRoute = result.route;
     window.LLM_FALLBACKS_ROUTE = this.lastRoute;
+    const totalMs = this.requestStartedAt ? Math.max(0, performance.now() - this.requestStartedAt) : void 0;
     setLastCompletionMeta({
       endpoint: result.route,
-      fallbackCount: 0
+      fallbackCount: 0,
+      trace: this.activeTrace?.snapshot(),
+      ttftMs: totalMs,
+      totalMs
     });
     emitTextAsStreamEvents(result.content, onEvent);
   }
@@ -6615,7 +6758,14 @@ var FailoverProvider = class {
           metaSet = true;
           this.lastRoute = `web_ui/${settings.webRunnerUrl}`;
           window.LLM_FALLBACKS_ROUTE = this.lastRoute;
-          setLastCompletionMeta({ endpoint: this.lastRoute, fallbackCount: 0 });
+          const totalMs = this.requestStartedAt ? Math.max(0, performance.now() - this.requestStartedAt) : void 0;
+          setLastCompletionMeta({
+            endpoint: this.lastRoute,
+            fallbackCount: 0,
+            trace: this.activeTrace?.snapshot(),
+            ttftMs: totalMs,
+            totalMs
+          });
         }
         onEvent(event);
       }
@@ -6646,28 +6796,50 @@ var FailoverProvider = class {
         );
       }
     }
-    const orchestrator = new TierOrchestrator({
-      qualityApi: (req, onEv) => this.streamWithCompletionTracking((inner) => this.streamQualityApiRoute(req, inner), onEv),
-      webUi: (req, onEv) => this.streamWithCompletionTracking((inner) => this.streamWebUiRoute(req, inner), onEv),
-      searxngDiscovery: (req, onEv) => this.streamWithCompletionTracking(
-        (inner) => this.streamSearxngDiscoveryRoute(req, inner),
-        onEv
-      ),
-      proxyFailover: (req, onEv) => this.streamWithCompletionTracking((inner) => this.streamProxyFailoverRoute(req, inner), onEv)
-    });
+    this.activeTrace = new RouteTrace();
+    this.requestStartedAt = performance.now();
+    const orchestrator = new TierOrchestrator(
+      {
+        qualityApi: (req, onEv) => this.streamWithCompletionTracking((inner) => this.streamQualityApiRoute(req, inner), onEv),
+        webUi: (req, onEv) => this.streamWithCompletionTracking((inner) => this.streamWebUiRoute(req, inner), onEv),
+        searxngDiscovery: (req, onEv) => this.streamWithCompletionTracking(
+          (inner) => this.streamSearxngDiscoveryRoute(req, inner),
+          onEv
+        ),
+        proxyFailover: (req, onEv) => this.streamWithCompletionTracking(
+          (inner) => this.streamProxyFailoverRoute(req, inner),
+          onEv
+        )
+      },
+      this.activeTrace
+    );
     try {
       await orchestrator.streamChat(request, onEvent);
+      const meta = getLastCompletionMeta();
+      if (meta && this.activeTrace) {
+        setLastCompletionMeta({ ...meta, trace: this.activeTrace.snapshot() });
+      }
     } catch (err) {
       if (err instanceof TierOrchestratorError) {
         throw this.mapTierFailure(err);
       }
       throw err;
+    } finally {
+      this.activeTrace = null;
     }
   }
   // Preserve the ChatRouteError taxonomy (rate-limit / quota / cold-start) while
   // surfacing which tiers were tried and their last error (R40). A no-attempt
   // failure means every tier skipped or none were enabled.
   mapTierFailure(err) {
+    if (this.activeTrace && this.activeTrace.length > 0) {
+      setLastCompletionMeta({
+        endpoint: "\u2014",
+        fallbackCount: Math.max(0, this.activeTrace.length - 1),
+        trace: this.activeTrace.snapshot(),
+        totalMs: this.requestStartedAt ? Math.max(0, performance.now() - this.requestStartedAt) : void 0
+      });
+    }
     if (err.attempts.length === 0) {
       return mapProxyChainFailure(
         "No chat routes are available yet. Enable a provider tier in Settings, or wait for the demo proxy to finish deploying."
@@ -7579,6 +7751,97 @@ function escapeHtml2(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+// src/plugins/session-usage/totals.ts
+function emptySessionTotals() {
+  return {
+    replies: 0,
+    repliesWithUsage: 0,
+    promptTokens: 0,
+    completionTokens: 0,
+    totalMs: 0
+  };
+}
+function accumulateSessionTotals(current, meta) {
+  const next = { ...current, replies: current.replies + 1 };
+  const wall = meta.totalMs ?? meta.durationMs;
+  if (wall !== void 0 && Number.isFinite(wall)) {
+    next.totalMs += Math.max(0, wall);
+  }
+  const usage = meta.usage;
+  if (usage && (usage.promptTokens !== void 0 || usage.completionTokens !== void 0)) {
+    next.repliesWithUsage += 1;
+    next.promptTokens += usage.promptTokens ?? 0;
+    next.completionTokens += usage.completionTokens ?? 0;
+  }
+  return next;
+}
+function formatSessionTotals(totals) {
+  if (totals.replies === 0) return "Session: no replies yet";
+  const parts = [`${totals.replies} repl${totals.replies === 1 ? "y" : "ies"}`];
+  if (totals.repliesWithUsage > 0) {
+    const tokenLabel = totals.repliesWithUsage < totals.replies ? `${totals.promptTokens}\u2192${totals.completionTokens} tok (partial)` : `${totals.promptTokens}\u2192${totals.completionTokens} tok`;
+    parts.push(tokenLabel);
+  }
+  if (totals.totalMs > 0) {
+    parts.push(`${Math.round(totals.totalMs)}ms`);
+  }
+  return `Session: ${parts.join(" \xB7 ")}`;
+}
+
+// src/plugins/session-usage/index.ts
+function SessionUsagePlugin() {
+  let host = null;
+  let totals = emptySessionTotals();
+  let sessionId = null;
+  let onMeta = null;
+  const paint = () => {
+    if (!host) return;
+    host.textContent = formatSessionTotals(totals);
+    host.hidden = totals.replies === 0;
+  };
+  const reset = () => {
+    totals = emptySessionTotals();
+    paint();
+  };
+  return {
+    name: "session-usage",
+    onMount(ctx) {
+      host = document.createElement("div");
+      host.className = "lf-session-totals";
+      host.setAttribute("aria-live", "polite");
+      host.hidden = true;
+      const layout = ctx.container.querySelector(".mur-chat-layout-wrapper");
+      const form = ctx.container.querySelector(".mur-chat-form-container");
+      if (layout && form) {
+        layout.insertBefore(host, form);
+      } else {
+        ctx.container.appendChild(host);
+      }
+      sessionId = ctx.engine.state.currentSessionId;
+      onMeta = (event) => {
+        const detail = event.detail;
+        if (!detail) return;
+        totals = accumulateSessionTotals(totals, detail);
+        paint();
+      };
+      window.addEventListener(COMPLETION_META_EVENT, onMeta);
+      ctx.engine.subscribe(
+        (s) => s.currentSessionId,
+        (id) => {
+          if (id !== sessionId) {
+            sessionId = id;
+            reset();
+          }
+        }
+      );
+    },
+    destroy() {
+      if (onMeta) window.removeEventListener(COMPLETION_META_EVENT, onMeta);
+      host?.remove();
+    }
+  };
+}
+
 // src/plugins/model-picker/index.ts
 var R11_TEXT = "`free` = our ranked chain; `openrouter/free` = OpenRouter meta-router";
 var RANK_HELP_URL = "https://github.com/bodecloud/llm_fallbacks#quality-scoring";
@@ -7674,6 +7937,62 @@ function ModelPickerPlugin() {
 
 // src/plugins/routing-chip/index.ts
 var CHIP_CLASS = "lf-routing-chip";
+var ROOT_CLASS = "lf-routing-root";
+function escapeHtml3(text) {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+function outcomeLabel(outcome) {
+  if (outcome === "success") return "ok";
+  if (outcome === "skip") return "skip";
+  return outcome === "error" ? "error" : outcome;
+}
+function hopRow(hop) {
+  const tier = TIER_LABELS[hop.tier] ?? hop.tier;
+  const host = hop.endpoint ? hostnameFromUrl(hop.endpoint) : "";
+  const model = hop.model ? escapeHtml3(hop.model) : "";
+  const reason = hop.reason ? escapeHtml3(hop.reason) : "";
+  const parts = [
+    `<span class="lf-hop-index">#${hop.hopIndex}</span>`,
+    `<span class="lf-hop-tier">${escapeHtml3(tier)}</span>`
+  ];
+  if (host) parts.push(`<span class="lf-hop-endpoint">${escapeHtml3(host)}</span>`);
+  if (model) parts.push(`<span class="lf-hop-model">${model}</span>`);
+  parts.push(
+    `<span class="lf-hop-outcome lf-hop-outcome-${hop.outcome}">${outcomeLabel(hop.outcome)}</span>`
+  );
+  return `
+    <li class="lf-hop-row" data-outcome="${hop.outcome}">
+      <div class="lf-hop-main">${parts.join("")}</div>
+      ${reason ? `<p class="lf-hop-reason">${reason}</p>` : ""}
+    </li>
+  `;
+}
+function renderChip(root, meta) {
+  const summary = formatRoutingChip(meta);
+  const badge = formatUsageBadge(meta);
+  const hops = meta.trace ?? [];
+  const panelId = `lf-routing-panel-${Math.random().toString(36).slice(2, 9)}`;
+  root.className = ROOT_CLASS;
+  root.innerHTML = `
+    <button type="button" class="${CHIP_CLASS}" aria-expanded="false" aria-controls="${panelId}">
+      <span class="lf-routing-summary">${escapeHtml3(summary)}</span>
+      ${badge ? `<span class="lf-usage-badge">${escapeHtml3(badge)}</span>` : ""}
+      <span class="lf-routing-chevron" aria-hidden="true">\u25BE</span>
+    </button>
+    <div id="${panelId}" class="lf-routing-panel" hidden>
+      ${hops.length ? `<ol class="lf-hop-list">${hops.map((h) => hopRow(h)).join("")}</ol>` : `<p class="lf-routing-empty">No hop details for this reply.</p>`}
+      <p class="lf-alias-note">${escapeHtml3(FREE_ALIAS_NOTE)}</p>
+    </div>
+  `;
+  const toggle = root.querySelector(`.${CHIP_CLASS}`);
+  const panel = root.querySelector(".lf-routing-panel");
+  toggle?.addEventListener("click", () => {
+    if (!toggle || !panel) return;
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!open));
+    panel.hidden = open;
+  });
+}
 function RoutingChipPlugin() {
   let engine = null;
   let container = null;
@@ -7685,14 +8004,12 @@ function RoutingChipPlugin() {
     const domAssistants = container.querySelectorAll(".mur-message-assistant");
     const msgEl = domAssistants[domAssistants.length - 1];
     if (!msgEl) return;
-    let chip = msgEl.querySelector(`.${CHIP_CLASS}`);
-    if (!chip) {
-      chip = document.createElement("div");
-      chip.className = CHIP_CLASS;
-      chip.setAttribute("aria-label", "Routing metadata");
-      msgEl.appendChild(chip);
+    let root = msgEl.querySelector(`.${ROOT_CLASS}`);
+    if (!root) {
+      root = document.createElement("div");
+      msgEl.appendChild(root);
     }
-    chip.textContent = formatRoutingChip(meta);
+    renderChip(root, meta);
   }
   function scheduleAttach(meta) {
     requestAnimationFrame(() => {
@@ -8308,6 +8625,7 @@ async function bootstrap() {
       ModelPickerPlugin(),
       MessageActionsPlugin(),
       RoutingChipPlugin(),
+      SessionUsagePlugin(),
       StatusStripPlugin(),
       TurnstileGatePlugin(),
       FailoverSettingsPlugin({

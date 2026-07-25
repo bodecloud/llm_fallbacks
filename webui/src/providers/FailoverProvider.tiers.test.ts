@@ -13,6 +13,7 @@ vi.mock("../analytics", () => ({
 }));
 
 import { FailoverProvider } from "./FailoverProvider";
+import { getLastCompletionMeta } from "./routing-metadata";
 
 const config: AppConfig = {
   endpoints: ["https://proxy.test"],
@@ -153,6 +154,66 @@ describe("FailoverProvider tier routing", () => {
       provider.streamChat(imageRequest("text/model"), () => {})
     ).rejects.toMatchObject({ kind: "vision_unsupported" });
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("attaches a RouteTrace with skip + success hops on zero-config chat (R61)", async () => {
+    const fetchMock = vi.fn(async () =>
+      sseResponse([
+        JSON.stringify({ choices: [{ delta: { content: "hi" } }] }),
+        JSON.stringify({ choices: [{ finish_reason: "stop" }] }),
+        JSON.stringify({ usage: { prompt_tokens: 2, completion_tokens: 1, total_tokens: 3 } }),
+      ])
+    );
+    vi.stubGlobal("fetch", fetchMock);
+
+    const provider = new FailoverProvider(config);
+    await provider.streamChat(request(), () => {});
+
+    const meta = getLastCompletionMeta();
+    expect(meta?.trace?.length).toBeGreaterThanOrEqual(2);
+    expect(meta?.trace?.[0]).toMatchObject({ tier: "quality_api", outcome: "skip" });
+    expect(meta?.trace?.some((h) => h.tier === "proxy_failover" && h.outcome === "success")).toBe(
+      true
+    );
+    expect(meta?.usage).toEqual({
+      promptTokens: 2,
+      completionTokens: 1,
+      totalTokens: 3,
+    });
+    expect(meta?.totalMs).toBeGreaterThanOrEqual(0);
+    const sent = JSON.parse((fetchMock.mock.calls[0][1] as RequestInit).body as string);
+    expect(sent.stream_options).toEqual({ include_usage: true });
+  });
+
+  it("records an error hop then success when the first proxy endpoint fails", async () => {
+    const dual: AppConfig = {
+      ...config,
+      endpoints: ["https://primary-fail.test", "https://secondary-ok.test"],
+    };
+    const fetchMock = vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input);
+      if (url.includes("primary-fail")) {
+        return new Response("upstream unavailable", { status: 503 });
+      }
+      return sseResponse([
+        JSON.stringify({ choices: [{ delta: { content: "ok" } }] }),
+        JSON.stringify({ choices: [{ finish_reason: "stop" }] }),
+      ]);
+    });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const provider = new FailoverProvider(dual);
+    await provider.streamChat(request(), () => {});
+
+    const proxyHops = (getLastCompletionMeta()?.trace ?? []).filter(
+      (h) => h.tier === "proxy_failover"
+    );
+    expect(proxyHops.length).toBeGreaterThanOrEqual(2);
+    expect(proxyHops[0].outcome).toBe("error");
+    expect(proxyHops[0].errorClass).toBe("cold_start");
+    expect(proxyHops[0].hopIndex).toBe(0);
+    expect(proxyHops.at(-1)?.outcome).toBe("success");
+    expect(proxyHops.at(-1)?.hopIndex).toBe(1);
   });
 
   it("sends an image_url part to the proxy for a vision model (R28)", async () => {

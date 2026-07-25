@@ -45,6 +45,11 @@ Shared vocabulary for the static chat gateway and Python library.
 | **Compare mode** | Two-column chat UI: same prompt to two independently configured sources |
 | **Web UI provider tier** | Optional headless-browser route against free web chat UIs; requires user-run runner; off by default on public demo |
 | **SearXNG discovery tier** | Metasearch pass to suggest candidate free web chat URLs when API/web tiers exhaust |
+| **Thinking block** | Collapsible reasoning trace in assistant messages when the active route streams a reasoning channel |
+| **Tool-call card** | Structured in-message UI for streamed tool invocations with lifecycle status (display-only until a later wave adds execution) |
+| **Usage badge** | Per-reply UI showing token counts (when exposed by route) plus TTFT and total latency |
+| **Failover timeline** | Expanded routing view: ordered hop attempts with endpoint, model, outcome, and tier skip reasons |
+| **Voice input** | Web Speech dictation into the composer on supported browsers; user sends manually |
 
 ## Learnings index
 

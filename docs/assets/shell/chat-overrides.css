@@ -645,18 +645,169 @@ body.lf-chat-page::before {
   white-space: nowrap;
 }
 
-/* ── Wave 1: routing chip ───────────────────────────────────── */
-.lf-routing-chip {
-  margin-top: 0.35rem;
+/* ── Wave 1 / 6A: routing chip + failover timeline ───────────── */
+.lf-routing-root {
+  margin-top: 0.4rem;
   font-size: 0.68rem;
   letter-spacing: 0.02em;
   color: #8b8ba3;
-  opacity: 0.9;
 }
 
-.lf-routing-chip::before {
+.lf-routing-chip {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.55rem;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.2rem 0.45rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  cursor: pointer;
+  opacity: 0.95;
+}
+
+.lf-routing-chip:hover {
+  border-color: rgba(157, 78, 221, 0.28);
+  background: rgba(26, 26, 46, 0.55);
+}
+
+.lf-routing-chip:focus-visible {
+  outline: 2px solid #c77dff;
+  outline-offset: 2px;
+}
+
+.lf-routing-summary::before {
   content: "↳ ";
   opacity: 0.65;
+}
+
+.lf-usage-badge {
+  color: #c4c4d4;
+  opacity: 0.95;
+}
+
+.lf-routing-chevron {
+  opacity: 0.7;
+  font-size: 0.75em;
+}
+
+.lf-routing-chip[aria-expanded="true"] .lf-routing-chevron {
+  transform: rotate(180deg);
+}
+
+.lf-routing-panel {
+  margin-top: 0.4rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid rgba(157, 78, 221, 0.22);
+  border-radius: 8px;
+  background: rgba(18, 18, 31, 0.92);
+}
+
+.lf-routing-panel[hidden] {
+  display: none !important;
+}
+
+.lf-hop-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.lf-hop-row {
+  border: 1px solid rgba(157, 78, 221, 0.16);
+  border-radius: 6px;
+  padding: 0.4rem 0.5rem;
+  background: rgba(26, 26, 46, 0.55);
+}
+
+.lf-hop-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  align-items: center;
+  color: #c4c4d4;
+}
+
+.lf-hop-index {
+  color: #8b8ba3;
+  font-variant-numeric: tabular-nums;
+}
+
+.lf-hop-tier {
+  color: #e8e8ef;
+  font-weight: 600;
+}
+
+.lf-hop-endpoint,
+.lf-hop-model {
+  color: #8b8ba3;
+  word-break: break-all;
+}
+
+.lf-hop-outcome {
+  margin-left: auto;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.lf-hop-outcome-success {
+  color: #7dcea0;
+  background: rgba(125, 206, 160, 0.12);
+}
+
+.lf-hop-outcome-skip {
+  color: #f0c674;
+  background: rgba(240, 198, 116, 0.12);
+}
+
+.lf-hop-outcome-error {
+  color: #e88;
+  background: rgba(238, 136, 136, 0.12);
+}
+
+.lf-hop-reason {
+  margin: 0.3rem 0 0;
+  color: #8b8ba3;
+  font-size: 0.72rem;
+}
+
+.lf-alias-note {
+  margin: 0.55rem 0 0;
+  color: #8b8ba3;
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.lf-routing-empty {
+  margin: 0;
+  color: #8b8ba3;
+}
+
+/* Wave 6A: session totals row */
+.lf-session-totals {
+  flex-shrink: 0;
+  padding: 0.35rem 0.75rem;
+  border-top: 1px solid rgba(157, 78, 221, 0.18);
+  background: rgba(18, 18, 31, 0.85);
+  font-size: 0.72rem;
+  color: #8b8ba3;
+  letter-spacing: 0.02em;
+}
+
+.lf-session-totals[hidden] {
+  display: none !important;
 }
 
 /* ── Wave 1: hide unwired ResearchWizard chrome ─────────────── */
