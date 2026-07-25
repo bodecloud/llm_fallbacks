@@ -1,6 +1,6 @@
 ---
 name: llm-fallbacks
-last_updated: 2026-07-24
+last_updated: 2026-07-25
 ---
 
 # Strategy
@@ -15,7 +15,7 @@ Developers want free LLM chat without manually tracking which models exist, whic
 
 Endpoint bootstrap is three-layer: Pages CI writes `docs/config.js`, the browser fetches `chat_proxy.json` at runtime, and the committed artifact lists dual proxy URLs for failover.
 
-High availability on free tiers means **best-effort failover with cold-start penalties**, not paid uptime. We say that plainly.
+High availability on free tiers means **best-effort failover with cold-start penalties**, not paid uptime. Exhaust free, legal routes the user opted into before giving up; cold starts, quotas, and ToS limits still apply. We say that plainly.
 
 ## Who it's for
 
@@ -33,13 +33,13 @@ Open-source builders and power users who want a demo-quality free LLM gateway ti
 
 ### Static public chat (GitHub Pages)
 
-Minimal chat SPA as the repo homepage. Uses `free_models.json` for the model browser. Calls proxies only.
+Static chat SPA as the repo homepage. Uses `free_models.json` for the model browser. Zero-config path uses ranked catalog + edge/container proxies only. Optional BYOK and user-run companions never embed repo-owned keys. Demo job: make ranked free failover tangible — not become Open WebUI.
 
 _Keeps secrets off the static surface and makes the project tangible to visitors._
 
 ### Edge + container proxy HA
 
-Cloudflare Worker primary (CORS, guest auth, rate limits, short fallback chain) plus **Render LiteLLM** as v1 secondary. Both driven by generated configs. Secondary redeploy via Render API when deploy hooks are unavailable; `chat_proxy.json` preserves dual endpoints across Worker-only CI runs.
+Cloudflare Worker primary (CORS, guest auth, rate limits, short fallback chain) plus **Render LiteLLM** as v1 secondary. Both driven by generated configs. Secondary redeploy via Render API when deploy hooks are unavailable; `chat_proxy.json` preserves dual endpoints across Worker-only CI runs. Public $0 HA remains Worker + Render LiteLLM; user-run runners are opt-in power-user extensions, not part of the dual-proxy HA story.
 
 _Runtime routing and keys cannot live in the browser; reuses `litellm_config_free.yaml` and `free` alias work._
 
@@ -61,6 +61,7 @@ _Without a living remediation track, operator runbooks drift from production._
 - Full TypeScript port of llm-fallbacks discovery
 - True multi-region DNS HA on $0
 - Browser-direct provider calls with repo-owned keys on the public homepage
+- Agent gateway features (MCP marketplace, tool execution loops, cloud session sync) — demo stays display/routing-first
 
 ## Messaging
 

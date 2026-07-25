@@ -1,6 +1,6 @@
 ---
 title: "feat: Chat UI Wave 3 — catalog differentiation, export, hash routing"
-status: active
+status: completed
 date: 2026-07-24
 type: feat
 origin: docs/brainstorms/2026-07-24-chat-ui-improvements-requirements.md

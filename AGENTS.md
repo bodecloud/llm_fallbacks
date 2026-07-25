@@ -189,6 +189,7 @@ When reviewing or submitting changes:
 14. **Bootstrap merge:** `FailoverProvider` must use `loadRuntimeConfig()` (merged `chat_proxy.json` endpoints), not raw `readRuntimeConfig()` alone — stale single-endpoint localStorage hides secondaries until cleared (see `docs/CAVEATS.md`)
 15. **Cloudflare auth 10000:** regenerate CF API token with Workers Scripts Edit; when deploy skips, `WORKER_URL` secret keeps Pages building (see `docs/solutions/workflow-issues/github-pages-webui-deploy-and-secrets.md`)
 16. **Render deploy-mode YAML:** omit `DATABASE_URL` env var entirely — do not set empty string; deploy generator excludes `database_url` and `allowed_routes`
+17. murm-ui streaming flicker: keep `webui/patches/murm-ui+0.2.0.patch` (plain-text tail until complete) via `postinstall` patch-package — bump alone was insufficient (see `docs/solutions/tooling-decisions/murm-ui-streaming-plaintext-tail-patch.md`)
 
 ## Compound Engineering
 
