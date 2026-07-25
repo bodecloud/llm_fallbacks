@@ -1,6 +1,7 @@
 import type { ChatPlugin } from "murm-ui";
 import { getColumns, applyFilter, sortRows, type FilterState } from "./filters";
 import type { CatalogEntry } from "../../providers/browser-router";
+import { setActiveModel } from "../../model-selection";
 
 export function ModelExplorerPlugin(deps: {
   getCatalog: () => CatalogEntry[];
@@ -12,24 +13,24 @@ export function ModelExplorerPlugin(deps: {
       window.registerShellPanel?.("explorer", (root) => {
         root.innerHTML = `
           <header class="panel-header">
-            <h3>Model Explorer</h3>
+            <h3>Free models</h3>
           </header>
-          <p class="panel-hint">Browse and filter <code>free_models.json</code>.</p>
-          <label>Filter method
+          <p class="panel-hint">Browse the daily-ranked free model list.</p>
+          <label>Filter type
             <select id="explorer-method">
-              <option value="value">value</option>
-              <option value="regex">regex</option>
-              <option value="topn">topn</option>
-              <option value="categorical">categorical</option>
-              <option value="null">null</option>
+              <option value="value">match value</option>
+              <option value="regex">pattern (regex)</option>
+              <option value="topn">top N by score</option>
+              <option value="categorical">category</option>
+              <option value="null">empty field</option>
             </select>
           </label>
           <label>Column <select id="explorer-column"></select></label>
-          <label>Value <input id="explorer-value" type="text" placeholder="filter value" /></label>
-          <label>Top N <input id="explorer-topn" type="number" min="1" value="10" /></label>
+          <label>Search <input id="explorer-value" type="text" placeholder="what to match" /></label>
+          <label>How many <input id="explorer-topn" type="number" min="1" value="10" /></label>
           <div class="panel-actions">
             <button type="button" id="explorer-apply" class="panel-btn panel-btn-primary">Apply filter</button>
-            <button type="button" id="explorer-reload" class="panel-btn">Reload catalog</button>
+            <button type="button" id="explorer-reload" class="panel-btn">Reload list</button>
           </div>
           <div id="explorer-status" class="panel-status"></div>
           <div class="explorer-table-wrap"><table id="explorer-table"><thead></thead><tbody></tbody></table></div>
@@ -67,26 +68,36 @@ export function ModelExplorerPlugin(deps: {
               (c) =>
                 `<th data-col="${c}" style="cursor:pointer">${c}${sortColumn === c ? (sortDir === "asc" ? " ▲" : " ▼") : ""}</th>`
             )
-            .join("")}</tr>`;
+            .join("")}<th>Use</th></tr>`;
           tbody.innerHTML = rows
             .slice(0, 200)
             .map(
-              (row) =>
-                `<tr>${cols
+              (row, rowIdx) =>
+                `<tr data-row-idx="${rowIdx}">${cols
                   .map((c) => `<td>${escapeHtml(String((row as Record<string, unknown>)[c] ?? ""))}</td>`)
-                  .join("")}</tr>`
+                  .join("")}<td><button type="button" class="panel-btn lf-use-model-btn" data-model-id="${escapeHtml(String(row.id ?? ""))}">Use for chat</button></td></tr>`
             )
             .join("");
           statusEl.textContent = `${rows.length} model(s) shown${rows.length > 200 ? " (first 200)" : ""}`;
           thead.querySelectorAll("th").forEach((th) => {
             th.addEventListener("click", () => {
-              const col = th.getAttribute("data-col")!;
+              const col = th.getAttribute("data-col");
+              if (!col) return;
               if (sortColumn === col) sortDir = sortDir === "asc" ? "desc" : "asc";
               else {
                 sortColumn = col;
                 sortDir = "desc";
               }
               renderTable(sortRows(rows, sortColumn, sortDir));
+            });
+          });
+          tbody.querySelectorAll<HTMLButtonElement>(".lf-use-model-btn").forEach((btn) => {
+            btn.addEventListener("click", (ev) => {
+              ev.stopPropagation();
+              const modelId = btn.getAttribute("data-model-id");
+              if (!modelId) return;
+              setActiveModel(modelId);
+              statusEl.textContent = `Model set to ${modelId} — use the composer picker to confirm.`;
             });
           });
         }

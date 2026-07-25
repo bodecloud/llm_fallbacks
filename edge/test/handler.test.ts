@@ -62,6 +62,20 @@ describe("Worker fetch handler", () => {
     expect(json.error.message).toMatch(/not allowlisted/i);
   });
 
+  it("OPTIONS exposes routing headers in CORS", async () => {
+    const res = await worker.fetch(
+      new Request("https://proxy.example/v1/chat/completions", {
+        method: "OPTIONS",
+        headers: { Origin: "https://bodecloud.github.io" },
+      }),
+      baseEnv(new MemoryKV()),
+    );
+    expect(res.status).toBe(204);
+    const exposed = res.headers.get("Access-Control-Expose-Headers") ?? "";
+    expect(exposed).toMatch(/x-llm-fallbacks-endpoint/i);
+    expect(exposed).toMatch(/x-litellm-model-name/i);
+  });
+
   it("returns 429 when per-minute rate limit exceeded", async () => {
     const kv = new MemoryKV();
     const env = baseEnv(kv, { RATE_LIMIT_PER_MINUTE: "1", RATE_LIMIT_PER_DAY: "100" });

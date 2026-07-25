@@ -5138,6 +5138,48 @@ function trackChatCompletionSuccess(route, zeroConfig) {
   }
 }
 
+// src/model-selection.ts
+var MODEL_CHANGED_EVENT = "llm-fallbacks:model-changed";
+var PINNED_MODELS = [
+  { id: "free", label: "free (ranked alias)" },
+  { id: "openrouter/free", label: "openrouter/free (OpenRouter router)" }
+];
+var sessionModel = null;
+var catalogRef = [];
+function initModelSelection(catalog) {
+  catalogRef = catalog;
+  if (sessionModel === null) {
+    sessionModel = "free";
+  }
+}
+function setCatalogRef(catalog) {
+  catalogRef = catalog;
+}
+function getActiveModel(fallbackDefault = "free") {
+  return sessionModel ?? fallbackDefault;
+}
+function setActiveModel(id) {
+  const trimmed = id.trim();
+  if (!trimmed) return;
+  sessionModel = trimmed;
+  window.dispatchEvent(
+    new CustomEvent(MODEL_CHANGED_EVENT, { detail: { modelId: trimmed } })
+  );
+}
+function getPinnedModels() {
+  return PINNED_MODELS;
+}
+function getCatalogModels(limit = 50) {
+  const sorted = [...catalogRef].sort(
+    (a, b2) => (b2.quality_score ?? 0) - (a.quality_score ?? 0)
+  );
+  return sorted.slice(0, limit);
+}
+function modelOptionLabel(entry) {
+  const score = entry.quality_score !== void 0 ? ` \xB7 ${entry.quality_score.toFixed(1)}` : "";
+  return `${entry.id}${score}`;
+}
+
 // src/providers/browser-router.ts
 var RETRYABLE = /* @__PURE__ */ new Set([408, 429, 500, 502, 503, 504]);
 var LOCAL_PROVIDERS = /* @__PURE__ */ new Set(["ollama", "vllm", "lmstudio", "xinference"]);
@@ -5296,6 +5338,112 @@ function shouldFallbackToProxy(browserErr) {
   return msg === "BROWSER_UNAVAILABLE" || msg === "PROXY_UNAVAILABLE" || /^no API key for /i.test(msg) || /^unsupported provider:/i.test(msg);
 }
 
+// src/providers/errors.ts
+var ChatRouteError = class extends Error {
+  kind;
+  constructor(kind, message) {
+    super(message);
+    this.name = "ChatRouteError";
+    this.kind = kind;
+  }
+};
+var RateLimitError = class extends ChatRouteError {
+  constructor(message = "Rate limit reached. Wait a moment and try again.") {
+    super("rate_limit", message);
+    this.name = "RateLimitError";
+  }
+};
+var QuotaError = class extends ChatRouteError {
+  constructor(message = "Daily quota exhausted for this route. Try again tomorrow or use a different model.") {
+    super("quota", message);
+    this.name = "QuotaError";
+  }
+};
+var ColdStartError = class extends ChatRouteError {
+  constructor(message = "The proxy is waking up \u2014 retry in a few seconds.") {
+    super("cold_start", message);
+    this.name = "ColdStartError";
+  }
+};
+var AuthError = class extends ChatRouteError {
+  constructor(message = "Authentication failed. Check your guest token in Server settings.") {
+    super("auth", message);
+    this.name = "AuthError";
+  }
+};
+var ProxyUnavailableError = class extends ChatRouteError {
+  constructor(message = "All proxy endpoints failed. Try again later or check Server settings.") {
+    super("proxy_unavailable", message);
+    this.name = "ProxyUnavailableError";
+  }
+};
+var QUOTA_RE = /quota|credit|insufficient|billing|exhausted/i;
+var COLD_START_RE = /cold start|starting up|still deploying|proxy pending|503|502/i;
+function mapHttpError(status, bodyText, endpoint) {
+  const snippet = bodyText.slice(0, 200);
+  if (status === 401 || status === 403) {
+    return new AuthError(`Authentication failed at ${endpoint}. Check your guest token in Server settings.`);
+  }
+  if (status === 429) {
+    return new RateLimitError(`Rate limit exceeded at ${endpoint}. Wait and try again.`);
+  }
+  if (QUOTA_RE.test(bodyText)) {
+    return new QuotaError(`Quota exhausted at ${endpoint}. ${snippet}`);
+  }
+  if (status === 502 || status === 503 || COLD_START_RE.test(bodyText)) {
+    return new ColdStartError(`Proxy at ${endpoint} is unavailable (${status}). Retry shortly.`);
+  }
+  return new ProxyUnavailableError(`${endpoint}: HTTP ${status} \u2014 ${snippet}`);
+}
+function mapProxyChainFailure(lastError) {
+  if (/401|403|Unauthorized/i.test(lastError)) {
+    return new AuthError(lastError);
+  }
+  if (/429|rate limit/i.test(lastError)) {
+    return new RateLimitError(lastError);
+  }
+  if (QUOTA_RE.test(lastError)) {
+    return new QuotaError(lastError);
+  }
+  if (COLD_START_RE.test(lastError)) {
+    return new ColdStartError(lastError);
+  }
+  return new ProxyUnavailableError(lastError);
+}
+
+// src/providers/routing-metadata.ts
+var lastCompletionMeta = null;
+var COMPLETION_META_EVENT = "llm-fallbacks:completion-meta";
+function setLastCompletionMeta(meta) {
+  lastCompletionMeta = meta;
+  window.dispatchEvent(
+    new CustomEvent(COMPLETION_META_EVENT, { detail: { ...meta } })
+  );
+}
+function getLastCompletionMeta() {
+  return lastCompletionMeta;
+}
+function hostnameFromUrl(url) {
+  try {
+    return new URL(url.startsWith("http") ? url : `https://${url}`).hostname;
+  } catch {
+    return url.replace(/^https?:\/\//, "").split("/")[0] || url;
+  }
+}
+function formatRoutingChip(meta) {
+  const parts = [];
+  if (meta.endpoint) {
+    parts.push(hostnameFromUrl(meta.endpoint));
+  }
+  if (meta.modelHeader) {
+    parts.push(meta.modelHeader);
+  }
+  if (meta.fallbackCount > 0) {
+    parts.push(`${meta.fallbackCount} fallback${meta.fallbackCount === 1 ? "" : "s"}`);
+  }
+  return parts.join(" \xB7 ") || "\u2014";
+}
+
 // src/providers/sse.ts
 async function parseSSE(response, onMessage) {
   const reader = response.body?.getReader();
@@ -5395,6 +5543,18 @@ function messagesToOpenAi(messages) {
     return { role: m2.role, content: text };
   });
 }
+function readRoutingHeaders(res) {
+  const modelHeader = res.headers.get("x-litellm-model-name") || res.headers.get("x-litellm-model-id") || void 0;
+  const durationRaw = res.headers.get("x-litellm-response-duration-ms");
+  const durationMs = durationRaw ? Number.parseFloat(durationRaw) : void 0;
+  return {
+    modelHeader: modelHeader ?? void 0,
+    durationMs: Number.isFinite(durationMs) ? durationMs : void 0
+  };
+}
+function endpointLabel(base, res) {
+  return res.headers.get("x-llm-fallbacks-endpoint") || base;
+}
 var FailoverProvider = class {
   config;
   catalog = [];
@@ -5444,6 +5604,12 @@ var FailoverProvider = class {
   getRuntimeConfig() {
     return this.config;
   }
+  resolveModel(request) {
+    const fromRequest = request.options.model;
+    if (fromRequest) return fromRequest;
+    const sessionModel2 = getActiveModel(this.config.defaultModel || "free");
+    return sessionModel2 || this.config.defaultModel || "free";
+  }
   async chatViaProxy(base, body, guestToken, signal) {
     return fetch(endpointUrl(base), {
       method: "POST",
@@ -5456,8 +5622,9 @@ var FailoverProvider = class {
     });
   }
   async streamProxyFallback(body, config, onEvent, signal) {
-    if (!config.endpoints.length) throw new Error("PROXY_UNAVAILABLE");
+    if (!config.endpoints.length) throw mapProxyChainFailure("PROXY_UNAVAILABLE");
     let lastError = "All proxy endpoints failed";
+    let hopIndex = 0;
     for (const base of config.endpoints) {
       this.setStatus(`proxy: ${base} \u2026`);
       try {
@@ -5465,22 +5632,35 @@ var FailoverProvider = class {
         if (res.ok) {
           this.lastRoute = `proxy/${base}`;
           window.LLM_FALLBACKS_ROUTE = this.lastRoute;
+          const headerMeta = readRoutingHeaders(res);
+          setLastCompletionMeta({
+            endpoint: endpointLabel(base, res),
+            modelHeader: headerMeta.modelHeader,
+            fallbackCount: hopIndex,
+            durationMs: headerMeta.durationMs
+          });
           await emitOpenAiSseAsStreamEvents(res, onEvent);
           return;
         }
         const errText = await res.text();
         lastError = `${base}: HTTP ${res.status} \u2014 ${errText.slice(0, 160)}`;
-        if (!RETRYABLE.has(res.status)) throw new Error(lastError);
+        if (!RETRYABLE.has(res.status)) {
+          throw mapHttpError(res.status, errText, base);
+        }
       } catch (err) {
         if (signal.aborted) throw err;
+        if (err instanceof ChatRouteError) {
+          throw err;
+        }
         lastError = `${base}: ${err instanceof Error ? err.message : String(err)}`;
       }
+      hopIndex += 1;
     }
-    throw new Error(lastError);
+    throw mapProxyChainFailure(lastError);
   }
   async streamChat(request, onEvent) {
     const config = this.getRuntimeConfig();
-    const model = request.options.model || config.defaultModel || "free";
+    const model = this.resolveModel(request);
     const openAiMessages = messagesToOpenAi(request.messages);
     const body = {
       model,
@@ -5501,6 +5681,10 @@ var FailoverProvider = class {
       });
       this.lastRoute = result.route;
       window.LLM_FALLBACKS_ROUTE = result.route;
+      setLastCompletionMeta({
+        endpoint: result.route,
+        fallbackCount: 0
+      });
       emitTextAsStreamEvents(result.content, onEv);
     };
     if (config.endpoints.length) {
@@ -5551,7 +5735,7 @@ var FailoverProvider = class {
       );
       return;
     }
-    throw new Error(
+    throw mapProxyChainFailure(
       "No chat routes are available yet. The demo proxy is still deploying \u2014 refresh in a minute."
     );
   }
@@ -5570,13 +5754,13 @@ function FailoverSettingsPlugin(deps) {
       window.registerShellPanel?.("failover", (root) => {
         root.innerHTML = `
           <header class="panel-header">
-            <h3>Failover &amp; Proxy</h3>
+            <h3>Chat server</h3>
           </header>
-          <p class="panel-hint">Proxy base URLs (one per line, tried in order).</p>
-          <label>Proxy endpoints
+          <p class="panel-hint">Server addresses, one per line. We try the first one, then the next if it fails.</p>
+          <label>Server URLs
             <textarea id="apiHostInput" rows="4" placeholder="https://your-worker.workers.dev"></textarea>
           </label>
-          <label>Guest token
+          <label>Access token
             <input id="guestTokenInput" type="password" autocomplete="off" />
           </label>
           <label>Default model
@@ -5676,13 +5860,13 @@ function ByokSettingsPlugin(deps) {
         const fields = [...new Set(Object.values(PROVIDER_KEY_FIELDS))];
         root.innerHTML = `
           <header class="panel-header">
-            <h3>Bring Your Own Keys</h3>
+            <h3>Your API keys</h3>
           </header>
-          <p class="panel-hint">Optional. Keys stay in this browser only \u2014 never sent to GitHub Pages.</p>
+          <p class="panel-hint">Optional. Keys stay in this browser only. They never go to GitHub Pages.</p>
           <form id="byok-form">
             <div id="byok-fields-primary"></div>
             <div id="byok-fields-extra" hidden></div>
-            <button type="button" id="byok-toggle-extra" class="panel-btn panel-btn-ghost">Show all providers</button>
+            <button type="button" id="byok-toggle-extra" class="panel-btn panel-btn-ghost">Show more providers</button>
             <div class="panel-actions">
               <button type="submit" class="panel-btn panel-btn-primary">Save keys</button>
             </div>
@@ -5714,7 +5898,7 @@ function ByokSettingsPlugin(deps) {
         toggleBtn.addEventListener("click", () => {
           const open = extraHost.hidden;
           extraHost.hidden = !open;
-          toggleBtn.textContent = open ? "Hide extra providers" : "Show all providers";
+          toggleBtn.textContent = open ? "Show fewer providers" : "Show more providers";
         });
         form.addEventListener("submit", (e) => {
           e.preventDefault();
@@ -5799,24 +5983,24 @@ function ModelExplorerPlugin(deps) {
       window.registerShellPanel?.("explorer", (root) => {
         root.innerHTML = `
           <header class="panel-header">
-            <h3>Model Explorer</h3>
+            <h3>Free models</h3>
           </header>
-          <p class="panel-hint">Browse and filter <code>free_models.json</code>.</p>
-          <label>Filter method
+          <p class="panel-hint">Browse the daily-ranked free model list.</p>
+          <label>Filter type
             <select id="explorer-method">
-              <option value="value">value</option>
-              <option value="regex">regex</option>
-              <option value="topn">topn</option>
-              <option value="categorical">categorical</option>
-              <option value="null">null</option>
+              <option value="value">match value</option>
+              <option value="regex">pattern (regex)</option>
+              <option value="topn">top N by score</option>
+              <option value="categorical">category</option>
+              <option value="null">empty field</option>
             </select>
           </label>
           <label>Column <select id="explorer-column"></select></label>
-          <label>Value <input id="explorer-value" type="text" placeholder="filter value" /></label>
-          <label>Top N <input id="explorer-topn" type="number" min="1" value="10" /></label>
+          <label>Search <input id="explorer-value" type="text" placeholder="what to match" /></label>
+          <label>How many <input id="explorer-topn" type="number" min="1" value="10" /></label>
           <div class="panel-actions">
             <button type="button" id="explorer-apply" class="panel-btn panel-btn-primary">Apply filter</button>
-            <button type="button" id="explorer-reload" class="panel-btn">Reload catalog</button>
+            <button type="button" id="explorer-reload" class="panel-btn">Reload list</button>
           </div>
           <div id="explorer-status" class="panel-status"></div>
           <div class="explorer-table-wrap"><table id="explorer-table"><thead></thead><tbody></tbody></table></div>
@@ -5847,20 +6031,30 @@ function ModelExplorerPlugin(deps) {
           );
           thead.innerHTML = `<tr>${cols.map(
             (c) => `<th data-col="${c}" style="cursor:pointer">${c}${sortColumn === c ? sortDir === "asc" ? " \u25B2" : " \u25BC" : ""}</th>`
-          ).join("")}</tr>`;
+          ).join("")}<th>Use</th></tr>`;
           tbody.innerHTML = rows.slice(0, 200).map(
-            (row) => `<tr>${cols.map((c) => `<td>${escapeHtml(String(row[c] ?? ""))}</td>`).join("")}</tr>`
+            (row, rowIdx) => `<tr data-row-idx="${rowIdx}">${cols.map((c) => `<td>${escapeHtml(String(row[c] ?? ""))}</td>`).join("")}<td><button type="button" class="panel-btn lf-use-model-btn" data-model-id="${escapeHtml(String(row.id ?? ""))}">Use for chat</button></td></tr>`
           ).join("");
           statusEl.textContent = `${rows.length} model(s) shown${rows.length > 200 ? " (first 200)" : ""}`;
           thead.querySelectorAll("th").forEach((th) => {
             th.addEventListener("click", () => {
               const col = th.getAttribute("data-col");
+              if (!col) return;
               if (sortColumn === col) sortDir = sortDir === "asc" ? "desc" : "asc";
               else {
                 sortColumn = col;
                 sortDir = "desc";
               }
               renderTable(sortRows(rows, sortColumn, sortDir));
+            });
+          });
+          tbody.querySelectorAll(".lf-use-model-btn").forEach((btn) => {
+            btn.addEventListener("click", (ev) => {
+              ev.stopPropagation();
+              const modelId = btn.getAttribute("data-model-id");
+              if (!modelId) return;
+              setActiveModel(modelId);
+              statusEl.textContent = `Model set to ${modelId} \u2014 use the composer picker to confirm.`;
             });
           });
         }
@@ -5896,6 +6090,217 @@ function ModelExplorerPlugin(deps) {
 }
 function escapeHtml(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// src/plugins/model-picker/index.ts
+var HELP_TEXT = "`free` = our ranked chain; `openrouter/free` = OpenRouter meta-router";
+function ModelPickerPlugin() {
+  let selectEl = null;
+  function syncSelect() {
+    if (!selectEl) return;
+    const active = getActiveModel();
+    if (selectEl.value !== active) {
+      const opt = selectEl.querySelector(`option[value="${CSS.escape(active)}"]`);
+      if (opt) selectEl.value = active;
+    }
+  }
+  function populateOptions() {
+    if (!selectEl) return;
+    const active = getActiveModel();
+    selectEl.innerHTML = "";
+    for (const pinned of getPinnedModels()) {
+      const opt = document.createElement("option");
+      opt.value = pinned.id;
+      opt.textContent = pinned.label;
+      selectEl.appendChild(opt);
+    }
+    for (const entry of getCatalogModels()) {
+      if (getPinnedModels().some((p) => p.id === entry.id)) continue;
+      const opt = document.createElement("option");
+      opt.value = entry.id;
+      opt.textContent = modelOptionLabel(entry);
+      selectEl.appendChild(opt);
+    }
+    selectEl.value = active;
+  }
+  return {
+    name: "model-picker",
+    beforeSubmit: async (request) => {
+      return {
+        options: {
+          ...request.options,
+          model: getActiveModel()
+        }
+      };
+    },
+    onMount(ctx) {
+      const form = ctx.container.querySelector(".mur-chat-form-container");
+      if (!form) return;
+      const wrapper = document.createElement("div");
+      wrapper.className = "lf-model-picker-row";
+      wrapper.innerHTML = `
+        <label class="lf-model-picker-label">
+          <span class="lf-model-picker-title">Model</span>
+          <select class="lf-model-picker-select" aria-label="Chat model"></select>
+        </label>
+        <p class="lf-model-picker-help" title="${HELP_TEXT}">${HELP_TEXT}</p>
+      `;
+      form.insertBefore(wrapper, form.firstChild);
+      selectEl = wrapper.querySelector(".lf-model-picker-select");
+      if (!selectEl) return;
+      populateOptions();
+      selectEl.addEventListener("change", () => {
+        setActiveModel(selectEl.value);
+      });
+      window.addEventListener(MODEL_CHANGED_EVENT, syncSelect);
+      window.addEventListener(MODEL_CHANGED_EVENT, populateOptions);
+    },
+    destroy() {
+      window.removeEventListener(MODEL_CHANGED_EVENT, syncSelect);
+    }
+  };
+}
+
+// src/plugins/routing-chip/index.ts
+var CHIP_CLASS = "lf-routing-chip";
+function RoutingChipPlugin() {
+  let engine = null;
+  let container = null;
+  let prevGenerating = null;
+  function attachChipToLastAssistant(meta) {
+    if (!engine || !container) return;
+    const assistants = engine.state.messages.filter((m2) => m2.role === "assistant" && !m2.ephemeral);
+    if (assistants.length === 0) return;
+    const domAssistants = container.querySelectorAll(".mur-message-assistant");
+    const msgEl = domAssistants[domAssistants.length - 1];
+    if (!msgEl) return;
+    let chip = msgEl.querySelector(`.${CHIP_CLASS}`);
+    if (!chip) {
+      chip = document.createElement("div");
+      chip.className = CHIP_CLASS;
+      chip.setAttribute("aria-label", "Routing metadata");
+      msgEl.appendChild(chip);
+    }
+    chip.textContent = formatRoutingChip(meta);
+  }
+  function scheduleAttach(meta) {
+    requestAnimationFrame(() => {
+      attachChipToLastAssistant(meta);
+    });
+  }
+  return {
+    name: "routing-chip",
+    onMount(ctx) {
+      engine = ctx.engine;
+      container = ctx.container;
+      const onMeta = (ev) => {
+        const detail = ev.detail;
+        if (detail) scheduleAttach(detail);
+      };
+      window.addEventListener(COMPLETION_META_EVENT, onMeta);
+      const pending = getLastCompletionMeta();
+      if (pending) scheduleAttach(pending);
+      ctx.engine.subscribe((s) => s.generatingMessageId, (generatingId) => {
+        if (prevGenerating && !generatingId) {
+          const meta = getLastCompletionMeta();
+          if (meta) scheduleAttach(meta);
+        }
+        prevGenerating = generatingId;
+      });
+    }
+  };
+}
+
+// src/plugins/message-actions/index.ts
+function extractText(msg) {
+  return msg.blocks.filter((b2) => b2.type === "text").map((b2) => b2.type === "text" ? b2.text : "").join("");
+}
+function newBlockId() {
+  return crypto.randomUUID();
+}
+function findUserForAssistant(engine, assistantMsg) {
+  const messages = engine.state.messages;
+  const idx = messages.findIndex((m2) => m2.id === assistantMsg.id);
+  if (idx <= 0) return null;
+  for (let i = idx - 1; i >= 0; i -= 1) {
+    if (messages[i].role === "user") return messages[i];
+  }
+  return null;
+}
+var ICON_REGEN = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>`;
+var ICON_EDIT2 = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
+function MessageActionsPlugin() {
+  let engine = null;
+  return {
+    name: "message-actions",
+    onMount(ctx) {
+      engine = ctx.engine;
+      const origStop = ctx.engine.stopGeneration.bind(ctx.engine);
+      ctx.engine.stopGeneration = async () => {
+        const generatingId = ctx.engine.state.generatingMessageId;
+        let partialText = "";
+        if (generatingId) {
+          const pending = ctx.engine.state.messages.find((m2) => m2.id === generatingId);
+          if (pending) partialText = extractText(pending);
+        }
+        await origStop();
+        await new Promise((r) => setTimeout(r, 50));
+        if (partialText.trim() && !ctx.engine.isBusy) {
+          const lastUser = [...ctx.engine.state.messages].reverse().find((m2) => m2.role === "user");
+          const now = Date.now();
+          const assistantId = newBlockId();
+          await ctx.engine.setMessages([
+            ...ctx.engine.state.messages,
+            {
+              id: assistantId,
+              role: "assistant",
+              blocks: [{ id: newBlockId(), type: "text", text: partialText }],
+              runId: lastUser?.runId ?? lastUser?.id ?? assistantId,
+              createdAt: now,
+              updatedAt: now
+            }
+          ]);
+        }
+      };
+    },
+    getActionButtons(msg) {
+      if (!engine) return [];
+      if (msg.role === "assistant" && !msg.ephemeral && extractText(msg).trim()) {
+        return [
+          {
+            id: "regenerate",
+            title: "Regenerate response",
+            iconHtml: ICON_REGEN,
+            onClick: ({ message }) => {
+              if (!engine || engine.isBusy) return;
+              const userMsg = findUserForAssistant(engine, message);
+              if (!userMsg) return;
+              const text = extractText(userMsg);
+              if (!text.trim()) return;
+              engine.editAndResubmit(userMsg.id, text);
+            }
+          }
+        ];
+      }
+      if (msg.role === "user" && extractText(msg).trim()) {
+        return [
+          {
+            id: "edit",
+            title: "Edit message",
+            iconHtml: ICON_EDIT2,
+            onClick: ({ message }) => {
+              if (!engine || engine.isBusy) return;
+              const current = extractText(message);
+              const next = window.prompt("Edit your message:", current);
+              if (next === null || next.trim() === current.trim()) return;
+              engine.editAndResubmit(message.id, next.trim());
+            }
+          }
+        ];
+      }
+      return [];
+    }
+  };
 }
 
 // src/shell-panels.ts
@@ -5963,8 +6368,13 @@ async function loadCatalog(config) {
 function wireChatInputIds(container) {
   const input = container.querySelector(".mur-chat-input");
   const send = container.querySelector(".mur-send-btn");
+  const history2 = container.querySelector(".mur-chat-history");
   if (input && !input.id) input.id = "chatinput";
   if (send && !send.id) send.id = "sendbutton";
+  if (history2 && !history2.getAttribute("aria-live")) {
+    history2.setAttribute("aria-live", "polite");
+    history2.setAttribute("aria-relevant", "additions");
+  }
 }
 async function bootstrap() {
   seedZeroConfigFromPageConfig();
@@ -5977,9 +6387,10 @@ async function bootstrap() {
   trackSessionEvent(ANALYTICS_EVENTS.homepageSession);
   const config = await loadRuntimeConfig();
   const { catalog, providerUrls } = await loadCatalog(config);
+  initModelSelection(catalog);
   const provider = new FailoverProvider(config);
   provider.setCatalog(catalog, providerUrls);
-  let catalogRef = catalog;
+  let catalogRef2 = catalog;
   let providerUrlsRef = providerUrls;
   const ui = new ChatUI({
     container: "#chatMount",
@@ -5990,24 +6401,28 @@ async function bootstrap() {
     routing: false,
     plugins: (engine) => [
       CopyPlugin(),
+      ModelPickerPlugin(),
+      MessageActionsPlugin(),
+      RoutingChipPlugin(),
       FailoverSettingsPlugin({
         provider,
         onConfigSaved: async () => {
           const refreshedConfig = await loadRuntimeConfig();
           const refreshed = await loadCatalog(refreshedConfig);
-          catalogRef = refreshed.catalog;
+          catalogRef2 = refreshed.catalog;
           providerUrlsRef = refreshed.providerUrls;
+          setCatalogRef(refreshed.catalog);
           provider.updateConfig(refreshedConfig);
           provider.setCatalog(refreshed.catalog, refreshed.providerUrls);
         }
       }),
       ByokSettingsPlugin({
         onKeysSaved: () => {
-          provider.setCatalog(catalogRef, providerUrlsRef);
+          provider.setCatalog(catalogRef2, providerUrlsRef);
         }
       }),
       ModelExplorerPlugin({
-        getCatalog: () => catalogRef,
+        getCatalog: () => catalogRef2,
         getCatalogUrl: () => readRuntimeConfig().catalogUrl
       })
     ]

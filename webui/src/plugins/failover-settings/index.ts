@@ -24,13 +24,13 @@ export function FailoverSettingsPlugin(deps: {
       window.registerShellPanel?.("failover", (root) => {
         root.innerHTML = `
           <header class="panel-header">
-            <h3>Failover &amp; Proxy</h3>
+            <h3>Chat server</h3>
           </header>
-          <p class="panel-hint">Proxy base URLs (one per line, tried in order).</p>
-          <label>Proxy endpoints
+          <p class="panel-hint">Server addresses, one per line. We try the first one, then the next if it fails.</p>
+          <label>Server URLs
             <textarea id="apiHostInput" rows="4" placeholder="https://your-worker.workers.dev"></textarea>
           </label>
-          <label>Guest token
+          <label>Access token
             <input id="guestTokenInput" type="password" autocomplete="off" />
           </label>
           <label>Default model

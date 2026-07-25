@@ -11,6 +11,10 @@ import type { CatalogEntry } from "./providers/browser-router";
 import { FailoverSettingsPlugin } from "./plugins/failover-settings";
 import { ByokSettingsPlugin } from "./plugins/byok-settings";
 import { ModelExplorerPlugin } from "./plugins/model-explorer";
+import { ModelPickerPlugin } from "./plugins/model-picker";
+import { RoutingChipPlugin } from "./plugins/routing-chip";
+import { MessageActionsPlugin } from "./plugins/message-actions";
+import { initModelSelection, setCatalogRef } from "./model-selection";
 import {
   ANALYTICS_EVENTS,
   trackSessionEvent,
@@ -47,8 +51,13 @@ async function loadCatalog(config: AppConfig): Promise<{
 function wireChatInputIds(container: HTMLElement): void {
   const input = container.querySelector<HTMLTextAreaElement>(".mur-chat-input");
   const send = container.querySelector<HTMLButtonElement>(".mur-send-btn");
+  const history = container.querySelector<HTMLElement>(".mur-chat-history");
   if (input && !input.id) input.id = "chatinput";
   if (send && !send.id) send.id = "sendbutton";
+  if (history && !history.getAttribute("aria-live")) {
+    history.setAttribute("aria-live", "polite");
+    history.setAttribute("aria-relevant", "additions");
+  }
 }
 
 async function bootstrap(): Promise<void> {
@@ -64,6 +73,7 @@ async function bootstrap(): Promise<void> {
 
   const config = await loadRuntimeConfig();
   const { catalog, providerUrls } = await loadCatalog(config);
+  initModelSelection(catalog);
   const provider = new FailoverProvider(config);
   provider.setCatalog(catalog, providerUrls);
 
@@ -79,6 +89,9 @@ async function bootstrap(): Promise<void> {
     routing: false,
     plugins: (engine) => [
       CopyPlugin(),
+      ModelPickerPlugin(),
+      MessageActionsPlugin(),
+      RoutingChipPlugin(),
       FailoverSettingsPlugin({
         provider,
         onConfigSaved: async () => {
@@ -86,6 +99,7 @@ async function bootstrap(): Promise<void> {
           const refreshed = await loadCatalog(refreshedConfig);
           catalogRef = refreshed.catalog;
           providerUrlsRef = refreshed.providerUrls;
+          setCatalogRef(refreshed.catalog);
           provider.updateConfig(refreshedConfig);
           provider.setCatalog(refreshed.catalog, refreshed.providerUrls);
         },

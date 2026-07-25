@@ -1,3 +1,12 @@
+export const EXPOSED_RESPONSE_HEADERS = [
+  "x-llm-fallbacks-endpoint",
+  "x-litellm-model-name",
+  "x-litellm-model-id",
+  "x-litellm-attempted-failbacks",
+  "x-litellm-response-duration-ms",
+  "retry-after",
+].join(", ");
+
 export function parseOrigins(raw: string): string[] {
   return raw.split(",").map((o) => o.trim()).filter(Boolean);
 }
@@ -8,6 +17,7 @@ export function corsHeaders(origin: string | null, allowed: string[]): HeadersIn
     "Access-Control-Allow-Origin": match,
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Authorization, Content-Type",
+    "Access-Control-Expose-Headers": EXPOSED_RESPONSE_HEADERS,
     "Access-Control-Max-Age": "86400",
   };
 }

@@ -1,4 +1,5 @@
 import { trackChatCompletionSuccess } from "../analytics";
+import { getActiveModel } from "../model-selection";
 import type { ChatProvider, ChatRequest, Message, StreamEvent } from "murm-ui";
 import type { AppConfig } from "../config";
 import { readRuntimeConfig } from "../config";
@@ -10,6 +11,8 @@ import {
   shouldFallbackToProxy,
   shouldTryBrowser,
 } from "./browser-router";
+import { ChatRouteError, mapHttpError, mapProxyChainFailure } from "./errors";
+import { setLastCompletionMeta, type CompletionMeta } from "./routing-metadata";
 import { emitOpenAiSseAsStreamEvents, emitTextAsStreamEvents } from "./sse";
 
 type StatusListener = (status: string) => void;
@@ -29,6 +32,23 @@ function messagesToOpenAi(messages: readonly Message[]): { role: string; content
       .join("");
     return { role: m.role, content: text };
   });
+}
+
+function readRoutingHeaders(res: Response): Pick<CompletionMeta, "modelHeader" | "durationMs"> {
+  const modelHeader =
+    res.headers.get("x-litellm-model-name") ||
+    res.headers.get("x-litellm-model-id") ||
+    undefined;
+  const durationRaw = res.headers.get("x-litellm-response-duration-ms");
+  const durationMs = durationRaw ? Number.parseFloat(durationRaw) : undefined;
+  return {
+    modelHeader: modelHeader ?? undefined,
+    durationMs: Number.isFinite(durationMs) ? durationMs : undefined,
+  };
+}
+
+function endpointLabel(base: string, res: Response): string {
+  return res.headers.get("x-llm-fallbacks-endpoint") || base;
 }
 
 export class FailoverProvider implements ChatProvider {
@@ -94,6 +114,13 @@ export class FailoverProvider implements ChatProvider {
     return this.config;
   }
 
+  private resolveModel(request: ChatRequest): string {
+    const fromRequest = request.options.model as string | undefined;
+    if (fromRequest) return fromRequest;
+    const sessionModel = getActiveModel(this.config.defaultModel || "free");
+    return sessionModel || this.config.defaultModel || "free";
+  }
+
   private async chatViaProxy(
     base: string,
     body: Record<string, unknown>,
@@ -117,9 +144,10 @@ export class FailoverProvider implements ChatProvider {
     onEvent: (event: StreamEvent) => void,
     signal: AbortSignal
   ): Promise<void> {
-    if (!config.endpoints.length) throw new Error("PROXY_UNAVAILABLE");
+    if (!config.endpoints.length) throw mapProxyChainFailure("PROXY_UNAVAILABLE");
 
     let lastError = "All proxy endpoints failed";
+    let hopIndex = 0;
     for (const base of config.endpoints) {
       this.setStatus(`proxy: ${base} …`);
       try {
@@ -127,23 +155,36 @@ export class FailoverProvider implements ChatProvider {
         if (res.ok) {
           this.lastRoute = `proxy/${base}`;
           window.LLM_FALLBACKS_ROUTE = this.lastRoute;
+          const headerMeta = readRoutingHeaders(res);
+          setLastCompletionMeta({
+            endpoint: endpointLabel(base, res),
+            modelHeader: headerMeta.modelHeader,
+            fallbackCount: hopIndex,
+            durationMs: headerMeta.durationMs,
+          });
           await emitOpenAiSseAsStreamEvents(res, onEvent);
           return;
         }
         const errText = await res.text();
         lastError = `${base}: HTTP ${res.status} — ${errText.slice(0, 160)}`;
-        if (!RETRYABLE.has(res.status)) throw new Error(lastError);
+        if (!RETRYABLE.has(res.status)) {
+          throw mapHttpError(res.status, errText, base);
+        }
       } catch (err) {
         if (signal.aborted) throw err;
+        if (err instanceof ChatRouteError) {
+          throw err;
+        }
         lastError = `${base}: ${err instanceof Error ? err.message : String(err)}`;
       }
+      hopIndex += 1;
     }
-    throw new Error(lastError);
+    throw mapProxyChainFailure(lastError);
   }
 
   async streamChat(request: ChatRequest, onEvent: (event: StreamEvent) => void): Promise<void> {
     const config = this.getRuntimeConfig();
-    const model = (request.options.model as string) || config.defaultModel || "free";
+    const model = this.resolveModel(request);
     const openAiMessages = messagesToOpenAi(request.messages);
     const body = {
       model,
@@ -166,6 +207,10 @@ export class FailoverProvider implements ChatProvider {
       });
       this.lastRoute = result.route;
       window.LLM_FALLBACKS_ROUTE = result.route;
+      setLastCompletionMeta({
+        endpoint: result.route,
+        fallbackCount: 0,
+      });
       emitTextAsStreamEvents(result.content, onEv);
     };
 
@@ -221,7 +266,7 @@ export class FailoverProvider implements ChatProvider {
       return;
     }
 
-    throw new Error(
+    throw mapProxyChainFailure(
       "No chat routes are available yet. The demo proxy is still deploying — refresh in a minute."
     );
   }

@@ -58,6 +58,17 @@ export async function installTestConfigMock(page: Page) {
     });
   });
 
+  await page.route("**/chat_proxy.json", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        endpoints: [DEMO_PROXY],
+        guestToken: "llm-fallbacks-public",
+      }),
+    });
+  });
+
   await page.route("**/llm-fallbacks-proxy.bocloud.workers.dev/**", (route) =>
     route.abort("blockedbyclient")
   );

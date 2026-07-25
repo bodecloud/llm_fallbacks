@@ -2,8 +2,8 @@
 <html lang="en" class="lf-chat-page">
 <head>
   <meta charset="utf-8">
-  <title>llm-fallbacks — free model chat</title>
-  <meta name="description" content="Zero-config chat over ranked free LLM fallbacks">
+  <title>llm-fallbacks — chat with free AI models</title>
+  <meta name="description" content="Chat with ranked free AI models. No signup. We try the next model if one fails.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./icon.png">
   <link rel="manifest" href="./manifest.json">
@@ -19,11 +19,11 @@
 <body class="lf-chat-page">
   <div class="credits-bar top-credits">
     <div class="credits-content">
-      <p><strong>llm-fallbacks</strong> — zero-config free model chat</p>
+      <p><strong>llm-fallbacks</strong> — chat with free AI models. No signup.</p>
       <div class="credits-actions">
-        <div id="sysSetting" class="top-settings-button" title="Failover settings"><i class="fas fa-server"></i> Failover</div>
-        <div id="byokSetting" class="top-settings-button" title="API keys"><i class="fas fa-key"></i> BYOK</div>
-        <div id="explorerSetting" class="top-settings-button" title="Model explorer"><i class="fas fa-table"></i> Models</div>
+        <div id="sysSetting" class="top-settings-button" title="Which server handles your chat"><i class="fas fa-server"></i> Server</div>
+        <div id="byokSetting" class="top-settings-button" title="Add your own API keys in this browser"><i class="fas fa-key"></i> Your keys</div>
+        <div id="explorerSetting" class="top-settings-button" title="Browse free models we rank daily"><i class="fas fa-table"></i> Models</div>
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@
           <button type="button" class="mur-close-sidebar-btn" aria-label="Close sidebar">×</button>
         </header>
         <div class="mur-sidebar-actions">
-          <button type="button" class="mur-new-chat-btn mur-sidebar-nav-btn">New Chat</button>
+          <button type="button" class="mur-new-chat-btn mur-sidebar-nav-btn">New chat</button>
         </div>
         <div class="mur-sidebar-content"><p class="mur-sidebar-status">Loading…</p></div>
         <div class="mur-sidebar-footer"></div>
@@ -52,7 +52,7 @@
           </div>
           <div class="mur-chat-form-container">
             <form class="mur-chat-form">
-              <textarea class="mur-chat-input" id="chatinput" rows="1" placeholder="Message…" aria-label="Message"></textarea>
+              <textarea class="mur-chat-input" id="chatinput" rows="1" placeholder="Ask anything…" aria-label="Message"></textarea>
               <div class="mur-form-footer-right">
                 <button type="submit" class="mur-send-btn mur-form-icon-btn mur-action-btn" id="sendbutton" aria-label="Send">↑</button>
               </div>

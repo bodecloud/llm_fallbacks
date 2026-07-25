@@ -21,13 +21,13 @@ export function ByokSettingsPlugin(deps: { onKeysSaved: () => void }): ChatPlugi
         const fields = [...new Set(Object.values(PROVIDER_KEY_FIELDS))];
         root.innerHTML = `
           <header class="panel-header">
-            <h3>Bring Your Own Keys</h3>
+            <h3>Your API keys</h3>
           </header>
-          <p class="panel-hint">Optional. Keys stay in this browser only — never sent to GitHub Pages.</p>
+          <p class="panel-hint">Optional. Keys stay in this browser only. They never go to GitHub Pages.</p>
           <form id="byok-form">
             <div id="byok-fields-primary"></div>
             <div id="byok-fields-extra" hidden></div>
-            <button type="button" id="byok-toggle-extra" class="panel-btn panel-btn-ghost">Show all providers</button>
+            <button type="button" id="byok-toggle-extra" class="panel-btn panel-btn-ghost">Show more providers</button>
             <div class="panel-actions">
               <button type="submit" class="panel-btn panel-btn-primary">Save keys</button>
             </div>
@@ -63,7 +63,7 @@ export function ByokSettingsPlugin(deps: { onKeysSaved: () => void }): ChatPlugi
         toggleBtn.addEventListener("click", () => {
           const open = extraHost.hidden;
           extraHost.hidden = !open;
-          toggleBtn.textContent = open ? "Hide extra providers" : "Show all providers";
+          toggleBtn.textContent = open ? "Show fewer providers" : "Show more providers";
         });
 
         form.addEventListener("submit", (e) => {

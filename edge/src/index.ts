@@ -203,6 +203,11 @@ export default {
     const upstream = await chatWithFallback(body, env, origin, allowed);
 
     const headers = new Headers(upstream.headers);
+    try {
+      headers.set("x-llm-fallbacks-endpoint", new URL(request.url).hostname);
+    } catch {
+      headers.set("x-llm-fallbacks-endpoint", "worker");
+    }
     for (const [k, v] of Object.entries(corsHeaders(origin, allowed))) {
       headers.set(k, v);
     }
