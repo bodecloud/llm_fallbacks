@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { PAGES_BASE_URL } from "../../playwright.config";
 import {
   ERROR_RE,
-  LOCALHOST_RE,
+  LOOPBACK_HOST_RE,
   lastUserMessage,
   waitForAssistantText,
 } from "./helpers";
@@ -20,13 +20,13 @@ test.describe("Live GitHub Pages chat (no mocks)", () => {
     await expect(page.locator("#chatinput")).toBeVisible({ timeout: 45_000 });
   });
 
-  test("loads zero-config UI with cloud routes only (no localhost)", async ({ page }) => {
+  test("loads zero-config UI with cloud proxy routes only", async ({ page }) => {
     await expect(page).toHaveTitle(/llm-fallbacks/i);
     await expect(page.locator("#chatinput")).toBeVisible();
     await expect(page.locator("#sendbutton")).toBeVisible();
 
     const config = await page.evaluate(() => window.LLM_FALLBACKS_CONFIG);
-    expect(JSON.stringify(config)).not.toMatch(LOCALHOST_RE);
+    expect(JSON.stringify(config)).not.toMatch(LOOPBACK_HOST_RE);
     for (const endpoint of config.endpoints || []) {
       expect(endpoint).toMatch(/^https:\/\/.+\.workers\.dev$/);
     }
@@ -54,14 +54,14 @@ test.describe("Live GitHub Pages chat (no mocks)", () => {
     await expect(lastUserMessage(page)).toContainText(userMsg, { timeout: 30_000 });
 
     const reply = await waitForAssistantText(page);
-    expect(reply).not.toMatch(LOCALHOST_RE);
+    expect(reply).not.toMatch(LOOPBACK_HOST_RE);
     expect(reply).not.toMatch(ERROR_RE);
 
     const hitProxy = requests.some(
       (u) => u.includes("workers.dev") && u.includes("/v1/chat/completions")
     );
     expect(hitProxy).toBeTruthy();
-    expect(requests.filter((u) => LOCALHOST_RE.test(u))).toHaveLength(0);
+    expect(requests.filter((u) => LOOPBACK_HOST_RE.test(u))).toHaveLength(0);
   });
 
   test("settings dialog opens without requiring keys", async ({ page }) => {

@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import {
   DEMO_PROXY,
-  LOCALHOST_RE,
+  LOOPBACK_HOST_RE,
   PRIMARY_FAIL_PROXY,
   SECONDARY_OK_PROXY,
   installDemoProxyMock,
@@ -38,7 +38,7 @@ test.describe("Dual-endpoint client failover (mocked AE2)", () => {
 
     expect(chatRequests.some((u) => u.startsWith(PRIMARY_FAIL_PROXY))).toBeTruthy();
     expect(chatRequests.some((u) => u.startsWith(SECONDARY_OK_PROXY))).toBeTruthy();
-    expect(chatRequests.filter((u) => LOCALHOST_RE.test(u))).toHaveLength(0);
+    expect(chatRequests.filter((u) => LOOPBACK_HOST_RE.test(u))).toHaveLength(0);
   });
 });
 

@@ -5029,13 +5029,9 @@ function saveJson(key, value) {
 }
 
 // src/config.ts
-var LOCALHOST_RE = /^(https?:\/\/)?(127\.0\.0\.1|localhost)(:\d+)?/i;
-function isLocalEndpoint(url) {
-  return LOCALHOST_RE.test(url || "");
-}
 function normalizeEndpoints(list) {
   if (!Array.isArray(list)) return [];
-  return list.map((u3) => String(u3).trim().replace(/\/$/, "")).filter((u3) => u3.length > 0 && !isLocalEndpoint(u3));
+  return list.map((u3) => String(u3).trim().replace(/\/$/, "")).filter((u3) => u3.length > 0);
 }
 function readRuntimeConfig() {
   const cfg = window.LLM_FALLBACKS_CONFIG || {};
@@ -5576,7 +5572,7 @@ function FailoverSettingsPlugin(deps) {
           <header class="panel-header">
             <h3>Failover &amp; Proxy</h3>
           </header>
-          <p class="panel-hint">Cloud proxy routes (one per line). Localhost is blocked.</p>
+          <p class="panel-hint">Proxy base URLs (one per line, tried in order).</p>
           <label>Proxy endpoints
             <textarea id="apiHostInput" rows="4" placeholder="https://your-worker.workers.dev"></textarea>
           </label>
@@ -5616,13 +5612,9 @@ function FailoverSettingsPlugin(deps) {
         };
         setInterval(updateRoute, 1e3);
         root.querySelector("#saveFailoverBtn")?.addEventListener("click", async () => {
-          const lines = endpointsEl.value.split("\n").map((l) => l.trim()).filter(Boolean);
-          const bad = lines.find((l) => isLocalEndpoint(l));
-          if (bad) {
-            alert(`Localhost endpoints are not allowed: ${bad}`);
-            return;
-          }
-          const endpoints = normalizeEndpoints(lines);
+          const endpoints = normalizeEndpoints(
+            endpointsEl.value.split("\n").map((l) => l.trim()).filter(Boolean)
+          );
           saveJson(STORAGE_KEYS.endpoints, endpoints);
           localStorage.setItem(STORAGE_KEYS.guestToken, guestEl.value.trim());
           localStorage.setItem(STORAGE_KEYS.defaultModel, modelEl.value.trim() || "free");

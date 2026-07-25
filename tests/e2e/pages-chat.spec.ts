@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import {
   DEMO_PROXY,
-  LOCALHOST_RE,
+  LOOPBACK_HOST_RE,
   installDemoProxyMock,
   installTestConfigMock,
   lastAssistant,
@@ -22,9 +22,9 @@ test.describe("GitHub Pages chat (mocked SSE on live site)", () => {
     await expect(page.locator("#chatinput")).toBeVisible({ timeout: 45_000 });
   });
 
-  test("loads UI without localhost endpoints", async ({ page }) => {
+  test("loads UI with configured cloud proxy endpoints", async ({ page }) => {
     const config = await page.evaluate(() => window.LLM_FALLBACKS_CONFIG);
-    expect(JSON.stringify(config)).not.toMatch(LOCALHOST_RE);
+    expect(JSON.stringify(config)).not.toMatch(LOOPBACK_HOST_RE);
     expect(config.endpoints[0]).toBe(DEMO_PROXY);
   });
 
@@ -39,7 +39,7 @@ test.describe("GitHub Pages chat (mocked SSE on live site)", () => {
     expect(reply).toContain("42 — zero-config proxy reply");
 
     expect(requests.some((u) => u.includes("demo-proxy.test"))).toBeTruthy();
-    expect(requests.filter((u) => LOCALHOST_RE.test(u))).toHaveLength(0);
+    expect(requests.filter((u) => LOOPBACK_HOST_RE.test(u))).toHaveLength(0);
   });
 
   test("settings can store optional API key locally", async ({ page }) => {

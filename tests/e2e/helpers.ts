@@ -1,6 +1,7 @@
 import type { Page } from "@playwright/test";
 
-export const LOCALHOST_RE = /127\.0\.0\.1|localhost/i;
+/** Matches loopback hosts — zero-config demo should not use these by default. */
+export const LOOPBACK_HOST_RE = /127\.0\.0\.1|localhost/i;
 export const ERROR_RE =
   /no API key for|proxy pending|still deploying|NetworkError|Failed to fetch|401 Unauthorized|PROXY_UNAVAILABLE|HTTP 502|HTTP 429|Rate limit exceeded|Workers AI failed|proxy_erro/i;
 

@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { PAGES_BASE_URL } from "../../playwright.config";
-import { ERROR_RE, LOCALHOST_RE, lastUserMessage, waitForAssistantText } from "./helpers";
+import { ERROR_RE, LOOPBACK_HOST_RE, lastUserMessage, waitForAssistantText } from "./helpers";
 
 test.describe("Zero-config production chat journey", () => {
   test("fresh visitor chats with streaming and no saved keys", async ({ page }) => {
@@ -48,6 +48,6 @@ test.describe("Zero-config production chat journey", () => {
       (u) => u.includes("workers.dev") && u.includes("/v1/chat/completions")
     );
     expect(proxyCalls.length).toBeGreaterThanOrEqual(2);
-    expect(networkLog.filter((u) => LOCALHOST_RE.test(u))).toHaveLength(0);
+    expect(networkLog.filter((u) => LOOPBACK_HOST_RE.test(u))).toHaveLength(0);
   });
 });

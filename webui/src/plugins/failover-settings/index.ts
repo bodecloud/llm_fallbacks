@@ -1,5 +1,5 @@
 import type { ChatPlugin } from "murm-ui";
-import { isLocalEndpoint, loadRuntimeConfig, normalizeEndpoints } from "../../config";
+import { loadRuntimeConfig, normalizeEndpoints } from "../../config";
 import type { FailoverProvider } from "../../providers/FailoverProvider";
 import { STORAGE_KEYS, saveJson } from "../../storage-keys";
 
@@ -26,7 +26,7 @@ export function FailoverSettingsPlugin(deps: {
           <header class="panel-header">
             <h3>Failover &amp; Proxy</h3>
           </header>
-          <p class="panel-hint">Cloud proxy routes (one per line). Localhost is blocked.</p>
+          <p class="panel-hint">Proxy base URLs (one per line, tried in order).</p>
           <label>Proxy endpoints
             <textarea id="apiHostInput" rows="4" placeholder="https://your-worker.workers.dev"></textarea>
           </label>
@@ -72,16 +72,12 @@ export function FailoverSettingsPlugin(deps: {
         setInterval(updateRoute, 1000);
 
         root.querySelector("#saveFailoverBtn")?.addEventListener("click", async () => {
-          const lines = endpointsEl.value
-            .split("\n")
-            .map((l) => l.trim())
-            .filter(Boolean);
-          const bad = lines.find((l) => isLocalEndpoint(l));
-          if (bad) {
-            alert(`Localhost endpoints are not allowed: ${bad}`);
-            return;
-          }
-          const endpoints = normalizeEndpoints(lines);
+          const endpoints = normalizeEndpoints(
+            endpointsEl.value
+              .split("\n")
+              .map((l) => l.trim())
+              .filter(Boolean)
+          );
           saveJson(STORAGE_KEYS.endpoints, endpoints);
           localStorage.setItem(STORAGE_KEYS.guestToken, guestEl.value.trim());
           localStorage.setItem(STORAGE_KEYS.defaultModel, modelEl.value.trim() || "free");

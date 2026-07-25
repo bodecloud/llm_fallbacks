@@ -12,7 +12,3 @@ window.LLM_FALLBACKS_CONFIG = {
     "https://raw.githubusercontent.com/bodecloud/llm_fallbacks/main/configs/chat_proxy.json",
   maxTokens: 512,
 };
-
-// Optional local LiteLLM dev (not used on GitHub Pages):
-// endpoints: ["http://127.0.0.1:4000"],
-// guestToken: "your-litellm-master-key",

@@ -10,17 +10,11 @@ export interface AppConfig {
   maxTokens: number;
 }
 
-const LOCALHOST_RE = /^(https?:\/\/)?(127\.0\.0\.1|localhost)(:\d+)?/i;
-
-export function isLocalEndpoint(url: string): boolean {
-  return LOCALHOST_RE.test(url || "");
-}
-
 export function normalizeEndpoints(list: unknown): string[] {
   if (!Array.isArray(list)) return [];
   return list
     .map((u) => String(u).trim().replace(/\/$/, ""))
-    .filter((u) => u.length > 0 && !isLocalEndpoint(u));
+    .filter((u) => u.length > 0);
 }
 
 export function readRuntimeConfig(): AppConfig {
