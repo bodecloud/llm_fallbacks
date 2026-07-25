@@ -5017,7 +5017,8 @@ var STORAGE_KEYS = {
   endpoints: "llm_fallbacks_proxy_endpoints",
   guestToken: "llm_fallbacks_guest_token",
   defaultModel: "llm_fallbacks_default_model",
-  apiKeys: "llm_fallbacks_api_keys"
+  apiKeys: "llm_fallbacks_api_keys",
+  providerTiers: "llm_fallbacks_provider_tiers"
 };
 function loadJson(key, fallback) {
   try {
@@ -5339,10 +5340,6 @@ function shouldTryBrowser(model, catalog, keys) {
     return hasAnyKey(keys) && buildFreeChain(catalog, keys).length > 0;
   }
   return hasAnyKey(keys) && hasKeyForModel(model, keys);
-}
-function shouldFallbackToProxy(browserErr) {
-  const msg = browserErr.message || String(browserErr);
-  return msg === "BROWSER_UNAVAILABLE" || msg === "PROXY_UNAVAILABLE" || /^no API key for /i.test(msg) || /^unsupported provider:/i.test(msg);
 }
 
 // src/turnstile-session.ts
@@ -5752,6 +5749,138 @@ function emitTextAsStreamEvents(text, onEvent) {
   onEvent({ type: "finish", reason: "stop" });
 }
 
+// src/providers/tiers/defaults.ts
+var TIER_IDS = [
+  "quality_api",
+  "web_ui",
+  "searxng_discovery",
+  "proxy_failover"
+];
+var DEFAULT_TIER_ENTRIES = [
+  { id: "quality_api", enabled: true },
+  { id: "web_ui", enabled: false },
+  { id: "searxng_discovery", enabled: false },
+  { id: "proxy_failover", enabled: true }
+];
+var DEFAULT_ENABLED_BY_ID = new Map(
+  DEFAULT_TIER_ENTRIES.map((t) => [t.id, t.enabled])
+);
+function defaultProviderTierSettings() {
+  return {
+    tiers: DEFAULT_TIER_ENTRIES.map((t) => ({ ...t })),
+    webRunnerUrl: "",
+    searxngUrl: ""
+  };
+}
+function normalizeTierSettings(raw) {
+  const seen = /* @__PURE__ */ new Set();
+  const tiers = [];
+  for (const entry of raw.tiers ?? []) {
+    if (!DEFAULT_ENABLED_BY_ID.has(entry.id) || seen.has(entry.id)) continue;
+    seen.add(entry.id);
+    tiers.push({ id: entry.id, enabled: !!entry.enabled });
+  }
+  for (const id of TIER_IDS) {
+    if (!seen.has(id)) tiers.push({ id, enabled: DEFAULT_ENABLED_BY_ID.get(id) ?? false });
+  }
+  return {
+    tiers,
+    webRunnerUrl: raw.webRunnerUrl?.trim() ?? "",
+    searxngUrl: raw.searxngUrl?.trim() ?? ""
+  };
+}
+
+// src/providers/tiers/settings.ts
+function loadProviderTierSettings() {
+  const fallback = defaultProviderTierSettings();
+  const raw = loadJson(STORAGE_KEYS.providerTiers, fallback);
+  return normalizeTierSettings({
+    tiers: raw.tiers ?? fallback.tiers,
+    webRunnerUrl: raw.webRunnerUrl ?? "",
+    searxngUrl: raw.searxngUrl ?? ""
+  });
+}
+
+// src/providers/tiers/types.ts
+var TierOrchestratorError = class extends Error {
+  attempts;
+  constructor(message, attempts) {
+    super(message);
+    this.name = "TierOrchestratorError";
+    this.attempts = attempts;
+  }
+};
+var TierSkipError = class extends Error {
+  tier;
+  constructor(tier, reason) {
+    super(reason);
+    this.name = "TierSkipError";
+    this.tier = tier;
+  }
+};
+
+// src/providers/tiers/orchestrator.ts
+function formatAttemptError(err) {
+  if (err instanceof Error) return err.message;
+  return String(err);
+}
+var TierOrchestrator = class {
+  constructor(handlers) {
+    this.handlers = handlers;
+  }
+  async streamChat(request, onEvent) {
+    const settings = loadProviderTierSettings();
+    const attempts = [];
+    for (const entry of settings.tiers) {
+      if (!entry.enabled) continue;
+      const handler = this.handlerFor(entry.id);
+      if (!handler) continue;
+      try {
+        await handler(request, onEvent);
+        return;
+      } catch (err) {
+        if (err instanceof TierSkipError) {
+          attempts.push({ tier: entry.id, error: err.message });
+          continue;
+        }
+        attempts.push({ tier: entry.id, error: formatAttemptError(err) });
+        if (request.signal.aborted) throw err;
+      }
+    }
+    const summary = attempts.map((a) => `${a.tier}: ${a.error}`).join("; ");
+    throw new TierOrchestratorError(
+      summary || "No provider tiers are enabled.",
+      attempts
+    );
+  }
+  handlerFor(id) {
+    switch (id) {
+      case "quality_api":
+        return this.handlers.qualityApi;
+      case "web_ui":
+        return this.handlers.webUi;
+      case "searxng_discovery":
+        return this.handlers.searxngDiscovery;
+      case "proxy_failover":
+        return this.handlers.proxyFailover;
+      default:
+        return null;
+    }
+  }
+};
+function qualityApiTierUnavailable() {
+  return new TierSkipError(
+    "quality_api",
+    "No BYOK API key set for the selected model \u2014 skipping direct routes."
+  );
+}
+function webUiTierUnavailable() {
+  return new TierSkipError("web_ui", "Web UI tier is not configured.");
+}
+function searxngTierUnavailable() {
+  return new TierSkipError("searxng_discovery", "SearXNG discovery is not configured.");
+}
+
 // src/providers/FailoverProvider.ts
 function endpointUrl(base) {
   const trimmed = base.replace(/\/$/, "");
@@ -5924,7 +6053,7 @@ var FailoverProvider = class {
     }
     throw mapProxyChainFailure(lastError, lastRateLimit);
   }
-  async streamChat(request, onEvent) {
+  buildChatBody(request) {
     const config = this.getRuntimeConfig();
     const model = this.resolveModel(request);
     const openAiMessages = messagesToOpenAi(request.messages);
@@ -5933,77 +6062,83 @@ var FailoverProvider = class {
       messages: openAiMessages,
       max_tokens: request.options.max_tokens ?? config.maxTokens
     };
-    const keys = loadKeys();
-    const userKeys = keys;
-    const tryBrowser = async (onEv) => {
-      const result = await chatWithBrowserFallback({
-        model,
-        messages: openAiMessages,
-        maxTokens: body.max_tokens,
-        catalog: this.catalog,
-        providerUrls: this.providerUrls,
-        keys: userKeys,
-        onStatus: (s) => this.setStatus(s)
-      });
-      this.lastRoute = result.route;
-      window.LLM_FALLBACKS_ROUTE = result.route;
-      setLastCompletionMeta({
-        endpoint: result.route,
-        fallbackCount: 0
-      });
-      emitTextAsStreamEvents(result.content, onEv);
-    };
-    if (config.endpoints.length) {
-      try {
-        await this.streamWithCompletionTracking(
-          (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
-          onEvent
-        );
-        return;
-      } catch (proxyErr) {
-        if (!shouldTryBrowser(model, this.catalog, userKeys)) throw proxyErr;
-        this.setStatus("cloud proxy unavailable \u2014 trying optional browser route \u2026");
-      }
+    return { config, model, body, openAiMessages };
+  }
+  // quality_api tier: direct/BYOK provider routes only. Disjoint from
+  // proxy_failover (KTD7) — this tier never touches the cloud proxy chain, so
+  // a single request is not attempted twice against the same endpoint. Without
+  // a usable key it skips, letting the orchestrator advance to proxy_failover.
+  async streamQualityApiRoute(request, onEvent) {
+    const { model, body, openAiMessages } = this.buildChatBody(request);
+    const userKeys = loadKeys();
+    if (!shouldTryBrowser(model, this.catalog, userKeys)) {
+      throw qualityApiTierUnavailable();
     }
-    if (model !== "free" && !shouldTryBrowser(model, this.catalog, userKeys)) {
-      if (config.endpoints.length) {
-        await this.streamWithCompletionTracking(
-          (onEv) => this.streamProxyFallback({ ...body, model: "free" }, config, onEv, request.signal),
-          onEvent
-        );
-        return;
+    const result = await chatWithBrowserFallback({
+      model,
+      messages: openAiMessages,
+      maxTokens: body.max_tokens,
+      catalog: this.catalog,
+      providerUrls: this.providerUrls,
+      keys: userKeys,
+      onStatus: (s) => this.setStatus(s)
+    });
+    this.lastRoute = result.route;
+    window.LLM_FALLBACKS_ROUTE = this.lastRoute;
+    setLastCompletionMeta({
+      endpoint: result.route,
+      fallbackCount: 0
+    });
+    emitTextAsStreamEvents(result.content, onEvent);
+  }
+  async streamProxyFailoverRoute(request, onEvent) {
+    const { config, body } = this.buildChatBody(request);
+    await this.streamProxyFallback(body, config, onEvent, request.signal);
+  }
+  async streamWebUiRoute(_request, _onEvent) {
+    const settings = loadProviderTierSettings();
+    if (!settings.webRunnerUrl) {
+      throw webUiTierUnavailable();
+    }
+    throw new Error("Web UI tier runner is not connected yet.");
+  }
+  async streamSearxngDiscoveryRoute(_request, _onEvent) {
+    const settings = loadProviderTierSettings();
+    if (!settings.searxngUrl) {
+      throw searxngTierUnavailable();
+    }
+    throw new Error("SearXNG discovery tier is not connected yet.");
+  }
+  async streamChat(request, onEvent) {
+    const orchestrator = new TierOrchestrator({
+      qualityApi: (req, onEv) => this.streamWithCompletionTracking((inner) => this.streamQualityApiRoute(req, inner), onEv),
+      webUi: (req, onEv) => this.streamWithCompletionTracking((inner) => this.streamWebUiRoute(req, inner), onEv),
+      searxngDiscovery: (req, onEv) => this.streamWithCompletionTracking(
+        (inner) => this.streamSearxngDiscoveryRoute(req, inner),
+        onEv
+      ),
+      proxyFailover: (req, onEv) => this.streamWithCompletionTracking((inner) => this.streamProxyFailoverRoute(req, inner), onEv)
+    });
+    try {
+      await orchestrator.streamChat(request, onEvent);
+    } catch (err) {
+      if (err instanceof TierOrchestratorError) {
+        throw this.mapTierFailure(err);
       }
-      throw new Error(
-        "Selected model requires an API key for its provider. Choose free or add the provider key in Settings."
+      throw err;
+    }
+  }
+  // Preserve the ChatRouteError taxonomy (rate-limit / quota / cold-start) while
+  // surfacing which tiers were tried and their last error (R40). A no-attempt
+  // failure means every tier skipped or none were enabled.
+  mapTierFailure(err) {
+    if (err.attempts.length === 0) {
+      return mapProxyChainFailure(
+        "No chat routes are available yet. Enable a provider tier in Settings, or wait for the demo proxy to finish deploying."
       );
     }
-    if (shouldTryBrowser(model, this.catalog, userKeys)) {
-      try {
-        await this.streamWithCompletionTracking((onEv) => tryBrowser(onEv), onEvent);
-        return;
-      } catch (browserErr) {
-        const err = browserErr instanceof Error ? browserErr : new Error(String(browserErr));
-        if (config.endpoints.length && shouldFallbackToProxy(err)) {
-          this.setStatus("browser route failed \u2014 retrying cloud proxy \u2026");
-          await this.streamWithCompletionTracking(
-            (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
-            onEvent
-          );
-          return;
-        }
-        throw err;
-      }
-    }
-    if (config.endpoints.length) {
-      await this.streamWithCompletionTracking(
-        (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
-        onEvent
-      );
-      return;
-    }
-    throw mapProxyChainFailure(
-      "No chat routes are available yet. The demo proxy is still deploying \u2014 refresh in a minute."
-    );
+    const summary = err.attempts.map((a) => `${a.tier} \u2192 ${a.error}`).join(" | ");
+    return mapProxyChainFailure(summary);
   }
 };
 

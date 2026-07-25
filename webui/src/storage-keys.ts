@@ -3,6 +3,7 @@ export const STORAGE_KEYS = {
   guestToken: "llm_fallbacks_guest_token",
   defaultModel: "llm_fallbacks_default_model",
   apiKeys: "llm_fallbacks_api_keys",
+  providerTiers: "llm_fallbacks_provider_tiers",
 } as const;
 
 export function loadJson<T>(key: string, fallback: T): T {
