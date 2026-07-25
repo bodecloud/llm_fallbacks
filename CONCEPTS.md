@@ -41,6 +41,10 @@ Shared vocabulary for the static chat gateway and Python library.
 | **Session export** | Sidebar menu download of current chat as Markdown or JSON (client-only; no server copy) |
 | **Hash session link** | URL `#/chat/{sessionId}` restores a session from local IndexedDB on the same browser/profile |
 | **Conversation import** | File-picker restore of exported Markdown/JSON into a new local session (symmetry with session export) |
+| **Provider tier** | User-ordered stage in the omnifail stack (quality API, headless web UI, SearXNG discovery, proxy failover) |
+| **Compare mode** | Two-column chat UI: same prompt to two independently configured sources |
+| **Web UI provider tier** | Optional headless-browser route against free web chat UIs; requires user-run runner; off by default on public demo |
+| **SearXNG discovery tier** | Metasearch pass to suggest candidate free web chat URLs when API/web tiers exhaust |
 
 ## Learnings index
 
