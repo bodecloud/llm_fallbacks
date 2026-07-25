@@ -39,6 +39,7 @@ export function closeShellPanel(_id?: string): void {
 export function bindTopBarButtons(): void {
   document.getElementById("sysSetting")?.addEventListener("click", () => openShellPanel("failover"));
   document.getElementById("byokSetting")?.addEventListener("click", () => openShellPanel("byok"));
+  document.getElementById("tiersSetting")?.addEventListener("click", () => openShellPanel("tiers"));
   document.getElementById("explorerSetting")?.addEventListener("click", () => openShellPanel("explorer"));
   document.getElementById("closeSet")?.addEventListener("click", () => closeShellPanel());
   document.getElementById("sysMask")?.addEventListener("click", (e) => {

@@ -1,6 +1,6 @@
 import { trackChatCompletionSuccess } from "../analytics";
 import { getActiveModel } from "../model-selection";
-import type { ChatProvider, ChatRequest, Message, StreamEvent } from "murm-ui";
+import type { ChatProvider, ChatRequest, StreamEvent } from "murm-ui";
 import type { AppConfig } from "../config";
 import { readRuntimeConfig } from "../config";
 import type { CatalogEntry } from "./browser-router";
@@ -8,14 +8,32 @@ import {
   RETRYABLE,
   chatWithBrowserFallback,
   loadKeys,
-  shouldFallbackToProxy,
   shouldTryBrowser,
 } from "./browser-router";
 import { ensureTurnstileToken } from "../turnstile-session";
 import { showRateLimitBanner } from "../plugins/status-strip";
 import { ChatRouteError, mapHttpError, mapProxyChainFailure, type RateLimitInfo, type RateLimitScope } from "./errors";
+import {
+  messagesHaveImage,
+  messagesToOpenAi,
+  messagesToPlainText,
+  modelSupportsVision,
+} from "./message-openai";
 import { setLastCompletionMeta, type CompletionMeta } from "./routing-metadata";
 import { emitOpenAiSseAsStreamEvents, emitTextAsStreamEvents } from "./sse";
+import {
+  TierOrchestrator,
+  qualityApiTierUnavailable,
+  searxngTierUnavailable,
+  webUiTierUnavailable,
+} from "./tiers/orchestrator";
+import {
+  broadcastDiscoveryResults,
+  searchFreeChatCandidates,
+} from "./tiers/searxng-discovery-tier";
+import { loadProviderTierSettings } from "./tiers/settings";
+import { TierOrchestratorError, TierSkipError } from "./tiers/types";
+import { streamFromWebRunner } from "./tiers/web-ui-tier";
 
 type StatusListener = (status: string) => void;
 
@@ -24,16 +42,6 @@ function endpointUrl(base: string): string {
   return trimmed.endsWith("/v1/chat/completions")
     ? trimmed
     : `${trimmed}/v1/chat/completions`;
-}
-
-function messagesToOpenAi(messages: readonly Message[]): { role: string; content: string }[] {
-  return messages.map((m) => {
-    const text = m.blocks
-      .filter((b) => b.type === "text")
-      .map((b) => (b.type === "text" ? b.text : ""))
-      .join("");
-    return { role: m.role, content: text };
-  });
 }
 
 function readRoutingHeaders(res: Response): Pick<CompletionMeta, "modelHeader" | "durationMs"> {
@@ -240,92 +248,189 @@ export class FailoverProvider implements ChatProvider {
     throw mapProxyChainFailure(lastError, lastRateLimit);
   }
 
-  async streamChat(request: ChatRequest, onEvent: (event: StreamEvent) => void): Promise<void> {
+  private buildChatBody(request: ChatRequest): {
+    config: AppConfig;
+    model: string;
+    body: Record<string, unknown>;
+    plainMessages: { role: string; content: string }[];
+    hasImage: boolean;
+  } {
     const config = this.getRuntimeConfig();
     const model = this.resolveModel(request);
-    const openAiMessages = messagesToOpenAi(request.messages);
+    // Proxy body carries multimodal content parts; browser/BYOK routes use the
+    // text-only projection (they cannot forward inline images yet).
     const body = {
       model,
-      messages: openAiMessages,
+      messages: messagesToOpenAi(request.messages),
       max_tokens: request.options.max_tokens ?? config.maxTokens,
     };
-
-    const keys = loadKeys();
-    const userKeys = keys;
-
-    const tryBrowser = async (onEv: (event: StreamEvent) => void): Promise<void> => {
-      const result = await chatWithBrowserFallback({
-        model,
-        messages: openAiMessages,
-        maxTokens: body.max_tokens as number,
-        catalog: this.catalog,
-        providerUrls: this.providerUrls,
-        keys: userKeys,
-        onStatus: (s) => this.setStatus(s),
-      });
-      this.lastRoute = result.route;
-      window.LLM_FALLBACKS_ROUTE = result.route;
-      setLastCompletionMeta({
-        endpoint: result.route,
-        fallbackCount: 0,
-      });
-      emitTextAsStreamEvents(result.content, onEv);
+    return {
+      config,
+      model,
+      body,
+      plainMessages: messagesToPlainText(request.messages),
+      hasImage: messagesHaveImage(request.messages),
     };
+  }
 
-    if (config.endpoints.length) {
-      try {
-        await this.streamWithCompletionTracking(
-          (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
-          onEvent
-        );
-        return;
-      } catch (proxyErr) {
-        if (!shouldTryBrowser(model, this.catalog, userKeys)) throw proxyErr;
-        this.setStatus("cloud proxy unavailable — trying optional browser route …");
-      }
-    }
+  // quality_api tier: direct/BYOK provider routes only. Disjoint from
+  // proxy_failover (KTD7) — this tier never touches the cloud proxy chain, so
+  // a single request is not attempted twice against the same endpoint. Without
+  // a usable key it skips, letting the orchestrator advance to proxy_failover.
+  private async streamQualityApiRoute(
+    request: ChatRequest,
+    onEvent: (event: StreamEvent) => void
+  ): Promise<void> {
+    const { model, body, plainMessages, hasImage } = this.buildChatBody(request);
+    const userKeys = loadKeys();
 
-    if (model !== "free" && !shouldTryBrowser(model, this.catalog, userKeys)) {
-      if (config.endpoints.length) {
-        await this.streamWithCompletionTracking(
-          (onEv) => this.streamProxyFallback({ ...body, model: "free" }, config, onEv, request.signal),
-          onEvent
-        );
-        return;
-      }
-      throw new Error(
-        "Selected model requires an API key for its provider. Choose free or add the provider key in Settings."
+    // Direct BYOK routes cannot forward inline images yet — skip so the
+    // orchestrator advances to a proxy tier rather than dropping the image.
+    if (hasImage) {
+      throw new TierSkipError(
+        "quality_api",
+        "Direct BYOK routes do not support image attachments yet — using the proxy tier."
       );
     }
 
-    if (shouldTryBrowser(model, this.catalog, userKeys)) {
-      try {
-        await this.streamWithCompletionTracking((onEv) => tryBrowser(onEv), onEvent);
-        return;
-      } catch (browserErr) {
-        const err = browserErr instanceof Error ? browserErr : new Error(String(browserErr));
-        if (config.endpoints.length && shouldFallbackToProxy(err)) {
-          this.setStatus("browser route failed — retrying cloud proxy …");
-          await this.streamWithCompletionTracking(
-            (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
-            onEvent
-          );
-          return;
+    if (!shouldTryBrowser(model, this.catalog, userKeys)) {
+      throw qualityApiTierUnavailable();
+    }
+
+    const result = await chatWithBrowserFallback({
+      model,
+      messages: plainMessages,
+      maxTokens: body.max_tokens as number,
+      catalog: this.catalog,
+      providerUrls: this.providerUrls,
+      keys: userKeys,
+      onStatus: (s) => this.setStatus(s),
+    });
+    this.lastRoute = result.route;
+    window.LLM_FALLBACKS_ROUTE = this.lastRoute;
+    setLastCompletionMeta({
+      endpoint: result.route,
+      fallbackCount: 0,
+    });
+    emitTextAsStreamEvents(result.content, onEvent);
+  }
+
+  private async streamProxyFailoverRoute(
+    request: ChatRequest,
+    onEvent: (event: StreamEvent) => void
+  ): Promise<void> {
+    const { config, body } = this.buildChatBody(request);
+    await this.streamProxyFallback(body, config, onEvent, request.signal);
+  }
+
+  private async streamWebUiRoute(
+    request: ChatRequest,
+    onEvent: (event: StreamEvent) => void
+  ): Promise<void> {
+    const settings = loadProviderTierSettings();
+    if (!settings.webRunnerUrl) {
+      throw webUiTierUnavailable();
+    }
+    const { model, body, plainMessages, hasImage } = this.buildChatBody(request);
+    if (hasImage) {
+      throw new TierSkipError(
+        "web_ui",
+        "The web runner does not support image attachments — using the proxy tier."
+      );
+    }
+    this.setStatus(`web runner: ${settings.webRunnerUrl} …`);
+    let metaSet = false;
+    await streamFromWebRunner({
+      runnerUrl: settings.webRunnerUrl,
+      model,
+      messages: plainMessages,
+      maxTokens: body.max_tokens as number,
+      signal: request.signal,
+      onEvent: (event) => {
+        // Record the route once the runner actually starts streaming, so a
+        // pre-stream failure never leaves stale web_ui routing metadata.
+        if (!metaSet) {
+          metaSet = true;
+          this.lastRoute = `web_ui/${settings.webRunnerUrl}`;
+          window.LLM_FALLBACKS_ROUTE = this.lastRoute;
+          setLastCompletionMeta({ endpoint: this.lastRoute, fallbackCount: 0 });
         }
-        throw err;
+        onEvent(event);
+      },
+    });
+  }
+
+  private async streamSearxngDiscoveryRoute(
+    request: ChatRequest,
+    _onEvent: (event: StreamEvent) => void
+  ): Promise<void> {
+    const settings = loadProviderTierSettings();
+    if (!settings.searxngUrl) {
+      throw searxngTierUnavailable();
+    }
+    this.setStatus("searxng: searching for free chat sites …");
+    const candidates = await searchFreeChatCandidates({
+      searxngUrl: settings.searxngUrl,
+      signal: request.signal,
+    });
+    broadcastDiscoveryResults(candidates);
+    // Discovery suggests links (R39) — it cannot answer the prompt itself.
+    // Record a descriptive attempt so the orchestrator moves to the next tier.
+    throw new Error(
+      `SearXNG found ${candidates.length} candidate chat site${
+        candidates.length === 1 ? "" : "s"
+      } — see suggestions below the chat.`
+    );
+  }
+
+  async streamChat(request: ChatRequest, onEvent: (event: StreamEvent) => void): Promise<void> {
+    // Vision guard (R29): never silently drop attachments. If the turn carries
+    // an image but the selected model is not vision-capable, block clearly and
+    // point at the vision-badged models in the explorer (R30).
+    if (messagesHaveImage(request.messages)) {
+      const model = this.resolveModel(request);
+      if (!modelSupportsVision(model, this.catalog)) {
+        throw new ChatRouteError(
+          "vision_unsupported",
+          `"${model}" can't read images. Pick a vision-capable model (filter by vision in the model explorer) or remove the attachment.`
+        );
       }
     }
 
-    if (config.endpoints.length) {
-      await this.streamWithCompletionTracking(
-        (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
-        onEvent
-      );
-      return;
-    }
+    const orchestrator = new TierOrchestrator({
+      qualityApi: (req, onEv) =>
+        this.streamWithCompletionTracking((inner) => this.streamQualityApiRoute(req, inner), onEv),
+      webUi: (req, onEv) =>
+        this.streamWithCompletionTracking((inner) => this.streamWebUiRoute(req, inner), onEv),
+      searxngDiscovery: (req, onEv) =>
+        this.streamWithCompletionTracking(
+          (inner) => this.streamSearxngDiscoveryRoute(req, inner),
+          onEv
+        ),
+      proxyFailover: (req, onEv) =>
+        this.streamWithCompletionTracking((inner) => this.streamProxyFailoverRoute(req, inner), onEv),
+    });
 
-    throw mapProxyChainFailure(
-      "No chat routes are available yet. The demo proxy is still deploying — refresh in a minute."
-    );
+    try {
+      await orchestrator.streamChat(request, onEvent);
+    } catch (err) {
+      if (err instanceof TierOrchestratorError) {
+        throw this.mapTierFailure(err);
+      }
+      throw err;
+    }
+  }
+
+  // Preserve the ChatRouteError taxonomy (rate-limit / quota / cold-start) while
+  // surfacing which tiers were tried and their last error (R40). A no-attempt
+  // failure means every tier skipped or none were enabled.
+  private mapTierFailure(err: TierOrchestratorError): Error {
+    if (err.attempts.length === 0) {
+      return mapProxyChainFailure(
+        "No chat routes are available yet. Enable a provider tier in Settings, or wait for the demo proxy to finish deploying."
+      );
+    }
+    const summary = err.attempts.map((a) => `${a.tier} → ${a.error}`).join(" | ");
+    return mapProxyChainFailure(summary);
   }
 }

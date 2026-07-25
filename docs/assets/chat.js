@@ -1382,6 +1382,7 @@ function syncDOMNode(target, source) {
 var ICON_COPY = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
 var ICON_CHECK = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--mur-success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
 var ICON_EDIT = `<svg width="15" height="15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>`;
+var ICON_PAPERCLIP = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>`;
 var ICON_CHEVRON = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
 var ICON_MORE_VERTICAL = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>`;
 var ICON_PIN = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5"/><path d="M9 10.8a2 2 0 0 1-1.1 1.8l-1.8.9A2 2 0 0 0 5 15.2V16h14v-.8a2 2 0 0 0-1.1-1.8l-1.8-.9a2 2 0 0 1-1.1-1.8V7h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1z"/></svg>`;
@@ -5012,12 +5013,319 @@ function CopyPlugin() {
   };
 }
 
+// node_modules/murm-ui/dist/plugins/attachment/attachment-plugin.js
+var DEFAULT_ACCEPTED_TYPES = "image/*,text/*,.csv,.json,.md";
+var TEXT_FILE_EXTENSIONS = /* @__PURE__ */ new Set(["csv", "json", "md"]);
+function AttachmentPlugin(config) {
+  var _a, _b;
+  const maxSize = (_a = config === null || config === void 0 ? void 0 : config.maxFileSize) !== null && _a !== void 0 ? _a : 20 * 1024 * 1024;
+  const acceptedTypes = (_b = config === null || config === void 0 ? void 0 : config.acceptedTypes) !== null && _b !== void 0 ? _b : DEFAULT_ACCEPTED_TYPES;
+  let queue = [];
+  let fileInput;
+  let previewContainer;
+  let attachBtn;
+  let inputContext = null;
+  let dragDepth = 0;
+  let destroyed = false;
+  const syncSubmitState = () => inputContext === null || inputContext === void 0 ? void 0 : inputContext.requestSubmitStateSync();
+  const renderPreviews = () => {
+    if (!previewContainer)
+      return;
+    previewContainer.innerHTML = "";
+    previewContainer.hidden = queue.length === 0;
+    queue.forEach((item) => {
+      var _a2, _b2;
+      const previewItem = el("div", `mur-attachment-preview-item mur-attachment-${item.state}`);
+      previewItem.setAttribute("data-attachment-state", item.state);
+      if (item.state === "processing") {
+        previewItem.appendChild(el("div", "mur-file-preview", null, [
+          el("span", "mur-attachment-spinner"),
+          el("span", "", { textContent: (_a2 = item.statusText) !== null && _a2 !== void 0 ? _a2 : "Processing..." })
+        ]));
+      } else if (item.state === "error") {
+        previewItem.appendChild(el("div", "mur-file-preview", { textContent: (_b2 = item.error) !== null && _b2 !== void 0 ? _b2 : "Unsupported type" }));
+      } else {
+        renderReadyPreview(item, previewItem);
+      }
+      const removeBtn = el("button", "mur-attachment-remove-btn", {
+        innerHTML: "\xD7",
+        type: "button",
+        onclick: () => {
+          queue = queue.filter((queuedItem) => queuedItem.id !== item.id);
+          renderPreviews();
+          syncSubmitState();
+        }
+      });
+      removeBtn.setAttribute("aria-label", `Remove ${item.fileName}`);
+      previewItem.appendChild(removeBtn);
+      previewContainer.appendChild(previewItem);
+    });
+  };
+  const queueFiles = (files) => {
+    for (const file of files) {
+      void queueFile(file);
+    }
+  };
+  const queueFile = async (file) => {
+    var _a2, _b2;
+    const item = {
+      id: uuidv7(),
+      fileName: file.name || "Untitled file",
+      mimeType: file.type || "application/octet-stream",
+      state: "processing",
+      statusText: (config === null || config === void 0 ? void 0 : config.uploadFile) ? "Uploading..." : "Processing..."
+    };
+    queue.push(item);
+    renderPreviews();
+    syncSubmitState();
+    if (file.size > maxSize) {
+      updateItemError(item.id, "File too large");
+      (_a2 = config === null || config === void 0 ? void 0 : config.onSizeExceeded) === null || _a2 === void 0 ? void 0 : _a2.call(config, file, maxSize);
+      return;
+    }
+    try {
+      const block = await processFile(file);
+      updateItemReady(item.id, block);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unsupported type";
+      updateItemError(item.id, message);
+      if (message === "Unsupported type") {
+        (_b2 = config === null || config === void 0 ? void 0 : config.onUnsupportedFile) === null || _b2 === void 0 ? void 0 : _b2.call(config, file);
+      }
+    }
+  };
+  const updateItemReady = (id, block) => {
+    const item = queue.find((queuedItem) => queuedItem.id === id);
+    if (!item || destroyed)
+      return;
+    item.state = "ready";
+    item.block = block;
+    item.mimeType = getBlockMimeType(block, item.mimeType);
+    item.statusText = void 0;
+    item.error = void 0;
+    renderPreviews();
+    syncSubmitState();
+  };
+  const updateItemError = (id, error) => {
+    const item = queue.find((queuedItem) => queuedItem.id === id);
+    if (!item || destroyed)
+      return;
+    item.state = "error";
+    item.error = error;
+    item.statusText = void 0;
+    renderPreviews();
+    syncSubmitState();
+  };
+  const processFile = async (file) => {
+    var _a2, _b2;
+    const handler = (_a2 = config === null || config === void 0 ? void 0 : config.fileHandlers) === null || _a2 === void 0 ? void 0 : _a2.find((candidate) => candidate.accepts(file));
+    if (handler) {
+      return handler.process(file);
+    }
+    if (config === null || config === void 0 ? void 0 : config.uploadFile) {
+      const uploaded = await config.uploadFile(file);
+      return {
+        id: uuidv7(),
+        type: "file",
+        mimeType: uploaded.type,
+        name: (_b2 = uploaded.name) !== null && _b2 !== void 0 ? _b2 : file.name,
+        data: uploaded.data
+      };
+    }
+    if (file.type.startsWith("image/")) {
+      return {
+        id: uuidv7(),
+        type: "file",
+        mimeType: file.type,
+        name: file.name,
+        data: await readFile(file, "data-url")
+      };
+    }
+    if (isTextLikeFile(file)) {
+      return {
+        id: uuidv7(),
+        type: "file",
+        mimeType: file.type || mimeTypeFromName(file.name),
+        name: file.name,
+        data: await readFile(file, "text")
+      };
+    }
+    throw new Error("Unsupported type");
+  };
+  const onFileInputChange = () => {
+    queueFiles(Array.from(fileInput.files || []));
+    fileInput.value = "";
+  };
+  const onDragEnter = (event) => {
+    if (!hasDraggedFiles(event))
+      return;
+    event.preventDefault();
+    dragDepth++;
+    inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.classList.add("mur-attachment-drag-active");
+  };
+  const onDragOver = (event) => {
+    if (!hasDraggedFiles(event))
+      return;
+    event.preventDefault();
+  };
+  const onDragLeave = (event) => {
+    if (!hasDraggedFiles(event))
+      return;
+    event.preventDefault();
+    dragDepth = Math.max(0, dragDepth - 1);
+    if (dragDepth === 0) {
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.classList.remove("mur-attachment-drag-active");
+    }
+  };
+  const onDrop = (event) => {
+    var _a2;
+    if (!hasDraggedFiles(event))
+      return;
+    event.preventDefault();
+    dragDepth = 0;
+    inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.classList.remove("mur-attachment-drag-active");
+    queueFiles(Array.from(((_a2 = event.dataTransfer) === null || _a2 === void 0 ? void 0 : _a2.files) || []));
+  };
+  const onPaste = (event) => {
+    var _a2;
+    const files = Array.from(((_a2 = event.clipboardData) === null || _a2 === void 0 ? void 0 : _a2.files) || []);
+    if (files.length === 0)
+      return;
+    if (!hasClipboardText(event)) {
+      event.preventDefault();
+    }
+    queueFiles(files);
+  };
+  return {
+    name: "attachments",
+    onInputMount: (ctx) => {
+      inputContext = ctx;
+      destroyed = false;
+      previewContainer = el("div", "mur-attachment-previews");
+      previewContainer.hidden = true;
+      fileInput = el("input", "", { type: "file", hidden: true, multiple: true, accept: acceptedTypes });
+      attachBtn = el("button", "mur-form-icon-btn", {
+        type: "button",
+        innerHTML: ICON_PAPERCLIP,
+        onclick: () => fileInput.click()
+      });
+      attachBtn.setAttribute("aria-label", "Attach files");
+      attachBtn.title = "Attach files";
+      ctx.form.prepend(attachBtn);
+      if (config === null || config === void 0 ? void 0 : config.previewMountSelector) {
+        const selectorRoot = config.previewMountSelectorScope === "document" ? document : ctx.container;
+        const customTarget = selectorRoot.querySelector(config.previewMountSelector);
+        if (customTarget) {
+          customTarget.appendChild(previewContainer);
+        } else {
+          console.error(`AttachmentPlugin: Could not find element matching previewMountSelector "${config.previewMountSelector}". Image previews will not be visible.`);
+        }
+      } else {
+        ctx.form.before(previewContainer);
+      }
+      ctx.form.appendChild(fileInput);
+      fileInput.addEventListener("change", onFileInputChange);
+      ctx.container.addEventListener("dragenter", onDragEnter);
+      ctx.container.addEventListener("dragover", onDragOver);
+      ctx.container.addEventListener("dragleave", onDragLeave);
+      ctx.container.addEventListener("drop", onDrop);
+      ctx.input.addEventListener("paste", onPaste);
+    },
+    hasPendingData: () => queue.some((item) => item.state === "ready" && item.block),
+    isSubmitBlocked: () => queue.some((item) => item.state === "processing"),
+    onUserSubmit: (msg) => {
+      const readyBlocks = queue.flatMap((item) => item.state === "ready" && item.block ? [item.block] : []);
+      if (readyBlocks.length > 0) {
+        msg.blocks.unshift(...readyBlocks);
+        queue = queue.filter((item) => item.state !== "ready");
+        renderPreviews();
+        syncSubmitState();
+      }
+    },
+    destroy: () => {
+      destroyed = true;
+      fileInput === null || fileInput === void 0 ? void 0 : fileInput.removeEventListener("change", onFileInputChange);
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.removeEventListener("dragenter", onDragEnter);
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.removeEventListener("dragover", onDragOver);
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.removeEventListener("dragleave", onDragLeave);
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.removeEventListener("drop", onDrop);
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.input.removeEventListener("paste", onPaste);
+      inputContext === null || inputContext === void 0 ? void 0 : inputContext.container.classList.remove("mur-attachment-drag-active");
+      fileInput === null || fileInput === void 0 ? void 0 : fileInput.remove();
+      attachBtn === null || attachBtn === void 0 ? void 0 : attachBtn.remove();
+      previewContainer === null || previewContainer === void 0 ? void 0 : previewContainer.remove();
+      queue = [];
+      inputContext = null;
+      dragDepth = 0;
+    }
+  };
+}
+function renderReadyPreview(item, previewItem) {
+  var _a, _b;
+  const block = item.block;
+  if ((block === null || block === void 0 ? void 0 : block.type) === "file" && block.mimeType.startsWith("image/")) {
+    previewItem.appendChild(el("img", "", { src: block.data, alt: (_a = block.name) !== null && _a !== void 0 ? _a : item.fileName }));
+    return;
+  }
+  const label = (block === null || block === void 0 ? void 0 : block.type) === "file" ? (_b = block.name) !== null && _b !== void 0 ? _b : item.fileName : item.fileName;
+  previewItem.appendChild(el("div", "mur-file-preview", { textContent: `\u{1F4C4} ${label}` }));
+}
+function getBlockMimeType(block, fallback) {
+  return block.type === "file" ? block.mimeType : fallback;
+}
+function hasDraggedFiles(event) {
+  var _a;
+  const types = (_a = event.dataTransfer) === null || _a === void 0 ? void 0 : _a.types;
+  if (!types)
+    return false;
+  return Array.from(types).includes("Files");
+}
+function hasClipboardText(event) {
+  const data = event.clipboardData;
+  if (!data)
+    return false;
+  const types = Array.from(data.types || []);
+  return types.includes("text/plain") || types.includes("text/html") || typeof data.getData === "function" && data.getData("text/plain").length > 0;
+}
+function isTextLikeFile(file) {
+  if (file.type.startsWith("text/") || file.type === "application/json")
+    return true;
+  const extension = getFileExtension(file.name);
+  return extension !== "" && TEXT_FILE_EXTENSIONS.has(extension);
+}
+function mimeTypeFromName(fileName) {
+  return getFileExtension(fileName) === "json" ? "application/json" : "text/plain";
+}
+function getFileExtension(fileName) {
+  const index = fileName.lastIndexOf(".");
+  return index === -1 ? "" : fileName.slice(index + 1).toLowerCase();
+}
+function readFile(file, mode) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      var _a;
+      return resolve(String((_a = reader.result) !== null && _a !== void 0 ? _a : ""));
+    };
+    reader.onerror = () => {
+      var _a;
+      return reject((_a = reader.error) !== null && _a !== void 0 ? _a : new Error("Failed to read file"));
+    };
+    if (mode === "data-url") {
+      reader.readAsDataURL(file);
+    } else {
+      reader.readAsText(file);
+    }
+  });
+}
+
 // src/storage-keys.ts
 var STORAGE_KEYS = {
   endpoints: "llm_fallbacks_proxy_endpoints",
   guestToken: "llm_fallbacks_guest_token",
   defaultModel: "llm_fallbacks_default_model",
-  apiKeys: "llm_fallbacks_api_keys"
+  apiKeys: "llm_fallbacks_api_keys",
+  providerTiers: "llm_fallbacks_provider_tiers"
 };
 function loadJson(key, fallback) {
   try {
@@ -5340,10 +5648,6 @@ function shouldTryBrowser(model, catalog, keys) {
   }
   return hasAnyKey(keys) && hasKeyForModel(model, keys);
 }
-function shouldFallbackToProxy(browserErr) {
-  const msg = browserErr.message || String(browserErr);
-  return msg === "BROWSER_UNAVAILABLE" || msg === "PROXY_UNAVAILABLE" || /^no API key for /i.test(msg) || /^unsupported provider:/i.test(msg);
-}
 
 // src/turnstile-session.ts
 var siteKey;
@@ -5631,6 +5935,42 @@ function mapProxyChainFailure(lastError, rateLimit) {
   return new ProxyUnavailableError(lastError);
 }
 
+// src/providers/message-openai.ts
+function isImageFileBlock(block) {
+  return block.type === "file" && typeof block.mimeType === "string" && block.mimeType.startsWith("image/") && typeof block.data === "string";
+}
+function messageText(message) {
+  return message.blocks.filter((b2) => b2.type === "text").map((b2) => b2.type === "text" ? b2.text : "").join("");
+}
+function messageHasImage(message) {
+  return message.blocks.some((b2) => isImageFileBlock(b2));
+}
+function messagesHaveImage(messages) {
+  return messages.some((m2) => messageHasImage(m2));
+}
+function messagesToOpenAi(messages) {
+  return messages.map((message) => {
+    const text = messageText(message);
+    const images = message.blocks.filter((b2) => isImageFileBlock(b2));
+    if (images.length === 0) {
+      return { role: message.role, content: text };
+    }
+    const parts = [];
+    if (text) parts.push({ type: "text", text });
+    for (const image of images) {
+      parts.push({ type: "image_url", image_url: { url: image.data } });
+    }
+    return { role: message.role, content: parts };
+  });
+}
+function messagesToPlainText(messages) {
+  return messages.map((message) => ({ role: message.role, content: messageText(message) }));
+}
+function modelSupportsVision(modelId, catalog) {
+  const entry = catalog.find((e) => e.id === modelId);
+  return entry?.supports_vision === true;
+}
+
 // src/providers/routing-metadata.ts
 var lastCompletionMeta = null;
 var COMPLETION_META_EVENT = "llm-fallbacks:completion-meta";
@@ -5752,16 +6092,289 @@ function emitTextAsStreamEvents(text, onEvent) {
   onEvent({ type: "finish", reason: "stop" });
 }
 
+// src/providers/tiers/defaults.ts
+var TIER_IDS = [
+  "quality_api",
+  "web_ui",
+  "searxng_discovery",
+  "proxy_failover"
+];
+var DEFAULT_TIER_ENTRIES = [
+  { id: "quality_api", enabled: true },
+  { id: "web_ui", enabled: false },
+  { id: "searxng_discovery", enabled: false },
+  { id: "proxy_failover", enabled: true }
+];
+var DEFAULT_ENABLED_BY_ID = new Map(
+  DEFAULT_TIER_ENTRIES.map((t) => [t.id, t.enabled])
+);
+function defaultProviderTierSettings() {
+  return {
+    tiers: DEFAULT_TIER_ENTRIES.map((t) => ({ ...t })),
+    webRunnerUrl: "",
+    searxngUrl: ""
+  };
+}
+function normalizeTierSettings(raw) {
+  const seen = /* @__PURE__ */ new Set();
+  const tiers = [];
+  for (const entry of raw.tiers ?? []) {
+    if (!DEFAULT_ENABLED_BY_ID.has(entry.id) || seen.has(entry.id)) continue;
+    seen.add(entry.id);
+    tiers.push({ id: entry.id, enabled: !!entry.enabled });
+  }
+  for (const id of TIER_IDS) {
+    if (!seen.has(id)) tiers.push({ id, enabled: DEFAULT_ENABLED_BY_ID.get(id) ?? false });
+  }
+  return {
+    tiers,
+    webRunnerUrl: raw.webRunnerUrl?.trim() ?? "",
+    searxngUrl: raw.searxngUrl?.trim() ?? ""
+  };
+}
+
+// src/providers/tiers/settings.ts
+function loadProviderTierSettings() {
+  const fallback = defaultProviderTierSettings();
+  const raw = loadJson(STORAGE_KEYS.providerTiers, fallback);
+  return normalizeTierSettings({
+    tiers: raw.tiers ?? fallback.tiers,
+    webRunnerUrl: raw.webRunnerUrl ?? "",
+    searxngUrl: raw.searxngUrl ?? ""
+  });
+}
+function saveProviderTierSettings(settings) {
+  saveJson(STORAGE_KEYS.providerTiers, normalizeTierSettings(settings));
+}
+
+// src/providers/tiers/types.ts
+var TierOrchestratorError = class extends Error {
+  attempts;
+  constructor(message, attempts) {
+    super(message);
+    this.name = "TierOrchestratorError";
+    this.attempts = attempts;
+  }
+};
+var TierSkipError = class extends Error {
+  tier;
+  constructor(tier, reason) {
+    super(reason);
+    this.name = "TierSkipError";
+    this.tier = tier;
+  }
+};
+
+// src/providers/tiers/orchestrator.ts
+function formatAttemptError(err) {
+  if (err instanceof Error) return err.message;
+  return String(err);
+}
+var TierOrchestrator = class {
+  constructor(handlers) {
+    this.handlers = handlers;
+  }
+  async streamChat(request, onEvent) {
+    const settings = loadProviderTierSettings();
+    const attempts = [];
+    for (const entry of settings.tiers) {
+      if (!entry.enabled) continue;
+      const handler = this.handlerFor(entry.id);
+      if (!handler) continue;
+      try {
+        await handler(request, onEvent);
+        return;
+      } catch (err) {
+        if (err instanceof TierSkipError) {
+          attempts.push({ tier: entry.id, error: err.message });
+          continue;
+        }
+        attempts.push({ tier: entry.id, error: formatAttemptError(err) });
+        if (request.signal.aborted) throw err;
+      }
+    }
+    const summary = attempts.map((a) => `${a.tier}: ${a.error}`).join("; ");
+    throw new TierOrchestratorError(
+      summary || "No provider tiers are enabled.",
+      attempts
+    );
+  }
+  handlerFor(id) {
+    switch (id) {
+      case "quality_api":
+        return this.handlers.qualityApi;
+      case "web_ui":
+        return this.handlers.webUi;
+      case "searxng_discovery":
+        return this.handlers.searxngDiscovery;
+      case "proxy_failover":
+        return this.handlers.proxyFailover;
+      default:
+        return null;
+    }
+  }
+};
+function qualityApiTierUnavailable() {
+  return new TierSkipError(
+    "quality_api",
+    "No BYOK API key set for the selected model \u2014 skipping direct routes."
+  );
+}
+function webUiTierUnavailable() {
+  return new TierSkipError("web_ui", "Web UI tier is not configured.");
+}
+function searxngTierUnavailable() {
+  return new TierSkipError("searxng_discovery", "SearXNG discovery is not configured.");
+}
+
+// src/providers/tiers/searxng-discovery-tier.ts
+var DiscoveryEmptyError = class extends Error {
+  constructor(query) {
+    super(`SearXNG returned no candidate free chat sites for "${query}".`);
+    this.name = "DiscoveryEmptyError";
+  }
+};
+var DiscoveryUnavailableError = class extends Error {
+  constructor(endpoint, cause) {
+    super(
+      `SearXNG at ${endpoint} is unreachable (${cause}). Check the URL in Tiers settings and that the instance allows browser requests (CORS).`
+    );
+    this.name = "DiscoveryUnavailableError";
+  }
+};
+var DEFAULT_DISCOVERY_QUERY = "free AI chat online no signup";
+var CHAT_HINT_RE = /\b(chat|gpt|assistant|llm|ai)\b/i;
+var EXCLUDED_HOST_RE = /(^|\.)(wikipedia\.org|youtube\.com|reddit\.com|github\.com|medium\.com|x\.com|twitter\.com|facebook\.com|linkedin\.com)$/i;
+var MAX_CANDIDATES = 6;
+function hostOf(url) {
+  try {
+    return new URL(url).hostname;
+  } catch {
+    return null;
+  }
+}
+function filterChatCandidates(results) {
+  const seenHosts = /* @__PURE__ */ new Set();
+  const candidates = [];
+  for (const result of results) {
+    const url = result.url?.trim() ?? "";
+    if (!url.startsWith("https://")) continue;
+    const host = hostOf(url);
+    if (!host || seenHosts.has(host) || EXCLUDED_HOST_RE.test(host)) continue;
+    const haystack = `${url} ${result.title ?? ""} ${result.content ?? ""}`;
+    if (!CHAT_HINT_RE.test(haystack)) continue;
+    seenHosts.add(host);
+    candidates.push({
+      url,
+      title: result.title?.trim() || host,
+      snippet: (result.content ?? "").trim().slice(0, 200)
+    });
+    if (candidates.length >= MAX_CANDIDATES) break;
+  }
+  return candidates;
+}
+function discoverySearchUrl(searxngUrl, query) {
+  const base = searxngUrl.replace(/\/$/, "");
+  return `${base}/search?q=${encodeURIComponent(query)}&format=json`;
+}
+async function searchFreeChatCandidates(options) {
+  const query = options.query?.trim() || DEFAULT_DISCOVERY_QUERY;
+  const doFetch = options.fetchImpl ?? fetch;
+  const url = discoverySearchUrl(options.searxngUrl, query);
+  let res;
+  try {
+    res = await doFetch(url, {
+      headers: { Accept: "application/json" },
+      signal: options.signal
+    });
+  } catch (err) {
+    if (options.signal?.aborted) throw err;
+    const cause = err instanceof Error ? err.message : String(err);
+    throw new DiscoveryUnavailableError(options.searxngUrl, cause || "network/CORS error");
+  }
+  if (!res.ok) {
+    throw new DiscoveryUnavailableError(options.searxngUrl, `HTTP ${res.status}`);
+  }
+  let parsed;
+  try {
+    parsed = await res.json();
+  } catch {
+    throw new DiscoveryUnavailableError(
+      options.searxngUrl,
+      "non-JSON response \u2014 enable the JSON format in SearXNG settings"
+    );
+  }
+  const candidates = filterChatCandidates(parsed.results ?? []);
+  if (candidates.length === 0) {
+    throw new DiscoveryEmptyError(query);
+  }
+  return candidates;
+}
+var DISCOVERY_RESULTS_EVENT = "llm-fallbacks:discovery-results";
+function broadcastDiscoveryResults(candidates) {
+  window.dispatchEvent(
+    new CustomEvent(DISCOVERY_RESULTS_EVENT, { detail: { candidates } })
+  );
+}
+
+// src/providers/tiers/web-ui-tier.ts
+var WebRunnerNotConfiguredError = class extends Error {
+  constructor(runnerUrl, detail) {
+    super(
+      `Web runner at ${runnerUrl} has no adapter configured (${detail}). Set up runner/runner.config.json \u2014 see runner/README.md.`
+    );
+    this.name = "WebRunnerNotConfiguredError";
+  }
+};
+var WebRunnerUnavailableError = class extends Error {
+  constructor(runnerUrl, cause) {
+    super(
+      `Web runner at ${runnerUrl} is unreachable (${cause}). Check that the runner is started and the URL in Tiers settings is correct.`
+    );
+    this.name = "WebRunnerUnavailableError";
+  }
+};
+function runnerChatUrl(runnerUrl) {
+  return `${runnerUrl.replace(/\/$/, "")}/v1/chat/completions`;
+}
+async function streamFromWebRunner(options) {
+  const doFetch = options.fetchImpl ?? fetch;
+  let res;
+  try {
+    res = await doFetch(runnerChatUrl(options.runnerUrl), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: options.model,
+        messages: options.messages,
+        max_tokens: options.maxTokens,
+        stream: true
+      }),
+      signal: options.signal
+    });
+  } catch (err) {
+    if (options.signal.aborted) throw err;
+    const cause = err instanceof Error ? err.message : String(err);
+    throw new WebRunnerUnavailableError(options.runnerUrl, cause || "network/CORS error");
+  }
+  if (res.status === 501) {
+    const bodyText = await res.text();
+    throw new WebRunnerNotConfiguredError(options.runnerUrl, bodyText.slice(0, 160) || "HTTP 501");
+  }
+  if (!res.ok) {
+    const bodyText = await res.text();
+    throw new WebRunnerUnavailableError(
+      options.runnerUrl,
+      `HTTP ${res.status} \u2014 ${bodyText.slice(0, 160)}`
+    );
+  }
+  await emitOpenAiSseAsStreamEvents(res, options.onEvent);
+}
+
 // src/providers/FailoverProvider.ts
 function endpointUrl(base) {
   const trimmed = base.replace(/\/$/, "");
   return trimmed.endsWith("/v1/chat/completions") ? trimmed : `${trimmed}/v1/chat/completions`;
-}
-function messagesToOpenAi(messages) {
-  return messages.map((m2) => {
-    const text = m2.blocks.filter((b2) => b2.type === "text").map((b2) => b2.type === "text" ? b2.text : "").join("");
-    return { role: m2.role, content: text };
-  });
 }
 function readRoutingHeaders(res) {
   const modelHeader = res.headers.get("x-litellm-model-name") || res.headers.get("x-litellm-model-id") || void 0;
@@ -5924,86 +6537,144 @@ var FailoverProvider = class {
     }
     throw mapProxyChainFailure(lastError, lastRateLimit);
   }
-  async streamChat(request, onEvent) {
+  buildChatBody(request) {
     const config = this.getRuntimeConfig();
     const model = this.resolveModel(request);
-    const openAiMessages = messagesToOpenAi(request.messages);
     const body = {
       model,
-      messages: openAiMessages,
+      messages: messagesToOpenAi(request.messages),
       max_tokens: request.options.max_tokens ?? config.maxTokens
     };
-    const keys = loadKeys();
-    const userKeys = keys;
-    const tryBrowser = async (onEv) => {
-      const result = await chatWithBrowserFallback({
-        model,
-        messages: openAiMessages,
-        maxTokens: body.max_tokens,
-        catalog: this.catalog,
-        providerUrls: this.providerUrls,
-        keys: userKeys,
-        onStatus: (s) => this.setStatus(s)
-      });
-      this.lastRoute = result.route;
-      window.LLM_FALLBACKS_ROUTE = result.route;
-      setLastCompletionMeta({
-        endpoint: result.route,
-        fallbackCount: 0
-      });
-      emitTextAsStreamEvents(result.content, onEv);
+    return {
+      config,
+      model,
+      body,
+      plainMessages: messagesToPlainText(request.messages),
+      hasImage: messagesHaveImage(request.messages)
     };
-    if (config.endpoints.length) {
-      try {
-        await this.streamWithCompletionTracking(
-          (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
-          onEvent
-        );
-        return;
-      } catch (proxyErr) {
-        if (!shouldTryBrowser(model, this.catalog, userKeys)) throw proxyErr;
-        this.setStatus("cloud proxy unavailable \u2014 trying optional browser route \u2026");
-      }
-    }
-    if (model !== "free" && !shouldTryBrowser(model, this.catalog, userKeys)) {
-      if (config.endpoints.length) {
-        await this.streamWithCompletionTracking(
-          (onEv) => this.streamProxyFallback({ ...body, model: "free" }, config, onEv, request.signal),
-          onEvent
-        );
-        return;
-      }
-      throw new Error(
-        "Selected model requires an API key for its provider. Choose free or add the provider key in Settings."
+  }
+  // quality_api tier: direct/BYOK provider routes only. Disjoint from
+  // proxy_failover (KTD7) — this tier never touches the cloud proxy chain, so
+  // a single request is not attempted twice against the same endpoint. Without
+  // a usable key it skips, letting the orchestrator advance to proxy_failover.
+  async streamQualityApiRoute(request, onEvent) {
+    const { model, body, plainMessages, hasImage } = this.buildChatBody(request);
+    const userKeys = loadKeys();
+    if (hasImage) {
+      throw new TierSkipError(
+        "quality_api",
+        "Direct BYOK routes do not support image attachments yet \u2014 using the proxy tier."
       );
     }
-    if (shouldTryBrowser(model, this.catalog, userKeys)) {
-      try {
-        await this.streamWithCompletionTracking((onEv) => tryBrowser(onEv), onEvent);
-        return;
-      } catch (browserErr) {
-        const err = browserErr instanceof Error ? browserErr : new Error(String(browserErr));
-        if (config.endpoints.length && shouldFallbackToProxy(err)) {
-          this.setStatus("browser route failed \u2014 retrying cloud proxy \u2026");
-          await this.streamWithCompletionTracking(
-            (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
-            onEvent
-          );
-          return;
+    if (!shouldTryBrowser(model, this.catalog, userKeys)) {
+      throw qualityApiTierUnavailable();
+    }
+    const result = await chatWithBrowserFallback({
+      model,
+      messages: plainMessages,
+      maxTokens: body.max_tokens,
+      catalog: this.catalog,
+      providerUrls: this.providerUrls,
+      keys: userKeys,
+      onStatus: (s) => this.setStatus(s)
+    });
+    this.lastRoute = result.route;
+    window.LLM_FALLBACKS_ROUTE = this.lastRoute;
+    setLastCompletionMeta({
+      endpoint: result.route,
+      fallbackCount: 0
+    });
+    emitTextAsStreamEvents(result.content, onEvent);
+  }
+  async streamProxyFailoverRoute(request, onEvent) {
+    const { config, body } = this.buildChatBody(request);
+    await this.streamProxyFallback(body, config, onEvent, request.signal);
+  }
+  async streamWebUiRoute(request, onEvent) {
+    const settings = loadProviderTierSettings();
+    if (!settings.webRunnerUrl) {
+      throw webUiTierUnavailable();
+    }
+    const { model, body, plainMessages, hasImage } = this.buildChatBody(request);
+    if (hasImage) {
+      throw new TierSkipError(
+        "web_ui",
+        "The web runner does not support image attachments \u2014 using the proxy tier."
+      );
+    }
+    this.setStatus(`web runner: ${settings.webRunnerUrl} \u2026`);
+    let metaSet = false;
+    await streamFromWebRunner({
+      runnerUrl: settings.webRunnerUrl,
+      model,
+      messages: plainMessages,
+      maxTokens: body.max_tokens,
+      signal: request.signal,
+      onEvent: (event) => {
+        if (!metaSet) {
+          metaSet = true;
+          this.lastRoute = `web_ui/${settings.webRunnerUrl}`;
+          window.LLM_FALLBACKS_ROUTE = this.lastRoute;
+          setLastCompletionMeta({ endpoint: this.lastRoute, fallbackCount: 0 });
         }
-        throw err;
+        onEvent(event);
+      }
+    });
+  }
+  async streamSearxngDiscoveryRoute(request, _onEvent) {
+    const settings = loadProviderTierSettings();
+    if (!settings.searxngUrl) {
+      throw searxngTierUnavailable();
+    }
+    this.setStatus("searxng: searching for free chat sites \u2026");
+    const candidates = await searchFreeChatCandidates({
+      searxngUrl: settings.searxngUrl,
+      signal: request.signal
+    });
+    broadcastDiscoveryResults(candidates);
+    throw new Error(
+      `SearXNG found ${candidates.length} candidate chat site${candidates.length === 1 ? "" : "s"} \u2014 see suggestions below the chat.`
+    );
+  }
+  async streamChat(request, onEvent) {
+    if (messagesHaveImage(request.messages)) {
+      const model = this.resolveModel(request);
+      if (!modelSupportsVision(model, this.catalog)) {
+        throw new ChatRouteError(
+          "vision_unsupported",
+          `"${model}" can't read images. Pick a vision-capable model (filter by vision in the model explorer) or remove the attachment.`
+        );
       }
     }
-    if (config.endpoints.length) {
-      await this.streamWithCompletionTracking(
-        (onEv) => this.streamProxyFallback(body, config, onEv, request.signal),
-        onEvent
-      );
-      return;
+    const orchestrator = new TierOrchestrator({
+      qualityApi: (req, onEv) => this.streamWithCompletionTracking((inner) => this.streamQualityApiRoute(req, inner), onEv),
+      webUi: (req, onEv) => this.streamWithCompletionTracking((inner) => this.streamWebUiRoute(req, inner), onEv),
+      searxngDiscovery: (req, onEv) => this.streamWithCompletionTracking(
+        (inner) => this.streamSearxngDiscoveryRoute(req, inner),
+        onEv
+      ),
+      proxyFailover: (req, onEv) => this.streamWithCompletionTracking((inner) => this.streamProxyFailoverRoute(req, inner), onEv)
+    });
+    try {
+      await orchestrator.streamChat(request, onEvent);
+    } catch (err) {
+      if (err instanceof TierOrchestratorError) {
+        throw this.mapTierFailure(err);
+      }
+      throw err;
     }
-    throw mapProxyChainFailure(
-      "No chat routes are available yet. The demo proxy is still deploying \u2014 refresh in a minute."
-    );
+  }
+  // Preserve the ChatRouteError taxonomy (rate-limit / quota / cold-start) while
+  // surfacing which tiers were tried and their last error (R40). A no-attempt
+  // failure means every tier skipped or none were enabled.
+  mapTierFailure(err) {
+    if (err.attempts.length === 0) {
+      return mapProxyChainFailure(
+        "No chat routes are available yet. Enable a provider tier in Settings, or wait for the demo proxy to finish deploying."
+      );
+    }
+    const summary = err.attempts.map((a) => `${a.tier} \u2192 ${a.error}`).join(" | ");
+    return mapProxyChainFailure(summary);
   }
 };
 
@@ -6240,6 +6911,443 @@ function ByokSettingsPlugin(deps) {
   };
 }
 
+// src/plugins/tier-settings/settings.ts
+var TIER_LABELS = {
+  quality_api: "Direct / BYOK routes",
+  web_ui: "Local web-UI runner (opt-in)",
+  searxng_discovery: "SearXNG discovery (opt-in)",
+  proxy_failover: "Cloud proxy failover"
+};
+var TIER_HINTS = {
+  quality_api: "Uses API keys stored in this browser. Skips when no key matches the selected model.",
+  web_ui: "Optional local companion that drives a browser chat UI. Off by default \u2014 you run it.",
+  searxng_discovery: "Optional self-hosted SearXNG. Suggests free chat URLs when higher tiers fail.",
+  proxy_failover: "Public Worker / Render endpoints from Server settings. Serves zero-config visitors."
+};
+function moveTier(settings, tierId, delta) {
+  const tiers = settings.tiers.map((t) => ({ ...t }));
+  const from = tiers.findIndex((t) => t.id === tierId);
+  if (from < 0) return settings;
+  const to = from + delta;
+  if (to < 0 || to >= tiers.length) return settings;
+  const [entry] = tiers.splice(from, 1);
+  tiers.splice(to, 0, entry);
+  return normalizeTierSettings({ ...settings, tiers });
+}
+function setTierEnabled(settings, tierId, enabled) {
+  const tiers = settings.tiers.map(
+    (t) => t.id === tierId ? { ...t, enabled } : { ...t }
+  );
+  return normalizeTierSettings({ ...settings, tiers });
+}
+function updateCompanionUrls(settings, urls) {
+  return normalizeTierSettings({
+    ...settings,
+    webRunnerUrl: urls.webRunnerUrl ?? settings.webRunnerUrl,
+    searxngUrl: urls.searxngUrl ?? settings.searxngUrl
+  });
+}
+function persistTierSettings(settings) {
+  const normalized = normalizeTierSettings(settings);
+  saveProviderTierSettings(normalized);
+  return loadProviderTierSettings();
+}
+
+// src/plugins/tier-settings/index.ts
+function renderTierList(settings) {
+  return settings.tiers.map((tier, index) => {
+    const label = TIER_LABELS[tier.id] ?? tier.id;
+    const hint = TIER_HINTS[tier.id] ?? "";
+    return `
+        <li class="lf-tier-row" data-tier-id="${tier.id}">
+          <div class="lf-tier-row-main">
+            <label class="lf-tier-enable">
+              <input type="checkbox" data-tier-enable="${tier.id}" ${tier.enabled ? "checked" : ""} />
+              <span>${label}</span>
+            </label>
+            <div class="lf-tier-move">
+              <button type="button" class="panel-btn panel-btn-ghost lf-tier-up" data-tier-up="${tier.id}" ${index === 0 ? "disabled" : ""} aria-label="Move ${label} up">\u2191</button>
+              <button type="button" class="panel-btn panel-btn-ghost lf-tier-down" data-tier-down="${tier.id}" ${index === settings.tiers.length - 1 ? "disabled" : ""} aria-label="Move ${label} down">\u2193</button>
+            </div>
+          </div>
+          <p class="panel-hint lf-tier-hint">${hint}</p>
+        </li>
+      `;
+  }).join("");
+}
+function TierSettingsPlugin() {
+  return {
+    name: "tier-settings",
+    onMount() {
+      window.registerShellPanel?.("tiers", (root) => {
+        let draft = loadProviderTierSettings();
+        const paint = () => {
+          root.innerHTML = `
+            <header class="panel-header">
+              <h3>Provider tiers</h3>
+            </header>
+            <p class="panel-hint">
+              Ordered routes we try for each chat. This is the <strong>omnifail stack</strong>
+              (which route to attempt), not cloud free-tier rate limits.
+              Exhausting enabled tiers still fails honestly \u2014 we do not promise never-fail.
+            </p>
+            <ol id="lf-tier-list" class="lf-tier-list">${renderTierList(draft)}</ol>
+            <label>Web-UI runner URL
+              <input id="lf-web-runner-url" type="url" autocomplete="off"
+                placeholder="http://127.0.0.1:8788" value="${draft.webRunnerUrl}" />
+            </label>
+            <p class="panel-hint">
+              Opt-in local companion. Off by default. You run it; it lowers pressure on the
+              public Worker demo. You are responsible for target-site terms \u2014 we do not
+              harvest credentials.
+            </p>
+            <label>SearXNG URL
+              <input id="lf-searxng-url" type="url" autocomplete="off"
+                placeholder="http://127.0.0.1:8080" value="${draft.searxngUrl}" />
+            </label>
+            <p class="panel-hint">
+              Opt-in self-hosted search. Empty disables discovery. Respect SearXNG and
+              target-site terms of service.
+            </p>
+            <div class="panel-actions">
+              <button type="button" id="lf-tier-reset" class="panel-btn">Reset defaults</button>
+              <button type="button" id="lf-tier-save" class="panel-btn panel-btn-primary">Save tiers</button>
+            </div>
+            <p id="lf-tier-status" class="panel-status" aria-live="polite"></p>
+          `;
+          const list = root.querySelector("#lf-tier-list");
+          list?.addEventListener("click", (event) => {
+            const target = event.target;
+            const up = target.closest("[data-tier-up]");
+            const down = target.closest("[data-tier-down]");
+            if (up?.dataset.tierUp) {
+              draft = moveTier(draft, up.dataset.tierUp, -1);
+              paint();
+              return;
+            }
+            if (down?.dataset.tierDown) {
+              draft = moveTier(draft, down.dataset.tierDown, 1);
+              paint();
+            }
+          });
+          list?.addEventListener("change", (event) => {
+            const input = event.target;
+            const tierId = input.dataset.tierEnable;
+            if (!tierId || input.type !== "checkbox") return;
+            draft = setTierEnabled(draft, tierId, input.checked);
+          });
+          root.querySelector("#lf-tier-reset")?.addEventListener("click", () => {
+            draft = persistTierSettings(defaultProviderTierSettings());
+            paint();
+            const status = root.querySelector("#lf-tier-status");
+            if (status) status.textContent = "Restored zero-config defaults.";
+          });
+          root.querySelector("#lf-tier-save")?.addEventListener("click", () => {
+            const webRunnerUrl = root.querySelector("#lf-web-runner-url")?.value ?? "";
+            const searxngUrl = root.querySelector("#lf-searxng-url")?.value ?? "";
+            draft = updateCompanionUrls(draft, { webRunnerUrl, searxngUrl });
+            draft = persistTierSettings(draft);
+            paint();
+            const status = root.querySelector("#lf-tier-status");
+            if (status) {
+              status.textContent = `Saved order: ${draft.tiers.filter((t) => t.enabled).map((t) => t.id).join(" \u2192 ") || "(none enabled)"}`;
+            }
+          });
+        };
+        paint();
+      });
+    }
+  };
+}
+
+// src/plugins/compare-mode/column-provider.ts
+function defaultCompareState(activeModel = "free") {
+  return {
+    active: false,
+    columns: {
+      a: { model: activeModel || "free" },
+      b: { model: "openrouter/free" }
+    }
+  };
+}
+function columnIsMetered(model, catalog, keys = loadKeys()) {
+  if (model === "free") return true;
+  return !shouldTryBrowser(model, catalog, keys);
+}
+function bothColumnsMetered(state, catalog, keys = loadKeys()) {
+  if (!state.active) return false;
+  return columnIsMetered(state.columns.a.model, catalog, keys) && columnIsMetered(state.columns.b.model, catalog, keys);
+}
+var METERED_COMPARE_BANNER = "Compare sends two requests. Rate limits and Turnstile apply to each column when both use the public proxy.";
+
+// src/plugins/compare-mode/index.ts
+function modelOptionsHtml(selected) {
+  const parts = [];
+  for (const pinned of getPinnedModels()) {
+    parts.push(
+      `<option value="${pinned.id}" ${pinned.id === selected ? "selected" : ""}>${pinned.label}</option>`
+    );
+  }
+  for (const entry of getCatalogModels(40)) {
+    if (getPinnedModels().some((p) => p.id === entry.id)) continue;
+    parts.push(
+      `<option value="${entry.id}" ${entry.id === selected ? "selected" : ""}>${modelOptionLabel(entry)}</option>`
+    );
+  }
+  return parts.join("");
+}
+function applyDeltaToPane(pane, event) {
+  if (event.type === "message_start") {
+    pane.textContent = "";
+    return;
+  }
+  if (event.type === "text_delta") {
+    pane.textContent = (pane.textContent || "") + event.delta;
+  }
+}
+function tagCompareMeta(event, column, model) {
+  if (event.type !== "message_start") return event;
+  return {
+    ...event,
+    message: {
+      ...event.message,
+      meta: { ...event.message.meta || {}, compareColumn: column, model }
+    }
+  };
+}
+function CompareModePlugin(deps) {
+  let state = defaultCompareState(getActiveModel());
+  let mount = null;
+  let chrome = null;
+  let bannerEl = null;
+  let paneA = null;
+  let paneB = null;
+  let labelA = null;
+  let labelB = null;
+  let wrapped = false;
+  const refreshBanner = () => {
+    if (!bannerEl) return;
+    const show = bothColumnsMetered(state, deps.getCatalog());
+    bannerEl.hidden = !show;
+    bannerEl.textContent = show ? METERED_COMPARE_BANNER : "";
+  };
+  const syncChromeVisibility = () => {
+    if (!chrome || !mount) return;
+    chrome.hidden = !state.active;
+    mount.classList.toggle("lf-compare-active", state.active);
+    refreshBanner();
+  };
+  const paintColumnLabels = () => {
+    if (labelA) labelA.textContent = state.columns.a.model;
+    if (labelB) labelB.textContent = state.columns.b.model;
+  };
+  return {
+    name: "compare-mode",
+    onMount(ctx) {
+      mount = ctx.container;
+      chrome = document.createElement("div");
+      chrome.className = "lf-compare-chrome";
+      chrome.hidden = true;
+      chrome.innerHTML = `
+        <p class="lf-compare-banner" id="lf-compare-banner" hidden></p>
+        <div class="lf-compare-grid" role="group" aria-label="Compare two models">
+          <section class="lf-compare-column" data-column="a">
+            <header class="lf-compare-column-header">
+              <label>
+                <span class="lf-compare-column-title">Column A</span>
+                <select class="lf-compare-model" data-column="a" aria-label="Compare model A"></select>
+              </label>
+              <span class="lf-compare-live-label" data-label="a"></span>
+            </header>
+            <div class="lf-compare-pane" data-pane="a" aria-live="polite"></div>
+          </section>
+          <section class="lf-compare-column" data-column="b">
+            <header class="lf-compare-column-header">
+              <label>
+                <span class="lf-compare-column-title">Column B</span>
+                <select class="lf-compare-model" data-column="b" aria-label="Compare model B"></select>
+              </label>
+              <span class="lf-compare-live-label" data-label="b"></span>
+            </header>
+            <div class="lf-compare-pane" data-pane="b" aria-live="polite"></div>
+          </section>
+        </div>
+      `;
+      const layout = mount.querySelector(".mur-chat-layout-wrapper");
+      const formHost = mount.querySelector(".mur-chat-form-container");
+      if (layout && formHost) {
+        layout.insertBefore(chrome, formHost);
+      } else {
+        (mount.querySelector(".mur-chat-scroll-area") || mount).appendChild(chrome);
+      }
+      bannerEl = chrome.querySelector("#lf-compare-banner");
+      paneA = chrome.querySelector('[data-pane="a"]');
+      paneB = chrome.querySelector('[data-pane="b"]');
+      labelA = chrome.querySelector('[data-label="a"]');
+      labelB = chrome.querySelector('[data-label="b"]');
+      const selectA = chrome.querySelector('select[data-column="a"]');
+      const selectB = chrome.querySelector('select[data-column="b"]');
+      selectA.innerHTML = modelOptionsHtml(state.columns.a.model);
+      selectB.innerHTML = modelOptionsHtml(state.columns.b.model);
+      selectA.addEventListener("change", () => {
+        state.columns.a.model = selectA.value;
+        paintColumnLabels();
+        refreshBanner();
+      });
+      selectB.addEventListener("change", () => {
+        state.columns.b.model = selectB.value;
+        paintColumnLabels();
+        refreshBanner();
+      });
+      paintColumnLabels();
+      if (formHost) {
+        const toggleRow = document.createElement("div");
+        toggleRow.className = "lf-compare-toggle-row";
+        toggleRow.innerHTML = `
+          <label class="lf-compare-toggle">
+            <input type="checkbox" id="lf-compare-toggle" />
+            <span>Compare mode</span>
+          </label>
+          <span class="lf-compare-toggle-hint">Same prompt \u2192 two models side by side</span>
+        `;
+        formHost.insertBefore(toggleRow, formHost.firstChild);
+        const checkbox = toggleRow.querySelector("#lf-compare-toggle");
+        checkbox.addEventListener("change", () => {
+          state.active = checkbox.checked;
+          if (state.active) {
+            state.columns.a.model = selectA.value || getActiveModel();
+            selectA.value = state.columns.a.model;
+            paintColumnLabels();
+            showStatusMessage("Compare mode on \u2014 replies appear in both columns.");
+          } else {
+            showStatusMessage("Compare mode off \u2014 history kept.");
+          }
+          syncChromeVisibility();
+        });
+      }
+      syncChromeVisibility();
+      if (!wrapped) {
+        wrapped = true;
+        const original = deps.provider.streamChat.bind(deps.provider);
+        deps.provider.streamChat = async (request, onEvent) => {
+          if (!state.active) {
+            return original(request, onEvent);
+          }
+          refreshBanner();
+          if (paneA) paneA.textContent = "";
+          if (paneB) paneB.textContent = "";
+          paintColumnLabels();
+          const modelA = state.columns.a.model;
+          const modelB = state.columns.b.model;
+          const reqA = {
+            ...request,
+            options: { ...request.options, model: modelA }
+          };
+          const reqB = {
+            ...request,
+            options: { ...request.options, model: modelB }
+          };
+          try {
+            await original(reqA, (event) => {
+              if (paneA) applyDeltaToPane(paneA, event);
+              onEvent(tagCompareMeta(event, "a", modelA));
+            });
+          } catch (err) {
+            if (paneA && !paneA.textContent) {
+              paneA.textContent = err instanceof Error ? err.message : String(err);
+            }
+            throw err;
+          }
+          try {
+            await original(reqB, (event) => {
+              if (paneB) applyDeltaToPane(paneB, event);
+              onEvent(tagCompareMeta(event, "b", modelB));
+            });
+          } catch (err) {
+            if (paneB && !paneB.textContent) {
+              paneB.textContent = err instanceof Error ? err.message : String(err);
+            }
+          }
+        };
+      }
+    },
+    beforeSubmit: async (request) => {
+      if (!state.active) return;
+      refreshBanner();
+      return {
+        options: {
+          ...request.options,
+          model: state.columns.a.model,
+          lfCompare: true
+        }
+      };
+    },
+    destroy() {
+      chrome?.remove();
+      mount?.classList.remove("lf-compare-active");
+    }
+  };
+}
+
+// src/plugins/discovery-picklist/index.ts
+function escapeHtml(text) {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+function candidateRow(candidate) {
+  const title = escapeHtml(candidate.title);
+  const url = escapeHtml(candidate.url);
+  const snippet = escapeHtml(candidate.snippet);
+  return `
+    <li class="lf-discovery-item">
+      <a href="${url}" target="_blank" rel="noopener noreferrer nofollow">${title}</a>
+      <span class="lf-discovery-url">${url}</span>
+      ${snippet ? `<p class="lf-discovery-snippet">${snippet}</p>` : ""}
+    </li>
+  `;
+}
+function DiscoveryPicklistPlugin() {
+  let host = null;
+  let handler = null;
+  return {
+    name: "discovery-picklist",
+    onMount(ctx) {
+      host = document.createElement("div");
+      host.className = "lf-discovery-picklist";
+      host.hidden = true;
+      const layout = ctx.container.querySelector(".mur-chat-layout-wrapper");
+      const form = ctx.container.querySelector(".mur-chat-form-container");
+      if (layout && form) {
+        layout.insertBefore(host, form);
+      } else {
+        ctx.container.appendChild(host);
+      }
+      handler = (event) => {
+        const detail = event.detail;
+        const candidates = detail?.candidates ?? [];
+        if (!host || candidates.length === 0) return;
+        host.innerHTML = `
+          <div class="lf-discovery-header">
+            <span>Free chat sites found via your SearXNG (open manually \u2014 nothing is automated):</span>
+            <button type="button" class="panel-btn panel-btn-ghost lf-discovery-dismiss" aria-label="Dismiss suggestions">\xD7</button>
+          </div>
+          <ul class="lf-discovery-list">
+            ${candidates.map((c) => candidateRow(c)).join("")}
+          </ul>
+        `;
+        host.hidden = false;
+        host.querySelector(".lf-discovery-dismiss")?.addEventListener("click", () => {
+          if (host) host.hidden = true;
+        });
+      };
+      window.addEventListener(DISCOVERY_RESULTS_EVENT, handler);
+    },
+    destroy() {
+      if (handler) window.removeEventListener(DISCOVERY_RESULTS_EVENT, handler);
+      host?.remove();
+    }
+  };
+}
+
 // src/catalog-display.ts
 function formatContextLength(value) {
   if (value === void 0 || value <= 0) return "\u2014";
@@ -6394,25 +7502,25 @@ function ModelExplorerPlugin(deps) {
         }
         function cellHtml(row, col) {
           if (col.display === "context") {
-            return escapeHtml(formatContextLength(row.context_length));
+            return escapeHtml2(formatContextLength(row.context_length));
           }
           if (col.display === "capabilities") {
             return renderCapabilityBadgesHtml(row) || "\u2014";
           }
           if (col.key === "provider") {
             const provider = row.provider ?? String(row.id).split("/")[0] ?? "";
-            return escapeHtml(provider);
+            return escapeHtml2(provider);
           }
-          return escapeHtml(String(row[col.key] ?? ""));
+          return escapeHtml2(String(row[col.key] ?? ""));
         }
         function renderTable(rows) {
           thead.innerHTML = `<tr>${TABLE_COLUMNS.map(
             (c) => `<th data-col="${c.key}" style="cursor:pointer">${c.label}${sortColumn === c.key ? sortDir === "asc" ? " \u25B2" : " \u25BC" : ""}</th>`
           ).join("")}<th>Use</th></tr>`;
           tbody.innerHTML = rows.slice(0, 200).map(
-            (row, rowIdx) => `<tr data-row-idx="${rowIdx}" title="${escapeHtml(catalogSummaryLine(row))}">${TABLE_COLUMNS.map(
+            (row, rowIdx) => `<tr data-row-idx="${rowIdx}" title="${escapeHtml2(catalogSummaryLine(row))}">${TABLE_COLUMNS.map(
               (c) => `<td>${cellHtml(row, c)}</td>`
-            ).join("")}<td><button type="button" class="panel-btn lf-use-model-btn" data-model-id="${escapeHtml(String(row.id ?? ""))}">Use for chat</button></td></tr>`
+            ).join("")}<td><button type="button" class="panel-btn lf-use-model-btn" data-model-id="${escapeHtml2(String(row.id ?? ""))}">Use for chat</button></td></tr>`
           ).join("");
           statusEl.textContent = `${rows.length} model(s) shown${rows.length > 200 ? " (first 200)" : ""}`;
           thead.querySelectorAll("th").forEach((th) => {
@@ -6467,7 +7575,7 @@ function ModelExplorerPlugin(deps) {
     }
   };
 }
-function escapeHtml(s) {
+function escapeHtml2(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
@@ -6767,6 +7875,7 @@ function closeShellPanel(_id) {
 function bindTopBarButtons() {
   document.getElementById("sysSetting")?.addEventListener("click", () => openShellPanel("failover"));
   document.getElementById("byokSetting")?.addEventListener("click", () => openShellPanel("byok"));
+  document.getElementById("tiersSetting")?.addEventListener("click", () => openShellPanel("tiers"));
   document.getElementById("explorerSetting")?.addEventListener("click", () => openShellPanel("explorer"));
   document.getElementById("closeSet")?.addEventListener("click", () => closeShellPanel());
   document.getElementById("sysMask")?.addEventListener("click", (e) => {
@@ -6775,14 +7884,14 @@ function bindTopBarButtons() {
 }
 
 // src/export-session.ts
-function messageText(message) {
+function messageText2(message) {
   return message.blocks.filter((b2) => b2.type === "text").map((b2) => b2.type === "text" ? b2.text : "").join("").trim();
 }
 function toMarkdown(messages, meta) {
   const title = meta?.title?.trim() || "Chat export";
   const lines = [`# ${title}`, "", `_Exported from llm-fallbacks_`, ""];
   for (const message of messages) {
-    const text = messageText(message);
+    const text = messageText2(message);
     if (!text) continue;
     const heading = message.role === "user" ? "## User" : "## Assistant";
     lines.push(heading, "", text, "");
@@ -6798,7 +7907,7 @@ function toJson(messages, meta) {
       messages: messages.map((m2) => ({
         id: m2.id,
         role: m2.role,
-        text: messageText(m2)
+        text: messageText2(m2)
       }))
     },
     null,
@@ -7032,6 +8141,7 @@ function ShortcutsSheetPlugin() {
 }
 
 // src/main.ts
+var MAX_IMAGE_ATTACHMENT_BYTES = 4e6;
 async function loadCatalog(config) {
   let catalog = [];
   let providerUrls = {};
@@ -7182,6 +8292,19 @@ async function bootstrap() {
     },
     plugins: (engine) => [
       CopyPlugin(),
+      AttachmentPlugin({
+        acceptedTypes: "image/*",
+        maxFileSize: MAX_IMAGE_ATTACHMENT_BYTES,
+        onSizeExceeded: (file, maxSize) => {
+          const limitMb = Math.round(maxSize / 1e6);
+          showStatusMessage(
+            `"${file.name}" is too large. Images must be under ${limitMb} MB.`
+          );
+        },
+        onUnsupportedFile: (file) => {
+          showStatusMessage(`"${file.name}" isn't a supported image type.`);
+        }
+      }),
       ModelPickerPlugin(),
       MessageActionsPlugin(),
       RoutingChipPlugin(),
@@ -7204,6 +8327,12 @@ async function bootstrap() {
           provider.setCatalog(catalogRef2, providerUrlsRef);
         }
       }),
+      TierSettingsPlugin(),
+      CompareModePlugin({
+        provider,
+        getCatalog: () => catalogRef2
+      }),
+      DiscoveryPicklistPlugin(),
       ModelExplorerPlugin({
         getCatalog: () => catalogRef2,
         getCatalogUrl: () => readRuntimeConfig().catalogUrl

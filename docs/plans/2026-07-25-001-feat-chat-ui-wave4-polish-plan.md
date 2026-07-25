@@ -270,7 +270,7 @@ U4/U5 parallel with U2/U3 after U1 spike confirms patch path.
 
 ### Deferred to Follow-Up Work
 
-- Wave 4B vision upload / Wave 4C model compare (separate brainstorm if pursued)
+- Wave 4B vision upload / model compare (see `docs/brainstorms/2026-07-25-chat-ui-wave4b-differentiation-requirements.md`)
 - Import merge into existing session
 - Upstream murm-ui PR for incremental markdown (if we ship patch-package locally)
 

@@ -1,5 +1,6 @@
 import { ChatUI, IndexedDBStorage, type ChatEngine } from "murm-ui/with-css";
 import { CopyPlugin } from "murm-ui/plugins/copy";
+import { AttachmentPlugin } from "murm-ui/plugins/attachment";
 import {
   loadRuntimeConfig,
   readRuntimeConfig,
@@ -10,6 +11,9 @@ import { FailoverProvider } from "./providers/FailoverProvider";
 import type { CatalogEntry } from "./providers/browser-router";
 import { FailoverSettingsPlugin } from "./plugins/failover-settings";
 import { ByokSettingsPlugin } from "./plugins/byok-settings";
+import { TierSettingsPlugin } from "./plugins/tier-settings";
+import { CompareModePlugin } from "./plugins/compare-mode";
+import { DiscoveryPicklistPlugin } from "./plugins/discovery-picklist";
 import { ModelExplorerPlugin } from "./plugins/model-explorer";
 import { ModelPickerPlugin } from "./plugins/model-picker";
 import { RoutingChipPlugin } from "./plugins/routing-chip";
@@ -35,6 +39,9 @@ import {
 } from "./import-session";
 import { ShortcutsSheetPlugin } from "./plugins/shortcuts-sheet";
 import { showStatusMessage } from "./plugins/status-strip";
+
+// Published client-side image attachment cap (R31).
+const MAX_IMAGE_ATTACHMENT_BYTES = 4_000_000;
 
 async function loadCatalog(config: AppConfig): Promise<{
   catalog: CatalogEntry[];
@@ -202,6 +209,19 @@ async function bootstrap(): Promise<void> {
     },
     plugins: (engine) => [
       CopyPlugin(),
+      AttachmentPlugin({
+        acceptedTypes: "image/*",
+        maxFileSize: MAX_IMAGE_ATTACHMENT_BYTES,
+        onSizeExceeded: (file, maxSize) => {
+          const limitMb = Math.round(maxSize / 1_000_000);
+          showStatusMessage(
+            `"${file.name}" is too large. Images must be under ${limitMb} MB.`
+          );
+        },
+        onUnsupportedFile: (file) => {
+          showStatusMessage(`"${file.name}" isn't a supported image type.`);
+        },
+      }),
       ModelPickerPlugin(),
       MessageActionsPlugin(),
       RoutingChipPlugin(),
@@ -224,6 +244,12 @@ async function bootstrap(): Promise<void> {
           provider.setCatalog(catalogRef, providerUrlsRef);
         },
       }),
+      TierSettingsPlugin(),
+      CompareModePlugin({
+        provider,
+        getCatalog: () => catalogRef,
+      }),
+      DiscoveryPicklistPlugin(),
       ModelExplorerPlugin({
         getCatalog: () => catalogRef,
         getCatalogUrl: () => readRuntimeConfig().catalogUrl,

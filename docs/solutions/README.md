@@ -10,6 +10,7 @@ Incident and workflow notes with YAML frontmatter. Search by `applies_when`, `ca
 | **workflow-issues** | [Product pulse without analytics](workflow-issues/ci-based-product-pulse-without-analytics.md) | STRATEGY metrics when PostHog is not wired |
 | **integration-issues** | [Workers AI proxy fallback and model chain](integration-issues/workers-ai-proxy-fallback-and-model-chain.md) | 502 on stream fallback, long MODEL_CHAIN |
 | **ui-bugs** | [murm-ui light theme on dark shell](ui-bugs/murm-ui-light-theme-on-dark-shell.md) | White chat surfaces on dark Pages shell |
+| **tooling-decisions** | [murm-ui streaming plaintext tail patch](tooling-decisions/murm-ui-streaming-plaintext-tail-patch.md) | SSE flicker; murm-ui bump vs patch-package |
 
 ## `applies_when` quick reference
 
@@ -19,6 +20,7 @@ Incident and workflow notes with YAML frontmatter. Search by `applies_when`, `ca
 | ci-based-product-pulse-without-analytics | Need product health recap without PostHog |
 | workers-ai-proxy-fallback-and-model-chain | Live chat 502 after OpenRouter 429; MODEL_CHAIN too long |
 | murm-ui-light-theme-on-dark-shell | Chat UI renders light surfaces despite dark shell |
+| murm-ui-streaming-plaintext-tail-patch | Stream flicker; re-justify patch after murm-ui upgrade |
 
 ## Related
 

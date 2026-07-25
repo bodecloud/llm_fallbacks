@@ -200,6 +200,26 @@ export async function installLocalChatBundle(page: Page): Promise<void> {
   });
 }
 
+/**
+ * Serve the locally built docs/index.html instead of the deployed page.
+ * Needed when a spec depends on static markup (e.g. the Tiers button) that
+ * has not shipped to GitHub Pages yet. Pair with installLocalChatBundle.
+ */
+export async function installLocalIndexHtml(page: Page): Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const fs = require("node:fs") as typeof import("node:fs");
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const path = require("node:path") as typeof import("node:path");
+  const body = fs.readFileSync(path.join(process.cwd(), "docs/index.html"), "utf8");
+  await page.route("**/*", async (route) => {
+    if (route.request().resourceType() !== "document") {
+      await route.fallback();
+      return;
+    }
+    await route.fulfill({ status: 200, contentType: "text/html; charset=utf-8", body });
+  });
+}
+
 export function readStoredEndpoints(page: Page): Promise<string[]> {
   return page.evaluate(() => {
     try {

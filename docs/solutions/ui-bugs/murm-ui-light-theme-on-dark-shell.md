@@ -60,3 +60,4 @@ murm-ui defaults to light theme on `.mur-app` unless `data-theme=dark` is set. E
 ## Related Issues
 
 - `webui/shell/chat-overrides.css` — canonical override file (copied to `docs/assets/shell/` on build)
+- [murm-ui streaming plaintext tail via patch-package](../tooling-decisions/murm-ui-streaming-plaintext-tail-patch.md) — SSE render jank (different root cause)

@@ -1,0 +1,18 @@
+{
+  "name": "llm-fallbacks-runner",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Opt-in local companion for the llm-fallbacks web_ui tier: OpenAI-shaped SSE over user-configured web chat adapters.",
+  "type": "module",
+  "engines": {
+    "node": ">=23.6"
+  },
+  "scripts": {
+    "start": "node src/server.ts",
+    "test": "node --test src/server.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}
