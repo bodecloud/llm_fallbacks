@@ -36,7 +36,7 @@ Free models sorted by `quality_score` (descending). Example entry:
 
 Local-only providers (`ollama`, `vllm`, `lmstudio`, `xinference`) are excluded.
 
-The [GitHub Pages chat UI](../docs/index.html) loads this file for the model browser.
+The [GitHub Pages chat UI](../docs/index.html) loads this file for the model browser. The Models panel and composer picker show `quality_score`, formatted `context_length`, and capability badges (`vision`, `tools`, `schema`) derived from the fields above.
 
 ### `free_models_ids.txt`
 

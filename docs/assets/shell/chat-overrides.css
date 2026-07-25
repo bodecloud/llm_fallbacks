@@ -567,10 +567,44 @@ body.lf-chat-page::before {
 .lf-model-picker-row {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.5rem 1rem;
   padding: 0.35rem 0.5rem 0.5rem;
   border-bottom: 1px solid rgba(157, 78, 221, 0.12);
+}
+
+.lf-model-picker-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1 1 14rem;
+  min-width: min(18rem, 70vw);
+}
+
+.lf-model-detail {
+  margin: 0;
+  font-size: 0.72rem;
+  color: #9d9db8;
+  opacity: 0.9;
+}
+
+.lf-model-picker-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  flex: 1 1 12rem;
+}
+
+.lf-model-rank-link {
+  font-size: 0.72rem;
+  color: #c77dff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lf-model-rank-link:hover {
+  text-decoration: underline;
 }
 
 .lf-model-picker-label {
@@ -742,4 +776,34 @@ body.lf-chat-page::before {
   .lf-status-text {
     max-width: 100%;
   }
+}
+
+/* ── Wave 3: catalog badges + explorer ──────────────────────── */
+.lf-cap-badge {
+  display: inline-block;
+  margin: 0 0.15rem 0.15rem 0;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background: rgba(157, 78, 221, 0.18);
+  color: #d4b8ff;
+  border: 1px solid rgba(157, 78, 221, 0.25);
+}
+
+.lf-cap-vision {
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  border-color: rgba(56, 189, 248, 0.28);
+}
+
+.lf-cap-tools {
+  background: rgba(74, 222, 128, 0.1);
+  color: #86efac;
+  border-color: rgba(74, 222, 128, 0.25);
+}
+
+.explorer-table-wrap td {
+  vertical-align: middle;
 }

@@ -1,7 +1,20 @@
 import type { ChatPlugin } from "murm-ui";
+import {
+  formatContextLength,
+  renderCapabilityBadgesHtml,
+  catalogSummaryLine,
+} from "../../catalog-display";
 import { getColumns, applyFilter, sortRows, type FilterState } from "./filters";
 import type { CatalogEntry } from "../../providers/browser-router";
 import { setActiveModel } from "../../model-selection";
+
+const TABLE_COLUMNS = [
+  { key: "id", label: "id" },
+  { key: "provider", label: "provider" },
+  { key: "quality_score", label: "quality_score" },
+  { key: "context_length", label: "context", display: "context" as const },
+  { key: "capabilities", label: "capabilities", display: "capabilities" as const },
+] as const;
 
 export function ModelExplorerPlugin(deps: {
   getCatalog: () => CatalogEntry[];
@@ -59,23 +72,32 @@ export function ModelExplorerPlugin(deps: {
           }
         }
 
+        function cellHtml(row: CatalogEntry, col: (typeof TABLE_COLUMNS)[number]): string {
+          if (col.display === "context") {
+            return escapeHtml(formatContextLength(row.context_length));
+          }
+          if (col.display === "capabilities") {
+            return renderCapabilityBadgesHtml(row) || "—";
+          }
+          if (col.key === "provider") {
+            const provider = row.provider ?? String(row.id).split("/")[0] ?? "";
+            return escapeHtml(provider);
+          }
+          return escapeHtml(String((row as Record<string, unknown>)[col.key] ?? ""));
+        }
+
         function renderTable(rows: CatalogEntry[]) {
-          const cols = ["id", "provider", "mode", "quality_score"].filter(
-            (c) => rows.length === 0 || c in (rows[0] as object)
-          );
-          thead.innerHTML = `<tr>${cols
-            .map(
-              (c) =>
-                `<th data-col="${c}" style="cursor:pointer">${c}${sortColumn === c ? (sortDir === "asc" ? " ▲" : " ▼") : ""}</th>`
-            )
-            .join("")}<th>Use</th></tr>`;
+          thead.innerHTML = `<tr>${TABLE_COLUMNS.map(
+            (c) =>
+              `<th data-col="${c.key}" style="cursor:pointer">${c.label}${sortColumn === c.key ? (sortDir === "asc" ? " ▲" : " ▼") : ""}</th>`
+          ).join("")}<th>Use</th></tr>`;
           tbody.innerHTML = rows
             .slice(0, 200)
             .map(
               (row, rowIdx) =>
-                `<tr data-row-idx="${rowIdx}">${cols
-                  .map((c) => `<td>${escapeHtml(String((row as Record<string, unknown>)[c] ?? ""))}</td>`)
-                  .join("")}<td><button type="button" class="panel-btn lf-use-model-btn" data-model-id="${escapeHtml(String(row.id ?? ""))}">Use for chat</button></td></tr>`
+                `<tr data-row-idx="${rowIdx}" title="${escapeHtml(catalogSummaryLine(row))}">${TABLE_COLUMNS.map(
+                  (c) => `<td>${cellHtml(row, c)}</td>`
+                ).join("")}<td><button type="button" class="panel-btn lf-use-model-btn" data-model-id="${escapeHtml(String(row.id ?? ""))}">Use for chat</button></td></tr>`
             )
             .join("");
           statusEl.textContent = `${rows.length} model(s) shown${rows.length > 200 ? " (first 200)" : ""}`;
@@ -86,7 +108,7 @@ export function ModelExplorerPlugin(deps: {
               if (sortColumn === col) sortDir = sortDir === "asc" ? "desc" : "asc";
               else {
                 sortColumn = col;
-                sortDir = "desc";
+                sortDir = col === "quality_score" || col === "context_length" ? "desc" : "asc";
               }
               renderTable(sortRows(rows, sortColumn, sortDir));
             });

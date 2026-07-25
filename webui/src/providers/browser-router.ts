@@ -32,8 +32,15 @@ export type ApiKeys = Record<string, string>;
 
 export interface CatalogEntry {
   id: string;
+  provider?: string;
   mode?: string;
   quality_score?: number;
+  context_length?: number;
+  max_output_tokens?: number;
+  supports_vision?: boolean;
+  supports_function_calling?: boolean;
+  supports_tool_choice?: boolean;
+  supports_response_schema?: boolean;
 }
 
 export function loadKeys(): ApiKeys {
