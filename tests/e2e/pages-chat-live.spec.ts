@@ -27,9 +27,12 @@ test.describe("Live GitHub Pages chat (no mocks)", () => {
 
     const config = await page.evaluate(() => window.LLM_FALLBACKS_CONFIG);
     expect(JSON.stringify(config)).not.toMatch(LOOPBACK_HOST_RE);
+    expect((config.endpoints || []).length).toBeGreaterThan(0);
     for (const endpoint of config.endpoints || []) {
-      expect(endpoint).toMatch(/^https:\/\/.+\.workers\.dev$/);
+      expect(endpoint).toMatch(/^https:\/\//);
+      expect(endpoint).not.toMatch(LOOPBACK_HOST_RE);
     }
+    await expect(page.locator(".lf-model-picker-select")).toBeVisible();
   });
 
   test("uses dark embedded theme on chat mount", async ({ page }) => {
@@ -37,6 +40,7 @@ test.describe("Live GitHub Pages chat (no mocks)", () => {
     await expect(mount).toHaveAttribute("data-theme", "dark");
     await expect(page.locator("html")).toHaveClass(/lf-chat-page/);
     await expect(page.locator(".mur-toolbar-btn")).toHaveCount(0);
+    await expect(page.locator(".lf-model-picker-select")).toBeVisible();
     const formBg = await page.locator(".mur-chat-form").evaluate((el) => getComputedStyle(el).backgroundColor);
     expect(formBg).not.toBe("rgb(255, 255, 255)");
   });

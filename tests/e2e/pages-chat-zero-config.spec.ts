@@ -19,10 +19,11 @@ test.describe("Zero-config production chat journey", () => {
     );
     expect(guestToken).toMatch(/llm-fallbacks-public|.+$/);
 
-    const endpointsRaw = await page.evaluate(() =>
-      localStorage.getItem("llm_fallbacks_proxy_endpoints")
-    );
-    expect(endpointsRaw).toMatch(/workers\.dev/);
+    const config = await page.evaluate(() => window.LLM_FALLBACKS_CONFIG);
+    expect(JSON.stringify(config.endpoints || [])).toMatch(/workers\.dev/);
+    expect(JSON.stringify(config)).not.toMatch(LOOPBACK_HOST_RE);
+
+    await expect(page.locator(".lf-model-picker-select")).toBeVisible();
 
     await page.locator("#sysSetting").click();
     await expect(page.locator("#sysMask")).toBeVisible();
