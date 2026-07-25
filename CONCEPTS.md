@@ -40,6 +40,7 @@ Shared vocabulary for the static chat gateway and Python library.
 | **Turnstile session** | Optional bot check at Worker; 1h KV pass per IP after successful siteverify |
 | **Session export** | Sidebar menu download of current chat as Markdown or JSON (client-only; no server copy) |
 | **Hash session link** | URL `#/chat/{sessionId}` restores a session from local IndexedDB on the same browser/profile |
+| **Conversation import** | File-picker restore of exported Markdown/JSON into a new local session (symmetry with session export) |
 
 ## Learnings index
 

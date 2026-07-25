@@ -151,7 +151,7 @@ body.lf-chat-page::before {
 }
 
 #chatMount.mur-app-embedded.mur-chat-empty .mur-chat-layout-wrapper::before {
-  content: "Free model chat";
+  content: "Ranked free models, zero config";
   display: block;
   position: absolute;
   top: 36%;
@@ -167,7 +167,7 @@ body.lf-chat-page::before {
 }
 
 #chatMount.mur-app-embedded.mur-chat-empty .mur-chat-layout-wrapper::after {
-  content: "Zero-config demo — ranked free alias via edge proxy. Optional BYOK for browser-direct routes.";
+  content: "Daily-updated catalog via edge proxy. Pick a model above or send a message. Optional BYOK for direct routes.";
   display: block;
   position: absolute;
   top: 44%;
@@ -807,3 +807,156 @@ body.lf-chat-page::before {
 .explorer-table-wrap td {
   vertical-align: middle;
 }
+
+/* ── Wave 4: streaming polish + shortcuts ───────────────────── */
+#chatMount .mur-streaming-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+  line-height: 1.55;
+  contain: content;
+}
+
+#chatMount .mur-message-assistant.mur-generating .mur-content-block {
+  min-height: 1.5em;
+}
+
+.lf-shortcuts-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lf-shortcuts-modal[hidden] {
+  display: none !important;
+}
+
+.lf-shortcuts-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.lf-shortcuts-panel {
+  position: relative;
+  z-index: 1;
+  width: min(22rem, 92vw);
+  padding: 1.25rem 1.35rem;
+  border-radius: 12px;
+  background: #1a1a2e;
+  border: 1px solid rgba(157, 78, 221, 0.28);
+  box-shadow: var(--mur-shadow-modal, 0 10px 28px rgba(0, 0, 0, 0.45));
+}
+
+.lf-shortcuts-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.lf-shortcuts-header h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #e8e8ef;
+}
+
+.lf-shortcuts-close {
+  border: none;
+  background: transparent;
+  color: #8b8ba3;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lf-shortcuts-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lf-shortcuts-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(157, 78, 221, 0.12);
+  font-size: 0.88rem;
+  color: #c4c4d4;
+}
+
+.lf-shortcuts-list li:last-child {
+  border-bottom: none;
+}
+
+.lf-shortcuts-list kbd {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  border-radius: 5px;
+  background: rgba(157, 78, 221, 0.16);
+  border: 1px solid rgba(157, 78, 221, 0.28);
+  color: #e4c7ff;
+  font-family: inherit;
+  font-size: 0.78rem;
+}
+
+.lf-shortcuts-hint {
+  position: absolute;
+  bottom: 5.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  background: rgba(26, 26, 46, 0.92);
+  border: 1px solid rgba(157, 78, 221, 0.25);
+  color: #c4c4d4;
+  font-size: 0.82rem;
+  pointer-events: auto;
+}
+
+.lf-shortcuts-hint[hidden] {
+  display: none !important;
+}
+
+.lf-shortcuts-hint kbd {
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  background: rgba(157, 78, 221, 0.2);
+  border: 1px solid rgba(157, 78, 221, 0.3);
+  font-size: 0.75rem;
+}
+
+.lf-shortcuts-hint-dismiss {
+  border: none;
+  background: transparent;
+  color: #8b8ba3;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.lf-shortcuts-footer-link {
+  border: none;
+  background: transparent;
+  color: #8b8ba3;
+  font-size: 0.78rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  padding: 0 0.35rem;
+}
+
+.lf-shortcuts-footer-link:hover {
+  color: #c77dff;
+}
+

@@ -79,3 +79,14 @@ export function showRateLimitBanner(seconds?: number): void {
       : " Wait and try again.";
   mount.innerHTML = `<span class="lf-status-dot lf-status-warn" aria-hidden="true"></span><span class="lf-status-text">Rate limited.${suffix}</span>`;
 }
+
+export function showStatusMessage(text: string, durationMs = 3500): void {
+  const mount = document.getElementById("lfStatusStrip");
+  if (!mount) return;
+  mount.innerHTML = `<span class="lf-status-dot lf-status-ok" aria-hidden="true"></span><span class="lf-status-text">${text}</span>`;
+  window.setTimeout(() => {
+    if (mount.querySelector(".lf-status-text")?.textContent === text) {
+      void refreshStatusStrip(mount);
+    }
+  }, durationMs);
+}

@@ -1,4 +1,4 @@
-import { ChatUI, IndexedDBStorage } from "murm-ui/with-css";
+import { ChatUI, IndexedDBStorage, type ChatEngine } from "murm-ui/with-css";
 import { CopyPlugin } from "murm-ui/plugins/copy";
 import {
   loadRuntimeConfig,
@@ -28,6 +28,13 @@ import {
   toJson,
   toMarkdown,
 } from "./export-session";
+import {
+  ImportError,
+  importMessagesFromFile,
+  importTitleFromFile,
+} from "./import-session";
+import { ShortcutsSheetPlugin } from "./plugins/shortcuts-sheet";
+import { showStatusMessage } from "./plugins/status-strip";
 
 async function loadCatalog(config: AppConfig): Promise<{
   catalog: CatalogEntry[];
@@ -88,6 +95,41 @@ async function bootstrap(): Promise<void> {
   let catalogRef = catalog;
   let providerUrlsRef = providerUrls;
 
+  const importInput = document.createElement("input");
+  importInput.type = "file";
+  importInput.accept = ".md,.json,text/markdown,application/json";
+  importInput.hidden = true;
+  document.body.appendChild(importInput);
+
+  let importEngine: ChatEngine | null = null;
+
+  importInput.addEventListener("change", async () => {
+    const file = importInput.files?.[0];
+    importInput.value = "";
+    if (!file || !importEngine) return;
+    if (importEngine.state.generatingMessageId) {
+      showStatusMessage("Wait for the current reply to finish before importing.");
+      return;
+    }
+    try {
+      const text = await file.text();
+      const messages = await importMessagesFromFile(file);
+      await importEngine.sessions.create();
+      const ok = await importEngine.setMessages(messages);
+      if (!ok) {
+        throw new ImportError("Could not import while a reply is generating.");
+      }
+      const title = importTitleFromFile(text, file.name);
+      if (title) {
+        await importEngine.sessions.updateTitle(importEngine.state.currentSessionId, title);
+      }
+      showStatusMessage(`Imported ${messages.length} message${messages.length === 1 ? "" : "s"}.`);
+    } catch (err) {
+      const msg = err instanceof ImportError ? err.message : "Import failed.";
+      showStatusMessage(msg);
+    }
+  });
+
   const ui = new ChatUI({
     container: "#chatMount",
     provider,
@@ -134,6 +176,28 @@ async function bootstrap(): Promise<void> {
             );
           },
         },
+        {
+          id: "import-conversation",
+          label: "Import conversation",
+          disabled: ctx.engine.state.generatingMessageId !== null,
+          onClick: () => {
+            importInput.click();
+          },
+        },
+        {
+          id: "copy-session-link",
+          label: "Copy session link",
+          onClick: async () => {
+            const hash = `#/chat/${encodeURIComponent(ctx.session.id)}`;
+            const url = `${window.location.origin}${window.location.pathname}${window.location.search}${hash}`;
+            try {
+              await navigator.clipboard.writeText(url);
+              showStatusMessage("Session link copied (local browser only).");
+            } catch {
+              window.prompt("Copy session link:", url);
+            }
+          },
+        },
       ];
     },
     plugins: (engine) => [
@@ -164,8 +228,11 @@ async function bootstrap(): Promise<void> {
         getCatalog: () => catalogRef,
         getCatalogUrl: () => readRuntimeConfig().catalogUrl,
       }),
+      ShortcutsSheetPlugin(),
     ],
   });
+
+  importEngine = ui.engine;
 
   wireChatInputIds(document.querySelector("#chatMount")!);
 

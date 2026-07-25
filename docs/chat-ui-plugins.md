@@ -34,12 +34,17 @@ Set `APP_VERSION` when building for cache busting (CI sets this from `github.sha
 | `message-actions` | Messages | Regenerate, edit user message; stop preserves partial output when present |
 | `status-strip` | Top bar | Proxy liveness dot + optional daily chat count from `/v1/metrics` |
 | `turnstile-gate` | Body (optional) | Cloudflare Turnstile widget when `turnstileSiteKey` is in config |
+| `shortcuts-sheet` | Footer / `?` key | Keyboard shortcuts modal + dismissible first-visit hint |
 
 Wave 3 adds **catalog enrichment** (context + capability badges in Models panel and composer subtitle), **session export** (sidebar menu → Markdown/JSON), and **hash routing** (`#/chat/{sessionId}` via murm-ui `AppRouter`).
 
-## Session export and hash links
+Wave 4 adds **streaming polish** (plain-text tail during SSE, full markdown on completion — `patch-package` on murm-ui), **conversation import** (symmetry with export), **copy session link**, empty-state copy, and the shortcuts sheet.
+
+## Session export, import, and hash links
 
 - **Export** — Session ⋮ menu → “Export as Markdown” or “Export as JSON”. Serializes text blocks only; empty chats disable the items.
+- **Import** — Session ⋮ menu → “Import conversation”. Creates a **new** session from exported `.md` or `.json`; does not merge into the active session.
+- **Copy session link** — Session ⋮ menu → copies `#/chat/{id}` URL (local browser only).
 - **Hash routing** — Enabled in `webui/src/main.ts` with `routing: { type: "hash", pathPrefix: "#/chat/" }`. Links are local-only; see [CAVEATS.md](CAVEATS.md).
 - **Why this rank?** — Composer link to [README quality scoring](https://github.com/bodecloud/llm_fallbacks#quality-scoring).
 
@@ -64,6 +69,7 @@ ResearchWizard includes MCP config UI backed by a server. Static Pages cannot ho
 | `llm_fallbacks_guest_token` | Bearer token for proxy auth |
 | `llm_fallbacks_default_model` | Default chat model (usually `free`) |
 | `llm_fallbacks_api_keys` | Optional BYOK map |
+| `llm_fallbacks_shortcuts_hint_dismissed` | `1` after user dismisses first-visit shortcuts hint |
 
 Zero-config values seed from `docs/config.js` on first visit (`seedZeroConfigFromPageConfig` in `webui/src/config.ts`).
 

@@ -127,7 +127,7 @@ jobs:
         run: |
           cd webui && npm ci && npm run build
           cd ..
-          npx playwright test tests/e2e/pages-chat.spec.ts tests/e2e/failover-dual-endpoint.spec.ts tests/e2e/model-picker.spec.ts tests/e2e/message-actions.spec.ts tests/e2e/health-panel.spec.ts tests/e2e/turnstile-gate.spec.ts tests/e2e/catalog-explorer.spec.ts tests/e2e/export-session.spec.ts tests/e2e/hash-routing.spec.ts
+          npx playwright test tests/e2e/pages-chat.spec.ts tests/e2e/failover-dual-endpoint.spec.ts tests/e2e/model-picker.spec.ts tests/e2e/message-actions.spec.ts tests/e2e/health-panel.spec.ts tests/e2e/turnstile-gate.spec.ts tests/e2e/catalog-explorer.spec.ts tests/e2e/export-session.spec.ts tests/e2e/hash-routing.spec.ts tests/e2e/import-session.spec.ts tests/e2e/shortcuts-sheet.spec.ts tests/e2e/streaming-polish.spec.ts
 
       - name: Run live Pages chat e2e (real proxy)
         env:
