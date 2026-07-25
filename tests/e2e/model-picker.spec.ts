@@ -7,7 +7,7 @@ import {
 } from "./helpers";
 
 const MOCK_CATALOG = [
-  { id: "groq/llama-3.3-70b", provider: "groq", quality_score: 9.2 },
+  { id: "groq/llama-3.3-70b", provider: "groq", quality_score: 9.2, context_length: 128000, supports_vision: true },
   { id: "google/gemini-2.0-flash", provider: "google", quality_score: 8.5 },
 ];
 
@@ -77,6 +77,16 @@ test.describe("Wave 1 — model picker", () => {
     await page.locator("#chatinput").fill("test model picker");
     await page.locator("#sendbutton").click();
     await expect.poll(() => capturedModel, { timeout: 30_000 }).toBe("groq/llama-3.3-70b");
+  });
+
+  test("shows model detail subtitle and rank link", async ({ page }) => {
+    const picker = page.locator(".lf-model-picker-select");
+    await picker.selectOption("groq/llama-3.3-70b");
+    const detail = page.locator("#lf-model-detail");
+    await expect(detail).toContainText(/score|ctx|vision/i);
+    const rankLink = page.locator(".lf-model-rank-link");
+    await expect(rankLink).toHaveAttribute("href", /quality-scoring/);
+    await expect(rankLink).toHaveAttribute("target", "_blank");
   });
 });
 

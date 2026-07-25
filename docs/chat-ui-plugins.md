@@ -35,6 +35,14 @@ Set `APP_VERSION` when building for cache busting (CI sets this from `github.sha
 | `status-strip` | Top bar | Proxy liveness dot + optional daily chat count from `/v1/metrics` |
 | `turnstile-gate` | Body (optional) | Cloudflare Turnstile widget when `turnstileSiteKey` is in config |
 
+Wave 3 adds **catalog enrichment** (context + capability badges in Models panel and composer subtitle), **session export** (sidebar menu → Markdown/JSON), and **hash routing** (`#/chat/{sessionId}` via murm-ui `AppRouter`).
+
+## Session export and hash links
+
+- **Export** — Session ⋮ menu → “Export as Markdown” or “Export as JSON”. Serializes text blocks only; empty chats disable the items.
+- **Hash routing** — Enabled in `webui/src/main.ts` with `routing: { type: "hash", pathPrefix: "#/chat/" }`. Links are local-only; see [CAVEATS.md](CAVEATS.md).
+- **Why this rank?** — Composer link to [README quality scoring](https://github.com/bodecloud/llm_fallbacks#quality-scoring).
+
 Plugins register murm-ui hooks **and** optional slide panels via `registerShellPanel(id, initFn)` — see `webui/src/shell-panels.ts`.
 
 ## Add a plugin

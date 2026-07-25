@@ -22,6 +22,12 @@ import {
   trackSessionEvent,
 } from "./analytics";
 import { bindTopBarButtons, initShellPanels } from "./shell-panels";
+import {
+  downloadBlob,
+  exportFilename,
+  toJson,
+  toMarkdown,
+} from "./export-session";
 
 async function loadCatalog(config: AppConfig): Promise<{
   catalog: CatalogEntry[];
@@ -88,7 +94,48 @@ async function bootstrap(): Promise<void> {
     storage: new IndexedDBStorage(),
     fullscreen: false,
     enableSidebar: true,
-    routing: false,
+    routing: { type: "hash", pathPrefix: "#/chat/" },
+    sidebarMenu: (defaults, ctx) => {
+      const messages = ctx.engine.state.messages;
+      const hasMessages = messages.length > 0;
+      return [
+        ...defaults,
+        {
+          id: "export-md",
+          label: "Export as Markdown",
+          disabled: !hasMessages,
+          onClick: () => {
+            if (!hasMessages) return;
+            const content = toMarkdown(messages, {
+              id: ctx.session.id,
+              title: ctx.session.title,
+            });
+            downloadBlob(
+              exportFilename("md", ctx.session.title),
+              content,
+              "text/markdown;charset=utf-8"
+            );
+          },
+        },
+        {
+          id: "export-json",
+          label: "Export as JSON",
+          disabled: !hasMessages,
+          onClick: () => {
+            if (!hasMessages) return;
+            const content = toJson(messages, {
+              id: ctx.session.id,
+              title: ctx.session.title,
+            });
+            downloadBlob(
+              exportFilename("json", ctx.session.title),
+              content,
+              "application/json;charset=utf-8"
+            );
+          },
+        },
+      ];
+    },
     plugins: (engine) => [
       CopyPlugin(),
       ModelPickerPlugin(),

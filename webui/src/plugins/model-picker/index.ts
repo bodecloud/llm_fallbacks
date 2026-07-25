@@ -1,5 +1,7 @@
 import type { ChatPlugin } from "murm-ui";
+import { catalogSummaryLine } from "../../catalog-display";
 import {
+  findCatalogEntry,
   getActiveModel,
   getCatalogModels,
   getPinnedModels,
@@ -8,11 +10,25 @@ import {
   setActiveModel,
 } from "../../model-selection";
 
-const HELP_TEXT =
+const R11_TEXT =
   "`free` = our ranked chain; `openrouter/free` = OpenRouter meta-router";
+const RANK_HELP_URL = "https://github.com/bodecloud/llm_fallbacks#quality-scoring";
 
 export function ModelPickerPlugin(): ChatPlugin {
   let selectEl: HTMLSelectElement | null = null;
+  let detailEl: HTMLElement | null = null;
+
+  function syncDetail(): void {
+    if (!detailEl) return;
+    const active = getActiveModel();
+    const pinned = getPinnedModels().find((p) => p.id === active);
+    if (pinned) {
+      detailEl.textContent = pinned.label;
+      return;
+    }
+    const entry = findCatalogEntry(active);
+    detailEl.textContent = entry ? catalogSummaryLine(entry) : active;
+  }
 
   function syncSelect(): void {
     if (!selectEl) return;
@@ -60,27 +76,38 @@ export function ModelPickerPlugin(): ChatPlugin {
       const wrapper = document.createElement("div");
       wrapper.className = "lf-model-picker-row";
       wrapper.innerHTML = `
-        <label class="lf-model-picker-label">
-          <span class="lf-model-picker-title">Model</span>
-          <select class="lf-model-picker-select" aria-label="Chat model"></select>
-        </label>
-        <p class="lf-model-picker-help" title="${HELP_TEXT}">${HELP_TEXT}</p>
+        <div class="lf-model-picker-main">
+          <label class="lf-model-picker-label">
+            <span class="lf-model-picker-title">Model</span>
+            <select class="lf-model-picker-select" aria-label="Chat model"></select>
+          </label>
+          <p id="lf-model-detail" class="lf-model-detail" aria-live="polite"></p>
+        </div>
+        <div class="lf-model-picker-info">
+          <p class="lf-model-picker-help">${R11_TEXT}</p>
+          <a class="lf-model-rank-link" href="${RANK_HELP_URL}" target="_blank" rel="noopener noreferrer">Why this rank?</a>
+        </div>
       `;
 
       form.insertBefore(wrapper, form.firstChild);
       selectEl = wrapper.querySelector(".lf-model-picker-select");
+      detailEl = wrapper.querySelector("#lf-model-detail");
       if (!selectEl) return;
 
       populateOptions();
+      syncDetail();
       selectEl.addEventListener("change", () => {
         setActiveModel(selectEl!.value);
+        syncDetail();
       });
 
       window.addEventListener(MODEL_CHANGED_EVENT, syncSelect);
       window.addEventListener(MODEL_CHANGED_EVENT, populateOptions);
+      window.addEventListener(MODEL_CHANGED_EVENT, syncDetail);
     },
     destroy() {
       window.removeEventListener(MODEL_CHANGED_EVENT, syncSelect);
+      window.removeEventListener(MODEL_CHANGED_EVENT, syncDetail);
     },
   };
 }

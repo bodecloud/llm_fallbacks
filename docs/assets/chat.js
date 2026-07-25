@@ -5179,6 +5179,9 @@ function modelOptionLabel(entry) {
   const score = entry.quality_score !== void 0 ? ` \xB7 ${entry.quality_score.toFixed(1)}` : "";
   return `${entry.id}${score}`;
 }
+function findCatalogEntry(id) {
+  return catalogRef.find((entry) => entry.id === id);
+}
 
 // src/providers/browser-router.ts
 var RETRYABLE = /* @__PURE__ */ new Set([408, 429, 500, 502, 503, 504]);
@@ -6223,6 +6226,46 @@ function ByokSettingsPlugin(deps) {
   };
 }
 
+// src/catalog-display.ts
+function formatContextLength(value) {
+  if (value === void 0 || value <= 0) return "\u2014";
+  if (value >= 1e6) {
+    const millions = value / 1e6;
+    return millions >= 10 ? `${Math.round(millions)}M` : `${millions.toFixed(1)}M`;
+  }
+  if (value >= 1e3) {
+    const thousands = value / 1e3;
+    return thousands >= 100 ? `${Math.round(thousands)}K` : `${thousands.toFixed(0)}K`;
+  }
+  return String(value);
+}
+function capabilityBadges(entry) {
+  const badges = [];
+  if (entry.supports_vision) badges.push("vision");
+  if (entry.supports_function_calling || entry.supports_tool_choice) badges.push("tools");
+  if (entry.supports_response_schema) badges.push("schema");
+  return badges;
+}
+function badgeLabel(badge) {
+  if (badge === "vision") return "vision";
+  if (badge === "tools") return "tools";
+  return "schema";
+}
+function catalogSummaryLine(entry) {
+  const parts = [];
+  if (entry.quality_score !== void 0) {
+    parts.push(`score ${entry.quality_score.toFixed(1)}`);
+  }
+  const ctx = formatContextLength(entry.context_length);
+  if (ctx !== "\u2014") parts.push(`ctx ${ctx}`);
+  const badges = capabilityBadges(entry);
+  if (badges.length) parts.push(badges.map(badgeLabel).join(", "));
+  return parts.length ? parts.join(" \xB7 ") : entry.id;
+}
+function renderCapabilityBadgesHtml(entry) {
+  return capabilityBadges(entry).map((b2) => `<span class="lf-cap-badge lf-cap-${b2}">${badgeLabel(b2)}</span>`).join("");
+}
+
 // src/plugins/model-explorer/filters.ts
 function getColumns(catalog) {
   if (!catalog.length) return [];
@@ -6279,6 +6322,13 @@ function sortRows(catalog, column, direction) {
 }
 
 // src/plugins/model-explorer/index.ts
+var TABLE_COLUMNS = [
+  { key: "id", label: "id" },
+  { key: "provider", label: "provider" },
+  { key: "quality_score", label: "quality_score" },
+  { key: "context_length", label: "context", display: "context" },
+  { key: "capabilities", label: "capabilities", display: "capabilities" }
+];
 function ModelExplorerPlugin(deps) {
   return {
     name: "model-explorer",
@@ -6328,15 +6378,27 @@ function ModelExplorerPlugin(deps) {
             columnEl.appendChild(opt);
           }
         }
+        function cellHtml(row, col) {
+          if (col.display === "context") {
+            return escapeHtml(formatContextLength(row.context_length));
+          }
+          if (col.display === "capabilities") {
+            return renderCapabilityBadgesHtml(row) || "\u2014";
+          }
+          if (col.key === "provider") {
+            const provider = row.provider ?? String(row.id).split("/")[0] ?? "";
+            return escapeHtml(provider);
+          }
+          return escapeHtml(String(row[col.key] ?? ""));
+        }
         function renderTable(rows) {
-          const cols = ["id", "provider", "mode", "quality_score"].filter(
-            (c) => rows.length === 0 || c in rows[0]
-          );
-          thead.innerHTML = `<tr>${cols.map(
-            (c) => `<th data-col="${c}" style="cursor:pointer">${c}${sortColumn === c ? sortDir === "asc" ? " \u25B2" : " \u25BC" : ""}</th>`
+          thead.innerHTML = `<tr>${TABLE_COLUMNS.map(
+            (c) => `<th data-col="${c.key}" style="cursor:pointer">${c.label}${sortColumn === c.key ? sortDir === "asc" ? " \u25B2" : " \u25BC" : ""}</th>`
           ).join("")}<th>Use</th></tr>`;
           tbody.innerHTML = rows.slice(0, 200).map(
-            (row, rowIdx) => `<tr data-row-idx="${rowIdx}">${cols.map((c) => `<td>${escapeHtml(String(row[c] ?? ""))}</td>`).join("")}<td><button type="button" class="panel-btn lf-use-model-btn" data-model-id="${escapeHtml(String(row.id ?? ""))}">Use for chat</button></td></tr>`
+            (row, rowIdx) => `<tr data-row-idx="${rowIdx}" title="${escapeHtml(catalogSummaryLine(row))}">${TABLE_COLUMNS.map(
+              (c) => `<td>${cellHtml(row, c)}</td>`
+            ).join("")}<td><button type="button" class="panel-btn lf-use-model-btn" data-model-id="${escapeHtml(String(row.id ?? ""))}">Use for chat</button></td></tr>`
           ).join("");
           statusEl.textContent = `${rows.length} model(s) shown${rows.length > 200 ? " (first 200)" : ""}`;
           thead.querySelectorAll("th").forEach((th) => {
@@ -6346,7 +6408,7 @@ function ModelExplorerPlugin(deps) {
               if (sortColumn === col) sortDir = sortDir === "asc" ? "desc" : "asc";
               else {
                 sortColumn = col;
-                sortDir = "desc";
+                sortDir = col === "quality_score" || col === "context_length" ? "desc" : "asc";
               }
               renderTable(sortRows(rows, sortColumn, sortDir));
             });
@@ -6396,9 +6458,22 @@ function escapeHtml(s) {
 }
 
 // src/plugins/model-picker/index.ts
-var HELP_TEXT = "`free` = our ranked chain; `openrouter/free` = OpenRouter meta-router";
+var R11_TEXT = "`free` = our ranked chain; `openrouter/free` = OpenRouter meta-router";
+var RANK_HELP_URL = "https://github.com/bodecloud/llm_fallbacks#quality-scoring";
 function ModelPickerPlugin() {
   let selectEl = null;
+  let detailEl = null;
+  function syncDetail() {
+    if (!detailEl) return;
+    const active = getActiveModel();
+    const pinned = getPinnedModels().find((p) => p.id === active);
+    if (pinned) {
+      detailEl.textContent = pinned.label;
+      return;
+    }
+    const entry = findCatalogEntry(active);
+    detailEl.textContent = entry ? catalogSummaryLine(entry) : active;
+  }
   function syncSelect() {
     if (!selectEl) return;
     const active = getActiveModel();
@@ -6442,24 +6517,35 @@ function ModelPickerPlugin() {
       const wrapper = document.createElement("div");
       wrapper.className = "lf-model-picker-row";
       wrapper.innerHTML = `
-        <label class="lf-model-picker-label">
-          <span class="lf-model-picker-title">Model</span>
-          <select class="lf-model-picker-select" aria-label="Chat model"></select>
-        </label>
-        <p class="lf-model-picker-help" title="${HELP_TEXT}">${HELP_TEXT}</p>
+        <div class="lf-model-picker-main">
+          <label class="lf-model-picker-label">
+            <span class="lf-model-picker-title">Model</span>
+            <select class="lf-model-picker-select" aria-label="Chat model"></select>
+          </label>
+          <p id="lf-model-detail" class="lf-model-detail" aria-live="polite"></p>
+        </div>
+        <div class="lf-model-picker-info">
+          <p class="lf-model-picker-help">${R11_TEXT}</p>
+          <a class="lf-model-rank-link" href="${RANK_HELP_URL}" target="_blank" rel="noopener noreferrer">Why this rank?</a>
+        </div>
       `;
       form.insertBefore(wrapper, form.firstChild);
       selectEl = wrapper.querySelector(".lf-model-picker-select");
+      detailEl = wrapper.querySelector("#lf-model-detail");
       if (!selectEl) return;
       populateOptions();
+      syncDetail();
       selectEl.addEventListener("change", () => {
         setActiveModel(selectEl.value);
+        syncDetail();
       });
       window.addEventListener(MODEL_CHANGED_EVENT, syncSelect);
       window.addEventListener(MODEL_CHANGED_EVENT, populateOptions);
+      window.addEventListener(MODEL_CHANGED_EVENT, syncDetail);
     },
     destroy() {
       window.removeEventListener(MODEL_CHANGED_EVENT, syncSelect);
+      window.removeEventListener(MODEL_CHANGED_EVENT, syncDetail);
     }
   };
 }
@@ -6674,6 +6760,59 @@ function bindTopBarButtons() {
   });
 }
 
+// src/export-session.ts
+function messageText(message) {
+  return message.blocks.filter((b2) => b2.type === "text").map((b2) => b2.type === "text" ? b2.text : "").join("").trim();
+}
+function toMarkdown(messages, meta) {
+  const title = meta?.title?.trim() || "Chat export";
+  const lines = [`# ${title}`, "", `_Exported from llm-fallbacks_`, ""];
+  for (const message of messages) {
+    const text = messageText(message);
+    if (!text) continue;
+    const heading = message.role === "user" ? "## User" : "## Assistant";
+    lines.push(heading, "", text, "");
+  }
+  return lines.join("\n").trimEnd() + "\n";
+}
+function toJson(messages, meta) {
+  return JSON.stringify(
+    {
+      id: meta.id,
+      title: meta.title ?? null,
+      exportedAt: (/* @__PURE__ */ new Date()).toISOString(),
+      messages: messages.map((m2) => ({
+        id: m2.id,
+        role: m2.role,
+        text: messageText(m2)
+      }))
+    },
+    null,
+    2
+  );
+}
+function slugifyTitle(title) {
+  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40);
+  return slug || "chat";
+}
+function exportFilename(ext, title) {
+  const date = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
+  const slug = slugifyTitle(title || "chat");
+  return `llm-fallbacks-${slug}-${date}.${ext}`;
+}
+function downloadBlob(filename, content, mime) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = filename;
+  anchor.rel = "noopener";
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
+}
+
 // src/main.ts
 async function loadCatalog(config) {
   let catalog = [];
@@ -6727,7 +6866,48 @@ async function bootstrap() {
     storage: new IndexedDBStorage(),
     fullscreen: false,
     enableSidebar: true,
-    routing: false,
+    routing: { type: "hash", pathPrefix: "#/chat/" },
+    sidebarMenu: (defaults, ctx) => {
+      const messages = ctx.engine.state.messages;
+      const hasMessages = messages.length > 0;
+      return [
+        ...defaults,
+        {
+          id: "export-md",
+          label: "Export as Markdown",
+          disabled: !hasMessages,
+          onClick: () => {
+            if (!hasMessages) return;
+            const content = toMarkdown(messages, {
+              id: ctx.session.id,
+              title: ctx.session.title
+            });
+            downloadBlob(
+              exportFilename("md", ctx.session.title),
+              content,
+              "text/markdown;charset=utf-8"
+            );
+          }
+        },
+        {
+          id: "export-json",
+          label: "Export as JSON",
+          disabled: !hasMessages,
+          onClick: () => {
+            if (!hasMessages) return;
+            const content = toJson(messages, {
+              id: ctx.session.id,
+              title: ctx.session.title
+            });
+            downloadBlob(
+              exportFilename("json", ctx.session.title),
+              content,
+              "application/json;charset=utf-8"
+            );
+          }
+        }
+      ];
+    },
     plugins: (engine) => [
       CopyPlugin(),
       ModelPickerPlugin(),

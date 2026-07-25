@@ -53,3 +53,7 @@ export function modelOptionLabel(entry: CatalogEntry): string {
     entry.quality_score !== undefined ? ` · ${entry.quality_score.toFixed(1)}` : "";
   return `${entry.id}${score}`;
 }
+
+export function findCatalogEntry(id: string): CatalogEntry | undefined {
+  return catalogRef.find((entry) => entry.id === id);
+}

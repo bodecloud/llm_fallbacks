@@ -15,6 +15,7 @@ Honest limits for the public chat demo and the Python library.
 | **Usage stats** | We count sessions and completions without storing message text. This is not full product analytics. |
 | **Routing headers** | The routing chip reads `x-llm-fallbacks-endpoint` and LiteLLM headers from proxy responses. After edge changes, redeploy the Worker (`Deploy Proxies` workflow) for production to expose them. |
 | **Turnstile** | Optional bot check when `TURNSTILE_SECRET` is set on the Worker and `turnstileSiteKey` is in `docs/config.js`. Skipped in local dev when secrets are absent. |
+| **Hash session links** | `#/chat/{id}` only works when that session exists in your browser’s IndexedDB. Copy the link on another device or after clearing site data and you get a new empty chat — use **Export as Markdown/JSON** to share transcripts. |
 
 ## Library and CI
 
