@@ -6884,6 +6884,235 @@ function TierSettingsPlugin() {
   };
 }
 
+// src/plugins/compare-mode/column-provider.ts
+function defaultCompareState(activeModel = "free") {
+  return {
+    active: false,
+    columns: {
+      a: { model: activeModel || "free" },
+      b: { model: "openrouter/free" }
+    }
+  };
+}
+function columnIsMetered(model, catalog, keys = loadKeys()) {
+  if (model === "free") return true;
+  return !shouldTryBrowser(model, catalog, keys);
+}
+function bothColumnsMetered(state, catalog, keys = loadKeys()) {
+  if (!state.active) return false;
+  return columnIsMetered(state.columns.a.model, catalog, keys) && columnIsMetered(state.columns.b.model, catalog, keys);
+}
+var METERED_COMPARE_BANNER = "Compare sends two requests. Rate limits and Turnstile apply to each column when both use the public proxy.";
+
+// src/plugins/compare-mode/index.ts
+function modelOptionsHtml(selected) {
+  const parts = [];
+  for (const pinned of getPinnedModels()) {
+    parts.push(
+      `<option value="${pinned.id}" ${pinned.id === selected ? "selected" : ""}>${pinned.label}</option>`
+    );
+  }
+  for (const entry of getCatalogModels(40)) {
+    if (getPinnedModels().some((p) => p.id === entry.id)) continue;
+    parts.push(
+      `<option value="${entry.id}" ${entry.id === selected ? "selected" : ""}>${modelOptionLabel(entry)}</option>`
+    );
+  }
+  return parts.join("");
+}
+function applyDeltaToPane(pane, event) {
+  if (event.type === "message_start") {
+    pane.textContent = "";
+    return;
+  }
+  if (event.type === "text_delta") {
+    pane.textContent = (pane.textContent || "") + event.delta;
+  }
+}
+function tagCompareMeta(event, column, model) {
+  if (event.type !== "message_start") return event;
+  return {
+    ...event,
+    message: {
+      ...event.message,
+      meta: { ...event.message.meta || {}, compareColumn: column, model }
+    }
+  };
+}
+function CompareModePlugin(deps) {
+  let state = defaultCompareState(getActiveModel());
+  let mount = null;
+  let chrome = null;
+  let bannerEl = null;
+  let paneA = null;
+  let paneB = null;
+  let labelA = null;
+  let labelB = null;
+  let wrapped = false;
+  const refreshBanner = () => {
+    if (!bannerEl) return;
+    const show = bothColumnsMetered(state, deps.getCatalog());
+    bannerEl.hidden = !show;
+    bannerEl.textContent = show ? METERED_COMPARE_BANNER : "";
+  };
+  const syncChromeVisibility = () => {
+    if (!chrome || !mount) return;
+    chrome.hidden = !state.active;
+    mount.classList.toggle("lf-compare-active", state.active);
+    refreshBanner();
+  };
+  const paintColumnLabels = () => {
+    if (labelA) labelA.textContent = state.columns.a.model;
+    if (labelB) labelB.textContent = state.columns.b.model;
+  };
+  return {
+    name: "compare-mode",
+    onMount(ctx) {
+      mount = ctx.container;
+      chrome = document.createElement("div");
+      chrome.className = "lf-compare-chrome";
+      chrome.hidden = true;
+      chrome.innerHTML = `
+        <p class="lf-compare-banner" id="lf-compare-banner" hidden></p>
+        <div class="lf-compare-grid" role="group" aria-label="Compare two models">
+          <section class="lf-compare-column" data-column="a">
+            <header class="lf-compare-column-header">
+              <label>
+                <span class="lf-compare-column-title">Column A</span>
+                <select class="lf-compare-model" data-column="a" aria-label="Compare model A"></select>
+              </label>
+              <span class="lf-compare-live-label" data-label="a"></span>
+            </header>
+            <div class="lf-compare-pane" data-pane="a" aria-live="polite"></div>
+          </section>
+          <section class="lf-compare-column" data-column="b">
+            <header class="lf-compare-column-header">
+              <label>
+                <span class="lf-compare-column-title">Column B</span>
+                <select class="lf-compare-model" data-column="b" aria-label="Compare model B"></select>
+              </label>
+              <span class="lf-compare-live-label" data-label="b"></span>
+            </header>
+            <div class="lf-compare-pane" data-pane="b" aria-live="polite"></div>
+          </section>
+        </div>
+      `;
+      const layout = mount.querySelector(".mur-chat-layout-wrapper");
+      const formHost = mount.querySelector(".mur-chat-form-container");
+      if (layout && formHost) {
+        layout.insertBefore(chrome, formHost);
+      } else {
+        (mount.querySelector(".mur-chat-scroll-area") || mount).appendChild(chrome);
+      }
+      bannerEl = chrome.querySelector("#lf-compare-banner");
+      paneA = chrome.querySelector('[data-pane="a"]');
+      paneB = chrome.querySelector('[data-pane="b"]');
+      labelA = chrome.querySelector('[data-label="a"]');
+      labelB = chrome.querySelector('[data-label="b"]');
+      const selectA = chrome.querySelector('select[data-column="a"]');
+      const selectB = chrome.querySelector('select[data-column="b"]');
+      selectA.innerHTML = modelOptionsHtml(state.columns.a.model);
+      selectB.innerHTML = modelOptionsHtml(state.columns.b.model);
+      selectA.addEventListener("change", () => {
+        state.columns.a.model = selectA.value;
+        paintColumnLabels();
+        refreshBanner();
+      });
+      selectB.addEventListener("change", () => {
+        state.columns.b.model = selectB.value;
+        paintColumnLabels();
+        refreshBanner();
+      });
+      paintColumnLabels();
+      if (formHost) {
+        const toggleRow = document.createElement("div");
+        toggleRow.className = "lf-compare-toggle-row";
+        toggleRow.innerHTML = `
+          <label class="lf-compare-toggle">
+            <input type="checkbox" id="lf-compare-toggle" />
+            <span>Compare mode</span>
+          </label>
+          <span class="lf-compare-toggle-hint">Same prompt \u2192 two models side by side</span>
+        `;
+        formHost.insertBefore(toggleRow, formHost.firstChild);
+        const checkbox = toggleRow.querySelector("#lf-compare-toggle");
+        checkbox.addEventListener("change", () => {
+          state.active = checkbox.checked;
+          if (state.active) {
+            state.columns.a.model = selectA.value || getActiveModel();
+            selectA.value = state.columns.a.model;
+            paintColumnLabels();
+            showStatusMessage("Compare mode on \u2014 replies appear in both columns.");
+          } else {
+            showStatusMessage("Compare mode off \u2014 history kept.");
+          }
+          syncChromeVisibility();
+        });
+      }
+      syncChromeVisibility();
+      if (!wrapped) {
+        wrapped = true;
+        const original = deps.provider.streamChat.bind(deps.provider);
+        deps.provider.streamChat = async (request, onEvent) => {
+          if (!state.active) {
+            return original(request, onEvent);
+          }
+          refreshBanner();
+          if (paneA) paneA.textContent = "";
+          if (paneB) paneB.textContent = "";
+          paintColumnLabels();
+          const modelA = state.columns.a.model;
+          const modelB = state.columns.b.model;
+          const reqA = {
+            ...request,
+            options: { ...request.options, model: modelA }
+          };
+          const reqB = {
+            ...request,
+            options: { ...request.options, model: modelB }
+          };
+          try {
+            await original(reqA, (event) => {
+              if (paneA) applyDeltaToPane(paneA, event);
+              onEvent(tagCompareMeta(event, "a", modelA));
+            });
+          } catch (err) {
+            if (paneA && !paneA.textContent) {
+              paneA.textContent = err instanceof Error ? err.message : String(err);
+            }
+            throw err;
+          }
+          try {
+            await original(reqB, (event) => {
+              if (paneB) applyDeltaToPane(paneB, event);
+              onEvent(tagCompareMeta(event, "b", modelB));
+            });
+          } catch (err) {
+            if (paneB && !paneB.textContent) {
+              paneB.textContent = err instanceof Error ? err.message : String(err);
+            }
+          }
+        };
+      }
+    },
+    beforeSubmit: async (request) => {
+      if (!state.active) return;
+      refreshBanner();
+      return {
+        options: {
+          ...request.options,
+          model: state.columns.a.model,
+          lfCompare: true
+        }
+      };
+    },
+    destroy() {
+      chrome?.remove();
+      mount?.classList.remove("lf-compare-active");
+    }
+  };
+}
+
 // src/catalog-display.ts
 function formatContextLength(value) {
   if (value === void 0 || value <= 0) return "\u2014";
@@ -7864,6 +8093,10 @@ async function bootstrap() {
         }
       }),
       TierSettingsPlugin(),
+      CompareModePlugin({
+        provider,
+        getCatalog: () => catalogRef2
+      }),
       ModelExplorerPlugin({
         getCatalog: () => catalogRef2,
         getCatalogUrl: () => readRuntimeConfig().catalogUrl

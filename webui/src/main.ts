@@ -12,6 +12,7 @@ import type { CatalogEntry } from "./providers/browser-router";
 import { FailoverSettingsPlugin } from "./plugins/failover-settings";
 import { ByokSettingsPlugin } from "./plugins/byok-settings";
 import { TierSettingsPlugin } from "./plugins/tier-settings";
+import { CompareModePlugin } from "./plugins/compare-mode";
 import { ModelExplorerPlugin } from "./plugins/model-explorer";
 import { ModelPickerPlugin } from "./plugins/model-picker";
 import { RoutingChipPlugin } from "./plugins/routing-chip";
@@ -243,6 +244,10 @@ async function bootstrap(): Promise<void> {
         },
       }),
       TierSettingsPlugin(),
+      CompareModePlugin({
+        provider,
+        getCatalog: () => catalogRef,
+      }),
       ModelExplorerPlugin({
         getCatalog: () => catalogRef,
         getCatalogUrl: () => readRuntimeConfig().catalogUrl,

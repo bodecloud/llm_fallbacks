@@ -29,6 +29,7 @@ Set `APP_VERSION` when building for cache busting (CI sets this from `github.sha
 | `failover-settings` | Server (top bar) | Proxy endpoints, guest token, default model, test connection |
 | `byok-settings` | Your keys | Optional provider API keys (`localStorage` only) |
 | `tier-settings` | Tiers | Ordered omnifail route stack (enable/reorder + optional runner/SearXNG URLs) |
+| `compare-mode` | Composer toggle | Two-column model compare (same prompt → dual proxy/BYOK streams) |
 | `model-explorer` | Models | Filter/sort `free_models.json`; **Use for chat** sets session model |
 | `model-picker` | Composer | Dropdown for `free`, `openrouter/free`, and top catalog models |
 | `routing-chip` | Messages | Endpoint / model / fallback metadata under assistant replies |
