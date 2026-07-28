@@ -420,6 +420,7 @@ opencode_zen/grok-build-0.1
 opencode_zen/kimi-k2.5
 opencode_zen/kimi-k2.6
 opencode_zen/kimi-k2.7-code
+opencode_zen/kimi-k3
 opencode_zen/laguna-s-2.1-free
 opencode_zen/ling-3.0-flash-free
 opencode_zen/mimo-v2.5-free

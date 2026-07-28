@@ -5,6 +5,26 @@
         "api_env_key_name": "OPENROUTER_API_KEY",
         "api_key_required": false,
         "model_specs": {
+            "qwen/qwen3.7-flash": {
+                "input_cost_per_token": 3e-08,
+                "output_cost_per_token": 1.3e-07,
+                "max_input_tokens": 1000000,
+                "max_output_tokens": 65536,
+                "metadata": {
+                    "notes": "Qwen3.7 Flash is a vision-language reasoning model from Alibaba. It is suited for multimodal agents, visual coding, search, and computer interaction, with strengths in object recognition, spatial understanding, and real-world..."
+                },
+                "litellm_provider": "openrouter",
+                "qwen/qwen3.7-flash": {
+                    "input_cost_per_token": 3e-08,
+                    "output_cost_per_token": 1.3e-07,
+                    "max_input_tokens": 1000000,
+                    "max_output_tokens": 65536,
+                    "metadata": {
+                        "notes": "Qwen3.7 Flash is a vision-language reasoning model from Alibaba. It is suited for multimodal agents, visual coding, search, and computer interaction, with strengths in object recognition, spatial understanding, and real-world..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "anthropic/claude-opus-5-fast": {
                 "input_cost_per_token": 1e-05,
                 "output_cost_per_token": 5e-05,
@@ -344,8 +364,8 @@
                 }
             },
             "openai/gpt-5.6-luna-pro": {
-                "input_cost_per_token": 1e-06,
-                "output_cost_per_token": 6e-06,
+                "input_cost_per_token": 5e-07,
+                "output_cost_per_token": 3e-06,
                 "max_input_tokens": 1050000,
                 "max_output_tokens": 128000,
                 "metadata": {
@@ -353,8 +373,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "openai/gpt-5.6-luna-pro": {
-                    "input_cost_per_token": 1e-06,
-                    "output_cost_per_token": 6e-06,
+                    "input_cost_per_token": 5e-07,
+                    "output_cost_per_token": 3e-06,
                     "max_input_tokens": 1050000,
                     "max_output_tokens": 128000,
                     "metadata": {
@@ -364,8 +384,8 @@
                 }
             },
             "openai/gpt-5.6-luna": {
-                "input_cost_per_token": 1e-06,
-                "output_cost_per_token": 6e-06,
+                "input_cost_per_token": 5e-07,
+                "output_cost_per_token": 3e-06,
                 "max_input_tokens": 1050000,
                 "max_output_tokens": 128000,
                 "metadata": {
@@ -373,8 +393,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "openai/gpt-5.6-luna": {
-                    "input_cost_per_token": 1e-06,
-                    "output_cost_per_token": 6e-06,
+                    "input_cost_per_token": 5e-07,
+                    "output_cost_per_token": 3e-06,
                     "max_input_tokens": 1050000,
                     "max_output_tokens": 128000,
                     "metadata": {
@@ -384,8 +404,8 @@
                 }
             },
             "openai/gpt-5.6-terra-pro": {
-                "input_cost_per_token": 2.5e-06,
-                "output_cost_per_token": 1.5e-05,
+                "input_cost_per_token": 1.25e-06,
+                "output_cost_per_token": 7.5e-06,
                 "max_input_tokens": 1050000,
                 "max_output_tokens": 128000,
                 "metadata": {
@@ -393,8 +413,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "openai/gpt-5.6-terra-pro": {
-                    "input_cost_per_token": 2.5e-06,
-                    "output_cost_per_token": 1.5e-05,
+                    "input_cost_per_token": 1.25e-06,
+                    "output_cost_per_token": 7.5e-06,
                     "max_input_tokens": 1050000,
                     "max_output_tokens": 128000,
                     "metadata": {
@@ -404,8 +424,8 @@
                 }
             },
             "openai/gpt-5.6-terra": {
-                "input_cost_per_token": 2.5e-06,
-                "output_cost_per_token": 1.5e-05,
+                "input_cost_per_token": 1.25e-06,
+                "output_cost_per_token": 7.5e-06,
                 "max_input_tokens": 1050000,
                 "max_output_tokens": 128000,
                 "metadata": {
@@ -413,8 +433,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "openai/gpt-5.6-terra": {
-                    "input_cost_per_token": 2.5e-06,
-                    "output_cost_per_token": 1.5e-05,
+                    "input_cost_per_token": 1.25e-06,
+                    "output_cost_per_token": 7.5e-06,
                     "max_input_tokens": 1050000,
                     "max_output_tokens": 128000,
                     "metadata": {
@@ -750,8 +770,8 @@
                 }
             },
             "z-ai/glm-5.2": {
-                "input_cost_per_token": 6.692e-07,
-                "output_cost_per_token": 2.1032e-06,
+                "input_cost_per_token": 7.322e-07,
+                "output_cost_per_token": 2.3012e-06,
                 "max_input_tokens": 1048576,
                 "max_output_tokens": 131072,
                 "metadata": {
@@ -759,8 +779,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "z-ai/glm-5.2": {
-                    "input_cost_per_token": 6.692e-07,
-                    "output_cost_per_token": 2.1032e-06,
+                    "input_cost_per_token": 7.322e-07,
+                    "output_cost_per_token": 2.3012e-06,
                     "max_input_tokens": 1048576,
                     "max_output_tokens": 131072,
                     "metadata": {
@@ -1441,6 +1461,7 @@
                 "input_cost_per_token": 3e-06,
                 "output_cost_per_token": 1.5e-05,
                 "max_input_tokens": 1048576,
+                "max_output_tokens": 262144,
                 "mode": "chat",
                 "supports_vision": true,
                 "metadata": {
@@ -1451,6 +1472,7 @@
                     "input_cost_per_token": 3e-06,
                     "output_cost_per_token": 1.5e-05,
                     "max_input_tokens": 1048576,
+                    "max_output_tokens": 262144,
                     "mode": "chat",
                     "supports_vision": true,
                     "metadata": {
@@ -2039,8 +2061,8 @@
                 }
             },
             "google/gemma-4-26b-a4b-it": {
-                "input_cost_per_token": 1.2e-07,
-                "output_cost_per_token": 3.5e-07,
+                "input_cost_per_token": 1.4e-07,
+                "output_cost_per_token": 4.2e-07,
                 "max_input_tokens": 262144,
                 "max_output_tokens": 262144,
                 "metadata": {
@@ -2048,8 +2070,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "google/gemma-4-26b-a4b-it": {
-                    "input_cost_per_token": 1.2e-07,
-                    "output_cost_per_token": 3.5e-07,
+                    "input_cost_per_token": 1.4e-07,
+                    "output_cost_per_token": 4.2e-07,
                     "max_input_tokens": 262144,
                     "max_output_tokens": 262144,
                     "metadata": {
@@ -4050,7 +4072,7 @@
                 "input_cost_per_token": 1.25e-06,
                 "output_cost_per_token": 1e-05,
                 "max_input_tokens": 128000,
-                "max_output_tokens": 16384,
+                "max_output_tokens": 32000,
                 "metadata": {
                     "notes": "GPT-5.1 Chat (AKA Instant is the fast, lightweight member of the 5.1 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively \u201cthink\u201d on..."
                 },
@@ -4059,7 +4081,7 @@
                     "input_cost_per_token": 1.25e-06,
                     "output_cost_per_token": 1e-05,
                     "max_input_tokens": 128000,
-                    "max_output_tokens": 16384,
+                    "max_output_tokens": 32000,
                     "metadata": {
                         "notes": "GPT-5.1 Chat (AKA Instant is the fast, lightweight member of the 5.1 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively \u201cthink\u201d on..."
                     },
@@ -5130,38 +5152,6 @@
                     "max_output_tokens": 4096,
                     "metadata": {
                         "notes": "Jamba Large 1.7 is the latest model in the Jamba open family, offering improvements in grounding, instruction-following, and overall efficiency. Built on a hybrid SSM-Transformer architecture with a 256K context..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "openai/gpt-5-chat": {
-                "cache_read_input_token_cost": 1.25e-07,
-                "input_cost_per_token": 1.25e-06,
-                "litellm_provider": "openrouter",
-                "max_input_tokens": 128000,
-                "max_output_tokens": 16384,
-                "max_tokens": 16384,
-                "mode": "chat",
-                "output_cost_per_token": 1e-05,
-                "supported_modalities": [
-                    "text",
-                    "image"
-                ],
-                "supported_output_modalities": [
-                    "text"
-                ],
-                "supports_reasoning": true,
-                "supports_tool_choice": true,
-                "metadata": {
-                    "notes": "GPT-5 Chat is designed for advanced, natural, multimodal, and context-aware conversations for enterprise applications."
-                },
-                "openai/gpt-5-chat": {
-                    "input_cost_per_token": 1.25e-06,
-                    "output_cost_per_token": 1e-05,
-                    "max_input_tokens": 128000,
-                    "max_output_tokens": 16384,
-                    "metadata": {
-                        "notes": "GPT-5 Chat is designed for advanced, natural, multimodal, and context-aware conversations for enterprise applications."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -6529,46 +6519,6 @@
                     "max_output_tokens": 8192,
                     "metadata": {
                         "notes": "Command A is an open-weights 111B parameter model with a 256k context window focused on delivering great performance across agentic, multilingual, and coding use cases. Compared to other leading proprietary..."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "openai/gpt-4o-mini-search-preview": {
-                "input_cost_per_token": 1.5e-07,
-                "output_cost_per_token": 6e-07,
-                "max_input_tokens": 128000,
-                "max_output_tokens": 16384,
-                "metadata": {
-                    "notes": "GPT-4o mini Search Preview is a specialized model for web search in Chat Completions. It is trained to understand and execute web search queries."
-                },
-                "litellm_provider": "openrouter",
-                "openai/gpt-4o-mini-search-preview": {
-                    "input_cost_per_token": 1.5e-07,
-                    "output_cost_per_token": 6e-07,
-                    "max_input_tokens": 128000,
-                    "max_output_tokens": 16384,
-                    "metadata": {
-                        "notes": "GPT-4o mini Search Preview is a specialized model for web search in Chat Completions. It is trained to understand and execute web search queries."
-                    },
-                    "litellm_provider": "openrouter"
-                }
-            },
-            "openai/gpt-4o-search-preview": {
-                "input_cost_per_token": 2.5e-06,
-                "output_cost_per_token": 1e-05,
-                "max_input_tokens": 128000,
-                "max_output_tokens": 16384,
-                "metadata": {
-                    "notes": "GPT-4o Search Previewis a specialized model for web search in Chat Completions. It is trained to understand and execute web search queries."
-                },
-                "litellm_provider": "openrouter",
-                "openai/gpt-4o-search-preview": {
-                    "input_cost_per_token": 2.5e-06,
-                    "output_cost_per_token": 1e-05,
-                    "max_input_tokens": 128000,
-                    "max_output_tokens": 16384,
-                    "metadata": {
-                        "notes": "GPT-4o Search Previewis a specialized model for web search in Chat Completions. It is trained to understand and execute web search queries."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -8832,6 +8782,12 @@
                     "litellm_provider": "opencode_zen"
                 }
             },
+            "opencode_zen/kimi-k3": {
+                "litellm_provider": "opencode_zen",
+                "opencode_zen/kimi-k3": {
+                    "litellm_provider": "opencode_zen"
+                }
+            },
             "opencode_zen/big-pickle": {
                 "litellm_provider": "opencode_zen",
                 "opencode_zen/big-pickle": {
@@ -9030,6 +8986,9 @@
                 "litellm_provider": "opencode_zen"
             },
             "opencode_zen/qwen3.5-plus": {
+                "litellm_provider": "opencode_zen"
+            },
+            "opencode_zen/kimi-k3": {
                 "litellm_provider": "opencode_zen"
             },
             "opencode_zen/big-pickle": {
