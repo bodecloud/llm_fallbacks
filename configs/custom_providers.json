@@ -707,7 +707,7 @@
                 "input_cost_per_token": 2.5e-07,
                 "output_cost_per_token": 1.5e-06,
                 "max_input_tokens": 65536,
-                "max_output_tokens": 66000,
+                "max_output_tokens": 65536,
                 "metadata": {
                     "notes": "Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image) is Google's fastest, most cost-efficient Gemini image model, built for high-velocity developer pipelines and rapid-fire visual exploration. It delivers text-to-image generation..."
                 },
@@ -716,7 +716,7 @@
                     "input_cost_per_token": 2.5e-07,
                     "output_cost_per_token": 1.5e-06,
                     "max_input_tokens": 65536,
-                    "max_output_tokens": 66000,
+                    "max_output_tokens": 65536,
                     "metadata": {
                         "notes": "Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image) is Google's fastest, most cost-efficient Gemini image model, built for high-velocity developer pipelines and rapid-fire visual exploration. It delivers text-to-image generation..."
                     },
@@ -834,19 +834,19 @@
                 }
             },
             "z-ai/glm-5.2": {
-                "input_cost_per_token": 7.616e-07,
-                "output_cost_per_token": 2.3936e-06,
-                "max_input_tokens": 1048576,
-                "max_output_tokens": 131072,
+                "input_cost_per_token": 6.769e-07,
+                "output_cost_per_token": 2.1274e-06,
+                "max_input_tokens": 1024000,
+                "max_output_tokens": 128000,
                 "metadata": {
                     "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
                 },
                 "litellm_provider": "openrouter",
                 "z-ai/glm-5.2": {
-                    "input_cost_per_token": 7.616e-07,
-                    "output_cost_per_token": 2.3936e-06,
-                    "max_input_tokens": 1048576,
-                    "max_output_tokens": 131072,
+                    "input_cost_per_token": 6.769e-07,
+                    "output_cost_per_token": 2.1274e-06,
+                    "max_input_tokens": 1024000,
+                    "max_output_tokens": 128000,
                     "metadata": {
                         "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
                     },
@@ -1206,8 +1206,8 @@
                 }
             },
             "qwen/qwen3.7-max": {
-                "input_cost_per_token": 1.25e-06,
-                "output_cost_per_token": 3.75e-06,
+                "input_cost_per_token": 1.475e-06,
+                "output_cost_per_token": 4.425e-06,
                 "max_input_tokens": 1000000,
                 "max_output_tokens": 65536,
                 "metadata": {
@@ -1215,8 +1215,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen3.7-max": {
-                    "input_cost_per_token": 1.25e-06,
-                    "output_cost_per_token": 3.75e-06,
+                    "input_cost_per_token": 1.475e-06,
+                    "output_cost_per_token": 4.425e-06,
                     "max_input_tokens": 1000000,
                     "max_output_tokens": 65536,
                     "metadata": {
@@ -1730,8 +1730,8 @@
                 }
             },
             "qwen/qwen3.6-max-preview": {
-                "input_cost_per_token": 1.04e-06,
-                "output_cost_per_token": 6.24e-06,
+                "input_cost_per_token": 1.027e-06,
+                "output_cost_per_token": 6.162e-06,
                 "max_input_tokens": 262144,
                 "max_output_tokens": 65536,
                 "metadata": {
@@ -1739,8 +1739,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen3.6-max-preview": {
-                    "input_cost_per_token": 1.04e-06,
-                    "output_cost_per_token": 6.24e-06,
+                    "input_cost_per_token": 1.027e-06,
+                    "output_cost_per_token": 6.162e-06,
                     "max_input_tokens": 262144,
                     "max_output_tokens": 65536,
                     "metadata": {
@@ -2231,19 +2231,19 @@
                 }
             },
             "google/gemma-4-26b-a4b-it": {
-                "input_cost_per_token": 1.5e-07,
-                "output_cost_per_token": 6e-07,
+                "input_cost_per_token": 7e-08,
+                "output_cost_per_token": 3.4e-07,
                 "max_input_tokens": 262144,
-                "max_output_tokens": 262144,
+                "max_output_tokens": 16384,
                 "metadata": {
                     "notes": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference \u2014 delivering near-31B quality at..."
                 },
                 "litellm_provider": "openrouter",
                 "google/gemma-4-26b-a4b-it": {
-                    "input_cost_per_token": 1.5e-07,
-                    "output_cost_per_token": 6e-07,
+                    "input_cost_per_token": 7e-08,
+                    "output_cost_per_token": 3.4e-07,
                     "max_input_tokens": 262144,
-                    "max_output_tokens": 262144,
+                    "max_output_tokens": 16384,
                     "metadata": {
                         "notes": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference \u2014 delivering near-31B quality at..."
                     },
@@ -2930,7 +2930,7 @@
                 }
             },
             "qwen/qwen3.5-35b-a3b": {
-                "input_cost_per_token": 1.5e-07,
+                "input_cost_per_token": 1.4e-07,
                 "litellm_provider": "openrouter",
                 "max_input_tokens": 262144,
                 "max_output_tokens": 262144,
@@ -2946,7 +2946,7 @@
                     "notes": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall..."
                 },
                 "qwen/qwen3.5-35b-a3b": {
-                    "input_cost_per_token": 1.5e-07,
+                    "input_cost_per_token": 1.4e-07,
                     "output_cost_per_token": 1e-06,
                     "max_input_tokens": 262144,
                     "max_output_tokens": 262144,
@@ -3403,19 +3403,19 @@
                 }
             },
             "qwen/qwen3-coder-next": {
-                "input_cost_per_token": 1.8e-07,
-                "output_cost_per_token": 9e-07,
-                "max_input_tokens": 256000,
-                "max_output_tokens": 64000,
+                "input_cost_per_token": 1.2e-07,
+                "output_cost_per_token": 8e-07,
+                "max_input_tokens": 262144,
+                "max_output_tokens": 262144,
                 "metadata": {
                     "notes": "Qwen3-Coder-Next is an open-weight causal language model optimized for coding agents and local development workflows. It uses a sparse MoE design with 80B total parameters and only 3B activated per..."
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen3-coder-next": {
-                    "input_cost_per_token": 1.8e-07,
-                    "output_cost_per_token": 9e-07,
-                    "max_input_tokens": 256000,
-                    "max_output_tokens": 64000,
+                    "input_cost_per_token": 1.2e-07,
+                    "output_cost_per_token": 8e-07,
+                    "max_input_tokens": 262144,
+                    "max_output_tokens": 262144,
                     "metadata": {
                         "notes": "Qwen3-Coder-Next is an open-weight causal language model optimized for coding agents and local development workflows. It uses a sparse MoE design with 80B total parameters and only 3B activated per..."
                     },
@@ -7851,8 +7851,8 @@
                 }
             },
             "qwen/qwen-2.5-7b-instruct": {
-                "input_cost_per_token": 4e-08,
-                "output_cost_per_token": 1e-07,
+                "input_cost_per_token": 1e-07,
+                "output_cost_per_token": 2e-07,
                 "max_input_tokens": 32768,
                 "max_output_tokens": 32768,
                 "metadata": {
@@ -7860,8 +7860,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen-2.5-7b-instruct": {
-                    "input_cost_per_token": 4e-08,
-                    "output_cost_per_token": 1e-07,
+                    "input_cost_per_token": 1e-07,
+                    "output_cost_per_token": 2e-07,
                     "max_input_tokens": 32768,
                     "max_output_tokens": 32768,
                     "metadata": {
