@@ -1,4 +1,5 @@
 openrouter/free
+dashscope/qwen3.7-plus
 chatgpt/gpt-5.4
 chatgpt/gpt-5.4-pro
 gemini/gemini-exp-1114

@@ -4726,6 +4726,26 @@
         "supports_reasoning": true,
         "supports_tool_choice": true
     },
+    "nvidia/nemotron-3-nano-30b-a3b": {
+        "input_cost_per_token": 5e-08,
+        "output_cost_per_token": 2e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "metadata": {
+            "notes": "NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest compute efficiency and accuracy for developers to build specialized agentic AI systems. The model is fully..."
+        },
+        "litellm_provider": "openrouter",
+        "nvidia/nemotron-3-nano-30b-a3b": {
+            "input_cost_per_token": 5e-08,
+            "output_cost_per_token": 2e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "metadata": {
+                "notes": "NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest compute efficiency and accuracy for developers to build specialized agentic AI systems. The model is fully..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "qwen/qwen3.5-9b": {
         "input_cost_per_token": 1e-07,
         "output_cost_per_token": 1.5e-07,
@@ -4742,26 +4762,6 @@
             "max_output_tokens": 262144,
             "metadata": {
                 "notes": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "nvidia/nemotron-3-nano-30b-a3b": {
-        "input_cost_per_token": 5e-08,
-        "output_cost_per_token": 2e-07,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 228000,
-        "metadata": {
-            "notes": "NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest compute efficiency and accuracy for developers to build specialized agentic AI systems. The model is fully..."
-        },
-        "litellm_provider": "openrouter",
-        "nvidia/nemotron-3-nano-30b-a3b": {
-            "input_cost_per_token": 5e-08,
-            "output_cost_per_token": 2e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 228000,
-            "metadata": {
-                "notes": "NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest compute efficiency and accuracy for developers to build specialized agentic AI systems. The model is fully..."
             },
             "litellm_provider": "openrouter"
         }
@@ -4928,6 +4928,26 @@
         "output_cost_per_token": 2e-07,
         "source": "https://docs.nscale.com/docs/inference/serverless-models/current#chat-models"
     },
+    "poolside/laguna-s-2.1": {
+        "input_cost_per_token": 9e-08,
+        "output_cost_per_token": 1.8e-07,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 131072,
+        "metadata": {
+            "notes": "Laguna S 2.1 is the latest coding agent model from [Poolside](<https://poolside.ai/>). Laguna S 2.1 is a 118B total parameter model with 8B active parameters, scoring 70.2% on Terminal-Bench 2.1 and..."
+        },
+        "litellm_provider": "openrouter",
+        "poolside/laguna-s-2.1": {
+            "input_cost_per_token": 9e-08,
+            "output_cost_per_token": 1.8e-07,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "Laguna S 2.1 is the latest coding agent model from [Poolside](<https://poolside.ai/>). Laguna S 2.1 is a 118B total parameter model with 8B active parameters, scoring 70.2% on Terminal-Bench 2.1 and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "openai.gpt-oss-safeguard-20b": {
         "input_cost_per_token": 7e-08,
         "litellm_provider": "bedrock_converse",
@@ -5009,26 +5029,6 @@
         "mode": "chat",
         "output_cost_per_token": 2.3e-07,
         "supports_system_messages": true
-    },
-    "poolside/laguna-s-2.1": {
-        "input_cost_per_token": 1e-07,
-        "output_cost_per_token": 2e-07,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 131072,
-        "metadata": {
-            "notes": "Laguna S 2.1 is the latest coding agent model from [Poolside](<https://poolside.ai/>). Laguna S 2.1 is a 118B total parameter model with 8B active parameters, scoring 70.2% on Terminal-Bench 2.1 and..."
-        },
-        "litellm_provider": "openrouter",
-        "poolside/laguna-s-2.1": {
-            "input_cost_per_token": 1e-07,
-            "output_cost_per_token": 2e-07,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 131072,
-            "metadata": {
-                "notes": "Laguna S 2.1 is the latest coding agent model from [Poolside](<https://poolside.ai/>). Laguna S 2.1 is a 118B total parameter model with 8B active parameters, scoring 70.2% on Terminal-Bench 2.1 and..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "google/gemini-2.5-flash-lite:batch": {
         "input_cost_per_token": 5e-08,
@@ -9937,6 +9937,46 @@
         "mode": "chat",
         "output_cost_per_token": 4e-07
     },
+    "openai/gpt-5.6-luna": {
+        "input_cost_per_token": 1e-07,
+        "output_cost_per_token": 6.000000000000001e-07,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-luna": {
+            "input_cost_per_token": 1e-07,
+            "output_cost_per_token": 6.000000000000001e-07,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.6-luna-pro": {
+        "input_cost_per_token": 1e-07,
+        "output_cost_per_token": 6.000000000000001e-07,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Luna Pro is the same underlying model as [GPT-5.6 Luna](https://openrouter.ai/openai/gpt-5.6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-luna-pro": {
+            "input_cost_per_token": 1e-07,
+            "output_cost_per_token": 6.000000000000001e-07,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Luna Pro is the same underlying model as [GPT-5.6 Luna](https://openrouter.ai/openai/gpt-5.6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "deepseek/deepseek-v3.2-exp": {
         "input_cost_per_token": 2.7e-07,
         "input_cost_per_token_cache_hit": 2e-08,
@@ -12685,60 +12725,6 @@
         "mode": "chat",
         "output_cost_per_token": 7.5e-07
     },
-    "deepseek/deepseek-chat": {
-        "input_cost_per_token": 2.002e-07,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 128000,
-        "max_output_tokens": 16000,
-        "max_tokens": 8192,
-        "mode": "chat",
-        "output_cost_per_token": 8.001e-07,
-        "supports_prompt_caching": true,
-        "supports_tool_choice": true,
-        "cache_creation_input_token_cost": 0.0,
-        "cache_read_input_token_cost": 2.8e-08,
-        "input_cost_per_token_cache_hit": 2.8e-08,
-        "source": "https://api-docs.deepseek.com/quick_start/pricing",
-        "supported_endpoints": [
-            "/v1/chat/completions"
-        ],
-        "supports_assistant_prefill": true,
-        "supports_function_calling": true,
-        "supports_native_streaming": true,
-        "supports_parallel_function_calling": true,
-        "supports_response_schema": true,
-        "supports_system_messages": true,
-        "metadata": {
-            "notes": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations..."
-        },
-        "deepseek/deepseek-chat": {
-            "cache_creation_input_token_cost": 0.0,
-            "cache_read_input_token_cost": 2.8e-08,
-            "input_cost_per_token": 2.002e-07,
-            "input_cost_per_token_cache_hit": 2.8e-08,
-            "litellm_provider": "openrouter",
-            "max_input_tokens": 128000,
-            "max_output_tokens": 16000,
-            "max_tokens": 8192,
-            "mode": "chat",
-            "output_cost_per_token": 8.001e-07,
-            "source": "https://api-docs.deepseek.com/quick_start/pricing",
-            "supported_endpoints": [
-                "/v1/chat/completions"
-            ],
-            "supports_assistant_prefill": true,
-            "supports_function_calling": true,
-            "supports_native_streaming": true,
-            "supports_parallel_function_calling": true,
-            "supports_prompt_caching": true,
-            "supports_response_schema": true,
-            "supports_system_messages": true,
-            "supports_tool_choice": true,
-            "metadata": {
-                "notes": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations..."
-            }
-        }
-    },
     "arcee-ai/trinity-large-thinking": {
         "input_cost_per_token": 2.2e-07,
         "output_cost_per_token": 8.5e-07,
@@ -14262,6 +14248,60 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "deepseek/deepseek-chat": {
+        "input_cost_per_token": 2.574e-07,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 128000,
+        "max_output_tokens": 16000,
+        "max_tokens": 8192,
+        "mode": "chat",
+        "output_cost_per_token": 1.0287e-06,
+        "supports_prompt_caching": true,
+        "supports_tool_choice": true,
+        "cache_creation_input_token_cost": 0.0,
+        "cache_read_input_token_cost": 2.8e-08,
+        "input_cost_per_token_cache_hit": 2.8e-08,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+            "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "metadata": {
+            "notes": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations..."
+        },
+        "deepseek/deepseek-chat": {
+            "cache_creation_input_token_cost": 0.0,
+            "cache_read_input_token_cost": 2.8e-08,
+            "input_cost_per_token": 2.574e-07,
+            "input_cost_per_token_cache_hit": 2.8e-08,
+            "litellm_provider": "openrouter",
+            "max_input_tokens": 128000,
+            "max_output_tokens": 16000,
+            "max_tokens": 8192,
+            "mode": "chat",
+            "output_cost_per_token": 1.0287e-06,
+            "source": "https://api-docs.deepseek.com/quick_start/pricing",
+            "supported_endpoints": [
+                "/v1/chat/completions"
+            ],
+            "supports_assistant_prefill": true,
+            "supports_function_calling": true,
+            "supports_native_streaming": true,
+            "supports_parallel_function_calling": true,
+            "supports_prompt_caching": true,
+            "supports_response_schema": true,
+            "supports_system_messages": true,
+            "supports_tool_choice": true,
+            "metadata": {
+                "notes": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations..."
+            }
+        }
+    },
     "vertex_ai/qwen/qwen3-next-80b-a3b-instruct-maas": {
         "input_cost_per_token": 1.5e-07,
         "litellm_provider": "vertex_ai-qwen_models",
@@ -14802,7 +14842,7 @@
         "cache_read_input_token_cost": 2e-08,
         "input_cost_per_token": 2e-07,
         "litellm_provider": "azure",
-        "max_input_tokens": 1050000,
+        "max_input_tokens": 272000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
@@ -14837,7 +14877,7 @@
         "cache_read_input_token_cost": 2e-08,
         "input_cost_per_token": 2e-07,
         "litellm_provider": "azure",
-        "max_input_tokens": 1050000,
+        "max_input_tokens": 272000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
@@ -14870,22 +14910,16 @@
     },
     "azure_ai/gpt-5.4-nano": {
         "cache_read_input_token_cost": 2e-08,
-        "cache_read_input_token_cost_above_272k_tokens": 4e-08,
         "cache_read_input_token_cost_priority": 4e-08,
-        "cache_read_input_token_cost_above_272k_tokens_priority": 8e-08,
         "input_cost_per_token": 2e-07,
-        "input_cost_per_token_above_272k_tokens": 4e-07,
         "input_cost_per_token_priority": 4e-07,
-        "input_cost_per_token_above_272k_tokens_priority": 8e-07,
         "litellm_provider": "azure_ai",
-        "max_input_tokens": 400000,
+        "max_input_tokens": 272000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
         "output_cost_per_token": 1.25e-06,
-        "output_cost_per_token_above_272k_tokens": 1.875e-06,
         "output_cost_per_token_priority": 2.5e-06,
-        "output_cost_per_token_above_272k_tokens_priority": 3.75e-06,
         "source": "https://ai.azure.com/catalog/models/gpt-5.4-nano",
         "supported_endpoints": [
             "/v1/chat/completions",
@@ -14916,22 +14950,16 @@
     },
     "azure_ai/gpt-5.4-nano-2026-03-17": {
         "cache_read_input_token_cost": 2e-08,
-        "cache_read_input_token_cost_above_272k_tokens": 4e-08,
         "cache_read_input_token_cost_priority": 4e-08,
-        "cache_read_input_token_cost_above_272k_tokens_priority": 8e-08,
         "input_cost_per_token": 2e-07,
-        "input_cost_per_token_above_272k_tokens": 4e-07,
         "input_cost_per_token_priority": 4e-07,
-        "input_cost_per_token_above_272k_tokens_priority": 8e-07,
         "litellm_provider": "azure_ai",
-        "max_input_tokens": 400000,
+        "max_input_tokens": 272000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
         "output_cost_per_token": 1.25e-06,
-        "output_cost_per_token_above_272k_tokens": 1.875e-06,
         "output_cost_per_token_priority": 2.5e-06,
-        "output_cost_per_token_above_272k_tokens_priority": 3.75e-06,
         "source": "https://ai.azure.com/catalog/models/gpt-5.4-nano",
         "supported_endpoints": [
             "/v1/chat/completions",
@@ -18928,7 +18956,7 @@
         "input_cost_per_token_flex": 1e-07,
         "input_cost_per_token_batches": 1e-07,
         "litellm_provider": "openai",
-        "max_input_tokens": 1050000,
+        "max_input_tokens": 272000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
@@ -18971,7 +18999,7 @@
         "input_cost_per_token_flex": 1e-07,
         "input_cost_per_token_batches": 1e-07,
         "litellm_provider": "openai",
-        "max_input_tokens": 1050000,
+        "max_input_tokens": 272000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
@@ -20848,6 +20876,31 @@
             "litellm_provider": "openrouter"
         }
     },
+    "qwen/qwen3-235b-a22b-thinking-2507": {
+        "input_cost_per_token": 2.3e-07,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 131072,
+        "max_output_tokens": 262144,
+        "max_tokens": 262144,
+        "mode": "chat",
+        "output_cost_per_token": 2.3e-06,
+        "source": "https://openrouter.ai/qwen/qwen3-235b-a22b-thinking-2507",
+        "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144..."
+        },
+        "qwen/qwen3-235b-a22b-thinking-2507": {
+            "input_cost_per_token": 2.3e-07,
+            "output_cost_per_token": 2.3e-06,
+            "max_input_tokens": 131072,
+            "metadata": {
+                "notes": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "cloudflare/@cf/meta/llama-3.3-70b-instruct-fp8-fast": {
         "input_cost_per_token": 2.93e-07,
         "litellm_provider": "cloudflare",
@@ -20964,26 +21017,6 @@
         "supports_function_calling": true,
         "supports_reasoning": true,
         "supports_system_messages": true
-    },
-    "nvidia/nemotron-3-ultra-550b-a55b": {
-        "input_cost_per_token": 5e-07,
-        "output_cost_per_token": 2.2e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 16384,
-        "metadata": {
-            "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
-        },
-        "litellm_provider": "openrouter",
-        "nvidia/nemotron-3-ultra-550b-a55b": {
-            "input_cost_per_token": 5e-07,
-            "output_cost_per_token": 2.2e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "qwen/qwen3.5-397b-a17b": {
         "input_cost_per_token": 3.9e-07,
@@ -21381,26 +21414,6 @@
         ],
         "tpm": 4000000,
         "rpm": 10
-    },
-    "z-ai/glm-5.2": {
-        "input_cost_per_token": 6.769e-07,
-        "output_cost_per_token": 2.1274e-06,
-        "max_input_tokens": 1024000,
-        "max_output_tokens": 128000,
-        "metadata": {
-            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.2": {
-            "input_cost_per_token": 6.769e-07,
-            "output_cost_per_token": 2.1274e-06,
-            "max_input_tokens": 1024000,
-            "max_output_tokens": 128000,
-            "metadata": {
-                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "novita/moonshotai/kimi-k2-instruct": {
         "litellm_provider": "novita",
@@ -22868,32 +22881,6 @@
         "supports_vision": true,
         "supports_reasoning": true
     },
-    "qwen/qwen3-235b-a22b-thinking-2507": {
-        "input_cost_per_token": 3e-07,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 131072,
-        "max_output_tokens": 32768,
-        "max_tokens": 262144,
-        "mode": "chat",
-        "output_cost_per_token": 3e-06,
-        "source": "https://openrouter.ai/qwen/qwen3-235b-a22b-thinking-2507",
-        "supports_function_calling": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144..."
-        },
-        "qwen/qwen3-235b-a22b-thinking-2507": {
-            "input_cost_per_token": 3e-07,
-            "output_cost_per_token": 3e-06,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 32768,
-            "metadata": {
-                "notes": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "novita/qwen/qwen3-235b-a22b-thinking-2507": {
         "litellm_provider": "novita",
         "mode": "chat",
@@ -22969,30 +22956,6 @@
         "supports_prompt_caching": true,
         "supports_reasoning": true,
         "supports_tool_choice": true
-    },
-    "moonshotai/kimi-k2.6": {
-        "input_cost_per_token": 6.46e-07,
-        "output_cost_per_token": 2.72e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-        },
-        "litellm_provider": "openrouter",
-        "moonshotai/kimi-k2.6": {
-            "input_cost_per_token": 6.46e-07,
-            "output_cost_per_token": 2.72e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "replicate/meta/llama-3-70b": {
         "input_cost_per_token": 6.5e-07,
@@ -23078,46 +23041,6 @@
         "output_cost_per_token": 3e-06,
         "supports_function_calling": true,
         "supports_vision": true
-    },
-    "openai/gpt-5.6-luna": {
-        "input_cost_per_token": 5e-07,
-        "output_cost_per_token": 3e-06,
-        "max_input_tokens": 1050000,
-        "max_output_tokens": 128000,
-        "metadata": {
-            "notes": "GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for..."
-        },
-        "litellm_provider": "openrouter",
-        "openai/gpt-5.6-luna": {
-            "input_cost_per_token": 5e-07,
-            "output_cost_per_token": 3e-06,
-            "max_input_tokens": 1050000,
-            "max_output_tokens": 128000,
-            "metadata": {
-                "notes": "GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "openai/gpt-5.6-luna-pro": {
-        "input_cost_per_token": 5e-07,
-        "output_cost_per_token": 3e-06,
-        "max_input_tokens": 1050000,
-        "max_output_tokens": 128000,
-        "metadata": {
-            "notes": "GPT-5.6 Luna Pro is the same underlying model as [GPT-5.6 Luna](https://openrouter.ai/openai/gpt-5.6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
-        },
-        "litellm_provider": "openrouter",
-        "openai/gpt-5.6-luna-pro": {
-            "input_cost_per_token": 5e-07,
-            "output_cost_per_token": 3e-06,
-            "max_input_tokens": 1050000,
-            "max_output_tokens": 128000,
-            "metadata": {
-                "notes": "GPT-5.6 Luna Pro is the same underlying model as [GPT-5.6 Luna](https://openrouter.ai/openai/gpt-5.6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "google/gemini-3.1-flash-image": {
         "input_cost_per_token": 5e-07,
@@ -24782,6 +24705,26 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "z-ai/glm-5.2": {
+        "input_cost_per_token": 9.66e-07,
+        "output_cost_per_token": 3.036e-06,
+        "max_input_tokens": 1024000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.2": {
+            "input_cost_per_token": 9.66e-07,
+            "output_cost_per_token": 3.036e-06,
+            "max_input_tokens": 1024000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "azure_ai/llama-3.2-90b-vision-instruct": {
         "input_cost_per_token": 2.04e-06,
         "litellm_provider": "azure_ai",
@@ -24831,6 +24774,24 @@
         "supports_system_messages": true,
         "supports_reasoning": true,
         "source": "https://serverless.tensormesh.ai/v1/models/openrouter"
+    },
+    "nvidia/nemotron-3-ultra-550b-a55b": {
+        "input_cost_per_token": 6e-07,
+        "output_cost_per_token": 3.6e-06,
+        "max_input_tokens": 512288,
+        "metadata": {
+            "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
+        },
+        "litellm_provider": "openrouter",
+        "nvidia/nemotron-3-ultra-550b-a55b": {
+            "input_cost_per_token": 6e-07,
+            "output_cost_per_token": 3.6e-06,
+            "max_input_tokens": 512288,
+            "metadata": {
+                "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "bedrock/us-east-1/zai.glm-5": {
         "input_cost_per_token": 1e-06,
@@ -25671,6 +25632,30 @@
         "supports_tool_choice": true,
         "supports_vision": true
     },
+    "moonshotai/kimi-k2.6": {
+        "input_cost_per_token": 9.5e-07,
+        "output_cost_per_token": 4e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+        },
+        "litellm_provider": "openrouter",
+        "moonshotai/kimi-k2.6": {
+            "input_cost_per_token": 9.5e-07,
+            "output_cost_per_token": 4e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "tensormesh/moonshotai/kimi-k2.6": {
         "litellm_provider": "tensormesh",
         "mode": "chat",
@@ -26077,7 +26062,7 @@
         "cache_read_input_token_cost": 7.5e-08,
         "input_cost_per_token": 7.5e-07,
         "litellm_provider": "azure",
-        "max_input_tokens": 1050000,
+        "max_input_tokens": 272000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
@@ -26112,7 +26097,7 @@
         "cache_read_input_token_cost": 7.5e-08,
         "input_cost_per_token": 7.5e-07,
         "litellm_provider": "azure",
-        "max_input_tokens": 1050000,
+        "max_input_tokens": 272000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
@@ -26145,22 +26130,16 @@
     },
     "azure_ai/gpt-5.4-mini": {
         "cache_read_input_token_cost": 7.5e-08,
-        "cache_read_input_token_cost_above_272k_tokens": 1.5e-07,
         "cache_read_input_token_cost_priority": 1.5e-07,
-        "cache_read_input_token_cost_above_272k_tokens_priority": 3e-07,
         "input_cost_per_token": 7.5e-07,
-        "input_cost_per_token_above_272k_tokens": 1.5e-06,
         "input_cost_per_token_priority": 1.5e-06,
-        "input_cost_per_token_above_272k_tokens_priority": 3e-06,
         "litellm_provider": "azure_ai",
-        "max_input_tokens": 400000,
+        "max_input_tokens": 272000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
         "output_cost_per_token": 4.5e-06,
-        "output_cost_per_token_above_272k_tokens": 6.75e-06,
         "output_cost_per_token_priority": 9e-06,
-        "output_cost_per_token_above_272k_tokens_priority": 1.35e-05,
         "source": "https://ai.azure.com/catalog/models/gpt-5.4-mini",
         "supported_endpoints": [
             "/v1/chat/completions",
@@ -26191,22 +26170,16 @@
     },
     "azure_ai/gpt-5.4-mini-2026-03-17": {
         "cache_read_input_token_cost": 7.5e-08,
-        "cache_read_input_token_cost_above_272k_tokens": 1.5e-07,
         "cache_read_input_token_cost_priority": 1.5e-07,
-        "cache_read_input_token_cost_above_272k_tokens_priority": 3e-07,
         "input_cost_per_token": 7.5e-07,
-        "input_cost_per_token_above_272k_tokens": 1.5e-06,
         "input_cost_per_token_priority": 1.5e-06,
-        "input_cost_per_token_above_272k_tokens_priority": 3e-06,
         "litellm_provider": "azure_ai",
-        "max_input_tokens": 400000,
+        "max_input_tokens": 272000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
         "output_cost_per_token": 4.5e-06,
-        "output_cost_per_token_above_272k_tokens": 6.75e-06,
         "output_cost_per_token_priority": 9e-06,
-        "output_cost_per_token_above_272k_tokens_priority": 1.35e-05,
         "source": "https://ai.azure.com/catalog/models/gpt-5.4-mini",
         "supported_endpoints": [
             "/v1/chat/completions",
@@ -27686,6 +27659,46 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "openai/gpt-5.6-terra": {
+        "input_cost_per_token": 1.0000000000000002e-06,
+        "output_cost_per_token": 6e-06,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Terra is a balanced model in OpenAI's GPT-5.6 series, positioned between the flagship Sol tier and the cost-efficient Luna tier. It is suited for everyday coding, reasoning, and agentic..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-terra": {
+            "input_cost_per_token": 1.0000000000000002e-06,
+            "output_cost_per_token": 6e-06,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Terra is a balanced model in OpenAI's GPT-5.6 series, positioned between the flagship Sol tier and the cost-efficient Luna tier. It is suited for everyday coding, reasoning, and agentic..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.6-terra-pro": {
+        "input_cost_per_token": 1.0000000000000002e-06,
+        "output_cost_per_token": 6e-06,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Terra Pro is the same underlying model as [GPT-5.6 Terra](https://openrouter.ai/openai/gpt-5.6-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-terra-pro": {
+            "input_cost_per_token": 1.0000000000000002e-06,
+            "output_cost_per_token": 6e-06,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Terra Pro is the same underlying model as [GPT-5.6 Terra](https://openrouter.ai/openai/gpt-5.6-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "moonshot/moonshot-v1-128k": {
         "input_cost_per_token": 2e-06,
         "litellm_provider": "moonshot",
@@ -28659,7 +28672,7 @@
         "input_cost_per_token_batches": 3.75e-07,
         "input_cost_per_token_priority": 1.5e-06,
         "litellm_provider": "openai",
-        "max_input_tokens": 1050000,
+        "max_input_tokens": 272000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
@@ -28705,7 +28718,7 @@
         "input_cost_per_token_batches": 3.75e-07,
         "input_cost_per_token_priority": 1.5e-06,
         "litellm_provider": "openai",
-        "max_input_tokens": 1050000,
+        "max_input_tokens": 272000,
         "max_output_tokens": 128000,
         "max_tokens": 128000,
         "mode": "chat",
@@ -29383,46 +29396,6 @@
             "litellm_provider": "openrouter"
         }
     },
-    "openai/gpt-5.6-terra": {
-        "input_cost_per_token": 1.25e-06,
-        "output_cost_per_token": 7.5e-06,
-        "max_input_tokens": 1050000,
-        "max_output_tokens": 128000,
-        "metadata": {
-            "notes": "GPT-5.6 Terra is a balanced model in OpenAI's GPT-5.6 series, positioned between the flagship Sol tier and the cost-efficient Luna tier. It is suited for everyday coding, reasoning, and agentic..."
-        },
-        "litellm_provider": "openrouter",
-        "openai/gpt-5.6-terra": {
-            "input_cost_per_token": 1.25e-06,
-            "output_cost_per_token": 7.5e-06,
-            "max_input_tokens": 1050000,
-            "max_output_tokens": 128000,
-            "metadata": {
-                "notes": "GPT-5.6 Terra is a balanced model in OpenAI's GPT-5.6 series, positioned between the flagship Sol tier and the cost-efficient Luna tier. It is suited for everyday coding, reasoning, and agentic..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "openai/gpt-5.6-terra-pro": {
-        "input_cost_per_token": 1.25e-06,
-        "output_cost_per_token": 7.5e-06,
-        "max_input_tokens": 1050000,
-        "max_output_tokens": 128000,
-        "metadata": {
-            "notes": "GPT-5.6 Terra Pro is the same underlying model as [GPT-5.6 Terra](https://openrouter.ai/openai/gpt-5.6-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
-        },
-        "litellm_provider": "openrouter",
-        "openai/gpt-5.6-terra-pro": {
-            "input_cost_per_token": 1.25e-06,
-            "output_cost_per_token": 7.5e-06,
-            "max_input_tokens": 1050000,
-            "max_output_tokens": 128000,
-            "metadata": {
-                "notes": "GPT-5.6 Terra Pro is the same underlying model as [GPT-5.6 Terra](https://openrouter.ai/openai/gpt-5.6-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "bedrock/us-gov-east-1/anthropic.claude-haiku-4-5-20251001-v1:0": {
         "cache_creation_input_token_cost": 1.5e-06,
         "cache_creation_input_token_cost_above_1hr": 2.4e-06,
@@ -29902,26 +29875,6 @@
             "max_output_tokens": 100000,
             "metadata": {
                 "notes": "o3 is a well-rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks. It also excels at technical writing and instruction-following...."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "openai/o4-mini-deep-research": {
-        "input_cost_per_token": 2e-06,
-        "output_cost_per_token": 8e-06,
-        "max_input_tokens": 200000,
-        "max_output_tokens": 100000,
-        "metadata": {
-            "notes": "o4-mini-deep-research is OpenAI's faster, more affordable deep research model\u2014ideal for tackling complex, multi-step research tasks.\n\nNote: This model always uses the 'web_search' tool which adds additional cost."
-        },
-        "litellm_provider": "openrouter",
-        "openai/o4-mini-deep-research": {
-            "input_cost_per_token": 2e-06,
-            "output_cost_per_token": 8e-06,
-            "max_input_tokens": 200000,
-            "max_output_tokens": 100000,
-            "metadata": {
-                "notes": "o4-mini-deep-research is OpenAI's faster, more affordable deep research model\u2014ideal for tackling complex, multi-step research tasks.\n\nNote: This model always uses the 'web_search' tool which adds additional cost."
             },
             "litellm_provider": "openrouter"
         }
@@ -30418,6 +30371,22 @@
         "supports_prompt_caching": true,
         "supports_system_messages": true,
         "supports_response_schema": true
+    },
+    "dashscope/qwen3.7-max": {
+        "cache_read_input_token_cost": 5e-07,
+        "input_cost_per_token": 2.5e-06,
+        "litellm_provider": "dashscope",
+        "max_input_tokens": 991808,
+        "max_output_tokens": 65536,
+        "max_tokens": 65536,
+        "mode": "chat",
+        "output_cost_per_token": 7.5e-06,
+        "source": "https://www.alibabacloud.com/help/en/model-studio/models",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_tool_choice": true
     },
     "google/gemini-3.6-flash": {
         "input_cost_per_token": 1.5e-06,
@@ -30947,41 +30916,6 @@
             "max_output_tokens": 128000,
             "metadata": {
                 "notes": "GPT-5 is OpenAI\u2019s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "openai/gpt-5-codex": {
-        "cache_read_input_token_cost": 1.25e-07,
-        "input_cost_per_token": 1.25e-06,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 400000,
-        "max_output_tokens": 128000,
-        "max_tokens": 128000,
-        "mode": "chat",
-        "output_cost_per_token": 1e-05,
-        "supported_modalities": [
-            "text",
-            "image"
-        ],
-        "supported_output_modalities": [
-            "text"
-        ],
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "metadata": {
-            "notes": "GPT-5-Codex is a specialized version of GPT-5 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks...."
-        },
-        "openai/gpt-5-codex": {
-            "input_cost_per_token": 1.25e-06,
-            "output_cost_per_token": 1e-05,
-            "max_input_tokens": 400000,
-            "max_output_tokens": 128000,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "GPT-5-Codex is a specialized version of GPT-5 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks...."
             },
             "litellm_provider": "openrouter"
         }
@@ -35249,6 +35183,30 @@
         "supports_vision": true,
         "supports_pdf_input": true
     },
+    "~moonshotai/kimi-latest": {
+        "input_cost_per_token": 2.9e-06,
+        "output_cost_per_token": 1.4e-05,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 1048576,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
+        },
+        "litellm_provider": "openrouter",
+        "~moonshotai/kimi-latest": {
+            "input_cost_per_token": 2.9e-06,
+            "output_cost_per_token": 1.4e-05,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 1048576,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "azure/us/gpt-4.1-2025-04-14": {
         "deprecation_date": "2026-11-04",
         "cache_read_input_token_cost": 5.5e-07,
@@ -35650,28 +35608,6 @@
             "supports_vision": true,
             "metadata": {
                 "notes": "Kimi K3 is a 2.8T parameter open-weight multimodal reasoning model from Moonshot AI. It is suited for complex coding, knowledge work, and long-horizon agentic workflows, and is particularly strong at..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "~moonshotai/kimi-latest": {
-        "input_cost_per_token": 3e-06,
-        "output_cost_per_token": 1.5e-05,
-        "max_input_tokens": 1048576,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
-        },
-        "litellm_provider": "openrouter",
-        "~moonshotai/kimi-latest": {
-            "input_cost_per_token": 3e-06,
-            "output_cost_per_token": 1.5e-05,
-            "max_input_tokens": 1048576,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "This model always redirects to the latest model in the MoonshotAI Kimi family."
             },
             "litellm_provider": "openrouter"
         }
@@ -43286,26 +43222,6 @@
             "audio"
         ]
     },
-    "openai/o3-deep-research": {
-        "input_cost_per_token": 1e-05,
-        "output_cost_per_token": 4e-05,
-        "max_input_tokens": 200000,
-        "max_output_tokens": 100000,
-        "metadata": {
-            "notes": "o3-deep-research is OpenAI's advanced model for deep research, designed to tackle complex, multi-step research tasks.\n\nNote: This model always uses the 'web_search' tool which adds additional cost."
-        },
-        "litellm_provider": "openrouter",
-        "openai/o3-deep-research": {
-            "input_cost_per_token": 1e-05,
-            "output_cost_per_token": 4e-05,
-            "max_input_tokens": 200000,
-            "max_output_tokens": 100000,
-            "metadata": {
-                "notes": "o3-deep-research is OpenAI's advanced model for deep research, designed to tackle complex, multi-step research tasks.\n\nNote: This model always uses the 'web_search' tool which adds additional cost."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "azure/o3-deep-research": {
         "cache_read_input_token_cost": 2.5e-06,
         "input_cost_per_token": 1e-05,
@@ -50846,6 +50762,40 @@
             {
                 "input_cost_per_token": 5e-07,
                 "output_cost_per_token": 3e-06,
+                "range": [
+                    256000.0,
+                    1000000.0
+                ]
+            }
+        ]
+    },
+    "dashscope/qwen3.7-plus": {
+        "litellm_provider": "dashscope",
+        "max_input_tokens": 991808,
+        "max_output_tokens": 65536,
+        "max_tokens": 65536,
+        "mode": "chat",
+        "source": "https://www.alibabacloud.com/help/en/model-studio/models",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "tiered_pricing": [
+            {
+                "cache_read_input_token_cost": 8e-08,
+                "input_cost_per_token": 4e-07,
+                "output_cost_per_token": 1.6e-06,
+                "range": [
+                    0,
+                    256000.0
+                ]
+            },
+            {
+                "cache_read_input_token_cost": 2.4e-07,
+                "input_cost_per_token": 1.2e-06,
+                "output_cost_per_token": 4.8e-06,
                 "range": [
                     256000.0,
                     1000000.0

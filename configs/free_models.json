@@ -21,6 +21,27 @@
     "quality_source": "heuristic_v1"
   },
   {
+    "id": "dashscope/qwen3.7-plus",
+    "provider": "dashscope",
+    "mode": "chat",
+    "is_free": true,
+    "input_cost_per_token": 0,
+    "output_cost_per_token": 0,
+    "context_length": 991808,
+    "max_output_tokens": 65536,
+    "supports_vision": true,
+    "supports_function_calling": true,
+    "supports_tool_choice": true,
+    "supports_response_schema": true,
+    "supports_system_messages": false,
+    "supports_audio_input": false,
+    "supports_audio_output": false,
+    "supports_pdf_input": false,
+    "supports_prompt_caching": true,
+    "quality_score": 76.84,
+    "quality_source": "heuristic_v1"
+  },
+  {
     "id": "chatgpt/gpt-5.4",
     "provider": "chatgpt",
     "mode": "responses",
