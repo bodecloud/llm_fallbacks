@@ -5,20 +5,40 @@
         "api_env_key_name": "OPENROUTER_API_KEY",
         "api_key_required": false,
         "model_specs": {
-            "deepseek/deepseek-v4-flash-0731": {
-                "input_cost_per_token": 1.4e-07,
-                "output_cost_per_token": 2.8e-07,
+            "~deepseek/deepseek-v4-flash-latest": {
+                "input_cost_per_token": 9e-08,
+                "output_cost_per_token": 1.8e-07,
                 "max_input_tokens": 1048576,
-                "max_output_tokens": 384000,
+                "max_output_tokens": 65536,
+                "metadata": {
+                    "notes": "This model always redirects to the latest model in the DeepSeek V4 Flash family."
+                },
+                "litellm_provider": "openrouter",
+                "~deepseek/deepseek-v4-flash-latest": {
+                    "input_cost_per_token": 9e-08,
+                    "output_cost_per_token": 1.8e-07,
+                    "max_input_tokens": 1048576,
+                    "max_output_tokens": 65536,
+                    "metadata": {
+                        "notes": "This model always redirects to the latest model in the DeepSeek V4 Flash family."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
+            "deepseek/deepseek-v4-flash-0731": {
+                "input_cost_per_token": 9e-08,
+                "output_cost_per_token": 1.8e-07,
+                "max_input_tokens": 1048576,
+                "max_output_tokens": 65536,
                 "metadata": {
                     "notes": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows."
                 },
                 "litellm_provider": "openrouter",
                 "deepseek/deepseek-v4-flash-0731": {
-                    "input_cost_per_token": 1.4e-07,
-                    "output_cost_per_token": 2.8e-07,
+                    "input_cost_per_token": 9e-08,
+                    "output_cost_per_token": 1.8e-07,
                     "max_input_tokens": 1048576,
-                    "max_output_tokens": 384000,
+                    "max_output_tokens": 65536,
                     "metadata": {
                         "notes": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows."
                     },
@@ -808,19 +828,19 @@
                 }
             },
             "z-ai/glm-5.2": {
-                "input_cost_per_token": 9.079e-07,
-                "output_cost_per_token": 2.8534e-06,
-                "max_input_tokens": 1024000,
-                "max_output_tokens": 128000,
+                "input_cost_per_token": 4.186e-07,
+                "output_cost_per_token": 1.3156e-06,
+                "max_input_tokens": 1048576,
+                "max_output_tokens": 131072,
                 "metadata": {
                     "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
                 },
                 "litellm_provider": "openrouter",
                 "z-ai/glm-5.2": {
-                    "input_cost_per_token": 9.079e-07,
-                    "output_cost_per_token": 2.8534e-06,
-                    "max_input_tokens": 1024000,
-                    "max_output_tokens": 128000,
+                    "input_cost_per_token": 4.186e-07,
+                    "output_cost_per_token": 1.3156e-06,
+                    "max_input_tokens": 1048576,
+                    "max_output_tokens": 131072,
                     "metadata": {
                         "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
                     },
@@ -5168,7 +5188,7 @@
                 "max_output_tokens": 131072,
                 "max_tokens": 32768,
                 "mode": "chat",
-                "output_cost_per_token": 1.4e-07,
+                "output_cost_per_token": 1.3e-07,
                 "source": "https://openrouter.ai/openai/gpt-oss-20b",
                 "supports_function_calling": true,
                 "supports_parallel_function_calling": true,
@@ -5180,7 +5200,7 @@
                 },
                 "openai/gpt-oss-20b": {
                     "input_cost_per_token": 3e-08,
-                    "output_cost_per_token": 1.4e-07,
+                    "output_cost_per_token": 1.3e-07,
                     "max_input_tokens": 131072,
                     "max_output_tokens": 131072,
                     "metadata": {
@@ -8623,6 +8643,12 @@
                     "litellm_provider": "opencode_zen"
                 }
             },
+            "opencode_zen/kimi-k3": {
+                "litellm_provider": "opencode_zen",
+                "opencode_zen/kimi-k3": {
+                    "litellm_provider": "opencode_zen"
+                }
+            },
             "opencode_zen/kimi-k2.7-code": {
                 "litellm_provider": "opencode_zen",
                 "opencode_zen/kimi-k2.7-code": {
@@ -8650,12 +8676,6 @@
             "opencode_zen/qwen3.5-plus": {
                 "litellm_provider": "opencode_zen",
                 "opencode_zen/qwen3.5-plus": {
-                    "litellm_provider": "opencode_zen"
-                }
-            },
-            "opencode_zen/kimi-k3": {
-                "litellm_provider": "opencode_zen",
-                "opencode_zen/kimi-k3": {
                     "litellm_provider": "opencode_zen"
                 }
             },
@@ -8844,6 +8864,9 @@
             "opencode_zen/minimax-m2.5": {
                 "litellm_provider": "opencode_zen"
             },
+            "opencode_zen/kimi-k3": {
+                "litellm_provider": "opencode_zen"
+            },
             "opencode_zen/kimi-k2.7-code": {
                 "litellm_provider": "opencode_zen"
             },
@@ -8857,9 +8880,6 @@
                 "litellm_provider": "opencode_zen"
             },
             "opencode_zen/qwen3.5-plus": {
-                "litellm_provider": "opencode_zen"
-            },
-            "opencode_zen/kimi-k3": {
                 "litellm_provider": "opencode_zen"
             },
             "opencode_zen/big-pickle": {
