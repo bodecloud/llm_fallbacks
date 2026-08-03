@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-b3651667752b4541b27f6b3e4c08d35a
+  master_key: sk-76ed7aaa7c6246718a33021ab9c71561
   alerting:
   - slack
   - email
@@ -482,7 +482,7 @@ model_list:
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: 1.0e-07
-    output_cost_per_token: 6.000000000000001e-07
+    output_cost_per_token: 6.0e-07
     max_input_tokens: 1050000
     max_output_tokens: 128000
     metadata: &id022
@@ -495,7 +495,7 @@ model_list:
     litellm_provider: openrouter
     openai/gpt-5.6-luna-pro:
       input_cost_per_token: 1.0e-07
-      output_cost_per_token: 6.000000000000001e-07
+      output_cost_per_token: 6.0e-07
       max_input_tokens: 1050000
       max_output_tokens: 128000
       metadata: *id022
@@ -506,7 +506,7 @@ model_list:
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: 1.0e-07
-    output_cost_per_token: 6.000000000000001e-07
+    output_cost_per_token: 6.0e-07
     max_input_tokens: 1050000
     max_output_tokens: 128000
     metadata: &id023
@@ -516,7 +516,7 @@ model_list:
     litellm_provider: openrouter
     openai/gpt-5.6-luna:
       input_cost_per_token: 1.0e-07
-      output_cost_per_token: 6.000000000000001e-07
+      output_cost_per_token: 6.0e-07
       max_input_tokens: 1050000
       max_output_tokens: 128000
       metadata: *id023
@@ -526,7 +526,7 @@ model_list:
     model: openai/gpt-5.6-terra-pro
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 1.0000000000000002e-06
+    input_cost_per_token: 1.0e-06
     output_cost_per_token: 6.0e-06
     max_input_tokens: 1050000
     max_output_tokens: 128000
@@ -539,7 +539,7 @@ model_list:
         Learn more in OpenAI''s docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode'
     litellm_provider: openrouter
     openai/gpt-5.6-terra-pro:
-      input_cost_per_token: 1.0000000000000002e-06
+      input_cost_per_token: 1.0e-06
       output_cost_per_token: 6.0e-06
       max_input_tokens: 1050000
       max_output_tokens: 128000
@@ -550,7 +550,7 @@ model_list:
     model: openai/gpt-5.6-terra
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 1.0000000000000002e-06
+    input_cost_per_token: 1.0e-06
     output_cost_per_token: 6.0e-06
     max_input_tokens: 1050000
     max_output_tokens: 128000
@@ -560,7 +560,7 @@ model_list:
         for everyday coding, reasoning, and agentic...
     litellm_provider: openrouter
     openai/gpt-5.6-terra:
-      input_cost_per_token: 1.0000000000000002e-06
+      input_cost_per_token: 1.0e-06
       output_cost_per_token: 6.0e-06
       max_input_tokens: 1050000
       max_output_tokens: 128000
@@ -913,20 +913,20 @@ model_list:
     model: openai/z-ai/glm-5.2
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 4.186e-07
-    output_cost_per_token: 1.3156e-06
+    input_cost_per_token: 1.19e-06
+    output_cost_per_token: 3.74e-06
     max_input_tokens: 1048576
-    max_output_tokens: 131072
+    max_output_tokens: 262144
     metadata: &id042
       notes: GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text
         input and output with a 1M-token context window, and is suited for long-horizon
         agent workflows, project-level software engineering,...
     litellm_provider: openrouter
     z-ai/glm-5.2:
-      input_cost_per_token: 4.186e-07
-      output_cost_per_token: 1.3156e-06
+      input_cost_per_token: 1.19e-06
+      output_cost_per_token: 3.74e-06
       max_input_tokens: 1048576
-      max_output_tokens: 131072
+      max_output_tokens: 262144
       metadata: *id042
       litellm_provider: openrouter
 - model_name: openrouter/fusion
@@ -2936,13 +2936,13 @@ model_list:
     model: openai/qwen/qwen3.5-122b-a10b
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 2.6e-07
+    input_cost_per_token: 4.0e-07
     litellm_provider: openrouter
     max_input_tokens: 262144
     max_output_tokens: 65536
     max_tokens: 65536
     mode: chat
-    output_cost_per_token: 2.08e-06
+    output_cost_per_token: 3.2e-06
     source: https://openrouter.ai/qwen/qwen3.5-122b-a10b
     supports_function_calling: true
     supports_reasoning: true
@@ -2953,8 +2953,8 @@ model_list:
         architecture that integrates a linear attention mechanism with a sparse mixture-of-experts
         model, achieving higher inference efficiency. In terms of...
     qwen/qwen3.5-122b-a10b:
-      input_cost_per_token: 2.6e-07
-      output_cost_per_token: 2.08e-06
+      input_cost_per_token: 4.0e-07
+      output_cost_per_token: 3.2e-06
       max_input_tokens: 262144
       max_output_tokens: 65536
       metadata: *id128
@@ -4902,8 +4902,8 @@ model_list:
     model: openai/qwen/qwen3-vl-235b-a22b-thinking
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 4.0e-07
-    output_cost_per_token: 4.0e-06
+    input_cost_per_token: 9.8e-07
+    output_cost_per_token: 3.95e-06
     max_input_tokens: 131072
     max_output_tokens: 32768
     mode: chat
@@ -4914,8 +4914,8 @@ model_list:
         model is optimized for multimodal reasoning in STEM and math....
     litellm_provider: openrouter
     qwen/qwen3-vl-235b-a22b-thinking:
-      input_cost_per_token: 4.0e-07
-      output_cost_per_token: 4.0e-06
+      input_cost_per_token: 9.8e-07
+      output_cost_per_token: 3.95e-06
       max_input_tokens: 131072
       max_output_tokens: 32768
       mode: chat
@@ -5741,13 +5741,13 @@ model_list:
     model: openai/qwen/qwen3-235b-a22b-2507
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 9.0e-08
+    input_cost_per_token: 1.495e-07
     litellm_provider: openrouter
-    max_input_tokens: 262144
-    max_output_tokens: 16384
+    max_input_tokens: 131072
+    max_output_tokens: 32768
     max_tokens: 262144
     mode: chat
-    output_cost_per_token: 5.5e-07
+    output_cost_per_token: 5.98e-07
     source: https://openrouter.ai/qwen/qwen3-235b-a22b-2507
     supports_function_calling: true
     supports_tool_choice: true
@@ -5757,10 +5757,10 @@ model_list:
         per forward pass. It is optimized for general-purpose text generation, including
         instruction following,...
     qwen/qwen3-235b-a22b-2507:
-      input_cost_per_token: 9.0e-08
-      output_cost_per_token: 5.5e-07
-      max_input_tokens: 262144
-      max_output_tokens: 16384
+      input_cost_per_token: 1.495e-07
+      output_cost_per_token: 5.98e-07
+      max_input_tokens: 131072
+      max_output_tokens: 32768
       metadata: *id237
       litellm_provider: openrouter
 - model_name: moonshotai/kimi-k2
@@ -7511,8 +7511,8 @@ model_list:
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: 4.0e-07
     output_cost_per_token: 4.0e-07
-    max_input_tokens: 32768
-    max_output_tokens: 32768
+    max_input_tokens: 1024000
+    max_output_tokens: 1024000
     metadata: &id311
       notes: UnslopNemo v4.1 is the latest addition from the creator of Rocinante,
         designed for adventure writing and role-play scenarios.
@@ -7520,8 +7520,8 @@ model_list:
     thedrummer/unslopnemo-12b:
       input_cost_per_token: 4.0e-07
       output_cost_per_token: 4.0e-07
-      max_input_tokens: 32768
-      max_output_tokens: 32768
+      max_input_tokens: 1024000
+      max_output_tokens: 1024000
       metadata: *id311
       litellm_provider: openrouter
 - model_name: anthracite-org/magnum-v4-72b
