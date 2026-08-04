@@ -5,6 +5,26 @@
         "api_env_key_name": "OPENROUTER_API_KEY",
         "api_key_required": false,
         "model_specs": {
+            "qwen/qwen3.8-max": {
+                "input_cost_per_token": 2e-06,
+                "output_cost_per_token": 6e-06,
+                "max_input_tokens": 1000000,
+                "max_output_tokens": 131072,
+                "metadata": {
+                    "notes": "Qwen3.8 Max is the flagship model in Alibaba's Qwen3.8 series, the general-availability successor to the Qwen3.8 Max Preview. It is a multimodal reasoning model intended for complex reasoning, visual understanding,..."
+                },
+                "litellm_provider": "openrouter",
+                "qwen/qwen3.8-max": {
+                    "input_cost_per_token": 2e-06,
+                    "output_cost_per_token": 6e-06,
+                    "max_input_tokens": 1000000,
+                    "max_output_tokens": 131072,
+                    "metadata": {
+                        "notes": "Qwen3.8 Max is the flagship model in Alibaba's Qwen3.8 series, the general-availability successor to the Qwen3.8 Max Preview. It is a multimodal reasoning model intended for complex reasoning, visual understanding,..."
+                    },
+                    "litellm_provider": "openrouter"
+                }
+            },
             "~deepseek/deepseek-v4-flash-latest": {
                 "input_cost_per_token": 9e-08,
                 "output_cost_per_token": 1.8e-07,
@@ -828,18 +848,18 @@
                 }
             },
             "z-ai/glm-5.2": {
-                "input_cost_per_token": 1.19e-06,
-                "output_cost_per_token": 3.74e-06,
-                "max_input_tokens": 1048576,
+                "input_cost_per_token": 7.6e-07,
+                "output_cost_per_token": 2.42e-06,
+                "max_input_tokens": 262144,
                 "max_output_tokens": 262144,
                 "metadata": {
                     "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
                 },
                 "litellm_provider": "openrouter",
                 "z-ai/glm-5.2": {
-                    "input_cost_per_token": 1.19e-06,
-                    "output_cost_per_token": 3.74e-06,
-                    "max_input_tokens": 1048576,
+                    "input_cost_per_token": 7.6e-07,
+                    "output_cost_per_token": 2.42e-06,
+                    "max_input_tokens": 262144,
                     "max_output_tokens": 262144,
                     "metadata": {
                         "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
@@ -1642,19 +1662,19 @@
                 }
             },
             "qwen/qwen3.6-27b": {
-                "input_cost_per_token": 3e-07,
-                "output_cost_per_token": 2e-06,
-                "max_input_tokens": 262144,
-                "max_output_tokens": 65536,
+                "input_cost_per_token": 2.89e-07,
+                "output_cost_per_token": 2.4e-06,
+                "max_input_tokens": 131072,
+                "max_output_tokens": 131072,
                 "metadata": {
                     "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen3.6-27b": {
-                    "input_cost_per_token": 3e-07,
-                    "output_cost_per_token": 2e-06,
-                    "max_input_tokens": 262144,
-                    "max_output_tokens": 65536,
+                    "input_cost_per_token": 2.89e-07,
+                    "output_cost_per_token": 2.4e-06,
+                    "max_input_tokens": 131072,
+                    "max_output_tokens": 131072,
                     "metadata": {
                         "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
                     },
@@ -1994,8 +2014,8 @@
                 }
             },
             "moonshotai/kimi-k2.6": {
-                "input_cost_per_token": 6e-07,
-                "output_cost_per_token": 3.41e-06,
+                "input_cost_per_token": 5.89e-07,
+                "output_cost_per_token": 2.48e-06,
                 "max_input_tokens": 262144,
                 "max_output_tokens": 262144,
                 "mode": "chat",
@@ -2005,8 +2025,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "moonshotai/kimi-k2.6": {
-                    "input_cost_per_token": 6e-07,
-                    "output_cost_per_token": 3.41e-06,
+                    "input_cost_per_token": 5.89e-07,
+                    "output_cost_per_token": 2.48e-06,
                     "max_input_tokens": 262144,
                     "max_output_tokens": 262144,
                     "mode": "chat",
@@ -2776,13 +2796,13 @@
                 }
             },
             "qwen/qwen3.5-122b-a10b": {
-                "input_cost_per_token": 4e-07,
+                "input_cost_per_token": 2.6e-07,
                 "litellm_provider": "openrouter",
                 "max_input_tokens": 262144,
                 "max_output_tokens": 65536,
                 "max_tokens": 65536,
                 "mode": "chat",
-                "output_cost_per_token": 3.2e-06,
+                "output_cost_per_token": 2.08e-06,
                 "source": "https://openrouter.ai/qwen/qwen3.5-122b-a10b",
                 "supports_function_calling": true,
                 "supports_reasoning": true,
@@ -2792,8 +2812,8 @@
                     "notes": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of..."
                 },
                 "qwen/qwen3.5-122b-a10b": {
-                    "input_cost_per_token": 4e-07,
-                    "output_cost_per_token": 3.2e-06,
+                    "input_cost_per_token": 2.6e-07,
+                    "output_cost_per_token": 2.08e-06,
                     "max_input_tokens": 262144,
                     "max_output_tokens": 65536,
                     "metadata": {
@@ -4485,10 +4505,10 @@
                 }
             },
             "qwen/qwen3-vl-30b-a3b-instruct": {
-                "input_cost_per_token": 1.3e-07,
-                "output_cost_per_token": 5.2e-07,
-                "max_input_tokens": 131072,
-                "max_output_tokens": 32768,
+                "input_cost_per_token": 1.5e-07,
+                "output_cost_per_token": 6e-07,
+                "max_input_tokens": 262144,
+                "max_output_tokens": 16384,
                 "mode": "chat",
                 "supports_vision": true,
                 "metadata": {
@@ -4496,10 +4516,10 @@
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen3-vl-30b-a3b-instruct": {
-                    "input_cost_per_token": 1.3e-07,
-                    "output_cost_per_token": 5.2e-07,
-                    "max_input_tokens": 131072,
-                    "max_output_tokens": 32768,
+                    "input_cost_per_token": 1.5e-07,
+                    "output_cost_per_token": 6e-07,
+                    "max_input_tokens": 262144,
+                    "max_output_tokens": 16384,
                     "mode": "chat",
                     "supports_vision": true,
                     "metadata": {
@@ -4796,8 +4816,7 @@
             "qwen/qwen3-next-80b-a3b-thinking": {
                 "input_cost_per_token": 1.5e-07,
                 "output_cost_per_token": 1.2e-06,
-                "max_input_tokens": 131072,
-                "max_output_tokens": 32768,
+                "max_input_tokens": 128000,
                 "metadata": {
                     "notes": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured \u201cthinking\u201d traces by default. It\u2019s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic..."
                 },
@@ -4805,8 +4824,7 @@
                 "qwen/qwen3-next-80b-a3b-thinking": {
                     "input_cost_per_token": 1.5e-07,
                     "output_cost_per_token": 1.2e-06,
-                    "max_input_tokens": 131072,
-                    "max_output_tokens": 32768,
+                    "max_input_tokens": 128000,
                     "metadata": {
                         "notes": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured \u201cthinking\u201d traces by default. It\u2019s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic..."
                     },
@@ -4814,19 +4832,19 @@
                 }
             },
             "qwen/qwen3-next-80b-a3b-instruct": {
-                "input_cost_per_token": 1e-07,
+                "input_cost_per_token": 9e-08,
                 "output_cost_per_token": 1.1e-06,
                 "max_input_tokens": 262144,
-                "max_output_tokens": 262144,
+                "max_output_tokens": 16384,
                 "metadata": {
                     "notes": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without \u201cthinking\u201d traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual..."
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen3-next-80b-a3b-instruct": {
-                    "input_cost_per_token": 1e-07,
+                    "input_cost_per_token": 9e-08,
                     "output_cost_per_token": 1.1e-06,
                     "max_input_tokens": 262144,
-                    "max_output_tokens": 262144,
+                    "max_output_tokens": 16384,
                     "metadata": {
                         "notes": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without \u201cthinking\u201d traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual..."
                     },
@@ -5282,18 +5300,18 @@
             },
             "qwen/qwen3-coder-30b-a3b-instruct": {
                 "input_cost_per_token": 7e-08,
-                "output_cost_per_token": 2.8e-07,
-                "max_input_tokens": 262144,
-                "max_output_tokens": 262144,
+                "output_cost_per_token": 2.7e-07,
+                "max_input_tokens": 160000,
+                "max_output_tokens": 32768,
                 "metadata": {
                     "notes": "Qwen3-Coder-30B-A3B-Instruct is a 30.5B parameter Mixture-of-Experts (MoE) model with 128 experts (8 active per forward pass), designed for advanced code generation, repository-scale understanding, and agentic tool use. Built on the..."
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen3-coder-30b-a3b-instruct": {
                     "input_cost_per_token": 7e-08,
-                    "output_cost_per_token": 2.8e-07,
-                    "max_input_tokens": 262144,
-                    "max_output_tokens": 262144,
+                    "output_cost_per_token": 2.7e-07,
+                    "max_input_tokens": 160000,
+                    "max_output_tokens": 32768,
                     "metadata": {
                         "notes": "Qwen3-Coder-30B-A3B-Instruct is a 30.5B parameter Mixture-of-Experts (MoE) model with 128 experts (8 active per forward pass), designed for advanced code generation, repository-scale understanding, and agentic tool use. Built on the..."
                     },
@@ -7023,19 +7041,19 @@
                 }
             },
             "meta-llama/llama-3.3-70b-instruct": {
-                "input_cost_per_token": 1.3e-07,
-                "output_cost_per_token": 4e-07,
+                "input_cost_per_token": 1e-07,
+                "output_cost_per_token": 3.2e-07,
                 "max_input_tokens": 131072,
-                "max_output_tokens": 128000,
+                "max_output_tokens": 16384,
                 "metadata": {
                     "notes": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model..."
                 },
                 "litellm_provider": "openrouter",
                 "meta-llama/llama-3.3-70b-instruct": {
-                    "input_cost_per_token": 1.3e-07,
-                    "output_cost_per_token": 4e-07,
+                    "input_cost_per_token": 1e-07,
+                    "output_cost_per_token": 3.2e-07,
                     "max_input_tokens": 131072,
-                    "max_output_tokens": 128000,
+                    "max_output_tokens": 16384,
                     "metadata": {
                         "notes": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model..."
                     },
@@ -7889,11 +7907,11 @@
                 }
             },
             "gryphe/mythomax-l2-13b": {
-                "input_cost_per_token": 6e-08,
+                "input_cost_per_token": 8e-08,
                 "litellm_provider": "openrouter",
                 "max_tokens": 8192,
                 "mode": "chat",
-                "output_cost_per_token": 6e-08,
+                "output_cost_per_token": 1.1e-07,
                 "supports_tool_choice": true,
                 "max_input_tokens": 4096,
                 "max_output_tokens": 4096,
@@ -7901,8 +7919,8 @@
                     "notes": "One of the highest performing and most popular fine-tunes of Llama 2 13B, with rich descriptions and roleplay. #merge"
                 },
                 "gryphe/mythomax-l2-13b": {
-                    "input_cost_per_token": 6e-08,
-                    "output_cost_per_token": 6e-08,
+                    "input_cost_per_token": 8e-08,
+                    "output_cost_per_token": 1.1e-07,
                     "max_input_tokens": 4096,
                     "max_output_tokens": 4096,
                     "metadata": {
