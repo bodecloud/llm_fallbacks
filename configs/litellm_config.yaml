@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-7e3f17e3d61040d5a173661fdd5ec3b8
+  master_key: sk-997eee7c856d48919af3f2dc00ee3a9a
   alerting:
   - slack
   - email
@@ -1286,9 +1286,9 @@ model_list:
     output_cost_per_token: 2.0e-06
     max_input_tokens: 256000
     metadata: &id058
-      notes: Grok Build 0.1 is xAI’s fast coding model trained specifically for agentic
-        software engineering workflows. It supports text and image inputs with text
-        output, and is optimized for interactive coding...
+      notes: Grok Build 0.1 is SpaceXAI’s fast coding model trained specifically for
+        agentic software engineering workflows. It supports text and image inputs
+        with text output, and is optimized for interactive coding...
     litellm_provider: openrouter
     x-ai/grok-build-0.1:
       input_cost_per_token: 1.0e-06
@@ -1470,8 +1470,8 @@ model_list:
     output_cost_per_token: 2.5e-06
     max_input_tokens: 1000000
     metadata: &id065
-      notes: Grok 4.3 is a reasoning model from xAI. It accepts text and image inputs
-        with text output, and is suited for agentic workflows, instruction-following
+      notes: Grok 4.3 is a reasoning model from SpaceXAI. It accepts text and image
+        inputs with text output, and is suited for agentic workflows, instruction-following
         tasks, and applications requiring high factual...
     litellm_provider: openrouter
     x-ai/grok-4.3:
@@ -2388,9 +2388,9 @@ model_list:
     output_cost_per_token: 2.5e-06
     max_input_tokens: 2000000
     metadata: &id105
-      notes: Grok 4.20 Multi-Agent is a variant of xAI’s Grok 4.20 designed for collaborative,
-        agent-based workflows. Multiple agents operate in parallel to conduct deep
-        research, coordinate tool use, and synthesize information...
+      notes: Grok 4.20 Multi-Agent is a variant of SpaceXAI’s Grok 4.20 designed for
+        collaborative, agent-based workflows. Multiple agents operate in parallel
+        to conduct deep research, coordinate tool use, and synthesize information...
     litellm_provider: openrouter
     x-ai/grok-4.20-multi-agent:
       input_cost_per_token: 1.25e-06
@@ -2407,9 +2407,9 @@ model_list:
     output_cost_per_token: 2.5e-06
     max_input_tokens: 2000000
     metadata: &id106
-      notes: Grok 4.20 is a reasoning model from xAI with industry-leading speed and
-        agentic tool calling capabilities. It combines the lowest hallucination rate
-        on the market with strict prompt adherance, delivering...
+      notes: Grok 4.20 is a reasoning model from SpaceXAI with industry-leading speed
+        and agentic tool calling capabilities. It combines the lowest hallucination
+        rate on the market with strict prompt adherance, delivering...
     litellm_provider: openrouter
     x-ai/grok-4.20:
       input_cost_per_token: 1.25e-06
@@ -2507,9 +2507,9 @@ model_list:
     model: openai/minimax/minimax-m2.7
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 2.5e-07
-    output_cost_per_token: 1.0e-06
-    max_input_tokens: 196608
+    input_cost_per_token: 2.7e-07
+    output_cost_per_token: 1.08e-06
+    max_input_tokens: 204800
     max_output_tokens: 131072
     metadata: &id111
       notes: MiniMax-M2.7 is a next-generation large language model designed for autonomous,
@@ -2518,9 +2518,9 @@ model_list:
         multi-agent...
     litellm_provider: openrouter
     minimax/minimax-m2.7:
-      input_cost_per_token: 2.5e-07
-      output_cost_per_token: 1.0e-06
-      max_input_tokens: 196608
+      input_cost_per_token: 2.7e-07
+      output_cost_per_token: 1.08e-06
+      max_input_tokens: 204800
       max_output_tokens: 131072
       metadata: *id111
       litellm_provider: openrouter
@@ -5948,13 +5948,13 @@ model_list:
     model: openai/mistralai/mistral-small-3.2-24b-instruct
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 7.5e-08
+    input_cost_per_token: 9.375e-08
     litellm_provider: openrouter
     max_tokens: 128000
     mode: chat
-    output_cost_per_token: 2.0e-07
+    output_cost_per_token: 2.5e-07
     supports_tool_choice: true
-    max_input_tokens: 128000
+    max_input_tokens: 256000
     max_output_tokens: 16384
     supports_vision: true
     metadata: &id245
@@ -5964,9 +5964,9 @@ model_list:
         improves accuracy on...
     supports_function_calling: true
     mistralai/mistral-small-3.2-24b-instruct:
-      input_cost_per_token: 7.5e-08
-      output_cost_per_token: 2.0e-07
-      max_input_tokens: 128000
+      input_cost_per_token: 9.375e-08
+      output_cost_per_token: 2.5e-07
+      max_input_tokens: 256000
       max_output_tokens: 16384
       mode: chat
       supports_vision: true
@@ -7016,10 +7016,9 @@ model_list:
     model: openai/qwen/qwen2.5-vl-72b-instruct
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
-    input_cost_per_token: 8.0e-07
-    output_cost_per_token: 1.0e-06
-    max_input_tokens: 128000
-    max_output_tokens: 128000
+    input_cost_per_token: 2.5e-07
+    output_cost_per_token: 7.5e-07
+    max_input_tokens: 32000
     mode: chat
     supports_vision: true
     metadata: &id290
@@ -7028,10 +7027,9 @@ model_list:
         icons, graphics, and layouts within images.
     litellm_provider: openrouter
     qwen/qwen2.5-vl-72b-instruct:
-      input_cost_per_token: 8.0e-07
-      output_cost_per_token: 1.0e-06
-      max_input_tokens: 128000
-      max_output_tokens: 128000
+      input_cost_per_token: 2.5e-07
+      output_cost_per_token: 7.5e-07
+      max_input_tokens: 32000
       mode: chat
       supports_vision: true
       metadata: *id290

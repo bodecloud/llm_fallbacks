@@ -1184,7 +1184,7 @@
                 "output_cost_per_token": 2e-06,
                 "max_input_tokens": 256000,
                 "metadata": {
-                    "notes": "Grok Build 0.1 is xAI\u2019s fast coding model trained specifically for agentic software engineering workflows. It supports text and image inputs with text output, and is optimized for interactive coding..."
+                    "notes": "Grok Build 0.1 is SpaceXAI\u2019s fast coding model trained specifically for agentic software engineering workflows. It supports text and image inputs with text output, and is optimized for interactive coding..."
                 },
                 "litellm_provider": "openrouter",
                 "x-ai/grok-build-0.1": {
@@ -1192,7 +1192,7 @@
                     "output_cost_per_token": 2e-06,
                     "max_input_tokens": 256000,
                     "metadata": {
-                        "notes": "Grok Build 0.1 is xAI\u2019s fast coding model trained specifically for agentic software engineering workflows. It supports text and image inputs with text output, and is optimized for interactive coding..."
+                        "notes": "Grok Build 0.1 is SpaceXAI\u2019s fast coding model trained specifically for agentic software engineering workflows. It supports text and image inputs with text output, and is optimized for interactive coding..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -1362,7 +1362,7 @@
                 "output_cost_per_token": 2.5e-06,
                 "max_input_tokens": 1000000,
                 "metadata": {
-                    "notes": "Grok 4.3 is a reasoning model from xAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual..."
+                    "notes": "Grok 4.3 is a reasoning model from SpaceXAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual..."
                 },
                 "litellm_provider": "openrouter",
                 "x-ai/grok-4.3": {
@@ -1370,7 +1370,7 @@
                     "output_cost_per_token": 2.5e-06,
                     "max_input_tokens": 1000000,
                     "metadata": {
-                        "notes": "Grok 4.3 is a reasoning model from xAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual..."
+                        "notes": "Grok 4.3 is a reasoning model from SpaceXAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -2254,7 +2254,7 @@
                 "output_cost_per_token": 2.5e-06,
                 "max_input_tokens": 2000000,
                 "metadata": {
-                    "notes": "Grok 4.20 Multi-Agent is a variant of xAI\u2019s Grok 4.20 designed for collaborative, agent-based workflows. Multiple agents operate in parallel to conduct deep research, coordinate tool use, and synthesize information..."
+                    "notes": "Grok 4.20 Multi-Agent is a variant of SpaceXAI\u2019s Grok 4.20 designed for collaborative, agent-based workflows. Multiple agents operate in parallel to conduct deep research, coordinate tool use, and synthesize information..."
                 },
                 "litellm_provider": "openrouter",
                 "x-ai/grok-4.20-multi-agent": {
@@ -2262,7 +2262,7 @@
                     "output_cost_per_token": 2.5e-06,
                     "max_input_tokens": 2000000,
                     "metadata": {
-                        "notes": "Grok 4.20 Multi-Agent is a variant of xAI\u2019s Grok 4.20 designed for collaborative, agent-based workflows. Multiple agents operate in parallel to conduct deep research, coordinate tool use, and synthesize information..."
+                        "notes": "Grok 4.20 Multi-Agent is a variant of SpaceXAI\u2019s Grok 4.20 designed for collaborative, agent-based workflows. Multiple agents operate in parallel to conduct deep research, coordinate tool use, and synthesize information..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -2272,7 +2272,7 @@
                 "output_cost_per_token": 2.5e-06,
                 "max_input_tokens": 2000000,
                 "metadata": {
-                    "notes": "Grok 4.20 is a reasoning model from xAI with industry-leading speed and agentic tool calling capabilities. It combines the lowest hallucination rate on the market with strict prompt adherance, delivering..."
+                    "notes": "Grok 4.20 is a reasoning model from SpaceXAI with industry-leading speed and agentic tool calling capabilities. It combines the lowest hallucination rate on the market with strict prompt adherance, delivering..."
                 },
                 "litellm_provider": "openrouter",
                 "x-ai/grok-4.20": {
@@ -2280,7 +2280,7 @@
                     "output_cost_per_token": 2.5e-06,
                     "max_input_tokens": 2000000,
                     "metadata": {
-                        "notes": "Grok 4.20 is a reasoning model from xAI with industry-leading speed and agentic tool calling capabilities. It combines the lowest hallucination rate on the market with strict prompt adherance, delivering..."
+                        "notes": "Grok 4.20 is a reasoning model from SpaceXAI with industry-leading speed and agentic tool calling capabilities. It combines the lowest hallucination rate on the market with strict prompt adherance, delivering..."
                     },
                     "litellm_provider": "openrouter"
                 }
@@ -2366,18 +2366,18 @@
                 }
             },
             "minimax/minimax-m2.7": {
-                "input_cost_per_token": 2.5e-07,
-                "output_cost_per_token": 1e-06,
-                "max_input_tokens": 196608,
+                "input_cost_per_token": 2.7e-07,
+                "output_cost_per_token": 1.08e-06,
+                "max_input_tokens": 204800,
                 "max_output_tokens": 131072,
                 "metadata": {
                     "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
                 },
                 "litellm_provider": "openrouter",
                 "minimax/minimax-m2.7": {
-                    "input_cost_per_token": 2.5e-07,
-                    "output_cost_per_token": 1e-06,
-                    "max_input_tokens": 196608,
+                    "input_cost_per_token": 2.7e-07,
+                    "output_cost_per_token": 1.08e-06,
+                    "max_input_tokens": 204800,
                     "max_output_tokens": 131072,
                     "metadata": {
                         "notes": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent..."
@@ -5656,13 +5656,13 @@
                 }
             },
             "mistralai/mistral-small-3.2-24b-instruct": {
-                "input_cost_per_token": 7.5e-08,
+                "input_cost_per_token": 9.375e-08,
                 "litellm_provider": "openrouter",
                 "max_tokens": 128000,
                 "mode": "chat",
-                "output_cost_per_token": 2e-07,
+                "output_cost_per_token": 2.5e-07,
                 "supports_tool_choice": true,
-                "max_input_tokens": 128000,
+                "max_input_tokens": 256000,
                 "max_output_tokens": 16384,
                 "supports_vision": true,
                 "metadata": {
@@ -5670,9 +5670,9 @@
                 },
                 "supports_function_calling": true,
                 "mistralai/mistral-small-3.2-24b-instruct": {
-                    "input_cost_per_token": 7.5e-08,
-                    "output_cost_per_token": 2e-07,
-                    "max_input_tokens": 128000,
+                    "input_cost_per_token": 9.375e-08,
+                    "output_cost_per_token": 2.5e-07,
+                    "max_input_tokens": 256000,
                     "max_output_tokens": 16384,
                     "mode": "chat",
                     "supports_vision": true,
@@ -6690,10 +6690,9 @@
                 }
             },
             "qwen/qwen2.5-vl-72b-instruct": {
-                "input_cost_per_token": 8e-07,
-                "output_cost_per_token": 1e-06,
-                "max_input_tokens": 128000,
-                "max_output_tokens": 128000,
+                "input_cost_per_token": 2.5e-07,
+                "output_cost_per_token": 7.5e-07,
+                "max_input_tokens": 32000,
                 "mode": "chat",
                 "supports_vision": true,
                 "metadata": {
@@ -6701,10 +6700,9 @@
                 },
                 "litellm_provider": "openrouter",
                 "qwen/qwen2.5-vl-72b-instruct": {
-                    "input_cost_per_token": 8e-07,
-                    "output_cost_per_token": 1e-06,
-                    "max_input_tokens": 128000,
-                    "max_output_tokens": 128000,
+                    "input_cost_per_token": 2.5e-07,
+                    "output_cost_per_token": 7.5e-07,
+                    "max_input_tokens": 32000,
                     "mode": "chat",
                     "supports_vision": true,
                     "metadata": {
