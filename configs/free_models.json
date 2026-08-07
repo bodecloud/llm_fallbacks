@@ -1806,7 +1806,7 @@
     "quality_source": "heuristic_v1"
   },
   {
-    "id": "inclusionai/ling-3.0-flash:free",
+    "id": "inclusionai/ling-3.0-tiny:free",
     "provider": "openrouter",
     "mode": "",
     "is_free": true,

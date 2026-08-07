@@ -11,7 +11,7 @@ cache:
   ttl: 600
   type: redis
 general_settings:
-  master_key: sk-cbaefb83a5184e24860dbbdbc57dc78f
+  master_key: sk-6f1823fc63c349188235c347e1ec29a9
   alerting:
   - slack
   - email
@@ -52,9 +52,9 @@ litellm_settings:
   set_verbose: false
   turn_off_message_logging: false
 model_list:
-- model_name: inclusionai/ling-3.0-flash:free
+- model_name: inclusionai/ling-3.0-tiny:free
   litellm_params:
-    model: openai/inclusionai/ling-3.0-flash:free
+    model: openai/inclusionai/ling-3.0-tiny:free
     api_base: https://openrouter.ai/api/v1
     api_key: os.environ/OPENROUTER_API_KEY
     input_cost_per_token: 0.0
@@ -62,10 +62,9 @@ model_list:
     max_input_tokens: 262144
     max_output_tokens: 32768
     metadata:
-      notes: '*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*,
-        with approximately *5.1B parameters activated per token*. The model is designed
-        with *token efficiency and production-scale agentic inference* as key priorities,
-        enabling developers...'
+      notes: Ling 3.0 Tiny is a mixture-of-experts model from InclusionAI, with 1.3B
+        active parameters out of 7.9B total. It is designed for responsive agents,
+        instruction following, and multi-turn conversations, with switchable...
     litellm_provider: openrouter
 - model_name: poolside/laguna-s-2.1:free
   litellm_params:
@@ -744,7 +743,7 @@ router_settings:
   enable_pre_call_checks: true
   enable_tag_filtering: true
   fallbacks:
-  - inclusionai/ling-3.0-flash:free:
+  - inclusionai/ling-3.0-tiny:free:
     - openrouter/free
     - gemini/gemini-exp-1206
     - bedrock/anthropic.claude-mythos-preview
@@ -787,7 +786,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-xs-2.1:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -813,7 +812,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -839,7 +838,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/nvidia/nemotron-3-nano-30b-a3b:free
@@ -864,7 +863,7 @@ router_settings:
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -891,7 +890,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -916,7 +915,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -942,7 +941,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -968,7 +967,7 @@ router_settings:
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -995,7 +994,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1021,7 +1020,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1046,7 +1045,7 @@ router_settings:
     - lemonade/qwen3-coder-30b-a3b-instruct-gguf
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1072,7 +1071,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1098,7 +1097,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1124,7 +1123,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1149,7 +1148,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1177,7 +1176,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1203,7 +1202,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1229,7 +1228,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1255,7 +1254,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1281,7 +1280,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1307,7 +1306,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1333,7 +1332,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1359,7 +1358,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1385,7 +1384,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1411,7 +1410,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1437,7 +1436,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1463,7 +1462,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1489,7 +1488,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1515,7 +1514,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1541,7 +1540,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1567,7 +1566,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1593,7 +1592,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1619,7 +1618,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1645,7 +1644,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1671,7 +1670,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1697,7 +1696,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1723,7 +1722,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1749,7 +1748,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1775,7 +1774,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1801,7 +1800,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1827,7 +1826,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1853,7 +1852,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1879,7 +1878,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1905,7 +1904,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1931,7 +1930,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1957,7 +1956,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -1983,7 +1982,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2009,7 +2008,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2035,7 +2034,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2061,7 +2060,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2087,7 +2086,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2113,7 +2112,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2139,7 +2138,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2165,7 +2164,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2191,7 +2190,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2217,7 +2216,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2243,7 +2242,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2269,7 +2268,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2295,7 +2294,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2321,7 +2320,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2347,7 +2346,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2373,7 +2372,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2399,7 +2398,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2425,7 +2424,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2451,7 +2450,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2477,7 +2476,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2503,7 +2502,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2529,7 +2528,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2555,7 +2554,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2581,7 +2580,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2607,7 +2606,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2633,7 +2632,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2659,7 +2658,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2685,7 +2684,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2711,7 +2710,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2737,7 +2736,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2763,7 +2762,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2789,7 +2788,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2815,7 +2814,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2841,7 +2840,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2867,7 +2866,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2893,7 +2892,7 @@ router_settings:
     - openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - openrouter/cohere/north-mini-code:free
     - openrouter/google/gemma-4-31b-it:free
-    - openrouter/inclusionai/ling-3.0-flash:free
+    - openrouter/inclusionai/ling-3.0-tiny:free
     - volcengine/kimi-k2-thinking-251104
     - openrouter/poolside/laguna-s-2.1:free
     - openrouter/poolside/laguna-xs-2.1:free
@@ -2910,7 +2909,7 @@ router_settings:
     - nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
     - cohere/north-mini-code:free
     - google/gemma-4-31b-it:free
-    - inclusionai/ling-3.0-flash:free
+    - inclusionai/ling-3.0-tiny:free
     - poolside/laguna-s-2.1:free
     - poolside/laguna-xs-2.1:free
     - nvidia/nemotron-3.5-content-safety:free

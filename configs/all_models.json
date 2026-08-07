@@ -286,22 +286,22 @@
             "litellm_provider": "openrouter"
         }
     },
-    "inclusionai/ling-3.0-flash:free": {
+    "inclusionai/ling-3.0-tiny:free": {
         "input_cost_per_token": 0.0,
         "output_cost_per_token": 0.0,
         "max_input_tokens": 262144,
         "max_output_tokens": 32768,
         "metadata": {
-            "notes": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers..."
+            "notes": "Ling 3.0 Tiny is a mixture-of-experts model from InclusionAI, with 1.3B active parameters out of 7.9B total. It is designed for responsive agents, instruction following, and multi-turn conversations, with switchable..."
         },
         "litellm_provider": "openrouter",
-        "inclusionai/ling-3.0-flash:free": {
+        "inclusionai/ling-3.0-tiny:free": {
             "input_cost_per_token": 0.0,
             "output_cost_per_token": 0.0,
             "max_input_tokens": 262144,
             "max_output_tokens": 32768,
             "metadata": {
-                "notes": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers..."
+                "notes": "Ling 3.0 Tiny is a mixture-of-experts model from InclusionAI, with 1.3B active parameters out of 7.9B total. It is designed for responsive agents, instruction following, and multi-turn conversations, with switchable..."
             },
             "litellm_provider": "openrouter"
         }
@@ -2277,6 +2277,26 @@
         "output_cost_per_token": 4e-08,
         "litellm_provider": "fireworks_ai",
         "mode": "image_generation"
+    },
+    "inclusionai/ling-3.0-flash": {
+        "input_cost_per_token": 2.1e-08,
+        "output_cost_per_token": 6.3e-08,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers..."
+        },
+        "litellm_provider": "openrouter",
+        "inclusionai/ling-3.0-flash": {
+            "input_cost_per_token": 2.1e-08,
+            "output_cost_per_token": 6.3e-08,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "darkbloom/gpt-oss-20b": {
         "input_cost_per_token": 1.45e-08,
@@ -4507,6 +4527,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "openai/gpt-5-nano:batch": {
+        "input_cost_per_token": 2.5e-08,
+        "output_cost_per_token": 2e-07,
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5-Nano is the smallest and fastest variant in the GPT-5 system, optimized for developer tools, rapid interactions, and ultra-low latency environments. While limited in reasoning depth compared to its larger..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5-nano:batch": {
+            "input_cost_per_token": 2.5e-08,
+            "output_cost_per_token": 2e-07,
+            "max_input_tokens": 400000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5-Nano is the smallest and fastest variant in the GPT-5 system, optimized for developer tools, rapid interactions, and ultra-low latency environments. While limited in reasoning depth compared to its larger..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "gemini/gemini-1.5-flash": {
         "deprecation_date": "2025-09-29",
         "input_cost_per_token": 7.5e-08,
@@ -4664,6 +4704,26 @@
         "litellm_provider": "openai",
         "mode": "image_generation",
         "output_cost_per_pixel": 0.0
+    },
+    "openai/gpt-4.1-nano:batch": {
+        "input_cost_per_token": 5e-08,
+        "output_cost_per_token": 2e-07,
+        "max_input_tokens": 1047576,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "For tasks that demand low latency, GPT\u20114.1 nano is the fastest and cheapest model in the GPT-4.1 series. It delivers exceptional performance at a small size with its 1 million..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-4.1-nano:batch": {
+            "input_cost_per_token": 5e-08,
+            "output_cost_per_token": 2e-07,
+            "max_input_tokens": 1047576,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "For tasks that demand low latency, GPT\u20114.1 nano is the fastest and cheapest model in the GPT-4.1 series. It delivers exceptional performance at a small size with its 1 million..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "dashscope/qwen-turbo-2025-04-28": {
         "input_cost_per_token": 5e-08,
@@ -5108,22 +5168,24 @@
         "output_cost_per_token": 2.3e-07,
         "supports_system_messages": true
     },
-    "inclusionai/ling-3.0-flash": {
-        "input_cost_per_token": 7.5e-08,
-        "output_cost_per_token": 2.2e-07,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 16384,
+    "google/gemini-2.5-flash-lite:batch": {
+        "input_cost_per_token": 5e-08,
+        "output_cost_per_token": 2e-07,
+        "input_cost_per_image": 5e-08,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65535,
         "metadata": {
-            "notes": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers..."
+            "notes": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance..."
         },
         "litellm_provider": "openrouter",
-        "inclusionai/ling-3.0-flash": {
-            "input_cost_per_token": 7.5e-08,
-            "output_cost_per_token": 2.2e-07,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 16384,
+        "google/gemini-2.5-flash-lite:batch": {
+            "input_cost_per_token": 5e-08,
+            "output_cost_per_token": 2e-07,
+            "input_cost_per_image": 5e-08,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 65535,
             "metadata": {
-                "notes": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers..."
+                "notes": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance..."
             },
             "litellm_provider": "openrouter"
         }
@@ -6229,6 +6291,26 @@
         "output_cost_per_token": 3e-07,
         "source": "https://console.cloud.google.com/vertex-ai/publishers/openai/model-garden/gpt-oss-120b-maas",
         "supports_reasoning": true
+    },
+    "openai/gpt-4o-mini:batch": {
+        "input_cost_per_token": 7.5e-08,
+        "output_cost_per_token": 3e-07,
+        "max_input_tokens": 128000,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-4o-mini:batch": {
+            "input_cost_per_token": 7.5e-08,
+            "output_cost_per_token": 3e-07,
+            "max_input_tokens": 128000,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "azure_ai/phi-4-mini-instruct": {
         "input_cost_per_token": 7.5e-08,
@@ -8126,7 +8208,7 @@
         "supports_function_calling": true,
         "supports_system_messages": true
     },
-    "replicateopenai/gpt-oss-20b": {
+    "replicate/openai/gpt-oss-20b": {
         "input_cost_per_token": 9e-08,
         "output_cost_per_token": 3.6e-07,
         "litellm_provider": "replicate",
@@ -8274,6 +8356,7 @@
         "cache_read_input_token_cost": 5e-09,
         "cache_read_input_token_cost_flex": 2.5e-09,
         "input_cost_per_token": 5e-08,
+        "input_cost_per_token_priority": 2.5e-06,
         "input_cost_per_token_flex": 2.5e-08,
         "litellm_provider": "openai",
         "max_input_tokens": 272000,
@@ -8538,26 +8621,6 @@
         "input_cost_per_token": 2.4e-07,
         "output_cost_per_token": 2.4e-07,
         "supports_system_messages": true
-    },
-    "nvidia/nemotron-3-super-120b-a12b": {
-        "input_cost_per_token": 8.5e-08,
-        "output_cost_per_token": 4e-07,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 16384,
-        "metadata": {
-            "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
-        },
-        "litellm_provider": "openrouter",
-        "nvidia/nemotron-3-super-120b-a12b": {
-            "input_cost_per_token": 8.5e-08,
-            "output_cost_per_token": 4e-07,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 16384,
-            "metadata": {
-                "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "deepinfra/google/gemini-2.0-flash-001": {
         "deprecation_date": "2026-06-01",
@@ -9863,6 +9926,46 @@
             "litellm_provider": "openrouter"
         }
     },
+    "openai/gpt-5.6-luna-pro:batch": {
+        "input_cost_per_token": 1e-07,
+        "output_cost_per_token": 6e-07,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Luna Pro is the same underlying model as [GPT-5.6 Luna](https://openrouter.ai/openai/gpt-5.6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-luna-pro:batch": {
+            "input_cost_per_token": 1e-07,
+            "output_cost_per_token": 6e-07,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Luna Pro is the same underlying model as [GPT-5.6 Luna](https://openrouter.ai/openai/gpt-5.6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.6-luna:batch": {
+        "input_cost_per_token": 1e-07,
+        "output_cost_per_token": 6e-07,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-luna:batch": {
+            "input_cost_per_token": 1e-07,
+            "output_cost_per_token": 6e-07,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "azure_ai/grok-4-1-fast-non-reasoning": {
         "input_cost_per_token": 2e-07,
         "output_cost_per_token": 5e-07,
@@ -10158,6 +10261,26 @@
         "output_cost_per_token": 6.76e-07,
         "supports_vision": true
     },
+    "openai/gpt-5.4-nano:batch": {
+        "input_cost_per_token": 1e-07,
+        "output_cost_per_token": 6.25e-07,
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.4 nano is the most lightweight and cost-efficient variant of the GPT-5.4 family, optimized for speed-critical and high-volume tasks. It supports text and image inputs and is designed for low-latency..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.4-nano:batch": {
+            "input_cost_per_token": 1e-07,
+            "output_cost_per_token": 6.25e-07,
+            "max_input_tokens": 400000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.4 nano is the most lightweight and cost-efficient variant of the GPT-5.4 family, optimized for speed-critical and high-volume tasks. It supports text and image inputs and is designed for low-latency..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "deepseek-reasoner": {
         "cache_read_input_token_cost": 2.8e-08,
         "input_cost_per_token": 2.8e-07,
@@ -10325,6 +10448,24 @@
         "output_cost_per_token": 6e-07,
         "litellm_provider": "fireworks_ai",
         "mode": "chat"
+    },
+    "minimax/minimax-m3:batch": {
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 6e-07,
+        "max_input_tokens": 524288,
+        "metadata": {
+            "notes": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,..."
+        },
+        "litellm_provider": "openrouter",
+        "minimax/minimax-m3:batch": {
+            "input_cost_per_token": 1.5e-07,
+            "output_cost_per_token": 6e-07,
+            "max_input_tokens": 524288,
+            "metadata": {
+                "notes": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "qwen.qwen3-coder-30b-a3b-v1:0": {
         "input_cost_per_token": 1.5e-07,
@@ -11067,7 +11208,9 @@
     },
     "gpt-4.1-nano-2025-04-14": {
         "cache_read_input_token_cost": 2.5e-08,
+        "cache_read_input_token_cost_priority": 5e-08,
         "input_cost_per_token": 1e-07,
+        "input_cost_per_token_priority": 2e-07,
         "input_cost_per_token_batches": 5e-08,
         "litellm_provider": "openai",
         "max_input_tokens": 1047576,
@@ -11075,6 +11218,7 @@
         "max_tokens": 32768,
         "mode": "chat",
         "output_cost_per_token": 4e-07,
+        "output_cost_per_token_priority": 8e-07,
         "output_cost_per_token_batches": 2e-07,
         "supported_endpoints": [
             "/v1/chat/completions",
@@ -12307,6 +12451,48 @@
             "litellm_provider": "openrouter"
         }
     },
+    "google/gemini-3.1-flash-lite:batch": {
+        "input_cost_per_token": 1.25e-07,
+        "output_cost_per_token": 7.5e-07,
+        "input_cost_per_image": 1.25e-07,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Gemini 3.1 Flash Lite is Google\u2019s GA high-efficiency multimodal model optimized for low-latency, high-volume workloads. It supports text, image, video, audio, and PDF inputs, and is designed for lightweight agentic..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemini-3.1-flash-lite:batch": {
+            "input_cost_per_token": 1.25e-07,
+            "output_cost_per_token": 7.5e-07,
+            "input_cost_per_image": 1.25e-07,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Gemini 3.1 Flash Lite is Google\u2019s GA high-efficiency multimodal model optimized for low-latency, high-volume workloads. It supports text, image, video, audio, and PDF inputs, and is designed for lightweight agentic..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-4.1-mini:batch": {
+        "input_cost_per_token": 2e-07,
+        "output_cost_per_token": 8e-07,
+        "max_input_tokens": 1047576,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "GPT-4.1 Mini is a mid-sized model delivering performance competitive with GPT-4o at substantially lower latency and cost. It retains a 1 million token context window and scores 45.1% on hard..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-4.1-mini:batch": {
+            "input_cost_per_token": 2e-07,
+            "output_cost_per_token": 8e-07,
+            "max_input_tokens": 1047576,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "GPT-4.1 Mini is a mid-sized model delivering performance competitive with GPT-4o at substantially lower latency and cost. It retains a 1 million token context window and scores 45.1% on hard..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "meta-llama/llama-4-maverick": {
         "input_cost_per_token": 2e-07,
         "output_cost_per_token": 8e-07,
@@ -12519,6 +12705,26 @@
             "supports_vision": true,
             "metadata": {
                 "notes": "Qwen2.5-VL is proficient in recognizing common objects such as flowers, birds, fish, and insects. It is also highly capable of analyzing texts, charts, icons, graphics, and layouts within images."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-3.5-turbo:batch": {
+        "input_cost_per_token": 2.5e-07,
+        "output_cost_per_token": 7.5e-07,
+        "max_input_tokens": 16385,
+        "max_output_tokens": 4096,
+        "metadata": {
+            "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-3.5-turbo:batch": {
+            "input_cost_per_token": 2.5e-07,
+            "output_cost_per_token": 7.5e-07,
+            "max_input_tokens": 16385,
+            "max_output_tokens": 4096,
+            "metadata": {
+                "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
             },
             "litellm_provider": "openrouter"
         }
@@ -12959,6 +13165,26 @@
         "supports_response_schema": true,
         "supports_tool_choice": true
     },
+    "openai/gpt-5-mini:batch": {
+        "input_cost_per_token": 1.25e-07,
+        "output_cost_per_token": 1e-06,
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5 Mini is a compact version of GPT-5, designed to handle lighter-weight reasoning tasks. It provides the same instruction-following and safety-tuning benefits as GPT-5, but with reduced latency and cost...."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5-mini:batch": {
+            "input_cost_per_token": 1.25e-07,
+            "output_cost_per_token": 1e-06,
+            "max_input_tokens": 400000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5 Mini is a compact version of GPT-5, designed to handle lighter-weight reasoning tasks. It provides the same instruction-following and safety-tuning benefits as GPT-5, but with reduced latency and cost...."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "deepinfra/deepseek-ai/deepseek-v3-0324": {
         "max_tokens": 163840,
         "max_input_tokens": 163840,
@@ -13230,6 +13456,24 @@
         "supports_function_calling": true,
         "supports_tool_choice": true
     },
+    "nvidia/nemotron-3-super-120b-a12b": {
+        "input_cost_per_token": 3e-07,
+        "output_cost_per_token": 9e-07,
+        "max_input_tokens": 262144,
+        "metadata": {
+            "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
+        },
+        "litellm_provider": "openrouter",
+        "nvidia/nemotron-3-super-120b-a12b": {
+            "input_cost_per_token": 3e-07,
+            "output_cost_per_token": 9e-07,
+            "max_input_tokens": 262144,
+            "metadata": {
+                "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "mistralai/codestral-2508": {
         "input_cost_per_token": 3e-07,
         "output_cost_per_token": 9e-07,
@@ -13308,7 +13552,9 @@
     },
     "gpt-4o-mini-2024-07-18": {
         "cache_read_input_token_cost": 7.5e-08,
+        "cache_read_input_token_cost_priority": 1.25e-07,
         "input_cost_per_token": 1.5e-07,
+        "input_cost_per_token_priority": 2.5e-07,
         "input_cost_per_token_batches": 7.5e-08,
         "litellm_provider": "openai",
         "max_input_tokens": 128000,
@@ -13316,6 +13562,7 @@
         "max_tokens": 16384,
         "mode": "chat",
         "output_cost_per_token": 6e-07,
+        "output_cost_per_token_priority": 1e-06,
         "output_cost_per_token_batches": 3e-07,
         "search_context_cost_per_query": {
             "search_context_size_high": 0.03,
@@ -15639,6 +15886,50 @@
         "supports_system_messages": true,
         "supports_tool_choice": true
     },
+    "google/gemini-3.5-flash-lite:batch": {
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 1.25e-06,
+        "input_cost_per_image": 1.5e-07,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Gemini 3.5 Flash Lite is a high-efficiency model from Google with upgraded agentic capabilities. It is suited for subagents that execute focused tasks within complex, multi-agent workflows."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemini-3.5-flash-lite:batch": {
+            "input_cost_per_token": 1.5e-07,
+            "output_cost_per_token": 1.25e-06,
+            "input_cost_per_image": 1.5e-07,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Gemini 3.5 Flash Lite is a high-efficiency model from Google with upgraded agentic capabilities. It is suited for subagents that execute focused tasks within complex, multi-agent workflows."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "google/gemini-2.5-flash:batch": {
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 1.25e-06,
+        "input_cost_per_image": 1.5e-07,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65535,
+        "metadata": {
+            "notes": "Gemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemini-2.5-flash:batch": {
+            "input_cost_per_token": 1.5e-07,
+            "output_cost_per_token": 1.25e-06,
+            "input_cost_per_image": 1.5e-07,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 65535,
+            "metadata": {
+                "notes": "Gemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "novita/minimax/minimax-m2": {
         "litellm_provider": "novita",
         "mode": "chat",
@@ -17911,6 +18202,28 @@
         "output_vector_size": 1024,
         "source": "https://www.databricks.com/product/pricing/foundation-model-serving"
     },
+    "google/gemini-3-flash-preview:batch": {
+        "input_cost_per_token": 2.5e-07,
+        "output_cost_per_token": 1.5e-06,
+        "input_cost_per_image": 2.5e-07,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance. It delivers near Pro level reasoning and tool..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemini-3-flash-preview:batch": {
+            "input_cost_per_token": 2.5e-07,
+            "output_cost_per_token": 1.5e-06,
+            "input_cost_per_image": 2.5e-07,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance. It delivers near Pro level reasoning and tool..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "deepinfra/qwen/qwen3-coder-480b-a35b-instruct": {
         "max_tokens": 262144,
         "max_input_tokens": 262144,
@@ -18762,6 +19075,24 @@
             "litellm_provider": "openrouter"
         }
     },
+    "nvidia/nemotron-3-ultra-550b-a55b:batch": {
+        "input_cost_per_token": 3e-07,
+        "output_cost_per_token": 1.8e-06,
+        "max_input_tokens": 512288,
+        "metadata": {
+            "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
+        },
+        "litellm_provider": "openrouter",
+        "nvidia/nemotron-3-ultra-550b-a55b:batch": {
+            "input_cost_per_token": 3e-07,
+            "output_cost_per_token": 1.8e-06,
+            "max_input_tokens": 512288,
+            "metadata": {
+                "notes": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "sambanova/deepseek-r1-distill-llama-70b": {
         "deprecation_date": "2026-03-20",
         "input_cost_per_token": 7e-07,
@@ -19391,6 +19722,26 @@
         "supports_tool_choice": true,
         "supports_native_structured_output": true
     },
+    "z-ai/glm-5.2": {
+        "input_cost_per_token": 5.46e-07,
+        "output_cost_per_token": 1.716e-06,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 131072,
+        "metadata": {
+            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.2": {
+            "input_cost_per_token": 5.46e-07,
+            "output_cost_per_token": 1.716e-06,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "gemini-3.1-flash-lite-preview": {
         "cache_read_input_token_cost": 2.5e-08,
         "input_cost_per_audio_token": 5e-07,
@@ -19958,33 +20309,6 @@
         "supports_system_messages": true,
         "supports_tool_choice": true,
         "source": "https://aws.amazon.com/bedrock/pricing/"
-    },
-    "qwen/qwen3.5-122b-a10b": {
-        "input_cost_per_token": 2.6e-07,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 262144,
-        "max_output_tokens": 65536,
-        "max_tokens": 65536,
-        "mode": "chat",
-        "output_cost_per_token": 2.08e-06,
-        "source": "https://openrouter.ai/qwen/qwen3.5-122b-a10b",
-        "supports_function_calling": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "supports_vision": true,
-        "metadata": {
-            "notes": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of..."
-        },
-        "qwen/qwen3.5-122b-a10b": {
-            "input_cost_per_token": 2.6e-07,
-            "output_cost_per_token": 2.08e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 65536,
-            "metadata": {
-                "notes": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "moonshot/kimi-latest-8k": {
         "cache_read_input_token_cost": 1.5e-07,
@@ -20639,6 +20963,28 @@
         "supports_reasoning": true,
         "supports_tool_choice": true
     },
+    "moonshotai/kimi-k2.7-code:batch": {
+        "input_cost_per_token": 4.75e-07,
+        "output_cost_per_token": 2e-06,
+        "max_input_tokens": 262144,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI's Kimi K2 family, built to complete end-to-end programming tasks reliably over long contexts. It uses a native multimodal mixture-of-experts..."
+        },
+        "litellm_provider": "openrouter",
+        "moonshotai/kimi-k2.7-code:batch": {
+            "input_cost_per_token": 4.75e-07,
+            "output_cost_per_token": 2e-06,
+            "max_input_tokens": 262144,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI's Kimi K2 family, built to complete end-to-end programming tasks reliably over long contexts. It uses a native multimodal mixture-of-experts..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "z-ai/glm-4.6": {
         "input_cost_per_token": 5e-07,
         "litellm_provider": "openrouter",
@@ -20948,6 +21294,24 @@
             "litellm_provider": "openrouter"
         }
     },
+    "thinkingmachines/inkling:batch": {
+        "input_cost_per_token": 5e-07,
+        "output_cost_per_token": 2.025e-06,
+        "max_input_tokens": 524288,
+        "metadata": {
+            "notes": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,..."
+        },
+        "litellm_provider": "openrouter",
+        "thinkingmachines/inkling:batch": {
+            "input_cost_per_token": 5e-07,
+            "output_cost_per_token": 2.025e-06,
+            "max_input_tokens": 524288,
+            "metadata": {
+                "notes": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "qwen/qwen3-235b-a22b-thinking-2507": {
         "input_cost_per_token": 2.3e-07,
         "litellm_provider": "openrouter",
@@ -21045,6 +21409,26 @@
         "input_cost_per_token_cache_hit": 1.1e-07,
         "supports_reasoning": true
     },
+    "openai/gpt-5.4-mini:batch": {
+        "input_cost_per_token": 3.75e-07,
+        "output_cost_per_token": 2.25e-06,
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more efficient model optimized for high-throughput workloads. It supports text and image inputs with strong performance across reasoning, coding,..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.4-mini:batch": {
+            "input_cost_per_token": 3.75e-07,
+            "output_cost_per_token": 2.25e-06,
+            "max_input_tokens": 400000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more efficient model optimized for high-throughput workloads. It supports text and image inputs with strong performance across reasoning, coding,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "bedrock/eu-west-2/qwen.qwen3-coder-next": {
         "input_cost_per_token": 7.8e-07,
         "litellm_provider": "bedrock",
@@ -21070,22 +21454,29 @@
         "supports_reasoning": true,
         "supports_system_messages": true
     },
-    "qwen/qwen3.6-27b": {
-        "input_cost_per_token": 2.89e-07,
-        "output_cost_per_token": 2.4e-06,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 131072,
-        "metadata": {
-            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
-        },
+    "qwen/qwen3.5-122b-a10b": {
+        "input_cost_per_token": 2.9e-07,
         "litellm_provider": "openrouter",
-        "qwen/qwen3.6-27b": {
-            "input_cost_per_token": 2.89e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 81920,
+        "max_tokens": 65536,
+        "mode": "chat",
+        "output_cost_per_token": 2.4e-06,
+        "source": "https://openrouter.ai/qwen/qwen3.5-122b-a10b",
+        "supports_function_calling": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "metadata": {
+            "notes": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of..."
+        },
+        "qwen/qwen3.5-122b-a10b": {
+            "input_cost_per_token": 2.9e-07,
             "output_cost_per_token": 2.4e-06,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 131072,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 81920,
             "metadata": {
-                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+                "notes": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of..."
             },
             "litellm_provider": "openrouter"
         }
@@ -21209,6 +21600,86 @@
             "max_output_tokens": 40000,
             "metadata": {
                 "notes": "MiniMax-M1 is a large-scale, open-weight reasoning model designed for extended context and high-efficiency inference. It leverages a hybrid Mixture-of-Experts (MoE) architecture paired with a custom \"lightning attention\" mechanism, allowing it..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/o3-mini-high:batch": {
+        "input_cost_per_token": 5.5e-07,
+        "output_cost_per_token": 2.2e-06,
+        "max_input_tokens": 200000,
+        "max_output_tokens": 100000,
+        "metadata": {
+            "notes": "OpenAI o3-mini-high is the same model as [o3-mini](/openai/o3-mini) with reasoning_effort set to high. o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/o3-mini-high:batch": {
+            "input_cost_per_token": 5.5e-07,
+            "output_cost_per_token": 2.2e-06,
+            "max_input_tokens": 200000,
+            "max_output_tokens": 100000,
+            "metadata": {
+                "notes": "OpenAI o3-mini-high is the same model as [o3-mini](/openai/o3-mini) with reasoning_effort set to high. o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/o3-mini:batch": {
+        "input_cost_per_token": 5.5e-07,
+        "output_cost_per_token": 2.2e-06,
+        "max_input_tokens": 200000,
+        "max_output_tokens": 100000,
+        "metadata": {
+            "notes": "OpenAI o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and coding. This model supports the `reasoning_effort` parameter, which can be set to..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/o3-mini:batch": {
+            "input_cost_per_token": 5.5e-07,
+            "output_cost_per_token": 2.2e-06,
+            "max_input_tokens": 200000,
+            "max_output_tokens": 100000,
+            "metadata": {
+                "notes": "OpenAI o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and coding. This model supports the `reasoning_effort` parameter, which can be set to..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/o4-mini-high:batch": {
+        "input_cost_per_token": 5.5e-07,
+        "output_cost_per_token": 2.2e-06,
+        "max_input_tokens": 200000,
+        "max_output_tokens": 100000,
+        "metadata": {
+            "notes": "OpenAI o4-mini-high is the same model as [o4-mini](/openai/o4-mini) with reasoning_effort set to high. OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/o4-mini-high:batch": {
+            "input_cost_per_token": 5.5e-07,
+            "output_cost_per_token": 2.2e-06,
+            "max_input_tokens": 200000,
+            "max_output_tokens": 100000,
+            "metadata": {
+                "notes": "OpenAI o4-mini-high is the same model as [o4-mini](/openai/o4-mini) with reasoning_effort set to high. OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/o4-mini:batch": {
+        "input_cost_per_token": 5.5e-07,
+        "output_cost_per_token": 2.2e-06,
+        "max_input_tokens": 200000,
+        "max_output_tokens": 100000,
+        "metadata": {
+            "notes": "OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining strong multimodal and agentic capabilities. It supports tool use and demonstrates competitive reasoning..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/o4-mini:batch": {
+            "input_cost_per_token": 5.5e-07,
+            "output_cost_per_token": 2.2e-06,
+            "max_input_tokens": 200000,
+            "max_output_tokens": 100000,
+            "metadata": {
+                "notes": "OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining strong multimodal and agentic capabilities. It supports tool use and demonstrates competitive reasoning..."
             },
             "litellm_provider": "openrouter"
         }
@@ -21567,6 +22038,24 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
+    "z-ai/glm-5.2:batch": {
+        "input_cost_per_token": 7e-07,
+        "output_cost_per_token": 2.2e-06,
+        "max_input_tokens": 512000,
+        "metadata": {
+            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.2:batch": {
+            "input_cost_per_token": 7e-07,
+            "output_cost_per_token": 2.2e-06,
+            "max_input_tokens": 512000,
+            "metadata": {
+                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "replicate/deepseek-ai/deepseek-v3": {
         "input_cost_per_token": 1.45e-06,
         "output_cost_per_token": 1.45e-06,
@@ -21748,6 +22237,30 @@
         "input_cost_per_token_cache_hit": 1.1e-07,
         "supports_reasoning": true
     },
+    "moonshotai/kimi-k2.6": {
+        "input_cost_per_token": 5.7e-07,
+        "output_cost_per_token": 2.4e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+        },
+        "litellm_provider": "openrouter",
+        "moonshotai/kimi-k2.6": {
+            "input_cost_per_token": 5.7e-07,
+            "output_cost_per_token": 2.4e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "crusoe/deepseek-ai/deepseek-v3-0324": {
         "input_cost_per_token": 1.5e-06,
         "litellm_provider": "crusoe",
@@ -21783,6 +22296,26 @@
         "mode": "chat",
         "output_cost_per_token": 2.25e-06,
         "supports_function_calling": true
+    },
+    "anthropic/claude-haiku-4.5:batch": {
+        "input_cost_per_token": 5e-07,
+        "output_cost_per_token": 2.5e-06,
+        "max_input_tokens": 200000,
+        "max_output_tokens": 64000,
+        "metadata": {
+            "notes": "Claude Haiku 4.5 is Anthropic\u2019s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4\u2019s performance..."
+        },
+        "litellm_provider": "openrouter",
+        "anthropic/claude-haiku-4.5:batch": {
+            "input_cost_per_token": 5e-07,
+            "output_cost_per_token": 2.5e-06,
+            "max_input_tokens": 200000,
+            "max_output_tokens": 64000,
+            "metadata": {
+                "notes": "Claude Haiku 4.5 is Anthropic\u2019s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4\u2019s performance..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "x-ai/grok-build-0.1": {
         "input_cost_per_token": 1e-06,
@@ -21974,30 +22507,6 @@
         "supports_tool_choice": true,
         "supports_function_calling": true
     },
-    "moonshotai/kimi-k2.6": {
-        "input_cost_per_token": 5.89e-07,
-        "output_cost_per_token": 2.48e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-        },
-        "litellm_provider": "openrouter",
-        "moonshotai/kimi-k2.6": {
-            "input_cost_per_token": 5.89e-07,
-            "output_cost_per_token": 2.48e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "groq/whisper-large-v3": {
         "input_cost_per_second": 3.083e-05,
         "litellm_provider": "groq",
@@ -22110,7 +22619,9 @@
     },
     "gpt-4.1-mini-2025-04-14": {
         "cache_read_input_token_cost": 1e-07,
+        "cache_read_input_token_cost_priority": 1.75e-07,
         "input_cost_per_token": 4e-07,
+        "input_cost_per_token_priority": 7e-07,
         "input_cost_per_token_batches": 2e-07,
         "litellm_provider": "openai",
         "max_input_tokens": 1047576,
@@ -22118,6 +22629,7 @@
         "max_tokens": 32768,
         "mode": "chat",
         "output_cost_per_token": 1.6e-06,
+        "output_cost_per_token_priority": 2.8e-06,
         "output_cost_per_token_batches": 8e-07,
         "supported_endpoints": [
             "/v1/chat/completions",
@@ -22768,26 +23280,6 @@
         "supports_response_schema": true,
         "supports_video_input": true,
         "supports_vision": true
-    },
-    "z-ai/glm-5.2": {
-        "input_cost_per_token": 7.6e-07,
-        "output_cost_per_token": 2.42e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
-        "metadata": {
-            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.2": {
-            "input_cost_per_token": 7.6e-07,
-            "output_cost_per_token": 2.42e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
-            "metadata": {
-                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "qwen.qwen3-vl-235b-a22b": {
         "input_cost_per_token": 5.3e-07,
@@ -24859,6 +25351,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "qwen/qwen3.6-27b": {
+        "input_cost_per_token": 6e-07,
+        "output_cost_per_token": 3.6e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "metadata": {
+            "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3.6-27b": {
+            "input_cost_per_token": 6e-07,
+            "output_cost_per_token": 3.6e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "metadata": {
+                "notes": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities \u2014 accepting text, image, and video inputs..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "tensormesh/qwen/qwen3.5-397b-a17b-fp8": {
         "litellm_provider": "tensormesh",
         "mode": "chat",
@@ -25256,6 +25768,30 @@
         "supports_reasoning": true,
         "supports_tool_choice": true,
         "supports_vision": true
+    },
+    "qwen/qwen3-vl-235b-a22b-thinking": {
+        "input_cost_per_token": 4e-07,
+        "output_cost_per_token": 4e-06,
+        "max_input_tokens": 131072,
+        "max_output_tokens": 32768,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Qwen3-VL-235B-A22B Thinking is a multimodal model that unifies strong text generation with visual understanding across images and video. The Thinking model is optimized for multimodal reasoning in STEM and math...."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3-vl-235b-a22b-thinking": {
+            "input_cost_per_token": 4e-07,
+            "output_cost_per_token": 4e-06,
+            "max_input_tokens": 131072,
+            "max_output_tokens": 32768,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Qwen3-VL-235B-A22B Thinking is a multimodal model that unifies strong text generation with visual understanding across images and video. The Thinking model is optimized for multimodal reasoning in STEM and math...."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "azure_ai/phi-4-multimodal-instruct": {
         "input_cost_per_audio_token": 4e-06,
@@ -25663,30 +26199,6 @@
         "supports_system_messages": true,
         "supports_reasoning": true
     },
-    "qwen/qwen3-vl-235b-a22b-thinking": {
-        "input_cost_per_token": 9.8e-07,
-        "output_cost_per_token": 3.95e-06,
-        "max_input_tokens": 131072,
-        "max_output_tokens": 32768,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Qwen3-VL-235B-A22B Thinking is a multimodal model that unifies strong text generation with visual understanding across images and video. The Thinking model is optimized for multimodal reasoning in STEM and math...."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3-vl-235b-a22b-thinking": {
-            "input_cost_per_token": 9.8e-07,
-            "output_cost_per_token": 3.95e-06,
-            "max_input_tokens": 131072,
-            "max_output_tokens": 32768,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Qwen3-VL-235B-A22B Thinking is a multimodal model that unifies strong text generation with visual understanding across images and video. The Thinking model is optimized for multimodal reasoning in STEM and math...."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "azure_ai/kimi-k2.6": {
         "input_cost_per_token": 9.5e-07,
         "litellm_provider": "azure_ai",
@@ -25723,6 +26235,26 @@
         "supports_system_messages": true,
         "supports_reasoning": true,
         "source": "https://serverless.tensormesh.ai/v1/models/openrouter"
+    },
+    "openai/gpt-4.1:batch": {
+        "input_cost_per_token": 1e-06,
+        "output_cost_per_token": 4e-06,
+        "max_input_tokens": 1047576,
+        "max_output_tokens": 32768,
+        "metadata": {
+            "notes": "GPT-4.1 is a flagship large language model optimized for advanced instruction following, real-world software engineering, and long-context reasoning. It supports a 1 million token context window and outperforms GPT-4o and..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-4.1:batch": {
+            "input_cost_per_token": 1e-06,
+            "output_cost_per_token": 4e-06,
+            "max_input_tokens": 1047576,
+            "max_output_tokens": 32768,
+            "metadata": {
+                "notes": "GPT-4.1 is a flagship large language model optimized for advanced instruction following, real-world software engineering, and long-context reasoning. It supports a 1 million token context window and outperforms GPT-4o and..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "cerebras/zai-glm-4.6": {
         "deprecation_date": "2026-01-20",
@@ -25766,6 +26298,26 @@
         "supports_function_calling": true,
         "supports_tool_choice": true
     },
+    "openai/o3:batch": {
+        "input_cost_per_token": 1e-06,
+        "output_cost_per_token": 4e-06,
+        "max_input_tokens": 200000,
+        "max_output_tokens": 100000,
+        "metadata": {
+            "notes": "o3 is a well-rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks. It also excels at technical writing and instruction-following...."
+        },
+        "litellm_provider": "openrouter",
+        "openai/o3:batch": {
+            "input_cost_per_token": 1e-06,
+            "output_cost_per_token": 4e-06,
+            "max_input_tokens": 200000,
+            "max_output_tokens": 100000,
+            "metadata": {
+                "notes": "o3 is a well-rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks. It also excels at technical writing and instruction-following...."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "replicate/openai/o4-mini": {
         "input_cost_per_token": 1e-06,
         "output_cost_per_token": 4e-06,
@@ -25807,7 +26359,7 @@
         "input_cost_per_token": 5e-07,
         "litellm_provider": "openrouter",
         "max_input_tokens": 1048576,
-        "max_output_tokens": 65535,
+        "max_output_tokens": 65536,
         "max_tokens": 65535,
         "mode": "chat",
         "output_cost_per_reasoning_token": 3e-06,
@@ -25850,7 +26402,7 @@
             "output_cost_per_token": 3e-06,
             "input_cost_per_image": 5e-07,
             "max_input_tokens": 1048576,
-            "max_output_tokens": 65535,
+            "max_output_tokens": 65536,
             "metadata": {
                 "notes": "Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance. It delivers near Pro level reasoning and tool..."
             },
@@ -26047,6 +26599,28 @@
         "supports_prompt_caching": true,
         "supports_response_schema": true,
         "supports_vision": true
+    },
+    "google/gemini-3.6-flash:batch": {
+        "input_cost_per_token": 7.5e-07,
+        "output_cost_per_token": 3.75e-06,
+        "input_cost_per_image": 7.5e-07,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Gemini 3.6 Flash is a high-efficiency model from Google for coding, agentic workflows, and web and app development. It is designed to produce polished outputs with fewer unnecessary edits and..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemini-3.6-flash:batch": {
+            "input_cost_per_token": 7.5e-07,
+            "output_cost_per_token": 3.75e-06,
+            "input_cost_per_image": 7.5e-07,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Gemini 3.6 Flash is a high-efficiency model from Google for coding, agentic workflows, and web and app development. It is designed to produce polished outputs with fewer unnecessary edits and..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "openai/gpt-5.4-mini": {
         "input_cost_per_token": 7.5e-07,
@@ -26460,6 +27034,70 @@
         "supports_tool_choice": true,
         "source": "https://docs.z.ai/guides/overview/pricing"
     },
+    "openai/gpt-5-codex:batch": {
+        "input_cost_per_token": 6.25e-07,
+        "output_cost_per_token": 5e-06,
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "GPT-5-Codex is a specialized version of GPT-5 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks...."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5-codex:batch": {
+            "input_cost_per_token": 6.25e-07,
+            "output_cost_per_token": 5e-06,
+            "max_input_tokens": 400000,
+            "max_output_tokens": 128000,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "GPT-5-Codex is a specialized version of GPT-5 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks...."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.1:batch": {
+        "input_cost_per_token": 6.25e-07,
+        "output_cost_per_token": 5e-06,
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.1 is the latest frontier-grade model in the GPT-5 series, offering stronger general-purpose reasoning, improved instruction adherence, and a more natural conversational style compared to GPT-5. It uses adaptive reasoning..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.1:batch": {
+            "input_cost_per_token": 6.25e-07,
+            "output_cost_per_token": 5e-06,
+            "max_input_tokens": 400000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.1 is the latest frontier-grade model in the GPT-5 series, offering stronger general-purpose reasoning, improved instruction adherence, and a more natural conversational style compared to GPT-5. It uses adaptive reasoning..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5:batch": {
+        "input_cost_per_token": 6.25e-07,
+        "output_cost_per_token": 5e-06,
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5 is OpenAI\u2019s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5:batch": {
+            "input_cost_per_token": 6.25e-07,
+            "output_cost_per_token": 5e-06,
+            "max_input_tokens": 400000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5 is OpenAI\u2019s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "meta/muse-spark-1.1": {
         "cache_read_input_token_cost": 1.5e-07,
         "input_cost_per_token": 1.25e-06,
@@ -26649,13 +27287,19 @@
     },
     "o4-mini-2025-04-16": {
         "cache_read_input_token_cost": 2.75e-07,
+        "cache_read_input_token_cost_flex": 1.375e-07,
+        "cache_read_input_token_cost_priority": 5e-07,
         "input_cost_per_token": 1.1e-06,
+        "input_cost_per_token_flex": 5.5e-07,
+        "input_cost_per_token_priority": 2e-06,
         "litellm_provider": "openai",
         "max_input_tokens": 200000,
         "max_output_tokens": 100000,
         "max_tokens": 100000,
         "mode": "chat",
         "output_cost_per_token": 4.4e-06,
+        "output_cost_per_token_flex": 2.2e-06,
+        "output_cost_per_token_priority": 8e-06,
         "supports_function_calling": true,
         "supports_parallel_function_calling": false,
         "supports_pdf_input": true,
@@ -26817,6 +27461,48 @@
         "supports_response_schema": true,
         "supports_tool_choice": true,
         "supports_vision": false
+    },
+    "anthropic/claude-sonnet-5:batch": {
+        "input_cost_per_token": 1e-06,
+        "output_cost_per_token": 5e-06,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "Sonnet 5 is Anthropic's most capable Sonnet-class model, with frontier performance across coding, agents, and professional work. It supports adaptive thinking with selectable reasoning effort levels (low, medium, high, max,..."
+        },
+        "litellm_provider": "openrouter",
+        "anthropic/claude-sonnet-5:batch": {
+            "input_cost_per_token": 1e-06,
+            "output_cost_per_token": 5e-06,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "Sonnet 5 is Anthropic's most capable Sonnet-class model, with frontier performance across coding, agents, and professional work. It supports adaptive thinking with selectable reasoning effort levels (low, medium, high, max,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "google/gemini-3.5-flash:batch": {
+        "input_cost_per_token": 7.5e-07,
+        "output_cost_per_token": 4.5e-06,
+        "input_cost_per_image": 7.5e-07,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Gemini 3.5 Flash is Google's high-efficiency multimodal model, bringing near-Pro level coding and reasoning at Flash-tier cost and speed. It is highly optimized for coding proficiency and parallel agentic execution..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemini-3.5-flash:batch": {
+            "input_cost_per_token": 7.5e-07,
+            "output_cost_per_token": 4.5e-06,
+            "input_cost_per_image": 7.5e-07,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Gemini 3.5 Flash is Google's high-efficiency multimodal model, bringing near-Pro level coding and reasoning at Flash-tier cost and speed. It is highly optimized for coding proficiency and parallel agentic execution..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "crusoe/qwen/qwen3-235b-a22b-instruct-2507": {
         "input_cost_per_token": 3e-06,
@@ -27281,6 +27967,48 @@
         "source": "https://azuremarketplace.microsoft.com/en-us/marketplace/apps/metagenai.meta-llama-3-1-70b-instruct-offer?tab=PlansAndPrice",
         "supports_tool_choice": true
     },
+    "google/gemini-2.5-pro:batch": {
+        "input_cost_per_token": 6.25e-07,
+        "output_cost_per_token": 5e-06,
+        "input_cost_per_image": 6.25e-07,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Gemini 2.5 Pro is Google\u2019s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs \u201cthinking\u201d capabilities, enabling it to reason through responses with enhanced accuracy..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemini-2.5-pro:batch": {
+            "input_cost_per_token": 6.25e-07,
+            "output_cost_per_token": 5e-06,
+            "input_cost_per_image": 6.25e-07,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Gemini 2.5 Pro is Google\u2019s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs \u201cthinking\u201d capabilities, enabling it to reason through responses with enhanced accuracy..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-4o:batch": {
+        "input_cost_per_token": 1.25e-06,
+        "output_cost_per_token": 5e-06,
+        "max_input_tokens": 128000,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-4o:batch": {
+            "input_cost_per_token": 1.25e-06,
+            "output_cost_per_token": 5e-06,
+            "max_input_tokens": 128000,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "azure/gpt-image-1": {
         "cache_read_input_token_cost": 1.25e-06,
         "input_cost_per_image_token": 1e-05,
@@ -27573,6 +28301,46 @@
             "max_output_tokens": 128000,
             "metadata": {
                 "notes": "GPT-5.6 Terra Pro is the same underlying model as [GPT-5.6 Terra](https://openrouter.ai/openai/gpt-5.6-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.6-terra-pro:batch": {
+        "input_cost_per_token": 1e-06,
+        "output_cost_per_token": 6e-06,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Terra Pro is the same underlying model as [GPT-5.6 Terra](https://openrouter.ai/openai/gpt-5.6-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-terra-pro:batch": {
+            "input_cost_per_token": 1e-06,
+            "output_cost_per_token": 6e-06,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Terra Pro is the same underlying model as [GPT-5.6 Terra](https://openrouter.ai/openai/gpt-5.6-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.6-terra:batch": {
+        "input_cost_per_token": 1e-06,
+        "output_cost_per_token": 6e-06,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Terra is a balanced model in OpenAI's GPT-5.6 series, positioned between the flagship Sol tier and the cost-efficient Luna tier. It is suited for everyday coding, reasoning, and agentic..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-terra:batch": {
+            "input_cost_per_token": 1e-06,
+            "output_cost_per_token": 6e-06,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Terra is a balanced model in OpenAI's GPT-5.6 series, positioned between the flagship Sol tier and the cost-efficient Luna tier. It is suited for everyday coding, reasoning, and agentic..."
             },
             "litellm_provider": "openrouter"
         }
@@ -28400,6 +29168,26 @@
         "source": "https://www.databricks.com/product/pricing/foundation-model-serving",
         "supports_tool_choice": true
     },
+    "openai/gpt-5.2:batch": {
+        "input_cost_per_token": 8.75e-07,
+        "output_cost_per_token": 7e-06,
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.2 is the latest frontier-grade model in the GPT-5 series, offering stronger agentic and long context perfomance compared to GPT-5.1. It uses adaptive reasoning to allocate computation dynamically, responding quickly..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.2:batch": {
+            "input_cost_per_token": 8.75e-07,
+            "output_cost_per_token": 7e-06,
+            "max_input_tokens": 400000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.2 is the latest frontier-grade model in the GPT-5 series, offering stronger agentic and long context perfomance compared to GPT-5.1. It uses adaptive reasoning to allocate computation dynamically, responding quickly..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "azure/codex-mini": {
         "cache_read_input_token_cost": 3.75e-07,
         "input_cost_per_token": 1.5e-06,
@@ -28566,6 +29354,28 @@
             "max_output_tokens": 131072,
             "metadata": {
                 "notes": "Qwen3.8 Max is the flagship model in Alibaba's Qwen3.8 series, the general-availability successor to the Qwen3.8 Max Preview. It is a multimodal reasoning model intended for complex reasoning, visual understanding,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "google/gemini-3.1-pro-preview:batch": {
+        "input_cost_per_token": 1e-06,
+        "output_cost_per_token": 6e-06,
+        "input_cost_per_image": 1e-06,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 65536,
+        "metadata": {
+            "notes": "Gemini 3.1 Pro Preview is Google\u2019s frontier reasoning model, delivering enhanced software engineering performance, improved agentic reliability, and more efficient token usage across complex workflows. Building on the multimodal foundation..."
+        },
+        "litellm_provider": "openrouter",
+        "google/gemini-3.1-pro-preview:batch": {
+            "input_cost_per_token": 1e-06,
+            "output_cost_per_token": 6e-06,
+            "input_cost_per_image": 1e-06,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 65536,
+            "metadata": {
+                "notes": "Gemini 3.1 Pro Preview is Google\u2019s frontier reasoning model, delivering enhanced software engineering performance, improved agentic reliability, and more efficient token usage across complex workflows. Building on the multimodal foundation..."
             },
             "litellm_provider": "openrouter"
         }
@@ -29215,6 +30025,26 @@
             "/v1/audio/transcriptions"
         ]
     },
+    "openai/gpt-5.4:batch": {
+        "input_cost_per_token": 1.25e-06,
+        "output_cost_per_token": 7.5e-06,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.4 is OpenAI\u2019s latest frontier model, unifying the Codex and GPT lines into a single system. It features a 1M+ token context window (922K input, 128K output) with support for..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.4:batch": {
+            "input_cost_per_token": 1.25e-06,
+            "output_cost_per_token": 7.5e-06,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.4 is OpenAI\u2019s latest frontier model, unifying the Codex and GPT lines into a single system. It features a 1M+ token context window (922K input, 128K output) with support for..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "bedrock/us-gov-east-1/anthropic.claude-haiku-4-5-20251001-v1:0": {
         "cache_creation_input_token_cost": 1.5e-06,
         "cache_creation_input_token_cost_above_1hr": 2.4e-06,
@@ -29264,6 +30094,46 @@
         "supports_pdf_input": true,
         "supports_parallel_tool_use_config": true,
         "prompt_cache_min_tokens": 4096
+    },
+    "anthropic/claude-sonnet-4.6:batch": {
+        "input_cost_per_token": 1.5e-06,
+        "output_cost_per_token": 7.5e-06,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "Sonnet 4.6 is Anthropic's most capable Sonnet-class model yet, with frontier performance across coding, agents, and professional work. It excels at iterative development, complex codebase navigation, end-to-end project management with..."
+        },
+        "litellm_provider": "openrouter",
+        "anthropic/claude-sonnet-4.6:batch": {
+            "input_cost_per_token": 1.5e-06,
+            "output_cost_per_token": 7.5e-06,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "Sonnet 4.6 is Anthropic's most capable Sonnet-class model yet, with frontier performance across coding, agents, and professional work. It excels at iterative development, complex codebase navigation, end-to-end project management with..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "anthropic/claude-sonnet-4.5:batch": {
+        "input_cost_per_token": 1.5e-06,
+        "output_cost_per_token": 7.5e-06,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 64000,
+        "metadata": {
+            "notes": "Claude Sonnet 4.5 is Anthropic\u2019s most advanced Sonnet model to date, optimized for real-world agents and coding workflows. It delivers state-of-the-art performance on coding benchmarks such as SWE-bench Verified, with..."
+        },
+        "litellm_provider": "openrouter",
+        "anthropic/claude-sonnet-4.5:batch": {
+            "input_cost_per_token": 1.5e-06,
+            "output_cost_per_token": 7.5e-06,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 64000,
+            "metadata": {
+                "notes": "Claude Sonnet 4.5 is Anthropic\u2019s most advanced Sonnet model to date, optimized for real-world agents and coding workflows. It delivers state-of-the-art performance on coding benchmarks such as SWE-bench Verified, with..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "mistral/mistral-medium-2604": {
         "input_cost_per_token": 1.5e-06,
@@ -30083,13 +30953,19 @@
     },
     "o3-2025-04-16": {
         "cache_read_input_token_cost": 5e-07,
+        "cache_read_input_token_cost_flex": 2.5e-07,
+        "cache_read_input_token_cost_priority": 8.75e-07,
         "input_cost_per_token": 2e-06,
+        "input_cost_per_token_flex": 1e-06,
+        "input_cost_per_token_priority": 3.5e-06,
         "litellm_provider": "openai",
         "max_input_tokens": 200000,
         "max_output_tokens": 100000,
         "max_tokens": 100000,
         "mode": "chat",
         "output_cost_per_token": 8e-06,
+        "output_cost_per_token_flex": 4e-06,
+        "output_cost_per_token_priority": 1.4e-05,
         "supported_endpoints": [
             "/v1/responses",
             "/v1/chat/completions",
@@ -33451,6 +34327,86 @@
         "supports_tool_choice": true,
         "supports_vision": true
     },
+    "anthropic/claude-opus-4.6:batch": {
+        "input_cost_per_token": 2.5e-06,
+        "output_cost_per_token": 1.25e-05,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "Opus 4.6 is Anthropic\u2019s strongest model for coding and long-running professional tasks. It is built for agents that operate across entire workflows rather than single prompts, making it especially effective..."
+        },
+        "litellm_provider": "openrouter",
+        "anthropic/claude-opus-4.6:batch": {
+            "input_cost_per_token": 2.5e-06,
+            "output_cost_per_token": 1.25e-05,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "Opus 4.6 is Anthropic\u2019s strongest model for coding and long-running professional tasks. It is built for agents that operate across entire workflows rather than single prompts, making it especially effective..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "anthropic/claude-opus-4.7:batch": {
+        "input_cost_per_token": 2.5e-06,
+        "output_cost_per_token": 1.25e-05,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on..."
+        },
+        "litellm_provider": "openrouter",
+        "anthropic/claude-opus-4.7:batch": {
+            "input_cost_per_token": 2.5e-06,
+            "output_cost_per_token": 1.25e-05,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "anthropic/claude-opus-4.8:batch": {
+        "input_cost_per_token": 2.5e-06,
+        "output_cost_per_token": 1.25e-05,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "Claude Opus 4.8 is Anthropic's most capable generally available model in the Opus family. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token..."
+        },
+        "litellm_provider": "openrouter",
+        "anthropic/claude-opus-4.8:batch": {
+            "input_cost_per_token": 2.5e-06,
+            "output_cost_per_token": 1.25e-05,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "Claude Opus 4.8 is Anthropic's most capable generally available model in the Opus family. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "anthropic/claude-opus-5:batch": {
+        "input_cost_per_token": 2.5e-06,
+        "output_cost_per_token": 1.25e-05,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "Claude Opus 5 is Anthropic\u2019s flagship model for demanding reasoning, coding, and long-horizon agentic work. It is particularly strong at end-to-end software tasks, code review and bug finding, visual analysis..."
+        },
+        "litellm_provider": "openrouter",
+        "anthropic/claude-opus-5:batch": {
+            "input_cost_per_token": 2.5e-06,
+            "output_cost_per_token": 1.25e-05,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "Claude Opus 5 is Anthropic\u2019s flagship model for demanding reasoning, coding, and long-horizon agentic work. It is particularly strong at end-to-end software tasks, code review and bug finding, visual analysis..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "amazon/nova-premier-v1": {
         "input_cost_per_token": 2.5e-06,
         "output_cost_per_token": 1.25e-05,
@@ -33502,6 +34458,26 @@
         "supports_prompt_caching": false,
         "supports_response_schema": true,
         "supports_vision": true
+    },
+    "anthropic/claude-opus-4.5:batch": {
+        "input_cost_per_token": 2.5e-06,
+        "output_cost_per_token": 1.25e-05,
+        "max_input_tokens": 200000,
+        "max_output_tokens": 64000,
+        "metadata": {
+            "notes": "Claude Opus 4.5 is Anthropic\u2019s frontier reasoning model optimized for complex software engineering, agentic workflows, and long-horizon computer use. It offers strong multimodal capabilities, competitive performance across real-world coding and..."
+        },
+        "litellm_provider": "openrouter",
+        "anthropic/claude-opus-4.5:batch": {
+            "input_cost_per_token": 2.5e-06,
+            "output_cost_per_token": 1.25e-05,
+            "max_input_tokens": 200000,
+            "max_output_tokens": 64000,
+            "metadata": {
+                "notes": "Claude Opus 4.5 is Anthropic\u2019s frontier reasoning model optimized for complex software engineering, agentic workflows, and long-horizon computer use. It offers strong multimodal capabilities, competitive performance across real-world coding and..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "azure/gpt-4o-transcribe": {
         "input_cost_per_audio_token": 2.5e-06,
@@ -33791,7 +34767,9 @@
     },
     "gpt-4.1-2025-04-14": {
         "cache_read_input_token_cost": 5e-07,
+        "cache_read_input_token_cost_priority": 8.75e-07,
         "input_cost_per_token": 2e-06,
+        "input_cost_per_token_priority": 3.5e-06,
         "input_cost_per_token_batches": 1e-06,
         "litellm_provider": "openai",
         "max_input_tokens": 1047576,
@@ -33799,6 +34777,7 @@
         "max_tokens": 32768,
         "mode": "chat",
         "output_cost_per_token": 8e-06,
+        "output_cost_per_token_priority": 1.4e-05,
         "output_cost_per_token_batches": 4e-06,
         "supported_endpoints": [
             "/v1/chat/completions",
@@ -35151,6 +36130,66 @@
             "litellm_provider": "openrouter"
         }
     },
+    "openai/gpt-5.5:batch": {
+        "input_cost_per_token": 2.5e-06,
+        "output_cost_per_token": 1.5e-05,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.5 is OpenAI\u2019s frontier model designed for complex professional workloads, building on GPT-5.4 with stronger reasoning, higher reliability, and improved token efficiency on hard tasks. It features a 1M+ token..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.5:batch": {
+            "input_cost_per_token": 2.5e-06,
+            "output_cost_per_token": 1.5e-05,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.5 is OpenAI\u2019s frontier model designed for complex professional workloads, building on GPT-5.4 with stronger reasoning, higher reliability, and improved token efficiency on hard tasks. It features a 1M+ token..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.6-sol-pro:batch": {
+        "input_cost_per_token": 2.5e-06,
+        "output_cost_per_token": 1.5e-05,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Sol Pro is the same underlying model as [GPT-5.6 Sol](https://openrouter.ai/openai/gpt-5.6-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-sol-pro:batch": {
+            "input_cost_per_token": 2.5e-06,
+            "output_cost_per_token": 1.5e-05,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Sol Pro is the same underlying model as [GPT-5.6 Sol](https://openrouter.ai/openai/gpt-5.6-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode"
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.6-sol:batch": {
+        "input_cost_per_token": 2.5e-06,
+        "output_cost_per_token": 1.5e-05,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.6 Sol is the flagship model in OpenAI's GPT-5.6 series. It is suited for complex reasoning, coding, and agentic workflows, and is particularly strong at command-line and multi-step coding tasks..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.6-sol:batch": {
+            "input_cost_per_token": 2.5e-06,
+            "output_cost_per_token": 1.5e-05,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.6 Sol is the flagship model in OpenAI's GPT-5.6 series. It is suited for complex reasoning, coding, and agentic workflows, and is particularly strong at command-line and multi-step coding tasks..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "azure/gpt-5.4": {
         "cache_read_input_token_cost": 2.5e-07,
         "cache_read_input_token_cost_above_272k_tokens": 5e-07,
@@ -36157,7 +37196,9 @@
     },
     "gpt-4o-2024-08-06": {
         "cache_read_input_token_cost": 1.25e-06,
+        "cache_read_input_token_cost_priority": 2.125e-06,
         "input_cost_per_token": 2.5e-06,
+        "input_cost_per_token_priority": 4.25e-06,
         "input_cost_per_token_batches": 1.25e-06,
         "litellm_provider": "openai",
         "max_input_tokens": 128000,
@@ -36165,6 +37206,7 @@
         "max_tokens": 16384,
         "mode": "chat",
         "output_cost_per_token": 1e-05,
+        "output_cost_per_token_priority": 1.7e-05,
         "output_cost_per_token_batches": 5e-06,
         "supports_function_calling": true,
         "supports_parallel_function_calling": true,
@@ -36177,7 +37219,9 @@
     },
     "gpt-4o-2024-11-20": {
         "cache_read_input_token_cost": 1.25e-06,
+        "cache_read_input_token_cost_priority": 2.125e-06,
         "input_cost_per_token": 2.5e-06,
+        "input_cost_per_token_priority": 4.25e-06,
         "input_cost_per_token_batches": 1.25e-06,
         "litellm_provider": "openai",
         "max_input_tokens": 128000,
@@ -36185,6 +37229,7 @@
         "max_tokens": 16384,
         "mode": "chat",
         "output_cost_per_token": 1e-05,
+        "output_cost_per_token_priority": 1.7e-05,
         "output_cost_per_token_batches": 5e-06,
         "supports_function_calling": true,
         "supports_parallel_function_calling": true,
@@ -36294,6 +37339,32 @@
             "metadata": {
                 "notes": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as..."
             },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-4-turbo:batch": {
+        "input_cost_per_token": 5e-06,
+        "output_cost_per_token": 1.5e-05,
+        "max_input_tokens": 128000,
+        "max_output_tokens": 4096,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "The latest GPT-4 Turbo model with vision capabilities. Vision requests can now use JSON mode and function calling.\n\nTraining data: up to December 2023."
+        },
+        "supports_function_calling": true,
+        "litellm_provider": "openrouter",
+        "openai/gpt-4-turbo:batch": {
+            "input_cost_per_token": 5e-06,
+            "output_cost_per_token": 1.5e-05,
+            "max_input_tokens": 128000,
+            "max_output_tokens": 4096,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "The latest GPT-4 Turbo model with vision capabilities. Vision requests can now use JSON mode and function calling.\n\nTraining data: up to December 2023."
+            },
+            "supports_function_calling": true,
             "litellm_provider": "openrouter"
         }
     },
@@ -38951,6 +40022,26 @@
         ],
         "supports_audio_input": true
     },
+    "anthropic/claude-fable-5:batch": {
+        "input_cost_per_token": 5e-06,
+        "output_cost_per_token": 2.5e-05,
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and..."
+        },
+        "litellm_provider": "openrouter",
+        "anthropic/claude-fable-5:batch": {
+            "input_cost_per_token": 5e-06,
+            "output_cost_per_token": 2.5e-05,
+            "max_input_tokens": 1000000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "anthropic/claude-opus-4.8": {
         "input_cost_per_token": 5e-06,
         "output_cost_per_token": 2.5e-05,
@@ -41555,6 +42646,26 @@
             "litellm_provider": "openrouter"
         }
     },
+    "openai/o1:batch": {
+        "input_cost_per_token": 7.5e-06,
+        "output_cost_per_token": 3e-05,
+        "max_input_tokens": 200000,
+        "max_output_tokens": 100000,
+        "metadata": {
+            "notes": "The latest and strongest model family from OpenAI, o1 is designed to spend more time thinking before responding. The o1 model series is trained with large-scale reinforcement learning to reason..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/o1:batch": {
+            "input_cost_per_token": 7.5e-06,
+            "output_cost_per_token": 3e-05,
+            "max_input_tokens": 200000,
+            "max_output_tokens": 100000,
+            "metadata": {
+                "notes": "The latest and strongest model family from OpenAI, o1 is designed to spend more time thinking before responding. The o1 model series is trained with large-scale reinforcement learning to reason..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "ai21.j2-ultra-v1": {
         "input_cost_per_token": 1.88e-05,
         "litellm_provider": "bedrock",
@@ -42737,6 +43848,26 @@
         "supports_function_calling": true,
         "supports_system_messages": true
     },
+    "anthropic/claude-opus-4.1:batch": {
+        "input_cost_per_token": 7.5e-06,
+        "output_cost_per_token": 3.75e-05,
+        "max_input_tokens": 200000,
+        "max_output_tokens": 32000,
+        "metadata": {
+            "notes": "Claude Opus 4.1 is an updated version of Anthropic\u2019s flagship model, offering improved performance in coding, reasoning, and agentic tasks. It achieves 74.5% on SWE-bench Verified and shows notable gains..."
+        },
+        "litellm_provider": "openrouter",
+        "anthropic/claude-opus-4.1:batch": {
+            "input_cost_per_token": 7.5e-06,
+            "output_cost_per_token": 3.75e-05,
+            "max_input_tokens": 200000,
+            "max_output_tokens": 32000,
+            "metadata": {
+                "notes": "Claude Opus 4.1 is an updated version of Anthropic\u2019s flagship model, offering improved performance in coding, reasoning, and agentic tasks. It achieves 74.5% on SWE-bench Verified and shows notable gains..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "bedrock_mantle/openai.gpt-5.6-sol": {
         "input_cost_per_token": 5.5e-06,
         "cache_creation_input_token_cost": 6.875e-06,
@@ -42836,6 +43967,26 @@
         "supported_output_modalities": [
             "audio"
         ]
+    },
+    "openai/o3-pro:batch": {
+        "input_cost_per_token": 1e-05,
+        "output_cost_per_token": 4e-05,
+        "max_input_tokens": 200000,
+        "max_output_tokens": 100000,
+        "metadata": {
+            "notes": "The o-series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o3-pro model uses more compute to think harder and provide consistently..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/o3-pro:batch": {
+            "input_cost_per_token": 1e-05,
+            "output_cost_per_token": 4e-05,
+            "max_input_tokens": 200000,
+            "max_output_tokens": 100000,
+            "metadata": {
+                "notes": "The o-series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o3-pro model uses more compute to think harder and provide consistently..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "azure/o3-deep-research": {
         "cache_read_input_token_cost": 2.5e-06,
@@ -43282,6 +44433,26 @@
             "/v1/audio/speech"
         ],
         "source": "https://aws.amazon.com/polly/pricing/"
+    },
+    "openai/gpt-5-pro:batch": {
+        "input_cost_per_token": 7.5e-06,
+        "output_cost_per_token": 6e-05,
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5 Pro is OpenAI\u2019s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5-pro:batch": {
+            "input_cost_per_token": 7.5e-06,
+            "output_cost_per_token": 6e-05,
+            "max_input_tokens": 400000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5 Pro is OpenAI\u2019s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "twelvelabs.marengo-embed-2-7-v1:0": {
         "input_cost_per_token": 7e-05,
@@ -44041,6 +45212,26 @@
         "supports_reasoning": true,
         "supports_tool_choice": true
     },
+    "openai/gpt-5.2-pro:batch": {
+        "input_cost_per_token": 1.05e-05,
+        "output_cost_per_token": 8.4e-05,
+        "max_input_tokens": 400000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.2 Pro is OpenAI\u2019s most advanced model, offering major improvements in agentic coding and long context performance over GPT-5 Pro. It is optimized for complex tasks that require step-by-step reasoning,..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.2-pro:batch": {
+            "input_cost_per_token": 1.05e-05,
+            "output_cost_per_token": 8.4e-05,
+            "max_input_tokens": 400000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.2 Pro is OpenAI\u2019s most advanced model, offering major improvements in agentic coding and long context performance over GPT-5 Pro. It is optimized for complex tasks that require step-by-step reasoning,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "deepinfra/anthropic/claude-4-opus": {
         "max_tokens": 200000,
         "max_input_tokens": 200000,
@@ -44106,6 +45297,46 @@
         "output_cost_per_token": 0.0001,
         "source": "https://cloud.sambanova.ai/plans/pricing",
         "supports_audio_input": true
+    },
+    "openai/gpt-5.4-pro:batch": {
+        "input_cost_per_token": 1.5e-05,
+        "output_cost_per_token": 9e-05,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.4 Pro is OpenAI's most advanced model, building on GPT-5.4's unified architecture with enhanced reasoning capabilities for complex, high-stakes tasks. It features a 1M+ token context window (922K input, 128K..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.4-pro:batch": {
+            "input_cost_per_token": 1.5e-05,
+            "output_cost_per_token": 9e-05,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.4 Pro is OpenAI's most advanced model, building on GPT-5.4's unified architecture with enhanced reasoning capabilities for complex, high-stakes tasks. It features a 1M+ token context window (922K input, 128K..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "openai/gpt-5.5-pro:batch": {
+        "input_cost_per_token": 1.5e-05,
+        "output_cost_per_token": 9e-05,
+        "max_input_tokens": 1050000,
+        "max_output_tokens": 128000,
+        "metadata": {
+            "notes": "GPT-5.5 Pro is OpenAI\u2019s high-capability model optimized for deep reasoning and accuracy on complex, high-stakes workloads. It features a 1M+ token context window (922K input, 128K output) with support for..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/gpt-5.5-pro:batch": {
+            "input_cost_per_token": 1.5e-05,
+            "output_cost_per_token": 9e-05,
+            "max_input_tokens": 1050000,
+            "max_output_tokens": 128000,
+            "metadata": {
+                "notes": "GPT-5.5 Pro is OpenAI\u2019s high-capability model optimized for deep reasoning and accuracy on complex, high-stakes workloads. It features a 1M+ token context window (922K input, 128K output) with support for..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "gpt-audio": {
         "input_cost_per_audio_token": 3.2e-05,
@@ -46829,6 +48060,26 @@
         "supports_parallel_function_calling": true,
         "supports_system_messages": true,
         "supports_tool_choice": true
+    },
+    "openai/o1-pro:batch": {
+        "input_cost_per_token": 7.5e-05,
+        "output_cost_per_token": 0.0003,
+        "max_input_tokens": 200000,
+        "max_output_tokens": 100000,
+        "metadata": {
+            "notes": "The o1 series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o1-pro model uses more compute to think harder and provide..."
+        },
+        "litellm_provider": "openrouter",
+        "openai/o1-pro:batch": {
+            "input_cost_per_token": 7.5e-05,
+            "output_cost_per_token": 0.0003,
+            "max_input_tokens": 200000,
+            "max_output_tokens": 100000,
+            "metadata": {
+                "notes": "The o1 series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o1-pro model uses more compute to think harder and provide..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "azure/gpt-4.5-preview": {
         "cache_read_input_token_cost": 3.75e-05,
