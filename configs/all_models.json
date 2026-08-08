@@ -5038,64 +5038,6 @@
         "output_cost_per_token": 2e-07,
         "supports_system_messages": true
     },
-    "deepseek/deepseek-v4-flash": {
-        "cache_creation_input_token_cost": 0.0,
-        "cache_read_input_token_cost": 2.8e-09,
-        "input_cost_per_token": 8.82e-08,
-        "input_cost_per_token_cache_hit": 2.8e-09,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 131072,
-        "max_tokens": 8192,
-        "mode": "chat",
-        "output_cost_per_token": 1.764e-07,
-        "source": "https://api-docs.deepseek.com/quick_start/pricing",
-        "supported_endpoints": [
-            "/v1/chat/completions"
-        ],
-        "supports_assistant_prefill": true,
-        "supports_function_calling": true,
-        "supports_native_streaming": true,
-        "supports_parallel_function_calling": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_response_schema": true,
-        "supports_system_messages": true,
-        "supports_tool_choice": true,
-        "supports_vision": false,
-        "metadata": {
-            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-        },
-        "deepseek/deepseek-v4-flash": {
-            "cache_creation_input_token_cost": 0.0,
-            "cache_read_input_token_cost": 2.8e-09,
-            "input_cost_per_token": 8.82e-08,
-            "input_cost_per_token_cache_hit": 2.8e-09,
-            "litellm_provider": "openrouter",
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 131072,
-            "max_tokens": 8192,
-            "mode": "chat",
-            "output_cost_per_token": 1.764e-07,
-            "source": "https://api-docs.deepseek.com/quick_start/pricing",
-            "supported_endpoints": [
-                "/v1/chat/completions"
-            ],
-            "supports_assistant_prefill": true,
-            "supports_function_calling": true,
-            "supports_native_streaming": true,
-            "supports_parallel_function_calling": true,
-            "supports_prompt_caching": true,
-            "supports_reasoning": true,
-            "supports_response_schema": true,
-            "supports_system_messages": true,
-            "supports_tool_choice": true,
-            "supports_vision": false,
-            "metadata": {
-                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
-            }
-        }
-    },
     "tencent/hy3-preview": {
         "input_cost_per_token": 6.3e-08,
         "output_cost_per_token": 2.1e-07,
@@ -8032,6 +7974,64 @@
         "supports_reasoning": true,
         "supports_vision": false
     },
+    "deepseek/deepseek-v4-flash": {
+        "cache_creation_input_token_cost": 0.0,
+        "cache_read_input_token_cost": 2.8e-09,
+        "input_cost_per_token": 1.4e-07,
+        "input_cost_per_token_cache_hit": 2.8e-09,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 393216,
+        "max_tokens": 8192,
+        "mode": "chat",
+        "output_cost_per_token": 2.8e-07,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+            "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": false,
+        "metadata": {
+            "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+        },
+        "deepseek/deepseek-v4-flash": {
+            "cache_creation_input_token_cost": 0.0,
+            "cache_read_input_token_cost": 2.8e-09,
+            "input_cost_per_token": 1.4e-07,
+            "input_cost_per_token_cache_hit": 2.8e-09,
+            "litellm_provider": "openrouter",
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 393216,
+            "max_tokens": 8192,
+            "mode": "chat",
+            "output_cost_per_token": 2.8e-07,
+            "source": "https://api-docs.deepseek.com/quick_start/pricing",
+            "supported_endpoints": [
+                "/v1/chat/completions"
+            ],
+            "supports_assistant_prefill": true,
+            "supports_function_calling": true,
+            "supports_native_streaming": true,
+            "supports_parallel_function_calling": true,
+            "supports_prompt_caching": true,
+            "supports_reasoning": true,
+            "supports_response_schema": true,
+            "supports_system_messages": true,
+            "supports_tool_choice": true,
+            "supports_vision": false,
+            "metadata": {
+                "notes": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and..."
+            }
+        }
+    },
     "deepseek-v4-flash": {
         "cache_creation_input_token_cost": 0.0,
         "cache_read_input_token_cost": 2.8e-09,
@@ -8621,6 +8621,26 @@
         "input_cost_per_token": 2.4e-07,
         "output_cost_per_token": 2.4e-07,
         "supports_system_messages": true
+    },
+    "nvidia/nemotron-3-super-120b-a12b": {
+        "input_cost_per_token": 8.5e-08,
+        "output_cost_per_token": 4e-07,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 16384,
+        "metadata": {
+            "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
+        },
+        "litellm_provider": "openrouter",
+        "nvidia/nemotron-3-super-120b-a12b": {
+            "input_cost_per_token": 8.5e-08,
+            "output_cost_per_token": 4e-07,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 16384,
+            "metadata": {
+                "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
+            },
+            "litellm_provider": "openrouter"
+        }
     },
     "deepinfra/google/gemini-2.0-flash-001": {
         "deprecation_date": "2026-06-01",
@@ -9787,6 +9807,42 @@
             "litellm_provider": "openrouter"
         }
     },
+    "deepseek/deepseek-v3.2": {
+        "input_cost_per_token": 2.6e-07,
+        "input_cost_per_token_cache_hit": 2.8e-08,
+        "litellm_provider": "openrouter",
+        "max_input_tokens": 163840,
+        "max_output_tokens": 163840,
+        "max_tokens": 163840,
+        "mode": "chat",
+        "output_cost_per_token": 3.8e-07,
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "metadata": {
+            "notes": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism..."
+        },
+        "deepseek/deepseek-v3.2": {
+            "input_cost_per_token": 2.6e-07,
+            "input_cost_per_token_cache_hit": 2.8e-08,
+            "litellm_provider": "openrouter",
+            "max_input_tokens": 163840,
+            "max_output_tokens": 163840,
+            "max_tokens": 163840,
+            "mode": "chat",
+            "output_cost_per_token": 3.8e-07,
+            "supports_assistant_prefill": true,
+            "supports_function_calling": true,
+            "supports_prompt_caching": true,
+            "supports_reasoning": true,
+            "supports_tool_choice": true,
+            "metadata": {
+                "notes": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism..."
+            }
+        }
+    },
     "novita/qwen/qwen3-235b-a22b-instruct-2507": {
         "litellm_provider": "novita",
         "mode": "chat",
@@ -9836,42 +9892,6 @@
         "mode": "chat",
         "supports_tool_choice": true,
         "supports_function_calling": true
-    },
-    "deepseek/deepseek-v3.2": {
-        "input_cost_per_token": 2.69e-07,
-        "input_cost_per_token_cache_hit": 2.8e-08,
-        "litellm_provider": "openrouter",
-        "max_input_tokens": 163840,
-        "max_output_tokens": 65536,
-        "max_tokens": 163840,
-        "mode": "chat",
-        "output_cost_per_token": 4e-07,
-        "supports_assistant_prefill": true,
-        "supports_function_calling": true,
-        "supports_prompt_caching": true,
-        "supports_reasoning": true,
-        "supports_tool_choice": true,
-        "metadata": {
-            "notes": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism..."
-        },
-        "deepseek/deepseek-v3.2": {
-            "input_cost_per_token": 2.69e-07,
-            "input_cost_per_token_cache_hit": 2.8e-08,
-            "litellm_provider": "openrouter",
-            "max_input_tokens": 163840,
-            "max_output_tokens": 65536,
-            "max_tokens": 163840,
-            "mode": "chat",
-            "output_cost_per_token": 4e-07,
-            "supports_assistant_prefill": true,
-            "supports_function_calling": true,
-            "supports_prompt_caching": true,
-            "supports_reasoning": true,
-            "supports_tool_choice": true,
-            "metadata": {
-                "notes": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism..."
-            }
-        }
     },
     "azure_ai/deepseek-v4-flash": {
         "input_cost_per_token": 1.9e-07,
@@ -13113,7 +13133,7 @@
         "output_cost_per_token": 6.5e-07,
         "supports_tool_choice": true,
         "max_input_tokens": 6144,
-        "max_output_tokens": 2048,
+        "max_output_tokens": 6144,
         "metadata": {
             "notes": "A recreation trial of the original MythoMax-L2-B13 but with updated models. #merge"
         },
@@ -13121,7 +13141,7 @@
             "input_cost_per_token": 4.5e-07,
             "output_cost_per_token": 6.5e-07,
             "max_input_tokens": 6144,
-            "max_output_tokens": 2048,
+            "max_output_tokens": 6144,
             "metadata": {
                 "notes": "A recreation trial of the original MythoMax-L2-B13 but with updated models. #merge"
             },
@@ -13455,24 +13475,6 @@
         "output_cost_per_token": 9e-07,
         "supports_function_calling": true,
         "supports_tool_choice": true
-    },
-    "nvidia/nemotron-3-super-120b-a12b": {
-        "input_cost_per_token": 3e-07,
-        "output_cost_per_token": 9e-07,
-        "max_input_tokens": 262144,
-        "metadata": {
-            "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
-        },
-        "litellm_provider": "openrouter",
-        "nvidia/nemotron-3-super-120b-a12b": {
-            "input_cost_per_token": 3e-07,
-            "output_cost_per_token": 9e-07,
-            "max_input_tokens": 262144,
-            "metadata": {
-                "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "mistralai/codestral-2508": {
         "input_cost_per_token": 3e-07,
@@ -14068,7 +14070,7 @@
         "output_cost_per_token": 7.5e-07,
         "supports_tool_choice": true,
         "max_input_tokens": 8000,
-        "max_output_tokens": 2000,
+        "max_output_tokens": 6000,
         "metadata": {
             "notes": "An attempt to recreate Claude-style verbosity, but don't expect the same level of coherence or memory. Meant for use in roleplay/narrative situations."
         },
@@ -14076,7 +14078,7 @@
             "input_cost_per_token": 5e-07,
             "output_cost_per_token": 7.5e-07,
             "max_input_tokens": 8000,
-            "max_output_tokens": 2000,
+            "max_output_tokens": 6000,
             "metadata": {
                 "notes": "An attempt to recreate Claude-style verbosity, but don't expect the same level of coherence or memory. Meant for use in roleplay/narrative situations."
             },
@@ -14537,6 +14539,26 @@
         "supports_function_calling": true,
         "supports_tool_choice": true
     },
+    "qwen/qwen3-next-80b-a3b-thinking": {
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 1.2e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "metadata": {
+            "notes": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured \u201cthinking\u201d traces by default. It\u2019s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic..."
+        },
+        "litellm_provider": "openrouter",
+        "qwen/qwen3-next-80b-a3b-thinking": {
+            "input_cost_per_token": 1.5e-07,
+            "output_cost_per_token": 1.2e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "metadata": {
+                "notes": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured \u201cthinking\u201d traces by default. It\u2019s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "stepfun/step-3.7-flash": {
         "input_cost_per_token": 2e-07,
         "output_cost_per_token": 1.15e-06,
@@ -14613,24 +14635,6 @@
         "supports_function_calling": true,
         "supports_system_messages": true,
         "supports_native_structured_output": true
-    },
-    "qwen/qwen3-next-80b-a3b-thinking": {
-        "input_cost_per_token": 1.5e-07,
-        "output_cost_per_token": 1.2e-06,
-        "max_input_tokens": 128000,
-        "metadata": {
-            "notes": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured \u201cthinking\u201d traces by default. It\u2019s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic..."
-        },
-        "litellm_provider": "openrouter",
-        "qwen/qwen3-next-80b-a3b-thinking": {
-            "input_cost_per_token": 1.5e-07,
-            "output_cost_per_token": 1.2e-06,
-            "max_input_tokens": 128000,
-            "metadata": {
-                "notes": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured \u201cthinking\u201d traces by default. It\u2019s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic..."
-            },
-            "litellm_provider": "openrouter"
-        }
     },
     "thedrummer/skyfall-36b-v2": {
         "input_cost_per_token": 5.5e-07,
@@ -16392,6 +16396,26 @@
         "cache_read_input_token_cost": 6e-08,
         "input_cost_per_token_cache_hit": 6e-08
     },
+    "thinkingmachines/inkling-small": {
+        "input_cost_per_token": 4.5e-07,
+        "output_cost_per_token": 1.2e-06,
+        "max_input_tokens": 524288,
+        "max_output_tokens": 262144,
+        "metadata": {
+            "notes": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of..."
+        },
+        "litellm_provider": "openrouter",
+        "thinkingmachines/inkling-small": {
+            "input_cost_per_token": 4.5e-07,
+            "output_cost_per_token": 1.2e-06,
+            "max_input_tokens": 524288,
+            "max_output_tokens": 262144,
+            "metadata": {
+                "notes": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "together_ai/qwen/qwen3-next-80b-a3b-instruct": {
         "input_cost_per_token": 1.5e-07,
         "litellm_provider": "together_ai",
@@ -16594,24 +16618,6 @@
             "metadata": {
                 "notes": "MiniMax-M2 is a compact, high-efficiency large language model optimized for end-to-end coding and agentic workflows. With 10 billion activated parameters (230 billion total), it delivers near-frontier intelligence across general reasoning,..."
             }
-        }
-    },
-    "thinkingmachines/inkling-small": {
-        "input_cost_per_token": 5e-07,
-        "output_cost_per_token": 1.2e-06,
-        "max_input_tokens": 524288,
-        "metadata": {
-            "notes": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of..."
-        },
-        "litellm_provider": "openrouter",
-        "thinkingmachines/inkling-small": {
-            "input_cost_per_token": 5e-07,
-            "output_cost_per_token": 1.2e-06,
-            "max_input_tokens": 524288,
-            "metadata": {
-                "notes": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of..."
-            },
-            "litellm_provider": "openrouter"
         }
     },
     "gmi/qwen/qwen3-vl-235b-a22b-instruct-fp8": {
@@ -16962,6 +16968,26 @@
             "search_context_size_low": 0.035,
             "search_context_size_medium": 0.035,
             "search_context_size_high": 0.035
+        }
+    },
+    "z-ai/glm-5.2": {
+        "input_cost_per_token": 4.326e-07,
+        "output_cost_per_token": 1.3596e-06,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 131072,
+        "metadata": {
+            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+        },
+        "litellm_provider": "openrouter",
+        "z-ai/glm-5.2": {
+            "input_cost_per_token": 4.326e-07,
+            "output_cost_per_token": 1.3596e-06,
+            "max_input_tokens": 1048576,
+            "max_output_tokens": 131072,
+            "metadata": {
+                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
+            },
+            "litellm_provider": "openrouter"
         }
     },
     "bedrock/ap-northeast-1/minimax.minimax-m2.5": {
@@ -19722,26 +19748,6 @@
         "supports_tool_choice": true,
         "supports_native_structured_output": true
     },
-    "z-ai/glm-5.2": {
-        "input_cost_per_token": 5.46e-07,
-        "output_cost_per_token": 1.716e-06,
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 131072,
-        "metadata": {
-            "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-        },
-        "litellm_provider": "openrouter",
-        "z-ai/glm-5.2": {
-            "input_cost_per_token": 5.46e-07,
-            "output_cost_per_token": 1.716e-06,
-            "max_input_tokens": 1048576,
-            "max_output_tokens": 131072,
-            "metadata": {
-                "notes": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "gemini-3.1-flash-lite-preview": {
         "cache_read_input_token_cost": 2.5e-08,
         "input_cost_per_audio_token": 5e-07,
@@ -22237,30 +22243,6 @@
         "input_cost_per_token_cache_hit": 1.1e-07,
         "supports_reasoning": true
     },
-    "moonshotai/kimi-k2.6": {
-        "input_cost_per_token": 5.7e-07,
-        "output_cost_per_token": 2.4e-06,
-        "max_input_tokens": 262144,
-        "max_output_tokens": 262144,
-        "mode": "chat",
-        "supports_vision": true,
-        "metadata": {
-            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-        },
-        "litellm_provider": "openrouter",
-        "moonshotai/kimi-k2.6": {
-            "input_cost_per_token": 5.7e-07,
-            "output_cost_per_token": 2.4e-06,
-            "max_input_tokens": 262144,
-            "max_output_tokens": 262144,
-            "mode": "chat",
-            "supports_vision": true,
-            "metadata": {
-                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
     "crusoe/deepseek-ai/deepseek-v3-0324": {
         "input_cost_per_token": 1.5e-06,
         "litellm_provider": "crusoe",
@@ -22444,6 +22426,30 @@
             "max_output_tokens": 4096,
             "metadata": {
                 "notes": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
+    "moonshotai/kimi-k2.6": {
+        "input_cost_per_token": 5.795e-07,
+        "output_cost_per_token": 2.44e-06,
+        "max_input_tokens": 262144,
+        "max_output_tokens": 262144,
+        "mode": "chat",
+        "supports_vision": true,
+        "metadata": {
+            "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
+        },
+        "litellm_provider": "openrouter",
+        "moonshotai/kimi-k2.6": {
+            "input_cost_per_token": 5.795e-07,
+            "output_cost_per_token": 2.44e-06,
+            "max_input_tokens": 262144,
+            "max_output_tokens": 262144,
+            "mode": "chat",
+            "supports_vision": true,
+            "metadata": {
+                "notes": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and..."
             },
             "litellm_provider": "openrouter"
         }
@@ -26340,6 +26346,26 @@
         "supports_system_messages": true,
         "supports_tool_choice": false
     },
+    "thinkingmachines/inkling": {
+        "input_cost_per_token": 9.5e-07,
+        "output_cost_per_token": 4.05e-06,
+        "max_input_tokens": 524288,
+        "max_output_tokens": 262144,
+        "metadata": {
+            "notes": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,..."
+        },
+        "litellm_provider": "openrouter",
+        "thinkingmachines/inkling": {
+            "input_cost_per_token": 9.5e-07,
+            "output_cost_per_token": 4.05e-06,
+            "max_input_tokens": 524288,
+            "max_output_tokens": 262144,
+            "metadata": {
+                "notes": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,..."
+            },
+            "litellm_provider": "openrouter"
+        }
+    },
     "replicate/google/gemini-2.5-flash": {
         "input_cost_per_token": 2.5e-06,
         "output_cost_per_token": 2.5e-06,
@@ -26405,24 +26431,6 @@
             "max_output_tokens": 65536,
             "metadata": {
                 "notes": "Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance. It delivers near Pro level reasoning and tool..."
-            },
-            "litellm_provider": "openrouter"
-        }
-    },
-    "thinkingmachines/inkling": {
-        "input_cost_per_token": 1e-06,
-        "output_cost_per_token": 4.05e-06,
-        "max_input_tokens": 524288,
-        "metadata": {
-            "notes": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,..."
-        },
-        "litellm_provider": "openrouter",
-        "thinkingmachines/inkling": {
-            "input_cost_per_token": 1e-06,
-            "output_cost_per_token": 4.05e-06,
-            "max_input_tokens": 524288,
-            "metadata": {
-                "notes": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,..."
             },
             "litellm_provider": "openrouter"
         }
@@ -35963,7 +35971,7 @@
         "supports_pdf_input": true
     },
     "~moonshotai/kimi-latest": {
-        "input_cost_per_token": 2.9e-06,
+        "input_cost_per_token": 2.5e-06,
         "output_cost_per_token": 1.4e-05,
         "max_input_tokens": 1048576,
         "max_output_tokens": 1048576,
@@ -35974,7 +35982,7 @@
         },
         "litellm_provider": "openrouter",
         "~moonshotai/kimi-latest": {
-            "input_cost_per_token": 2.9e-06,
+            "input_cost_per_token": 2.5e-06,
             "output_cost_per_token": 1.4e-05,
             "max_input_tokens": 1048576,
             "max_output_tokens": 1048576,
@@ -53139,12 +53147,6 @@
             "litellm_provider": "opencode_zen"
         }
     },
-    "opencode_zen/claude-opus-4-1": {
-        "litellm_provider": "opencode_zen",
-        "opencode_zen/claude-opus-4-1": {
-            "litellm_provider": "opencode_zen"
-        }
-    },
     "opencode_zen/claude-opus-4-5": {
         "litellm_provider": "opencode_zen",
         "opencode_zen/claude-opus-4-5": {
@@ -53430,6 +53432,12 @@
     "opencode_zen/ling-3.0-flash-free": {
         "litellm_provider": "opencode_zen",
         "opencode_zen/ling-3.0-flash-free": {
+            "litellm_provider": "opencode_zen"
+        }
+    },
+    "opencode_zen/ling-3.0-tiny-free": {
+        "litellm_provider": "opencode_zen",
+        "opencode_zen/ling-3.0-tiny-free": {
             "litellm_provider": "opencode_zen"
         }
     },

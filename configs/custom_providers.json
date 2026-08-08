@@ -104,17 +104,19 @@
                 }
             },
             "thinkingmachines/inkling-small": {
-                "input_cost_per_token": 5e-07,
+                "input_cost_per_token": 4.5e-07,
                 "output_cost_per_token": 1.2e-06,
                 "max_input_tokens": 524288,
+                "max_output_tokens": 262144,
                 "metadata": {
                     "notes": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of..."
                 },
                 "litellm_provider": "openrouter",
                 "thinkingmachines/inkling-small": {
-                    "input_cost_per_token": 5e-07,
+                    "input_cost_per_token": 4.5e-07,
                     "output_cost_per_token": 1.2e-06,
                     "max_input_tokens": 524288,
+                    "max_output_tokens": 262144,
                     "metadata": {
                         "notes": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of..."
                     },
@@ -370,17 +372,19 @@
                 }
             },
             "thinkingmachines/inkling": {
-                "input_cost_per_token": 1e-06,
+                "input_cost_per_token": 9.5e-07,
                 "output_cost_per_token": 4.05e-06,
                 "max_input_tokens": 524288,
+                "max_output_tokens": 262144,
                 "metadata": {
                     "notes": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,..."
                 },
                 "litellm_provider": "openrouter",
                 "thinkingmachines/inkling": {
-                    "input_cost_per_token": 1e-06,
+                    "input_cost_per_token": 9.5e-07,
                     "output_cost_per_token": 4.05e-06,
                     "max_input_tokens": 524288,
+                    "max_output_tokens": 262144,
                     "metadata": {
                         "notes": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,..."
                     },
@@ -1108,8 +1112,8 @@
                 }
             },
             "z-ai/glm-5.2": {
-                "input_cost_per_token": 5.46e-07,
-                "output_cost_per_token": 1.716e-06,
+                "input_cost_per_token": 4.326e-07,
+                "output_cost_per_token": 1.3596e-06,
                 "max_input_tokens": 1048576,
                 "max_output_tokens": 131072,
                 "metadata": {
@@ -1117,8 +1121,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "z-ai/glm-5.2": {
-                    "input_cost_per_token": 5.46e-07,
-                    "output_cost_per_token": 1.716e-06,
+                    "input_cost_per_token": 4.326e-07,
+                    "output_cost_per_token": 1.3596e-06,
                     "max_input_tokens": 1048576,
                     "max_output_tokens": 131072,
                     "metadata": {
@@ -1916,7 +1920,7 @@
                 }
             },
             "~moonshotai/kimi-latest": {
-                "input_cost_per_token": 2.9e-06,
+                "input_cost_per_token": 2.5e-06,
                 "output_cost_per_token": 1.4e-05,
                 "max_input_tokens": 1048576,
                 "max_output_tokens": 1048576,
@@ -1927,7 +1931,7 @@
                 },
                 "litellm_provider": "openrouter",
                 "~moonshotai/kimi-latest": {
-                    "input_cost_per_token": 2.9e-06,
+                    "input_cost_per_token": 2.5e-06,
                     "output_cost_per_token": 1.4e-05,
                     "max_input_tokens": 1048576,
                     "max_output_tokens": 1048576,
@@ -2242,14 +2246,14 @@
             "deepseek/deepseek-v4-flash": {
                 "cache_creation_input_token_cost": 0.0,
                 "cache_read_input_token_cost": 2.8e-09,
-                "input_cost_per_token": 8.82e-08,
+                "input_cost_per_token": 1.4e-07,
                 "input_cost_per_token_cache_hit": 2.8e-09,
                 "litellm_provider": "openrouter",
                 "max_input_tokens": 1048576,
-                "max_output_tokens": 131072,
+                "max_output_tokens": 393216,
                 "max_tokens": 8192,
                 "mode": "chat",
-                "output_cost_per_token": 1.764e-07,
+                "output_cost_per_token": 2.8e-07,
                 "source": "https://api-docs.deepseek.com/quick_start/pricing",
                 "supported_endpoints": [
                     "/v1/chat/completions"
@@ -2270,14 +2274,14 @@
                 "deepseek/deepseek-v4-flash": {
                     "cache_creation_input_token_cost": 0.0,
                     "cache_read_input_token_cost": 2.8e-09,
-                    "input_cost_per_token": 8.82e-08,
+                    "input_cost_per_token": 1.4e-07,
                     "input_cost_per_token_cache_hit": 2.8e-09,
                     "litellm_provider": "openrouter",
                     "max_input_tokens": 1048576,
-                    "max_output_tokens": 131072,
+                    "max_output_tokens": 393216,
                     "max_tokens": 8192,
                     "mode": "chat",
-                    "output_cost_per_token": 1.764e-07,
+                    "output_cost_per_token": 2.8e-07,
                     "source": "https://api-docs.deepseek.com/quick_start/pricing",
                     "supported_endpoints": [
                         "/v1/chat/completions"
@@ -2474,8 +2478,8 @@
                 }
             },
             "moonshotai/kimi-k2.6": {
-                "input_cost_per_token": 5.7e-07,
-                "output_cost_per_token": 2.4e-06,
+                "input_cost_per_token": 5.795e-07,
+                "output_cost_per_token": 2.44e-06,
                 "max_input_tokens": 262144,
                 "max_output_tokens": 262144,
                 "mode": "chat",
@@ -2485,8 +2489,8 @@
                 },
                 "litellm_provider": "openrouter",
                 "moonshotai/kimi-k2.6": {
-                    "input_cost_per_token": 5.7e-07,
-                    "output_cost_per_token": 2.4e-06,
+                    "input_cost_per_token": 5.795e-07,
+                    "output_cost_per_token": 2.44e-06,
                     "max_input_tokens": 262144,
                     "max_output_tokens": 262144,
                     "mode": "chat",
@@ -2988,17 +2992,19 @@
                 }
             },
             "nvidia/nemotron-3-super-120b-a12b": {
-                "input_cost_per_token": 3e-07,
-                "output_cost_per_token": 9e-07,
+                "input_cost_per_token": 8.5e-08,
+                "output_cost_per_token": 4e-07,
                 "max_input_tokens": 262144,
+                "max_output_tokens": 16384,
                 "metadata": {
                     "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
                 },
                 "litellm_provider": "openrouter",
                 "nvidia/nemotron-3-super-120b-a12b": {
-                    "input_cost_per_token": 3e-07,
-                    "output_cost_per_token": 9e-07,
+                    "input_cost_per_token": 8.5e-08,
+                    "output_cost_per_token": 4e-07,
                     "max_input_tokens": 262144,
+                    "max_output_tokens": 16384,
                     "metadata": {
                         "notes": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer..."
                     },
@@ -4621,14 +4627,14 @@
                 }
             },
             "deepseek/deepseek-v3.2": {
-                "input_cost_per_token": 2.69e-07,
+                "input_cost_per_token": 2.6e-07,
                 "input_cost_per_token_cache_hit": 2.8e-08,
                 "litellm_provider": "openrouter",
                 "max_input_tokens": 163840,
-                "max_output_tokens": 65536,
+                "max_output_tokens": 163840,
                 "max_tokens": 163840,
                 "mode": "chat",
-                "output_cost_per_token": 4e-07,
+                "output_cost_per_token": 3.8e-07,
                 "supports_assistant_prefill": true,
                 "supports_function_calling": true,
                 "supports_prompt_caching": true,
@@ -4638,14 +4644,14 @@
                     "notes": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism..."
                 },
                 "deepseek/deepseek-v3.2": {
-                    "input_cost_per_token": 2.69e-07,
+                    "input_cost_per_token": 2.6e-07,
                     "input_cost_per_token_cache_hit": 2.8e-08,
                     "litellm_provider": "openrouter",
                     "max_input_tokens": 163840,
-                    "max_output_tokens": 65536,
+                    "max_output_tokens": 163840,
                     "max_tokens": 163840,
                     "mode": "chat",
-                    "output_cost_per_token": 4e-07,
+                    "output_cost_per_token": 3.8e-07,
                     "supports_assistant_prefill": true,
                     "supports_function_calling": true,
                     "supports_prompt_caching": true,
@@ -5624,7 +5630,8 @@
             "qwen/qwen3-next-80b-a3b-thinking": {
                 "input_cost_per_token": 1.5e-07,
                 "output_cost_per_token": 1.2e-06,
-                "max_input_tokens": 128000,
+                "max_input_tokens": 262144,
+                "max_output_tokens": 262144,
                 "metadata": {
                     "notes": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured \u201cthinking\u201d traces by default. It\u2019s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic..."
                 },
@@ -5632,7 +5639,8 @@
                 "qwen/qwen3-next-80b-a3b-thinking": {
                     "input_cost_per_token": 1.5e-07,
                     "output_cost_per_token": 1.2e-06,
-                    "max_input_tokens": 128000,
+                    "max_input_tokens": 262144,
+                    "max_output_tokens": 262144,
                     "metadata": {
                         "notes": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured \u201cthinking\u201d traces by default. It\u2019s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic..."
                     },
@@ -9106,7 +9114,7 @@
                 "output_cost_per_token": 7.5e-07,
                 "supports_tool_choice": true,
                 "max_input_tokens": 8000,
-                "max_output_tokens": 2000,
+                "max_output_tokens": 6000,
                 "metadata": {
                     "notes": "An attempt to recreate Claude-style verbosity, but don't expect the same level of coherence or memory. Meant for use in roleplay/narrative situations."
                 },
@@ -9114,7 +9122,7 @@
                     "input_cost_per_token": 5e-07,
                     "output_cost_per_token": 7.5e-07,
                     "max_input_tokens": 8000,
-                    "max_output_tokens": 2000,
+                    "max_output_tokens": 6000,
                     "metadata": {
                         "notes": "An attempt to recreate Claude-style verbosity, but don't expect the same level of coherence or memory. Meant for use in roleplay/narrative situations."
                     },
@@ -9129,7 +9137,7 @@
                 "output_cost_per_token": 6.5e-07,
                 "supports_tool_choice": true,
                 "max_input_tokens": 6144,
-                "max_output_tokens": 2048,
+                "max_output_tokens": 6144,
                 "metadata": {
                     "notes": "A recreation trial of the original MythoMax-L2-B13 but with updated models. #merge"
                 },
@@ -9137,7 +9145,7 @@
                     "input_cost_per_token": 4.5e-07,
                     "output_cost_per_token": 6.5e-07,
                     "max_input_tokens": 6144,
-                    "max_output_tokens": 2048,
+                    "max_output_tokens": 6144,
                     "metadata": {
                         "notes": "A recreation trial of the original MythoMax-L2-B13 but with updated models. #merge"
                     },
@@ -9673,12 +9681,6 @@
                     "litellm_provider": "opencode_zen"
                 }
             },
-            "opencode_zen/claude-opus-4-1": {
-                "litellm_provider": "opencode_zen",
-                "opencode_zen/claude-opus-4-1": {
-                    "litellm_provider": "opencode_zen"
-                }
-            },
             "opencode_zen/claude-sonnet-5": {
                 "litellm_provider": "opencode_zen",
                 "opencode_zen/claude-sonnet-5": {
@@ -9979,6 +9981,12 @@
                     "litellm_provider": "opencode_zen"
                 }
             },
+            "opencode_zen/ling-3.0-tiny-free": {
+                "litellm_provider": "opencode_zen",
+                "opencode_zen/ling-3.0-tiny-free": {
+                    "litellm_provider": "opencode_zen"
+                }
+            },
             "opencode_zen/nemotron-3-ultra-free": {
                 "litellm_provider": "opencode_zen",
                 "opencode_zen/nemotron-3-ultra-free": {
@@ -10021,9 +10029,6 @@
                 "litellm_provider": "opencode_zen"
             },
             "opencode_zen/claude-opus-4-5": {
-                "litellm_provider": "opencode_zen"
-            },
-            "opencode_zen/claude-opus-4-1": {
                 "litellm_provider": "opencode_zen"
             },
             "opencode_zen/claude-sonnet-5": {
@@ -10174,6 +10179,9 @@
                 "litellm_provider": "opencode_zen"
             },
             "opencode_zen/ling-3.0-flash-free": {
+                "litellm_provider": "opencode_zen"
+            },
+            "opencode_zen/ling-3.0-tiny-free": {
                 "litellm_provider": "opencode_zen"
             },
             "opencode_zen/nemotron-3-ultra-free": {

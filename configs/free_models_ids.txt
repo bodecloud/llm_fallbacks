@@ -374,7 +374,6 @@ openai/sora-2-pro-high-res
 opencode_zen/big-pickle
 opencode_zen/claude-fable-5
 opencode_zen/claude-haiku-4-5
-opencode_zen/claude-opus-4-1
 opencode_zen/claude-opus-4-5
 opencode_zen/claude-opus-4-6
 opencode_zen/claude-opus-4-7
@@ -423,6 +422,7 @@ opencode_zen/kimi-k2.7-code
 opencode_zen/kimi-k3
 opencode_zen/laguna-s-2.1-free
 opencode_zen/ling-3.0-flash-free
+opencode_zen/ling-3.0-tiny-free
 opencode_zen/longcat-2.0-free
 opencode_zen/mimo-v2.5-free
 opencode_zen/minimax-m2.5
